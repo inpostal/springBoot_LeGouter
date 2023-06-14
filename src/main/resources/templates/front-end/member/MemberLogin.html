@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+
+    <link rel="stylesheet" href="/Member/Sam_CSS/style_login.css">
+</head>
+
+<body>
+    <header>
+        <a href="" id="title">Le Goûter</a>
+    </header>
+    <section id="middle-section">
+        <aside id="left-side">
+
+        </aside>
+        <section id="login-section-outer">
+            <section class="space"></section>
+
+            <section id="login-section-inner-o">
+                <section class="inner-space"></section>
+                <section id="login-section-inner">
+                    <p id="member-login-p">會員登入</p>
+                    <form action="" method="post" id="login-form">
+
+                        <div id="account-div">
+                            <label for="username">帳號:</label>
+                            <input type="text" id="username" name="username" placeholder="Accout">
+                        </div>
+
+
+                        <div id="password-div" >
+                            <label for="password">密碼:</label>
+                            <input type="password" id="password" name="password" placeholder="Password">
+                        </div>
+
+
+                        <div id="option-div">
+                            <input type="button" id="login-btn" value="登入">
+                            <input type="button" id="register-btn" value="註冊">
+                            <a href=""id="forget-a">忘記密碼?</a>
+                        </div>
+
+                        <hr>
+
+                        <div id="social-div">
+                            <a class="social-button" href="https://line.me/" target="_blank">Line</a>
+                            <a class="social-button" href="https://www.google.com/" target="_blank">G</a>
+                            <a class="social-button" href="https://www.facebook.com/" target="_blank">FB</a>
+                        </div>
+                    </form>
+                </section>
+                <section class="inner-space"></section>
+            </section>
+            <section class="space"></section>
+        </section>
+        <aside id="right-side">
+
+        </aside>
+    </section>
+    <footer>
+        Le Goûter
+    </footer>
+    <script src="/Member/Sam_Js/Jquery.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            // 註冊按鈕功能
+            $("#register-btn").click(function () {
+                console.log("前往註冊");
+            })
+
+            // 登入按鈕功能
+            let msg = $("<p style='color: red'>").text("帳號或密碼錯誤").addClass("error-message").hide();
+            $("#login-form").prepend(msg);
+
+            $("#login-btn").click(function(){
+                let account = $("#username").val();
+                let password = $("#password").val();
+                $.ajax({
+                    url: '/member/login',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        memberAccount: account,
+                        memberPassword: password
+                    }),
+                    success: function(res){
+                        console.log(res);
+                        msg.hide();
+                        alert("登入成功");
+                        location.href = "/LeGouter";
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                        if (xhr.status === 401) {
+                           msg.show();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

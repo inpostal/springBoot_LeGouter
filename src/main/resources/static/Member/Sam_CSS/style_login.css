@@ -1,0 +1,210 @@
+:root {
+    --primary: #EAA636;
+    --secondary: #545454;
+    --light: #FDF5EB;
+    --dark: #1E1916;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--light);
+    background-image: url(/Commom/image/member.jpg);
+}
+
+header {
+    background-color: var(--dark);
+    width: 100%;
+    text-align: center;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 40px;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background-color: var(--dark);
+    color: var(--primary);
+    font-size: 40px;
+}
+
+#middle-section {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+aside {
+    height: 100%;
+    width: 20%;
+    text-align: center;
+}
+
+#login-section-outer {
+    height: 100%;
+    width: 60%;
+    text-align: center;
+    align-items: center;
+}
+
+#login-section-outer .space {
+    height: 10%;
+}
+
+#login-section-inner {
+    border: var(--dark) 5px solid;
+    border-radius: 10px;
+    height: auto;
+    width: 60%;
+    background-color: var(--light);
+    opacity: 90%;
+}
+
+#login-section-inner-o {
+    display: flex;
+}
+
+#member-login-p {
+    background-color: var(--dark);
+    color: var(--primary);
+    margin: 0;
+    font-size: 40px;
+}
+
+.inner-space {
+    width: 20%;
+    height: 80%;
+}
+
+#login-form {
+    height: calc(100% - 53.6px);
+}
+
+/* #account-div {
+    font-size: 25px;
+} */
+
+#account-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+#account-div label {
+    /* display: block; */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#account-div input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    display: inline-block;
+}
+
+#account-div input[type="text"]:focus {
+    outline: none;
+    border-color: #4c8bf5;
+    box-shadow: 0 0 3px #4c8bf5;
+}
+
+#password-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#password-div label {
+    /* display: block; */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#password-div input[type="password"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+}
+
+#password-div input[type="password"]:focus {
+    outline: none;
+    border-color: #4c8bf5;
+    box-shadow: 0 0 3px #4c8bf5;
+}
+
+#option-div {
+    margin-bottom: 5px;
+}
+
+#option-div a {
+    text-decoration: none;
+}
+
+
+#option-div {
+    margin-top: 20px;
+}
+
+#option-div input[type="submit"],
+#option-div input[type="button"] {
+    padding: 10px 20px;
+    background-color: var(--dark);
+    color: var(--primary);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#option-div input[type="submit"]:hover,
+#option-div input[type="button"]:hover {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+#forget-a {
+    text-decoration: none;
+    color: var(--secondary);
+    margin-left: 50px;
+}
+
+hr {
+    color: var(--dark);
+}
+
+.social-button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--dark);
+    border: 2px solid #ccc;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: var(--primary);
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.social-button:hover {
+    background-color: var(--secondary);
+    border-color: #999;
+    color: #fff;
+}
+
+#social-div{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
