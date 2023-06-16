@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +25,7 @@
                 <section class="inner-space"></section>
                 <section id="login-section-inner">
                     <p id="member-login-p">會員登入</p>
+                    <span th:if="${pleaseLogin != null}" th:text="${pleaseLogin}" style="color: red"></span>
                     <form action="" method="post" id="login-form">
 
                         <div id="account-div">
@@ -72,6 +73,7 @@
             // 註冊按鈕功能
             $("#register-btn").click(function () {
                 console.log("前往註冊");
+                location.href = "/register";
             })
 
             // 登入按鈕功能

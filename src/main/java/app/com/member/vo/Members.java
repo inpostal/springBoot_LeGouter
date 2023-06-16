@@ -1,9 +1,8 @@
-package app.test.vo;
+package app.com.member.vo;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Date;
 
 
@@ -38,6 +37,6 @@ public class Members{
     private Date memberBirthday;
     @Column(name = "MEM_STATUS")
     private Integer memberStatus;
-    @Column(name = "MEM_REGIS_TIME")
+    @Column(name = "MEM_REGIS_TIME", insertable = false)
     private Date memberRegistrationTime;
 }

@@ -14,7 +14,7 @@ body {
     align-items: center;
     justify-content: space-between;
     font-family: Arial, sans-serif;
-    background-image: url(../static/image/member.jpg);
+    background-image: url(/Commom/image/member.jpg);
 }
 
 .member-container {

@@ -1,8 +1,7 @@
-package app.test.vo;
+package app.com.member.vo;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import java.sql.Date;
 @Data
 @Setter

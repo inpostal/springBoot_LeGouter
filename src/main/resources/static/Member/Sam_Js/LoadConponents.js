@@ -3,16 +3,10 @@ fetch('/header')
     .then(html=>{
         document.querySelector('#header-div').innerHTML = html;
     })
-
 fetch('/navbar')
     .then(response=>response.text())
     .then(html=>{
         document.querySelector('#nav-bar').innerHTML = html;
-    })
-fetch('/carousel')
-    .then(response=>response.text())
-    .then(html=>{
-        document.querySelector('#carousel-div').innerHTML = html;
     })
 fetch('/footer')
     .then(response=>response.text())
