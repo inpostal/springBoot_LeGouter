@@ -470,18 +470,18 @@
         });
         //-------------------------
         //load事件後包含的，新增團購商品的事件。
-        // window.addEventListener("load", function () {
-		//   $("#btnSend").on("click", function () {
-		// 	  console.log($("#productstardate").val());
+        window.addEventListener("load", function () {
+		  $("#btnSend").on("click", function () {
+			  console.log($("#productstardate").val());
 
-		//     addproduct(); //執行新增至團購商品表格的函式
-		// 	//addproductimg(); //準備寫執行新增至商品圖片表格的函式
-		//   })
-        //   showlist(); //執行顯示全部商品資料的函式
+		    addproduct(); //執行新增至團購商品表格的函式
+			//addproductimg(); //準備寫執行新增至商品圖片表格的函式
+		  })
+          //showlist(); //執行顯示全部商品資料的函式
         //   $("#btnone").on("click", function () {	 
         //     showone();
         // });
-		// })
+		})
 
         //新增至團購商品表格的函式。
         function addproduct() {
@@ -495,19 +495,18 @@
           console.log(datas.groupProductStardate); //測試有無資料，本身是物件還是字串。
           //--送出Ajax請求
             $.ajax({
-                url: "/LeGouter/group/GroupProductServletAjax",
+                url: "/groupProduct/inser",
                 method: "POST",
-                contentType: "application/josn; charset=utf-8",
+                contentType: "application/json",
                 data: JSON.stringify(datas),
-                dataType: "json",
+                //dataType: "json",
                 beforeSend: function () {
                 console.log("發送請求之前確認:" + JSON.stringify(datas));
                 },
                 success: function(response) {
-                    console.log(response);
-                    if(response == 1234){
+                    console.log(response.success);
+                    if(response.success){
                         alert("新增成功");
-                        //clearForm(); //執行清除欄位內容的函式。
                         location.reload();
                     }
                 
@@ -519,13 +518,6 @@
             });
         }
         //-------------------------
-        //清除欄位內容的函式。
-        function clearForm() {          
-		  let inputs = document.getElementsByClassName(".inpproduct");
-		  for (let i in inputs) {
-		    inputs[i].val() = "";
-		  }
-		}
 
         //準備寫新增圖片的函式。
         // function addproductimg(){

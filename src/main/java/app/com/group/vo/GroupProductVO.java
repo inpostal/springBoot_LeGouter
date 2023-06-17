@@ -1,6 +1,8 @@
 package app.com.group.vo;
 
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,9 +35,9 @@ public class GroupProductVO{
 	@Column (name = "GROUP_PRODUCT_PRICE")
 	private Integer groupProductPrice;
 	@Column (name = "GROUP_PRODUCT_STARDATE")
-	private String groupProductStardate;
+	private Date groupProductStardate;
 	@Column (name = "GROUP_PRODUCT_ENDDATE ")
-	private String groupProductEnddate;
+	private Date groupProductEnddate;
 	@Column (name = "GROUP_PRODUCT_STATUS")
 	private Integer groupProductStatus;
 	
