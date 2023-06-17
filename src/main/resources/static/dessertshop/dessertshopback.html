@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>dessert shop back</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="back-nav-bar.css">  -->
+
+    <!-- import font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+        
+    <!-- import table css -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <style>
+        #nav-bar {
+            background-color: #1E1916;
+            
+        }
+
+        .nav-pills {
+            --bs-nav-pills-link-active-bg: white;
+        }
+
+        :root {
+            --bs-link-color: white;
+            --bs-link-hover-color: orange;
+
+        }
+
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 20px;
+        }
+
+        .dropdown {
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            font-size: 20px;
+        }
+
+        .dropdown-toggle::after {
+            color: #1E1916;
+        }
+
+
+        /* table css */
+        /* body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        } */
+        .table-responsive {
+            margin: 30px 0;
+        }
+        .table-wrapper {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 3px;
+            min-width: 1000px;
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        }
+        .table-title {        
+            padding-bottom: 15px;
+            background: #1E1916;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+        .table-title .btn-group {
+            float: right;
+        }
+        .table-title .btn {
+            color: #fff;
+            float: right;
+            font-size: 13px;
+            border: none;
+            min-width: 50px;
+            border-radius: 2px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+        .table-title .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+        .table-title .btn span {
+            float: left;
+            margin-top: 2px;
+        }
+        table.table tr th, table.table tr td {
+            border-color: #e9e9e9;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+        table.table tr th:first-child {
+            width: 250px;
+        }
+        table.table tr th:last-child {
+            width: 100px;
+        }
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }	
+        table.table td:last-child i {
+            opacity: 0.9;
+            font-size: 22px;
+            margin: 0 5px;
+        }
+        table.table td a {
+            font-weight: bold;
+            color: #566787;
+            display: inline-block;
+            text-decoration: none;
+            outline: none !important;
+        }
+        table.table td a:hover {
+            color: #2196F3;
+        }
+        table.table td a.edit {
+            color: #198754;
+        }
+        table.table td a.Remove {
+            color: #F44336;
+        }
+        table.table td i {
+            font-size: 19px;
+        }
+        table.table .avatar {
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .pagination {
+            float: right;
+            margin: 0 0 5px;
+        }
+        .pagination li a {
+            border: none;
+            font-size: 13px;
+            min-width: 30px;
+            min-height: 30px;
+            color: #999;
+            margin: 0 2px;
+            line-height: 30px;
+            border-radius: 2px !important;
+            text-align: center;
+            padding: 0 6px;
+        }
+        .pagination li a:hover {
+            color: #666;
+        }	
+        .pagination li.active a, .pagination li.active a.page-link {
+            background: #03A9F4;
+        }
+        .pagination li.active a:hover {        
+            background: #0397d6;
+        }
+        .pagination li.disabled i {
+            color: #ccc;
+        }
+        .pagination li i {
+            font-size: 16px;
+            padding-top: 6px
+        }
+        .hint-text {
+            float: left;
+            margin-top: 10px;
+            font-size: 13px;
+        }    
+        /* Custom checkbox */
+        .custom-checkbox {
+            position: relative;
+        }
+        .custom-checkbox input[type="checkbox"] {    
+            opacity: 0;
+            position: absolute;
+            margin: 5px 0 0 3px;
+            z-index: 9;
+        }
+        .custom-checkbox label:before{
+            width: 18px;
+            height: 18px;
+        }
+        .custom-checkbox label:before {
+            content: '';
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: text-top;
+            background: white;
+            border: 1px solid #bbb;
+            border-radius: 2px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 3px;
+            width: 6px;
+            height: 11px;
+            border: solid #000;
+            border-width: 0 3px 3px 0;
+            transform: inherit;
+            z-index: 3;
+            transform: rotateZ(45deg);
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:before {
+            border-color: #03A9F4;
+            background: #03A9F4;
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            border-color: #fff;
+        }
+        .custom-checkbox input[type="checkbox"]:disabled + label:before {
+            color: #b8b8b8;
+            cursor: auto;
+            box-shadow: none;
+            background: #ddd;
+        }
+        /* Modal styles */
+        .modal .modal-dialog {
+            max-width: 400px;
+        }
+        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
+            padding: 20px 30px;
+        }
+        .modal .modal-content {
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .modal .modal-footer {
+            background: #ecf0f1;
+            border-radius: 0 0 3px 3px;
+        }
+        .modal .modal-title {
+            display: inline-block;
+        }
+        .modal .form-control {
+            border-radius: 2px;
+            box-shadow: none;
+            border-color: #dddddd;
+        }
+        .modal textarea.form-control {
+            resize: vertical;
+        }
+        .modal .btn {
+            border-radius: 2px;
+            min-width: 100px;
+        }	
+        .modal form label {
+            font-weight: normal;
+        }
+
+        /* 去掉input number裡面的箭頭 */
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <section id="mainheader">
+        <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
+        <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
+
+        <!-- 員工功能小圈圈 -->
+        
+        <div class="dropdown" style="position: absolute; right: 30px;">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/weichen9715/catpic/blob/main/smudge_lord_60314581_2452933891436033_1050250552612724249_n.jpg?raw=true" alt="noimg" width="30" height="30" class="rounded-circle">
+                <span class="d-none d-sm-inline mx-1" style="color: #1E1916;">employee</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <!-- <li><a class="dropdown-item" href="#">New project</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li> -->
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div>
+
+
+    </section>
+
+    
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <!-- Menu
+                        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline mt-3">Menu</span></a> -->
+
+
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        
+                        <!-- 1 -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+
+                        <!-- 2 -->
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">會員管理系統</span></a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">會員權限管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">會員資料管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">優惠管理</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 3 -->
+                        <!-- 
+                            <li>
+                                <a href="#" class="nav-link px-0 align-middle">
+                                    <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                            </li>
+                        -->
+
+                        <!-- 4 -->
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">網站管理系統</span></a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">即時客服</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">輪播圖管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">最新消息管理</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 5 -->
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">團購管理系統</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購商品管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購參與者訂單管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購方案管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購活動管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購分潤管理</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 6 -->
+                        <!-- 
+                            <li>
+                                <a href="#" class="nav-link px-0 align-middle">
+                                    <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                            </li>
+                        -->
+
+                        <!-- 7 -->
+                        <li>
+                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程訂單管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程資訊審核管理</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 8 -->
+                        <li>
+                            <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">主廚管理</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">主廚資料管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程討論區管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程資訊管理</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 9 -->
+                        <li>
+                            <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">甜點管理系統</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">甜點訂單管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">甜點商品管理</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 10 -->
+                        <li>
+                            <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">員工管理系統</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">員工資料管理</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">員工權限管理</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+
+                    <!-- 員工功能小圈圈 -->
+                    
+                </div>
+            </div>
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+            <div class="col py-3">
+
+                <!-- 由此開始 -->
+
+                <!-- <h3>甜點商品清單</h3> -->
+
+                <div class="container-xl">
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h2>甜點<b>商品管理</b></h2>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"> <span>新增商品</span></a>
+                                        <a class="btn btn-success" id="search" style="margin-right: 50px; background-color: cornflowerblue"> <span>搜尋</span></a>
+                                        <form>
+                                            <input type="search" style="border: none; padding: 0; margin-top: 5px; margin-left: 230px;" id="searchVal">
+                                        </form>						
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+<!--                                        <th>-->
+<!--                                            <span class="custom-checkbox">-->
+<!--                                                <input type="checkbox" id="selectAll">-->
+<!--                                                <label for="selectAll"></label>-->
+<!--                                            </span>-->
+<!--                                        </th>-->
+                                        <th>商品名稱</th>
+                                        <th>商品描述</th>
+                                        <th>價格</th>
+                                        <th>狀態</th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="back-table">
+                                    <!-- 1. -->
+<!--                                    <tr>-->
+<!--                                        <td>-->
+<!--                                            <span class="custom-checkbox">-->
+<!--                                                <input type="checkbox" id="checkbox1" name="options[]" value="1">-->
+<!--                                                <label for="checkbox1"></label>-->
+<!--                                            </span>-->
+<!--                                        </td>-->
+<!--                                        <td>馬卡龍</td>-->
+<!--                                        <td>我們店內的馬卡龍是絕對不能錯過的甜點之一！這些小巧的甜點外脆內軟，口感絕佳。我們提供各種口味的馬卡龍，每一顆都令人垂涎欲滴。</td>-->
+<!--                                        <td>$39.00</td>-->
+<!--                                        <td>已上架</td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><span data-toggle="tooltip" title="Edit">編輯</span></a>-->
+<!--                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal"><span data-toggle="tooltip" title="Remove">下架</span></a>-->
+<!--                                            <a href="#pictureUploadModal" data-toggle="modal"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+
+                                    <!-- 2. -->
+<!--                                    <tr>-->
+<!--                                        <td>-->
+<!--                                            <span class="custom-checkbox">-->
+<!--                                                <input type="checkbox" id="checkbox2" name="options[]" value="1">-->
+<!--                                                <label for="checkbox2"></label>-->
+<!--                                            </span>-->
+<!--                                        </td>-->
+<!--                                        <td>Dominique Perrier</td>-->
+<!--                                        <td>dominiqueperrier@mail.com</td>-->
+<!--                                        <td>Obere Str. 57, Berlin, Germany</td>-->
+<!--                                        <td>(313) 555-5735</td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><span data-toggle="tooltip" title="Edit">編輯</span></a>-->
+<!--                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal"><span data-toggle="tooltip" title="Remove">下架</span></a>-->
+<!--                                            <a href="#pictureUploadModal" data-toggle="modal"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+
+                                    <!-- 3. -->
+<!--                                    <tr>-->
+<!--                                        <td>-->
+<!--                                            <span class="custom-checkbox">-->
+<!--                                                <input type="checkbox" id="checkbox3" name="options[]" value="1">-->
+<!--                                                <label for="checkbox3"></label>-->
+<!--                                            </span>-->
+<!--                                        </td>-->
+<!--                                        <td>Maria Anders</td>-->
+<!--                                        <td>mariaanders@mail.com</td>-->
+<!--                                        <td>25, rue Lauriston, Paris, France</td>-->
+<!--                                        <td>(503) 555-9931</td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><span data-toggle="tooltip" title="Edit">編輯</span></a>-->
+<!--                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal"><span data-toggle="tooltip" title="Remove">下架</span></a>-->
+<!--                                            <a href="#pictureUploadModal" data-toggle="modal"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+
+                                </tbody>
+                            </table>
+
+                            <!-- 左下提示字 -->
+                            <div class="clearfix">
+                                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>        
+                </div>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                <!-- Edit Modal HTML 新增 -->
+                <div id="addEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">						
+                                    <h4 class="modal-title">新增商品</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">					
+                                    <div class="form-group">
+                                        <label>商品名稱</label>
+                                        <input type="text" class="form-control" required id="dessertName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>商品描述</label>
+                                        <textarea class="form-control" required id="dessertContent"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>價格</label>
+                                        <input type="number" class="form-control" required id="dessertPrice">
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>數量</label>
+                                        <input type="number" class="form-control" required>
+                                    </div> -->
+                                    <div>圖片<br>
+                                        <input name="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                        <input name="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                        <input name="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                        <input name="product_img_4" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
+                                    <input type="submit" class="btn btn-success" value="確定上架" id="insert" >
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Modal HTML 編輯 -->
+                <div id="editEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">						
+                                    <h4 class="modal-title">編輯商品</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">					
+                                    <div class="form-group">
+                                        <label>商品名稱</label>
+                                        <input type="text" class="form-control" required id="editName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>商品描述</label>
+                                        <textarea class="form-control" required id="editContent"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>價格</label>
+                                        <input type="number" class="form-control" required id="editPrice">
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>數量</label>
+                                        <input type="number" class="form-control" required>
+                                    </div>					 -->
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
+                                    <button class="btn btn-info" id="dessert-edit">儲存</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Remove Modal HTML -->
+                <div id="RemoveEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">						
+                                    <h4 class="modal-title">下架商品</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">					
+                                    <p>確定下架？</p>
+                                    <p class="text-warning"><small style="color: red;">注意：商品一經下架無法回復</small></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
+                                    <button class="btn btn-danger" id="soldout">確定下架</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- picture upload -->
+                <div id="pictureUploadModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <dic class="modal-content">
+                            <form action="#" enctype="multipart/form-data">
+                                <div class="modal-header">						
+                                    <h4 class="modal-title">商品圖片上傳</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <input name="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input name="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input name="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input name="product_img_4" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">				
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                    <input type="submit" class="btn btn-info" value="Save">
+                                </div>
+                            </form>
+                            
+                        </dic>
+                    </div>
+                </div>
+                
+
+                <!-- 由此結束 -->
+            </div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- import js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+    <!-- import font awesome -->
+    <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+
+    <!-- import table js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <!-- table script -->
+    <script>
+        $(document).ready(function(){
+            // Activate tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Select/Deselect checkboxes
+            // var checkbox = $('table tbody input[type="checkbox"]');
+            // $("#selectAll").click(function(){
+            //     if(this.checked){
+            //         checkbox.each(function(){
+            //             this.checked = true;
+            //         });
+            //     } else{
+            //         checkbox.each(function(){
+            //             this.checked = false;
+            //         });
+            //     }
+            // });
+            // checkbox.click(function(){
+            //     if(!this.checked){
+            //         $("#selectAll").prop("checked", false);
+            //     }
+            // });
+        });
+    </script>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+        <!-- axios -->
+        // $(document).ready(function(){
+        //     axios.get("/dessert5/findAll")
+        //         .then((response)=>{
+        //             console.log(response.data);   // 顯示後端傳來的資料
+        //         });
+        // })
+
+
+        <!-- GET ALL -->
+        $(document).ready(findAll());
+
+        function findAll(){
+            $.ajax({
+                url: '/dessert5/findAll',
+                type: 'GET',
+                success: function(res){
+                    console.log(res);
+                    let html = "";
+                    for (let e in res) {
+                        html += `<tr>
+<!--                                    <td>-->
+<!--                                        <span class="custom-checkbox">-->
+<!--                                            <input type="checkbox" id="checkbox1" name="options[]" value="1">-->
+<!--                                            <label for="checkbox1"></label>-->
+<!--                                        </span>-->
+<!--                                    </td>-->
+                                    <td>${res[e].dessertName}</td>
+                                    <td>${res[e].dessertContent}</td>
+                                    <td>NT$${res[e].dessertPrice}</td>
+                                    <td>${res[e].dessertStatus}</td>
+                                    <td>
+                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
+                                        <a href="#pictureUploadModal" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                    </td>
+                                 </tr>`;
+
+                    }
+                    $("#back-table").html(html);
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr);
+                }
+            })
+        }
+
+        // 下架單筆
+        $(document).on("click", ".Remove", function(){
+            let dessertName = $(this).data("info");
+            console.log(dessertName);
+
+            $("#soldout").on("click", function(){
+                $.ajax({
+                    url: '/dessert5/soldout?dessertName=' + encodeURIComponent(dessertName),
+                    type: 'GET',
+                    success: function(){
+                        // location.reload();
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                })
+            })
+
+        })
+
+
+        // 新增一筆
+        $("#insert").on("click", function(){
+
+            $.ajax({
+                url: '/dessert5/insert',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    dessertName: $("#dessertName").val(),
+                    dessertContent: $("#dessertContent").val(),
+                    dessertPrice: $("#dessertPrice").val(),
+                    dessertStatus: "販售中"
+                }),
+                success: function(res){
+                    // 跳出訊息視窗
+                    alert(res);
+                    location.reload();
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr);
+                }
+            })
+
+        })
+
+        // 查詢一筆
+        $("#search").on("click", function(){
+            let dessertName = $("#searchVal").val();
+            console.log(dessertName);
+            $.ajax({
+                url: '/dessert5/search?dessertName=' + encodeURIComponent(dessertName),
+                type: 'GET',
+                success: function(res){
+                        let html =`<tr>
+<!--                                    <td>-->
+<!--                                        <span class="custom-checkbox">-->
+<!--                                            <input type="checkbox" id="checkbox1" name="options[]" value="1">-->
+<!--                                            <label for="checkbox1"></label>-->
+<!--                                        </span>-->
+<!--                                    </td>-->
+                                    <td>${res.dessertName}</td>
+                                    <td>${res.dessertContent}</td>
+                                    <td>NT$${res.dessertPrice}</td>
+                                    <td>${res.dessertStatus}</td>
+                                    <td>
+                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
+                                        <a href="#pictureUploadModal" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                    </td>
+                                 </tr>`;
+
+                    $("#back-table").html(html);
+                }
+            })
+        })
+
+        // 編輯一筆
+        $(document).on("click", ".edit", function(){
+            let dessertName = $(this).data("info");
+            console.log(dessertName);
+
+            $("#dessert-edit").on("click", function(){
+                $.ajax({
+                    url: '/dessert5/update/' + encodeURIComponent(dessertName),
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        dessertName: $("#editName").val(),
+                        dessertContent: $("#editContent").val(),
+                        dessertPrice: $("#editPrice").val(),
+                        dessertStatus: "販售中"
+                    }),
+                    success: function(res){
+                        // 跳出訊息視窗
+                        alert(res);
+                        location.reload();
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                })
+            })
+        })
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
