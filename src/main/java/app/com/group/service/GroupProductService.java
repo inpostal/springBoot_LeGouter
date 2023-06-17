@@ -1,6 +1,7 @@
 package app.com.group.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,11 @@ public class GroupProductService {
 		groupProductVO.setGroupProductStatus(groupProductDTO.getGroupProductStatus());
 		
 		return groupProductRepository.save(groupProductVO) != null;
+	}
+	
+	public List<GroupProductVO> showAllProduct() {
+		List<GroupProductVO> volist = groupProductRepository.findAll();
+		return volist;
+		
 	}
 }

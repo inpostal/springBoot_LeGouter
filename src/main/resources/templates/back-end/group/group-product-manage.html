@@ -477,7 +477,7 @@
 		    addproduct(); //執行新增至團購商品表格的函式
 			//addproductimg(); //準備寫執行新增至商品圖片表格的函式
 		  })
-          //showlist(); //執行顯示全部商品資料的函式
+          showlist(); //執行顯示全部商品資料的函式
         //   $("#btnone").on("click", function () {	 
         //     showone();
         // });
@@ -527,10 +527,10 @@
         //顯示全部商品資料的函式。
         function showlist() {
             $.ajax({
-                url: "/LeGouter/group/GroupAllServlet",
+                url: "/groupProduct/showList",
                 method: "GET",
                 success: function (response) {
-                    // console.log("回來的資料:" + response);
+                    console.log("回來的資料:" + response);
                     let texts = "";                   
                     for (let gvo in response) {
                         // console.log(gvo);
