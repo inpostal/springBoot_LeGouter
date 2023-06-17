@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>團購活動 單品</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="Group/Shan_static/css/css2.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/all.min.css" rel="stylesheet">
+    <link href="Group/Shan_static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/animate.min.css" rel="stylesheet">
+    <link href="Group/Shan_static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/style.css" rel="stylesheet">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="Group/Shan_assets/css/main.css" />
+
+    <style>
+        .tototo {
+            height: 200px;
+        }
+
+        progress {
+            width: 400px;
+            position: relative;
+            /* -webkit-appearance: none; */
+            border-radius: 5px;
+            /* 圓角 */
+            overflow: hidden;
+            /* 超過範圍就裁切 */
+            height: 14px;
+            /* 高度 */
+        }
+
+        ::-webkit-progress-value {
+            background-color: rgb(0, 110, 255);
+        }
+
+
+
+        ::-webkit-progress-bar {
+            background-color: rgb(216, 231, 241);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+
+
+    <div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
+                </ol>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <div class="h-100 d-inline-flex align-items-center">
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================導覽列開始========================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
+            <h1 class="text-primary m-0">Le Goûter</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto p-4 p-lg-0">
+                <a href="" class="nav-item nav-link active">首頁</a>
+                <a href="" class="nav-item nav-link">品牌故事</a>
+                <a href="" class="nav-item nav-link">甜點訂購</a>
+                <a href="" class="nav-item nav-link">課程系統</a>
+                <a href="/group-shop" class="nav-item nav-link">團購平台</a>
+                <a href="" class="nav-item nav-link">會員專區</a>
+                <a href="" class="nav-item nav-link">優惠券專區</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="" class="dropdown-item">FAQ</a>
+                        <a href="" class="dropdown-item">聯絡客服</a>
+                    </div>
+                </div>
+                <div class="nav-link">
+                    <form action="/group-shop">
+                        <input class="" type="search" placeholder="搜尋團購活動" name="" value="">
+                        <button class="" type="submit">搜尋</button>
+                    </form>
+                </div>
+            </div>
+            <div class=" d-none d-lg-flex">
+                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+                    <i class="fa fa-phone text-primary"></i>
+                </div>
+                <div class="ps-3">
+                    <small class="text-primary mb-0">聯絡我們</small>
+                    <p class="text-light fs-5 mb-0">0912345678</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- =====================導覽列結束========================= -->
+    <div class="tototo"></div>
+    <main>
+        <!-- prealoder area start，載入中動圖開始 -->
+        <!-- <div id="loading">
+            <div id="loading-center">
+                <div id="loading-center-absolute">
+                    <div class="object" id="first_object"></div>
+                    <div class="object" id="second_object"></div>
+                    <div class="object" id="third_object"></div>
+                </div>
+            </div>
+        </div> -->
+        <!-- prealoder area end，載入中動圖結束 -->
+
+
+        <!-- 單品區開始 -->
+        <div class="single-product-area mb-100">
+            <div class="container">
+                <div class="row mb-40">
+                    <!-- 單品圖片顯示開始 -->
+                    <div class="col-xxl-6 col-lg-6">
+                        <div class="epix-single-product-left mr-35">
+                            <div class="epix-tab-product mb-15">
+                                <div class="epix-product-tab-content">
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="epix-single-1">
+                                            <div class="epix-single-product-thumb-4">
+                                                <div class="epix-featured">
+                                                    <!-- <span>精選</span> -->
+                                                </div>
+                                                <img src="Group/Shan_assets/img/肉桂捲.jpg" 
+                                                    data-zoom-image="Group/Shan_assets/img/肉桂捲.jpg"
+                                                    class="img-fluid" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="epix-single-2">
+                                            <div class="epix-single-product-thumb-4">
+                                                <div class="epix-featured">
+                                                    <!-- <span>new</span> -->
+                                                </div>
+                                                <img src="Group/Shan_assets/img/來自北歐瑞典傳統點心肉桂捲.jpg"
+                                                    data-zoom-image="Group/Shan_assets/img/來自北歐瑞典傳統點心肉桂捲.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="epix-single-3">
+                                            <div class="epix-single-product-thumb-4">
+                                                <div class="epix-featured">
+                                                    <!-- <span>hot</span> -->
+                                                </div>
+                                                <img src="Group/Shan_assets/img/肯都咖啡-經典肉桂捲.jpg"
+                                                    data-zoom-image="Group/Shan_assets/img/肯都咖啡-經典肉桂捲.jpg" class="img-fluid"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="epix-single-4">
+                                            <div class="epix-single-product-thumb-4">
+                                                <div class="epix-featured">
+                                                    <!-- <span>featured</span> -->
+                                                </div>
+                                                <img src="Group/Shan_assets/img/美式核桃肉桂捲.jpg"
+                                                    data-zoom-image="Group/Shan_assets/img/美式核桃肉桂捲.jpg" class="img-fluid" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="epix-tab-content">
+                                <ul class="nav nav-pills mb-3" id="epix-single-product-tab" role="tablist">
+                                    <li>
+                                        <button class="active" value="1" data-bs-toggle="pill"
+                                            data-bs-target="#epix-single-1" type="button">
+                                            <img width="98" height="98" src="Group/Shan_assets/img/肉桂捲.jpg" alt="">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button data-bs-toggle="pill" value="2" data-bs-target="#epix-single-2"
+                                            type="button">
+                                            <img width="98" height="98" src="Group/Shan_assets/img/來自北歐瑞典傳統點心肉桂捲.jpg" alt="">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button data-bs-toggle="pill" value="3" data-bs-target="#epix-single-3"
+                                            type="button">
+                                            <img width="98" height="98" src="Group/Shan_assets/img/肯都咖啡-經典肉桂捲.jpg" alt="">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button data-bs-toggle="pill" value="4" data-bs-target="#epix-single-4"
+                                            type="button">
+                                            <img width="98" height="98" src="Group/Shan_assets/img/美式核桃肉桂捲.jpg" alt="">
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 單品圖片顯示結束 -->
+                    <div class="col-xxl-6 col-lg-6">
+                        <div class="epix-single-product-right">
+                            <!-- <div class="rating">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star-half"></i>
+                                <i class="fas fa-star text-gray"></i>
+                            </div> -->
+                            <h4 class="epix-single-product-title">團購活動：天天肉桂捲日</h4>
+                            <h6>團購主:</h6>
+                            <p class="epix-product-details-short-description">
+                                開始日期:<br>
+                                結束日期:<br>
+                                成團達標數:<br>
+                                參加人數:
+                            </p>
+                            <p class="epix-product-details-short-description">
+                                肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲
+                                肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲 肉桂捲
+                            </p>
+                            <p class="price">
+                                <span class="epix-price-amount">
+                                    <bdi>
+                                        <span class="epix-price-currency-symbol">NT$</span>
+                                        100
+                                    </bdi>
+                                </span>
+                            </p>
+                            <form action="#" class="epix-cart-variation">
+                                <!-- 選擇規格開始，先不要 -->
+                                <!-- <div class="epix-product-label mb-35">
+                                    <a href="#" class="title">SERIES CPU</a>
+                                    <div class="taglist">
+                                        <a href="shop.html">Core i5</a>
+                                        <a href="shop.html">Core i7</a>
+                                        <a href="shop.html">Core i9</a>
+                                    </div>
+                                </div> -->
+                                <!-- 選擇規格結束 -->
+                                <div class="epix-quantity-validation">
+                                    <!-- <span>數量</span>
+                                    <div class="wrap-2 d-block d-sm-inline-block mb-15 mb-sm-0">
+                                        <div class="d-inline-block border-gray mr-20">
+                                            <div class="epix-quantity-form">
+                                                <div class="cart-plus-minus"></div>
+                                                <input type="text" value="2">
+                                            </div>
+                                        </div>
+                                        <a href="cart.html" class="cart-btn mr-15">加入購物車</a>
+                                    </div> -->
+                                    <!-- 在結帳的頁面選擇數量 -->
+                                    <span>倒數計時:</span>
+                                    <p id="demo"></p>
+                                    <p>
+                                        <span>揪團進度：</span>
+                                        <progress value="123" max="300"></progress>
+                                    </p>
+                                    <a href="checkout.html"
+                                        class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /. single product right -->
+                    </div>
+                </div>
+                <!-- 組合包框開始，這不要 -->
+                <!-- <div class="row justify-content-center mb-50">
+                    <div class="col-xxl-10">
+                        <div class="purchase-collection-box">
+                            <h5 class="purchase-collection-title">FREQUENTLY BOUGHT TOGETHER</h5>
+                            <div class="row">
+                                <div class="col-xxl-9 col-lg-9">
+                                    <div class="purchase-collection-products-thumbs">
+                                        <div class="single-purchase-collection-product">
+                                            <a href="single-product.html" target="_blank"><img
+                                                    src="assets/img/product/product-1-1.jpg" alt=""></a>
+                                        </div>
+                                        <div class="single-purchase-collection-product">
+                                            <a href="single-product.html" target="_blank"><img
+                                                    src="assets/img/product/product-1-2.jpg" alt=""></a>
+                                        </div>
+                                        <div class="single-purchase-collection-product">
+                                            <a href="single-product.html" target="_blank"><img
+                                                    src="assets/img/product/product-1-3.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-collection-products-content">
+                                        <p class="epix-single-product-desc">This Product: Microsoft Surface Laptop 3-15”
+                                            Touch-Screen – Core i5 – $750.00</p>
+                                        <p class="epix-single-product-desc">Desktop Webcam, HD 720p Widescreen – $200.00
+                                        </p>
+                                        <p class="epix-single-product-desc">Verbatim Optical Mouse USB Accessibility –
+                                            $30.00</p>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-lg-3">
+                                    <div class="purchase-collection-product-content">
+                                        <h5 class="epix-purchase-title">Price for all:</h5>
+                                        <div class="price">
+                                            <h5 class="epix-price-count">980.00</h5>
+                                            <a href="cart.html" class="add-cart-theme text-uppercase">add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- 組合包框結束 -->
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="epix-single-product-description">
+                            <div class="epix-single-product-description-tabs-wrap mb-20">
+                                <div class="epix-single-product-description-tab">
+                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="active" data-bs-toggle="pill" data-bs-target="#tab-1-1"
+                                                type="button">描述</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button data-bs-toggle="pill" data-bs-target="#tab-1-2"
+                                                type="button">附加信息</button>
+                                        </li>
+                                        <!-- 評論欄位開始 -->
+                                        <!-- <li class="nav-item" role="presentation">
+                                            <button data-bs-toggle="pill" data-bs-target="#tab-1-3"
+                                                type="button">評論</button>
+                                        </li> -->
+                                        <!-- 評論欄位結束 -->
+                                    </ul>
+                                </div>
+                                <div class="epix-single-product-description-content-wrap">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="tab-1-1" role="tabpanel">
+                                            <div class="epix-single-product-content">
+                                                <p>這肉桂捲整個都是特調肉桂粉 超好吃。
+                                                </p>
+
+                                                <div class="row">
+                                                    <div class="col-xxl-7">
+                                                        <!-- 規格表開始，這先不要 -->
+                                                        <!-- <div class="epix-featured-list">
+                                                            <h4 class="epix-featured-list-title">Technical Details</h4>
+                                                            <ul>
+                                                                <li>
+                                                                    <span>Device Length :</span>
+                                                                    <span>Dimensions 2024*3068</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Type :</span>
+                                                                    <span>Rechargeable Lithium battery</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>USB :</span>
+                                                                    <span>Type-C fast charge</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>USB:</span>
+                                                                    <span>Type-C fast charge</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Warranty :</span>
+                                                                    <span>30 Days Warenty</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Processor Count :</span>
+                                                                    <span>30 Days Warenty</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Device Length :</span>
+                                                                    <span>Dimensions 2024*3068</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Type :</span>
+                                                                    <span>Rechargeable Lithium battery</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>USB :</span>
+                                                                    <span>Type-C fast charge</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>USB:</span>
+                                                                    <span>Type-C fast charge</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Warranty :</span>
+                                                                    <span>30 Days Warenty</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span>Processor Count :</span>
+                                                                    <span>30 Days Warenty</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div> -->
+                                                        <!-- 規格表結束 -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab-1-2" role="tabpanel">
+                                            <div class="epix-additional-product-information">
+                                                <div class="epix-product-table">
+                                                    <table class="table table-striped">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>顏色</th>
+                                                                <td>
+                                                                    <a>肉桂色</a>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>體積</th>
+                                                                <td>
+                                                                    <a><span>32 * 32 吋</span></a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>品牌</th>
+                                                                <td>
+                                                                    <a>第六組</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>保存期限</th>
+                                                                <td>
+                                                                    <a>整整4個月半</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab-1-3" role="tabpanel">
+                                            <!-- 評論標頭開始，這不要 -->
+                                            <!-- <div class="epix-review-content mb-40">
+                                                <h4 class="epix-review-content-title">3 reviews for Microsoft Surface
+                                                    Laptop 3-15” Touch-Screen</h4>
+                                                <div class="epix-rating-count-wrap">
+                                                    <div class="epix-rating-count-left-content">
+                                                        <h5>CUSTOMER REVIEWS</h5>
+                                                        <div class="epix-rating-flex-wrap">
+                                                            <div class="row g-0">
+                                                                <div class="col-xxl-2 col-md-4">
+                                                                    <div
+                                                                        class="epix-rating-count-number-box text-center">
+                                                                        <div class="epix-rating-count-number">
+                                                                            <h4>4.33</h4>
+                                                                        </div>
+                                                                        <div class="rating">
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                        </div>
+                                                                        <span class="review-subtitle">Based on 3
+                                                                            reviews</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xxl-8 col-md-8">
+                                                                    <div class="epix-count-right-progress">
+                                                                        <div class="single-progress-list">
+                                                                            <div class="rating">
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                            </div>
+                                                                            <div class="epix-rating-progress">
+                                                                                <div class="progress-count"
+                                                                                    data-width="72%"></div>
+                                                                            </div>
+                                                                            <div class="count">
+                                                                                <span>55</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="single-progress-list">
+                                                                            <div class="rating">
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                            </div>
+                                                                            <div class="epix-rating-progress">
+                                                                                <div class="progress-count"
+                                                                                    data-width="32%"></div>
+                                                                            </div>
+                                                                            <div class="count">
+                                                                                <span>32</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="single-progress-list">
+                                                                            <div class="rating">
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                            </div>
+                                                                            <div class="epix-rating-progress">
+                                                                                <div class="progress-count"
+                                                                                    data-width="44%"></div>
+                                                                            </div>
+                                                                            <div class="count">
+                                                                                <span>44</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="single-progress-list">
+                                                                            <div class="rating">
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                            </div>
+                                                                            <div class="epix-rating-progress">
+                                                                                <div class="progress-count"
+                                                                                    data-width="93%"></div>
+                                                                            </div>
+                                                                            <div class="count">
+                                                                                <span>93</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="single-progress-list">
+                                                                            <div class="rating">
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                                <i class="fal fa-star"></i>
+                                                                            </div>
+                                                                            <div class="epix-rating-progress">
+                                                                                <div class="progress-count"
+                                                                                    data-width="65%"></div>
+                                                                            </div>
+                                                                            <div class="count">
+                                                                                <span>65</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- 評論標頭結束 -->
+                                            <!-- 評論內容開始，這不要 -->
+                                            <!-- <div class="row">
+                                                <div class="col-xxl-10">
+                                                    <ul class="epix-commentlist mb-50">
+                                                        <li class="epix-comment-item">
+                                                            <div class="epix-comment-thumb">
+                                                                <img src="assets/img/user/user-1.png" alt="">
+                                                            </div>
+                                                            <div class="epix-comment-content">
+                                                                <div class="epix-comment-top">
+                                                                    <div class="rating">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fal fa-star"></i>
+                                                                        <i class="fal fa-star"></i>
+                                                                    </div>
+                                                                    <div class="user-name"><a href="blog.html">John
+                                                                            Park</a></div>
+                                                                    <span class="date">– December 14, 2020</span>
+                                                                </div>
+                                                                <div class="epix-comment-bottom">
+                                                                    <p>This is an awesome product which is was really
+                                                                        good.</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="epix-comment-item">
+                                                            <div class="epix-comment-thumb">
+                                                                <img src="assets/img/user/user-2.png" alt="">
+                                                            </div>
+                                                            <div class="epix-comment-content">
+                                                                <div class="epix-comment-top">
+                                                                    <div class="rating">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fal fa-star"></i>
+                                                                        <i class="fal fa-star"></i>
+                                                                    </div>
+                                                                    <div class="user-name"><a href="blog.html">Yahun
+                                                                            Branze</a></div>
+                                                                    <span class="date">– February 16, 2020</span>
+                                                                </div>
+                                                                <div class="epix-comment-bottom">
+                                                                    <p>This is an awesome product which is was really
+                                                                        good.</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="epix-comment-item">
+                                                            <div class="epix-comment-thumb">
+                                                                <img src="assets/img/user/user-3.png" alt="">
+                                                            </div>
+                                                            <div class="epix-comment-content">
+                                                                <div class="epix-comment-top">
+                                                                    <div class="rating">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fal fa-star"></i>
+                                                                        <i class="fal fa-star"></i>
+                                                                    </div>
+                                                                    <div class="user-name"><a href="blog.html">Md Hemal
+                                                                            Akhand</a></div>
+                                                                    <span class="date">– February 12, 2021</span>
+                                                                </div>
+                                                                <div class="epix-comment-bottom">
+                                                                    <p>This is an awesome product was really good.</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="epix-review-form-wrapper">
+                                                        <h4 class="epix-review-title">Add a review</h4>
+                                                        <form action="post">
+                                                            <p class="epix-comment-notes">Your email address will not be
+                                                                published. Required fields are marked *</p>
+                                                            <div class="row">
+                                                                <div class="col-xxl-12">
+                                                                    <div class="epix-comment-form-rating">
+                                                                        <div class="epix-comment-form-rating-label">
+                                                                            <div class="row">
+                                                                                <div class="col-xxl-12">
+                                                                                    <div class="epix-wrapper mb-6">
+                                                                                        <span
+                                                                                            class="rating-label d-inline-block">Your
+                                                                                            rating <span>*</span></span>
+                                                                                        <div
+                                                                                            class="rating d-inline-block">
+                                                                                            <i class="fas fa-star"></i>
+                                                                                            <i class="fas fa-star"></i>
+                                                                                            <i class="fas fa-star"></i>
+                                                                                            <i class="fal fa-star"></i>
+                                                                                            <i class="fal fa-star"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xxl-12">
+                                                                                    <div class="epix-wrapper mb-10">
+                                                                                        <label for="review"
+                                                                                            class="rating-label d-block mb-15">Your
+                                                                                            review
+                                                                                            <span>*</span></label>
+                                                                                        <textarea name="review"
+                                                                                            id="review" cols="30"
+                                                                                            rows="10"></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-35">
+                                                                <div class="col-xxl-6 col-lg-6">
+                                                                    <label for="name"
+                                                                        class="rating-label d-block mb-15">Name
+                                                                        <span>*</span></label>
+                                                                    <input type="text" id="name">
+                                                                </div>
+                                                                <div class="col-xxl-6 col-lg-6">
+                                                                    <label for="email"
+                                                                        class="rating-label d-block mb-15">Email
+                                                                        <span>*</span></label>
+                                                                    <input type="email" id="email">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xxl-12">
+                                                                    <button type="submit">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- 評論內容結束 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 單品區結束 -->
+    </main>
+
+
+
+
+
+    <!-- =====================頁腳開始========================= -->
+    <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">粉絲專頁</h4>
+
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">快速連結</h4>
+                    <a class="btn btn-link" href="">品牌故事</a>
+                    <a class="btn btn-link" href="">聯絡我們</a>
+                    <a class="btn btn-link" href="">服務與條款</a>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">常見問題</h4>
+                    <a class="btn btn-link" href="">FAQ</a>
+                    <a class="btn btn-link" href="">回報客服</a>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">甜點畫廊</h4>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =====================頁腳結束========================= -->
+
+    <script data-cfasync="false" src="Group/Shan_static/js/email-decode.min.js"></script>
+    <script src="Group/Shan_static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+    <script src="Group/Shan_static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Oct 1, 2023 00:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
