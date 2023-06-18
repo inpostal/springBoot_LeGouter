@@ -29,5 +29,5 @@ public class GroupProductImgVO {
 	@Column (name = "GROUP_PRODUCT_ID")
 	private Integer groupProductId;
 	@Column (name = "GOURP_PRODUCT_IMG")
-	private String groupProductImg;
+	private byte[] groupProductImg;
 }

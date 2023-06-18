@@ -370,7 +370,7 @@
                             <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" placeholder="yyyy-mm-dd" required></label>
                             <input type="radio" class="inpproduct" id="productstatus" name="groupProductStatus" value="1" checked style="display: none;">
                             <label class="inpproduct">上傳圖片</label>
-                            <input type="file" style="margin-top: 10px;" id="uploadimg">
+                            <input type="file" style="margin-top: 10px;" id="uploadimg1">
                             <input type="file" style="margin-top: 10px;">
                             <input type="file" style="margin-top: 10px;">
                             <input type="file" style="margin-top: 10px;">
@@ -473,10 +473,9 @@
         window.addEventListener("load", function () {
 		  $("#btnSend").on("click", function () {
 			  console.log($("#productstardate").val());
-
 		    addproduct(); //執行新增至團購商品表格的函式
-			//addproductimg(); //準備寫執行新增至商品圖片表格的函式
 		  })
+
           showlist(); //執行顯示全部商品資料的函式
           $("#btnone").on("click", function () {	 
             showone();
@@ -485,27 +484,42 @@
 
         //新增至團購商品表格的函式。
         function addproduct() {
-          let datas = {   
-		  groupProductName: ($("#productname").val()),
-		  groupProductContent: ($("#textarea").val()),
-		  groupProductPrice:parseInt($("#productprice").val()),
-		  groupProductStardate: ($("#productstardate").val()),
-		  groupProductStatus: parseInt($("#productstatus").val()),  
-          }
-          console.log(datas.groupProductStardate); //測試有無資料，本身是物件還是字串。
+        //   let datas = {
+		//   groupProductName: ($("#productname").val()),
+		//   groupProductContent: ($("#textarea").val()),
+		//   groupProductPrice:parseInt($("#productprice").val()),
+		//   groupProductStardate: ($("#productstardate").val()),
+		//   groupProductStatus: parseInt($("#productstatus").val()),
+        //   }
+          let formdata = new FormData;
+          let groupProductName = $("#productname").val();
+          let groupProductContent = $("#textarea").val();
+          let groupProductPrice= $("#productprice").val();
+          let groupProductStardate = $("#productstardate").val();
+          let groupProductStatus = $("#productstatus").val();
+          let groupProductImg = $("#uploadimg1")[0].files[0];
+          formdata.append("groupProductName", groupProductName);
+          formdata.append("groupProductContent", groupProductContent);
+          formdata.append("groupProductPrice", groupProductPrice);
+          formdata.append("groupProductStardate", groupProductStardate);
+          formdata.append("groupProductStatus", groupProductStatus);
+          formdata.append("groupProductImg", groupProductImg);
+
+          console.log(groupProductImg);
+        //   console.log(datas.groupProductStardate); //測試有無資料，本身是物件還是字串。
           //--送出Ajax請求
             $.ajax({
-                url: "/groupProduct/inser",
+                url: "/groupProduct/inserNew",
                 method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(datas),
-                //dataType: "json",
+                contentType: false,
+                processData: false,
+                data: formdata,
                 beforeSend: function () {
-                console.log("發送請求之前確認:" + JSON.stringify(datas));
+                // console.log("發送請求之前確認:" + JSON.stringify(datas));
                 },
                 success: function(response) {
-                    console.log(response.success);
-                    if(response.success){
+                    console.log(response);
+                    if(response.success1){
                         alert("新增成功");
                         location.reload();
                     }
@@ -519,11 +533,6 @@
         }
         //-------------------------
 
-        //準備寫新增圖片的函式。
-        // function addproductimg(){
-
-		// }
-        //-------------------------
         //顯示全部商品資料的函式。
         function showlist() {
             $.ajax({
