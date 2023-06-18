@@ -48,11 +48,11 @@ public class DessertShopController {
         return dessert;
     }
 
-    @PutMapping("/update/{dessertName}")
-    public String update(@PathVariable String dessertName,
+    @PutMapping("/update/{dessertId}")
+    public String update(@PathVariable Integer dessertId,
                          @RequestBody Dessert dessert){
-        System.out.println("dessertName: " + dessertName);
-        String msg = dessertService.update(dessertName, dessert);
+
+        String msg = dessertService.update(dessertId, dessert);
         return msg;
     }
 

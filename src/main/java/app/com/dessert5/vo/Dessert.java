@@ -20,8 +20,7 @@ public class Dessert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DESSERT_ID")
-    private Integer dessert_id;
-
+    private Integer dessertId;
 
     @Column(name = "DESSERT_NAME", unique = true, nullable = false)
     private String dessertName;

@@ -44,19 +44,25 @@ public class DessertService {
         return dessert;
     }
 
-    public String update(String dessertName, Dessert dessert){
-        // 要被編輯的商品
-        System.out.println("dessertName2: " + dessertName);
-        Dessert d = dessertRepository.findByDessertName(dessertName);
+//    public Dessert findByPK(Integer dessertId){
+//        Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+//        return dessert;
+//    }
 
-        // 新編輯的商品資訊，是否有重複的商品名稱
-        Dessert t = dessertRepository.findByDessertName(dessert.getDessertName());
-        System.out.println("dessertName3: " + dessert.getDessertName());
-        if (t != null){
-            return "商品已存在，無法修改";
-        } else {
-            dessertRepository.save(d);
+    public String update(Integer dessertId, Dessert dessert){
+
+        // 找到要被編輯的商品
+        Dessert dessertOld = dessertRepository.findById(dessertId).orElse(null);
+
+        // 檢查新編輯的商品資訊，是否有重複的商品名稱
+        if (dessertRepository.findByDessertName(dessert.getDessertName()) == null) {
+            dessert.setDessertId(dessertId);
+            dessertRepository.save(dessert);
             return "編輯成功";
+        } else {
+            return "商品已存在，無法修改";
         }
+
+
     }
 }

@@ -305,6 +305,10 @@
             margin: 0;
         }
 
+        .red-text {
+            color: red;
+        }
+
     </style>
 
 
@@ -542,23 +546,17 @@
                                 </thead>
                                 <tbody id="back-table">
                                     <!-- 1. -->
-<!--                                    <tr>-->
-<!--                                        <td>-->
-<!--                                            <span class="custom-checkbox">-->
-<!--                                                <input type="checkbox" id="checkbox1" name="options[]" value="1">-->
-<!--                                                <label for="checkbox1"></label>-->
-<!--                                            </span>-->
-<!--                                        </td>-->
-<!--                                        <td>馬卡龍</td>-->
-<!--                                        <td>我們店內的馬卡龍是絕對不能錯過的甜點之一！這些小巧的甜點外脆內軟，口感絕佳。我們提供各種口味的馬卡龍，每一顆都令人垂涎欲滴。</td>-->
-<!--                                        <td>$39.00</td>-->
-<!--                                        <td>已上架</td>-->
-<!--                                        <td>-->
-<!--                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><span data-toggle="tooltip" title="Edit">編輯</span></a>-->
-<!--                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal"><span data-toggle="tooltip" title="Remove">下架</span></a>-->
-<!--                                            <a href="#pictureUploadModal" data-toggle="modal"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
+                                    <tr>
+                                        <td>${res.dessertName}</td>
+                                        <td>${res.dessertContent}</td>
+                                        <td>NT$${res.dessertPrice}</td>
+                                        <td>${res.dessertStatus}</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
+                                            <a href="#pictureUploadModal" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        </td>
+                                    </tr>
 
                                     <!-- 2. -->
 <!--                                    <tr>-->
@@ -812,16 +810,7 @@
 
     <script>
 
-        <!-- axios -->
-        // $(document).ready(function(){
-        //     axios.get("/dessert5/findAll")
-        //         .then((response)=>{
-        //             console.log(response.data);   // 顯示後端傳來的資料
-        //         });
-        // })
-
-
-        <!-- GET ALL -->
+        // GET ALL
         $(document).ready(findAll());
 
         function findAll(){
@@ -832,6 +821,8 @@
                     console.log(res);
                     let html = "";
                     for (let e in res) {
+                        let dessertStatus = res[e].dessertStatus;
+                        let statusClass = dessertStatus === "已下架" ? "red-text" : "";
                         html += `<tr>
 <!--                                    <td>-->
 <!--                                        <span class="custom-checkbox">-->
@@ -842,11 +833,11 @@
                                     <td>${res[e].dessertName}</td>
                                     <td>${res[e].dessertContent}</td>
                                     <td>NT$${res[e].dessertPrice}</td>
-                                    <td>${res[e].dessertStatus}</td>
+                                    <td class="${statusClass}">${dessertStatus}</td>
                                     <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -859,29 +850,32 @@
             })
         }
 
+
         // 下架單筆
         $(document).on("click", ".Remove", function(){
             let dessertName = $(this).data("info");
             console.log(dessertName);
 
-            $("#soldout").on("click", function(){
+            $(document).off("click", "#soldout").on("click", "#soldout", function(e){
+                e.preventDefault(); // 阻止默认事件行为
+
                 $.ajax({
                     url: '/dessert5/soldout?dessertName=' + encodeURIComponent(dessertName),
                     type: 'GET',
                     success: function(){
-                        // location.reload();
+                        window.alert("商品已下架");
+                        location.reload();
                     },
                     error: function(xhr, textStatus, errorThrown) {
                         console.error(xhr);
                     }
-                })
-            })
-
-        })
-
+                });
+            });
+        });
 
         // 新增一筆
-        $("#insert").on("click", function(){
+        $("#insert").off().on("click", function(e){
+            e.preventDefault(); // 阻止默认事件行为
 
             $.ajax({
                 url: '/dessert5/insert',
@@ -895,15 +889,15 @@
                 }),
                 success: function(res){
                     // 跳出訊息視窗
-                    alert(res);
+                    window.alert(res);
                     location.reload();
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.error(xhr);
                 }
-            })
+            });
+        });
 
-        })
 
         // 查詢一筆
         $("#search").on("click", function(){
@@ -913,21 +907,17 @@
                 url: '/dessert5/search?dessertName=' + encodeURIComponent(dessertName),
                 type: 'GET',
                 success: function(res){
+                        let dessertStatus = res.dessertStatus;
+                        let statusClass = dessertStatus === "已下架" ? "red-text" : "";
                         let html =`<tr>
-<!--                                    <td>-->
-<!--                                        <span class="custom-checkbox">-->
-<!--                                            <input type="checkbox" id="checkbox1" name="options[]" value="1">-->
-<!--                                            <label for="checkbox1"></label>-->
-<!--                                        </span>-->
-<!--                                    </td>-->
                                     <td>${res.dessertName}</td>
                                     <td>${res.dessertContent}</td>
                                     <td>NT$${res.dessertPrice}</td>
-                                    <td>${res.dessertStatus}</td>
+                                    <td class="${statusClass}">${dessertStatus}</td>
                                     <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -937,13 +927,18 @@
         })
 
         // 編輯一筆
-        $(document).on("click", ".edit", function(){
-            let dessertName = $(this).data("info");
-            console.log(dessertName);
+        $(document).on("click", ".edit", function() {
+            let dessertId = $(this).data('id');
+            console.log(dessertId);
 
-            $("#dessert-edit").on("click", function(){
+            $("#dessert-edit").off().on("click", function(e) {
+                e.preventDefault(); // 防止表单提交
+
+                // 保存当前点击的按钮元素的引用
+                const $currentButton = $(this);
+
                 $.ajax({
-                    url: '/dessert5/update/' + encodeURIComponent(dessertName),
+                    url: '/dessert5/update/' + encodeURIComponent(dessertId),
                     type: 'PUT',
                     contentType: 'application/json',
                     data: JSON.stringify({
@@ -952,17 +947,20 @@
                         dessertPrice: $("#editPrice").val(),
                         dessertStatus: "販售中"
                     }),
-                    success: function(res){
+                    success: function(res) {
                         // 跳出訊息視窗
-                        alert(res);
+                        window.alert(res);
                         location.reload();
+
+                        // 在成功后解绑当前按钮元素的点击事件
+                        $currentButton.off('click');
                     },
                     error: function(xhr, textStatus, errorThrown) {
                         console.error(xhr);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
 
 
 
