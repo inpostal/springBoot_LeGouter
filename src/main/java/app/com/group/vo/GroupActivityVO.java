@@ -1,6 +1,9 @@
 package app.com.group.vo;
 
 
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,14 +34,14 @@ public class GroupActivityVO {
 	@Column (name = "GROUP_ACTIVITY_CONTENT")
 	private String groupActivityContent; //內容
 	@Column (name = "GROUP_ORDER_STAR")
-	private String groupOrderStar; //開始日期
+	private Date groupOrderStar; //開始日期
 	@Column (name = "GROUP_ORDER_END")
-	private String groupOrderEnd; //結束日期
+	private Date groupOrderEnd; //結束日期
 	@Column (name = "GROUP_ORDER_MIN")
 	private Integer groupOrderMin; //達標數
 	@Column (name = "GROUP_NAME")
 	private String groupName; //活動名稱
 	@Column (name = "GROUP_ORDER_DISCOUNT")
-	private double groupOrderDiscount; //折扣數
+	private Double groupOrderDiscount; //折扣數
 
 }
