@@ -306,7 +306,7 @@
         }
 
         .red-text {
-            color: red;
+            color: red !important;
         }
 
     </style>
@@ -545,18 +545,12 @@
                                     </tr>
                                 </thead>
                                 <tbody id="back-table">
+
+
                                     <!-- 1. -->
-                                    <tr>
-                                        <td>${res.dessertName}</td>
-                                        <td>${res.dessertContent}</td>
-                                        <td>NT$${res.dessertPrice}</td>
-                                        <td>${res.dessertStatus}</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
-                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                            <a href="#pictureUploadModal" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
-                                        </td>
-                                    </tr>
+
+
+
 
                                     <!-- 2. -->
 <!--                                    <tr>-->
@@ -577,24 +571,8 @@
 <!--                                        </td>-->
 <!--                                    </tr>-->
 
-                                    <!-- 3. -->
-<!--                                    <tr>-->
-<!--                                        <td>-->
-<!--                                            <span class="custom-checkbox">-->
-<!--                                                <input type="checkbox" id="checkbox3" name="options[]" value="1">-->
-<!--                                                <label for="checkbox3"></label>-->
-<!--                                            </span>-->
-<!--                                        </td>-->
-<!--                                        <td>Maria Anders</td>-->
-<!--                                        <td>mariaanders@mail.com</td>-->
-<!--                                        <td>25, rue Lauriston, Paris, France</td>-->
-<!--                                        <td>(503) 555-9931</td>-->
-<!--                                        <td>-->
-<!--                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><span data-toggle="tooltip" title="Edit">編輯</span></a>-->
-<!--                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal"><span data-toggle="tooltip" title="Remove">下架</span></a>-->
-<!--                                            <a href="#pictureUploadModal" data-toggle="modal"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
+
+
 
                                 </tbody>
                             </table>
@@ -961,6 +939,10 @@
                 });
             });
         });
+
+
+
+        // 上傳圖片
 
 
 
