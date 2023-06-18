@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
+
+
     <style>
         #nav-bar {
             background-color: #1E1916;
@@ -266,8 +268,15 @@
         }
         /* Modal styles */
         .modal .modal-dialog {
-            max-width: 400px;
+            max-width: 700px;
+            overflow: auto;
         }
+        /* 上傳圖片的modal */
+        .modal-dialog img {
+            width: 100%;
+            height: auto;
+        }
+
         .modal .modal-header, .modal .modal-body, .modal .modal-footer {
             padding: 20px 30px;
         }
@@ -308,6 +317,7 @@
         .red-text {
             color: red !important;
         }
+
 
     </style>
 
@@ -521,7 +531,7 @@
                                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"> <span>新增商品</span></a>
                                         <a class="btn btn-success" id="search" style="margin-right: 50px; background-color: cornflowerblue"> <span>搜尋</span></a>
                                         <form>
-                                            <input type="search" style="border: none; padding: 0; margin-top: 5px; margin-left: 230px;" id="searchVal">
+                                            <input type="search" style="border: none; padding: 0; margin-top: 5px; margin-left: 180px;" id="searchVal">
                                         </form>						
                                     </div>
                                 </div>
@@ -548,6 +558,17 @@
 
 
                                     <!-- 1. -->
+                                    <tr>
+                                        <td>${res[e].dessertName}</td>
+                                        <td>${res[e].dessertContent}</td>
+                                        <td>NT$${res[e].dessertPrice}</td>
+                                        <td class="${statusClass}">${dessertStatus}</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
+                                            <a href="#pictureUploadModal" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        </td>
+                                    </tr>
 
 
 
@@ -699,8 +720,9 @@
                 <!-- picture upload -->
                 <div id="pictureUploadModal" class="modal fade">
                     <div class="modal-dialog">
-                        <dic class="modal-content">
-                            <form action="#" enctype="multipart/form-data">
+                        <div class="modal-content">
+
+                            <form enctype="multipart/form-data" id="picform">
                                 <div class="modal-header">						
                                     <h4 class="modal-title">商品圖片上傳</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -708,18 +730,26 @@
                                 <div class="modal-body">
 
                                     <input name="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+
+
                                     <input name="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+
+
                                     <input name="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                    <input name="product_img_4" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">				
+
+
+                                    <input name="product_img_4" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+
+
                                     
                                 </div>
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                    <input type="submit" class="btn btn-info" value="Save">
+                                    <button class="btn btn-info" id="picupload">儲存</button>
                                 </div>
                             </form>
-                            
-                        </dic>
+
+                        </div>
                     </div>
                 </div>
                 
@@ -815,7 +845,7 @@
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" class="picupload" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -895,7 +925,7 @@
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" class="picupload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -941,8 +971,51 @@
         });
 
 
-
         // 上傳圖片
+        $(document).on("click", ".picupload", function() {
+            let dessertId = $(this).data('id');
+            console.log(dessertId);
+
+            $("#picupload").off().on("click", function(e) {
+                e.preventDefault(); // 防止表单提交
+
+                // 保存当前点击的按钮元素的引用
+                const $currentButton = $(this);
+
+                let picform = $("#picform");
+                let imageInputs = picform.find("input[type='file']");
+
+                let formData = new FormData();
+
+                // 将每个文件输入元素的文件添加到 FormData 对象
+                imageInputs.each(function() {
+                    let input = $(this);
+                    let files = input[0].files;
+
+                    for (let i = 0; i < files.length; i++) {
+                        let file = files[i];
+                        let uniqueKey = dessertId + input.attr('name') + i; // 使用更具唯一性的键名
+                        formData.append(uniqueKey, file);
+                    }
+                });
+
+                $.ajax({
+                    url: '/dessert5/upload/' + encodeURIComponent(dessertId),
+                    type: 'PUT',
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function(res) {
+                        window.alert(res);
+                        location.reload();
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                });
+            });
+        });
+
 
 
 
