@@ -386,7 +386,8 @@
                                     <tr>
                                         <th style="width:120px;"><strong>團購商品編號</strong></th>
                                         <th style="width:180px;"><strong>名稱</strong></th>
-                                        <th style="width:320px;"><strong>內容</strong></th>
+                                        <th style="width:220px;"><strong>內容</strong></th>
+                                        <th style="width:100px;"><strong>圖片</strong></th>
                                         <th style="width:120px;"><strong>價格</strong></th>
                                         <th style="width:120px;"><strong>上架時間</strong></th>
                                         <th style="width:120px;"><strong>下架時間</strong></th>
@@ -415,7 +416,8 @@
                                     <tr>
                                         <th style="width:120px;"><strong>團購商品編號</strong></th>
                                         <th style="width:180px;"><strong>名稱</strong></th>
-                                        <th style="width:320px;"><strong>內容</strong></th>
+                                        <th style="width:220px;"><strong>內容</strong></th>
+                                        <th style="width:100px;"><strong>圖片</strong></th>
                                         <th style="width:120px;"><strong>價格</strong></th>
                                         <th style="width:120px;"><strong>上架時間</strong></th>
                                         <th style="width:120px;"><strong>下架時間</strong></th>
@@ -547,6 +549,7 @@
                                         <td><strong>${response[gvo].groupProductId}</strong></td>
                                         <td>${response[gvo].groupProductName}</td>
                                         <td>${response[gvo].groupProductContent}</td>
+                                        <td><img src="/groupProduct/get/img/${response[gvo].groupProductId}" width="100px" height="100px"></td>
                                         <td>${response[gvo].groupProductPrice}</td>
                                         <td>${response[gvo].groupProductStardate}</td>
                                         <td>${response[gvo].groupProductEnddate}</td>
@@ -590,6 +593,7 @@
                                     <td><strong>${response.groupProductId}</strong></td>
                                     <td>${response.groupProductName}</td>
                                     <td>${response.groupProductContent}</td>
+                                    <td><img src="/groupProduct/get/img/${response.groupProductId}" width="100px" height="100px"></td>
                                     <td>${response.groupProductPrice}</td>
                                     <td>${response.groupProductStardate}</td>
                                     <td>${response.groupProductEnddate}</td>

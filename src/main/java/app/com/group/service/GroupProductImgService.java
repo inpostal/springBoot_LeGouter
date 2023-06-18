@@ -15,5 +15,10 @@ public class GroupProductImgService {
 	public Boolean inserImg(GroupProductImgVO groupProductImgVO) {
 		return groupProductImgRepository.save(groupProductImgVO) != null;
 	}
+	
+	public GroupProductImgVO getImg(Integer groupProductImgId) {
+		GroupProductImgVO imgvo = groupProductImgRepository.getReferenceById(groupProductImgId);
+		return imgvo;
+	}
 
 }
