@@ -38,6 +38,7 @@ public class MemberRestController {
         Boolean isExist  = memberService.findByEmail(email) != null;
         Map<String, Boolean> response = new HashMap<>();
         response.put("isExist", isExist);
+        System.out.println(response);
         return response;
     }
 
@@ -52,6 +53,16 @@ public class MemberRestController {
     @PostMapping("/register")
     public Map<String, Boolean> registerUser(@RequestBody MembersRegisterDTO dto) {
         Boolean success = memberService.memberRegister(dto);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("success", success);
+        return response;
+    }
+
+    @PostMapping("/member/update")
+    public Map<String, Boolean> updateMember(@RequestBody MembersRegisterDTO dto, HttpSession session) {
+        Members members = memberService.updateMember(dto);
+        session.setAttribute("user", members);
+        Boolean success = members != null;
         Map<String, Boolean> response = new HashMap<>();
         response.put("success", success);
         return response;

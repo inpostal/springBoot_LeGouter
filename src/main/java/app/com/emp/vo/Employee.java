@@ -22,10 +22,13 @@ public class Employee {
     private String empPhone;
 
     @Column(name = "EMP_PICTURE")
-    private String empPicture;
+    private byte[] empPicture;
 
     @Column(name = "EMP_ACCOUNT")
     private String empAccount;
+
+    @Column(name = "EMP_MAIL")
+    private String empMail;
 
     @Column(name = "EMP_PASSWORD")
     private String empPassword;

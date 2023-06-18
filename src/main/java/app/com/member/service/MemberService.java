@@ -82,4 +82,16 @@ public class MemberService {
 
         return memberRepository.save(members) != null;
     }
+
+    public Members updateMember(MembersRegisterDTO dto) {
+        Members members = memberRepository.getReferenceById(dto.getId());
+
+        members.setMemberGender(dto.getGender().charAt(0));
+        members.setMemberName(dto.getName());
+        members.setMemberPassword(dto.getPassword());
+        members.setMemberAddress(dto.getCity()+","+dto.getDistrict()+","+dto.getAddress());
+        members.setMemberPhone(dto.getPhone());
+        memberRepository.save(members);
+        return members;
+    }
 }

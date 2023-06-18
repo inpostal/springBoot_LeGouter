@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>會員註冊</title>
+    <title>修改會員資料</title>
 
     <link rel="stylesheet" href="/Member/Sam_CSS/style_register.css">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -29,46 +29,40 @@
 
     <!--  導覽列  -->
     <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
     <div class="member-container-out">
         <div class="member-container">
-            <p>會員註冊</p>
+            <p>修改會員資料</p>
             <form id="form">
                 <label for="name"><b>姓名</b></label>
-                <input id="name" type="text" placeholder="輸入姓名" name="name" required>
-
-                <label for="account"><b>帳號</b></label>
-                <input id="account" type="text" placeholder="輸入帳號" name="account" required>
+                <input id="name" type="text" placeholder="輸入姓名" name="name" required th:value="${session.user.getMemberName()}">
 
                 <label for="password"><b>密碼</b></label>
-                <input id="password" type="password" placeholder="輸入密碼" name="password" required>
+                <input id="password" type="password" placeholder="輸入密碼" name="password" required th:value="${session.user.getMemberPassword()}">
 
                 <label for="gender"><b>性別</b></label>
-                <select id="gender" name="gender" required>
+                <select id="gender" name="gender" required th:value="${session.user.getMemberGender()}">
                     <option value="f">女</option>
                     <option value="m">男</option>
                 </select>
 
                 <label for="phone"><b>電話</b></label>
-                <input id="phone" type="text" placeholder="輸入電話" name="phone" required>
+                <input id="phone" type="text" placeholder="輸入電話" name="phone" required th:value="${session.user.getMemberPhone()}">
 
-                <label for="email"><b>信箱</b></label>
-                <input id="email" type="email" placeholder="輸入信箱" name="email" required>
 
                 <label for="city">居住縣市:</label><br>
-                <select id="city" name="city"></select><br>
+                <select id="city" name="city" th:value="${city}"></select><br>
                 <label for="district">居住地區:</label><br>
-                <select id="district" name="district"></select><br>
+                <select id="district" name="district" th:value="${district}"></select><br>
                 <label for="address">詳細地址:</label><br>
-                <input type="text" id="address" name="address"><br>
+                <input type="text" id="address" name="address" th:value="${address}"><br>
 
-
-                <label for="birthday"><b>生日</b></label>
-                <input id="birthday" type="date" name="birthday" required>
-
-                <button type="button" id="submit">註冊</button>
+                <button type="button" id="submit">修改完成</button>
+                <p id="user-id" style="display: none" th:text="${session.user.getMemberId()}"></p>
             </form>
         </div>
     </div>
+
 
     <!-- 頁腳 -->
     <div th:insert="front-end/components/Footer :: #footer-div"></div>
@@ -93,35 +87,6 @@
             }
         });
 
-        // 帳號輸入區驗證
-        $("#account").blur(function(){
-            let pattern = /^[a-zA-Z0-9]+$/;
-            let inputAccount = $(this).val();
-
-            if(!pattern.test(inputAccount)){
-                $("label[for='account']").attr("style","color: red");
-                $("label[for='account'] b").html("帳號: *帳號只能包含英文或數字");
-                $(this).val('');
-                $(this).focus();
-            } else {
-                // 發送 AJAX 請求確認是否已經被註冊
-                $.ajax({
-                    type: "POST",
-                    url: "/checkAccount",
-                    data: {account: inputAccount},
-                    success: function(response) {
-                        if(response.isExist){
-                            alert("該帳號已被註冊");
-                            $("#account").val('');
-                            $(this).focus();
-                        } else {
-                            $("label[for='account']").attr("style","color: black");
-                            $("label[for='account'] b").html("帳號:");
-                        }
-                    }
-                });
-            }
-        });
 
         // 密碼輸入區驗證
         $("#password").blur(function(){
@@ -155,28 +120,6 @@
             }
         });
 
-        // 信箱輸入區驗證
-        $("#email").blur(function(){
-            let inputEmail = $(this).val();
-
-            // 發送 AJAX 請求確認是否已經被註冊
-            $.ajax({
-                type: "POST",
-                url: "/checkEmail",
-                data: {email: inputEmail},
-                success: function(response) {
-                    if(response.isExist){
-                        alert("該信箱已被註冊");
-                        $("#email").val('');
-                        $(this).focus();
-                    } else {
-                        $("label[for='email']").attr("style","color: black");
-                        $("label[for='email'] b").html("信箱:");
-                    }
-                }
-            });
-        });
-
         // 詳細地址輸入區驗證
         $("#address").blur(function(){
             let pattern = /^[\u4e00-\u9fa5\d]+$/;
@@ -195,33 +138,32 @@
 
         $("#submit").click(function() {
             let data = {
+                id: $("#user-id").text(),
                 name: $("#name").val(),
-                account: $("#account").val(),
                 password: $("#password").val(),
                 gender: $("#gender").val(),
                 phone: $("#phone").val(),
-                email: $("#email").val(),
                 city: $("#city").val(),
                 district: $("#district").val(),
                 address: $("#address").val(),
-                birthday: $("#birthday").val(),
             };
-
             $.ajax({
-                url: "/register",
+                url: "/member/update",
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function(response) {
                     if(response.success) {
-                        alert("註冊成功！ 請嘗試登入!");
-                        location.href = "/login";
+                        alert("修改資料成功！");
+                        location.href = "/member/data";
                     } else {
-                        alert("註冊失敗：" + response.message);
+                        alert("修改失敗：" + response.message);
                     }
                 }
             });
         });
+
+
 
 
 
@@ -296,10 +238,8 @@
     <script src="/Commom/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
     <script src="/Commom/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
     <script src="/Commom/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-
     <script src="/Commom/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
     <script src="/Commom/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
-    <script src="/Member/Sam_Js/LoadConponents.js"></script>
 </body>
 
 </html>

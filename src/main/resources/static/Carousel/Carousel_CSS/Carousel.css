@@ -1,0 +1,114 @@
+:root {
+    --primary: #EAA636;
+    --secondary: #545454;
+    --light: #FDF5EB;
+    --dark: #1E1916;
+}
+
+#carousel-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#border-title {
+    border-color: #333;
+}
+
+#carousel-out-section {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#carousel-form-container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: var(--light);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#carousel-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#carousel-form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+#carousel-form input,
+#carousel-form textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#carousel-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--dark);
+    color: var(--primary);
+    cursor: pointer;
+}
+
+#carousel-form button:hover {
+    background-color: var(--secondary);
+}
+
+
+tr{
+    text-align: center;
+}
+
+#carousel-list {
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(243, 231, 215);
+}
+
+#carousel-list thead th {
+    background-color: var(--dark);
+    color: var(--primary);
+    text-align: center;
+    padding: 10px;
+}
+
+#carousel-list tbody td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#carousel-list tbody tr:nth-child(even) {
+    background-color: var(--light);
+}
+
+tr img {
+    width: 100px;
+    height: auto;
+}
+
+tr h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+tr p {
+    margin: 0;
+    font-size: 1em;
+}
+
+#table-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
