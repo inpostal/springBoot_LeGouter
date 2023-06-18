@@ -14,11 +14,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GroupProductDTO {
 
-	//private Integer groupProductId;
+	private Integer groupProductId;
 	private String groupProductName;
 	private String groupProductContent;
 	private Integer groupProductPrice;
 	private String groupProductStardate;
-	//private String groupProductEnddate;
+	private String groupProductEnddate;
 	private Integer groupProductStatus;
 }

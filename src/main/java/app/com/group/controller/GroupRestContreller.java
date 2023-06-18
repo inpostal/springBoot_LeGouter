@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.com.group.service.GroupProductService;
@@ -31,6 +32,12 @@ public class GroupRestContreller {
 	@GetMapping("/groupProduct/showList")
 	public List<GroupProductVO> showAll() {
 		return groupProductService.showAllProduct();
+	}
+	
+	@PostMapping("/groupProduct/showOne")
+	public GroupProductDTO showOne (@RequestParam String groupProductId) {
+		Integer gpid = Integer.parseInt(groupProductId);
+		return groupProductService.showOneProduct(gpid);
 	}
 
 }

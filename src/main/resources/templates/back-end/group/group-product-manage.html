@@ -478,9 +478,9 @@
 			//addproductimg(); //準備寫執行新增至商品圖片表格的函式
 		  })
           showlist(); //執行顯示全部商品資料的函式
-        //   $("#btnone").on("click", function () {	 
-        //     showone();
-        // });
+          $("#btnone").on("click", function () {	 
+            showone();
+        });
 		})
 
         //新增至團購商品表格的函式。
@@ -560,20 +560,21 @@
         //-------------------------
         //查詢單筆商品的函式。
         function showone() {
-            let datas = {   
-            groupProductId: ($("#productid").val())   
-            }
-            console.log(datas); //測試有無資料，是物件還是字串。
-        //---------------------------------送出Ajax請求
+            // let datas = {   
+            // groupProductId: ($("#productid").val())   
+            // }
+            // console.log(datas); //測試有無資料，是物件還是字串。
+
             $.ajax({
-                url: "/LeGouter/group/GroupByServlet",
-                method: "POST",
-                contentType: "application/json; charset=UTF-8",
-                data: JSON.stringify(datas),
-                dataType: "json",
-                beforeSend: function () {
-                console.log("發送請求之前確認:" + JSON.stringify(datas));
-                },
+                url: "/groupProduct/showOne",
+                type: "POST",
+                //contentType: "application/json",
+                //data: JSON.stringify(datas),
+                data: {groupProductId: ($("#productid").val())},
+                // beforeSend: function () {
+                // //console.log("發送請求之前確認:" + JSON.stringify(datas));
+                // console.log("發送請求之前確認:" + datas);
+                // },
                 success: function (response) {                   
                     console.log("回來的資料:" + response);          
                     let text = `<tr>

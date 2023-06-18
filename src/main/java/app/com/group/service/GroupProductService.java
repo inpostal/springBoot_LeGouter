@@ -30,6 +30,20 @@ public class GroupProductService {
 	public List<GroupProductVO> showAllProduct() {
 		List<GroupProductVO> volist = groupProductRepository.findAll();
 		return volist;
-		
+	}
+	
+	public GroupProductDTO showOneProduct(Integer groupProductId) {
+		GroupProductVO vo = groupProductRepository.getReferenceById(groupProductId);
+		GroupProductDTO dto = new GroupProductDTO();
+		dto.setGroupProductId(vo.getGroupProductId());
+		dto.setGroupProductName(vo.getGroupProductName());
+		dto.setGroupProductContent(vo.getGroupProductContent());
+		dto.setGroupProductPrice(vo.getGroupProductPrice());
+		dto.setGroupProductStardate(vo.getGroupProductStardate().toString());
+		if (vo.getGroupProductEnddate() != null) {
+			dto.setGroupProductEnddate(vo.getGroupProductEnddate().toString());
+		}
+		dto.setGroupProductStatus(vo.getGroupProductStatus());
+		return dto;
 	}
 }
