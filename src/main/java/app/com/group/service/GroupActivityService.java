@@ -18,4 +18,9 @@ public class GroupActivityService {
 		List<GroupActivityVO> avolist = groupActivityRepository.findAll();
 		return avolist;
 	}
+	
+	public List<GroupActivityVO> allShopActivity() {
+		List<GroupActivityVO> avoaclist = groupActivityRepository.findAll();
+		return avoaclist;
+	}
 }

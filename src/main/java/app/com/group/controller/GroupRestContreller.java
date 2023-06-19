@@ -105,9 +105,16 @@ public class GroupRestContreller {
 
 	
 	//-----以下是團購活動-----
+	//後台
 	@GetMapping("/groupActivity/showList")
 	public List<GroupActivityVO> showAllActivity() {
 		return groupActivityService.allActivity();
+	}
+	
+	//前台
+	@GetMapping("/group-shop/showActivityList")
+	public List<GroupActivityVO> showAllShopActivity() {
+		return groupActivityService.allShopActivity();
 	}
 
 }
