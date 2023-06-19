@@ -1,0 +1,76 @@
+/* Evelyn */
+.content-section {
+    display: none;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:700);
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    /* padding: 30px 0;
+    font-family: raleway, sans-serif; */
+    text-align: center;
+}
+
+.btngroup {
+    font-size: 0 !important;
+    border: 1px brown;
+    line-height: 1v;
+    white-space: nowrap !important;
+    display: inline;
+    /* // no glow crap */
+}
+
+.btngroup--btn {
+    font-size: 1rem;
+    letter-spacing: .1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2px solid #f09a4f;
+    border-left-width: 0;
+    display: inline-block;
+    padding: .5em 1.25em;
+    outline: 0;
+}
+
+.btngroup--btn:first-child {
+    border-left-width: 2px;
+    border-radius: 2em 0 0 2em;
+}
+
+.btngroup--btn:last-child {
+    border-radius: 0 2em 2em 0;
+}
+
+.btngroup--btn:link,
+.btngroup--btn:visited {
+    color: #f09a4f;
+}
+
+.btngroup--btn:hover {
+    background: #f09a4f;
+    color: #fff;
+}
+
+.btngroup--btn:active {
+    background: #fff;
+    color: #f09a4f;
+}
+
+.custom-search-input {
+    text-align: right;
+}
+
+div#example3_wrapper {
+    overflow: hidden;
+}
+
+h3.mt-3.mb-e {
+    margin-bottom: 0 !important;
+}
