@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>團購活動平台</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="Group/Shan_static/css/css2.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/all.min.css" rel="stylesheet">
+    <link href="Group/Shan_static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/animate.min.css" rel="stylesheet">
+    <link href="Group/Shan_static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/style.css" rel="stylesheet">
+
+    <!-- 內容CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="Group/Shan_assets/css/vendor/font.awesome.min.css">
+    <link rel="stylesheet" href="Group/Shan_assets/css/vendor/ionicons.min.css">
+    <link rel="stylesheet" href="Group/Shan_assets/css/plugins/nice-select.min.css">
+    <link rel="stylesheet" href="Group/Shan_assets/css/style.css">
+</head>
+
+<body>
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+
+
+    <div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
+                    <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
+                </ol>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <div class="h-100 d-inline-flex align-items-center">
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================導覽列開始========================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
+            <h1 class="text-primary m-0">Le Goûter</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto p-4 p-lg-0">
+                <a href="" class="nav-item nav-link active">首頁</a>
+                <a href="" class="nav-item nav-link">品牌故事</a>
+                <a href="" class="nav-item nav-link">甜點訂購</a>
+                <a href="" class="nav-item nav-link">課程系統</a>
+                <a href="/group-shop" class="nav-item nav-link">團購平台</a>
+                <a href="" class="nav-item nav-link">會員專區</a>
+                <a href="" class="nav-item nav-link">優惠券專區</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="" class="dropdown-item">FAQ</a>
+                        <a href="" class="dropdown-item">聯絡客服</a>
+                    </div>
+                </div>
+                <div class="nav-link">
+                    <form action="">
+                        <input class="" type="search" placeholder="搜尋團購活動" name="" value="">
+                        <button class="" type="submit">搜尋</button>
+                    </form>
+                </div>
+            </div>
+            <div class=" d-none d-lg-flex">
+                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+                    <i class="fa fa-phone text-primary"></i>
+                </div>
+                <div class="ps-3">
+                    <small class="text-primary mb-0">聯絡我們</small>
+                    <p class="text-light fs-5 mb-0">0912345678</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- =====================導覽列結束========================= -->
+
+
+
+
+    <div class="col-lg-9 col-12 col-custom widget-mt">
+        <!--shop toolbar start-->
+        <div class="shop_toolbar_wrapper">
+            <div class="shop_toolbar_btn">
+                <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip"
+                    title="">縮圖</button>
+                <!-- <button data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip" title="4"></button> -->
+                <button data-role="grid_list" type="button" class="btn-list" data-toggle="tooltip" title="">清單</button>
+            </div>
+            <div class="shop-select">
+                <form class="d-flex flex-column w-100" action="#">
+                    <div class="form-group">
+                        <select class="form-control nice-select w-100">
+                            <option selected value="0">預設排序</option>
+                            <option value="1">價格高到低</option>
+                            <option value="2">價格低到高</option>
+                            <option value="3">截止日期高到低</option>
+                            <option value="4">截止日期低到高</option>
+                            <option value="5">參加人數高到低</option>
+                            <option value="6">參加人數低到高</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--shop toolbar end-->
+        <!-- Shop Wrapper Start -->
+        <div class="row shop_wrapper grid_3" id="allactivity">
+            <!-- <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
+                <div class="single-product position-relative">
+                    <div class="product-image">
+                        <a class="d-block" href="single-product">
+                            <img src="Group/Shan_assets/img/肉桂捲.jpg" alt="" class="product-image-1 w-100">
+                        </a>
+                    </div>
+                    <div class="product-content">
+
+                        <div class="product-title">
+                            <h4 class="title-2"> <a href="single-product">天天肉桂捲日</a></h4>
+                        </div>
+                        <div class="price-box">
+                            <span class="regular-price ">NT$100</span>
+                        </div>
+                    </div>
+                    <div class="add-action d-flex position-absolute">
+                        <a href="" title="">
+                            <button>參加團購</button>
+                        </a>
+
+                    </div>
+                    <div class="product-content-listview">
+
+                        <div class="product-title">
+                            <h4 class="title-2"> <a href="single-product">天天肉桂捲日</a></h4>
+                        </div>
+                        <div>
+                            <p>團購開始時間:
+                                <br>
+                                團購結束時間:
+                                <br>
+                                成團達標數:
+                                <br>
+                                團購參加人數:
+                            </p>
+                        </div>
+                        <div class="price-box">
+                            <span class="regular-price ">NT$100</span>
+                            <span class="old-price"><del>NT$300</del></span>
+                        </div>
+                        <div class="add-action-listview d-flex">
+                            <a href="" title="">
+                                <button>參加團購</button>
+                            </a>
+
+                        </div>
+                        <p class="desc-content">
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                            of
+                            classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
+                            Latin professor at Hampden-Sydney College in Virginia,
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!-- Shop Wrapper End -->
+        <!-- Bottom Toolbar Start -->
+        <div class="row">
+            <div class="col-sm-12 col-custom">
+                <div class="toolbar-bottom mt-30">
+                    <nav class="pagination pagination-wrap mb-10 mb-sm-0">
+                        <ul class="pagination">
+                            <li class="disabled prev">
+                                Left
+                            </li>
+                            <li class="active"><a>1</a></li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li class="next">
+                                <a href="#" title="Next >>">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="desc-content text-center text-sm-right">Showing 1 - 12 of 34 result</p>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Toolbar End -->
+    </div>
+
+    <!-- =====================頁腳開始========================= -->
+    <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">粉絲專頁</h4>
+
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">快速連結</h4>
+                    <a class="btn btn-link" href="">品牌故事</a>
+                    <a class="btn btn-link" href="">聯絡我們</a>
+                    <a class="btn btn-link" href="">服務與條款</a>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">常見問題</h4>
+                    <a class="btn btn-link" href="">FAQ</a>
+                    <a class="btn btn-link" href="">回報客服</a>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">甜點畫廊</h4>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =====================頁腳結束========================= -->
+
+    <script data-cfasync="false" src="Group/Shan_static/js/email-decode.min.js"></script>
+    <!-- <script src="static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script> -->
+    <script src="Group/Shan_static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+    <script src="Group/Shan_static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+
+    <!-- jQuery JS -->
+    <script src="Group/Shan_assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <!-- jQuery Migrate JS -->
+    <script src="Group/Shan_assets/js/vendor/jQuery-migrate-3.3.0.min.js"></script>
+    <!-- Modernizer JS -->
+    <script src="Group/Shan_assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Bootstrap JS -->
+    <!-- <script src="assets/js/vendor/bootstrap.bundle.min.js"></script> -->
+    <!-- Slick Slider JS -->
+    <script src="Group/Shan_assets/js/plugins/slick.min.js"></script>
+    <!-- Countdown JS -->
+    <script src="Group/Shan_assets/js/plugins/jquery.countdown.min.js"></script>
+    <!-- Ajax JS -->
+    <script src="Group/Shan_assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <!-- Jquery Nice Select JS -->
+    <script src="Group/Shan_assets/js/plugins/jquery.nice-select.min.js"></script>
+    <!-- Jquery Ui JS -->
+    <script src="Group/Shan_assets/js/plugins/jquery-ui.min.js"></script>
+    <!-- jquery magnific popup js -->
+    <script src="Group/Shan_assets/js/plugins/jquery.magnific-popup.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="Group/Shan_assets/js/main.js"></script>
+
+    <script>
+        window.addEventListener("load", function () {
+            showlist()
+        })
+
+        function showlist() {
+            $.ajax({
+                url: "/group-shop/showActivityList",
+                type: "GET",
+                success: function (response) {
+                    let texts = "";                   
+                    for (let gvo in response) {
+                        let text = `<div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
+                <div class="single-product position-relative">
+                    <div class="product-image">
+                        <a class="d-block" href="single-product">
+                            <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="product-image-1 w-100">
+                        </a>
+                    </div>
+                    <div class="product-content">
+
+                        <div class="product-title">
+                            <h4 class="title-2"> <a href="single-product">${response[gvo].groupName}</a></h4>
+                        </div>
+                        <div class="price-box">
+                            <span class="regular-price ">NT$100</span>
+                        </div>
+                    </div>
+                    <div class="add-action d-flex position-absolute">
+                        <a href="" title="">
+                            <button>參加團購</button>
+                        </a>
+
+                    </div>
+                    <div class="product-content-listview">
+
+                        <div class="product-title">
+                            <h4 class="title-2"> <a href="single-product">${response[gvo].groupName}</a></h4>
+                        </div>
+                        <div>
+                            <p>團購開始時間:${response[gvo].groupOrderStar}
+                                <br>
+                                團購結束時間:${response[gvo].groupOrderEnd}
+                                <br>
+                                成團達標數:${response[gvo].groupOrderMin}
+                                <br>
+                                團購參加人數:
+                            </p>
+                        </div>
+                        <div class="price-box">
+                            <span class="regular-price ">NT$100</span>
+                        </div>
+                        <div class="add-action-listview d-flex">
+                            <a href="" title="">
+                                <button>參加團購</button>
+                            </a>
+
+                        </div>
+                        <p class="desc-content">
+                            ${response[gvo].groupActivityContent}
+                        </p>
+                    </div>
+                </div>
+            </div>`;
+                        texts += text;
+                    }
+                    $("#allactivity").html(texts);
+                }
+
+            })
+
+        }
+    </script>
+</body>
+
+</html>
