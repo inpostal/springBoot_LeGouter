@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 @Controller
 public class MemberController {
@@ -74,5 +75,23 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/member/data/list")
+    public String memberDataList(HttpSession session, RedirectAttributes redirectAttributes){
+//        if (session.getAttribute("emp")!=null){
+            return "/back-end/Member/MemberList";
+//        }else {
+//            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
+//            return "/back-end/Employee/EmpLogin";
+//        }
+    }
 
+    @GetMapping("/member/data/edit/{memberId}")
+    public String memberDataEdit(@PathParam("memberId") Integer memberId ,HttpSession session, RedirectAttributes redirectAttributes){
+//        if (session.getAttribute("emp")!=null){
+            return "/back-end/Member/MemberDataEdit";
+//        }else {
+//            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
+//            return "/back-end/Employee/EmpLogin";
+//        }
+    }
 }
