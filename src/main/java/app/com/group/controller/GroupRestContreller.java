@@ -124,4 +124,13 @@ public class GroupRestContreller {
 		Integer theid = Integer.parseInt(groupActivityId);
 		return groupActivityService.showTheActivity(theid);
 	}
+	
+	//前台團購主專區
+	@PostMapping("/groupActivity/inser")
+	public Map<String, Boolean> inserActivity(@RequestBody GroupActivityDTO groupActivityDTO) {
+		Boolean success = groupActivityService.inserActivitys(groupActivityDTO);
+		 Map<String, Boolean> response = new HashMap<>();
+		 response.put("success", success);
+		return response;
+	}
 }

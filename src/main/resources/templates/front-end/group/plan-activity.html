@@ -155,8 +155,8 @@
                     </select>
                 </div>
             </div>
-            <div class="context">
-                <div class="col-item">
+            <div class="context" id="showallact">
+                <!-- <div class="col-item">
                     <div class="item">
                         <div class="img-board">
                             <img src="Group/Shan_static/image/雙捲原味鮮芋盒子.jpg" alt="" class="img-width">
@@ -187,71 +187,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-item">
-                    <div class="item">
-                        <div class="img-board">
-                            <img src="Group/Shan_static/image/雙捲原味鮮芋盒子.jpg" alt="" class="img-width">
+                </div> -->
 
-                        </div>
-                        <div class="cont">
-                            <h6>團購活動名稱:</h6>
-                            <div class="info">
-                                <p class="info-context">
-                                    團購活動內容:團購介紹內文 團購介紹內文 團購介紹內文 團購介紹內文
-                                    團購介紹內文團購介紹內文。
-                                </p>
-                                <p>團購開始時間:
-                                    <br>
-                                    團購結束時間:
-                                    <br>
-                                    團購參加人數:
-                                    <br>
-                                    成團數量低標:
-                                    <br>
-                                    團購商品價格:
-                                </p>
-                            </div>
-                            <div class="botm">
-                                <div class="tags">
-                                    <button>取消活動 申請</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-item">
-                    <div class="item">
-                        <div class="img-board">
-                            <img src="Group/Shan_static/image/雙捲原味鮮芋盒子.jpg" alt="" class="img-width">
-
-                        </div>
-                        <div class="cont">
-                            <h6>團購活動名稱:</h6>
-                            <div class="info">
-                                <p class="info-context">
-                                    團購活動內容:團購介紹內文 團購介紹內文 團購介紹內文 團購介紹內文
-                                    團購介紹內文團購介紹內文。
-                                </p>
-                                <p>團購開始時間:
-                                    <br>
-                                    團購結束時間:
-                                    <br>
-                                    團購參加人數:
-                                    <br>
-                                    成團數量低標:
-                                    <br>
-                                    團購商品價格:
-                                </p>
-                            </div>
-                            <div class="botm">
-                                <div class="tags">
-                                    <button>取消活動 申請</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -265,20 +202,22 @@
                     <span class="close-icon" aria-hidden="true">x</span>
                 </button>
                 <div class="modal-body">
-                    <form action="" method="post" target="_blank">
-                        <select name="" id="" class="">
-                            <option value="0">選擇可團購商品</option>
-                        </select>
-                        <textarea class="textarea" name="" id="" cols="50" rows="8" maxlength="300"
-                            placeholder="輸入團購活動內容" required></textarea>
-                        <label> 團購開始日期：<input type="date" name="" value="" required> </label>
-                        <label> 團購結束日期：<input type="date" name="" value="" max="" required> </label>
-                        <p>選擇方案:<select name="" id="" class="">
+                    <form action="">
+                        <label>選擇可團購商品：
+                            <select name="groupProductId" id="selectva" class="">
+
+                            </select>
+                        </label>
+                        <textarea class="textarea" name="groupActivityContent" id="tarva" cols="50" rows="8"
+                            maxlength="300" placeholder="輸入團購活動內容" required></textarea>
+                        <label> 團購開始日期：<input type="date" name="groupOrderStar" id="starva" required> </label>
+                        <label> 團購結束日期：<input type="date" name="groupOrderEnd" id="endva" max="" required> </label>
+                        <p>選擇方案:<select name="groupOrderMin" id="minva" class="">
                                 <option value="200" selected>方案A</option>
                                 <option value="400">方案B</option>
                                 <option value="600">方案C</option>
                             </select></p>
-                        <input type="text" placeholder="輸入團購活動名稱" name="" value="" required>
+                        <input type="text" placeholder="輸入團購活動名稱" name="groupName" id="nameva" required>
                         <p>
                             方案A:團購商品數量低標 200人，95折，成團分潤:4%。
                             <br>
@@ -286,7 +225,7 @@
                             <br>
                             方案C:團購商品數量低標 600人，85折，成團分潤:12%。
                         </p>
-                        <button type="submit" class="activity-but">發起活動</button>
+                        <button type="button" class="activity-but">發起活動</button>
                     </form>
                 </div>
             </div>
@@ -325,22 +264,28 @@
                     <h4 class="text-light mb-4">甜點畫廊</h4>
                     <div class="row g-2">
                         <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg" alt="Image">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg"
+                                alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg" alt="Image">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg"
+                                alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg" alt="Image">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg"
+                                alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg" alt="Image">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg"
+                                alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg" alt="Image">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg"
+                                alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg" alt="Image">
+                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg"
+                                alt="Image">
                         </div>
                     </div>
                 </div>
@@ -350,8 +295,9 @@
     <!-- =====================頁腳結束========================= -->
 
     <script data-cfasync="false" src="Group/Shan_static/js/email-decode.min.js"></script>
-    <script src="Group/Shan_static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="Group/Shan_assets/js/vendor/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <!-- <script src="Group/Shan_static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script> -->
+    <script src="Group/Shan_assets/js/vendor/bootstrap.bundle.min.js"
+        type="0080e6b992b21508d4c0eeae-text/javascript"></script>
     <script src="Group/Shan_static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
     <script src="Group/Shan_static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
     <script src="Group/Shan_static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
@@ -359,8 +305,108 @@
     <script src="Group/Shan_static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
 
     <script src="Group/Shan_static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="Group/Shan_static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+    <script src="Group/Shan_static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49"
+        defer=""></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            show();
+            onselect();
+
+            $(".activity-but").on("click", function () {
+                inserAct();
+            });
+        });
+
+        function show() {
+            $.ajax({
+                url: "/group-shop/showActivityList",
+                type: "GET",
+                success: function (response) {
+                    let texts = "";
+                    for (let gvo in response) {
+                        let text = `<div class="col-item">
+                    <div class="item">
+                        <div class="img-board">
+                            <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="img-width">
+
+                        </div>
+                        <div class="cont">
+                            <h6>團購活動名稱:${response[gvo].groupName}</h6>
+                            <div class="info">
+                                <p class="info-context">
+                                    ${response[gvo].groupActivityContent}。
+                                </p>
+                                <p>團購開始時間:${response[gvo].groupOrderStar}
+                                    <br>
+                                    團購結束時間:${response[gvo].groupOrderEnd}
+                                    <br>
+                                    團購參加人數:
+                                    <br>
+                                    成團數量低標:${response[gvo].groupOrderMin}
+                                    <br>
+                                    團購商品價格:
+                                </p>
+                            </div>
+                            <div class="botm">
+                                <div class="tags">
+                                    <button>取消活動 申請</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                        texts += text;
+                    }
+                    $("#showallact").html(texts);
+                }
+            });
+        }
+
+        function onselect() {
+            $.ajax({
+                url: "/groupProduct/showList",
+                type: "GET",
+                success: function (response) {
+                    console.log("回來的資料:" + response);
+                    let optioncons = "";
+                    for (let opt in response) {
+                        let optioncon = `<option value="${response[opt].groupProductId}">${response[opt].groupProductName}</option>
+                        `;
+
+                        optioncons += optioncon
+                    }
+                    $("#selectva").html(optioncons);
+                }
+            });
+        }
+
+        function inserAct() {
+
+            $.ajax({
+                url: "/groupActivity/inser",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    groupProductId: $("#selectva").val(),
+                    groupActivityContent: $("#tarva").val(),
+                    groupOrderStar: $("#starva").val(),
+                    groupOrderEnd: $("#endva").val(),
+                    groupOrderMin: $("#minva").val(),
+                    groupName: $("#nameva").val(),
+                    groupOrderDiscount: 0.95
+                }),
+                success: function (response) {
+                    console.log(response);
+                    if(response.success){
+                        alert("新增成功");
+                        location.reload();
+                    }
+                }
+            });
+        }
+    </script>
 
 </body>
 

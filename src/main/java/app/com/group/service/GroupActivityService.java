@@ -38,4 +38,16 @@ public class GroupActivityService {
 		thedto.setGroupOrderDiscount(thevo.getGroupOrderDiscount());
 				return thedto;
 	}
+	
+	public Boolean inserActivitys (GroupActivityDTO groupActivityDTO) {
+		GroupActivityVO groupActivityVO = new GroupActivityVO();
+		groupActivityVO.setGroupProductId(groupActivityDTO.getGroupProductId());
+		groupActivityVO.setGroupActivityContent(groupActivityDTO.getGroupActivityContent());
+		groupActivityVO.setGroupOrderStar(groupActivityDTO.getGroupOrderStar());
+		groupActivityVO.setGroupOrderEnd(groupActivityDTO.getGroupOrderEnd());
+		groupActivityVO.setGroupOrderMin(groupActivityDTO.getGroupOrderMin());
+		groupActivityVO.setGroupName(groupActivityDTO.getGroupName());
+		groupActivityVO.setGroupOrderDiscount(groupActivityDTO.getGroupOrderDiscount());
+		return groupActivityRepository.save(groupActivityVO) != null;
+	}
 }
