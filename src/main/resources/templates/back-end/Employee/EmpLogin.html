@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>員工登入</title>
+
+    <link rel="stylesheet" href="/Employee/EmpCSS/style_emp_login.css">
+</head>
+
+<body>
+    <section id="login-out">
+        <section id="login-container">
+            <div class="login-form">
+                <p id="login-title">員工登入</p>
+                <form>
+                    <div class="form-group">
+                        <span id="errmsg" style="color: red;display: none;">帳號或密碼錯誤</span>
+                        <label for="username">帳號:</label>
+                        <input type="text" id="username" name="username" placeholder="輸入帳號" value="admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密碼:</label>
+                        <input type="password" id="password" name="password" placeholder="輸入密碼" value="admin" required>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <button type="button" id="login-btn">登入</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </section>
+    <script src="/Member/Sam_Js/Jquery.js"></script>
+    <script>
+        $("#errmsg").hide();
+        $("#username").focus();
+        $("#login-btn").click(function() {
+            let username = $("#username").val();
+            let password = $("#password").val();
+            if (username == "" || password == "") {
+                alert("請輸入帳號密碼");
+            } else {
+                $.ajax({
+                    url: "/employee/login/check",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        empAccount: username,
+                        empPassword: password
+                    }),
+                    success: function(res) {
+                        if (res.result) {
+                            $("#errmsg").hide();
+                            alert("登入成功");
+                            location.href = "/employee/data";
+                        } else {
+                            $("#errmsg").show();
+                            $("#password").val("");
+                        }
+                    },
+                    error: function(res) {
+                        console.log(res);
+                    },
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

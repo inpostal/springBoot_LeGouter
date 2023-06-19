@@ -1,0 +1,99 @@
+:root {
+    --primary: #EAA636;
+    --secondary: #545454;
+    --light: #FDF5EB;
+    --dark: #1E1916;
+}
+
+#emp_top {
+    text-align: center;
+}
+
+#emp_title {
+    font-size: 50px;
+    font-weight: 600;
+}
+
+#emp_list {
+    border: 1px #1E1916 solid;
+    height: 80%;
+    justify-content: center;
+    max-height: 80%;
+    /* 設定最大高度 */
+    overflow: auto;
+}
+
+#border_title {
+    height: 3px;
+    /* 調整横線的粗細，可以根據需要修改數值 */
+    background-color: #2d2407;
+    /* 横線的顏色 */
+    border: none;
+    /* 移除邊框 */
+    box-shadow: 0px 2px 4px rgba(158, 104, 17, 0.4);
+    /* 添加陰影效果，可以根據需要調整數值 */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 1px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr,
+td {
+    height: 50px;
+    background-color: var(--light);
+}
+
+#emp_list {
+    margin-top: 15px;
+}
+
+#emp_list table th {
+    position: sticky;
+    top: 0;
+    background-color: var(--dark);
+    /* 可自訂表頭的背景顏色 */
+    color: var(--primary);
+}
+
+#filter-bar {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    margin-bottom: 20px;
+}
+
+.search-filter,
+.select-filter {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search-filter label,
+.select-filter label {
+    margin-right: 5px;
+}
+
+.search-filter input[type="text"],
+.select-filter select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.filter-button {
+    margin-left: 5px;
+}
+
+.search-filter label {
+    margin-left: 3px;
+}

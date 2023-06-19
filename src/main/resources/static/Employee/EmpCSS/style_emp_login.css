@@ -1,0 +1,109 @@
+:root {
+    --primary: #EAA636;
+    --secondary: #545454;
+    --light: #FDF5EB;
+    --dark: #1E1916;
+}
+
+body {
+    /* background-color: white;
+    margin: 0; */
+    background-color: #FDF5EB;
+    background-image: url('../EmpImages/1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+#login-out {
+    /* border: 1px red solid; */
+    margin: 0;
+    opacity: 0.95;
+}
+
+#login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+
+.login-form {
+    border: 5px var(--dark) solid;
+    border-radius: 5px;
+}
+
+#login-title {
+    font-size: 40px;
+    text-align: center;
+    color: var(--primary);
+    background-color: var(--dark);
+    margin: 0;
+    /* border-radius: 5px; */
+}
+
+/* .form-group{
+    margin: 20px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
+form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--light);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--secondary);
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid var(--secondary);
+    border-radius: 3px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--secondary);
+    margin: 20px 0;
+}
+
+.form-group button[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#login-btn{
+    width: 100%;
+    padding: 8px;
+    background-color: var(--dark);
+    color: var(--primary);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#login-btn:hover{
+    background-color: var(--secondary);
+}
