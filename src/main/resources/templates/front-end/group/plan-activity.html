@@ -202,7 +202,7 @@
                     <span class="close-icon" aria-hidden="true">x</span>
                 </button>
                 <div class="modal-body">
-                    <form action="">
+                    <!-- <form action=""> -->
                         <label>選擇可團購商品：
                             <select name="groupProductId" id="selectva" class="">
 
@@ -226,7 +226,7 @@
                             方案C:團購商品數量低標 600人，85折，成團分潤:12%。
                         </p>
                         <button type="button" class="activity-but">發起活動</button>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
         </div>
@@ -310,13 +310,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
+        $(".activity-but").on("click", function () {
+            inserAct();
+        });
+        onselect();
         window.addEventListener("load", function () {
             show();
-            onselect();
-
-            $(".activity-but").on("click", function () {
-                inserAct();
-            });
         });
 
         function show() {
@@ -383,6 +382,18 @@
         }
 
         function inserAct() {
+            const groupOmin = $("#minva").val();
+            const groupODis = 0;
+            console.log(groupOmin);
+            switch (groupOmin) {
+                case 200:groupODis = 0.95;
+                break;
+                case 400:groupODis = 0.90;
+                break;
+                case 600:groupODis = 0.85;
+                break;
+            }
+            console.log(groupODis);
 
             $.ajax({
                 url: "/groupActivity/inser",
@@ -395,7 +406,7 @@
                     groupOrderEnd: $("#endva").val(),
                     groupOrderMin: $("#minva").val(),
                     groupName: $("#nameva").val(),
-                    groupOrderDiscount: 0.95
+                    groupOrderDiscount: groupODis
                 }),
                 success: function (response) {
                     console.log(response);
