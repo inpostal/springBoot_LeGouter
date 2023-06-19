@@ -845,7 +845,7 @@
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" class="picupload" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -925,7 +925,7 @@
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" class="picupload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -972,7 +972,7 @@
 
 
         // 上傳圖片
-        $(document).on("click", ".picupload", function() {
+        $(document).on("click", ".upload", function() {
             let dessertId = $(this).data('id');
             console.log(dessertId);
 
@@ -983,21 +983,24 @@
                 const $currentButton = $(this);
 
                 let picform = $("#picform");
-                let imageInputs = picform.find("input[type='file']");
+                let imageInputs = picform.find("input[type='file']"); // 選取4個檔案輸入元素
 
                 let formData = new FormData();
 
-                // 将每个文件输入元素的文件添加到 FormData 对象
-                imageInputs.each(function() {
-                    let input = $(this);
-                    let files = input[0].files;
+                // 將每個檔案存到 formData
+                for (let i = 0; i < imageInputs.length; i++) {
+                    let files = imageInputs[i].files[0];
+                    console.log(files);
 
-                    for (let i = 0; i < files.length; i++) {
-                        let file = files[i];
-                        let uniqueKey = dessertId + input.attr('name') + i; // 使用更具唯一性的键名
-                        formData.append(uniqueKey, file);
-                    }
-                });
+                    // 存入formdata
+                    let uniqueKey = ""+ dessertId + i; // 使用更具唯一性的键名
+                    console.log(uniqueKey);
+                    formData.append(uniqueKey, files);
+
+                }
+
+                console.log(formData);
+
 
                 $.ajax({
                     url: '/dessert5/upload/' + encodeURIComponent(dessertId),
@@ -1006,8 +1009,8 @@
                     processData: false,
                     data: formData,
                     success: function(res) {
-                        window.alert(res);
-                        location.reload();
+                        // window.alert(res);
+                        // location.reload();
                     },
                     error: function(xhr, textStatus, errorThrown) {
                         console.error(xhr);

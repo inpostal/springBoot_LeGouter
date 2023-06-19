@@ -1,5 +1,7 @@
 package app.com.dessert5.vo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +47,11 @@ public class Dessert {
 
     @Column(name = "RATE_STAR")
     private Integer rateStar;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "dessert", cascade = CascadeType.ALL)
+        private List<DessertImage> dessertImages;
+
 
 
 
