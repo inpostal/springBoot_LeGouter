@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import app.com.group.service.GroupActivityService;
 import app.com.group.service.GroupProductImgService;
 import app.com.group.service.GroupProductService;
+import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.GroupProductDTO;
 import app.com.group.vo.GroupProductImgVO;
@@ -117,4 +118,10 @@ public class GroupRestContreller {
 		return groupActivityService.allShopActivity();
 	}
 
+	//前台單品
+	@PostMapping("/single-product/showthe")
+	public GroupActivityDTO showthe (@RequestParam String groupActivityId) {
+		Integer theid = Integer.parseInt(groupActivityId);
+		return groupActivityService.showTheActivity(theid);
+	}
 }
