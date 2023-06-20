@@ -311,6 +311,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
         $(".activity-but").on("click", function () {
+            
             inserAct();
         });
         onselect();
@@ -383,17 +384,20 @@
 
         function inserAct() {
             const groupOmin = $("#minva").val();
-            const groupODis = 0;
+            let groupODis = 0.95;
             console.log(groupOmin);
             switch (groupOmin) {
-                case 200:groupODis = 0.95;
-                break;
-                case 400:groupODis = 0.90;
-                break;
-                case 600:groupODis = 0.85;
-                break;
+                case 200: {groupODis = 0.95;
+                    console.log("進入200");
+                break;}
+                case 400: {groupODis = 0.90;
+                    console.log("進入400");
+                break;}
+                case 600: {groupODis = 0.85;
+                    console.log("進入600");
+                break;}
             }
-            console.log(groupODis);
+            console.log("switch完測試" + groupODis);
 
             $.ajax({
                 url: "/groupActivity/inser",

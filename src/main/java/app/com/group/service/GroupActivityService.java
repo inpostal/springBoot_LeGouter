@@ -50,4 +50,9 @@ public class GroupActivityService {
 		groupActivityVO.setGroupOrderDiscount(groupActivityDTO.getGroupOrderDiscount());
 		return groupActivityRepository.save(groupActivityVO) != null;
 	}
+	
+	public Boolean deleteOneActivity (Integer groupActivityId) {
+		groupActivityRepository.deleteById(groupActivityId);
+		return true;
+	}
 }

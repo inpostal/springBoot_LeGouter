@@ -133,4 +133,14 @@ public class GroupRestContreller {
 		 response.put("success", success);
 		return response;
 	}
+	
+	//後台
+	@PostMapping("/groupActivity/deleteone")
+	public Map<String, Boolean> deleteOne (@RequestParam String groupActivityId) {
+		Integer theid = Integer.parseInt(groupActivityId);
+		Boolean success = groupActivityService.deleteOneActivity(theid);
+		Map<String, Boolean> response = new HashMap<>();
+		 response.put("success", success);
+		return response;
+	}
 }

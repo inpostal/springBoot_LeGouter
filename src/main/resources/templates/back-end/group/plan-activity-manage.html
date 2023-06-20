@@ -343,7 +343,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="actall">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -369,10 +369,15 @@
     <!-- 團購活動管理添加 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
-        window.addEventListener("load", function () {
-        
-            showlist();
+        showlist();
+        $(document).ready(function () {
+            // DOM 載入完成之後
         })
+        
+        $(window).on("load", function () {
+            // 圖片等資源載入完成之後
+            deletecontroll();
+        });
 
         function showlist() {
             $.ajax({
@@ -380,7 +385,7 @@
                 type: "GET",
                 success: function (response) {
                     console.log("回來的資料:" + response);
-                    let texts = "";                   
+                    let texts = "";
                     for (let avo in response) {
                         let text = `<tr>
                                         <td><strong>${response[avo].groupActivityId}</strong></td>
@@ -407,7 +412,7 @@
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="#">編輯</a>
-                                                    <a class="dropdown-item" href="#">刪除</a>
+                                                    <a class="dropdown-item delectone" data-id="${response[avo].groupActivityId}" href="#">刪除</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -416,7 +421,30 @@
                     }
                     $("#actall").html(texts);
                 }
-            })
+            });
+        }
+
+        function deletecontroll() {
+            $(".delectone").on("click", function() {
+                event.stopPropagation;
+                let idkey = $(this).data("id");
+                window.confirm("確定要刪除該筆資料嗎?");
+                if (window.confirm("確定要刪除該筆資料嗎?") == true) {
+                    $.ajax({
+                        url: "/groupActivity/deleteone",
+                        type: "POST",
+                        data: { groupActivityId: idkey },
+                        success: function (response) {
+                            if (response.success) {
+                                alert("刪除成功");
+                                location.href("/plan-activity-manage");
+                            }
+
+                        }
+
+                    });
+                };
+            });
         }
     </script>
 
