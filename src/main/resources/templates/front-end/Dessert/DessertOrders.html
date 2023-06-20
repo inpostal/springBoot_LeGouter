@@ -1,0 +1,377 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>後台甜點訂單管理</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="back-nav-bar.css">  -->
+
+    <!-- import font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="/Dessert/CSS/css2.css" rel="stylesheet">
+
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-icons.min.css" type="text/css">
+    <!-- Bootstrap Docs -->
+    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-docs.css" type="text/css">
+
+
+    <!-- Main style file -->
+    <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
+
+
+    <style>
+        #nav-bar {
+            background-color: #1E1916;
+
+        }
+
+        .nav-pills {
+            --bs-nav-pills-link-active-bg: white;
+        }
+
+        :root {
+            --bs-link-color: white;
+            --bs-link-hover-color: orange;
+
+        }
+
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 20px;
+        }
+
+        .dropdown {
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            font-size: 20px;
+        }
+
+        .dropdown-toggle::after {
+            color: #1E1916;
+        }
+    </style>
+
+
+</head>
+
+
+
+<div class="col py-3">
+
+    <!-- 由此開始 -->
+    <div class="content " style="margin-top: 50px;">
+
+
+
+        <div class="card">
+            <div class="card-body">
+                <div class="d-md-flex gap-4 align-items-center">
+                    <div class="d-none d-md-flex">甜點訂單</div>
+                    <div class="d-md-flex gap-4 align-items-center">
+                        <form class="mb-3 mb-md-0">
+                            <div class="row g-3">
+                                <div class="col-md-5">
+                                    <select class="form-select" onchange="filterOrdersByStatus(this.value)">
+                                        <option>訂單狀態</option>
+                                        <option value="訂單處理中">訂單處理中</option>
+                                        <option value="運送中">運送中</option>
+                                        <option value="取消訂單">取消訂單</option>
+                                        <option value="訂單完成">訂單完成</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="查詢">
+                                        <button class="btn btn-outline-light" type="button">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-custom table-lg mb-0" id="orders">
+                <thead>
+                <tr>
+
+                    <th>訂單編號</th>
+                    <th>訂單日期</th>
+                    <th>訂單總金額</th>
+                    <th>訂單狀態</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <a href="#">#3210</a>
+                    </td>
+                    <td>May 23, 2021</td>
+                    <td>$239,00</td>
+                    <td>
+                        <span class="badge bg-primary">訂單處理中</span>
+                    </td>
+
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <a href="#">#3211</a>
+                    </td>
+                    <td>May 15, 2021</td>
+                    <td>$650,50</td>
+                    <td>
+                        <span class="badge bg-dark">運送中</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <!-- <td>
+                                <input class="form-check-input" type="checkbox">
+                            </td> -->
+                    <td>
+                        <a href="#">#3212</a>
+                    </td>
+                    <td>Apr 24, 2021</td>
+                    <td>$100,00</td>
+                    <td>
+                        <span class="badge bg-success">訂單完成</span>
+                    </td>
+                    <td>
+                        </a>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <!-- <td>
+                                <input class="form-check-input" type="checkbox">
+                            </td> -->
+                    <td>
+                        <a href="#">#3213</a>
+                    </td>
+                    <td>Apr 10, 2021</td>
+                    <td>$19</td>
+                    <td>
+                        <span class="badge bg-success">訂單完成</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <!-- <td>
+                                <input class="form-check-input" type="checkbox">
+                            </td> -->
+                    <td>
+                        <a href="#">#3214</a>
+                    </td>
+                    <td>March 5, 2021</td>
+                    <td>$150,00</td>
+                    <td>
+                        <span class="badge bg-danger">取消訂單</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <!-- <td>
+                                <input class="form-check-input" type="checkbox">
+                            </td> -->
+                    <td>
+                        <a href="#">#3215</a>
+                    </td>
+                    <td>May 23, 2021</td>
+                    <td>$239,00</td>
+                    <td>
+                        <span class="badge bg-primary">訂單處理中</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <!-- <td>
+                                <input class="form-check-input" type="checkbox">
+                            </td> -->
+                    <td>
+                        <a href="#">#3216</a>
+                    </td>
+                    <td>May 15, 2021</td>
+                    <td>$650,50</td>
+                    <td>
+                        <span class="badge bg-dark">運送中</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#">#3217</a>
+                    </td>
+                    <td>Apr 24, 2021</td>
+                    <td>$100,00</td>
+                    <td>
+                        <span class="badge bg-success">訂單完成</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#">#3218</a>
+                    </td>
+                    <td>Apr 10, 2021</td>
+                    <td>$19</td>
+                    <td>
+                        <span class="badge bg-danger">取消訂單</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#">#3210</a>
+                    </td>
+                    <td>March 5, 2021</td>
+                    <td>$150,00</td>
+                    <td>
+                        <span class="badge bg-danger">取消訂單</span>
+                    </td>
+                    <td>
+                        <a href="DessertOrderDetail.html" title="詳細訂單資訊">
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav class="mt-4" aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <!-- 由此結束 -->
+
+
+        <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+
+        <!-- import js -->
+        <script>
+            function filterOrdersByStatus(status) {
+                var table = document.getElementById("orders");
+                var rows = table.getElementsByTagName("tr");
+
+                for (var i = 1; i < rows.length; i++) { // 從索引1開始，略過表頭行
+                    var orderStatus = rows[i].querySelector("td:nth-child(4) span").innerText;
+
+                    if (status === "訂單狀態" || status === orderStatus) {
+                        rows[i].style.display = ""; // 顯示符合條件的訂單資料
+                    } else {
+                        rows[i].style.display = "none"; // 隱藏不符合條件的訂單資料
+                    }
+                }
+            }
+
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+                crossorigin="anonymous"></script>
+
+        <!-- import font awesome -->
+        <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+
+    </div>
+</div>
+</body>
+        </html>
