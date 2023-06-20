@@ -2,6 +2,8 @@ package app.com.dessert5.controller;
 
 import app.com.dessert5.dao.DessertImageRepository;
 import app.com.dessert5.dao.DessertRepository;
+import app.com.dessert5.service.DessertImageService;
+import app.com.dessert5.service.DessertService;
 import app.com.dessert5.vo.Dessert;
 import app.com.dessert5.vo.DessertImage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +20,39 @@ import java.util.Optional;
 public class DessertImgController {
 
     @Autowired
+    private DessertImageService dessertImageService;
+
+    @Autowired
     private DessertRepository dessertRepository;
 
     @Autowired
     private DessertImageRepository dessertImageRepository;
 
-    @PostMapping("/upload/{dessertId}")
-    public ResponseEntity<String> uploadImages(@PathVariable("dessertId") Integer dessertId,
-                                               @RequestParam("images") MultipartFile[] images) {
-        try {
-            Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
-            if (dessert != null) {
-                for (MultipartFile image : images) {
-                    DessertImage dessertImage = new DessertImage();
-                    dessertImage.setDessertImg(image.getBytes());
-                    dessertImage.setDessert(dessert);
-                    dessertImageRepository.save(dessertImage);
-                }
-                return ResponseEntity.ok("Images uploaded successfully.");
+    @PutMapping("/upload/{dessertId}")
+    public String uploadImages(@PathVariable("dessertId") Integer dessertId,
+                                               @RequestParam(name = "1", required = false) MultipartFile file1,
+                                               @RequestParam(name = "2", required = false) MultipartFile file2,
+                                               @RequestParam(name = "3", required = false) MultipartFile file3,
+                                               @RequestParam(name = "4", required = false) MultipartFile file4) {
 
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dessert not found.");
-            }
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading images.");
-        }
+        return dessertImageService.updateDessertImage(dessertId, file1, file2, file3, file4);
+//        try {
+//            Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+//            if (dessert != null) {
+//                for (MultipartFile image : images) {
+//                    DessertImage dessertImage = new DessertImage();
+//                    dessertImage.setDessertImg(image.getBytes());
+//                    dessertImage.setDessert(dessert);
+//                    dessertImageRepository.save(dessertImage);
+//                }
+//                return ResponseEntity.ok("Images uploaded successfully.");
+//
+//            } else {
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dessert not found.");
+//            }
+//        } catch (IOException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading images.");
+//        }
     }
 
 }

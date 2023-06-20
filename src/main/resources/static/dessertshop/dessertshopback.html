@@ -993,9 +993,7 @@
                     console.log(files);
 
                     // 存入formdata
-                    let uniqueKey = ""+ dessertId + i; // 使用更具唯一性的键名
-                    console.log(uniqueKey);
-                    formData.append(uniqueKey, files);
+                    formData.append(i, files);
 
                 }
 
