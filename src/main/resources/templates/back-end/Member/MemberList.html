@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -132,30 +132,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td>John Doe</td>
-                                <td>1234567890</td>
-                                <td>johndoe</td>
-                                <td>會員地址</td>
-                                <td>一般會員</td>
-                                <td>正常</td>
-                                <td>2022-01-01</td>
+                            <tr th:each="mem : ${memberList}">
+                                <td th:text="${mem.getMemberId()}"></td>
+                                <td th:text="${mem.getMemberName()}"></td>
+                                <td th:text="${mem.getMemberPhone()}"></td>
+                                <td th:text="${mem.getMemberAccount()}"></td>
+                                <td th:text="${mem.getMemberAddress()}"></td>
+                                <td th:text="${mem.getMemberClassify()==0?'一般會員':'團購主'}"></td>
+                                <td th:text="${mem.getMemberStatus()==0?'正常':'停權'}"></td>
+                                <td th:text="${mem.getMemberRegistrationTime()}"></td>
                                 <td>
-                                    <button>管理</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>001</td>
-                                <td>John Doe</td>
-                                <td>1234567890</td>
-                                <td>johndoe</td>
-                                <td>會員地址</td>
-                                <td>一般會員</td>
-                                <td>正常</td>
-                                <td>2022-01-01</td>
-                                <td>
-                                    <button>管理</button>
+                                    <button th:onclick="'window.location.href=\'/member/data/edit/' + ${mem.getMemberId()} + '\''">修改</button>
                                 </td>
                             </tr>
                         </tbody>

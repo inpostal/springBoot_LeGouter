@@ -132,6 +132,8 @@ public class EmployeeController {
         }
     }
 
+
+    // 新增員工網址
     @GetMapping("/employee/add")
     public String add(HttpSession session) {
         if (session.getAttribute("emp") != null) {
@@ -141,6 +143,7 @@ public class EmployeeController {
         }
     }
 
+    // 員工資料列表網址
     @GetMapping("/employee/manage")
     public String manage(HttpSession session, Model model) {
         if (session.getAttribute("emp") != null) {
@@ -151,11 +154,13 @@ public class EmployeeController {
         }
     }
 
+    // 員工登入網址
     @GetMapping("/employee/login")
     public String login() {
         return "/back-end/Employee/EmpLogin";
     }
 
+    // 員工資料網址
     @GetMapping("/employee/data")
     public String employeeData(HttpSession session) {
         if (session.getAttribute("emp") != null) {
@@ -165,6 +170,7 @@ public class EmployeeController {
         }
     }
 
+    // 員工登出網址
     @GetMapping("/employee/logout")
     public String logout(HttpSession session) {
         session.invalidate();

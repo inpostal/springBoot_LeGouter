@@ -94,4 +94,15 @@ public class MemberService {
         memberRepository.save(members);
         return members;
     }
+
+    public List<Members> getAllMember() {
+        return memberRepository.findAll();
+    }
+
+    public Members updateMemberCategory(Members members) {
+        Members memberInDB = memberRepository.getReferenceById(members.getMemberId());
+        memberInDB.setMemberClassify(members.getMemberClassify());
+        memberInDB.setMemberStatus(members.getMemberStatus());
+        return memberRepository.save(memberInDB);
+    }
 }

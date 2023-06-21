@@ -68,7 +68,13 @@ public class MemberRestController {
         return response;
     }
 
-
-
-
+    // 後臺修改會員狀態以及分類
+    @PostMapping("/member/updateMemberCategory")
+    public Map<String, Boolean> updateMemberCategory(@RequestBody Members members) {
+        Members membersInDB = memberService.updateMemberCategory(members);
+        Boolean success = membersInDB != null;
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("success", success);
+        return response;
+    }
 }

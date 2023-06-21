@@ -36,7 +36,25 @@
 <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
 
 <!-- 輪播圖 -->
-<div th:insert="front-end/components/Carousel :: #carousel-div"></div>
+<div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s" id="carousel-div">
+    <div class="owl-carousel header-carousel position-relative">
+        <div class="owl-carousel-item position-relative"  th:each="car : ${carousel}">
+            <img class="img-fluid" th:src="@{/carousel/view/{carId}(carId=${car.getCarPicId()})}">
+            <div class="owl-carousel-inner">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-lg-8">
+                            <p class="text-primary text-uppercase fw-bold mb-2" th:text="${car.getCarTag()}"></p>
+                            <h1 class="display-1 text-light mb-4 animated slideInDown" th:text="${car.getCarTitle()}"></h1>
+                            <p class="text-light fs-5 mb-4 pb-3" th:text="${car.getCarPicContent()}"></p>
+                            <a th:href="@{${car.getCarPicLink()}}" class="btn btn-primary rounded-pill py-3 px-5" th:text="${car.getCarPicLinkTitle()}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- 頁腳 -->
 <div th:insert="front-end/components/Footer :: #footer-div"></div>

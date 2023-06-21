@@ -125,6 +125,7 @@
                             <th>入職日</th>
                             <th>功能</th>
                         </tr>
+
                         <tr th:each="e : ${empList}">
                             <td th:text="${e.getEmpId()}"></td>
                             <td th:text="${e.getEmpName()}"></td>
