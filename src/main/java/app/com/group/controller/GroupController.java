@@ -26,4 +26,8 @@ public class GroupController {
 	public String singleProduct() {
 		return "front-end/group/single-product";
 	}
+    @GetMapping("/group-product/updata") //後台團購商品管理-修改資料用頁面
+    public String groupProductUpdata() {
+    	return "back-end/group/group-product-updata";
+    }
 }
