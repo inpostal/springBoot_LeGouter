@@ -119,7 +119,7 @@
                                 <button type="button" th:onclick="'window.location.href=\'/carousel/edit/' + ${car.carPicId} + '\''">編輯</button>
                             </td>
                             <td>
-                                <button>刪除</button>
+                                <button type="button" class="deleteBtn" th:value="${car.getCarPicId()}">刪除</button>
                             </td>
                         </tr>
                         </tbody>
@@ -168,6 +168,26 @@
 <script src="/Member/Sam_Js/Jquery.js"></script>
 
 <script>
+    $(".deleteBtn").click(function () {
+        let boolean = confirm("確定要刪除此此輪播圖嗎?");
+        let id = $(this).val();
+
+        if (boolean){
+            $.ajax({
+                url: "/carousel/delete/" + id,
+                type: "DELETE",
+                success: function (data) {
+                        alert(data);
+                        window.location.reload();
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+        }
+    });
+
+
     $("#carousel-tag-input").blur(function () {
         if ($("#carousel-tag-input").val().trim() === "") {
             $("label[for='carousel-tag-input']").attr("style", "color: red");

@@ -28,4 +28,8 @@ public class CarouselService {
     public void updateCarousel(Carousel carousel) {
         repository.save(carousel);
     }
+
+    public void deleteCarousel(Integer carId) {
+        repository.deleteById(carId);
+    }
 }

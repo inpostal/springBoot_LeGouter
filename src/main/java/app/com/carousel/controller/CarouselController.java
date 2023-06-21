@@ -49,6 +49,18 @@ public class CarouselController {
         return "/back-end/Carousel/CarouselEdit";
     }
 
+    // 輪播圖刪除請求
+    @DeleteMapping("/carousel/delete/{carId}")
+    public ResponseEntity<?> deleteCarousel(@PathVariable Integer carId) {
+        List<Carousel> list = service.getAllCarousel();
+        if (list.size() <= 1) {
+            return ResponseEntity.badRequest().body("輪播圖至少要有一張");
+        }else {
+            service.deleteCarousel(carId);
+            return ResponseEntity.ok().body("刪除成功");
+        }
+    }
+
     // 新增輪播圖請求
     @PostMapping("/carousel/add")
     @ResponseBody
