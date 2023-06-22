@@ -50,10 +50,14 @@ public class Dessert {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "dessert", cascade = CascadeType.ALL)
-        private List<DessertImage> dessertImages;
+        private List<DessertImage> dessertImageList;
 
 
-
-
-
+//    public List<DessertImage> getDessertImageList() {
+//        return dessertImageList;
+//    }
+//
+//    public void setDessertImageList(List<DessertImage> dessertImageList) {
+//        this.dessertImageList = dessertImageList;
+//    }
 }

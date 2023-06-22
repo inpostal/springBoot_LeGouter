@@ -1,12 +1,10 @@
 package app.com.dessert5.dao;
 
 import app.com.dessert5.vo.DessertImage;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface DessertImageRepository extends JpaRepository<DessertImage, Integer> {
-
-    List<DessertImage> findByDessert_DessertId(Integer dessertId);
+public interface DessertImageRepository extends CrudRepository<DessertImage, Integer> {
 
 }

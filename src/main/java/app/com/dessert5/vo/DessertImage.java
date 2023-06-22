@@ -18,15 +18,14 @@ public class DessertImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DESSERT_IMG_ID")
-    private Integer dessertImgId;
+    private Integer dessertImageId;
 
     @Lob
     @Column(name = "DESSERT_IMG")
-    private byte[] dessertImg;
+    private byte[] dessertImage;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "DESSERT_ID")
+    @JoinColumn(name = "DESSERT_ID", referencedColumnName = "DESSERT_ID")
     private Dessert dessert;
-
 }

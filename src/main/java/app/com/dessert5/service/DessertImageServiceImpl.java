@@ -2,12 +2,15 @@ package app.com.dessert5.service;
 
 import app.com.dessert5.dao.DessertImageRepository;
 import app.com.dessert5.dao.DessertRepository;
+import app.com.dessert5.vo.Dessert;
 import app.com.dessert5.vo.DessertImage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@Service
 public class DessertImageServiceImpl implements DessertImageService {
 
         @Autowired
@@ -21,26 +24,42 @@ public class DessertImageServiceImpl implements DessertImageService {
                                          MultipartFile file2,
                                          MultipartFile file3,
                                          MultipartFile file4) {
-                // 找到對應商品
-                // Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                // 找到對應商品Dessert
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
 
                 // 找到原本存的對應的圖片
-                List<DessertImage> dessertImages = dessertImageRepository.findByDessert_DessertId(dessertId);
+                List<DessertImage> dessertImageList = dessertRepository.findByDessertId(dessertId);
 
                 MultipartFile[] files = {file1, file2, file3, file4};
 
-                // 如果有上傳圖片，就更新圖片
                 for (int i = 0; i < files.length; i++) {
-                        if (!files[i].isEmpty()) {
-                                DessertImage dessertImage = dessertImages.get(i); // 拿出原本的圖片
+                        if (files[i] != null) {
+                                // 新建一個DessertImage物件
+                                DessertImage dessertImage = new DessertImage();
                                 try {
-                                        dessertImage.setDessertImg(files[i].getBytes());
+                                        // 把圖片存入新建的DessertImage物件
+                                        dessertImage.setDessertImage(files[i].getBytes());
                                 } catch (Exception e) {
                                         e.printStackTrace();
                                 }
+                                // 更新DessertImage物件的dessert屬性，讓他可以找到對應的Dessert
+                                dessertImage.setDessert(dessert);
                                 dessertImageRepository.save(dessertImage);
+                        } else {
+                                if (dessertImageList.size() > i) {
+                                        dessertImageRepository.delete(dessertImageList.get(i));
+                                }
                         }
                 }
+
+
+
+
+
+
+
+
+
 
 
                 return "上傳成功";
