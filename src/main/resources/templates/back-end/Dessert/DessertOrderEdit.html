@@ -1,10 +1,11 @@
 <!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>後台甜點訂單管理</title>
-
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> 甜點訂單修改 </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- <link rel="stylesheet" type="text/css" href="back-nav-bar.css">  -->
@@ -26,8 +27,6 @@
 
     <!-- Main style file -->
     <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
-
-
     <style>
         #nav-bar {
             background-color: #1E1916;
@@ -82,7 +81,7 @@
 
 </head>
 
-
+<body>
 <section id="mainheader">
     <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
     <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
@@ -112,8 +111,6 @@
 
 
 <div class="row flex-nowrap">
-
-    <!-- 左側選單 -->
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
             <!-- Menu
@@ -271,233 +268,196 @@
 
         </div>
     </div>
-
     <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
     <div class="col py-3">
 
         <!-- 由此開始 -->
-        <div class="content " style="margin-top: 50px;">
+
+        <!-- preloader -->
+        <div class="preloader">
+            <img src="/Dessert/picture/logo.svg" alt="logo">
+            <div class="preloader-icon"></div>
+        </div>
+        <!-- ./ preloader -->
 
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-md-flex gap-4 align-items-center">
-                        <div class="d-none d-md-flex">甜點訂單</div>
-                        <div class="d-md-flex gap-4 align-items-center">
-                            <form class="mb-3 mb-md-0">
-                                <div class="row g-3">
-                                    <div class="col-md-5">
-                                        <select class="form-select" onchange="filterOrdersByStatus(this.value)">
-                                            <option>訂單狀態</option>
-                                            <option value="訂單處理中">訂單處理中</option>
-                                            <option value="運送中">運送中</option>
-                                            <option value="取消訂單">取消訂單</option>
-                                            <option value="訂單完成">訂單完成</option>
-                                        </select>
-                                    </div>
+        <!-- content -->
+        <div class="content ">
 
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control light-table-filter"
-                                                   id="memberIdInput"
-                                                   placeholder="查詢訂單" data-table="orders">
-                                            <button class="btn btn-outline-light" type="button"
-                                                    onclick="LightTableFilter.init()">
-                                                <i class="fa-solid fa-magnifying-glass" style="color: #f8d3ae;"></i>
-                                            </button>
-                                        </div>
+            <div class="row flex-column-reverse flex-md-row">
+                <div class="col-md-8">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel"
+                             aria-labelledby="profile-tab">
+                            <div class="mb-4">
+                                <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
+
+                                    <div class="flex-fill">
+                                        <h5 class="mb-3">訂單編號：#<span id="orderId"
+                                                                         th:text="${orders.getOrderId()}"></span></h5>
+
+
+                                        <button class="btn btn-primary me-2" id="submit">確認修改</button>
+                                        <button class="btn btn-outline-danger btn-icon" data-bs-toggle="tooltip"
+                                                title="捨棄修改" id="cancel">
+                                            <i class="fa-solid fa-trash-can" style="color: #ea4444;"></i>
+                                        </button>
 
 
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-4">訂單資訊</h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">訂單總金額</label>
+                                                    <input type="text" class="form-control" id="orderTotal"
+                                                           th:value="${orders.getCpOrderTotal()}" readonly
+                                                           style="background-color: #dddddd;">
 
+
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">收件人</label>
+                                                    <input type="text" class="form-control" id="receiverName"
+                                                           th:value="${orders.getReceiverName()}">
+
+
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">連絡電話</label>
+                                                    <input type="text" class="form-control" id="receiverPhone"
+                                                           th:value="${orders.getReceiverPhone()}">
+
+
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">收件地址</label>
+                                                    <input type="text" class="form-control" id="receiverAddress"
+                                                           th:value="${orders.receiverAddress}">
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">訂購日期</label>
+                                                    <input type="text" class="form-control" readonly id="orderTime"
+                                                           style="background-color: #dddddd;"
+                                                           th:value="${orders.getOrderTime()}">
+
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">E-mail</label>
+                                                        <input type="text" class="form-control" id="receiverEmail"
+                                                               value="好像少這藍">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">訂單狀態</label>
+                                                    <select id="orderStatus" class="form-select"
+                                                            th:field="${orders.orderStatus}">
+                                                        <option value="訂單處理中">訂單處理中</option>
+                                                        <option value="運送中">運送中</option>
+                                                        <option value="取消訂單">取消訂單</option>
+                                                        <option value="訂單完成">訂單完成</option>
+                                                    </select>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+
             </div>
-
-            <div class="table-responsive">
-                <table class="table table-custom table-lg mb-0" id="orders">
-                    <thead>
-                    <tr>
-
-                        <th>訂單編號</th>
-                        <th>會員ID</th>
-                        <th>訂單日期</th>
-                        <th>訂單總金額</th>
-                        <th>訂單狀態</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody id="dessertOrders">
-
-
-                    </tbody>
-
-                    </tbody>
-                </table>
-            </div>
-
-            <nav class="mt-4" aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-
-            <!-- 由此結束 -->
-
-
-            <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
         </div>
+        <!-- ./ content -->
+        <!-- 由此結束 -->
     </div>
 
-
-    <!-- import js -->
-    <script>
-        function filterOrdersByStatus(status) {
-            var table = document.getElementById("orders");
-            var rows = table.getElementsByTagName("tr");
-
-            for (var i = 1; i < rows.length; i++) { // 從索引1開始，略過表頭行
-                var orderStatus = rows[i].querySelector("td:nth-child(5) span").innerText;
-
-                if (status === "訂單狀態" || status === orderStatus) {
-                    rows[i].style.display = ""; // 顯示符合條件的訂單資料
-                } else {
-                    rows[i].style.display = "none"; // 隱藏不符合條件的訂單資料
-                }
-            }
-        }
-
-    </script>
-    <script src="/Course/JS/Jquery.js"></script>
-    <script>
-        //顯示訂單
-        $(document).ready(function () {
-            $.ajax({
-                url: '/orders',
-                type: 'GET',
-                dataType: 'json',
-                success: function (res) {
-                    console.log(res);
-                    let th_html = ``;
-                    for (let e in res) {
-                        let badgeClass = '';
-                        let dessertStatusText = '';
-
-                        switch (res[e].orderStatus) {
-                            case 0:
-                                badgeClass = 'badge badge-pill bg-primary';
-                                dessertStatusText = '訂單處理中';
-                                break;
-                            case 1:
-                                badgeClass = 'badge badge-pill bg-dark';
-                                dessertStatusText = '運送中';
-                                break;
-                            case 2:
-                                badgeClass = 'badge badge-pill bg-danger';
-                                dessertStatusText = '取消訂單';
-                                break;
-                            case 3:
-                                badgeClass = 'badge badge-pill bg-success';
-                                dessertStatusText = '訂單完成';
-                                break;
-                        }
-
-
-                        let orderTime = res[e].orderTime;
-
-                        let td_html = `
-        <tr>
-             <td><a href="#">${res[e].orderId}</a></td>
-                        <td>${res[e].memId}</td>
-                        <td>${orderTime}</td>
-                        <td>${res[e].cpOrderTotal}</td>
-                       <td><span class="${badgeClass}">${dessertStatusText}</span></td>
-                        <td>
-
-
-                            <a onclick="location.href='/orders/edit?ordersId=${res[e].orderId}'" title="編輯訂單資訊">
-    <i class="fas fa-edit fa-lg" style="color: #f8d3ae;"></i>
-</a>
-
-                            <a href="templates/back-end/DessertOrderDetail" title="詳細訂單資訊">
-                                <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
-                            </a>
-                        </td> </tr>`;
-                        th_html += td_html;
-                    }
-                    $("#dessertOrders").html(th_html);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.error(xhr);
-                }
-            });
-        });
-
-        $(document).ready(function () {
-            'use strict';
-
-            var LightTableFilter = (function (Arr) {
-                var _input;
-
-                function _onInputEvent(e) {
-                    _input = e.target;
-                    var table = document.getElementById(_input.getAttribute('data-table'));
-                    var rows = table.tBodies[0].rows;
-                    var memberId = _input.value.toLowerCase();
-
-                    for (var i = 0; i < rows.length; i++) {
-                        var row = rows[i];
-                        var memId = row.cells[1].textContent.toLowerCase();
-                        row.style.display = memId.indexOf(memberId) === -1 ? 'none' : 'table-row';
-                    }
-                }
-
-                return {
-                    init: function () {
-                        var inputs = document.getElementsByClassName('light-table-filter');
-                        Arr.forEach.call(inputs, function (input) {
-                            input.oninput = _onInputEvent;
-                        });
-                    }
-                };
-            })(Array.prototype);
-
-            document.addEventListener('readystatechange', function () {
-                if (document.readyState === 'complete') {
-                    LightTableFilter.init();
-                }
-            });
-        });
-
-
-    </script>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous"></script>
-
-    <!-- import font awesome -->
-    <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
-
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 </div>
+
+
+<script src="/Course/JS/Jquery.js"></script>
+<script>
+    $("#submit").click(function () {
+        // 取得需要修改的值
+        let receiverAddress = $("#receiverAddress").val();
+        // let receiverEmail = $("#receiverEmail").val();
+        let receiverPhone = $("#receiverPhone").val();
+        let receiverName = $("#receiverName").val();
+        let orderStatus = $("#orderStatus").val();
+
+        // 建立 FormData 物件並加入需要修改的值
+        let formData = new FormData();
+        formData.append("receiverAddress", receiverAddress);
+        // formData.append("receiverEmail", receiverEmail);
+        formData.append("receiverPhone", receiverPhone);
+        formData.append("receiverName", receiverName);
+        formData.append("orderStatus", orderStatus);
+
+        // 發送 AJAX 請求
+        $.ajax({
+            url: "/orders/update",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                alert("修改成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("修改失敗");
+            }
+        });
+    });
+
+
+    $('#cancel').click(function () {
+        if (confirm('確認放棄修改?')) {
+            window.location.href = '/orders/list';
+        } else {
+            // 取消操作，保留在當前頁面
+        }
+    });
+</script>
+<!-- import js -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+<!-- import font awesome -->
+<script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+
+<!-- ./ layout-wrapper -->
+
+<!-- Bundle scripts -->
+<script src="/Dessert/JS/bundle.js"></script>
+
+
+<!-- Main Javascript file -->
+<script src="/Dessert/JS/app.min.js"></script>
+</body>
+
 </html>

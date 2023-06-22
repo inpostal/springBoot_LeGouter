@@ -22,7 +22,7 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
     private Integer orderId;
-    
+
     //    @ManyToOne
 //    @JoinColumn(name = "MEM_ID")
 //    private Member member;
@@ -43,7 +43,7 @@ public class Orders implements Serializable {
     private Integer cpOrderTotal;
 
     @Column(name = "ORDER_STATUS")
-    private Integer orderStatus;
+    private Integer orderStatus = 0;
 
     @Column(name = "ORDER_TIME", insertable = false)
     private Date orderTime;

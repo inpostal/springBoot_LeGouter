@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since 2023-06-21 10:35:15
  */
 public interface OrdersRepository extends JpaRepository<Orders, Integer> {
-
+    
 }
 
