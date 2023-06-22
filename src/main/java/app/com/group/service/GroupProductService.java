@@ -58,4 +58,19 @@ public class GroupProductService {
 		groupProductVO.setGroupProductStatus(groupProductDTO.getGroupProductStatus());
 		return groupProductRepository.save(groupProductVO) != null;
 	}
+	
+	public Boolean updataThe (GroupProductDTO groupProductDTO) {
+		GroupProductVO groupProductVO = new GroupProductVO();
+		groupProductVO.setGroupProductId(groupProductDTO.getGroupProductId());
+		groupProductVO.setGroupProductName(groupProductDTO.getGroupProductName());
+		groupProductVO.setGroupProductContent(groupProductDTO.getGroupProductContent());
+		groupProductVO.setGroupProductPrice(groupProductDTO.getGroupProductPrice());
+		groupProductVO.setGroupProductStardate(Date.valueOf(groupProductDTO.getGroupProductStardate()));
+//		System.out.println("GroupProductEnddate的值為:" + groupProductDTO.getGroupProductEnddate());
+		if (groupProductDTO.getGroupProductEnddate().trim().length() != 0) {
+			groupProductVO.setGroupProductEnddate(Date.valueOf(groupProductDTO.getGroupProductEnddate()));
+		}
+		groupProductVO.setGroupProductStatus(groupProductDTO.getGroupProductStatus());
+		return groupProductRepository.save(groupProductVO) != null;
+	}
 }

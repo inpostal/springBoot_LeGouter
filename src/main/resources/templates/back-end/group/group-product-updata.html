@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -301,24 +302,27 @@
                     <H4>團購商品資料修改</H4>
                 </div>
                 <div>
-                    <label class="inpproduct">團購商品編號：</label>
-                    <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" value="" required></label>
-                    <label class="inpproduct">團購商品內容：<input type="text" id="textarea" name="groupProductContent" value="" maxlength="300" required style="width: 300px; height: 125px;"></label>
+                    <label class="inpproduct">團購商品編號：<input type="text" id="productid" name="groupProductId" th:value="${groupProductVO.getGroupProductId()}" readonly></label>
+                    <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" th:value="${groupProductVO.getGroupProductName()}" required></label>
+                    <label class="inpproduct">團購商品內容：<input type="text" id="textarea" name="groupProductContent" th:value="${groupProductVO.getGroupProductContent()}" maxlength="300" required style="width: 300px; height: 125px;"></label>
                     <!-- <textarea class="inpproduct" id="textarea" name="groupProductContent" cols="50" rows="8" maxlength="300" placeholder="輸入團購商品內容" required></textarea> -->
-                    <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" required></label>
-                    <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" value="2023-06-01" placeholder="yyyy-mm-dd" readonly></label>
-                    <label class="inpproduct">團購商品下架時間：<input type="date" id="productstardate" name="groupProductStardate" value="" placeholder="yyyy-mm-dd" readonly></label>
+                    <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" th:value="${groupProductVO.getGroupProductPrice()}" required></label>
+                    <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" th:value="${groupProductVO.getGroupProductStardate()}" placeholder="yyyy-mm-dd" readonly></label>
+                    <label class="inpproduct">團購商品下架時間：<input type="date" id="ProductEnddate" name="groupProductEnddate" th:value="${groupProductVO.getGroupProductEnddate()}" placeholder="yyyy-mm-dd" readonly></label>
                     <select class="inpproduct" id="productstatus" name="groupProductStatus">
                         <option value="1" selected="true">上架</option>
                         <option value="0">下架</option>
                     </select>
                     <label class="inpproduct">圖片</label>
-                    <input type="file" style="margin-top: 10px;" id="uploadimg1">
+                    <input type="file" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
+                    <img th:src="@{/groupProduct/get/img/{groupProductId}(groupProductId=${groupProductVO.getGroupProductId()})}" alt="預設圖片">
                     <!-- <input type="file" style="margin-top: 10px;">
                     <input type="file" style="margin-top: 10px;">
                     <input type="file" style="margin-top: 10px;"> -->
                     <button type="button" id="btnupdata" style="margin-top: 10px; display: block;">修改</button>
-                    <button type="button" id="btnback" style="margin-top: 10px; display: block;">取消</button>
+                    <form action="/group-product-manage">
+                    <button type="submit" id="btnback" style="margin-top: 10px; display: block;">取消</button>
+                    </form>
                  </div>  
 
                 <!-- 由此結束 -->
@@ -349,14 +353,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
        $("#btnupdata").on("click", function() {
+        let formdata = new FormData;
+        let groupProductId = $("#productid").val();
+          let groupProductName = $("#productname").val();
+          let groupProductContent = $("#textarea").val();
+          let groupProductPrice= $("#productprice").val();
+          let groupProductStardate = $("#productstardate").val();
+          let groupProductEnddate = $("#ProductEnddate").val();
+          if($("#productstatus").val() === 0){
+            let dateobj = new Date();
+            let today = dateobj.getFullYear + "-" + (dateobj.getMonth+1) + "-" + dateobj.getDate;
+            groupProductEnddate = today;
+          }
+          let groupProductStatus = $("#productstatus").val();
+          let groupProductImg = $("#uploadimg1")[0].files[0];
+          formdata.append("groupProductId", groupProductId);
+          formdata.append("groupProductName", groupProductName);
+          formdata.append("groupProductContent", groupProductContent);
+          formdata.append("groupProductPrice", groupProductPrice);
+          formdata.append("groupProductStardate", groupProductStardate);
+          formdata.append("groupProductEnddate", groupProductEnddate);
+          formdata.append("groupProductStatus", groupProductStatus);
+          formdata.append("groupProductImg", groupProductImg);
         $.ajax({
-            url: "/group-product/updata",
+            url: "/group-product/updata-the",
             type: "POST",
-            data: {
-                
-            },
+            contentType: false,
+            processData: false,
+            data: formdata,
             success: function(response) {
-                
+                alert("修改成功");
             }
 
 

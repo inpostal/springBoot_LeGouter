@@ -104,6 +104,39 @@ public class GroupRestContreller {
                 .body(resource);
     }
 
+	@PostMapping("/group-product/updata-the")
+	public Map<String, Boolean> updataForProduct(
+			@RequestParam("groupProductId") Integer groupProductId,
+			@RequestParam("groupProductName") String groupProductName,
+			@RequestParam("groupProductContent") String groupProductContent,
+			@RequestParam("groupProductPrice") Integer groupProductPrice,
+			@RequestParam("groupProductStardate") String groupProductStardate,
+			@RequestParam("groupProductEnddate") String groupProductEnddate,
+			@RequestParam("groupProductStatus") Integer groupProductStatus,
+			@RequestParam("groupProductImg") MultipartFile groupProductImg) {
+		GroupProductDTO updatato = new GroupProductDTO();
+		updatato.setGroupProductId(groupProductId);
+		updatato.setGroupProductName(groupProductName);
+		updatato.setGroupProductContent(groupProductContent);
+		updatato.setGroupProductPrice(groupProductPrice);
+		updatato.setGroupProductStardate(groupProductStardate);
+		updatato.setGroupProductEnddate(groupProductEnddate);
+		updatato.setGroupProductStatus(groupProductStatus);
+		Boolean success = groupProductService.updataThe(updatato);
+		
+		GroupProductImgVO updataivo = new GroupProductImgVO();
+		try {
+			updataivo.setGroupProductImgId(groupProductId);
+			updataivo.setGroupProductImg(groupProductImg.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		groupProductImgService.updataImg(updataivo);
+		
+		Map<String, Boolean> response = new HashMap<>();
+		 response.put("success", success);
+		return response;
+	}
 	
 	//-----以下是團購活動-----
 	//後台
