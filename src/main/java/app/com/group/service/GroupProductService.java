@@ -2,6 +2,7 @@ package app.com.group.service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,19 +33,20 @@ public class GroupProductService {
 		return volist;
 	}
 	
-	public GroupProductDTO showOneProduct(Integer groupProductId) {
-		GroupProductVO vo = groupProductRepository.getReferenceById(groupProductId);
-		GroupProductDTO dto = new GroupProductDTO();
-		dto.setGroupProductId(vo.getGroupProductId());
-		dto.setGroupProductName(vo.getGroupProductName());
-		dto.setGroupProductContent(vo.getGroupProductContent());
-		dto.setGroupProductPrice(vo.getGroupProductPrice());
-		dto.setGroupProductStardate(vo.getGroupProductStardate().toString());
-		if (vo.getGroupProductEnddate() != null) {
-			dto.setGroupProductEnddate(vo.getGroupProductEnddate().toString());
-		}
-		dto.setGroupProductStatus(vo.getGroupProductStatus());
-		return dto;
+	public GroupProductVO showOneProduct(Integer groupProductId) {
+//		GroupProductVO vo = groupProductRepository.getReferenceById(groupProductId);
+//		GroupProductDTO dto = new GroupProductDTO();
+//		dto.setGroupProductId(vo.getGroupProductId());
+//		dto.setGroupProductName(vo.getGroupProductName());
+//		dto.setGroupProductContent(vo.getGroupProductContent());
+//		dto.setGroupProductPrice(vo.getGroupProductPrice());
+//		dto.setGroupProductStardate(vo.getGroupProductStardate().toString());
+//		if (vo.getGroupProductEnddate() != null) {
+//			dto.setGroupProductEnddate(vo.getGroupProductEnddate().toString());
+//		}
+//		dto.setGroupProductStatus(vo.getGroupProductStatus());
+		Optional<GroupProductVO> vo = groupProductRepository.findById(groupProductId);
+		return vo.get();
 	}
 	
 	public Boolean inserProductNew (GroupProductDTO groupProductDTO) {

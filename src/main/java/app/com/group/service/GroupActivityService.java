@@ -1,6 +1,7 @@
 package app.com.group.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,18 +26,19 @@ public class GroupActivityService {
 		return avoaclist;
 	}
 	
-	public GroupActivityDTO showTheActivity(Integer groupActivityId) {
-		GroupActivityVO thevo = groupActivityRepository.getReferenceById(groupActivityId);
-		GroupActivityDTO thedto = new GroupActivityDTO();
-		thedto.setGroupActivityId(thevo.getGroupActivityId());
-		thedto.setGroupProductId(thevo.getGroupProductId());
-		thedto.setGroupActivityContent(thevo.getGroupActivityContent());
-		thedto.setGroupOrderStar(thevo.getGroupOrderStar());
-		thedto.setGroupOrderEnd(thevo.getGroupOrderEnd());
-		thedto.setGroupOrderMin(thevo.getGroupOrderMin());
-		thedto.setGroupName(thevo.getGroupName());
-		thedto.setGroupOrderDiscount(thevo.getGroupOrderDiscount());
-				return thedto;
+	public GroupActivityVO showTheActivity(Integer groupActivityId) {
+//		GroupActivityVO thevo = groupActivityRepository.getReferenceById(groupActivityId);
+//		GroupActivityDTO thedto = new GroupActivityDTO();
+//		thedto.setGroupActivityId(thevo.getGroupActivityId());
+//		thedto.setGroupProductId(thevo.getGroupProductId());
+//		thedto.setGroupActivityContent(thevo.getGroupActivityContent());
+//		thedto.setGroupOrderStar(thevo.getGroupOrderStar());
+//		thedto.setGroupOrderEnd(thevo.getGroupOrderEnd());
+//		thedto.setGroupOrderMin(thevo.getGroupOrderMin());
+//		thedto.setGroupName(thevo.getGroupName());
+//		thedto.setGroupOrderDiscount(thevo.getGroupOrderDiscount());
+		Optional<GroupActivityVO> thevo = groupActivityRepository.findById(groupActivityId);
+				return thevo.get();
 	}
 	
 	public Boolean inserActivitys (GroupActivityDTO groupActivityDTO) {

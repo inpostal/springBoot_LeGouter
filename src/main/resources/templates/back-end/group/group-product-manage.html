@@ -556,7 +556,10 @@
                                         <td>${response[gvo].groupProductStatus}</td>                
                                         <td>
                                             <div class="dropdown">
-                                                <button type="button" class="btn btn-success">編輯</button>
+                                                <form action="/group-product/updata" method="get">
+                                                <input type="text" name="groupProductId" value="${response[gvo].groupProductId}" hidden>
+                                                <button type="submit" class="btn btn-success">編輯</button>
+                                            </form>
                                             </div>
                                         </td>
                                     </tr>`;
@@ -600,7 +603,10 @@
                                     <td>${response.groupProductStatus}</td>                
                                     <td>
                                         <div class="dropdown">
-                                            <button type="button" class="btn btn-success">編輯</button>
+                                            <form action="/group-product/updata" method="get">
+                                            <input type="text" name="groupProductId" value="${response.groupProductId}" hidden>
+                                            <button type="submit" class="btn btn-success">編輯</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>`;
@@ -612,6 +618,24 @@
                 }   
             });
         }
+        //----------
+        // function updatathe(id) { //測試跳轉頁面的痕跡，用ajax是根本上的錯誤，最後使用form帶到別URL。
+        //     let theId = id;
+        //     console.log("ID是" + theId);
+        //     let upurl = `groupProductId=${theId}`
+        //     console.log(upurl)
+        //     $.ajax({
+        //         url: "/group-product/updata",
+        //         type: "GET",
+        //         data: upurl,
+        //         beforeSend: function() {
+        //             console.log("發送前確認");
+        //         },
+        //         success: function() {
+
+        //         }
+        //     });
+        // }
     </script>
 
 </body>

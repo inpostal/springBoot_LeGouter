@@ -54,7 +54,7 @@ public class GroupRestContreller {
 	}
 	
 	@PostMapping("/groupProduct/showOne")
-	public GroupProductDTO showOne (@RequestParam String groupProductId) {
+	public GroupProductVO showOne (@RequestParam String groupProductId) {
 		Integer gpid = Integer.parseInt(groupProductId);
 		return groupProductService.showOneProduct(gpid);
 	}
@@ -120,7 +120,7 @@ public class GroupRestContreller {
 
 	//前台單品
 	@PostMapping("/single-product/showthe")
-	public GroupActivityDTO showthe (@RequestParam String groupActivityId) {
+	public GroupActivityVO showthe (@RequestParam String groupActivityId) {
 		Integer theid = Integer.parseInt(groupActivityId);
 		return groupActivityService.showTheActivity(theid);
 	}
