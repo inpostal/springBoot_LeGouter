@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5.課程訂單管理</title>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="static/css/css2.css" rel="stylesheet">
+
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="static/css/bootstrap-icons.min.css" type="text/css">
+    <!-- Bootstrap Docs -->
+    <link rel="stylesheet" href="static/css/bootstrap-docs.css" type="text/css">
+
+
+    <!-- Main style file -->
+    <link rel="stylesheet" href="static/css/app.min.css" type="text/css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="static/css/1css2.css" rel="stylesheet">
+
+    <link href="static/css/all.min.css" rel="stylesheet">
+    <link href="static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="static/css/1animate.min.css" rel="stylesheet">
+    <link href="static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="static/css/style.css" rel="stylesheet">
+    <link href="static/css/orders.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/Sam_CSS/style_member_data.css"> -->
+
+</head>
+
+<body>
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+
+
+    <div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <ol class="breadcrumb mb-0">
+                </ol>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <div class="h-100 d-inline-flex align-items-center">
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
+            <h1 class="text-primary m-0">Le Goûter</h1>
+        </a>
+
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto p-4 p-lg-0">
+                <a href="" class="nav-item nav-link active">首頁</a>
+                <a href="" class="nav-item nav-link">最新消息</a>
+                <a href="" class="nav-item nav-link">關於我們</a>
+                <a href="" class="nav-item nav-link">甜點商城</a>
+                <a href="" class="nav-item nav-link">課程專區</a>
+                <a href="" class="nav-item nav-link">團購專區</a>
+                <a href="" class="nav-item nav-link">會員專區</a>
+                <a href="" class="nav-item nav-link">優惠券專區</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="" class="dropdown-item">FAQ</a>
+                        <a href="" class="dropdown-item">聯絡客服</a>
+                    </div>
+                </div>
+            </div>
+            <div class=" d-none d-lg-flex">
+
+                <a href="cart.html" class="nav-item nav-link">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                </a>
+
+
+                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+                    <i class="fa fa-phone text-primary"></i>
+                </div>
+                <div class="ps-3">
+                    <small class="text-primary mb-0">聯絡我們</small>
+                    <p class="text-light fs-5 mb-0">0912345678</p>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- layout-wrapper -->
+    <div class="layout-wrapper">
+
+
+        <!-- ./ header -->
+
+        <!-- 訂單功能處理區 -->
+        <div class="content " style="margin-top: 100px;">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex gap-4 align-items-center">
+                        <div class="section-heading text-center"></div>
+                        <div class="search-input-container text-center mt-4">
+                            <div class="input-group">
+                                <input type="text" id="searchInput" class="form-control" placeholder="搜尋訂單編號">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" onclick="searchOrders()">訂單搜尋</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive" style="padding-left: 10px; padding-right: 10px;">
+                <table class="table table-custom table-lg mb-0" id="orders">
+                    <thead>
+                        <tr>                           
+                            <th>訂單編號</th>
+                            <th>訂單日期</th>
+                            <th>訂單金額</th>
+                            <th>付款方式</th>
+                            <th>訂單狀態</th>
+                            <th>詳細資訊</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>                           
+                            <td>
+                                <a href="#">#3210</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-primary">Processing</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3211</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-dark">Shipped</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3212</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-success">Completed</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3213</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-warning">Refunded</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3214</a>
+                            </td>
+                            <td>March 5, 2021</td>
+                            <td>$15,000</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-danger">Cancelled</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3215</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$23,900</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-primary">Processing</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3216</a>
+                            </td>
+                            <td>May 15, 2021</td>
+                            <td>$65,050</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-dark">Shipped</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3217</a>
+                            </td>
+                            <td>Apr 24, 2021</td>
+                            <td>$10,000</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-success">Completed</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3218</a>
+                            </td>
+                            <td>Apr 10, 2021</td>
+                            <td>$19</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-warning">Refunded</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3219</a>
+                            </td>
+                            <td>March 5, 2021</td>
+                            <td>$15,000</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-danger">Cancelled</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav class="mt-4" aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- ./ 訂單功能處理區 -->
+
+
+
+    </div>
+    <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">粉絲專頁</h4>
+
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">關於我們</h4>
+                    <a class="btn btn-link" href="">認識Le Goûter</a>
+                    <a class="btn btn-link" href="">最新消息</a>
+                    <a class="btn btn-link" href="">甜點商城</a>
+                    <a class="btn btn-link" href="">課程專區</a>
+                    <a class="btn btn-link" href="">團購專區</a>
+                    <a class="btn btn-link" href="">服務條款</a>
+                    <a class="btn btn-link" href="">隱私政策</a>
+                    <a class="btn btn-link" href="">聯絡我們</a>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">常見問題</h4>
+                    <a class="btn btn-link" href="">註冊登入</a>
+                    <a class="btn btn-link" href="">FAQ</a>
+                    <a class="btn btn-link" href="">回報客服</a>
+                    <a class="btn btn-link" href="">購物須知</a>
+                    <a class="btn btn-link" href="">退款政策</a>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4"></h4>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg" alt="Image">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 版權所有 -->
+
+
+    <script data-cfasync="false" src="static/js/email-decode.min.js"></script>
+    <script src="static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+    <script src="static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+    <script src="static/js/orders.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+    <!-- ./ layout-wrapper -->
+
+    <!-- Bundle scripts -->
+    <script src="static/js/bundle.js"></script>
+
+    <!-- Main Javascript file -->
+    <script src="static/js/app.min.js"></script>
+</body>
+
+</html>

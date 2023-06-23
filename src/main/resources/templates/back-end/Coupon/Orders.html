@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5.課程訂單管理</title>
+
+    <link href="static/css/css2.css" rel="stylesheet">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="static/css/bootstrap-icons.min.css" type="text/css">
+    <!-- Bootstrap Docs -->
+    <link rel="stylesheet" href="static/css/bootstrap-docs.css" type="text/css">
+
+
+    <!-- Main style file -->
+    <link rel="stylesheet" href="static/css/app.min.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="static/css/1css2.css" rel="stylesheet">
+
+    <link href="static/css/all.min.css" rel="stylesheet">
+    <link href="static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="static/css/1animate.min.css" rel="stylesheet">
+    <link href="static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="static/css/style.css" rel="stylesheet">
+    <link href="static/css/orders.css" rel="stylesheet">
+
+    <style>
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #nav-bar {
+            background-color: #1E1916;
+        }
+
+        .nav-pills {
+            --bs-nav-pills-link-active-bg: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        :root {
+            --bs-link-color: white;
+            --bs-link-hover-color: orange;
+
+        }
+
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 20px;
+        }
+
+        .dropdown {
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<section id="mainheader">
+    <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
+    <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
+</section>
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" role="status"></div>
+</div>
+
+
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+</div>
+
+
+<!-- layout-wrapper -->
+<div class="layout-wrapper">
+    <div class="row">
+        <!-- 左側導航欄 -->
+        <div class="col-lg-3" id="nav-bar">
+            <div class="container-fluid">
+                <div class="row flex-nowrap">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
+                        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                                id="menu">
+
+                                <!-- 1 -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link px-5 align-middle d-flex" style="margin-top: 50px;">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                                    </a>
+                                </li>
+
+                                <!-- 2 -->
+                                <li>
+                                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">會員管理系統</span></a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">會員權限管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">會員資料管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">優惠管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">網站管理系統</span></a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">即時客服</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">輪播圖管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">最新消息管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 5 -->
+                                <li>
+                                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">團購管理系統</span> </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購商品管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購參與者訂單管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購方案管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購活動管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購分潤管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- 7 -->
+                                <li>
+                                    <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span> </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程訂單管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程資訊審核管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 8 -->
+                                <li>
+                                    <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">主廚管理</span> </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">主廚資料管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程討論區管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程資訊管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 9 -->
+                                <li>
+                                    <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">甜點管理系統</span> </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">甜點訂單管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">甜點商品管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">甜點追蹤清單管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 10 -->
+                                <li>
+                                    <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">員工管理系統</span> </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"><span class="d-none d-sm-inline">員工資料管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">員工權限管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 訂單功能處理區 -->
+        <div class="col-lg-8">
+            <!-- 訂單功能處理區 -->
+            <div class="content" >
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex gap-4 align-items-center">
+                            <div class="section-heading text-center"></div>
+                            <div class="search-input-container text-center mt-4">
+                                <div class="input-group">
+                                    <input type="text" id="searchInput" class="form-control" placeholder="搜尋訂單編號">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" onclick="searchOrders()">訂單搜尋</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="padding-left: 10px; padding-right: 10px;">
+                    <table class="table table-custom table-lg mb-0" id="orders">
+                        <thead>
+                        <tr>
+                            <th>訂單編號</th>
+                            <th>訂單日期</th>
+                            <th>訂單金額</th>
+                            <th>付款方式</th>
+                            <th>訂單狀態</th>
+                            <th>詳細資訊</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a href="#">#3210</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-primary">Processing</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3211</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-dark">Shipped</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3212</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-success">Completed</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3213</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$100</td>
+                            <td>現金</td>
+                            <td>
+                                <span class="badge bg-warning">Refunded</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3214</a>
+                            </td>
+                            <td>March 5, 2021</td>
+                            <td>$15,000</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-danger">Cancelled</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3215</a>
+                            </td>
+                            <td>May 23, 2021</td>
+                            <td>$23,900</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-primary">Processing</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3216</a>
+                            </td>
+                            <td>May 15, 2021</td>
+                            <td>$65,050</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-dark">Shipped</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3217</a>
+                            </td>
+                            <td>Apr 24, 2021</td>
+                            <td>$10,000</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-success">Completed</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3218</a>
+                            </td>
+                            <td>Apr 10, 2021</td>
+                            <td>$19</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-warning">Refunded</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">#3219</a>
+                            </td>
+                            <td>March 5, 2021</td>
+                            <td>$15,000</td>
+                            <td>信用卡</td>
+                            <td>
+                                <span class="badge bg-danger">Cancelled</span>
+                            </td>
+                            <td>
+                                <a href="order-detail.html">詳細資訊</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav class="mt-4" aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- ./ 訂單功能處理區 -->
+
+
+
+        </div>
+
+
+        <!-- 版權所有 -->
+
+
+        <script data-cfasync="false" src="static/js/email-decode.min.js"></script>
+        <script src="static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+        <script src="static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+        <script src="static/js/orders.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+        <!-- ./ layout-wrapper -->
+
+        <!-- Bundle scripts -->
+        <script src="static/js/bundle.js"></script>
+
+        <!-- Main Javascript file -->
+        <script src="static/js/app.min.js"></script>
+</body>
+
+</html>
