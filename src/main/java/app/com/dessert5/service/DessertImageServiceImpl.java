@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DessertImageServiceImpl implements DessertImageService {
@@ -27,30 +29,41 @@ public class DessertImageServiceImpl implements DessertImageService {
                 // 找到對應商品Dessert
                 Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
 
-                // 找到原本存的對應的圖片
-                List<DessertImage> dessertImageList = dessertRepository.findByDessertId(dessertId);
+                // 取得原本存的對應Dessert的圖片陣列
+//                Map<Integer, DessertImage> dessertImageMap = (HashMap<Integer, DessertImage>)dessertRepository.findByDessertId(dessertId);
+                Map<Integer, DessertImage> dessertImageMap = dessert.getDessertImageMap();
+
 
                 MultipartFile[] files = {file1, file2, file3, file4};
 
+
+
                 for (int i = 0; i < files.length; i++) {
+                        System.out.println(files.length);
                         if (files[i] != null) {
                                 // 新建一個DessertImage物件
                                 DessertImage dessertImage = new DessertImage();
+
+                                // 設定要存入的dessertImage物件的各屬性
                                 try {
                                         // 把圖片存入新建的DessertImage物件
                                         dessertImage.setDessertImage(files[i].getBytes());
                                 } catch (Exception e) {
                                         e.printStackTrace();
                                 }
-                                // 更新DessertImage物件的dessert屬性，讓他可以找到對應的Dessert
                                 dessertImage.setDessert(dessert);
-                                dessertImageRepository.save(dessertImage);
-                        } else {
-                                if (dessertImageList.size() > i) {
-                                        dessertImageRepository.delete(dessertImageList.get(i));
-                                }
+
+
+                                // 把新建的DessertImage物件加入對應的Dessert的圖片集合
+                                dessertImageMap.put(i, dessertImage);
                         }
                 }
+
+                dessertRepository.save(dessert);
+
+
+
+
 
 
 

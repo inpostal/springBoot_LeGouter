@@ -1,6 +1,7 @@
 package app.com.dessert5.vo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,8 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @Setter
 @Getter
@@ -17,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "dessert")
-public class Dessert {
+public class Dessert implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,15 +54,20 @@ public class Dessert {
     private Integer rateStar;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "dessert", cascade = CascadeType.ALL)
-        private List<DessertImage> dessertImageList;
+    @JsonIgnore
+    @OneToMany(mappedBy = "dessert", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Map<Integer, DessertImage> dessertImageMap = new HashMap<>() {{
+        put(0, null);
+        put(1, null);
+        put(2, null);
+        put(3, null);
+    }};
 
-
-//    public List<DessertImage> getDessertImageList() {
-//        return dessertImageList;
+//    public Map<Integer, DessertImage> getDessertImageMap() {
+//        return dessertImageMap;
 //    }
 //
-//    public void setDessertImageList(List<DessertImage> dessertImageList) {
-//        this.dessertImageList = dessertImageList;
+//    public void setDessertImageMap(Map<Integer, DessertImage> dessertImageMap) {
+//        this.dessertImageMap = dessertImageMap;
 //    }
 }

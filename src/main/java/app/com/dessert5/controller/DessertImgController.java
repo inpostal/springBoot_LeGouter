@@ -30,12 +30,18 @@ public class DessertImgController {
 
     @PutMapping("/upload/{dessertId}")
     public String uploadImages(@PathVariable("dessertId") Integer dessertId,
-                                               @RequestParam(name = "1", required = false) MultipartFile file1,
-                                               @RequestParam(name = "2", required = false) MultipartFile file2,
-                                               @RequestParam(name = "3", required = false) MultipartFile file3,
-                                               @RequestParam(name = "4", required = false) MultipartFile file4) {
+                                               @RequestParam(name = "0", required = false) MultipartFile file1,
+                                               @RequestParam(name = "1", required = false) MultipartFile file2,
+                                               @RequestParam(name = "2", required = false) MultipartFile file3,
+                                               @RequestParam(name = "3", required = false) MultipartFile file4) {
+        System.out.println("file1: " + file1);
+        System.out.println("file2: " + file2);
+        System.out.println("file3: " + file3);
+        System.out.println("file4: " + file4);
 
         return dessertImageService.updateDessertImage(dessertId, file1, file2, file3, file4);
+
+
 //        try {
 //            Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
 //            if (dessert != null) {
