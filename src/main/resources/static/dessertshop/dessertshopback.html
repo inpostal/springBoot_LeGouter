@@ -617,7 +617,7 @@
                     </div>        
                 </div>
 <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-                <!-- Edit Modal HTML 新增 -->
+                <!-- Insert Modal HTML 新增 -->
                 <div id="addEmployeeModal" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -643,12 +643,12 @@
                                         <label>數量</label>
                                         <input type="number" class="form-control" required>
                                     </div> -->
-                                    <div>圖片<br>
-                                        <input name="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                        <input name="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                        <input name="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                        <input name="product_img_4" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                    </div>
+<!--                                    <div>圖片<br>-->
+<!--                                        <input name="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">-->
+<!--                                        <input name="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">-->
+<!--                                        <input name="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">-->
+<!--                                        <input name="product_img_4" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
@@ -729,16 +729,25 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <input name="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <button class="btn btn-danger" id="delete0" style="position: absolute; right: 35px;">刪除圖片</button>
+                                    <br id="img0">
+                                    <img src="https://github.com/weichen9715/catpic/blob/main/smudge_lord_60314581_2452933891436033_1050250552612724249_n.jpg?raw=true">
 
 
-                                    <input name="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input id="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <button class="btn btn-danger" id="delete1" style="position: absolute; right: 35px;">刪除圖片</button>
+                                    <br>
 
 
-                                    <input name="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input id="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <button class="btn btn-danger" id="delete2" style="position: absolute; right: 35px;">刪除圖片</button>
+                                    <br>
 
 
-                                    <input name="product_img_4" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input id="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <button class="btn btn-danger" id="delete3" style="position: absolute; right: 35px;">刪除圖片</button>
+                                    <br>
 
 
                                     
@@ -830,7 +839,7 @@
                     let html = "";
                     for (let e in res) {
                         let dessertStatus = res[e].dessertStatus;
-                        let statusClass = dessertStatus === "已下架" ? "red-text" : "";
+                        let statusClass = dessertStatus === "已下架" ? "red-text" : "";    // 讓已下架呈現紅色
                         html += `<tr>
 <!--                                    <td>-->
 <!--                                        <span class="custom-checkbox">-->
@@ -971,11 +980,29 @@
         });
 
 
-        // 上傳圖片
+        // 上傳圖片0
         $(document).on("click", ".upload", function() {
             let dessertId = $(this).data('id');
             console.log(dessertId);
 
+            // 顯示圖片的部分
+            $.ajax({
+                url: '/dessert5/image0?dessertId=' + encodeURIComponent(dessertId),
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    $("#img0").after(`<img src="${res}" alt="圖片顯示" style="width: 100px; height: 100px;"><br>`)
+
+
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr);
+                }
+            });
+
+
+
+            // 上傳的部分
             $("#picupload").off().on("click", function(e) {
                 e.preventDefault(); // 防止表单提交
 
@@ -1015,6 +1042,10 @@
                     }
                 });
             });
+
+
+
+
         });
 
 
