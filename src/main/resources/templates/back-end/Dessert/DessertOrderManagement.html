@@ -44,6 +44,10 @@
 
         }
 
+        a[onclick] {
+            cursor: pointer;
+        }
+
         /* 標題列 */
         #mainheader {
             display: flex;
@@ -304,7 +308,7 @@
                                                    placeholder="查詢訂單" data-table="orders">
                                             <button class="btn btn-outline-light" type="button"
                                                     onclick="LightTableFilter.init()">
-                                                <i class="fa-solid fa-magnifying-glass" style="color: #f8d3ae;"></i>
+                                                <i class="fa-solid fa-magnifying-glass"></i>
                                             </button>
                                         </div>
 
@@ -400,8 +404,9 @@
                     for (let e in res) {
                         let badgeClass = '';
                         let dessertStatusText = '';
-
+                        console.log(res[e].orderStatus)
                         switch (res[e].orderStatus) {
+
                             case 0:
                                 badgeClass = 'badge badge-pill bg-primary';
                                 dessertStatusText = '訂單處理中';
@@ -421,19 +426,16 @@
                         }
 
 
-                        let orderTime = res[e].orderTime;
-
                         let td_html = `
         <tr>
-             <td><a href="#">${res[e].orderId}</a></td>
-                        <td>${res[e].memId}</td>
-                        <td>${orderTime}</td>
+             <td><a href="#">${res[e].orderID}</a></td>
+                        <td>${res[e].memberAC}</td>
+                        <td>${res[e].ordersDate}</td>
                         <td>${res[e].cpOrderTotal}</td>
                        <td><span class="${badgeClass}">${dessertStatusText}</span></td>
                         <td>
 
-
-                            <a onclick="location.href='/orders/edit?ordersId=${res[e].orderId}'" title="編輯訂單資訊">
+<a onclick="location.href='/orders/edit?ordersId=${res[e].orderID}'" title="編輯訂單資訊">
     <i class="fas fa-edit fa-lg" style="color: #f8d3ae;"></i>
 </a>
 

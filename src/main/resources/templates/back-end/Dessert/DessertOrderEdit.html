@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -275,10 +275,10 @@
         <!-- 由此開始 -->
 
         <!-- preloader -->
-        <div class="preloader">
-            <img src="/Dessert/picture/logo.svg" alt="logo">
-            <div class="preloader-icon"></div>
-        </div>
+        <!--        <div class="preloader">-->
+        <!--            <img src="/Dessert/picture/logo.svg" alt="logo">-->
+        <!--            <div class="preloader-icon"></div>-->
+        <!--        </div>-->
         <!-- ./ preloader -->
 
 
@@ -294,14 +294,14 @@
                                 <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
 
                                     <div class="flex-fill">
-                                        <h5 class="mb-3">訂單編號：#<span id="orderId"
+                                        <h5 class="mb-3">訂單編號：#<span id="ordersId"
                                                                          th:text="${orders.getOrderId()}"></span></h5>
 
 
-                                        <button class="btn btn-primary me-2" id="submit">確認修改</button>
+                                        <button class="btn btn-primary me-2" type="button" id="submit">確認修改</button>
                                         <button class="btn btn-outline-danger btn-icon" data-bs-toggle="tooltip"
                                                 title="捨棄修改" id="cancel">
-                                            <i class="fa-solid fa-trash-can" style="color: #ea4444;"></i>
+                                            <i class="fa-regular fa-trash-can" style="color: #ff6e40;"></i>
                                         </button>
 
 
@@ -329,19 +329,17 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label">連絡電話</label>
+                                                    <label class="form-label">電話</label>
                                                     <input type="text" class="form-control" id="receiverPhone"
                                                            th:value="${orders.getReceiverPhone()}">
-
-
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">收件地址</label>
-                                                    <input type="text" class="form-control" id="receiverAddress"
-                                                           th:value="${orders.receiverAddress}">
-
+                                                    <div class="mb-3">
+                                                        <label class="form-label">E-mail</label>
+                                                        <input type="text" class="form-control" id="receiverEmail"
+                                                               th:value="${orders.getReceiverEmail()}">
+                                                    </div>
                                                 </div>
-
 
                                             </div>
 
@@ -354,21 +352,23 @@
 
                                                 </div>
 
+
                                                 <div class="mb-3">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">E-mail</label>
-                                                        <input type="text" class="form-control" id="receiverEmail"
-                                                               value="好像少這藍">
-                                                    </div>
+                                                    <label class="form-label">收件地址</label>
+                                                    <input type="text" class="form-control" id="receiverAddress"
+                                                           th:value="${orders.receiverAddress}">
+
                                                 </div>
+
+
                                                 <div class="mb-3">
                                                     <label class="form-label">訂單狀態</label>
                                                     <select id="orderStatus" class="form-select"
-                                                            th:field="${orders.orderStatus}">
-                                                        <option value="訂單處理中">訂單處理中</option>
-                                                        <option value="運送中">運送中</option>
-                                                        <option value="取消訂單">取消訂單</option>
-                                                        <option value="訂單完成">訂單完成</option>
+                                                            th:value="${orders.orderStatus}">
+                                                        <option value="0">訂單處理中</option>
+                                                        <option value="1">運送中</option>
+                                                        <option value="2">取消訂單</option>
+                                                        <option value="3">訂單完成</option>
                                                     </select>
 
 
@@ -400,19 +400,24 @@
 <script>
     $("#submit").click(function () {
         // 取得需要修改的值
-        let receiverAddress = $("#receiverAddress").val();
+        let ordersId = $("#ordersId").text();
+        let receiverName = $("#receiverName").val();
         // let receiverEmail = $("#receiverEmail").val();
         let receiverPhone = $("#receiverPhone").val();
-        let receiverName = $("#receiverName").val();
         let orderStatus = $("#orderStatus").val();
+        let receiverAddress = $("#receiverAddress").val();
+        let receiverEmail = $("#receiverEmail").val();
 
         // 建立 FormData 物件並加入需要修改的值
         let formData = new FormData();
-        formData.append("receiverAddress", receiverAddress);
+
+        formData.append("ordersId", ordersId);
+        formData.append("receiverName", receiverName);
         // formData.append("receiverEmail", receiverEmail);
         formData.append("receiverPhone", receiverPhone);
-        formData.append("receiverName", receiverName);
         formData.append("orderStatus", orderStatus);
+        formData.append("receiverAddress", receiverAddress);
+        formData.append("receiverEmail", receiverEmail);
 
         // 發送 AJAX 請求
         $.ajax({
@@ -424,6 +429,7 @@
             success: function (data) {
                 console.log(data);
                 alert("修改成功");
+                window.location.href = '/orders/list';
             },
             error: function (data) {
                 console.log(data);

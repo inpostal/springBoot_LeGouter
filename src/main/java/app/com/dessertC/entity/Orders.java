@@ -57,6 +57,7 @@ public class Orders implements Serializable {
     @Column(name = "RECEIVER_NAME")
     private String receiverName;
 
-
+    @Column(name = "RECEIVER_EMAIL")
+    private String receiverEmail;
 }
 
