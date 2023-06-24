@@ -1,12 +1,14 @@
 package app.com.dessert5.vo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Getter
@@ -15,7 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "DESSERT_IMG")
-public class DessertImage {
+public class DessertImage implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +32,5 @@ public class DessertImage {
     @ManyToOne
     @JoinColumn(name = "DESSERT_ID", referencedColumnName = "DESSERT_ID")
     private Dessert dessert;
+
 }

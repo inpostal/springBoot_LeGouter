@@ -20,4 +20,11 @@ public interface DessertImageService {
 
     byte[] findImage3(Integer dessertId);
 
+    String deleteImage0(Integer dessertId);
+
+    String deleteImage1(Integer dessertId);
+
+    String deleteImage2(Integer dessertId);
+
+    String deleteImage3(Integer dessertId);
 }

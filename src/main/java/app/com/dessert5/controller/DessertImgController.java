@@ -6,6 +6,7 @@ import app.com.dessert5.service.DessertImageService;
 import app.com.dessert5.service.DessertService;
 import app.com.dessert5.vo.Dessert;
 import app.com.dessert5.vo.DessertImage;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,5 +65,29 @@ public class DessertImgController {
     public byte[] Image3(@RequestParam Integer dessertId) throws IOException {
         byte[] image3 = dessertImageService.findImage3(dessertId);
         return image3;
+    }
+
+    @DeleteMapping("/delete0")
+    public String deleteImage0(@RequestParam Integer dessertId) {
+        System.out.println("dessertId: " + dessertId);
+        return dessertImageService.deleteImage0(dessertId);
+    }
+
+    @DeleteMapping("/delete1")
+    public String deleteImage1(@RequestParam Integer dessertId) {
+        System.out.println("dessertId: " + dessertId);
+        return dessertImageService.deleteImage1(dessertId);
+    }
+
+    @DeleteMapping("/delete2")
+    public String deleteImage2(@RequestParam Integer dessertId) {
+        System.out.println("dessertId: " + dessertId);
+        return dessertImageService.deleteImage2(dessertId);
+    }
+
+    @DeleteMapping("/delete3")
+    public String deleteImage3(@RequestParam Integer dessertId) {
+        System.out.println("dessertId: " + dessertId);
+        return dessertImageService.deleteImage3(dessertId);
     }
 }

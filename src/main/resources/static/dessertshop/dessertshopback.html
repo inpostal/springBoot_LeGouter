@@ -717,7 +717,7 @@
                     </div>
                 </div>
 
-                <!-- picture upload -->
+                <!-- picture -->
                 <div id="pictureUploadModal" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -826,7 +826,7 @@
 
     <script>
 
-        // GET ALL
+        // GET ALL ----------------------------------------------------------------------------------------------------------------------------------------------------------
         $(document).ready(findAll());
 
         function findAll(){
@@ -867,7 +867,7 @@
         }
 
 
-        // 下架單筆
+        // 下架單筆 ---------------------------------------------------------------------------------------------------------------------------
         $(document).on("click", ".Remove", function(){
             let dessertName = $(this).data("info");
             console.log(dessertName);
@@ -889,7 +889,7 @@
             });
         });
 
-        // 新增一筆
+        // 新增一筆 ----------------------------------------------------------------------------------------------------------------------
         $("#insert").off().on("click", function(e){
             e.preventDefault(); // 阻止默认事件行为
 
@@ -915,7 +915,7 @@
         });
 
 
-        // 查詢一筆
+        // 查詢一筆 -----------------------------------------------------------------------------------------------------------------------------------
         $("#search").on("click", function(){
             let dessertName = $("#searchVal").val();
             console.log(dessertName);
@@ -942,7 +942,7 @@
             })
         })
 
-        // 編輯一筆
+        // 編輯一筆 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         $(document).on("click", ".edit", function() {
             let dessertId = $(this).data('id');
             console.log(dessertId);
@@ -979,7 +979,7 @@
         });
 
 
-        // 上傳圖片
+        // 圖片管理 -------------------------------------------------------------------------------------------------------------------
         $(document).on("click", ".upload", function() {
             let dessertId = $(this).data('id');
             console.log(dessertId);
@@ -992,16 +992,114 @@
 
 
             // 從資料庫顯示圖片0
-            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
+            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
             // 從資料庫顯示圖片1
-            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
+            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
             // 從資料庫顯示圖片2
-            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
+            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
             // 從資料庫顯示圖片3
-            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
+            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
 
 
-            // 上傳圖片
+            // 刪除圖片 -----------------------------------------------------------------------------------------------------------
+            // 刪除圖片0
+            $("#delete0").off().on("click", function(e) {
+                e.preventDefault(); // 防止表单提交
+
+                // 保存当前点击的按钮元素的引用
+                const $currentButton = $(this);
+
+                $.ajax({
+                    url: '/dessert5/delete0?dessertId=' + encodeURIComponent(dessertId),
+                    type: 'DELETE',
+                    success: function(res) {
+                        // 跳出訊息視窗
+                        window.alert(res);
+                        location.reload();
+
+                        // 在成功后解绑当前按钮元素的点击事件
+                        $currentButton.off('click');
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                });
+            });
+
+            // 刪除圖片1
+            $("#delete1").off().on("click", function(e) {
+                e.preventDefault(); // 防止表单提交
+
+                // 保存当前点击的按钮元素的引用
+                const $currentButton = $(this);
+
+                $.ajax({
+                    url: '/dessert5/delete1?dessertId=' + encodeURIComponent(dessertId),
+                    type: 'DELETE',
+                    success: function(res) {
+                        // 跳出訊息視窗
+                        window.alert(res);
+                        location.reload();
+
+                        // 在成功后解绑当前按钮元素的点击事件
+                        $currentButton.off('click');
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                });
+            });
+
+            // 刪除圖片2
+            $("#delete2").off().on("click", function(e) {
+                e.preventDefault(); // 防止表单提交
+
+                // 保存当前点击的按钮元素的引用
+                const $currentButton = $(this);
+
+                $.ajax({
+                    url: '/dessert5/delete2?dessertId=' + encodeURIComponent(dessertId),
+                    type: 'DELETE',
+                    success: function(res) {
+                        // 跳出訊息視窗
+                        window.alert(res);
+                        location.reload();
+
+                        // 在成功后解绑当前按钮元素的点击事件
+                        $currentButton.off('click');
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                });
+            });
+
+            // 刪除圖片3
+            $("#delete3").off().on("click", function(e) {
+                e.preventDefault(); // 防止表单提交
+
+                // 保存当前点击的按钮元素的引用
+                const $currentButton = $(this);
+
+                $.ajax({
+                    url: '/dessert5/delete3?dessertId=' + encodeURIComponent(dessertId),
+                    type: 'DELETE',
+                    success: function(res) {
+                        // 跳出訊息視窗
+                        window.alert(res);
+                        location.reload();
+
+                        // 在成功后解绑当前按钮元素的点击事件
+                        $currentButton.off('click');
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                });
+            });
+
+
+            // 上傳圖片 -----------------------------------------------------------------------------------------------------------------
             $("#picupload").off().on("click", function(e) {
                 e.preventDefault(); // 防止表单提交
 
@@ -1041,6 +1139,7 @@
                     }
                 });
             });
+            //---------------------------------------------------------------------------------------------
 
 
 

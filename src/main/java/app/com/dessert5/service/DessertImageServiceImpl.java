@@ -18,6 +18,9 @@ public class DessertImageServiceImpl implements DessertImageService {
         @Autowired
         private DessertRepository dessertRepository;
 
+        @Autowired
+        private DessertImageRepository dessertImageRepository;
+
 
         public String updateDessertImage(Integer dessertId,
                                          MultipartFile file1,
@@ -65,24 +68,72 @@ public class DessertImageServiceImpl implements DessertImageService {
         @Override
         public byte[] findImage0(Integer dessertId) {
                 Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                if(dessert.getDessertImageMap().get(0) == null){
+                        return null;}
                 return dessert.getDessertImageMap().get(0).getDessertImage();
         }
 
         @Override
         public byte[] findImage1(Integer dessertId) {
                 Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                if(dessert.getDessertImageMap().get(1) == null){
+                        return null;}
                 return dessert.getDessertImageMap().get(1).getDessertImage();
         }
 
         @Override
         public byte[] findImage2(Integer dessertId) {
                 Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                if(dessert.getDessertImageMap().get(2) == null){
+                        return null;}
                 return dessert.getDessertImageMap().get(2).getDessertImage();
         }
 
         @Override
         public byte[] findImage3(Integer dessertId) {
                 Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                if(dessert.getDessertImageMap().get(3) == null){
+                        return null;}
                 return dessert.getDessertImageMap().get(3).getDessertImage();
+        }
+
+        @Override
+        public String deleteImage0(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                dessertImageRepository.deleteByDessertIdAndDessertImageMapKey(dessertId, 0);
+                dessert.getDessertImageMap().put(0, null);
+                dessertRepository.save(dessert);
+
+                return "刪除成功";
+        }
+
+        @Override
+        public String deleteImage1(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                dessertImageRepository.deleteByDessertIdAndDessertImageMapKey(dessertId, 1);
+                dessert.getDessertImageMap().put(1, null);
+                dessertRepository.save(dessert);
+
+                return "刪除成功";
+        }
+
+        @Override
+        public String deleteImage2(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                dessertImageRepository.deleteByDessertIdAndDessertImageMapKey(dessertId, 2);
+                dessert.getDessertImageMap().put(2, null);
+                dessertRepository.save(dessert);
+
+                return "刪除成功";
+        }
+
+        @Override
+        public String deleteImage3(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                dessertImageRepository.deleteByDessertIdAndDessertImageMapKey(dessertId, 3);
+                dessert.getDessertImageMap().put(3, null);
+                dessertRepository.save(dessert);
+
+                return "刪除成功";
         }
 }
