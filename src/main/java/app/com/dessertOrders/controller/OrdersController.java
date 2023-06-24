@@ -1,9 +1,9 @@
-package app.com.dessertC.controller;
+package app.com.dessertOrders.controller;
 
 
-import app.com.dessertC.entity.Orders;
-import app.com.dessertC.entity.OrdersDTO;
-import app.com.dessertC.service.OrdersService;
+import app.com.dessertOrders.entity.Orders;
+import app.com.dessertOrders.entity.OrdersDTO;
+import app.com.dessertOrders.service.OrdersService;
 import app.com.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,9 @@ import java.util.List;
 
 
 /**
- * 控制层
+ * 控制層
  *
- * @author makejava
+ * @author Charlie
  * @since 2023-06-21 10:35:13
  */
 @Controller
@@ -54,10 +54,8 @@ public class OrdersController {
             dto.setOrderStatus(o.getOrderStatus());
             dtoList.add(dto);
         }
-
         return dtoList;
     }
-
 
     @GetMapping("/orders/edit")
     public String editOrdersPage(@RequestParam Integer ordersId, Model model) {
@@ -84,5 +82,7 @@ public class OrdersController {
         ordersService.update(orders);
         return ResponseEntity.ok().body("修改成功");
     }
+
+
 }
 

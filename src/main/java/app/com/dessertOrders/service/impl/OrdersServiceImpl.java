@@ -1,9 +1,9 @@
-package app.com.dessertC.service.impl;
+package app.com.dessertOrders.service.impl;
 
 
-import app.com.dessertC.entity.Orders;
-import app.com.dessertC.repository.OrdersRepository;
-import app.com.dessertC.service.OrdersService;
+import app.com.dessertOrders.entity.Orders;
+import app.com.dessertOrders.repository.OrdersRepository;
+import app.com.dessertOrders.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import java.util.Optional;
 
 
 /**
- * 业务层
+ * 業務層
  *
- * @author makejava
+ * @author Charlie
  * @since 2023-06-21 10:35:16
  */
 @Service

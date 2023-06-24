@@ -1,4 +1,4 @@
-package app.com.dessertC.entity;
+package app.com.dessertOrders.entity;
 
 import lombok.Data;
 
@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (Orders)实体类
+ * (Orders)實體類
  *
- * @author makejava
+ * @author Charlie
  * @since 2023-06-21 10:35:13
  */
 @Data

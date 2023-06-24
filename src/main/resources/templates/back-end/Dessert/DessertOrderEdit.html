@@ -397,6 +397,23 @@
 
 
 <script src="/Course/JS/Jquery.js"></script>
+
+<script>
+    // 確保網頁載入完成後執行程式碼
+    document.addEventListener("DOMContentLoaded", function () {
+        // 取得訂購日期元素
+        let orderTimeElement = document.getElementById("orderTime");
+        // 取得訂購日期值
+        let orderTimeValue = orderTimeElement.value;
+        // 將訂購日期值轉換為日期物件
+        let ordersDate = new Date(orderTimeValue);
+        // 格式化日期並設定時區與12小時制
+        let formattedDate = ordersDate.toLocaleString('zh-TW', {timeZone: 'UTC', hour12: true});
+        // 將格式化後的日期設定回訂購日期元素
+        orderTimeElement.value = formattedDate;
+    });
+</script>
+
 <script>
     $("#submit").click(function () {
         // 取得需要修改的值

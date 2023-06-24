@@ -1,15 +1,15 @@
-package app.com.dessertC.service;
+package app.com.dessertOrders.service;
 
 
-import app.com.dessertC.entity.Orders;
+import app.com.dessertOrders.entity.Orders;
 
 import java.util.List;
 
 
 /**
- * 业务层
+ * 業務層
  *
- * @author makejava
+ * @author Charlie
  * @since 2023-06-21 10:35:15
  */
 public interface OrdersService {
