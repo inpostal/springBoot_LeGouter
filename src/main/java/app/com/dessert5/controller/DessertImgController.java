@@ -48,4 +48,21 @@ public class DessertImgController {
         return image0;
     }
 
+    @GetMapping("/image1")
+    public byte[] Image1(@RequestParam Integer dessertId) throws IOException {
+        byte[] image1 = dessertImageService.findImage1(dessertId);
+        return image1;
+    }
+
+    @GetMapping("/image2")
+    public byte[] Image2(@RequestParam Integer dessertId) throws IOException {
+        byte[] image2 = dessertImageService.findImage2(dessertId);
+        return image2;
+    }
+
+    @GetMapping("/image3")
+    public byte[] Image3(@RequestParam Integer dessertId) throws IOException {
+        byte[] image3 = dessertImageService.findImage3(dessertId);
+        return image3;
+    }
 }

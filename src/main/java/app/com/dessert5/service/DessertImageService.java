@@ -14,10 +14,10 @@ public interface DessertImageService {
 
     byte[] findImage0(Integer dessertId);
 
-//    byte[] findImage1(Integer dessertId);
-//
-//    byte[] findImage2(Integer dessertId);
-//
-//    byte[] findImage3(Integer dessertId);
+    byte[] findImage1(Integer dessertId);
+
+    byte[] findImage2(Integer dessertId);
+
+    byte[] findImage3(Integer dessertId);
 
 }

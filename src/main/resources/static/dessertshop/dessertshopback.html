@@ -724,7 +724,7 @@
 
                             <form enctype="multipart/form-data" id="picform">
                                 <div class="modal-header">						
-                                    <h4 class="modal-title">商品圖片編輯</h4>
+                                    <h4 class="modal-title">商品圖片管理</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                 <div class="modal-body">
@@ -733,14 +733,17 @@
                                     <button class="btn btn-danger" id="delete0" style="position: absolute; right: 35px;">刪除圖片</button>
                                     <br id="img0">
 
+                                    <br>
                                     <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                                     <button class="btn btn-danger" id="delete1" style="position: absolute; right: 35px;">刪除圖片</button>
                                     <br id="img1">
 
+                                    <br>
                                     <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                                     <button class="btn btn-danger" id="delete2" style="position: absolute; right: 35px;">刪除圖片</button>
                                     <br id="img2">
 
+                                    <br>
                                     <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                                     <button class="btn btn-danger" id="delete3" style="position: absolute; right: 35px;">刪除圖片</button>
                                     <br id="img3">
@@ -981,17 +984,21 @@
             let dessertId = $(this).data('id');
             console.log(dessertId);
 
+            // 清除上一次點擊所留下來的.after的img標籤
+            $("#img0").next("img").remove();
+            $("#img1").next("img").remove();
+            $("#img2").next("img").remove();
+            $("#img3").next("img").remove();
+
+
             // 從資料庫顯示圖片0
-            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
-
+            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
             // 從資料庫顯示圖片1
-            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
-
+            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
             // 從資料庫顯示圖片2
-            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
-
+            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
             // 從資料庫顯示圖片3
-            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
+            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;">`)
 
 
             // 上傳圖片

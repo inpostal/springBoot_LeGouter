@@ -67,4 +67,22 @@ public class DessertImageServiceImpl implements DessertImageService {
                 Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
                 return dessert.getDessertImageMap().get(0).getDessertImage();
         }
+
+        @Override
+        public byte[] findImage1(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                return dessert.getDessertImageMap().get(1).getDessertImage();
+        }
+
+        @Override
+        public byte[] findImage2(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                return dessert.getDessertImageMap().get(2).getDessertImage();
+        }
+
+        @Override
+        public byte[] findImage3(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                return dessert.getDessertImageMap().get(3).getDessertImage();
+        }
 }
