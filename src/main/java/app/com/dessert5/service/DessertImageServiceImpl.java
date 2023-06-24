@@ -18,8 +18,6 @@ public class DessertImageServiceImpl implements DessertImageService {
         @Autowired
         private DessertRepository dessertRepository;
 
-        @Autowired
-        private DessertImageRepository dessertImageRepository;
 
         public String updateDessertImage(Integer dessertId,
                                          MultipartFile file1,
@@ -30,7 +28,6 @@ public class DessertImageServiceImpl implements DessertImageService {
                 Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
 
                 // 取得原本存的對應Dessert的圖片陣列
-//                Map<Integer, DessertImage> dessertImageMap = (HashMap<Integer, DessertImage>)dessertRepository.findByDessertId(dessertId);
                 Map<Integer, DessertImage> dessertImageMap = dessert.getDessertImageMap();
 
 
@@ -48,11 +45,11 @@ public class DessertImageServiceImpl implements DessertImageService {
                                 try {
                                         // 把圖片存入新建的DessertImage物件
                                         dessertImage.setDessertImage(files[i].getBytes());
+
                                 } catch (Exception e) {
                                         e.printStackTrace();
                                 }
                                 dessertImage.setDessert(dessert);
-
 
                                 // 把新建的DessertImage物件加入對應的Dessert的圖片集合
                                 dessertImageMap.put(i, dessertImage);
@@ -61,22 +58,13 @@ public class DessertImageServiceImpl implements DessertImageService {
 
                 dessertRepository.save(dessert);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 return "上傳成功";
 
         }
 
+        @Override
+        public byte[] findImage0(Integer dessertId) {
+                Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+                return dessert.getDessertImageMap().get(0).getDessertImage();
+        }
 }

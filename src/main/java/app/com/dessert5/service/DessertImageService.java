@@ -12,5 +12,12 @@ public interface DessertImageService {
                               MultipartFile file3,
                               MultipartFile file4);
 
+    byte[] findImage0(Integer dessertId);
+
+//    byte[] findImage1(Integer dessertId);
+//
+//    byte[] findImage2(Integer dessertId);
+//
+//    byte[] findImage3(Integer dessertId);
 
 }

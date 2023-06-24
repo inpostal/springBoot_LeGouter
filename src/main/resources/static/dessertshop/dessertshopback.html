@@ -566,7 +566,7 @@
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                             <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                            <a href="#pictureUploadModal" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                            <a href="#pictureUploadModal" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
                                         </td>
                                     </tr>
 
@@ -724,7 +724,7 @@
 
                             <form enctype="multipart/form-data" id="picform">
                                 <div class="modal-header">						
-                                    <h4 class="modal-title">商品圖片上傳</h4>
+                                    <h4 class="modal-title">商品圖片編輯</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                 <div class="modal-body">
@@ -732,22 +732,18 @@
                                     <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                                     <button class="btn btn-danger" id="delete0" style="position: absolute; right: 35px;">刪除圖片</button>
                                     <br id="img0">
-                                    <img src="https://github.com/weichen9715/catpic/blob/main/smudge_lord_60314581_2452933891436033_1050250552612724249_n.jpg?raw=true">
 
-
-                                    <input id="product_img_1" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                                     <button class="btn btn-danger" id="delete1" style="position: absolute; right: 35px;">刪除圖片</button>
-                                    <br>
+                                    <br id="img1">
 
-
-                                    <input id="product_img_2" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                                     <button class="btn btn-danger" id="delete2" style="position: absolute; right: 35px;">刪除圖片</button>
-                                    <br>
+                                    <br id="img2">
 
-
-                                    <input id="product_img_3" type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                    <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                                     <button class="btn btn-danger" id="delete3" style="position: absolute; right: 35px;">刪除圖片</button>
-                                    <br>
+                                    <br id="img3">
 
 
                                     
@@ -854,7 +850,7 @@
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -934,7 +930,7 @@
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">上傳圖片</span></a>
+                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -980,29 +976,25 @@
         });
 
 
-        // 上傳圖片0
+        // 上傳圖片
         $(document).on("click", ".upload", function() {
             let dessertId = $(this).data('id');
             console.log(dessertId);
 
-            // 顯示圖片的部分
-            $.ajax({
-                url: '/dessert5/image0?dessertId=' + encodeURIComponent(dessertId),
-                type: 'GET',
-                success: function(res) {
-                    console.log(res);
-                    $("#img0").after(`<img src="${res}" alt="圖片顯示" style="width: 100px; height: 100px;"><br>`)
+            // 從資料庫顯示圖片0
+            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
+
+            // 從資料庫顯示圖片1
+            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
+
+            // 從資料庫顯示圖片2
+            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
+
+            // 從資料庫顯示圖片3
+            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="圖片顯示" style="width: 640px;"><br>`)
 
 
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    console.error(xhr);
-                }
-            });
-
-
-
-            // 上傳的部分
+            // 上傳圖片
             $("#picupload").off().on("click", function(e) {
                 e.preventDefault(); // 防止表单提交
 

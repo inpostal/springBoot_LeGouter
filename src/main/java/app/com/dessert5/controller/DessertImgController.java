@@ -40,25 +40,12 @@ public class DessertImgController {
         System.out.println("file4: " + file4);
 
         return dessertImageService.updateDessertImage(dessertId, file1, file2, file3, file4);
+    }
 
-
-//        try {
-//            Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
-//            if (dessert != null) {
-//                for (MultipartFile image : images) {
-//                    DessertImage dessertImage = new DessertImage();
-//                    dessertImage.setDessertImg(image.getBytes());
-//                    dessertImage.setDessert(dessert);
-//                    dessertImageRepository.save(dessertImage);
-//                }
-//                return ResponseEntity.ok("Images uploaded successfully.");
-//
-//            } else {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dessert not found.");
-//            }
-//        } catch (IOException e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading images.");
-//        }
+    @GetMapping("/image0")
+    public byte[] Image0(@RequestParam Integer dessertId) throws IOException {
+        byte[] image0 = dessertImageService.findImage0(dessertId);
+        return image0;
     }
 
 }
