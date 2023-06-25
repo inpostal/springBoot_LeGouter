@@ -26,14 +26,14 @@ public class OrdersServiceImpl implements OrdersService {
     @Autowired
     private OrdersRepository ordersRepository;
 
+    @Autowired
+    private MemberService memberService;
+
     @Override
     public Orders getOrdersById(Integer ordersId) {
         Optional<Orders> orders = ordersRepository.findById(ordersId);
         return orders.get();
     }
-
-    @Autowired
-    private MemberService memberService;
 
     @Override
     public List<OrdersDTO> getAllOrdersDTO() {

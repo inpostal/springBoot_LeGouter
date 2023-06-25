@@ -27,15 +27,13 @@ public class OrdersController {
 
     @Autowired
     private OrdersService ordersService;
-//    @Autowired
-//    private MemberService memberService;
 
 
     @GetMapping("/orders/list")
     public String getAllOrders() {
         return "/back-end/Dessert/DessertOrderManagement";
     }
-
+    
     @GetMapping("/orders")
     @ResponseBody
     public List<OrdersDTO> getAll() {
