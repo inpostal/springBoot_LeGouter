@@ -23,13 +23,7 @@ public class Orders implements Serializable {
     @Column(name = "ORDER_ID")
     private Integer orderId;
 
-    //    @ManyToOne
-//    @JoinColumn(name = "MEM_ID")
-//    private Member member;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "CP_ID")
-//    private Coupon coupon;
+
     @Column(name = "MEM_ID")
     private Integer memId;
 

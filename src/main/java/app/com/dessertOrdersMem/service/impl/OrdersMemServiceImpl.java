@@ -1,6 +1,8 @@
 package app.com.dessertOrdersMem.service.impl;
 
 
+import app.com.dessertOrderDetail.entity.OrderDetailDTO;
+import app.com.dessertOrderDetail.service.OrderDetailService;
 import app.com.dessertOrdersMem.entity.OrdersMem;
 import app.com.dessertOrdersMem.repository.OrdersMemRepository;
 import app.com.dessertOrdersMem.service.OrdersMemService;
@@ -26,6 +28,9 @@ public class OrdersMemServiceImpl implements OrdersMemService {
     @Autowired
     private OrdersMemRepository ordersMemRepository;
 
+    @Autowired
+    private OrderDetailService orderDetailService;
+
     public List<OrdersMem> getAllOrdersByMemberId(Integer memId) {
         return ordersMemRepository.findByMemId(memId);
     }
@@ -33,4 +38,9 @@ public class OrdersMemServiceImpl implements OrdersMemService {
     public String getMemberAccountById(Integer memId) {
         return memberRepository.findById(memId).get().getMemberAccount();
     }
+
+    public List<OrderDetailDTO> getDessertDetails(Integer orderId) {
+        return orderDetailService.getOrderDetailDTOList(orderId);
+    }
+
 }

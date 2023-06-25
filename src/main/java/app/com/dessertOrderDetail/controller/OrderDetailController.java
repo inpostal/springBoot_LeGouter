@@ -1,6 +1,5 @@
 package app.com.dessertOrderDetail.controller;
 
-import app.com.dessert5.service.DessertService;
 import app.com.dessertOrderDetail.entity.OrderDetailDTO;
 import app.com.dessertOrderDetail.service.OrderDetailService;
 import app.com.dessertOrders.entity.Orders;
@@ -26,8 +25,6 @@ public class OrderDetailController {
     private OrderDetailService orderDetailService;
     @Autowired
     private OrdersService ordersService;
-    @Autowired
-    private DessertService dessertService;
 
 
     @GetMapping("/orderDetail/list")
@@ -35,7 +32,7 @@ public class OrderDetailController {
         return "/back-end/Dessert/DessertOrderDetail";
     }
 
-  
+
     @GetMapping("/orderDetail/get")
     public String getOrderDetail(@RequestParam Integer orderId, Model model) {
         List<OrderDetailDTO> orderDetailDTOList = orderDetailService.getOrderDetailDTOList(orderId);

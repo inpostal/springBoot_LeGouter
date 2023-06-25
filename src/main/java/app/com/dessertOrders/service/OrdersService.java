@@ -16,7 +16,6 @@ import java.util.List;
 public interface OrdersService {
     List<OrdersDTO> getAllOrdersDTO();
 
-    OrdersDTO getOrdersDTOById(Integer ordersId);
 
     void updateOrders(Integer ordersId, String receiverName, String receiverAddress, String receiverPhone,
                       Integer orderStatus, String receiverEmail);

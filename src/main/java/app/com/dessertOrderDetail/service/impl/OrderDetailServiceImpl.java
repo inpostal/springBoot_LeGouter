@@ -32,11 +32,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Autowired
     private DessertImageRepository dessertImageRepository;
 
-    @Override
-    public List<OrderDetail> getAllOrderDetail() {
-        List<OrderDetail> all = orderDetailRepository.findAll();
-        return all;
-    }
 
     @Override
     public List<OrderDetailDTO> getOrderDetailDTOList(Integer orderId) {

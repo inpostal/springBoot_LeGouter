@@ -1,6 +1,8 @@
 package app.com.dessertOrdersMem.controller;
 
 
+import app.com.dessertOrderDetail.entity.OrderDetailDTO;
+import app.com.dessertOrderDetail.service.impl.OrderDetailServiceImpl;
 import app.com.dessertOrdersMem.entity.OrdersMem;
 import app.com.dessertOrdersMem.service.OrdersMemService;
 import app.com.member.repository.MemberRepository;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,6 +29,8 @@ public class OrdersMemController {
     private OrdersMemService ordersMemService;
     @Autowired
     private MemberRepository memberRepository; // 替换为您的会员存储库
+    @Autowired
+    private OrderDetailServiceImpl orderDetailService;
 
 
     @GetMapping("/ordersMem/list/{memId}")
@@ -34,8 +39,21 @@ public class OrdersMemController {
         model.addAttribute("orders", orders);
         String memAccount = ordersMemService.getMemberAccountById(memId);
         model.addAttribute("memAccount", memAccount);
+
+
+        List<OrderDetailDTO> dessertDetailsList = new ArrayList<>();
+        for (OrdersMem order : orders) {
+            List<OrderDetailDTO> dessertDetails = ordersMemService.getDessertDetails(order.getOrderId());
+            dessertDetailsList.addAll(dessertDetails);
+        }
+        model.addAttribute("dessertDetailsList", dessertDetailsList);
+
         return "/front-end/Dessert/DessertOrdersMem";
     }
 
+
 }
+
+
+
 

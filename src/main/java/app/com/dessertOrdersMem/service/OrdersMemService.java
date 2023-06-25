@@ -1,6 +1,7 @@
 package app.com.dessertOrdersMem.service;
 
 
+import app.com.dessertOrderDetail.entity.OrderDetailDTO;
 import app.com.dessertOrdersMem.entity.OrdersMem;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface OrdersMemService {
     List<OrdersMem> getAllOrdersByMemberId(Integer memId);
 
     String getMemberAccountById(Integer memId);
+
+    List<OrderDetailDTO> getDessertDetails(Integer orderId);
 
 }
 

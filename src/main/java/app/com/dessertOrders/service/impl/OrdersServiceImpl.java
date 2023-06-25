@@ -53,20 +53,6 @@ public class OrdersServiceImpl implements OrdersService {
         return dtoList;
     }
 
-    @Override
-    public OrdersDTO getOrdersDTOById(Integer ordersId) {
-        Orders orders = ordersRepository.findById(ordersId).orElse(null);
-        if (orders != null) {
-            OrdersDTO dto = new OrdersDTO();
-            dto.setOrderID(orders.getOrderId());
-            dto.setMemberAC(memberService.getMemberById(orders.getMemId()).getMemberAccount());
-            dto.setOrdersDate(orders.getOrderTime());
-            dto.setCpOrderTotal(orders.getCpOrderTotal());
-            dto.setOrderStatus(orders.getOrderStatus());
-            return dto;
-        }
-        return null;
-    }
 
     @Override
     public void updateOrders(Integer ordersId, String receiverName, String receiverAddress, String receiverPhone,

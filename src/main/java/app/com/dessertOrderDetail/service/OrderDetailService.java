@@ -1,6 +1,5 @@
 package app.com.dessertOrderDetail.service;
 
-import app.com.dessertOrderDetail.entity.OrderDetail;
 import app.com.dessertOrderDetail.entity.OrderDetailDTO;
 
 import java.util.List;
@@ -13,10 +12,6 @@ import java.util.List;
  * @Create 2023/6/24 AM 12:20
  */
 public interface OrderDetailService {
-
-
-    List<OrderDetail> getAllOrderDetail();
-
 
     List<OrderDetailDTO> getOrderDetailDTOList(Integer orderId);
 }
