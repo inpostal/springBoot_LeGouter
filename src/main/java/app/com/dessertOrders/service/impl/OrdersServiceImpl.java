@@ -2,11 +2,14 @@ package app.com.dessertOrders.service.impl;
 
 
 import app.com.dessertOrders.entity.Orders;
+import app.com.dessertOrders.entity.OrdersDTO;
 import app.com.dessertOrders.repository.OrdersRepository;
 import app.com.dessertOrders.service.OrdersService;
+import app.com.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,22 +27,58 @@ public class OrdersServiceImpl implements OrdersService {
     private OrdersRepository ordersRepository;
 
     @Override
-    public List<Orders> getAllOrders() {
-        List<Orders> all = ordersRepository.findAll();
-        return all;
-    }
-
-    @Override
     public Orders getOrdersById(Integer ordersId) {
         Optional<Orders> orders = ordersRepository.findById(ordersId);
         return orders.get();
     }
 
+    @Autowired
+    private MemberService memberService;
+
     @Override
-    public void update(Orders orders) {
-        ordersRepository.save(orders);
+    public List<OrdersDTO> getAllOrdersDTO() {
+        List<Orders> list = ordersRepository.findAll();
+        List<OrdersDTO> dtoList = new ArrayList<>();
+
+        for (Orders o : list) {
+            OrdersDTO dto = new OrdersDTO();
+            dto.setOrderID(o.getOrderId());
+            dto.setMemberAC(memberService.getMemberById(o.getMemId()).getMemberAccount());
+            dto.setOrdersDate(o.getOrderTime());
+            dto.setCpOrderTotal(o.getCpOrderTotal());
+            dto.setOrderStatus(o.getOrderStatus());
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 
+    @Override
+    public OrdersDTO getOrdersDTOById(Integer ordersId) {
+        Orders orders = ordersRepository.findById(ordersId).orElse(null);
+        if (orders != null) {
+            OrdersDTO dto = new OrdersDTO();
+            dto.setOrderID(orders.getOrderId());
+            dto.setMemberAC(memberService.getMemberById(orders.getMemId()).getMemberAccount());
+            dto.setOrdersDate(orders.getOrderTime());
+            dto.setCpOrderTotal(orders.getCpOrderTotal());
+            dto.setOrderStatus(orders.getOrderStatus());
+            return dto;
+        }
+        return null;
+    }
 
+    @Override
+    public void updateOrders(Integer ordersId, String receiverName, String receiverAddress, String receiverPhone,
+                             Integer orderStatus, String receiverEmail) {
+        Orders orders = ordersRepository.findById(ordersId).orElse(null);
+        if (orders != null) {
+            orders.setReceiverName(receiverName);
+            orders.setReceiverAddress(receiverAddress);
+            orders.setReceiverPhone(receiverPhone);
+            orders.setOrderStatus(orderStatus);
+            orders.setReceiverEmail(receiverEmail);
+            ordersRepository.save(orders);
+        }
+    }
 }
-
