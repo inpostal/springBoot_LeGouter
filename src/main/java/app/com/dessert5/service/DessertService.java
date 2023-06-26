@@ -44,10 +44,10 @@ public class DessertService {
         return dessert;
     }
 
-//    public Dessert findByPK(Integer dessertId){
-//        Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
-//        return dessert;
-//    }
+    public Dessert findById(Integer dessertId){
+        Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
+        return dessert;
+    }
 
     public String update(Integer dessertId, Dessert dessert){
 
