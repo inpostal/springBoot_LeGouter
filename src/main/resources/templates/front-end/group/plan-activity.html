@@ -210,8 +210,8 @@
                         </label>
                         <textarea class="textarea" name="groupActivityContent" id="tarva" cols="50" rows="8"
                             maxlength="300" placeholder="輸入團購活動內容" required></textarea>
-                        <label> 團購開始日期：<input type="date" name="groupOrderStar" id="starva" required> </label>
-                        <label> 團購結束日期：<input type="date" name="groupOrderEnd" id="endva" max="" required> </label>
+                        <label> 團購開始日期：<input type="datetime-local" name="groupOrderStar" id="starva" required> </label>
+                        <label> 團購結束日期：<input type="datetime-local" name="groupOrderEnd" id="endva" max="" required> </label>
                         <p>選擇方案:<select name="groupOrderMin" id="minva" class="">
                                 <option value="200" selected>方案A</option>
                                 <option value="400">方案B</option>
@@ -398,6 +398,13 @@
                 break;}
             }
             console.log("switch完測試" + groupODis);
+            let starvaobj = new Date($("#starva").val());
+            let endvaobj = new Date($("#endva").val());
+            let starva = starvaobj.getFullYear() + "-" + (starvaobj.getMonth() + 1) + "-" + starvaobj.getDate() + " " + starvaobj.getHours() + ":" + starvaobj.getMinutes() + ":" + starvaobj.getSeconds();
+            let endva = endvaobj.getFullYear() + "-" + (endvaobj.getMonth() + 1) + "-" + endvaobj.getDate() + " " + endvaobj.getHours() + ":" + endvaobj.getMinutes() + ":" + endvaobj.getSeconds();
+            console.log(starvaobj.getTime);
+            console.log("測試starva的資料" + starva);
+            console.log("測試endva的資料" + endva);
 
             $.ajax({
                 url: "/groupActivity/inser",
@@ -406,8 +413,8 @@
                 data: JSON.stringify({
                     groupProductId: $("#selectva").val(),
                     groupActivityContent: $("#tarva").val(),
-                    groupOrderStar: $("#starva").val(),
-                    groupOrderEnd: $("#endva").val(),
+                    groupOrderStar: starva,
+                    groupOrderEnd: endva,
                     groupOrderMin: $("#minva").val(),
                     groupName: $("#nameva").val(),
                     groupOrderDiscount: groupODis

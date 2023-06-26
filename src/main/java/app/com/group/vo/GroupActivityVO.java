@@ -10,6 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -34,8 +39,12 @@ public class GroupActivityVO {
 	@Column (name = "GROUP_ACTIVITY_CONTENT")
 	private String groupActivityContent; //內容
 	@Column (name = "GROUP_ORDER_STAR")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date groupOrderStar; //開始日期
 	@Column (name = "GROUP_ORDER_END")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date groupOrderEnd; //結束日期
 	@Column (name = "GROUP_ORDER_MIN")
 	private Integer groupOrderMin; //達標數

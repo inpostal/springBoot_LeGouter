@@ -166,6 +166,8 @@ public class GroupRestContreller {
 	//前台團購主專區
 	@PostMapping("/groupActivity/inser")
 	public Map<String, Boolean> inserActivity(@RequestBody GroupActivityDTO groupActivityDTO) {
+		System.out.println("開始日期" + groupActivityDTO.getGroupOrderStar());
+		System.out.println("結束日期" + groupActivityDTO.getGroupOrderEnd());
 		Boolean success = groupActivityService.inserActivitys(groupActivityDTO);
 		 Map<String, Boolean> response = new HashMap<>();
 		 response.put("success", success);
