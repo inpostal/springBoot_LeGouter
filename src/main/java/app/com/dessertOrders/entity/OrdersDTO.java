@@ -2,7 +2,7 @@ package app.com.dessertOrders.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 
 /**
@@ -16,7 +16,7 @@ import java.util.Date;
 public class OrdersDTO {
     private Integer orderID;
     private String memberAC;
-    private Date ordersDate;
+    private Timestamp ordersDate;
     private Integer cpOrderTotal;
     private Integer orderStatus;
     private Integer orderId;

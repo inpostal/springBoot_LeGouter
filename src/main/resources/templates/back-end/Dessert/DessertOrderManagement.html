@@ -258,7 +258,6 @@
                         let badgeClass = '';
                         let dessertStatusText = '';
                         switch (res[e].orderStatus) {
-
                             case 0:
                                 badgeClass = 'badge badge-pill bg-primary';
                                 dessertStatusText = '訂單處理中';
@@ -278,30 +277,24 @@
                         }
 
                         let ordersDate = new Date(res[e].ordersDate);
-                        let formattedDate = ordersDate.toLocaleString('zh-TW', {timeZone: 'UTC', hour12: true});
-
+                        let formattedDate = ordersDate.toLocaleString(undefined, {hour12: true});
 
                         let td_html = `
-        <tr>
-             <td><a href="#">${res[e].orderID}</a></td>
+                    <tr>
+                        <td><a href="#">${res[e].orderID}</a></td>
                         <td>${res[e].memberAC}</td>
                         <td>${formattedDate}</td>
                         <td>${res[e].cpOrderTotal}</td>
-                       <td><span class="${badgeClass}">${dessertStatusText}</span></td>
+                        <td><span class="${badgeClass}">${dessertStatusText}</span></td>
                         <td>
-
-<a onclick="location.href='/orders/edit?ordersId=${res[e].orderID}'" title="編輯訂單資訊">
-    <i class="fas fa-edit fa-lg" style="color: #f8d3ae;"></i>
-</a>
-
-
-<a onclick="location.href='/orderDetail/get?orderId=${res[e].orderID}'" title="詳細訂單資訊">
-    <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
-</a>
-
-
-
-                        </td> </tr>`;
+                            <a onclick="location.href='/orders/edit?ordersId=${res[e].orderID}'" title="編輯訂單資訊">
+                                <i class="fas fa-edit fa-lg" style="color: #f8d3ae;"></i>
+                            </a>
+                            <a onclick="location.href='/orderDetail/get?orderId=${res[e].orderID}'" title="詳細訂單資訊">
+                                <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae;"></i>
+                            </a>
+                        </td>
+                    </tr>`;
                         th_html += td_html;
                     }
                     $("#dessertOrders").html(th_html);
@@ -311,6 +304,8 @@
                 }
             });
         });
+    </script>
+
     </script>
     <script src="/Conponents/back_end.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

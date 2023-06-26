@@ -27,21 +27,24 @@ public class OrderDetailController {
     private OrdersService ordersService;
 
 
-    @GetMapping("/orderDetail/list")
-    public String getAllOrderDetail() {
-        return "/back-end/Dessert/DessertOrderDetail";
+    @GetMapping("/orderDetail/get")
+    public String getBackEndOrderDetail(@RequestParam Integer orderId, Model model) {
+        return getOrderDetail(orderId, model, "/back-end/Dessert/DessertOrderDetail");
     }
 
+    @GetMapping("/memOrderDetail/get")
+    public String getFrontEndOrderDetail(@RequestParam Integer orderId, Model model) {
+        return getOrderDetail(orderId, model, "/front-end/Dessert/DessertMemOrderDetail");
+    }
 
-    @GetMapping("/orderDetail/get")
-    public String getOrderDetail(@RequestParam Integer orderId, Model model) {
+    private String getOrderDetail(Integer orderId, Model model, String viewName) {
         List<OrderDetailDTO> orderDetailDTOList = orderDetailService.getOrderDetailDTOList(orderId);
         Orders orders = ordersService.getOrdersById(orderId);
 
         model.addAttribute("orderDetailList", orderDetailDTOList);
         model.addAttribute("orders", orders);
 
-        return "/back-end/Dessert/DessertOrderDetail";
+        return viewName;
     }
 
 

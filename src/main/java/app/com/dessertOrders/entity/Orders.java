@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * (Orders)實體類
@@ -40,7 +40,7 @@ public class Orders implements Serializable {
     private Integer orderStatus = 0;
 
     @Column(name = "ORDER_TIME", insertable = false)
-    private Date orderTime;
+    private Timestamp orderTime;
 
     @Column(name = "RECEIVER_PHONE")
     private String receiverPhone;
