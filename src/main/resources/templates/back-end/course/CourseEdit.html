@@ -73,7 +73,6 @@
     </style>
 
 
-
 </head>
 
 <body>
@@ -295,7 +294,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h3 class="text-center">
-                            課程內容修改
+                            <i class="bi bi-telephone"></i>課程內容修改
                         </h3>
                     </div>
                 </div>
@@ -304,12 +303,11 @@
                         <div class="col-xl-6 col-xxl-6 col-lg-6">
                             <div class="card">
                                 <div class="card-header">
-
                                     <h4 class="card-title">課程內容</h4>
+                                    <a style="display: none" id="course-status"
+                                       th:text="${course.getCourseStatus()}"></a>
                                     <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>
-                                    <button type="button"
-                                            class="btn btn-danger" id="delete">下架課程
-                                    </button>
+
                                 </div>
 
                                 <div class="card-body">
@@ -318,35 +316,42 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程圖片</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" class="dropify" data-default-file="" id="courseImg">
-                                                    <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}" th:alt="${course.getCourseName()}" width="100" height="100" alt="">
+                                                    <input type="file" class="dropify" data-default-file=""
+                                                           id="courseImg">
+                                                    <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"
+                                                         th:alt="${course.getCourseName()}" width="100" height="100"
+                                                         alt="">
 
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程名稱</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control input-default" name="courseName" placeholder="課程名稱" id="courseName" th:value="${course.getCourseName()}">
+                                                    <input type="text" class="form-control input-default"
+                                                           name="courseName" placeholder="課程名稱" id="courseName"
+                                                           th:value="${course.getCourseName()}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程售價</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control input-default" name="coursePrice" placeholder="課程售價" id="coursePrice" th:value="${course.getCoursePrice()}">
+                                                    <input type="text" class="form-control input-default"
+                                                           name="coursePrice" placeholder="課程售價" id="coursePrice"
+                                                           th:value="${course.getCoursePrice()}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程介紹</label>
                                                 <div class="col-sm-10">
-                                                    <textarea class="form-control" rows="4" name="courseContent" id="courseContent" th:text="${course.getCourseContent()}"></textarea>
+                                                    <textarea class="form-control" rows="4" name="courseContent"
+                                                              id="courseContent"
+                                                              th:text="${course.getCourseContent()}"></textarea>
                                                 </div>
                                             </div>
                                         </form>
                                         <div class="card-header">
-                                            <h4 class="card-title">影片上傳</h4>
-                                            <button id="addVideo" type="button" class="btn btn-sm btn-warning"
-                                                    value="新增影片">新增影片
-                                            </button>
+                                            <h4 class="card-title">影片區域</h4>
+
                                         </div>
                                         <form>
                                             <div class="card-body">
@@ -356,11 +361,44 @@
                                                     <tr>
                                                         <td>試看</td>
                                                         <td>試看影片</td>
-                                                        <td><input type="file" class="dropify"
-                                                                   data-default-file=""></td>
-
+                                                        <td>
+                                                            <video width="320" height="240" controls
+                                                                   th:each="v:${list}">
+                                                                <source th:src="@{'/course/'+${v.getCourseId()}+'/'+${v.getCourseImgId()}}"
+                                                                        type="video/mp4">
+                                                            </video>
+                                                        </td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo1"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo2"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo3"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo4"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo5"></td>
+                                                    </tr>
 
                                                     </tbody>
                                                 </table>
@@ -373,7 +411,7 @@
                                                                     class="btn btn-primary" id="submit">送出
                                                             </button>
                                                             <button type="button"
-                                                                    class="btn btn-light"id="cancel">取消
+                                                                    class="btn btn-light" id="cancel">取消
                                                             </button>
                                                         </div>
                                                     </div>
@@ -397,7 +435,6 @@
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
-
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 
@@ -409,6 +446,7 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
 
 <script>
 
@@ -442,26 +480,8 @@
         })
     })
 
-    $('#cancel').on('click', function() {
-        location.href = '/course/allcrs'; // 在此处替换为你的目标 URL
-    });
-
-
-    $("#delete").click(function () {
-        let courseId = $("#course-id").text(); // 你需要在某处获取要删除的课程的 ID，这是一个示例
-        $.ajax({
-            url: "/course/delete/" + courseId,
-            type: "DELETE",
-            success: function (data) {
-                console.log(data);
-                alert("删除成功");
-                location.href = '/course/allcrs';// 重新加载页面，以便从列表中删除该课程
-            },
-            error: function (data) {
-                console.log(data);
-                alert("删除失败");
-            }
-        });
+    $('#cancel').on('click', function () {
+        location.href = '/course/allcrs';
     });
 
 

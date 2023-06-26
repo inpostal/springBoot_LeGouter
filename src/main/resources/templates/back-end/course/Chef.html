@@ -2,6 +2,7 @@
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,7 +72,6 @@
             color: #1E1916;
         }
     </style>
-
 
 
 </head>
@@ -161,7 +161,8 @@
                                 <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">即時客服</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">輪播圖管理</span></a>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">輪播圖管理</span></a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link px-4"> <span
@@ -296,6 +297,8 @@
             <div class="row page-titles mx-0">
                 <div class="welcome-text">
                     <h4>主廚資訊</h4>
+                    <a style="display: none" id="chef-Id" th:text="${chef.getChefId()}"></a>
+
                 </div>
             </div>
 
@@ -305,45 +308,41 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
-                                <div class="text-center p-3 overlay-box"
-                                     style="background-image: url(images/big/img1.jpg);">
+                                <div class="text-center p-3 overlay-box">
                                     <div class="profile-photo">
-                                        <img src="img\evelyn-img\baobao.jpg" width="300" class="img-fluid rounded"
+                                        <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" width="300"
+                                             class="img-fluid rounded"
                                              alt="">
                                     </div>
-                                    <h3 class="mt-3 mb-e">Bao Bao</h3>
+                                    <h3 class="mt-3 mb-e" th:text="${chef.getEmpName()}"></h3>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <strong>會員身分</strong>
-                                            <span class="mb-0">99999999</span>
+                                            <strong>員工編號</strong>
+                                            <span class="mb-0" th:text="${chef.getEmpId()}"></span>
                                         </li>
                                         <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <strong>會員帳號</strong>
-                                            <span class="mb-0">fsfsfdsfs</span>
+                                            <strong>員工帳號</strong>
+                                            <span class="mb-0" th:text="${chef.getEmpAccount()}"></span>
                                         </li>
                                         <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <strong>性別</strong>
-                                            <span class="mb-0">N</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <strong>已上傳課程數</strong>
-                                            <span class="mb-0">2</span>
+                                            <strong>員工身分</strong>
+                                            <span class="mb-0" th:text="${chef.getEmpClassify()}"></span>
                                         </li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
+
                     </div>
                 </div>
-                <div class="col-xl-9 col-xxl-8 col-lg-8">
+                <div class=" col-xl-9 col-xxl-8 col-lg-8">
                     <div class="card">
                         <div class="card-body">
                             <div class="profile-tab">
@@ -353,10 +352,7 @@
                                             <div class="profile-about-me">
                                                 <div class="pt-4 border-bottom-1 pb-4">
                                                     <h4 class="text-primary mb-4">自我介紹</h4>
-                                                    <p>我是法國藍帶甜點主廚Bao Bao。憑藉著熱情和豐富的經驗，
-                                                        我致力於創作美味且精緻的法式甜點。我將法國糕點傳統與現代技術結合，
-                                                        追求糕點藝術的卓越。我的作品獲得了多個國際烘焙大賽的肯定，
-                                                        並希望將這份熱愛與你分享。</p>
+                                                    <p id="chefInfoText" th:text="${chef.getChefInfo()}"></p>
                                                 </div>
                                             </div>
 
@@ -364,39 +360,33 @@
                                                 <h4 class="text-primary mb-4">更多資訊</h4>
                                                 <div class="row mb-4">
                                                     <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                        <h5 class="f-w-500">電話 <span class="pull-right">:</span>
+                                                        <h5 class="f-w-500">電話 <span
+                                                                class="pull-right">:</span>
                                                         </h5>
                                                     </div>
                                                     <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                        <span>0912121212</span>
+                                                        <span th:text="${chef.getEmpPhone()}"></span>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-4">
                                                     <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                        <h5 class="f-w-500">信箱 <span class="pull-right">:</span>
+                                                        <h5 class="f-w-500">信箱 <span
+                                                                class="pull-right">:</span>
                                                         </h5>
                                                     </div>
                                                     <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                        <span>1111@mail</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                        <h5 class="f-w-500">生日 <span class="pull-right">:</span>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                        <span>000000</span>
+                                                        <span th:text="${chef.getEmpMail()}"></span>
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-4">
                                                     <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                        <h5 class="f-w-500">入職日 <span class="pull-right">:</span>
+                                                        <h5 class="f-w-500">入職日 <span
+                                                                class="pull-right">:</span>
                                                         </h5>
                                                     </div>
                                                     <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                        <span>1111.03.03</span>
+                                                        <span th:text="${chef.getEmpHireDate()}"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -408,8 +398,8 @@
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <button type="button" class="btn btn-primary">修改</button>
-                    <button type="button" class="btn btn-secondary">確認</button>
+                    <button id="editButton" type="button" class="btn btn-primary">修改</button>
+                    <button id="confirmButton" type="button" class="btn btn-secondary">確認</button>
                 </div>
             </div>
         </div>
@@ -427,36 +417,63 @@
 </div>
 
 
-
-
-
-
-
 <!-- import js -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 
-<!-- import font awesome -->
-<script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- evelyn jquery -->
-<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
-        integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
 <script>
-    $(function () {
+    let editing = false;
 
-        $(".ebtn").on("click", function () {
-            console.log("sss")
-            //hide all sections
-            $(".content-section").hide();
-            //show the section depending on which button was clicked
-            $("#" + $(this).attr("data-section")).show();
-        });
-
+    $('#editButton').click(function () {
+        if (editing) {
+            // 如果当前在编辑模式，点击按钮则取消编辑
+            let chefInfo = $('#chefInfoText').val();
+            $('#chefInfoText').replaceWith('<p id="chefInfoText">' + chefInfo + '</p>');
+            $(this).text('修改'); // 改变按钮文字为"修改"
+        } else {
+            // 如果当前不在编辑模式，点击按钮则开始编辑
+            let chefInfo = $('#chefInfoText').text();
+            $('#chefInfoText').replaceWith('<textarea id="chefInfoText" style="height: 130px;width: 950px;">' + chefInfo + '</textarea>');
+            $(this).text('取消'); // 改变按钮文字为"取消"
+        }
+        editing = !editing; // 切换编辑状态
     });
+
+    $('#confirmButton').click(function () {
+        console.log("SSSSSS")
+        if (editing) {
+            let chefInfo = $('#chefInfoText').val();
+            let chefId = $("#chef-Id").text();
+            $.ajax({
+                url: '/course/updateChefInfo',
+                type: 'POST',
+                data: {chefId: chefId, chefInfo: chefInfo},
+                success: function (response) {
+                    // 处理服务器响应
+                    alert("修改成功！");
+                    $('#chefInfoText').replaceWith('<p id="chefInfoText">' + chefInfo + '</p>');
+                    $('#editButton').text('修改'); // 改变按钮文字为"修改"
+                    editing = false; // 切换到非编辑状态
+                },
+                error: function (error) {
+                    // 处理错误情况
+                    console.log('Error:', error);
+                }
+            });
+        }
+    });
+
+
 </script>
 
 </body>
 </html>
+
+<!--<li class="list-group-item d-flex px-0 justify-content-between">-->
+<!--    <strong>上傳課程數</strong>-->
+<!--    <span class="mb-0">fsfsfdsfs</span>-->
+<!--</li>-->
