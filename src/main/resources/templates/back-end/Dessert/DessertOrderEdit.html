@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> 甜點訂單修改 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="back-nav-bar.css">  -->
+
+    <!-- import font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="/Dessert/CSS/css2.css" rel="stylesheet">
+
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-icons.min.css" type="text/css">
+    <!-- Bootstrap Docs -->
+    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-docs.css" type="text/css">
+
+
+    <!-- Main style file -->
+    <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
+    <style>
+        #nav-bar {
+            background-color: #1E1916;
+
+        }
+
+        .nav-pills {
+            --bs-nav-pills-link-active-bg: white;
+        }
+
+        :root {
+            --bs-link-color: white;
+            --bs-link-hover-color: orange;
+
+        }
+
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 20px;
+        }
+
+        .dropdown {
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            font-size: 20px;
+        }
+
+        .dropdown-toggle::after {
+            color: #1E1916;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<section id="mainheader">
+    <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
+    <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
+
+    <!-- 員工功能小圈圈 -->
+
+    <div class="dropdown" style="position: absolute; right: 30px;">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/weichen9715/catpic/blob/main/smudge_lord_60314581_2452933891436033_1050250552612724249_n.jpg?raw=true"
+                 alt="noimg" width="30" height="30" class="rounded-circle">
+            <span class="d-none d-sm-inline mx-1" style="color: #1E1916;">employee</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <!-- <li><a class="dropdown-item" href="#">New project</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li> -->
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+    </div>
+
+
+</section>
+
+
+<div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <!-- Menu
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline mt-3">Menu</span></a> -->
+
+
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+
+                <!-- 1 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link align-middle px-0">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                    </a>
+                </li>
+
+                <!-- 2 -->
+                <li>
+                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">會員管理系統</span></a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">會員權限管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">會員資料管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">優惠管理</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 3 -->
+                <!--
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                        </li>
+                    -->
+
+                <!-- 4 -->
+                <li>
+                    <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">網站管理系統</span></a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">即時客服</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">輪播圖管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">最新消息管理</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 5 -->
+                <li>
+                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">團購管理系統</span> </a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購商品管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span
+                                    class="d-none d-sm-inline">團購參與者訂單管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購方案管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購活動管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購分潤管理</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 6 -->
+                <!--
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                        </li>
+                    -->
+
+                <!-- 7 -->
+                <li>
+                    <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span> </a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程訂單管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程資訊審核管理</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 8 -->
+                <li>
+                    <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">主廚管理</span> </a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">主廚資料管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span
+                                    class="d-none d-sm-inline">課程討論區管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">課程資訊管理</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 9 -->
+                <li>
+                    <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">甜點管理系統</span> </a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">甜點訂單管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">甜點商品管理</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 10 -->
+                <li>
+                    <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">員工管理系統</span> </a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">員工資料管理</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">員工權限管理</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+
+            <!-- 員工功能小圈圈 -->
+
+        </div>
+    </div>
+    <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="col py-3">
+
+        <!-- 由此開始 -->
+
+        <!-- preloader -->
+        <!--        <div class="preloader">-->
+        <!--            <img src="/Dessert/picture/logo.svg" alt="logo">-->
+        <!--            <div class="preloader-icon"></div>-->
+        <!--        </div>-->
+        <!-- ./ preloader -->
+
+
+        <!-- content -->
+        <div class="content ">
+
+            <div class="row flex-column-reverse flex-md-row">
+                <div class="col-md-8">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel"
+                             aria-labelledby="profile-tab">
+                            <div class="mb-4">
+                                <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
+
+                                    <div class="flex-fill">
+                                        <h5 class="mb-3">訂單編號：#<span id="ordersId"
+                                                                         th:text="${orders.getOrderId()}"></span></h5>
+
+
+                                        <button class="btn btn-primary me-2" type="button" id="submit">確認修改</button>
+                                        <button class="btn btn-outline-danger btn-icon" data-bs-toggle="tooltip"
+                                                title="捨棄修改" id="cancel">
+                                            <i class="fa-regular fa-trash-can" style="color: #ff6e40;"></i>
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-4">訂單資訊</h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">訂單總金額</label>
+                                                    <input type="text" class="form-control" id="orderTotal"
+                                                           th:value="${orders.getCpOrderTotal()}" readonly
+                                                           style="background-color: #dddddd;">
+
+
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">收件人</label>
+                                                    <input type="text" class="form-control" id="receiverName"
+                                                           th:value="${orders.getReceiverName()}">
+
+
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">電話</label>
+                                                    <input type="text" class="form-control" id="receiverPhone"
+                                                           th:value="${orders.getReceiverPhone()}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">E-mail</label>
+                                                        <input type="text" class="form-control" id="receiverEmail"
+                                                               th:value="${orders.getReceiverEmail()}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">訂購日期</label>
+                                                    <input type="text" class="form-control" readonly id="orderTime"
+                                                           style="background-color: #dddddd;"
+                                                           th:value="${orders.getOrderTime()}">
+
+                                                </div>
+
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">收件地址</label>
+                                                    <input type="text" class="form-control" id="receiverAddress"
+                                                           th:value="${orders.receiverAddress}">
+
+                                                </div>
+
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">訂單狀態</label>
+                                                    <select id="orderStatus" class="form-select"
+                                                            th:value="${orders.orderStatus}">
+                                                        <option value="0">訂單處理中</option>
+                                                        <option value="1">運送中</option>
+                                                        <option value="2">取消訂單</option>
+                                                        <option value="3">訂單完成</option>
+                                                    </select>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ./ content -->
+        <!-- 由此結束 -->
+    </div>
+
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+</div>
+
+
+<script src="/Course/JS/Jquery.js"></script>
+
+<script>
+    // 確保網頁載入完成後執行程式碼
+    document.addEventListener("DOMContentLoaded", function () {
+        // 取得訂購日期元素
+        let orderTimeElement = document.getElementById("orderTime");
+        // 取得訂購日期值
+        let orderTimeValue = orderTimeElement.value;
+        // 將訂購日期值轉換為日期物件
+        let ordersDate = new Date(orderTimeValue);
+        // 格式化日期並設定時區與12小時制
+        let formattedDate = ordersDate.toLocaleString('zh-TW', {timeZone: 'UTC', hour12: true});
+        // 將格式化後的日期設定回訂購日期元素
+        orderTimeElement.value = formattedDate;
+    });
+</script>
+
+<script>
+    $("#submit").click(function () {
+        // 取得需要修改的值
+        let ordersId = $("#ordersId").text();
+        let receiverName = $("#receiverName").val();
+        // let receiverEmail = $("#receiverEmail").val();
+        let receiverPhone = $("#receiverPhone").val();
+        let orderStatus = $("#orderStatus").val();
+        let receiverAddress = $("#receiverAddress").val();
+        let receiverEmail = $("#receiverEmail").val();
+
+        // 建立 FormData 物件並加入需要修改的值
+        let formData = new FormData();
+
+        formData.append("ordersId", ordersId);
+        formData.append("receiverName", receiverName);
+        // formData.append("receiverEmail", receiverEmail);
+        formData.append("receiverPhone", receiverPhone);
+        formData.append("orderStatus", orderStatus);
+        formData.append("receiverAddress", receiverAddress);
+        formData.append("receiverEmail", receiverEmail);
+
+        // 發送 AJAX 請求
+        $.ajax({
+            url: "/orders/update",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                alert("修改成功");
+                window.location.href = '/orders/list';
+            },
+            error: function (data) {
+                console.log(data);
+                alert("修改失敗");
+            }
+        });
+    });
+
+
+    $('#cancel').click(function () {
+        if (confirm('確認放棄修改?')) {
+            window.location.href = '/orders/list';
+        } else {
+            // 取消操作，保留在當前頁面
+        }
+    });
+</script>
+<!-- import js -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+<!-- import font awesome -->
+<script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+
+<!-- ./ layout-wrapper -->
+
+<!-- Bundle scripts -->
+<script src="/Dessert/JS/bundle.js"></script>
+
+
+<!-- Main Javascript file -->
+<script src="/Dessert/JS/app.min.js"></script>
+</body>
+
+</html>
