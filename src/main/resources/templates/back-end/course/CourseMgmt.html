@@ -298,13 +298,16 @@
                         <div>
                             <div class="btngroup btn-grouplg centerbuttons">
                                 <button type="button" data-section="section1"
-                                        class="ebtn btnprimary segmentedButton btngroup--btn">所有課程
+                                        class="btnprimary segmentedButton btngroup--btn" id="section-1">所有課程
                                 </button>
-                                <button type="button" data-section="section2" id="section-2"
-                                        class="ebtn btnprimary segmentedButton btngroup--btn">已上架
+                                <button type="button" data-section="section2"
+                                        class="btnprimary segmentedButton btngroup--btn" id="section-2">開課中
                                 </button>
                                 <button type="button" data-section="section3"
-                                        class="ebtn btnprimary segmentedButton btngroup--btn">已退件
+                                        class="btnprimary segmentedButton btngroup--btn" id="section-3">已下架
+                                </button>
+                                <button type="button" data-section="section4"
+                                        class="btnprimary segmentedButton btngroup--btn" id="section-4">退件區
                                 </button>
                             </div>
                         </div>
@@ -329,7 +332,7 @@
                                                 <!--                                                                       <th>確認</th>-->
                                                 <!--                                                                       </tr>-->
                                                 </thead>
-                                                <tbody id="checkCourse">
+                                                <tbody id="checkCourse1">
                                                 </tbody>
                                             </table>
                                         </div>
@@ -344,130 +347,82 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="myTable" class="display" style="min-width: 100%">
+                                    <table id="example3" class="display" style="min-width: 100%">
                                         <thead>
-                                        <tr>
-                                            <th>課程編號</th>
-                                            <th>課程圖片</th>
-                                            <th>課程名稱</th>
-                                            <th>更新時間</th>
-                                            <th>確認</th>
-
-                                        </tr>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <th>課程編號</th>-->
+                                        <!--                                            <th>課程圖片</th>-->
+                                        <!--                                            <th>課程名稱</th>-->
+                                        <!--                                            <th>更新時間</th>-->
+                                        <!--                                            <th>課程狀態</th>-->
+                                        <!--                                            <th>確認</th>-->
+                                        <!--                                        </tr>-->
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>11111</td>
-                                            <td><img class="rounded-circle" width="80"
-                                                     src="img\evelyn-img\i_suck.jpg" alt="">我就爛甜點課程
-                                            </td>
-                                            <td>時間放這裡</td>
-                                            <td>時間放這裡</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">查看</button>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>22222</td>
-                                            <td><img class="rounded" width="80"
-                                                     src="img\evelyn-img\everyonesucks.jpg" alt="">我就爛甜點課程
-                                            </td>
-                                            <td>時間放這裡</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">查看</button>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>33333</td>
-                                            <td><img class="rounded" width="80"
-                                                     src="img\evelyn-img\givemesomejava.jpg" alt="">我最好吃甜點課程
-                                            </td>
-                                            <td>時間放這裡</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">查看</button>
-                                            </td>
-
-                                        </tr>
-
-
+                                        <tbody id="checkCourse2">
+                                        <!--                                        <tr>-->
+                                        <!--                                            <td>11111</td>-->
+                                        <!--                                            <td><img class="rounded-circle" width="80"-->
+                                        <!--                                                     src="img\evelyn-img\i_suck.jpg" alt="">我就爛甜點課程-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>時間放這裡</td>-->
+                                        <!--                                            <td>時間放這裡</td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <button type="button" class="btn btn-warning">查看</button>-->
+                                        <!--                                            </td>-->
+                                        <!--                                        </tr>-->
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
-
                 <div class="content-section" id="section3">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 100%">
+                                    <table id="example4" class="display" style="min-width: 100%">
                                         <thead>
-                                        <tr>
-                                            <th>課程編號</th>
-                                            <th>課程名稱</th>
-                                            <th>更新時間</th>
-                                            <th>確認</th>
-
-                                        </tr>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <th>課程編號</th>-->
+                                        <!--                                            <th>課程名稱</th>-->
+                                        <!--                                            <th>更新時間</th>-->
+                                        <!--                                            <th>確認</th>-->
+                                        <!--                                        </tr>-->
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>11111</td>
-                                            <td><img class="rounded-circle" width="80"
-                                                     src="img\evelyn-img\i_suck.jpg" alt="">我就爛甜點課程
-                                            </td>
-                                            <td>時間放這裡</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">修改</button>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>22222</td>
-                                            <td><img class="rounded" width="80"
-                                                     src="img\evelyn-img\everyonesucks.jpg" alt="">我就爛甜點課程
-                                            </td>
-                                            <td>時間放這裡</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">修改</button>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>33333</td>
-                                            <td><img class="rounded" width="80"
-                                                     src="img\evelyn-img\givemesomejava.jpg" alt="">我最好吃甜點課程
-                                            </td>
-                                            <td>時間放這裡</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">修改</button>
-                                            </td>
-
-                                        </tr>
-
-
+                                        <tbody id="checkCourse3">
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
+                </div>
+                <div class="content-section" id="section4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example5" class="display" style="min-width: 100%">
+                                        <thead>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <th>課程編號</th>-->
+                                        <!--                                            <th>課程名稱</th>-->
+                                        <!--                                            <th>更新時間</th>-->
+                                        <!--                                            <th>確認</th>-->
+                                        <!--                                        </tr>-->
+                                        </thead>
+                                        <tbody id="checkCourse4">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 </div>
@@ -485,131 +440,172 @@
 <script src="/Course/JS/datatables.init.js"></script>
 
 
+<!--<script>-->
+<!--    $(function () {-->
+<!--        $(".content-section").hide();-->
+
+<!--        // Show the first section on page load-->
+<!--        $("#section1").show();-->
+
+<!--        $(".ebtn").on("click", function () {-->
+<!--            // Hide all sections when a button is clicked-->
+<!--            $(".content-section").hide();-->
+
+<!--            // Show the section depending on which button was clicked-->
+<!--            $("#" + $(this).attr("data-section")).show();-->
+<!--        });-->
+<!--    });-->
+
+
+<!--</script>-->
 <script>
     $(function () {
-        $(".content-section").hide();
-
-        // Show the first section on page load
-        $("#section1").show();
-
-        $(".ebtn").on("click", function () {
-            // Hide all sections when a button is clicked
-            $(".content-section").hide();
-
-            // Show the section depending on which button was clicked
-            $("#" + $(this).attr("data-section")).show();
-        });
-    });
-
-
-</script>
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: '/course/getall',
-            type: 'GET',
-            success: function (res) {
-                let th_html = `<tr>
-            <th>課程編號</th>
-            <th>課程圖片</th>
-            <th>課程名稱</th>
-            <th>上傳時間</th>
-            <th>課程狀態</th>
-            <th>確認</th>
-        </tr>`;
-
-                for (let e in res) {
-                    let badgeClass = '';
-                    let courseStatusText = '';
-
-                    switch (res[e].courseStatus) {
-                        case 0:
-                            badgeClass = 'badge badge-pill badge-secondary';
-                            courseStatusText = '待審核';
-                            break;
-                        case 1:
-                            badgeClass = 'badge badge-pill badge-success';
-                            courseStatusText = '已上架';
-                            break;
-                        case 2:
-                            badgeClass = 'badge badge-pill badge-danger';
-                            courseStatusText = '已退件';
-                            break;
-                        case 3:
-                            badgeClass = 'badge badge-pill badge-dark';
-                            courseStatusText = '已下架';
-                            break;
-                    }
-
-                    // 直接使用 res[e].courseTime
-                    let courseTime = res[e].courseTime;
-
-                    let td_html = `
-        <tr>
-            <td>${res[e].courseId}</td>
-            <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
-            <td>${res[e].courseName}</td>
-            <td>${courseTime}</td>
-            <td><span class="${badgeClass}">${courseStatusText}</span></td>
-            <td><button type="button" class="btn btn-warning" onclick="location.href='/course/edit?courseId=${res[e].courseId}'">查看</button></td>
-        </tr>`;
-                    th_html += td_html;
-                }
-                $("#checkCourse").html(th_html);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.error(xhr);
-            }
-        });
-    });
-
-
-    function refreshCourseList() {
-        $.ajax({
-            url: '/course/getall',
-            type: 'GET',
-            success: function (res) {
-                // Your existing code to update the course list
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.error(xhr);
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        refreshCourseList();
-
-        $("#submit").click(function () {
-            // Your existing code to submit the new course
-
+        function renderCourses(url, elementId) {
             $.ajax({
-                url: "/course/add",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    console.log(data);
-                    alert("新增成功");
-                    refreshCourseList(); // Refresh the course list after successfully adding a new course
+                url: url,
+                type: 'GET',
+                success: function (res) {
+                    let th_html =
+                        `<tr>
+                        <th>課程編號</th>
+                        <th>課程圖片</th>
+                        <th>課程名稱</th>
+                        <th>上傳時間</th>
+                        <th>課程狀態</th>
+                        <th>確認</th>
+                    </tr>`;
+
+                    for (let e in res) {
+                        let badgeClass = '';
+                        let courseStatusText = '';
+                        let buttonLink = '';
+
+                        switch (res[e].courseStatus) {
+                            case 0:
+                                badgeClass = 'badge badge-pill badge-secondary';
+                                courseStatusText = '待審核';
+                                buttonLink = `/course/edit?courseId=${res[e].courseId}`;
+                                break;
+                            case 1:
+                                badgeClass = 'badge badge-pill badge-success';
+                                courseStatusText = '已上架';
+                                buttonLink = `/course/coursereview?courseId=${res[e].courseId}`;
+                                break;
+                            case 2:
+                                badgeClass = 'badge badge-pill badge-danger';
+                                courseStatusText = '被退件';
+                                buttonLink = `/course/courserestart?courseId=${res[e].courseId}`;
+                                break;
+                            case 3:
+                                badgeClass = 'badge badge-pill badge-dark';
+                                courseStatusText = '已下架';
+                                buttonLink = `/course/courserestart?courseId=${res[e].courseId}`;
+                                break;
+                        }
+
+                        let courseTime = res[e].courseTime;
+
+                        let td_html =
+                            `<tr>
+                            <td>${res[e].courseId}</td>
+                            <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
+                            <td>${res[e].courseName}</td>
+                            <td>${courseTime}</td>
+                            <td><span class="${badgeClass}">${courseStatusText}</span></td>
+                            <td><button type="button" class="btn btn-warning" onclick="location.href='${buttonLink}'">查看</button></td>
+                        </tr>`;
+                        th_html += td_html;
+                    }
+                    $(`#${elementId}`).html(th_html);
                 },
-                error: function (data) {
-                    console.log(data);
-                    alert("新增失敗");
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error(xhr);
                 }
             });
+        }
+
+        // Initial load
+        $("#section1").show();
+        $("#section2, #section3").hide();
+        renderCourses('/course/getall', 'checkCourse1');
+
+        $("#section-1").on("click", function () {
+            console.log('section1')
+            $("#section2, #section3, #section4").hide();
+            // Show section1
+            $("#section1").show();
+            renderCourses('/course/getall', 'checkCourse1');
+        });
+
+        $("#section-2").on("click", function () {
+            // Hide all sections
+            $("#section1, #section3, #section4").hide();
+            // Show section2
+            $("#section2").show();
+            console.log('section2');
+            renderCourses('/course/getall', 'checkCourse2');
+        });
+
+        $("#section-3").on("click", function () {
+            // Hide all sections
+            $("#section1, #section2, #section4").hide();
+            // Show section3
+            $("#section3").show();
+            console.log('section3');
+            renderCourses('/course/getall', 'checkCourse3');
         });
     });
 
 
-
-
 </script>
+
+
+<!--function refreshCourseList() {-->
+<!--$.ajax({-->
+<!--url: '/course/getall',-->
+<!--type: 'GET',-->
+<!--success: function (res) {-->
+<!--// Your existing code to update the course list-->
+<!--},-->
+<!--error: function (xhr, textStatus, errorThrown) {-->
+<!--console.error(xhr);-->
+<!--}-->
+<!--});-->
+<!--}-->
+
+<!--$(document).ready(function () {-->
+<!--refreshCourseList();-->
+
+<!--$("#submit").click(function () {-->
+<!--// Your existing code to submit the new course-->
+
+<!--$.ajax({-->
+<!--url: "/course/add",-->
+<!--type: "POST",-->
+<!--data: formData,-->
+<!--contentType: false,-->
+<!--processData: false,-->
+<!--success: function (data) {-->
+<!--console.log(data);-->
+<!--alert("新增成功");-->
+<!--refreshCourseList(); // Refresh the course list after successfully adding a new course-->
+<!--},-->
+<!--error: function (data) {-->
+<!--console.log(data);-->
+<!--alert("新增失敗");-->
+<!--}-->
+<!--});-->
+<!--});-->
+<!--});-->
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+
 <script>
     $('#addCourseBtn').on('click', function () {
         location.href = '/course/addcourse'; // 在此处替换为你的目标 URL
     });
+
+
 </script>
 </body>
 

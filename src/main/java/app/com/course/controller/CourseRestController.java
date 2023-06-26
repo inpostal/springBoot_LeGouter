@@ -18,7 +18,7 @@ public class CourseRestController {
     @GetMapping("/course/getall")
     public List<Course> allCourseList(){
         return service.getCourse();
-    };
+    }
 
 
 }

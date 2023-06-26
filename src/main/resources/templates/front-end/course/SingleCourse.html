@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/bootstrap.min.css">
+    <!-- Owl Theme Default CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/owl.theme.default.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/owl.carousel.min.css">
+    <!-- Owl Magnific CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/animate.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/boxicons.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/flaticon.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/meanmenu.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/nice-select.css">
+    <!-- Odometer CSS-->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/odometer.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/responsive.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="static/css/css2.css" rel="stylesheet">
+
+    <link href="/Course/front-end/static/css/all.min.css" rel="stylesheet">
+    <link href="/Course/front-end/static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/Course/front-end//css/animate.min.css" rel="stylesheet">
+    <link href="/Course/front-end/static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/Course/front-end/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/Course/front-end/static/css/style.css" rel="stylesheet">
+
+    <!-- Favicon -->
+
+    <!-- Title -->
+    <title>Le Goûter</title>
+</head>
+
+<body>
+
+<!--<div id="spinner"-->
+<!--     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">-->
+<!--    <div class="spinner-grow text-primary" role="status"></div>-->
+<!--</div>-->
+
+<!-- Menu For Desktop Device -->
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+    <div class="row gx-0 align-items-center d-none d-lg-flex">
+        <div class="col-lg-6 px-5 text-start">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
+            </ol>
+        </div>
+        <div class="col-lg-6 px-5 text-end">
+            <small>Follow us:</small>
+            <div class="h-100 d-inline-flex align-items-center">
+                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                        class="fab fa-facebook-f"></i></a>
+                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                        class="fab fa-twitter"></i></a>
+                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn animated bg-dark"
+         data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; top: 0px; animation-name: fadeIn;">
+        <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
+            <h1 class="text-primary m-0">Le Goûter</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto p-4 p-lg-0">
+                <a href="" class="nav-item nav-link">首頁</a>
+                <a href="" class="nav-item nav-link">品牌故事</a>
+                <a href="" class="nav-item nav-link">甜點訂購</a>
+                <a href="" class="nav-item nav-link active">課程系統</a>
+                <a href="" class="nav-item nav-link">團購平台</a>
+                <a href="" class="nav-item nav-link">會員專區</a>
+                <a href="" class="nav-item nav-link">優惠券專區</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="" class="dropdown-item">FAQ</a>
+                        <a href="" class="dropdown-item">聯絡客服</a>
+                    </div>
+                </div>
+            </div>
+            <div class=" d-none d-lg-flex">
+                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+                    <svg class="svg-inline--fa fa-phone fa-w-16 text-primary" aria-hidden="true" focusable="false"
+                         data-prefix="fa" data-icon="phone" role="img" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 512 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                              d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z">
+                        </path>
+                    </svg><!-- <i class="fa fa-phone text-primary"></i> -->
+                </div>
+                <div class="ps-3">
+                    <small class="text-primary mb-0">聯絡我們</small>
+                    <p class="text-light fs-5 mb-0">0912345678</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
+        <h1 class="text-primary m-0">Le Goûter</h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse1">
+        <div class="navbar-nav mx-auto p-4 p-lg-0">
+            <a href="" class="nav-item nav-link active">首頁</a>
+            <a href="" class="nav-item nav-link">品牌故事</a>
+            <a href="" class="nav-item nav-link">甜點訂購</a>
+            <a href="" class="nav-item nav-link">課程系統</a>
+            <a href="" class="nav-item nav-link">團購平台</a>
+            <a href="" class="nav-item nav-link">會員專區</a>
+            <a href="" class="nav-item nav-link">優惠券專區</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
+                <div class="dropdown-menu m-0">
+                    <a href="" class="dropdown-item">FAQ</a>
+                    <a href="" class="dropdown-item">聯絡客服</a>
+                </div>
+            </div>
+        </div>
+        <div class=" d-none d-lg-flex">
+            <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+                <i class="fa fa-phone text-primary"></i>
+            </div>
+            <div class="ps-3">
+                <small class="text-primary mb-0">聯絡我們</small>
+                <p class="text-light fs-5 mb-0">0912345678</p>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- End Others Option For Responsive -->
+</div>
+<!-- End Navbar Area -->
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-4">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>甜點課程</h2>
+            <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>
+
+            <ul>
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li class="active">甜點課程</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Single Course Area -->
+<section class="single-course-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="single-course-content">
+                    <h3 th:text="${course.getCourseName()}"></h3>
+
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="course-rating">
+                                <img alt="#">
+
+                                <h4>主廚：</h4>
+                                <span>dsfsds</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="course-rating pl-0 text-center">
+                                <!--									<h4><a href="#">課程難度：</a></h4>-->
+                                <!--									<span>★★★★★</span>-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"
+                         th:alt="${course.getCourseName()}" alt="#"
+                         style="width: 100%; height: 500px; object-fit: cover;">
+                </div>
+
+                <div class="tab single-course-tab">
+                    <ul class="tabs">
+                        <li>
+                            <a href="#">課程總覽</a>
+                        </li>
+                        <li>
+                            <a href="#">課程影片</a>
+                        </li>
+                        <li>
+                            <a href="#">主廚介紹</a>
+                        </li>
+                        <li>
+                            <a href="#">課程評論區</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab_content">
+                        <div class="tabs_item">
+                            <h3>課程介紹</h3>
+
+                            <p th:text="${course.getCourseContent()}"></p>
+
+
+                        </div>
+
+                        <div class=" tabs_item">
+                            <div class="curriculum-content">
+                                <div class="curriculum-list">
+                                    <h4>Section 1</h4>
+
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="meet-title">
+                                                <i class="bx bx-right-arrow"></i>
+                                                Introduction
+                                            </a>
+                                            <a href="#" class="meet-time">
+                                                <span class="min">01 hour</span>
+                                                <span class="preview">Preview</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="curriculum-list">
+                                    <h4>Section 2</h4>
+
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="meet-title">
+                                                <i class="bx bx-right-arrow"></i>
+                                                Utility modules
+                                            </a>
+                                            <a href="#" class="meet-time">
+                                                <span class="min">03 hours</span>
+                                                <i class="bx bxs-lock-alt"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tabs_item">
+                            <div class="instructor-content">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <div class="advisor-img">
+                                            <img src="assets/img/chef/chef-img-01.jpg" alt="Image">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <div class="advisor-content">
+                                            <a href="#">
+                                                <h3>Pierre Chen</h3>
+                                            </a>
+
+                                            <p th:text="${chef.getChefInfo()}">
+
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tabs_item">
+                            <div class="review-content">
+                                <div class="course-reviews-content">
+                                    <ul class="course-reviews">
+                                        <li>
+                                            <img src="assets/img/course-reviews-img.jpg" alt="Image">
+
+                                            <h3>Anna Dew</h3>
+                                            <span>Cover all my needs</span>
+                                            <p>The course identify things we want to change and then figure out the
+                                                things that need to be done to create the desired outcome. The
+                                                course helped me in clearly define problems and generate a wider
+                                                variety of quality solutions. Support more structures analysis of
+                                                options.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="account-wrap">
+                    <ul>
+                        <li>
+                            價錢 <span class="bold" th:text="${course.getCoursePrice()}"></span>
+                        </li>
+                    </ul>
+                    <a href="#" class="default-btn checkout">購買課程</a>
+
+                    <div class="social-content">
+                        <p>
+                            分享
+                            <i class="bx bxs-share-alt"></i>
+                        </p>
+
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxl-facebook'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxl-twitter'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxl-instagram'></i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Single Course Area -->
+
+<!-- Start Popular Courses Area -->
+<section class="courses-area-style pb-70">
+    <div class="container">
+        <div class="section-title">
+            <h2>課程推薦</h2>
+        </div>
+        <!--ajax-->
+        <div class="row" id="recommends">
+            <!--            <div class="col-lg-4 col-md-6">-->
+            <!--                <div class="single-course">-->
+            <!--                    <a href="single-course02.html">-->
+            <!--                        <img src="assets/img/course-img/course-img-2.jpg" alt="Image">-->
+            <!--                    </a>-->
+
+            <!--                    <div class="course-content">-->
+            <!--                        <a href="single-course02.html">-->
+            <!--                            <h3>【在家做肉桂捲】一起胖！用甜點說甜話</h3>-->
+            <!--                        </a>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</section>
+<!-- End Popular Courses Area -->
+
+<!-- Start Footer Top Area -->
+<div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">粉絲專頁</h4>
+
+                <div class="d-flex pt-2">
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">快速連結</h4>
+                <a class="btn btn-link" href="">品牌故事</a>
+                <a class="btn btn-link" href="">聯絡我們</a>
+                <a class="btn btn-link" href="">服務與條款</a>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">常見問題</h4>
+                <a class="btn btn-link" href="">FAQ</a>
+                <a class="btn btn-link" href="">回報客服</a>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">甜點畫廊</h4>
+                <div class="row g-2">
+                    <div class="col-4">
+                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg" alt="Image">
+                    </div>
+                    <div class="col-4">
+                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg" alt="Image">
+                    </div>
+                    <div class="col-4">
+                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg" alt="Image">
+                    </div>
+                    <div class="col-4">
+                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg" alt="Image">
+                    </div>
+                    <div class="col-4">
+                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg" alt="Image">
+                    </div>
+                    <div class="col-4">
+                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script data-cfasync="false" src="/Course/front-end/static/js/email-decode.min.js"></script>
+<script src="/Course/front-end/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/bootstrap.bundle.min.js"
+        type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/Course/front-end/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49"
+        defer=""></script>
+
+<script src="/Course/front-end/assets/js/jquery-3.5.1.slim.min.js"></script>
+<!-- Popper JS -->
+<script src="/Course/front-end/assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="/Course/front-end/assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/Course/front-end/assets/js/jquery.meanmenu.js"></script>
+<!-- Wow JS -->
+<script src="/Course/front-end/assets/js/wow.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/Course/front-end/assets/js/owl.carousel.js"></script>
+<!-- Owl Magnific JS -->
+<script src="/Course/front-end/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Nice Select JS -->
+<script src="/Course/front-end/assets/js/jquery.nice-select.min.js"></script>
+<!-- Parallax JS -->
+<script src="/Course/front-end/assets/js/parallax.min.js"></script>
+<!-- Appear JS -->
+<script src="/Course/front-end/assets/js/jquery.appear.js"></script>
+<!-- Odometer JS -->
+<script src="/Course/front-end/assets/js/odometer.min.js"></script>
+<!-- Form Validator JS -->
+<script src="/Course/front-end/assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script src="/Course/front-end/assets/js/contact-form-script.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/Course/front-end/assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/Course/front-end/assets/js/custom.js"></script>
+
+
+<script>
+
+    $('.checkout').on('click', function (e) {
+        e.preventDefault();  // 防止<a>的預設行為（即瀏覽器會試圖導航到href屬性指向的URL）
+        location.href = '/course/coursecheckout';
+    });
+</script>
+
+
+<script>
+    var currentCourseId = $("#course-id").text(); // 使用 jQuery 取得 course-id 的值
+
+    $.ajax({
+        url: "/course/getall", // 這裡改成你的 getAll API
+        type: 'GET',
+        dataType: 'json',
+        success: function (courses) {
+            var filteredCourses = courses.filter(function (course) {
+                return course.courseId != currentCourseId;
+            });
+
+            // 隨機排序
+            filteredCourses.sort(function (a, b) {
+                return 0.5 - Math.random();
+            });
+
+            // 取前三個課程
+            var selectedCourses = filteredCourses.slice(0, 3);
+
+            var coursesHtml = '';
+            for (var i = 0; i < selectedCourses.length; i++) {
+                var course = selectedCourses[i];
+
+                coursesHtml += `
+            <div class="col-lg-4 col-md-6">
+                <div class="single-course" >
+                    <a href="/course/singlecourse?courseId=${course.courseId}">
+                        <img src="/course/img/${course.courseId}" alt="image" style="width: 100%; height: 350px; object-fit: cover;">
+                    </a>
+
+                    <div class="course-content">
+                       <a href="/course/singlecourse?courseId=${course.courseId}">
+                        <h3>${course.courseName}</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>`;
+            }
+            $('#recommends').html(coursesHtml); // 將取得的課程資訊插入到 '#recommends' 的元素中
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+
+
+</script>
+
+</body>
+
+</html>
