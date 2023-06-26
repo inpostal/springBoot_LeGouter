@@ -10,7 +10,9 @@ import app.com.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -39,8 +41,18 @@ public class OrdersMemServiceImpl implements OrdersMemService {
         return memberRepository.findById(memId).get().getMemberAccount();
     }
 
+    public Map<Integer, List<OrderDetailDTO>> getDessertDetails(List<OrdersMem> orders) {
+        Map<Integer, List<OrderDetailDTO>> dessertDetailsMap = new HashMap<>();
+        for (OrdersMem order : orders) {
+            List<OrderDetailDTO> dessertDetails = orderDetailService.getOrderDetailDTOList(order.getOrderId());
+            dessertDetailsMap.put(order.getOrderId(), dessertDetails);
+        }
+        return dessertDetailsMap;
+    }
+
     public List<OrderDetailDTO> getDessertDetails(Integer orderId) {
         return orderDetailService.getOrderDetailDTOList(orderId);
     }
+
 
 }

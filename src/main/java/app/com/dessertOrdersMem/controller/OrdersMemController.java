@@ -12,8 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -40,13 +41,12 @@ public class OrdersMemController {
         String memAccount = ordersMemService.getMemberAccountById(memId);
         model.addAttribute("memAccount", memAccount);
 
-
-        List<OrderDetailDTO> dessertDetailsList = new ArrayList<>();
+        Map<Integer, List<OrderDetailDTO>> dessertDetailsMap = new HashMap<>();
         for (OrdersMem order : orders) {
             List<OrderDetailDTO> dessertDetails = ordersMemService.getDessertDetails(order.getOrderId());
-            dessertDetailsList.addAll(dessertDetails);
+            dessertDetailsMap.put(order.getOrderId(), dessertDetails);
         }
-        model.addAttribute("dessertDetailsList", dessertDetailsList);
+        model.addAttribute("dessertDetailsMap", dessertDetailsMap);
 
         return "/front-end/Dessert/DessertOrdersMem";
     }

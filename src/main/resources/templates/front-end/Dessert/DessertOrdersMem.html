@@ -125,7 +125,7 @@
                                         </thead>
                                         <tbody>
 
-                                        <tr th:each="M : ${dessertDetailsList}">
+                                        <tr th:each="M : ${dessertDetailsMap[__${order.orderId}__]}">
                                             <td>
                                                 <a href="#">
                                                     <img src="static/picture/2.jpg" class="rounded" width="40"
@@ -133,6 +133,7 @@
                                                 </a>
                                             </td>
                                             <td th:text="${M.getDessertName()}"></td>
+
                                             <td th:text="${M.getDessertAmount()}"></td>
                                             <td th:text="${M.getDessertPrice()}"></td>
                                             <td th:text="'$' + ${M.getDessertAmount() * M.getDessertPrice()}"></td>
@@ -180,7 +181,7 @@
     <script type="text/javascript" src="/Dessert/JS/jquery.min.js"></script>
 
 
-    //以下是評價星星的功能，暫時無法實現
+    <!--    //以下是評價星星的功能，暫時無法實現-->
     <script>
         function toggleRating(button) {
             var ratingSection = button.nextElementSibling;
@@ -263,3 +264,4 @@
 </body>
 
 </html>
+
