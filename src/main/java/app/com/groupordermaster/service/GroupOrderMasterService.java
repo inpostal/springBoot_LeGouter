@@ -13,7 +13,11 @@ public class GroupOrderMasterService {
 @Autowired
     private GroupOrderMasterRepository repository;
     public List<GroupOrderMaster>GroupOrderMasterAll(){
-        List<GroupOrderMaster>groupOrderMaster=repository.findAll();
-        return  groupOrderMaster;
+        List<GroupOrderMaster>list=repository.findAll();
+        return  list;
+    }
+    public GroupOrderMaster getGroupOrderMasterById(Integer groupOrderMasterId){
+        GroupOrderMaster update=repository.findById(groupOrderMasterId).get();
+        return update;
     }
 }

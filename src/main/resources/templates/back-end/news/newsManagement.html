@@ -7,7 +7,7 @@
     <title>back-nav-bar</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- <link rel="stylesheet" type="text/css" href="back-nav-bar.css">  -->
 
     <!-- import font -->
@@ -74,16 +74,13 @@
         tr {
             font-size: 20px;
             padding: 5px;
-            word-spacing: 10px;
-            border-width: 1px;
+            text-align: center;
             border-color: #212529;
         }
 
         .card-header {
             font-size: 40px;
         }
-
-
 
 
         .pagination-bar {
@@ -122,8 +119,6 @@
             background-color: #1E1916 !important;
             color: white;
         }
-
-
 
 
         .card-body {
@@ -169,7 +164,9 @@
             float: right;
         }
 
-
+        .page-link {
+            color: #1e1916;
+        }
 
 
         /* .ms-2 {
@@ -183,320 +180,310 @@
 <body>
 
 
-    <section id="mainheader">
-        <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
-        <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
+<section id="mainheader">
+    <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
+    <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
 
-        <!-- 員工功能小圈圈 -->
-        <div class="dropdown" style="position: absolute; right: 30px;">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/weichen9715/catpic/blob/main/smudge_lord_60314581_2452933891436033_1050250552612724249_n.jpg?raw=true"
-                    alt="noimg" width="30" height="30" class="rounded-circle">
-                <span class="d-none d-sm-inline mx-1" style="color: #1E1916;">employee</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <!-- <li><a class="dropdown-item" href="#">New project</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li> -->
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
-        </div>
-    </section>
-
-
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <!-- Menu
-                        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline mt-3">Menu</span></a> -->
+    <!-- 員工功能小圈圈 -->
+    <div class="dropdown" style="position: absolute; right: 30px;">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/weichen9715/catpic/blob/main/smudge_lord_60314581_2452933891436033_1050250552612724249_n.jpg?raw=true"
+                 alt="noimg" width="30" height="30" class="rounded-circle">
+            <span class="d-none d-sm-inline mx-1" style="color: #1E1916;">employee</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <!-- <li><a class="dropdown-item" href="#">New project</a></li>
+    <li><a class="dropdown-item" href="#">Settings</a></li> -->
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+    </div>
+</section>
 
 
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                        id="menu">
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <!-- Menu
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline mt-3">Menu</span></a> -->
 
-                        <!-- 1 -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a>
-                        </li>
 
-                        <!-- 2 -->
-                        <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">會員管理系統</span></a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">會員權限管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">會員資料管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">優惠管理</span></a>
-                                </li>
-                            </ul>
-                        </li>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                    id="menu">
 
-                        <!-- 3 -->
-                        <!-- 
+                    <!-- 1 -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link align-middle px-0">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+
+                    <!-- 2 -->
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">會員管理系統</span></a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">會員權限管理</span></a>
+                            </li>
                             <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">會員資料管理</span></a>
                             </li>
-                        -->
-
-                        <!-- 4 -->
-                        <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">網站管理系統</span></a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">即時客服</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">輪播圖管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline"
-                                            id="news-organization">最新消息管理</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- 5 -->
-                        <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">團購管理系統</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">團購商品管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">團購參與者訂單管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">團購方案管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">團購活動管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">團購分潤管理</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- 6 -->
-                        <!-- 
                             <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-                            </li>
-                        -->
-
-                        <!-- 7 -->
-                        <li>
-                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">課程訂單管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">課程資訊審核管理</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- 8 -->
-                        <li>
-                            <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">主廚管理</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">主廚資料管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">課程討論區管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">課程資訊管理</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- 9 -->
-                        <li>
-                            <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">甜點管理系統</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">甜點訂單管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">甜點商品管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">甜點追蹤清單管理</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- 10 -->
-                        <li>
-                            <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">員工管理系統</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">員工資料管理</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-4"> <span
-                                            class="d-none d-sm-inline">員工權限管理</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-
-                    </ul>
-
-
-
-                </div>
-            </div>
-
-            <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-            <div class="col py-3">
-                <!-- 由此開始 -->
-                <h1>最新消息管理</h1>
-
-
-
-                <div class="from-row">
-                    <div class="d-flex justify-content-between">
-                        <a href="./新增最新消息文章 .html"><input class="add-news" type="button" value="+新增文章"></a>
-
-                        <div class="text-end mb-3">
-                            關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
-                                placeholder="請輸入關鍵字">
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="from-row">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="order-table table">
-                                    <thead>
-                                        <tr style="background-color: #f8d3ae;color:#1E1916;">
-
-                                            <th>
-
-                                                <div class="form-check custom-checkbox ms-2">
-                                                    <input type="checkbox" class="form-check-input" id="checkAll"
-                                                        onchange="selectAll()">全選
-                                                    <label class="form-check-label" for="checkAll"></label>
-                                                </div>
-                                            </th>
-                                            <th>文章編號</th>
-                                            <th>員工編號</th>
-                                            <th>文章標題</th>
-                                            <th>文章內容</th>
-                                            <th>文章圖片</th>
-                                            <th>發布日期</th>
-                                            <th>編輯</th>
-                                            <th>刪除</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="row">
-
-
-                                    </tbody>
-                                </table>
-                                <div id="selectedCount"></div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 col-md-12 d-flex pagination-bar"></div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link">上一頁</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">下一頁</a>
+                                <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">優惠管理</span></a>
                             </li>
                         </ul>
-                    </nav>
-                </div>
+                    </li>
+
+                    <!-- 3 -->
+                    <!--
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                        </li>
+                    -->
+
+                    <!-- 4 -->
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">網站管理系統</span></a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">即時客服</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">輪播圖管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline"
+                                                                         id="news-organization">最新消息管理</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 5 -->
+                    <li>
+                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">團購管理系統</span> </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">團購商品管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">團購參與者訂單管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">團購方案管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">團購活動管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">團購分潤管理</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 6 -->
+                    <!--
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                        </li>
+                    -->
+
+                    <!-- 7 -->
+                    <li>
+                        <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span> </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">課程訂單管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">課程資訊審核管理</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 8 -->
+                    <li>
+                        <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">主廚管理</span> </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">主廚資料管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">課程討論區管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">課程資訊管理</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 9 -->
+                    <li>
+                        <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">甜點管理系統</span> </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">甜點訂單管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">甜點商品管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">甜點追蹤清單管理</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 10 -->
+                    <li>
+                        <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">員工管理系統</span> </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">員工資料管理</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">員工權限管理</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+
             </div>
-
-
-
-
-
-            <!-- 由此結束 -->
         </div>
 
-        <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+        <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <div class="col py-3">
+            <!-- 由此開始 -->
+            <h1>最新消息管理</h1>
 
+
+            <div class="from-row">
+                <div class="d-flex justify-content-between">
+                    <a href="./新增最新消息文章 .html"><input class="add-news" type="button" value="+新增文章"></a>
+
+                    <div class="text-end mb-3">
+                        關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
+                                          placeholder="請輸入關鍵字">
+                    </div>
+                </div>
+                <hr>
+                <div class="from-row">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="order-table table">
+                                <thead>
+                                <tr style="background-color: #f8d3ae;color:#1E1916;">
+
+                                    <th>
+
+                                        <div class="form-check custom-checkbox ms-2">
+                                            <input type="checkbox" class="form-check-input" id="checkAll"
+                                                   onchange="selectAll()">全選
+                                            <label class="form-check-label" for="checkAll"></label>
+                                        </div>
+                                    </th>
+                                    <th>文章編號</th>
+                                    <th>員工編號</th>
+                                    <th>文章標題</th>
+                                    <th>文章內容</th>
+                                    <th>文章圖片</th>
+                                    <th>發布日期</th>
+                                    <th>編輯</th>
+                                    <th>刪除</th>
+                                </tr>
+                                </thead>
+                                <tbody id="row">
+
+
+                                </tbody>
+                            </table>
+                            <div id="selectedCount"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 d-flex pagination-bar"></div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link">上一頁</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">下一頁</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+
+        <!-- 由此結束 -->
     </div>
 
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+</div>
 
 
-
-
-
-
-
-    <!-- import js -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+<!-- import js -->
+<script src="/Conponents/back_end.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 
-    <!-- import font awesome -->
-    <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- import font awesome -->
+<script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </body>
 <script>
     $(document).ready(function () {
         console.log("xxx")
-        $('.fa-trash').click(function () {
-            $(this).closest("tr").remove();
-        });
+
 
         $.ajax({
             url: '/news/getAll',
-            type: "Get",
+            type: "GET",
             dataType: "json",
             success: function (resp) {
                 console.log(resp);
@@ -515,11 +502,12 @@
                                             <td id="newstitle">${resp[e].newsTitle}</td>
                                             <td id="newscontent">${resp[e].newsContent}</td>
                                             <td><img src="/news/img/${resp[e].newsId}" width="100" height="100"></td>
-                                            <td id="news-released-date">${resp[e].newsTime}0</td>
+                                            <td id="news-released-date">${resp[e].newsTime}</td>
 
 
                                              <td>
-                                                <a href="./修改最新消息文章.html">
+                                                <a href="/news/updateThyleaf?newsId=${resp[e].newsId} ">
+
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                         data-bs-target="#staticBackdrop">
                                                         <i class="fas fa-pencil-alt"></i>
@@ -533,18 +521,55 @@
                                             </td>
 
                                         </tr>`;
+
+
                 }
                 $("#row").html(td_html);
+
             },
             error: function (xhr, textstatus, errorThrown) {
                 console.error(xhr);
             }
         });
-    });
+        $(document).on('click', '.fa-trash', function () {
+            var row = $(this).closest("tr");
+            var newsId = row.find("#newsid").text();
+            Swal.fire({
+                title: '確定要刪除嗎?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: '刪除',
+                denyButtonText: `取消`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('已刪除!', '', '刪除')
+                    row.remove();
+                    $.ajax({
+                        url: '/news/delete',
+                        type: "GET",
+                        data: {
+                            newsId: newsId
+                        },
+                        success: function (resp) {
+                            console.log(resp);
+                        },
+                        error: function (xhr, textstatus, errorThrown) {
+                            console.error(xhr);
+                        }
+                    })
 
-    (function (document) {
+                } else if (result.isDenied) {
+                    Swal.fire('確定不刪除嗎', '', 'info')
+                }
+            })
+        })
+    })
+
+
+
+    $(document).ready(function () {
         'use strict';
-
         var LightTableFilter = (function (Arr) {
 
             var _input;
@@ -560,7 +585,8 @@
             }
 
             function _filter(row) {
-                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                var text = row.textContent.toLowerCase(),
+                    val = _input.value.toLowerCase();
                 row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
             }
 
@@ -579,8 +605,7 @@
                 LightTableFilter.init();
             }
         });
-
-    })(document);
+    });
 
 
     function selectAll() {
@@ -590,7 +615,7 @@
 
         checkboxes.forEach(function (checkbox) {
             checkbox.checked = selectAllCheckbox.checked;
-            if (checkbox.checked) {
+            if (checkbox !== selectAllCheckbox && checkbox.checked) {
                 selectedCount++;
             }
         });
@@ -603,7 +628,7 @@
         var selectedCount = 0;
 
         checkboxes.forEach(function (checkbox) {
-            if (checkbox.checked) {
+            if (checkbox.checked && checkbox !== document.getElementById('checkAll')) {
                 selectedCount++;
             }
         });
@@ -612,19 +637,8 @@
         selectedCountElement.innerHTML = '已選取 ' + selectedCount + ' 筆資料';
     }
 
-    // Initial count when the page loads
-    updateSelectedCount();
-
-
-    //ajax
-
-    // 瀏覽器被載入後,將ajax撈出來呈現在頁面上
-    $(document).ready(function () {
-
-    });
-
-
-
+        // Initial count when the page loads
+        updateSelectedCount();
 
 
 

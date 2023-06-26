@@ -29,7 +29,17 @@ public class NewsController {
     public String getNewsAll() {
         return "/back-end/news/newsManagement";
     }
-//thyleaf
+
+    //刪除
+
+    @GetMapping("/news/delete")
+    public String deleteNews(@RequestParam Integer newsId) {
+        service.delete(newsId);
+        // 導至頁面
+        return "redirect:/back-end/news/newsManagement";
+    }
+
+    //thyleaf
     @GetMapping("/news/updateThyleaf")
     public String updateNews(@RequestParam Integer newsId, Model model) {
         //拿到id裡面資料
@@ -40,7 +50,7 @@ public class NewsController {
         return "/back-end/news/updatenewManagement";
     }
 
-    @PostMapping("/news/add")
+    @PostMapping("/news/update")
     //拿到前台資料
     public ResponseEntity<?> update(@RequestParam("newsId") Integer newsId,
                                     @RequestParam("empId") Integer empId,
@@ -48,7 +58,7 @@ public class NewsController {
                                     @RequestParam("newsPic") MultipartFile newsPic,
                                     @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
                                     @RequestParam("newsTitle") String newsTitle) {
-       //拿到後台資料
+        //拿到後台資料
         News news = service.getNewsById(newsId);
         //將前台資料放入後台
         news.setEmpId(empId);
@@ -70,39 +80,48 @@ public class NewsController {
 
     @GetMapping("/news/img/{newsId}")
     //拿到圖片
-    public ResponseEntity<?>getNewsImageById(@PathVariable Integer newsId) {
-        News news=service.getNewsById(newsId);
-        byte[] image=news.getNewsPic();
-        ByteArrayResource resource=new ByteArrayResource(image);
+    public ResponseEntity<?> getNewsImageById(@PathVariable Integer newsId) {
+        News news = service.getNewsById(newsId);
+        byte[] image = news.getNewsPic();
+        ByteArrayResource resource = new ByteArrayResource(image);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_GIF)
                 .body(resource);
     }
 
 
+    @GetMapping("/news/addnews")
+    public String addnews() {
+        return "/back-end/news/addNewsManagement";
+    }
+
+
     //新增:將資料送到資料庫
-    @GetMapping("/news/add")
-    //拿到前台資料
-    public ResponseEntity<?> addNews(@RequestParam("empId") Integer empId,
-                                     @RequestParam("newsContent") String newsContent,
-                                     @RequestParam("newsPic") MultipartFile newsPic,
-                                     @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
-                                     @RequestParam("newsTitle") String newsTitle) {
-        //建立一個物件
+@PostMapping("/news/add")
+    public ResponseEntity<?> addNews(
+            //拿到錢端傳來的資料
+            @RequestParam("empId") Integer empId,
+            @RequestParam("newsContent") String newsContent,
+            @RequestParam("newsPic") MultipartFile newsPic,
+            @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
+            @RequestParam("newsTitle") String newsTitle) {
+        //建立news物件放入所有傳入的值
         News news = new News();
-        //將前台資料放入後台
         news.setEmpId(empId);
         news.setNewsContent(newsContent);
         news.setNewsTime(Date.valueOf(newsTime));
         news.setNewsTitle(newsTitle);
+        //照片用資料流傳入
         try {
             news.setNewsPic(newsPic.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        //將news物件放入資料庫
         service.add(news);
         return ResponseEntity.ok().build();
     }
+
 
 
 
