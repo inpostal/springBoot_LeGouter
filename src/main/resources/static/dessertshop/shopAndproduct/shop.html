@@ -484,6 +484,9 @@
                     let html = "";
                     for (let e in res) {
                         // let dessertId = res[e].dessertId;
+                        if (res[e].dessertStatus === "已下架") {
+                            continue;
+                        }
                         html += `<div class="pro" onclick="redirectToSProduct(${res[e].dessertId})">
                                     <img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="沒有圖片">
                                     <div class="des">
