@@ -18,6 +18,8 @@ public class CourseImage {
     @Column(name = "COURSE_ID")
     private int courseId;
 
+    @Column(name = "COURSE_IMG_NAME")
+    private String courseImgName;
     // Getter and Setter methods
 
     public int getCourseImgId() {

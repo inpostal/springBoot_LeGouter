@@ -61,12 +61,4 @@ public class DessertShopController {
         return msg;
     }
 
-    // 存圖片
-    @PutMapping("/upload/{dessertId}")
-    public String upload(@RequestBody MultipartFile file,
-                         @PathVariable Integer dessertId){
-        System.out.println("接到請求");
-        String msg = "";
-        return msg;
-    }
 }

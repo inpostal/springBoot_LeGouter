@@ -3,7 +3,7 @@ package app.com.course.vo;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -22,16 +22,16 @@ public class Course {
     private Integer coursePrice;
 
     @Column(name = "EMP_ID", insertable = true)
-    private Integer empId=1;
+    private Integer empId;
 
     @Column(name = "COURSE_TIME", insertable = false)
-    private Timestamp courseTime;
+    private Date courseTime;
 
     @Column(name = "COURSE_CONTENT")
     private String courseContent;
 
     @Column(name = "COURSE_STATUS")
-    private Integer courseStatus=0;
+    private Integer courseStatus;
 
     @Column(name = "COURSE_VIDEO")
     private byte[] courseVideo;
@@ -41,5 +41,9 @@ public class Course {
 
     @Column(insertable = false, name = "RATE_STAR")
     private Integer rateStar;
+
+    @Column(insertable = false, name = "COURSE_COMMENT")
+    private String courseComment;
+
 }
 

@@ -1,0 +1,216 @@
+/*	Media 768Px Start */
+@media (min-width: 768px) and (max-width: 990px) {
+
+	/* Content */
+	.wm-modren-courses figcaption p,
+	.wm-modren-courses figcaption a.wm-course-see-btn {
+		display: none;
+	}
+
+	.wm-apply-info ul li {
+		padding: 46px 30px 40px;
+	}
+
+	.wm-apply-info ul li i {
+		opacity: 0.3;
+	}
+
+	.wm-thumb-testimonial figure {
+		width: 100%;
+	}
+
+	.wm-thumb-testimonial figure~.thumb-testimonial-text {
+		float: left;
+		width: 100%;
+		margin: 0px;
+	}
+
+	.wm-event-medium figure~.wm-eventmedium-text {
+		padding: 15px 0px;
+		float: left;
+		width: 100%;
+	}
+
+	.wm-event-time {
+		right: 5px;
+	}
+
+	.wm-subscribe-color {
+		display: none;
+	}
+
+	.wm-history-list,
+	.wm-history-list-color {
+		padding-left: 0px;
+	}
+
+	.wm-search-courses ul li {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+
+	.wm-event-list figure~.wm-event-list-text {
+		margin-left: 0px;
+		float: left;
+		width: 100%;
+	}
+
+	.wm-question-inner {
+		width: 100%;
+	}
+
+	.wm-question-wrap {
+		background: none;
+		padding: 80px 0px;
+	}
+
+	.wm-parallex-two,
+	.wm-courses-mediumsec .wm-courses-popular-wrap>figure {
+		width: 100%;
+	}
+
+	.wm-404page {
+		margin: 0px;
+	}
+
+	.wm-404page-bg {
+		background: none;
+	}
+
+	.wm-news-medium figure {
+		width: 100%;
+	}
+
+	.wm-news-medium figure~.wm-newsgrid-text,
+	.wm-author-detail figure~.wm-author-text,
+	.wm-postreviews .thumblist>ul>li figure~.wm-reviews-text,
+	.wm-shop-list .wm-shop-grid figure,
+	.wm-courses-mediumsec figure~.wm-popular-courses-text {
+		margin-left: 0px;
+		float: left;
+		width: 100%;
+	}
+
+	.wm-filter-box .wm-apply-select {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+
+	.wm-shop-list .wm-grid-info {
+		padding: 40px;
+		float: left;
+		width: 100%;
+	}
+
+	.wm-student-dashboard-nav {
+		padding-right: 0px;
+	}
+
+	.wm-student-nav {
+		padding: 20px;
+	}
+
+	.wm-student-nav figure~.wm-student-nav-text {
+		padding: 0px;
+		float: left;
+		width: 100%;
+	}
+
+	.wm-event-countdown h2 {
+		font-size: 20px;
+	}
+
+	.wm-event-countdown .countdown-amount {
+		font-size: 18px;
+	}
+
+	.wm-event-countdown .countdown-section:before {
+		display: none;
+	}
+
+	.wm-lesson-list figure~.wm-lesson-text {
+		padding: 20px 0px 0px 0px;
+		float: left;
+		width: 100%;
+	}
+
+	.tabs-nav li,
+	.tabs-nav li a {
+		width: 100%;
+	}
+
+	.wm-event-register-list {
+		display: none;
+	}
+
+	.wm-filterable-link ul li {
+		width: 100%;
+		margin: 0px 0px 15px 0px;
+	}
+
+	.wm-courses-started-text {
+		width: 100%;
+		padding: 0px;
+		border: none;
+	}
+
+	.wm-average-rating,
+	.wm-detailed-rating,
+	.wm-average-rating,
+	.wm-courses-detail-rating ul li .wm-rating,
+	.wm-courses-detail-rating>ul>li>small {
+		width: 100%;
+	}
+
+	.wm-courses-detail-rating ul li .wm-rating {
+		margin: 0px;
+	}
+
+	.wm-ourcourses-right .wm-previous-icon,
+	.wm-ourcourses-right .wm-Next-icon {
+		margin: 9px 0px 0px 0px;
+	}
+
+	.wm-filterable ul li {
+		margin-bottom: 15px;
+	}
+
+	.wm-professor-info>ul>li {
+		margin-bottom: 25px;
+	}
+
+	.wm-images,
+	.wm-summary,
+	.wm-thum,
+	.wm-student-dashboard-favorite .wm-thum figure,
+	.wm-student-favorite {
+		width: 100%;
+	}
+
+	.wm-summary {
+		padding: 0px 0px 40px 0px;
+	}
+
+	.wm-thum~.wm-favorite-text {
+		margin-left: 0px;
+	}
+
+	.wm-student-favorite .wm-student-favorite-text {
+		padding: 6px 0px;
+	}
+
+	.wm-student-dashboard-courses .wm-article ul li.wm-courses-start,
+	.wm-student-dashboard-courses .wm-article ul li,
+	.wm-dashboard-courses .wm-article li.wm-student,
+	.wm-student-dashboard-statement .wm-article ul li.wm-statement-start,
+	.wm-student-dashboard-statement .wm-article ul li,
+	.wm-tabs-listing .nav-tabs,
+	.wm-tabs-listing .tab-content {
+		width: 100%;
+	}
+
+	.wm-student-dashboard-profile>ul>li {
+		margin-bottom: 25px;
+	}
+
+}

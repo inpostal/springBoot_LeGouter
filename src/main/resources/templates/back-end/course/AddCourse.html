@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -73,7 +73,6 @@
     </style>
 
 
-
 </head>
 
 <body>
@@ -111,10 +110,6 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <!-- Menu
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline mt-3">Menu</span></a> -->
-
 
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                     id="menu">
@@ -144,16 +139,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- 3 -->
-                    <!--
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
-                        </li>
-                    -->
-
-                    <!-- 4 -->
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">網站管理系統</span></a>
@@ -199,16 +184,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- 6 -->
-                    <!--
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-                        </li>
-                    -->
-
-                    <!-- 7 -->
                     <li>
                         <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span> </a>
@@ -275,21 +250,13 @@
                             </li>
                         </ul>
                     </li>
-
-
                 </ul>
-
                 <!-- 員工功能小圈圈 -->
-
             </div>
         </div>
-
         <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-
         <div class="col py-3">
-
             <!-- 由此開始 -->
-
             <!-- 主要內容 -->
             <div class="container-fluid">
                 <div class="row">
@@ -312,7 +279,8 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程圖片</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" class="dropify" data-default-file="" id="courseImg">
+                                                    <input type="file" class="dropify" data-default-file=""
+                                                           id="courseImg">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -320,7 +288,6 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control input-default "
                                                            placeholder="課程名稱" id="courseName">
-
                                                     <!--                                                    <input type="text" class="form-control input-default" name="courseName" placeholder="課程名稱" id="courseName" th:value="${course.getCourseName()}">-->
                                                 </div>
                                             </div>
@@ -329,7 +296,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control input-default "
                                                            placeholder="課程售價" id="coursePrice">
-<!--                                                    <input type="text" class="form-control input-default" name="coursePrice" placeholder="課程售價" id="coursePrice" th:value="${course.getCoursePrice()}">-->
+                                                    <!--                                                    <input type="text" class="form-control input-default" name="coursePrice" placeholder="課程售價" id="coursePrice" th:value="${course.getCoursePrice()}">-->
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -337,7 +304,7 @@
                                                 <div class="col-sm-10">
                                                      <textarea class="form-control" rows="4"
                                                                id="courseContent"></textarea>
-<!--                                                    <textarea class="form-control" rows="4" name="courseContent" id="courseContent" th:text="${course.getCourseContent()}"></textarea>-->
+                                                    <!--                                                    <textarea class="form-control" rows="4" name="courseContent" id="courseContent" th:text="${course.getCourseContent()}"></textarea>-->
                                                 </div>
                                             </div>
                                         </form>
@@ -355,11 +322,39 @@
                                                     <tr>
                                                         <td>試看</td>
                                                         <td>試看影片</td>
-                                                        <td><input type="file" class="dropify"
-                                                                   data-default-file=""></td>
-
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo"></td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo1"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo2"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo3"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo4"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td><input></td>
+                                                        <td><input type="file" class="dropify" data-default-file=""
+                                                                   id="courseVideo5"></td>
+                                                    </tr>
 
                                                     </tbody>
                                                 </table>
@@ -396,29 +391,110 @@
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
+<!-- import font awesome -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/Conponents/back_end.js"></script>
 
-<!-- evelyn jquery -->
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
-        integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-
-
-
+<script src="/Course/JS/datatables.init.js"></script>
 
 <script>
+
+    // $(document).ready(function () {
+    //     var videoData = []; // 儲存影片資料
+    //
+    //     // 更新編號
+    //     function updateRowNumbers() {
+    //         $('#addvideotable tbody tr:not(:first-child)').each(function (index) {
+    //             $(this).find('td:first').text(index + 1); // 從1開始所以加 1
+    //         });
+    //     }
+    //
+    //     // 刪除指定行並更新資料
+    //     $(document).on('click', '.deleteRow', function () {
+    //         var index = $(this).closest('tr').index() - 1; // 減去預留的試看行
+    //         videoData.splice(index, 1); // 從陣列中刪除對應的資料
+    //         $(this).closest('tr').remove();
+    //         updateRowNumbers(); // 更新編號
+    //         saveDataToLocalStorage(); // 將資料保存至 localStorage
+    //     });
+    //
+    //     // 從 localStorage 中檢索資料並顯示在頁面上
+    //     function loadDataFromLocalStorage() {
+    //         var storedData = localStorage.getItem('videoData');
+    //         if (storedData) {
+    //             videoData = JSON.parse(storedData);
+    //
+    //             videoData.forEach(function (data) {
+    //                 var newRow = $('<tr>');
+    //                 var rowContent = `
+    //                 <td></td>
+    //                 <td><input type="text" value="${data.name}" class="nameInput"></td>
+    //                 <td><input type="file" class="dropify" data-default-file=""></td>
+    //                 <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+    //             `;
+    //
+    //                 newRow.html(rowContent);
+    //                 newRow.insertAfter("#addvideotable tbody tr:last-child");
+    //             });
+    //
+    //             updateRowNumbers(); // 更新編號
+    //         }
+    //     }
+    //
+    //     // 將資料保存至 localStorage
+    //     function saveDataToLocalStorage() {
+    //         localStorage.setItem('videoData', JSON.stringify(videoData));
+    //     }
+    //
+    //     $('#addVideo').click(function () {
+    //         var newData = {
+    //             id: '',
+    //             name: '',
+    //             file: ''
+    //         };
+    //         videoData.push(newData);
+    //
+    //         var newRow = $('<tr>');
+    //         var rowContent = `
+    //         <td></td>
+    //         <td><input type="text" value="${newData.name}" class="nameInput" placeholder="輸入影片名稱"></td>
+    //         <td><input type="file" class="dropify" data-default-file=""></td>
+    //         <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+    //     `;
+    //
+    //         newRow.html(rowContent);
+    //         newRow.insertAfter("#addvideotable tbody tr:last-child");
+    //
+    //         updateRowNumbers(); // 更新編號
+    //         saveDataToLocalStorage(); // 將資料保存至 localStorage
+    //     });
+    //
+    //     // 在頁面載入時檢查 localStorage 中是否有資料並載入
+    //     $(document).ready(function () {
+    //         loadDataFromLocalStorage();
+    //     });
+    // });
+
+
+</script>
+
+<script>
+
+
     $("#submit").click(function () {
         let courseName = $("#courseName").val();
         let coursePrice = $("#coursePrice").val();
         let courseContent = $("#courseContent").val();
         let courseImg = $("#courseImg")[0].files[0];
-
+        let courseVideo = $("#courseVideo")[0].files[0];
         console.log(courseImg);
 
 
@@ -426,8 +502,9 @@
         formData.append("courseName", courseName);
         formData.append("coursePrice", coursePrice);
         formData.append("courseContent", courseContent);
-       formData.append("courseImg", courseImg);
-    formData.append("courseId", $("#course-id").text());
+        formData.append("courseImg", courseImg);
+        formData.append("courseVideo", courseVideo);
+        // formData.append("courseId", $("#course-id").text());
 
         $.ajax({
             url: "/course/add",
@@ -447,8 +524,8 @@
         })
     })
 
-    $('#cancel').on('click', function() {
-        location.href = '/course/allcrs'; // 在此处替换为你的目标 URL
+    $('#cancel').on('click', function () {
+        location.href = '/course/allcrs';
     });
 
 </script>
