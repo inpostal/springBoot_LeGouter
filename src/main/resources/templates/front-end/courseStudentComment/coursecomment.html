@@ -587,7 +587,7 @@
                                  alt="avatar" />
                           </div>
                           <div class="box_comment col-md-11">
-                          <textarea class="commentContent" id="commentContent" placeholder="在這裡描述課程內容問題或是留下學習心得與大家分享"></textarea>
+                            <textarea class="commentContent" id="commentContent" placeholder="在這裡描述課程內容問題或是留下學習心得與大家分享"></textarea>
                             <input type="hidden" id="memId" value="memId" />
                             <input type="hidden" id="studentCommentId" value="studentCommentId" />
                             <input type="hidden" id="courseId" value="courseId" />
@@ -814,30 +814,30 @@
       contentType: false,
       success: function (resp) {
         // function submit_comment() {
-          let memId=1;
-          let courseId =1;
-          // var memId = $('#memId').val();
-          // var courseId = $('#courseId').val();
-          // var studentcommentdate = $('#studentcommentdate').val();
-          var commentContent = $('.commentContent').val();
-          el = document.createElement('li');
-          el.className = "box_result row";
-          //成功後再執行
-          el.innerHTML =
-                  '<div class=\"avatar_comment col-md-1\">' +
-                  '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>' +
-                  '</div>' +
-                  '<div class=\"result_comment col-md-11\">' +
-                  '<h4>' + memId + '</h4>' +
-                  '<p>' + commentContent + '</p>' +
-                  '<div class=\"tools_comment\">' +
-                  '<a class=\"replay\" href=\"#\">回覆</a>' +
-                  '<span>' + '當下時間' + formattedTime + '</span>' + // 顯示格式化後的時間
-                  '</div>' +
-                  '<ul class="child_replay"></ul>' +
-                  '</div>';
-          document.getElementById('list_comment').prepend(el);
-          $('.commentContent').val('');
+        let memId=1;
+        let courseId =1;
+        // var memId = $('#memId').val();
+        // var courseId = $('#courseId').val();
+        // var studentcommentdate = $('#studentcommentdate').val();
+        var commentContent = $('.commentContent').val();
+        el = document.createElement('li');
+        el.className = "box_result row";
+        //成功後再執行
+        el.innerHTML =
+                '<div class=\"avatar_comment col-md-1\">' +
+                '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>' +
+                '</div>' +
+                '<div class=\"result_comment col-md-11\">' +
+                '<h4>' + memId + '</h4>' +
+                '<p>' + commentContent + '</p>' +
+                '<div class=\"tools_comment\">' +
+                '<a class=\"replay\" href=\"#\">回覆</a>' +
+                '<span>' + '當下時間' + formattedTime + '</span>' + // 顯示格式化後的時間
+                '</div>' +
+                '<ul class="child_replay"></ul>' +
+                '</div>';
+        document.getElementById('list_comment').prepend(el);
+        $('.commentContent').val('');
         // }
 
 
@@ -848,37 +848,9 @@
       }
     });
 
-
-
   });
 
-  //先將資料放到資料庫--->
-  //會員留言
-  // function submit_comment() {
-  //
-  //   var memId = $('#memId').val();
-  //   var courseId = $('#courseId').val();
-  //   var coursecomment = $('.coursecomment').val();
-  //   var studentcommentdate = $('#studentcommentdate').val();
-  //   el = document.createElement('li');
-  //   el.className = "box_result row";
-  //   //成功後再執行
-  //   el.innerHTML =
-  //           '<div class=\"avatar_comment col-md-1\">' +
-  //           '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>' +
-  //           '</div>' +
-  //           '<div class=\"result_comment col-md-11\">' +
-  //           '<h4>'+memId +'</h4>' +
-  //           '<p>' +  coursecomment + '</p>' +
-  //           '<div class=\"tools_comment\">' +
-  //           '<a class=\"replay\" href=\"#\">回覆</a>' +
-  //           '<span>'+studentcommentdate+'</span>' +
-  //           '</div>' +
-  //           '<ul class="child_replay"></ul>' +
-  //           '</div>';
-  //   document.getElementById('list_comment').prepend(el);
-  //   $('.coursecomment').val('');
-  // }
+
 
   $(document).ready(function () {
     $('.show_more').on('click', function (e) {
@@ -886,13 +858,13 @@
       $(".show_less").show();
     });
 
-    $('#list_comment').on('click', '.like', function (e) {
-      $current = $(this);
-      var x = $current.closest('div').text().trim();
-      var y = parseInt($current.closest('div').find('.count').text().trim());
-
-
-    });
+    // $('#list_comment').on('click', '.like', function (e) {
+    //   $current = $(this);
+    //   var x = $current.closest('div').text().trim();
+    //   var y = parseInt($current.closest('div').find('.count').text().trim());
+    //
+    //
+    // });
 
     //取消回覆
 
