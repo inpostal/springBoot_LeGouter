@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"></html>
 
 <head>
     <meta charset="utf-8">
@@ -58,71 +59,12 @@
     </div>
 
 
-    <div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
-        <div class="row gx-0 align-items-center d-none d-lg-flex">
-            <div class="col-lg-6 px-5 text-start">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
-                    <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
-                    <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
-                </ol>
-            </div>
-            <div class="col-lg-6 px-5 text-end">
-                <small>Follow us:</small>
-                <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- 頁首 -->
+    <div th:insert="front-end/components/Header :: #header-div"></div>
 
-    <!-- =====================導覽列開始========================= -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-        <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="text-primary m-0">Le Goûter</h1>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav mx-auto p-4 p-lg-0">
-                <a href="" class="nav-item nav-link active">首頁</a>
-                <a href="" class="nav-item nav-link">品牌故事</a>
-                <a href="" class="nav-item nav-link">甜點訂購</a>
-                <a href="" class="nav-item nav-link">課程系統</a>
-                <a href="/group-shop" class="nav-item nav-link">團購平台</a>
-                <a href="" class="nav-item nav-link">會員專區</a>
-                <a href="" class="nav-item nav-link">優惠券專區</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="" class="dropdown-item">FAQ</a>
-                        <a href="" class="dropdown-item">聯絡客服</a>
-                    </div>
-                </div>
-                <div class="nav-link">
+    <!-- 導覽列 -->
+    <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
 
-                </div>
-            </div>
-            <div class=" d-none d-lg-flex">
-                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-                    <i class="fa fa-phone text-primary"></i>
-                </div>
-                <div class="ps-3">
-                    <small class="text-primary mb-0">聯絡我們</small>
-                    <p class="text-light fs-5 mb-0">0912345678</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- =====================導覽列結束========================= -->
 
     <section class="main-shop">
         <div class="products-shop">
@@ -233,67 +175,14 @@
     </div>
     <!-- Modal Area End Here -->
 
-    <!-- =====================頁腳開始========================= -->
-    <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">粉絲專頁</h4>
 
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
-                                class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">快速連結</h4>
-                    <a class="btn btn-link" href="">品牌故事</a>
-                    <a class="btn btn-link" href="">聯絡我們</a>
-                    <a class="btn btn-link" href="">服務與條款</a>
-                </div>
+    <!-- 頁腳 -->
+    <div th:insert="front-end/components/Footer :: #footer-div"></div>
 
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">常見問題</h4>
-                    <a class="btn btn-link" href="">FAQ</a>
-                    <a class="btn btn-link" href="">回報客服</a>
-                </div>
+    <!-- 版權所有 -->
+    <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">甜點畫廊</h4>
-                    <div class="row g-2">
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg"
-                                alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg"
-                                alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg"
-                                alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-2.jpg"
-                                alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-3.jpg"
-                                alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="Group/Shan_static/picture/product-1.jpg"
-                                alt="Image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- =====================頁腳結束========================= -->
-
+    
     <script data-cfasync="false" src="Group/Shan_static/js/email-decode.min.js"></script>
     <!-- <script src="Group/Shan_static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script> -->
     <script src="Group/Shan_assets/js/vendor/bootstrap.bundle.min.js"
