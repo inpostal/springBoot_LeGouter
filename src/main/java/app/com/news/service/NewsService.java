@@ -30,4 +30,7 @@ public class NewsService {
         repository.save(news);
     }
 
+    public void delete(Integer newsId) {
+        repository.deleteById(newsId);
+    }
 }

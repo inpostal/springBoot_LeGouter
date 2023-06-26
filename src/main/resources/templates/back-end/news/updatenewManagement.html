@@ -475,11 +475,11 @@
       <form class="container">
 
         <div class="container-small-unit">
-          <label class="label" for="">員工編號</label>
+          <label class="label" >員工編號</label>
           <input class="input" type="number" placeholder="輸入員工編號" id="empId" required th:value="${news.getEmpId()}"/>
         </div>
         <div class="container-small-unit">
-          <label class="label" for="">文章標題</label>
+          <label class="label" >文章標題</label>
           <input class="input" type="text" placeholder="輸入文章標題" required id="newsTitle" th:value="${news.getNewsTitle()}"/>
         </div>
 
@@ -506,6 +506,8 @@
         </div>
 
         <button class="btn" type="button" id="submit">發布</button>
+        <button class="btn" type="button" id="cancel">取消修改</button>
+
       </form>
 
 
@@ -583,7 +585,7 @@
     formData.append('newsPic',newsPic);
     formData.append('newsTitle',newsTitle);
     $.ajax({
-      url:'/news/add',
+      url:'/news/update',
       contentType:false,
       processData:false,
       data:formData,
