@@ -20,5 +20,9 @@ public class GroupProductImgService {
 		GroupProductImgVO imgvo = groupProductImgRepository.getReferenceById(groupProductImgId);
 		return imgvo;
 	}
+	
+	public Boolean updataImg(GroupProductImgVO groupProductImgVO) {
+		return groupProductImgRepository.save(groupProductImgVO) != null;
+	}
 
 }

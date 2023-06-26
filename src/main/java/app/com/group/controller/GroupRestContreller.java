@@ -40,6 +40,7 @@ public class GroupRestContreller {
 	private GroupProductImgService groupProductImgService;
 
 	//-----以下是團購商品-----
+	//後台 新增團購商品(舊)
 	@PostMapping("/groupProduct/inser")
 	public Map<String, Boolean> inserProduct(@RequestBody GroupProductDTO groupProductDTO) {
 		Boolean success = groupProductService.inserProduct(groupProductDTO);
@@ -48,17 +49,20 @@ public class GroupRestContreller {
 		return response;
 	}
 	
+	//後台瀏覽全部團購商品
 	@GetMapping("/groupProduct/showList")
 	public List<GroupProductVO> showAll() {
 		return groupProductService.showAllProduct();
 	}
 	
+	//查詢單以團購商品
 	@PostMapping("/groupProduct/showOne")
-	public GroupProductDTO showOne (@RequestParam String groupProductId) {
+	public GroupProductVO showOne (@RequestParam String groupProductId) {
 		Integer gpid = Integer.parseInt(groupProductId);
 		return groupProductService.showOneProduct(gpid);
 	}
 	
+	//後台 新增團購商品(含上傳單一圖片功能)
 	@PostMapping("/groupProduct/inserNew")
 	public Map<String, Boolean> inserProductNew(
 			@RequestParam("groupProductName") String groupProductName,
@@ -104,15 +108,49 @@ public class GroupRestContreller {
                 .body(resource);
     }
 
+	//後台 修改團購商品
+	@PostMapping("/group-product/updata-the")
+	public Map<String, Boolean> updataForProduct(
+			@RequestParam("groupProductId") Integer groupProductId,
+			@RequestParam("groupProductName") String groupProductName,
+			@RequestParam("groupProductContent") String groupProductContent,
+			@RequestParam("groupProductPrice") Integer groupProductPrice,
+			@RequestParam("groupProductStardate") String groupProductStardate,
+			@RequestParam("groupProductEnddate") String groupProductEnddate,
+			@RequestParam("groupProductStatus") Integer groupProductStatus,
+			@RequestParam("groupProductImg") MultipartFile groupProductImg) {
+		GroupProductDTO updatato = new GroupProductDTO();
+		updatato.setGroupProductId(groupProductId);
+		updatato.setGroupProductName(groupProductName);
+		updatato.setGroupProductContent(groupProductContent);
+		updatato.setGroupProductPrice(groupProductPrice);
+		updatato.setGroupProductStardate(groupProductStardate);
+		updatato.setGroupProductEnddate(groupProductEnddate);
+		updatato.setGroupProductStatus(groupProductStatus);
+		Boolean success = groupProductService.updataThe(updatato);
+		
+		GroupProductImgVO updataivo = new GroupProductImgVO();
+		try {
+			updataivo.setGroupProductImgId(groupProductId);
+			updataivo.setGroupProductImg(groupProductImg.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		groupProductImgService.updataImg(updataivo);
+		
+		Map<String, Boolean> response = new HashMap<>();
+		 response.put("success", success);
+		return response;
+	}
 	
 	//-----以下是團購活動-----
-	//後台
+	//後台 瀏覽全部活動
 	@GetMapping("/groupActivity/showList")
 	public List<GroupActivityVO> showAllActivity() {
 		return groupActivityService.allActivity();
 	}
 	
-	//前台
+	//前台 瀏覽全部活動
 	@GetMapping("/group-shop/showActivityList")
 	public List<GroupActivityVO> showAllShopActivity() {
 		return groupActivityService.allShopActivity();
@@ -120,7 +158,7 @@ public class GroupRestContreller {
 
 	//前台單品
 	@PostMapping("/single-product/showthe")
-	public GroupActivityDTO showthe (@RequestParam String groupActivityId) {
+	public GroupActivityVO showthe (@RequestParam String groupActivityId) {
 		Integer theid = Integer.parseInt(groupActivityId);
 		return groupActivityService.showTheActivity(theid);
 	}
@@ -128,8 +166,20 @@ public class GroupRestContreller {
 	//前台團購主專區
 	@PostMapping("/groupActivity/inser")
 	public Map<String, Boolean> inserActivity(@RequestBody GroupActivityDTO groupActivityDTO) {
+		System.out.println("開始日期" + groupActivityDTO.getGroupOrderStar());
+		System.out.println("結束日期" + groupActivityDTO.getGroupOrderEnd());
 		Boolean success = groupActivityService.inserActivitys(groupActivityDTO);
 		 Map<String, Boolean> response = new HashMap<>();
+		 response.put("success", success);
+		return response;
+	}
+	
+	//後台
+	@PostMapping("/groupActivity/deleteone")
+	public Map<String, Boolean> deleteOne (@RequestParam String groupActivityId) {
+		Integer theid = Integer.parseInt(groupActivityId);
+		Boolean success = groupActivityService.deleteOneActivity(theid);
+		Map<String, Boolean> response = new HashMap<>();
 		 response.put("success", success);
 		return response;
 	}
