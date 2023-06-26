@@ -8,7 +8,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" type="text/css" href="back-nav-bar.css">  -->
+    <link rel="stylesheet" type="text/css" href="back-nav-bar.css">
 
     <!-- import font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,10 +16,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
     <!-- evely_css -->
     <link rel="stylesheet" type="text/css" href="/Course/CSS/style.css">
-    <link rel="stylesheet" type="text/css" href="/Course/CSS/evelyn.css">
-    <link rel="stylesheet" type="text/css" href="/Course/CSS/app.min.css">
+    <!--    <link rel="stylesheet" type="text/css" href="/Course/CSS/evelyn.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="/Course/CSS/app.min.css">-->
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">-->
     <style>
         #nav-bar {
             background-color: #1E1916;
@@ -433,7 +433,14 @@
 
 
 <!-- import font awesome -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+<!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/Conponents/back_end.js"></script>
 
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
@@ -460,9 +467,187 @@
 <!--</script>-->
 <script>
     $(function () {
-        function renderCourses(url, elementId) {
+        $.ajax({
+            url: '/course/getall',
+            type: 'GET',
+            success: function (res) {
+                let th_html =
+                    `<tr>
+                                <th>課程編號</th>
+                                <th>課程圖片</th>
+                                <th>課程名稱</th>
+                                <th>上傳時間</th>
+                                <th>課程狀態</th>
+                                <th>確認</th>
+                             </tr>`;
+
+                for (let e in res) {
+                    let badgeClass = '';
+                    let courseStatusText = '';
+
+                    switch (res[e].courseStatus) {
+                        case 0:
+                            badgeClass = 'badge badge-pill badge-secondary';
+                            courseStatusText = '待審核';
+                            break;
+                        case 1:
+                            badgeClass = 'badge badge-pill badge-success';
+                            courseStatusText = '已上架';
+                            break;
+                        case 2:
+                            badgeClass = 'badge badge-pill badge-danger';
+                            courseStatusText = '被退件';
+                            break;
+                        case 3:
+                            badgeClass = 'badge badge-pill badge-dark';
+                            courseStatusText = '已下架';
+                            break;
+                    }
+
+                    let courseTime = res[e].courseTime;
+
+                    let td_html =
+                        `<tr>
+                                  <td>${res[e].courseId}</td>
+                                  <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
+                                  <td>${res[e].courseName}</td>
+                                  <td>${courseTime}</td>
+                                  <td><span class="${badgeClass}">${courseStatusText}</span></td>
+                                  <td><button type="button" class="btn btn-warning" onclick="location.href='/course/edit?courseId=${res[e].courseId}'">查看</button></td>
+                                </tr>`;
+                    th_html += td_html;
+                }
+                $("#checkCourse1").html(th_html);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error(xhr);
+            }
+        });
+        $("#section1").show();
+        $("#section2, #section3").hide();
+
+        $("#section-1").on("click", function () {
+            console.log('section1')
+
+            $("#section2, #section3, #section4").hide();
+            // Show section1
+            $("#section1").show();
             $.ajax({
-                url: url,
+                url: '/course/getall',
+                type: 'GET',
+                success: function (res) {
+                    let th_html =
+                        `<tr>
+                                <th>課程編號</th>
+                                <th>課程圖片</th>
+                                <th>課程名稱</th>
+                                <th>上傳時間</th>
+                                <th>課程狀態</th>
+                                <th>確認</th>
+                                 </tr>`;
+
+                    for (let e in res) {
+                        let badgeClass = '';
+                        let courseStatusText = '';
+
+                        switch (res[e].courseStatus) {
+                            case 0:
+                                badgeClass = 'badge badge-pill badge-secondary';
+                                courseStatusText = '待審核';
+                                break;
+                            case 1:
+                                badgeClass = 'badge badge-pill badge-success';
+                                courseStatusText = '已上架';
+                                break;
+                            case 2:
+                                badgeClass = 'badge badge-pill badge-danger';
+                                courseStatusText = '已退件';
+                                break;
+                            case 3:
+                                badgeClass = 'badge badge-pill badge-dark';
+                                courseStatusText = '已下架';
+                                break;
+                        }
+
+                        let courseTime = res[e].courseTime;
+
+                        let td_html = `
+                                <tr>
+                                    <td>${res[e].courseId}</td>
+                                    <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
+                                    <td>${res[e].courseName}</td>
+                                    <td>${courseTime}</td>
+                                    <td><span class="${badgeClass}">${courseStatusText}</span></td>
+                                    <td><button type="button" class="btn btn-warning" onclick="location.href='/course/edit?courseId=${res[e].courseId}'">查看</button></td>
+                                </tr>`;
+                        th_html += td_html;
+                    }
+                    $("#checkCourse1").html(th_html);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error(xhr);
+                }
+            });
+        });
+
+        $("#section-2").on("click", function () {
+            // Hide all sections
+            $("#section1, #section3, #section4").hide();
+
+            // Show section2
+            $("#section2").show();
+            console.log('section2');
+            $.ajax({
+                url: '/course/getall',
+                type: 'GET',
+                success: function (res) {
+                    let th_html =
+                        `<tr>
+                                    <th>課程編號</th>
+                                    <th>課程圖片</th>
+                                    <th>課程名稱</th>
+                                    <th>更新時間</th>
+                                    <th>課程狀態</th>
+                                    <th>審核人員</th>
+                                    <th>內容</th>
+                                 </tr>`;
+                    for (let e in res) { // 加入 for loop
+                        // 只有狀態為 '已上架' 的課程才會被添加
+                        if (res[e].courseStatus === 1) {
+                            let badgeClass = 'badge badge-pill badge-success';
+                            let courseStatusText = '已上架';
+                            let courseTime = res[e].courseTime;
+
+                            let td_html = `
+                                        <tr>
+                                            <td>${res[e].courseId}</td>
+                                            <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
+                                            <td>${res[e].courseName}</td>
+                                            <td>${courseTime}</td>
+                                            <td><span class="${badgeClass}">${courseStatusText}</span></td>
+                                            <td>${res[e].empId}</td>
+                                            <td><button type="button" class="btn btn-warning" onclick="location.href='/course/edit?courseId=${res[e].courseId}'">查看</button></td>
+                                        </tr>`;
+                            th_html += td_html;
+                        }
+                    }
+                    $("#checkCourse2").html(th_html);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error(xhr);
+                }
+            });
+        });
+
+        $("#section-3").on("click", function () {
+            // Hide all sections
+            $("#section1, #section2, #section4").hide();
+
+            // Show section3
+            $("#section3").show();
+            console.log('section3');
+            $.ajax({
+                url: '/course/getall',
                 type: 'GET',
                 success: function (res) {
                     let th_html =
@@ -470,92 +655,88 @@
                         <th>課程編號</th>
                         <th>課程圖片</th>
                         <th>課程名稱</th>
-                        <th>上傳時間</th>
+                        <th>更新時間</th>
                         <th>課程狀態</th>
-                        <th>確認</th>
-                    </tr>`;
-
+                        <th>審核人員</th>
+                        <th>內容</th>
+        </tr>`;
                     for (let e in res) {
-                        let badgeClass = '';
-                        let courseStatusText = '';
-                        let buttonLink = '';
+                        // 只有狀態為 '已退件' 的課程才會被添加
+                        if (res[e].courseStatus === 3) {
+                            let badgeClass = 'badge badge-pill badge-dark';
+                            let courseStatusText = '已下架';
+                            let courseTime = res[e].courseTime;
 
-                        switch (res[e].courseStatus) {
-                            case 0:
-                                badgeClass = 'badge badge-pill badge-secondary';
-                                courseStatusText = '待審核';
-                                buttonLink = `/course/edit?courseId=${res[e].courseId}`;
-                                break;
-                            case 1:
-                                badgeClass = 'badge badge-pill badge-success';
-                                courseStatusText = '已上架';
-                                buttonLink = `/course/coursereview?courseId=${res[e].courseId}`;
-                                break;
-                            case 2:
-                                badgeClass = 'badge badge-pill badge-danger';
-                                courseStatusText = '被退件';
-                                buttonLink = `/course/courserestart?courseId=${res[e].courseId}`;
-                                break;
-                            case 3:
-                                badgeClass = 'badge badge-pill badge-dark';
-                                courseStatusText = '已下架';
-                                buttonLink = `/course/courserestart?courseId=${res[e].courseId}`;
-                                break;
+                            let td_html = `
+                                        <tr>
+                                            <td>${res[e].courseId}</td>
+                                            <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
+                                            <td>${res[e].courseName}</td>
+                                            <td>${courseTime}</td>
+                                            <td><span class="${badgeClass}">${courseStatusText}</span></td>
+                                            <td>${res[e].empId}</td>
+                                            <td><button type="button" class="btn btn-warning" onclick="location.href='/course/edit?courseId=${res[e].courseId}'">修改</button></td>
+                                        </tr>`;
+                            th_html += td_html;
                         }
-
-                        let courseTime = res[e].courseTime;
-
-                        let td_html =
-                            `<tr>
-                            <td>${res[e].courseId}</td>
-                            <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
-                            <td>${res[e].courseName}</td>
-                            <td>${courseTime}</td>
-                            <td><span class="${badgeClass}">${courseStatusText}</span></td>
-                            <td><button type="button" class="btn btn-warning" onclick="location.href='${buttonLink}'">查看</button></td>
-                        </tr>`;
-                        th_html += td_html;
                     }
-                    $(`#${elementId}`).html(th_html);
+                    $("#checkCourse3").html(th_html);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.error(xhr);
                 }
             });
-        }
-
-        // Initial load
-        $("#section1").show();
-        $("#section2, #section3").hide();
-        renderCourses('/course/getall', 'checkCourse1');
-
-        $("#section-1").on("click", function () {
-            console.log('section1')
-            $("#section2, #section3, #section4").hide();
-            // Show section1
-            $("#section1").show();
-            renderCourses('/course/getall', 'checkCourse1');
         });
 
-        $("#section-2").on("click", function () {
+        $("#section-4").on("click", function () {
             // Hide all sections
-            $("#section1, #section3, #section4").hide();
-            // Show section2
-            $("#section2").show();
-            console.log('section2');
-            renderCourses('/course/getall', 'checkCourse2');
-        });
+            $("#section1, #section2, #section3").hide();
 
-        $("#section-3").on("click", function () {
-            // Hide all sections
-            $("#section1, #section2, #section4").hide();
             // Show section3
-            $("#section3").show();
+            $("#section4").show();
             console.log('section3');
-            renderCourses('/course/getall', 'checkCourse3');
+            $.ajax({
+                url: '/course/getall',
+                type: 'GET',
+                success: function (res) {
+                    let th_html =
+                        `<tr>
+                        <th>課程編號</th>
+                        <th>課程圖片</th>
+                        <th>課程名稱</th>
+                        <th>更新時間</th>
+                        <th>課程狀態</th>
+                        <th>審核人員</th>
+                        <th>內容</th>
+        </tr>`;
+                    for (let e in res) {
+                        // 只有狀態為 '已退件' 的課程才會被添加
+                        if (res[e].courseStatus === 2) {
+                            let badgeClass = 'badge badge-pill badge-danger';
+                            let courseStatusText = '被退件';
+                            let courseTime = res[e].courseTime;
+
+                            let td_html = `
+                                        <tr>
+                                            <td>${res[e].courseId}</td>
+                                            <td><img src="/course/img/${res[e].courseId}" width="100" height="100"></td>
+                                            <td>${res[e].courseName}</td>
+                                            <td>${courseTime}</td>
+                                            <td><span class="${badgeClass}">${courseStatusText}</span></td>
+                                            <td>${res[e].empId}</td>
+                                            <td><button type="button" class="btn btn-warning" onclick="location.href='/course/edit?courseId=${res[e].courseId}'">修改</button></td>
+                                        </tr>`;
+                            th_html += td_html;
+                        }
+                    }
+                    $("#checkCourse4").html(th_html);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error(xhr);
+                }
+            });
         });
     });
-
 
 </script>
 

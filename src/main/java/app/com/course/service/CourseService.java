@@ -58,8 +58,8 @@ public class CourseService {
 
 
     //儲存結帳資料
-    public CourseOrder checkout(CheckoutDTO dto) {
-        CourseOrder courseOrder = new CourseOrder();
+    public CourseOrder2 checkout(CheckoutDTO dto) {
+        CourseOrder2 courseOrder = new CourseOrder2();
         courseOrder.setMemId(dto.getMemberId());
         courseOrder.setOrderTotal(dto.getCoursePrice());
         courseOrder.setCourseId(dto.getCourseId());
