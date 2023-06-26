@@ -377,7 +377,7 @@
 <!--                                        </th>-->
                                         <th>商品名稱</th>
                                         <th>商品描述</th>
-                                        <th>商品圖片</th>
+                                        <th style="width: 200px;">商品圖片</th>
                                         <th>價格</th>
                                         <th>狀態</th>
                                         <th></th>
@@ -512,6 +512,14 @@
                                         <label>價格</label>
                                         <input type="number" class="form-control" required id="editPrice">
                                     </div>
+                                    <div class="form-group">
+                                        <label>商品狀態</label>
+                                        <br>
+                                        <select class="form-control" id="editStatus">
+                                            <option value="已下架">下架</option>
+                                            <option value="販售中">販售中</option>
+                                        </select>
+                                    </div>
                                     <!-- <div class="form-group">
                                         <label>數量</label>
                                         <input type="number" class="form-control" required>
@@ -537,7 +545,7 @@
                                 </div>
                                 <div class="modal-body">					
                                     <p>確定下架？</p>
-                                    <p class="text-warning"><small style="color: red;">注意：商品一經下架無法回復</small></p>
+                                    <p class="text-warning"><small style="color: red;">注意：要下架?真假...要確定內</small></p>
                                 </div>
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-default" data-dismiss="modal" value="取消">
@@ -560,24 +568,33 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                    <button class="btn btn-danger" id="delete0" style="position: absolute; right: 35px;">刪除圖片</button>
-                                    <br id="img0">
 
-                                    <br>
-                                    <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                    <button class="btn btn-danger" id="delete1" style="position: absolute; right: 35px;">刪除圖片</button>
-                                    <br id="img1">
+                                    <div style="position: relative; display: inline-block;">
+                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                        <button class="btn btn-danger" id="delete0"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
+                                        <br id="img0">
+                                    </div>
 
-                                    <br>
-                                    <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                    <button class="btn btn-danger" id="delete2" style="position: absolute; right: 35px;">刪除圖片</button>
-                                    <br id="img2">
 
-                                    <br>
-                                    <input  type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                    <button class="btn btn-danger" id="delete3" style="position: absolute; right: 35px;">刪除圖片</button>
-                                    <br id="img3">
+                                    <div style="position: relative; display: inline-block;">
+                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                        <button class="btn btn-danger" id="delete1"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
+                                        <br id="img1">
+                                    </div>
+
+
+                                    <div style="position: relative; display: inline-block;">
+                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                        <button class="btn btn-danger" id="delete2"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
+                                        <br id="img2">
+                                    </div>
+
+
+                                    <div style="position: relative; display: inline-block;">
+                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
+                                        <button class="btn btn-danger" id="delete3"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
+                                        <br id="img3">
+                                    </div>
 
 
                                     
@@ -681,7 +698,7 @@
 <!--                                    </td>-->
                                     <td>${res[e].dessertName}</td>
                                     <td>${res[e].dessertContent}</td>
-                                    <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="沒有圖片" style="width: 100px;></td>
+                                    <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="沒有圖片" style="height: 60px;"></td>
                                     <td>NT$${res[e].dessertPrice}</td>
                                     <td class="${statusClass}">${dessertStatus}</td>
                                     <td>
@@ -757,21 +774,30 @@
                 url: '/dessert5/search?dessertName=' + encodeURIComponent(dessertName),
                 type: 'GET',
                 success: function(res){
+                    console.log(res);
+                    if (res.dessertName !== undefined) {
                         let dessertStatus = res.dessertStatus;
                         let statusClass = dessertStatus === "已下架" ? "red-text" : "";
-                        let html =`<tr>
-                                    <td>${res.dessertName}</td>
-                                    <td>${res.dessertContent}</td>
-                                    <td>NT$${res.dessertPrice}</td>
-                                    <td class="${statusClass}">${dessertStatus}</td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
-                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
-                                    </td>
-                                 </tr>`;
+                        let html = `<tr>
+                                        <td>${res.dessertName}</td>
+                                        <td>${res.dessertContent}</td>
+                                        <td><img src="/dessert5/image0?dessertId=${res.dessertId}" alt="沒有圖片" style="height: 60px;"></td>
+                                        <td>NT$${res.dessertPrice}</td>
+                                        <td class="${statusClass}">${dessertStatus}</td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
+                                            <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
+                                        </td>
+                                     </tr>`;
 
-                    $("#back-table").html(html);
+                        $("#back-table").html(html);
+                    } else {
+                        window.alert("查無此商品");
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr);
                 }
             })
         })
@@ -780,6 +806,22 @@
         $(document).on("click", ".edit", function() {
             let dessertId = $(this).data('id');
             console.log(dessertId);
+
+            // 給input標籤預設值
+            $.ajax({
+                url: '/dessert5/editdefault?dessertId=' + encodeURIComponent(dessertId),
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    $("#editName").val(res.dessertName);
+                    $("#editContent").val(res.dessertContent);
+                    $("#editPrice").val(res.dessertPrice);
+                    $("#editStatus").val(res.dessertStatus);
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr);
+                }
+            });
 
             $("#dessert-edit").off().on("click", function(e) {
                 e.preventDefault(); // 防止表单提交
@@ -795,7 +837,7 @@
                         dessertName: $("#editName").val(),
                         dessertContent: $("#editContent").val(),
                         dessertPrice: $("#editPrice").val(),
-                        dessertStatus: "販售中"
+                        dessertStatus: $("#editStatus").val()
                     }),
                     success: function(res) {
                         // 跳出訊息視窗
@@ -826,13 +868,13 @@
 
 
             // 從資料庫顯示圖片0
-            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
+            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
             // 從資料庫顯示圖片1
-            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
+            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
             // 從資料庫顯示圖片2
-            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
+            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
             // 從資料庫顯示圖片3
-            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px;">`)
+            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
 
 
             // 刪除圖片 -----------------------------------------------------------------------------------------------------------

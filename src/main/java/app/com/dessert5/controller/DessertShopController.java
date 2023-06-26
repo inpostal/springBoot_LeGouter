@@ -61,4 +61,11 @@ public class DessertShopController {
         return msg;
     }
 
+    // 給預設值
+    @GetMapping("/editdefault")
+    public Dessert editDefault(@RequestParam Integer dessertId){
+        Dessert dessert = dessertService.findById(dessertId);
+        return dessert;
+    }
+
 }

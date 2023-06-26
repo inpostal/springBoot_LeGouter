@@ -49,6 +49,7 @@ public class DessertService {
         return dessert;
     }
 
+    // 編輯一筆
     public String update(Integer dessertId, Dessert dessert){
 
         // 找到要被編輯的商品
@@ -56,8 +57,11 @@ public class DessertService {
 
         // 檢查新編輯的商品資訊，是否有重複的商品名稱
         if (dessertRepository.findByDessertName(dessert.getDessertName()) == null) {
-            dessert.setDessertId(dessertId);
-            dessertRepository.save(dessert);
+            dessertOld.setDessertName(dessert.getDessertName());
+            dessertOld.setDessertContent(dessert.getDessertContent());
+            dessertOld.setDessertPrice(dessert.getDessertPrice());
+            dessertOld.setDessertStatus(dessert.getDessertStatus());
+            dessertRepository.save(dessertOld);
             return "編輯成功";
         } else {
             return "商品已存在，無法修改";
