@@ -74,8 +74,7 @@
     tr {
       font-size: 20px;
       padding: 5px;
-      word-spacing: 10px;
-      border-width: 1px;
+        text-align: center;
       border-color: #212529;
     }
 
@@ -133,7 +132,7 @@
 
     .table-responsive {
       width: 100%;
-      margin-top: 20px;
+
     }
 
     #example3 {
@@ -157,6 +156,7 @@
       padding: 10px;
     }
 
+
     .form-check-input[type=checkbox] {
       border-color: #1E1916;
     }
@@ -168,7 +168,9 @@
     .search-input {
       float: right;
     }
-
+    .page-link {
+      color: #1e1916;
+    }
 
 
 
@@ -391,13 +393,12 @@
     <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <div class="col py-3">
       <!-- 由此開始 -->
-      <h1>訂單管理管理</h1>
+      <h1>團購訂單管理</h1>
 
 
 
       <div class="from-row">
         <div class="d-flex justify-content-between">
-          <a href="./新增最新消息文章.html"><input class="add-news" type="button" value="+新增文章"></a>
 
           <div class="text-end mb-3">
             關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
@@ -421,13 +422,14 @@
                     </div>
                   </th>
                   <th>訂單編號</th>
-                  <th>會員編號</th>
-                  <th>活動編號</th>
-                  <th>團購狀態</th>
+                  <th>團購主編號</th>
                   <th>訂購數量</th>
-                  <th>商品總金額</th>
-                  <th>訂單明細</th>
-                  <th>訂單編輯</th>
+                  <th>團購狀態</th>
+                  <th>訂單總金額</th>
+                  <th>查看團購活動</th>
+                  <th>查看訂單詳情</th>
+
+
                 </tr>
                 </thead>
                 <tbody id="groupordermaster">
@@ -484,47 +486,72 @@
 
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
 
 </body>
 <script>
   $(document).ready(function () {
-    $('.fa-trash').click(function () {
-      $(this).closest("tr").remove();
-    });
 
+    // 第一个 $(document).ready 函数中的代码
     $.ajax({
-      url: '/groupordermaster/getAll',
-      type: "Get",
-      dataType: "json",
+      url: '/group/order/master/restcontrollerlist',
+      type: 'GET',
+      dataType: 'json',
       success: function (resp) {
-        console.log(resp);
-        let td_html = '';
-        for (let e in resp) {
+          let td_html = '';
+          for (let e in resp) {
+            let groupOrderStatustext = '';
+            switch (resp[e].groupOrderStatus) {
+              case 0:
+                groupOrderStatustext = '尚未達到開團時間';
+                break;
+              case 1:
+                groupOrderStatustext = '團購進行中，目前團購商品下訂總數不足';
+                break;
+              case 2:
+                groupOrderStatustext = '團購進行中，目前團購商品下訂總數已達標';
+                break;
+              case 3:
+                groupOrderStatustext = '團購關閉，出貨處理中';
+                break;
+              case 4:
+                groupOrderStatustext = '團購關閉，已出貨';
+                break;
+              case 5:
+                groupOrderStatustext = '團購結束。團購時間逾期且團購商品下訂總數不足';
+                break;
+              case 6:
+                groupOrderStatustext = ':團購結束。訂單已完成';
+                break;
+            }
+
+
           td_html += `<tr>
-                    <th>
-                        <div class="form-check custom-checkbox ms-2">
-                            <input type="checkbox" class="form-check-input" id="row1" onchange="updateSelectedCount()">
-                            <label class="form-check-label" for="row1"></label>
-                        </div>
-                    </th>
-                    <td id="grouporderid">${resp[e].groupOrderId}</td>
-                    <td id="memid">${resp[e].memId}</td>
-                    <td id="groupproductid">${resp[e].groupProductId}</td>
-                    <td id="grouporderstatus">${resp[e].groupOrderStatus}</td>
-                    <td id="numberofproduct">${resp[e].numberOfProduct}</td>
-                    <td id="totalgroupproductprice">${resp[e].totalGroupProductPrice}</td>
-                    <td>
-                        <a href="./訂單明細管理.html" class="btn btn-primary">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#" class="btn btn-danger shadow btn-xs sharp">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>`;
+          <th>
+            <div class="form-check custom-checkbox ms-2">
+              <input type="checkbox" class="form-check-input" id="row2" onChange="updateSelectedCount()">
+              <label class="form-check-label" for="row2"></label>
+            </div>
+          </th>
+          <td id="groupOrderId">${resp[e].groupOrderId}</td>
+          <td id="memId">${resp[e].memId}</td>
+          <td id="numberOfProduct">${resp[e].numberOfProduct}</td>
+          <td id="groupOrderStatus">${groupOrderStatustext}</td>
+          <td id="totalGroupProductPrice">${resp[e].totalGroupProductPrice}</td>
+          <td>
+
+            <a href="/group/activity/update?groupActivityId=${resp[e].groupActivityId}" class="btn btn-dark">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+          </td>
+          <td>
+<!--               設定路徑&ndash;&gt;訂單主檔進到近單明細.找到訂單明細相同-->
+            <a href="/grouporderdetail/list/getbyId/all?groupOrderId=${resp[e].groupOrderId}" class="btn btn-secondary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+          </td>
+        </tr>`;
         }
         $("#groupordermaster").html(td_html);
       },
@@ -532,81 +559,85 @@
         console.error(xhr);
       }
     });
-  });
+    });
 
+    $(document).ready(function () {
+      'use strict';
+      var LightTableFilter = (function (Arr) {
 
-  (function (document) {
-    'use strict';
+        var _input;
 
-    var LightTableFilter = (function (Arr) {
-
-      var _input;
-
-      function _onInputEvent(e) {
-        _input = e.target;
-        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-        Arr.forEach.call(tables, function (table) {
-          Arr.forEach.call(table.tBodies, function (tbody) {
-            Arr.forEach.call(tbody.rows, _filter);
-          });
-        });
-      }
-
-      function _filter(row) {
-        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-      }
-
-      return {
-        init: function () {
-          var inputs = document.getElementsByClassName('light-table-filter');
-          Arr.forEach.call(inputs, function (input) {
-            input.oninput = _onInputEvent;
+        function _onInputEvent(e) {
+          _input = e.target;
+          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+          Arr.forEach.call(tables, function (table) {
+            Arr.forEach.call(table.tBodies, function (tbody) {
+              Arr.forEach.call(tbody.rows, _filter);
+            });
           });
         }
-      };
-    })(Array.prototype);
 
-    document.addEventListener('readystatechange', function () {
-      if (document.readyState === 'complete') {
-        LightTableFilter.init();
-      }
+        function _filter(row) {
+          var text = row.textContent.toLowerCase(),
+                  val = _input.value.toLowerCase();
+          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        }
+
+        return {
+          init: function () {
+            var inputs = document.getElementsByClassName('light-table-filter');
+            Arr.forEach.call(inputs, function (input) {
+              input.oninput = _onInputEvent;
+            });
+          }
+        };
+      })(Array.prototype);
+
+      document.addEventListener('readystatechange', function () {
+        if (document.readyState === 'complete') {
+          LightTableFilter.init();
+        }
+      });
     });
 
-  })(document);
+
+    function selectAll() {
+      var checkboxes = document.querySelectorAll('.table-responsive .form-check-input');
+      var selectAllCheckbox = document.getElementById('checkAll');
+      var selectedCount = 0;
+
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = selectAllCheckbox.checked;
+        if (checkbox !== selectAllCheckbox && checkbox.checked) {
+          selectedCount++;
+        }
+      });
+
+      updateSelectedCount(selectedCount);
+    }
+
+    function updateSelectedCount() {
+      var checkboxes = document.querySelectorAll('.table-responsive .form-check-input');
+      var selectedCount = 0;
+
+      checkboxes.forEach(function (checkbox) {
+        if (checkbox.checked && checkbox !== document.getElementById('checkAll')) {
+          selectedCount++;
+        }
+      });
+
+      var selectedCountElement = document.getElementById('selectedCount');
+      selectedCountElement.innerHTML = '已選取 ' + selectedCount + ' 筆資料';
+    }
+
+    // Initial count when the page loads
+    updateSelectedCount();
 
 
-  function selectAll() {
-    var checkboxes = document.querySelectorAll('.table-responsive .form-check-input');
-    var selectAllCheckbox = document.getElementById('checkAll');
-    var selectedCount = 0;
 
-    checkboxes.forEach(function (checkbox) {
-      checkbox.checked = selectAllCheckbox.checked;
-      if (checkbox.checked) {
-        selectedCount++;
-      }
-    });
 
-    updateSelectedCount(selectedCount);
-  }
 
-  function updateSelectedCount() {
-    var checkboxes = document.querySelectorAll('.table-responsive .form-check-input');
-    var selectedCount = 0;
 
-    checkboxes.forEach(function (checkbox) {
-      if (checkbox.checked) {
-        selectedCount++;
-      }
-    });
-
-    var selectedCountElement = document.getElementById('selectedCount');
-    selectedCountElement.innerHTML = '已選取 ' + selectedCount + ' 筆資料';
-  }
-
-  // Initial count when the page loads
-  updateSelectedCount();
 </script>
 
 </html>

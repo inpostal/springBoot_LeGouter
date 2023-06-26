@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>團購訂單</title>
+
+  <link rel="stylesheet" href="/Comment/Janet_CSS/style_member_課程清單.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="/Comment/static/css/css2.css" rel="stylesheet">
+
+  <link href="/Comment/static/css/all.min.css" rel="stylesheet">
+  <link href="/Comment/static/css/bootstrap-icons.css" rel="stylesheet">
+
+  <link href="/Comment/static/css/animate.min.css" rel="stylesheet">
+  <link href="/Comment/static/css/owl.carousel.min.css" rel="stylesheet">
+
+  <link href="/Comment/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="/Comment/static/css/style.css" rel="stylesheet">
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/bootstrap.min.css">
+  <!-- Owl Theme Default CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/owl.theme.default.min.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/owl.carousel.min.css">
+  <!-- Owl Magnific CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/magnific-popup.css">
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/animate.css">
+  <!-- Boxicons CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/boxicons.min.css">
+  <!-- Flaticon CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/flaticon.css">
+  <!-- Meanmenu CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/meanmenu.css">
+  <!-- Nice Select CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/nice-select.css">
+  <!-- Odometer CSS-->
+  <link rel="stylesheet" href="/Comment/assets/css/odometer.css">
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/style.css">
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" href="/Comment/assets/css/responsive.css">
+
+  <style>
+    .body_comment {
+      padding: 0 8px;
+      font-size: 14px;
+      display: block;
+      line-height: 25px;
+      word-break: break-word;
+    }
+
+    .avatar_comment {
+      display: block;
+    }
+
+    .avatar_comment img {
+      height: 48px;
+      width: 48px;
+    }
+
+    .box_comment {
+      display: block;
+      position: relative;
+      line-height: 1.358;
+      word-break: break-word;
+      border: 1px solid #d3d6db;
+      word-wrap: break-word;
+      background: #fff;
+      box-sizing: border-box;
+      cursor: text;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      padding: 0;
+    }
+
+    .box_comment textarea {
+      min-height: 40px;
+      padding: 12px 8px;
+      width: 100%;
+      border: none;
+      resize: none;
+    }
+
+    .box_comment textarea:focus {
+      outline: none !important;
+    }
+
+    .box_comment .box_post {
+      border-top: 1px solid #d3d6db;
+      background: #f5f6f7;
+      padding: 8px;
+      display: block;
+      overflow: hidden;
+    }
+
+    .box_comment label {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 11px;
+      color: #90949c;
+      line-height: 22px;
+    }
+
+    .box_comment button {
+      margin-left: 8px;
+      background-color: #4267b2;
+      border: 1px solid #4267b2;
+      color: #fff;
+      text-decoration: none;
+      line-height: 22px;
+      border-radius: 2px;
+      font-size: 14px;
+      font-weight: bold;
+      position: relative;
+      text-align: center;
+    }
+
+    .box_comment button:hover {
+      background-color: #29487d;
+      border-color: #29487d;
+    }
+
+    .box_comment .cancel {
+      margin-left: 8px;
+      background-color: #f5f6f7;
+      color: #4b4f56;
+      text-decoration: none;
+      line-height: 22px;
+      border-radius: 2px;
+      font-size: 14px;
+      font-weight: bold;
+      position: relative;
+      text-align: center;
+      border-color: #ccd0d5;
+    }
+
+    .box_comment .cancel:hover {
+      background-color: #d0d0d0;
+      border-color: #ccd0d5;
+    }
+
+    .box_comment img {
+      height: 16px;
+      width: 16px;
+    }
+
+    .box_result {
+      margin-top: 24px;
+    }
+
+    .box_result .result_comment .tools_comment {
+      font-size: 12px;
+      line-height: 1.358;
+    }
+
+    .div {
+      display: block;
+    }
+
+    .box_result .result_comment h4 {
+      font-weight: 600;
+      white-space: nowrap;
+      color: #365899;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.358;
+      margin: 0;
+    }
+
+    .box_result .result_comment {
+      display: block;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .child_replay {
+      border-left: 1px dotted #d3d6db;
+      margin-top: 12px;
+      list-style: none;
+      padding: 0 0 0 8px
+    }
+
+    .reply_comment {
+      margin: 12px 0;
+    }
+
+    .box_result .result_comment p {
+      margin: 4px 0;
+      text-align: justify;
+    }
+
+    .box_result .result_comment .tools_comment {
+      font-size: 12px;
+      line-height: 1.358;
+    }
+
+    .box_result .result_comment .tools_comment a {
+      color: #4267b2;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .box_result .result_comment .tools_comment span {
+      color: #90949c;
+    }
+
+    .body_comment .show_more,
+    .body_comment .show_less {
+      background: #3578e5;
+      border: none;
+      box-sizing: border-box;
+      color: #fff;
+      font-size: 14px;
+      margin-top: 24px;
+      padding: 12px;
+      text-shadow: none;
+      width: 100%;
+      font-weight: bold;
+      position: relative;
+      text-align: center;
+      vertical-align: middle;
+      border-radius: 2px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+</head>
+
+<body>
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+  <div class="spinner-grow text-primary" role="status"></div>
+</div>
+
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+  <div class="row gx-0 align-items-center d-none d-lg-flex">
+    <div class="col-lg-6 px-5 text-start">
+      <ol class="breadcrumb mb-0">
+        <!-- <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li> -->
+      </ol>
+    </div>
+    <div class="col-lg-6 px-5 text-end">
+      <small>Follow us:</small>
+      <div class="h-100 d-inline-flex align-items-center">
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-facebook-f"></i></a>
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-twitter"></i></a>
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-linkedin-in"></i></a>
+        <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+  <a href="" class="navbar-brand ms-4 ms-lg-0">
+    <h1 class="text-primary m-0">Le Goûter</h1>
+  </a>
+  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav mx-auto p-4 p-lg-0">
+      <a href="" class="nav-item nav-link active">首頁</a>
+      <a href="" class="nav-item nav-link">會員登入</a>
+      <a href="" class="nav-item nav-link">最新消息</a>
+      <a href="" class="nav-item nav-link">關於我們</a>
+      <a href="" class="nav-item nav-link">甜點商城</a>
+      <a href="" class="nav-item nav-link">課程專區</a>
+      <a href="" class="nav-item nav-link">團購專區</a>
+      <a href="" class="nav-item nav-link">會員專區</a>
+      <a href="" class="nav-item nav-link">優惠券專區</a>
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
+        <div class="dropdown-menu m-0">
+          <a href="" class="dropdown-item">FAQ</a>
+          <a href="" class="dropdown-item">聯絡客服</a>
+        </div>
+      </div>
+    </div>
+    <div class=" d-none d-lg-flex">
+      <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+        <i class="fa fa-phone text-primary"></i>
+      </div>
+      <div class="ps-3">
+        <small class="text-primary mb-0">聯絡我們</small>
+        <p class="text-light fs-5 mb-0">0912345678</p>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section id="main-container">
+  <aside id="left-side">
+    <p id="left-side-title">會員專區</p>
+    <hr id="left-side-hr">
+    <ul id="ul">
+      <li class="list">會員資料</li>
+      <li class="list" id="dessert">甜點專區</li>
+      <ul id="subUl1" class="hide">
+        <li class="subList">甜點追蹤清單</li>
+        <li class="subList">甜點訂單</li>
+      </ul>
+      <li class="list" id="member-class">課程專區</li>
+      <ul id="subUl2" class="hide">
+        <li class="subList">觀看課程</li>
+        <li class="subList">課程訂單</li>
+        <li class="subList">收藏的課程</li>
+      </ul>
+      <li class="list" id="member-group">團購專區</li>
+      <ul id="subUl3" class="hide">
+        <li class="subList">團購訂單</li>
+      </ul>
+      <li class="list">優惠券列表</li>
+    </ul>
+  </aside>
+
+
+  <!-- 以下是右邊欄位放資訊用的 -->
+  <section id="msg-container">
+    <section class="single-course-area ptb-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-11">
+            <div class="single-course-content">
+              <h3>主廚不藏私｜系統化零基礎法式甜點課</h3>
+              <video controls>
+                <source src="路径/到/你的/视频文件.mp4" type="video/mp4">
+                您的浏览器不支持HTML5视频标签。
+              </video>
+            </div>
+
+            <div class="tab single-course-tab">
+              <ul class="tabs">
+                <li>
+                  <a href="#">課程總覽</a>
+                </li>
+                <li>
+                  <a href="#">課程內容</a>
+                </li>
+                <li>
+                  <a href="#">主廚介紹</a>
+                </li>
+                <li>
+                  <a href="#">問題討論</a>
+                </li>
+              </ul>
+
+              <div class="tab_content">
+                <div class="tabs_item">
+                  <h3>課程介紹</h3>
+
+                  <p>「主廚不藏私｜系統化零基礎法式甜點課」是一個專為零基礎學習者設計的課程。
+                    這個課程將教授你製作法式甜點的基本技巧和原則，Pierre主廚將分享多年的經驗和訣竅，
+                    讓你能在家中輕鬆製作出美味的法式甜點。無論你是初學者還是廚藝愛好者，
+                    這個課程都能幫助你提升甜點技藝！</p>
+
+                  <!-- <h3>Certification Online</h3>
+
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
+                      gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis sit amet,
+                      consectetur adipiscing elit, sed do eiusmod tempor.</p> -->
+
+                  <h3>你將學習到？</h3>
+
+                  <ul class="course-list">
+                    <li>
+                      <i class="bx bx-check"></i>
+                      基礎奠定：打下法式甜點基本技巧和原則的基礎。
+                    </li>
+                    <li>
+                      <i class="bx bx-check"></i>
+                      實踐與反饋：透過實際製作甜點和即時指導，不斷提升技巧。
+                    </li>
+                    <li>
+                      <i class="bx bx-check"></i>
+                      貼心分享：主廚不藏私的秘訣，讓你啟發個人風格的甜點創作。
+                    </li>
+                    <!-- <li>
+                        <i class="bx bx-check"></i>
+                        Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                    </li> -->
+                  </ul>
+
+                  <h3>誰適合這門課？</h3>
+
+                  <p>「主廚不藏私｜系統化零基礎法式甜點課」旨在從零基礎開始，
+                    讓你逐步建立起製作法式甜點的基本技能和知識。
+                    無論你是否有烹飪經驗，這門課都將提供你所需的指導，
+                    讓你能夠製作出美味的法式甜點。
+                  </p>
+                </div>
+
+                <div class="tabs_item">
+                  <div class="curriculum-content">
+                    <h3>課程影片</h3>
+
+                    <div class="curriculum-list">
+                      <h4>Section 1</h4>
+
+                      <ul>
+                        <li>
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Introduction
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">01 hour</span>
+                            <span class="preview">Preview</span>
+                          </a>
+                        </li>
+
+                        <li class="transparent">
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Environment setup
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">02 hours</span>
+                            <span class="preview">Preview</span>
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Quiz one
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">01 min</span>
+                            <span class="preview">4 question</span>
+                            <i class="bx bxs-lock-alt"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="curriculum-list">
+                      <h4>Section 2</h4>
+
+                      <ul>
+                        <li>
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Utility modules
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">03 hours</span>
+                            <i class="bx bxs-lock-alt"></i>
+                          </a>
+                        </li>
+
+                        <li class="transparent">
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Express framework
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">05 min</span>
+                            <i class="bx bxs-lock-alt"></i>
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Web module
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">01 hour</span>
+                            <i class="bx bxs-lock-alt"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="curriculum-list">
+                      <h4>Section 3</h4>
+
+                      <ul>
+                        <li>
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Video introduction
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">30 min</span>
+                            <i class="bx bxs-lock-alt"></i>
+                          </a>
+                        </li>
+
+                        <li class="transparent">
+                          <a href="#" class="meet-title">
+                            <i class="bx bx-right-arrow"></i>
+                            Web module
+                          </a>
+                          <a href="#" class="meet-time">
+                            <span class="min">05 hours</span>
+                            <i class="bx bxs-lock-alt"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabs_item">
+                  <div class="instructor-content">
+                    <div class="row align-items-center">
+                      <div class="col-lg-4">
+                        <div class="advisor-img">
+                          <img src="assets/img/chef/chef-img-01.jpg" alt="Image">
+                        </div>
+                      </div>
+
+                      <div class="col-lg-8">
+                        <div class="advisor-content">
+                          <a href="#">
+                            <h3>Pierre Chen</h3>
+                          </a>
+
+                          <p>
+                            我是法國藍帶甜點主廚Pierre Chen。憑藉著熱情和豐富的經驗，
+                            我致力於創作美味且精緻的法式甜點。我將法國糕點傳統與現代技術結合，
+                            追求糕點藝術的卓越。我的作品獲得了多個國際烘焙大賽的肯定，
+                            並希望將這份熱愛與你分享。
+                          </p>
+
+                          <!-- <ul>
+                              <li>
+                                  <a href="#">
+                                      <i class='bx bxl-facebook'></i>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#">
+                                      <i class='bx bxl-twitter'></i>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#">
+                                      <i class='bx bxl-youtube'></i>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#">
+                                      <i class='bx bxl-behance'></i>
+                                  </a>
+                              </li>
+                          </ul> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tabs_item">
+                  <div class="review-content">
+                    <h3>課程評價</h3>
+                    <hr>
+                    <div class="course-reviews-content">
+                      <h3>學員回饋</h3>
+                      <div class="body_comment">
+                        <div class="row">
+                          <div class="avatar_comment col-md-1">
+                            <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg"
+                                 alt="avatar" />
+                          </div>
+                          <div class="box_comment col-md-11">
+                          <textarea class="commentContent" id="commentContent" placeholder="在這裡描述課程內容問題或是留下學習心得與大家分享"></textarea>
+                            <input type="hidden" id="memId" value="memId" />
+                            <input type="hidden" id="studentCommentId" value="studentCommentId" />
+                            <input type="hidden" id="courseId" value="courseId" />
+                            <div style="display: none;">
+                              <input type="date" name="studentcommentdate" id="studentcommentdate">
+                            </div>
+
+                            <!-- 新增的隐藏字段 -->
+                            <div class="box_post">
+
+                              <div class="pull-right">
+
+                                <button onclick="submit_comment()" type="button"
+                                        value="1" id="submitcomment">發布問題</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <ul id="list_comment" class="col-md-12">
+                          <!-- Start List Comment 1 -->
+                          <li class="box_result row">
+                            <div class="avatar_comment col-md-1">
+                              <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg"
+                                   alt="avatar" />
+                            </div>
+                            <div class="result_comment col-md-11">
+                              <h4>登入者</h4>
+                              <p>留言內容</p>
+                              <div class="tools_comment">
+                                <a class="replay" href="#">回覆</a>
+                                <span>當下時間</span>
+                              </div>
+                              <ul class="child_replay">
+                                <li class="box_reply row"></li>
+                              </ul>
+                            </div>
+                          </li>
+                          <!-- Start List Comment 2 -->
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </section>
+  </section>
+</section>
+<!-- 頁腳 -->
+
+<!-- Start Footer Top Area -->
+<div id="footer-1">
+  <div class="container-fluid" data-wow-delay="0.1s">
+    <div class="container py-5">
+      <div class="row g-5">
+        <div class="col-lg-3 col-md-6">
+          <h4 class="text-light mb-4">粉絲專頁</h4>
+
+          <div class="d-flex pt-2">
+            <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                    class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                    class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h4 class="text-light mb-4">快速連結</h4>
+          <a class="btn btn-link" href="">品牌故事</a>
+          <a class="btn btn-link" href="">聯絡我們</a>
+          <a class="btn btn-link" href="">服務與條款</a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4 class="text-light mb-4">常見問題</h4>
+          <a class="btn btn-link" href="">FAQ</a>
+          <a class="btn btn-link" href="">回報客服</a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4 class="text-light mb-4">甜點畫廊</h4>
+          <div class="row g-2">
+            <div class="col-4">
+              <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg"
+                   alt="Image">
+            </div>
+            <div class="col-4">
+              <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg"
+                   alt="Image">
+            </div>
+            <div class="col-4">
+              <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg"
+                   alt="Image">
+            </div>
+            <div class="col-4">
+              <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg"
+                   alt="Image">
+            </div>
+            <div class="col-4">
+              <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg"
+                   alt="Image">
+            </div>
+            <div class="col-4">
+              <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg"
+                   alt="Image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script data-cfasync="false" src="/Comment/static/js/email-decode.min.js"></script>
+<script src="/Comment/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/Comment/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+<!-- End Footer Top Area -->
+
+<!-- Start Footer Bottom Area -->
+
+<!-- Image by <a href="https://www.freepik.com/free-photo/top-view-delicious-cinnamon-rolls-concept_11376541.htm#page=2&query=cinnimon%20roll&position=2&from_view=search&track=ais">Freepik</a> -->
+<!-- <a href="https://www.freepik.com/free-photo/variety-pastries-wooden-boards_10748285.htm#query=french%20dessert&position=13&from_view=search&track=ais">Image by azerbaijan_stockers</a> on Freepik -->
+<!-- Image by <a href="https://www.freepik.com/free-photo/front-view-delicious-assortment-desserts_10343331.htm#page=5&query=french%20dessert&position=33&from_view=search&track=ais">Freepik</a> -->
+<!-- </footer>Image by <a href="https://www.freepik.com/free-photo/roscon-de-reyes-epiphany-dessert-yellow-crown_10740832.htm#query=Galette%20des%20rois&position=22&from_view=search&track=ais">Freepik</a> -->
+<!-- <a href="https://www.freepik.com/free-vector/dessert-frame-design-with-cupcake-berries-tart-chocolate-cake-watercolor-illustration_5589294.htm#page=3&query=french%20dessert&position=21&from_view=search&track=ais">Image by photographeeasia</a> on Freepik -->
+<!-- Image by <a href="https://www.freepik.com/free-photo/high-angle-macarons-valentines-day_6355336.htm#query=macaroon&position=9&from_view=search&track=sph">Freepik</a> -->
+<!-- End Footer Bottom Area -->
+
+<!-- Start Go Top Area -->
+<div class="go-top">
+  <i class='bx bx-chevrons-up'></i>
+  <i class='bx bx-chevrons-up'></i>
+</div>
+<!-- End Go Top Area -->
+
+
+<!-- Jquery-3.5.1.Slim.Min.JS -->
+<script src="/Comment/assets/js/jquery-3.5.1.slim.min.js"></script>
+<!-- Popper JS -->
+<script src="/Comment/assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="/Comment/assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/Comment/assets/js/jquery.meanmenu.js"></script>
+<!-- Wow JS -->
+<script src="/Comment/assets/js/wow.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/Comment/assets/js/owl.carousel.js"></script>
+<!-- Owl Magnific JS -->
+<script src="/Comment/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Nice Select JS -->
+<script src="/Comment/assets/js/jquery.nice-select.min.js"></script>
+<!-- Parallax JS -->
+<script src="/Comment/assets/js/parallax.min.js"></script>
+<!-- Appear JS -->
+<script src="/Comment/assets/js/jquery.appear.js"></script>
+<!-- Odometer JS -->
+<script src="/Comment/assets/js/odometer.min.js"></script>
+<!-- Form Validator JS -->
+<script src="/Comment/assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script src="/Comment/assets/js/contact-form-script.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/Comment/assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/Comment/assets/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+
+<script data-cfasync="false" src="/Comment/static/js/email-decode.min.js"></script>
+<script src="/Comment/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/Comment/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+</body>
+<script>
+  //發布-->新增ajax,memid.courseid.coursecomment
+
+  $('#submitcomment').click(function (){
+    // let studentcommentdate = $('#studentcommentdate').val();
+    // let memId = $('#memId').val();
+    let memId=1;
+    let courseId =1;
+    // let courseId = $('#courseId').val();
+    let commentContent = $('#commentContent').val();
+    var currentTime = new Date(); // 取得當前時間
+    var formattedTime = currentTime.getHours() + ':' + currentTime.getMinutes(); // 格式化時間為小時:分鐘
+    let formdate = new FormData();
+    formdate.append('memId', memId);
+    formdate.append('courseId', courseId);
+    // formdate.append('courseid', courseId);
+    formdate.append('commentContent', commentContent);
+
+    $.ajax({
+      url: '/CourseStudentComment/addcomment', // 替换为服务器端处理请求的URL
+      type: 'POST',
+      data: formdate,
+      processData: false,
+      contentType: false,
+      success: function (resp) {
+        // function submit_comment() {
+          let memId=1;
+          let courseId =1;
+          // var memId = $('#memId').val();
+          // var courseId = $('#courseId').val();
+          // var studentcommentdate = $('#studentcommentdate').val();
+          var commentContent = $('.commentContent').val();
+          el = document.createElement('li');
+          el.className = "box_result row";
+          //成功後再執行
+          el.innerHTML =
+                  '<div class=\"avatar_comment col-md-1\">' +
+                  '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>' +
+                  '</div>' +
+                  '<div class=\"result_comment col-md-11\">' +
+                  '<h4>' + memId + '</h4>' +
+                  '<p>' + commentContent + '</p>' +
+                  '<div class=\"tools_comment\">' +
+                  '<a class=\"replay\" href=\"#\">回覆</a>' +
+                  '<span>' + '當下時間' + formattedTime + '</span>' + // 顯示格式化後的時間
+                  '</div>' +
+                  '<ul class="child_replay"></ul>' +
+                  '</div>';
+          document.getElementById('list_comment').prepend(el);
+          $('.commentContent').val('');
+        // }
+
+
+      },
+      error: function (resp) {
+        console.log("新增失敗");
+        alert("新增失敗");
+      }
+    });
+
+
+
+  });
+
+  //先將資料放到資料庫--->
+  //會員留言
+  // function submit_comment() {
+  //
+  //   var memId = $('#memId').val();
+  //   var courseId = $('#courseId').val();
+  //   var coursecomment = $('.coursecomment').val();
+  //   var studentcommentdate = $('#studentcommentdate').val();
+  //   el = document.createElement('li');
+  //   el.className = "box_result row";
+  //   //成功後再執行
+  //   el.innerHTML =
+  //           '<div class=\"avatar_comment col-md-1\">' +
+  //           '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>' +
+  //           '</div>' +
+  //           '<div class=\"result_comment col-md-11\">' +
+  //           '<h4>'+memId +'</h4>' +
+  //           '<p>' +  coursecomment + '</p>' +
+  //           '<div class=\"tools_comment\">' +
+  //           '<a class=\"replay\" href=\"#\">回覆</a>' +
+  //           '<span>'+studentcommentdate+'</span>' +
+  //           '</div>' +
+  //           '<ul class="child_replay"></ul>' +
+  //           '</div>';
+  //   document.getElementById('list_comment').prepend(el);
+  //   $('.coursecomment').val('');
+  // }
+
+  $(document).ready(function () {
+    $('.show_more').on('click', function (e) {
+      $(".show_more").hide();
+      $(".show_less").show();
+    });
+
+    $('#list_comment').on('click', '.like', function (e) {
+      $current = $(this);
+      var x = $current.closest('div').text().trim();
+      var y = parseInt($current.closest('div').find('.count').text().trim());
+
+
+    });
+
+    //取消回覆
+
+    $('#list_comment').on('click', '.replay', function (e) {
+      cancel_reply();
+      $current = $(this);
+      el = document.createElement('li');
+      el.className = "box_reply row";
+      el.innerHTML =
+              '<div class=\"col-md-12 reply_comment\">' +
+              '<div class=\"row\">' +
+              '<div class=\"avatar_comment col-md-1\">' +
+              '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>' +
+              '</div>' +
+              '<div class=\"box_comment col-md-10\">' +
+              '<textarea class=\"comment_replay\" placeholder=\"Add a comment...\"></textarea>' +
+              '<div class=\"box_post\">' +
+              '<div class=\"pull-right\">' +
+              '<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>' +
+              '<button onclick=\"submit_reply()\" type=\"button\" value=\"1\">回覆</button>' +
+              '</div>' +
+              '</div>' +
+              '</div>' +
+              '</div>' +
+              '</div>';
+      $current.closest('li').find('.child_replay').prepend(el);
+    });
+  });
+
+  //按下回覆鍵
+
+  function submit_reply() {
+    var comment_replay = $('.comment_replay').val();
+    el = document.createElement('li');
+    el.className = "box_reply row";
+    el.innerHTML =
+            '<div class=\"avatar_comment col-md-1\">' +
+            '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>' +
+            '</div>' +
+            '<div class=\"result_comment col-md-11\">' +
+            '<h4>主廚回覆</h4>' +
+            '<p>' + comment_replay + '</p>' +
+            '<div class=\"tools_comment\">' +
+            '<span>主廚回覆當下時間</span>' +
+            '</div>' +
+            '<ul class="child_replay"></ul>' +
+            '</div>';
+
+    // 尋找所選擇的回覆對象下方的 '.child_replay' 元素
+    var selectedReplyContainer = $current.closest('.result_comment').find('.child_replay');
+
+    // 插入回覆留言到所選擇的回覆對象下方
+    selectedReplyContainer.prepend(el);
+
+    $current.closest('.tools_comment').find('.replay').hide();
+
+    $('.comment_replay').val('');
+    cancel_reply();
+  }
+  function cancel_reply() {
+    $('.reply_comment').remove();
+  }
+</script>
+
+</html>
