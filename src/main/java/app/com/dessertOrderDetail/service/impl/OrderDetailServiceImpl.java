@@ -49,7 +49,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
             orderDetailDTO.setDessertName(dessert.getDessertName());
 
             DessertImage dessertImg = dessertImageRepository.getReferenceById(orderDetail.getDessertId());
-            orderDetailDTO.setDessertImg(dessertImg.getDessertImg());
+//            orderDetailDTO.setDessertImg(dessertImg.getDessertImg());
 
             orderDetailDTOList.add(orderDetailDTO);
         }
