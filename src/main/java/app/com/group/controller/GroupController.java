@@ -34,7 +34,7 @@ public class GroupController {
 	}
     @GetMapping("/plan-activity") //前台團購主活動瀏覽專區
 	public String planActivity() {
-		return "front-end/group/plan-activity";
+		return "front-end/group/plan-activity2";
 	}
     @GetMapping("/single-product") //前台團購活動單品頁
 	public String singleProduct(@RequestParam Integer groupActivityId, Model model) {
@@ -51,4 +51,10 @@ public class GroupController {
         //導至頁面
     	return "back-end/group/group-product-updata";
     }
+//    @GetMapping("/plan-activity/updata") //前台團購主修改活動資料
+//	public String theActivityUp(@RequestParam Integer groupActivityId, Model model) {
+//    	GroupActivityVO groupActivityVO = groupActivityService.showTheActivity(groupActivityId);
+//    	 model.addAttribute("groupActivityVO", groupActivityVO);
+//		return "front-end/group/";
+//    }
 }

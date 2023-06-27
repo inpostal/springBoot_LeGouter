@@ -169,9 +169,10 @@
           let groupProductPrice= $("#productprice").val();
           let groupProductStardate = $("#productstardate").val();
           let groupProductEnddate = $("#ProductEnddate").val();
+          console.log("下架日期的值:" + $("#ProductEnddate").val());
           if($("#productstatus").val() === 0){
             let dateobj = new Date();
-            let today = dateobj.getFullYear + "-" + (dateobj.getMonth+1) + "-" + dateobj.getDate;
+            let today = dateobj.getFullYear() + "-" + (dateobj.getMonth() + 1) + "-" + dateobj.getDate();
             groupProductEnddate = today;
           }
           let groupProductStatus = $("#productstatus").val();

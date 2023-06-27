@@ -71,7 +71,7 @@
 
             <div class="topline">
                 <div class="pagesviews">
-                    <h3>團購活動檢視</h3>
+                    <h3>商品項目檢視</h3>
 
                 </div>
 
@@ -81,8 +81,8 @@
 
                 <div class="to-search">
                     <form action="">
-                        <input class="" type="search" placeholder="搜尋團購活動" name="" value="">
-                        <button class="" type="submit">搜尋</button>
+                        <input class="" type="search" placeholder="搜尋商品名稱" name="">
+                        <button type="submit" id="">搜尋</button>
                     </form>
                 </div>
                 <div class="sortby">
@@ -90,46 +90,11 @@
                         <option value="0">預設排序</option>
                         <option value="1">價格高到低</option>
                         <option value="2">價格低到高</option>
-                        <option value="3">截止日期高到低</option>
-                        <option value="4">截止日期低到高</option>
-                        <option value="5">參加人數高到低</option>
-                        <option value="6">參加人數低到高</option>
                     </select>
                 </div>
             </div>
             <div class="context" id="showallact">
-                <!-- <div class="col-item">
-                    <div class="item">
-                        <div class="img-board">
-                            <img src="Group/Shan_static/image/雙捲原味鮮芋盒子.jpg" alt="" class="img-width">
-
-                        </div>
-                        <div class="cont">
-                            <h6>團購活動名稱:</h6>
-                            <div class="info">
-                                <p class="info-context">
-                                    團購活動內容:團購介紹內文 團購介紹內文 團購介紹內文 團購介紹內文
-                                    團購介紹內文團購介紹內文。
-                                </p>
-                                <p>團購開始時間:
-                                    <br>
-                                    團購結束時間:
-                                    <br>
-                                    團購參加人數:
-                                    <br>
-                                    成團數量低標:
-                                    <br>
-                                    團購商品價格:
-                                </p>
-                            </div>
-                            <div class="botm">
-                                <div class="tags">
-                                    <button>取消活動 申請</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+               
 
             </div>
         </div>
@@ -210,7 +175,7 @@
 
         function show() {
             $.ajax({
-                url: "/group-shop/showActivityList",
+                url: "/groupProduct/showList",
                 type: "GET",
                 success: function (response) {
                     let texts = "";
@@ -222,28 +187,18 @@
 
                         </div>
                         <div class="cont">
-                            <h6>團購活動名稱:${response[gvo].groupName}</h6>
+                            <h6>商品名稱:${response[gvo].groupProductName}</h6>
                             <div class="info">
-                                <p class="info-context">
-                                    ${response[gvo].groupActivityContent}。
+                                <p class="info-context" style="height: 200px; overflow: auto;">
+                                    ${response[gvo].groupProductContent}。
                                 </p>
-                                <p>團購開始時間:${response[gvo].groupOrderStar}
-                                    <br>
-                                    團購結束時間:${response[gvo].groupOrderEnd}
-                                    <br>
-                                    團購參加人數:
-                                    <br>
-                                    成團數量低標:${response[gvo].groupOrderMin}
-                                    <br>
-                                    團購商品價格:
+                                <p>
+                                    商品價格:${response[gvo].groupProductPrice}
                                 </p>
                             </div>
                             <div class="botm">
                                 <div class="tags">
-                                    <button>取消活動 申請</button>
-                                    <a href="/plan-activity/updata?groupActivityId=${response[gvo].groupActivityId}">
-                                        <button type="button">修改資料</button>
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>

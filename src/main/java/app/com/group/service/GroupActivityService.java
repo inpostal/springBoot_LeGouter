@@ -1,5 +1,6 @@
 package app.com.group.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,8 @@ public class GroupActivityService {
 		return avolist;
 	}
 	
-	public List<GroupActivityVO> allShopActivity() {
-		List<GroupActivityVO> avoaclist = groupActivityRepository.findAll();
+	public List<GroupActivityVO> allShopActivity(Date groupOrderEnd) {
+		List<GroupActivityVO> avoaclist = groupActivityRepository.findByGroupOrderEndAfter(groupOrderEnd);
 		return avoaclist;
 	}
 	
@@ -57,4 +58,12 @@ public class GroupActivityService {
 		groupActivityRepository.deleteById(groupActivityId);
 		return true;
 	}
+	
+//	public Boolean updataActivity (GroupActivityDTO groupActivityDTO) {
+//		GroupActivityVO groupActivityVO = new GroupActivityVO();
+//		groupActivityVO.setGroupActivityId(groupActivityDTO.getGroupActivityId());
+//		groupActivityVO.setGroupActivityContent(groupActivityDTO.getGroupActivityContent());
+//		groupActivityVO.setGroupName(groupActivityDTO.getGroupName());
+//		return groupActivityRepository.save(groupActivityVO) != null;
+//	}
 }

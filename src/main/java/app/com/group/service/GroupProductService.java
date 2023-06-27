@@ -49,14 +49,14 @@ public class GroupProductService {
 		return vo.get();
 	}
 	
-	public Boolean inserProductNew (GroupProductDTO groupProductDTO) {
+	public GroupProductVO inserProductNew (GroupProductDTO groupProductDTO) {
 		GroupProductVO groupProductVO = new GroupProductVO();
 		groupProductVO.setGroupProductName(groupProductDTO.getGroupProductName());
 		groupProductVO.setGroupProductContent(groupProductDTO.getGroupProductContent());
 		groupProductVO.setGroupProductPrice(groupProductDTO.getGroupProductPrice());
 		groupProductVO.setGroupProductStardate(Date.valueOf(groupProductDTO.getGroupProductStardate()));
 		groupProductVO.setGroupProductStatus(groupProductDTO.getGroupProductStatus());
-		return groupProductRepository.save(groupProductVO) != null;
+		return groupProductRepository.save(groupProductVO);
 	}
 	
 	public Boolean updataThe (GroupProductDTO groupProductDTO) {
