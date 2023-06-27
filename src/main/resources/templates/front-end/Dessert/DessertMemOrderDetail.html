@@ -101,7 +101,10 @@
                             </thead>
                             <tbody>
                             <tr th:each="l : ${orderDetailList}">
-                                <td th:text="${l.getDessertImg()}"></td>
+                                <td>
+                                    <img th:src="@{/dessert5/image0(dessertId=${l.getDessertId()})}"
+                                         class="img-fluid" style="max-width: 15%; height: auto;" alt="Product"/>
+                                </td>
                                 <td th:text="${l.getDessertName()}" id="dessertName"></td>
                                 <td th:text="${l.getDessertAmount()}" id="dessertAmount"></td>
                                 <td th:text="'$' + ${l.getDessertPrice()}" id="dessertPrice"></td>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,7 +81,10 @@
 
 
 <!-- preloader -->
-
+<div class="preloader">
+    <img src="/Dessert/picture/logo.svg" alt="logo">
+    <div class="preloader-icon"></div>
+</div>
 <!-- ./ preloader -->
 
 <!-- sidebars -->
@@ -102,10 +105,7 @@
 
 
     <div class="col py-3">
-        <div class="preloader">
-            <img src="/Dessert/picture/logo.svg" alt="logo">
-            <div class="preloader-icon"></div>
-        </div>
+
         <!-- content -->
         <div class="content ">
 
@@ -124,7 +124,15 @@
                                 <div class="col-md-3 col-sm-6">
                                     <p class="fw-bold">訂單日期</p>
                                     <p id="orderTime" th:text="${orders.getOrderTime()}"></p>
-
+                                    <script th:inline="javascript">
+                                        var orderTimeElement = document.getElementById('orderTime');
+                                        var orderTime = orderTimeElement.textContent.trim();
+                                        var formattedTime = new Date(orderTime).toLocaleString('zh-TW', {
+                                            timeZone: 'UTC',
+                                            hour12: true
+                                        });
+                                        orderTimeElement.textContent = formattedTime;
+                                    </script>
                                 </div>
 
 
@@ -174,7 +182,11 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="l : ${orderDetailList}">
-                                        <td th:text="${l.getDessertImg()}"></td>
+                                        <td>
+                                            <img th:src="@{/dessert5/image0(dessertId=${l.getDessertId()})}"
+                                                 class="img-fluid" style="max-width: 15%; height: auto;" alt="Product"/>
+                                        </td>
+
 
                                         <td th:text="${l.getDessertName()}" id="dessertName"></td>
                                         <td th:text="${l.getDessertAmount()}" id="dessertAmount"></td>
@@ -200,13 +212,7 @@
 </div>
 
 
-<!--改時間顯示格式-->
-<script th:inline="javascript">
-    var orderTimeElement = document.getElementById('orderTime');
-    var orderTime = orderTimeElement.textContent.trim();
-    var formattedTime = new Date(orderTime).toLocaleString('zh-TW');
-    orderTimeElement.textContent = formattedTime;
-</script>
+<!-- ./ layout-wrapper -->
 
 <!-- import js -->
 

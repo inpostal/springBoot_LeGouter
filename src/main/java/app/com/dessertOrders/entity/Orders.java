@@ -30,16 +30,16 @@ public class Orders implements Serializable {
     @Column(name = "CP_ID", insertable = false)
     private Integer cpId;
 
-    @Column(name = "ORDER_TOTAL", insertable = false)
+    @Column(name = "ORDER_TOTAL")
     private Integer orderTotal;
 
-    @Column(name = "CP_ORDER_TOTAL", insertable = false)
+    @Column(name = "CP_ORDER_TOTAL")
     private Integer cpOrderTotal;
 
     @Column(name = "ORDER_STATUS")
     private Integer orderStatus = 0;
 
-    @Column(name = "ORDER_TIME", insertable = false)
+    @Column(name = "ORDER_TIME")
     private Timestamp orderTime;
 
     @Column(name = "RECEIVER_PHONE")

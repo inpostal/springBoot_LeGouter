@@ -43,7 +43,6 @@ public class OrderDetailController {
 
         model.addAttribute("orderDetailList", orderDetailDTOList);
         model.addAttribute("orders", orders);
-
         return viewName;
     }
 

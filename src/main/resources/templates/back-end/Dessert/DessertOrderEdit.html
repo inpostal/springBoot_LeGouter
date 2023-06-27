@@ -258,6 +258,25 @@
         let receiverAddress = $("#receiverAddress").val();
 
 
+        // Validate the input fields
+        if (receiverName.trim() === '') {
+            alert('收件人不能為空');
+            return;
+        }
+        if (receiverAddress.trim() === '') {
+            alert('收件地址不能為空');
+            return;
+        }
+        if (receiverPhone.trim() === '') {
+            alert('電話不能為空');
+            return;
+        }
+        if (receiverEmail.trim() === '') {
+            alert('E-mail不能為空');
+            return;
+        }
+
+
         // 建立 FormData 物件並加入需要修改的值
         let formData = new FormData();
 
@@ -267,7 +286,7 @@
         formData.append("receiverPhone", receiverPhone);
         formData.append("orderStatus", orderStatus);
         formData.append("receiverAddress", receiverAddress);
- 
+
 
         // 發送 AJAX 請求
         $.ajax({

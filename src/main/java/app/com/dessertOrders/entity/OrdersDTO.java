@@ -14,10 +14,10 @@ import java.sql.Timestamp;
  */
 @Data
 public class OrdersDTO {
-    private Integer orderID;
+    private Integer orderId;
     private String memberAC;
     private Timestamp ordersDate;
     private Integer cpOrderTotal;
     private Integer orderStatus;
-    private Integer orderId;
+
 }
