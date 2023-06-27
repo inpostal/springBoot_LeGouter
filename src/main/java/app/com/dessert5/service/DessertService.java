@@ -28,6 +28,7 @@ public class DessertService {
 
     public String insert(Dessert dessert) {
         String result;
+
         Dessert d = dessertRepository.findByDessertName(dessert.getDessertName());
         // 如果沒有重複的甜點名稱，就新增
         if (d == null) {
@@ -36,6 +37,7 @@ public class DessertService {
         } else {
             result = "商品已存在，無法新增";
         }
+
         return result;
     }
 
@@ -55,18 +57,19 @@ public class DessertService {
         // 找到要被編輯的商品
         Dessert dessertOld = dessertRepository.findById(dessertId).orElse(null);
 
-        // 檢查新編輯的商品資訊，是否有重複的商品名稱
-        if (dessertRepository.findByDessertName(dessert.getDessertName()) == null) {
+        // sameNameDessert: 輸入的甜點名稱是否已存在
+        Dessert sameNameDessert = dessertRepository.findByDessertName(dessert.getDessertName());
+
+        if ( (sameNameDessert != null) && (sameNameDessert.getDessertId() != dessertId) ) {
+            return "商品已存在，無法修改";
+        } else {
             dessertOld.setDessertName(dessert.getDessertName());
             dessertOld.setDessertContent(dessert.getDessertContent());
             dessertOld.setDessertPrice(dessert.getDessertPrice());
             dessertOld.setDessertStatus(dessert.getDessertStatus());
             dessertRepository.save(dessertOld);
             return "編輯成功";
-        } else {
-            return "商品已存在，無法修改";
         }
-
 
     }
 }

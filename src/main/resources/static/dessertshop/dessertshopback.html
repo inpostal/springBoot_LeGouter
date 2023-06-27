@@ -268,7 +268,7 @@
         }
         /* Modal styles */
         .modal .modal-dialog {
-            max-width: 700px;
+            max-width: 400px;
             overflow: auto;
         }
         /* 上傳圖片的modal */
@@ -393,11 +393,11 @@
                                         <td>${res[e].dessertContent}</td>
                                         <td>商品圖片</td>
                                         <td>NT$${res[e].dessertPrice}</td>
-                                        <td class="${statusClass}">${dessertStatus}</td>
+                                        <td class="${statusClass}"><span class="badge rounded-pill bg-primary">${dessertStatus}</span></td>
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                             <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                            <a href="#pictureUploadModal" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
+                                            <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(100)"><span data-toggle="tooltip" title="Edit">商品圖片</span></a>
                                         </td>
                                     </tr>
 
@@ -556,58 +556,6 @@
                     </div>
                 </div>
 
-                <!-- picture -->
-                <div id="pictureUploadModal" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <form enctype="multipart/form-data" id="picform">
-                                <div class="modal-header">						
-                                    <h4 class="modal-title">商品圖片管理</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                </div>
-                                <div class="modal-body">
-
-
-                                    <div style="position: relative; display: inline-block;">
-                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                        <button class="btn btn-danger" id="delete0"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
-                                        <br id="img0">
-                                    </div>
-
-
-                                    <div style="position: relative; display: inline-block;">
-                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                        <button class="btn btn-danger" id="delete1"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
-                                        <br id="img1">
-                                    </div>
-
-
-                                    <div style="position: relative; display: inline-block;">
-                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                        <button class="btn btn-danger" id="delete2"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
-                                        <br id="img2">
-                                    </div>
-
-
-                                    <div style="position: relative; display: inline-block;">
-                                        <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
-                                        <button class="btn btn-danger" id="delete3"  style="position: absolute; top: 0; right: 0; padding-top: 2px; padding-bottom: 2px;">刪除圖片</button>
-                                        <br id="img3">
-                                    </div>
-
-
-                                    
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                    <button class="btn btn-info" id="picupload">儲存</button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
                 
 
                 <!-- 由此結束 -->
@@ -688,7 +636,7 @@
                     let html = "";
                     for (let e in res) {
                         let dessertStatus = res[e].dessertStatus;
-                        let statusClass = dessertStatus === "已下架" ? "red-text" : "";    // 讓已下架呈現紅色
+                        let statusClass = dessertStatus === "已下架" ? "badge rounded-pill bg-danger" : "badge rounded-pill bg-primary";    // 讓已下架呈現紅色
                         html += `<tr>
 <!--                                    <td>-->
 <!--                                        <span class="custom-checkbox">-->
@@ -698,13 +646,13 @@
 <!--                                    </td>-->
                                     <td>${res[e].dessertName}</td>
                                     <td>${res[e].dessertContent}</td>
-                                    <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="沒有圖片" style="height: 60px;"></td>
+                                    <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
                                     <td>NT$${res[e].dessertPrice}</td>
-                                    <td class="${statusClass}">${dessertStatus}</td>
+                                    <td><span class="${statusClass}">${dessertStatus}</span></td>
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
                                         <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                        <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
+                                        <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip">商品圖片</span></a>
                                     </td>
                                  </tr>`;
 
@@ -777,19 +725,25 @@
                     console.log(res);
                     if (res.dessertName !== undefined) {
                         let dessertStatus = res.dessertStatus;
-                        let statusClass = dessertStatus === "已下架" ? "red-text" : "";
-                        let html = `<tr>
-                                        <td>${res.dessertName}</td>
-                                        <td>${res.dessertContent}</td>
-                                        <td><img src="/dessert5/image0?dessertId=${res.dessertId}" alt="沒有圖片" style="height: 60px;"></td>
-                                        <td>NT$${res.dessertPrice}</td>
-                                        <td class="${statusClass}">${dessertStatus}</td>
-                                        <td>
-                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
-                                            <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
-                                            <a href="#pictureUploadModal" class="upload" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Upload">商品圖片</span></a>
-                                        </td>
-                                     </tr>`;
+                        let statusClass = dessertStatus === "已下架" ? "badge rounded-pill bg-danger" : "badge rounded-pill bg-primary";
+                        let html =`<tr>
+<!--                                    <td>-->
+<!--                                        <span class="custom-checkbox">-->
+<!--                                            <input type="checkbox" id="checkbox1" name="options[]" value="1">-->
+<!--                                            <label for="checkbox1"></label>-->
+<!--                                        </span>-->
+<!--                                    </td>-->
+                                    <td>${res.dessertName}</td>
+                                    <td>${res.dessertContent}</td>
+                                    <td><img src="/dessert5/image0?dessertId=${res.dessertId}" alt="" style="height: 60px;"></td>
+                                    <td>NT$${res.dessertPrice}</td>
+                                    <td><span class="${statusClass}">${dessertStatus}</span></td>
+                                    <td>
+                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="Edit" >編輯</span></a>
+                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="Remove">下架</span></a>
+                                        <a href data-id="${res.dessertId}" onclick="redirectToEditPicture(${res.dessertId})"><span data-toggle="tooltip">商品圖片</span></a>
+                                    </td>
+                                 </tr>`;
 
                         $("#back-table").html(html);
                     } else {
@@ -856,172 +810,11 @@
 
 
         // 圖片管理 -------------------------------------------------------------------------------------------------------------------
-        $(document).on("click", ".upload", function() {
-            let dessertId = $(this).data('id');
-            console.log(dessertId);
-
-            // 清除上一次點擊所留下來的.after的img標籤
-            $("#img0").next("img").remove();
-            $("#img1").next("img").remove();
-            $("#img2").next("img").remove();
-            $("#img3").next("img").remove();
-
-
-            // 從資料庫顯示圖片0
-            $("#img0").after(`<img src="/dessert5/image0?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
-            // 從資料庫顯示圖片1
-            $("#img1").after(`<img src="/dessert5/image1?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
-            // 從資料庫顯示圖片2
-            $("#img2").after(`<img src="/dessert5/image2?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
-            // 從資料庫顯示圖片3
-            $("#img3").after(`<img src="/dessert5/image3?dessertId=${dessertId}" alt="沒有圖片" style="width: 640px; padding-bottom: 2px;">`)
-
-
-            // 刪除圖片 -----------------------------------------------------------------------------------------------------------
-            // 刪除圖片0
-            $("#delete0").off().on("click", function(e) {
-                e.preventDefault(); // 防止表单提交
-
-                // 保存当前点击的按钮元素的引用
-                const $currentButton = $(this);
-
-                $.ajax({
-                    url: '/dessert5/delete0?dessertId=' + encodeURIComponent(dessertId),
-                    type: 'DELETE',
-                    success: function(res) {
-                        // 跳出訊息視窗
-                        window.alert(res);
-                        location.reload();
-
-                        // 在成功后解绑当前按钮元素的点击事件
-                        $currentButton.off('click');
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.error(xhr);
-                    }
-                });
-            });
-
-            // 刪除圖片1
-            $("#delete1").off().on("click", function(e) {
-                e.preventDefault(); // 防止表单提交
-
-                // 保存当前点击的按钮元素的引用
-                const $currentButton = $(this);
-
-                $.ajax({
-                    url: '/dessert5/delete1?dessertId=' + encodeURIComponent(dessertId),
-                    type: 'DELETE',
-                    success: function(res) {
-                        // 跳出訊息視窗
-                        window.alert(res);
-                        location.reload();
-
-                        // 在成功后解绑当前按钮元素的点击事件
-                        $currentButton.off('click');
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.error(xhr);
-                    }
-                });
-            });
-
-            // 刪除圖片2
-            $("#delete2").off().on("click", function(e) {
-                e.preventDefault(); // 防止表单提交
-
-                // 保存当前点击的按钮元素的引用
-                const $currentButton = $(this);
-
-                $.ajax({
-                    url: '/dessert5/delete2?dessertId=' + encodeURIComponent(dessertId),
-                    type: 'DELETE',
-                    success: function(res) {
-                        // 跳出訊息視窗
-                        window.alert(res);
-                        location.reload();
-
-                        // 在成功后解绑当前按钮元素的点击事件
-                        $currentButton.off('click');
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.error(xhr);
-                    }
-                });
-            });
-
-            // 刪除圖片3
-            $("#delete3").off().on("click", function(e) {
-                e.preventDefault(); // 防止表单提交
-
-                // 保存当前点击的按钮元素的引用
-                const $currentButton = $(this);
-
-                $.ajax({
-                    url: '/dessert5/delete3?dessertId=' + encodeURIComponent(dessertId),
-                    type: 'DELETE',
-                    success: function(res) {
-                        // 跳出訊息視窗
-                        window.alert(res);
-                        location.reload();
-
-                        // 在成功后解绑当前按钮元素的点击事件
-                        $currentButton.off('click');
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.error(xhr);
-                    }
-                });
-            });
-
-
-            // 上傳圖片 -----------------------------------------------------------------------------------------------------------------
-            $("#picupload").off().on("click", function(e) {
-                e.preventDefault(); // 防止表单提交
-
-                // 保存当前点击的按钮元素的引用
-                const $currentButton = $(this);
-
-                let picform = $("#picform");
-                let imageInputs = picform.find("input[type='file']"); // 選取4個檔案輸入元素
-
-                let formData = new FormData();
-
-                // 將每個檔案存到 formData
-                for (let i = 0; i < imageInputs.length; i++) {
-                    let files = imageInputs[i].files[0];
-                    console.log(files);
-
-                    // 存入formdata
-                    formData.append(i, files);
-
-                }
-
-                console.log(formData);
-
-
-                $.ajax({
-                    url: '/dessert5/upload/' + encodeURIComponent(dessertId),
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    data: formData,
-                    success: function(res) {
-                        window.alert(res);
-                        location.reload();
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.error(xhr);
-                    }
-                });
-            });
-            //---------------------------------------------------------------------------------------------
-
-
-
-
-        });
-
+        function redirectToEditPicture(param) {
+            console.log(param);
+            let url = 'imgg.html?param=' + encodeURIComponent(param);
+            window.open(url, "商品圖片管理", "width=720,height=650");
+        }
 
 
 

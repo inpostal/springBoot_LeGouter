@@ -61,7 +61,7 @@ public class DessertImageServiceImpl implements DessertImageService {
 
                 dessertRepository.save(dessert);
 
-                return "上傳成功";
+                return "更新完成";
 
         }
 
