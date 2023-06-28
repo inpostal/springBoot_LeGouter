@@ -1,6 +1,7 @@
 package app.com.dessertCart.service;
 
 import app.com.dessertCart.entity.DessertCart;
+import app.com.member.vo.Members;
 
 import java.util.List;
 
@@ -12,11 +13,7 @@ import java.util.List;
  * @Create 2023/6/27 PM 05:05
  */
 public interface DessertCartService {
-    DessertCart saveOrUpdateDessertCart(DessertCart dessertCart);
+    List<DessertCart> getDessertCartByMember(Members member);
 
-    void deleteDessertCart(Integer dessertId, Integer memId);
-
-    DessertCart getDessertCart(Integer dessertId, Integer memId);
-
-    List<DessertCart> getAllDessertCarts();
+    double calculateTotalPrice(List<DessertCart> dessertCartItems);
 }

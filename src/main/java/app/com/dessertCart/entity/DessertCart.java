@@ -1,9 +1,10 @@
 package app.com.dessertCart.entity;
 
+import app.com.dessert5.vo.Dessert;
+import app.com.member.vo.Members;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * ClassName: DessertCart
@@ -12,21 +13,33 @@ import java.io.Serializable;
  * @Author Charlie
  * @Create 2023/6/27 PM 04:56
  */
-@Data
+
 @Entity
-@IdClass(DessertCartId.class)
-@Table(name = "cart_detail")
-public class DessertCart implements Serializable {
-    private static final long serialVersionUID = 991064508818802335L;
-
+@Data
+@Table(name = "DESSERT_CART")
+public class DessertCart {
     @Id
-    @Column(name = "DESSERT_ID")
-    private Integer dessertId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DESSERTCART_ID")
+    private int dessertCartId;
 
-    @Id
-    @Column(name = "MEM_ID")
-    private Integer memId;
+    @ManyToOne
+    @JoinColumn(name = "DESSERT_ID")
+    private Dessert dessert;
 
-    @Column(name = "CART_DESSERT_AMOUNT")
-    private Integer cartDessertAmount;
+    @ManyToOne
+    @JoinColumn(name = "MEM_ID")
+    private Members member;
+
+    @Column(name = "CART_DESSERT_QUANTITY", nullable = false)
+    private int cartDessertQuantity;
+
+    public double getTotalPrice() {
+        if (dessert != null) {
+            return dessert.getDessertPrice() * cartDessertQuantity;
+        } else {
+            return 0.0;
+        }
+    }
+
 }

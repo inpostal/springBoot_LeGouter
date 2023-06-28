@@ -1,14 +1,13 @@
 package app.com.dessertCart.service.impl;
 
 import app.com.dessertCart.entity.DessertCart;
-import app.com.dessertCart.entity.DessertCartId;
 import app.com.dessertCart.repository.DessertCartRepository;
 import app.com.dessertCart.service.DessertCartService;
+import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * ClassName: DessertCartServiceImpl
@@ -19,29 +18,23 @@ import java.util.Optional;
  */
 @Service
 public class DessertCartServiceImpl implements DessertCartService {
+
     @Autowired
     private DessertCartRepository dessertCartRepository;
 
     @Override
-    public DessertCart saveOrUpdateDessertCart(DessertCart dessertCart) {
-        return dessertCartRepository.save(dessertCart);
+    public List<DessertCart> getDessertCartByMember(Members member) {
+        return dessertCartRepository.findByMember(member);
     }
 
     @Override
-    public void deleteDessertCart(Integer dessertId, Integer memId) {
-        DessertCartId dessertCartId = new DessertCartId(dessertId, memId);
-        dessertCartRepository.deleteById(dessertId);
-    }
-
-    @Override
-    public DessertCart getDessertCart(Integer dessertId, Integer memId) {
-        DessertCartId dessertCartId = new DessertCartId(dessertId, memId);
-        Optional<DessertCart> optionalDessertCart = dessertCartRepository.findById(dessertId);
-        return optionalDessertCart.orElse(null);
-    }
-
-    @Override
-    public List<DessertCart> getAllDessertCarts() {
-        return dessertCartRepository.findAll();
+    public double calculateTotalPrice(List<DessertCart> dessertCartItems) {
+        double totalPrice = 0.0;
+        for (DessertCart item : dessertCartItems) {
+            if (item.getDessert() != null) {
+                totalPrice += item.getDessert().getDessertPrice() * item.getCartDessertQuantity();
+            }
+        }
+        return totalPrice;
     }
 }
