@@ -268,18 +268,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="item : ${dessertCartItems}">
+                        <tr th:each="dessertCart : ${dessertCartList}">
                             <td>
-                                <img th:src="@{/dessert5/image0(dessertId=${item.dessert.dessertId})}"
+                                <img th:src="@{/dessert5/image0(dessertId=${dessertCart.getDessertId()})}"
                                      class="img-fluid"/>
                             </td>
 
-                            <td class="pro-title" th:text="${item.dessert.dessertName}"></td>
-                            <td class="pro-price"><span th:text="${item.dessert.dessertPrice}"></span></td>
+                            <td class="pro-title" th:text="${dessertCart.getDessertName()}"></td>
+                            <td class="pro-price"><span th:text="'$' + ${dessertCart.dessertPrice}"></span></td>
                             <td class="pro-quantity">
                                 <div class="quantity">
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" th:value="${item.getCartDessertQuantity()}"
+                                        <input class="cart-plus-minus-box"
+                                               th:value="${dessertCart.getCartDessertQuantity()}"
                                                type="text">
                                         <div class="dec qtybutton">-</div>
                                         <div class="inc qtybutton">+</div>
@@ -288,7 +289,8 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="pro-subtotal"><span th:text="${item.getTotalPrice()}"></span></td>
+                            <td class="pro-subtotal"><span th:text="'$' + ${dessertCart.subtotalAmount}"></span></td>
+
                             <td class="pro-remove"><a href="#"><i class="ion-trash-b"></i></a></td>
                         </tr>
                         </tbody>

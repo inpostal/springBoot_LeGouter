@@ -1,7 +1,6 @@
 package app.com.dessertCart.entity;
 
 import app.com.dessert5.vo.Dessert;
-import app.com.member.vo.Members;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,25 +20,20 @@ public class DessertCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DESSERTCART_ID")
-    private int dessertCartId;
+    private Integer dessertCartId;
 
-    @ManyToOne
-    @JoinColumn(name = "DESSERT_ID")
-    private Dessert dessert;
+    @Column(name = "DESSERT_ID")
+    private Integer dessertId;
 
-    @ManyToOne
-    @JoinColumn(name = "MEM_ID")
-    private Members member;
+    @Column(name = "MEM_ID")
+    private Integer memberId;
 
     @Column(name = "CART_DESSERT_QUANTITY", nullable = false)
-    private int cartDessertQuantity;
+    private Integer cartDessertQuantity;
 
-    public double getTotalPrice() {
-        if (dessert != null) {
-            return dessert.getDessertPrice() * cartDessertQuantity;
-        } else {
-            return 0.0;
-        }
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DESSERT_ID", referencedColumnName = "DESSERT_ID", insertable = false, updatable = false)
+    private Dessert dessert;
+
 
 }
