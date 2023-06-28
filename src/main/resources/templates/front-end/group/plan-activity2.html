@@ -175,7 +175,7 @@
 
         function show() {
             $.ajax({
-                url: "/groupProduct/showList",
+                url: "/groupProduct/showPutOnList",
                 type: "GET",
                 success: function (response) {
                     let texts = "";
@@ -213,7 +213,7 @@
 
         function onselect() {
             $.ajax({
-                url: "/groupProduct/showList",
+                url: "/groupProduct/showPutOnList",
                 type: "GET",
                 success: function (response) {
                     console.log("回來的資料:" + response);

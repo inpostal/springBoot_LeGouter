@@ -54,10 +54,16 @@ public class GroupRestContreller {
 		return response;
 	}
 	
-	//後台瀏覽全部團購商品+前台團購主專區發起檢視
+	//後台瀏覽全部團購商品
 	@GetMapping("/groupProduct/showList")
 	public List<GroupProductVO> showAll() {
 		return groupProductService.showAllProduct();
+	}
+	
+	//前台團購主專區發起檢視 與 可選團購商品
+	@GetMapping("/groupProduct/showPutOnList")
+	public List<GroupProductVO> showPutOnList() {
+		return groupProductService.findPutOnList();
 	}
 	
 	//查詢單以團購商品
@@ -71,12 +77,12 @@ public class GroupRestContreller {
 	//後台 新增團購商品(含上傳單一圖片功能)
 	@PostMapping("/groupProduct/inserNew")
 	public Map<String, Boolean> inserProductNew(
-			@RequestParam("groupProductName") String groupProductName,
-			@RequestParam("groupProductContent") String groupProductContent,
-			@RequestParam("groupProductPrice") Integer groupProductPrice,
-			@RequestParam("groupProductStardate") String groupProductStardate,
-			@RequestParam("groupProductStatus") Integer groupProductStatus,
-			@RequestParam("groupProductImg") MultipartFile groupProductImg) {
+			@RequestParam String groupProductName,
+			@RequestParam String groupProductContent,
+			@RequestParam Integer groupProductPrice,
+			@RequestParam String groupProductStardate,
+			@RequestParam Integer groupProductStatus,
+			@RequestParam MultipartFile groupProductImg) {
 		
 		GroupProductDTO inserdto = new GroupProductDTO();
 		inserdto.setGroupProductName(groupProductName);
@@ -122,14 +128,14 @@ public class GroupRestContreller {
 	//後台 修改團購商品
 	@PostMapping("/group-product/updata-the")
 	public Map<String, Boolean> updataForProduct(
-			@RequestParam("groupProductId") Integer groupProductId,
-			@RequestParam("groupProductName") String groupProductName,
-			@RequestParam("groupProductContent") String groupProductContent,
-			@RequestParam("groupProductPrice") Integer groupProductPrice,
-			@RequestParam("groupProductStardate") String groupProductStardate,
-			@RequestParam("groupProductEnddate") String groupProductEnddate,
-			@RequestParam("groupProductStatus") Integer groupProductStatus,
-			@RequestParam("groupProductImg") MultipartFile groupProductImg) {
+			@RequestParam Integer groupProductId,
+			@RequestParam String groupProductName,
+			@RequestParam String groupProductContent,
+			@RequestParam Integer groupProductPrice,
+			@RequestParam String groupProductStardate,
+			@RequestParam String groupProductEnddate,
+			@RequestParam Integer groupProductStatus,
+			@RequestParam(required = false) MultipartFile groupProductImg) {
 		GroupProductDTO updatato = new GroupProductDTO();
 		updatato.setGroupProductId(groupProductId);
 		updatato.setGroupProductName(groupProductName);
@@ -140,6 +146,7 @@ public class GroupRestContreller {
 		updatato.setGroupProductStatus(groupProductStatus);
 		Boolean success = groupProductService.updataThe(updatato);
 		
+		if(groupProductImg != null) {
 		GroupProductImgVO updataivo = new GroupProductImgVO();
 		try {
 			updataivo.setGroupProductImgId(groupProductId);
@@ -148,6 +155,7 @@ public class GroupRestContreller {
 			e.printStackTrace();
 		}
 		groupProductImgService.updataImg(updataivo);
+		}
 		
 		Map<String, Boolean> response = new HashMap<>();
 		 response.put("success", success);

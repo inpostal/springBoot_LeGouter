@@ -73,4 +73,9 @@ public class GroupProductService {
 		groupProductVO.setGroupProductStatus(groupProductDTO.getGroupProductStatus());
 		return groupProductRepository.save(groupProductVO) != null;
 	}
+	
+	public List<GroupProductVO> findPutOnList() {
+		List<GroupProductVO> voOnlist = groupProductRepository.findByGroupProductStatus(1);
+		return voOnlist;
+	}
 }

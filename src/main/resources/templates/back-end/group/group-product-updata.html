@@ -177,6 +177,7 @@
           }
           let groupProductStatus = $("#productstatus").val();
           let groupProductImg = $("#uploadimg1")[0].files[0];
+          console.log("groupProductImg的值" + groupProductImg);
           formdata.append("groupProductId", groupProductId);
           formdata.append("groupProductName", groupProductName);
           formdata.append("groupProductContent", groupProductContent);
@@ -193,6 +194,7 @@
             data: formdata,
             success: function(response) {
                 alert("修改成功");
+                location.reload();
             }
 
 

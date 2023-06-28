@@ -19,6 +19,7 @@ public class GroupController {
 	
 	@Autowired
 	private GroupActivityService groupActivityService;
+	
 
 	@GetMapping("/group-product-manage") //後台團購商品管理
 	public String groupProductManage() {
@@ -44,7 +45,7 @@ public class GroupController {
 	}
     @GetMapping("/group-product/updata") //後台團購商品管理-修改資料用頁面
     public String groupProductUpdata(@RequestParam Integer groupProductId, Model model) {
-    	 //拿到id裡面資料
+    	//拿到id裡面資料
     	GroupProductVO groupProductVO = groupProductService.showOneProduct(groupProductId);
         //將id裡面資料放入model
         model.addAttribute("groupProductVO", groupProductVO);

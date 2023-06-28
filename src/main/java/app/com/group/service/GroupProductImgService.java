@@ -1,5 +1,7 @@
 package app.com.group.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,4 +27,8 @@ public class GroupProductImgService {
 		return groupProductImgRepository.save(groupProductImgVO) != null;
 	}
 
+	public GroupProductImgVO getOneImg(Integer groupProductImgId) {
+		Optional<GroupProductImgVO> imgonevo = groupProductImgRepository.findById(groupProductImgId);
+		return imgonevo.get();
+	}
 }
