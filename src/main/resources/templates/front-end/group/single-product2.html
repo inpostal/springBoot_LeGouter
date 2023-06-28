@@ -127,8 +127,8 @@
                                             <div class="epix-single-product-thumb-4">
                                                 <div class="epix-featured">
                                                 </div>
-                                                <img th:src="@{${'/groupProduct/get/img/' + groupActivityVO.getGroupProductId}}" 
-                                                    data-zoom-image="@{${'/groupProduct/get/img/' + groupActivityVO.getGroupProductId}}"
+                                                <img th:src="@{${'/groupProduct/get/img/' + groupActivityDTO.getGroupProductId}}" 
+                                                    data-zoom-image="@{${'/groupProduct/get/img/' + groupActivityDTO.getGroupProductId}}"
                                                     class="img-fluid" alt="">
                                             </div>
                                         </div>
@@ -166,7 +166,7 @@
                                     <li>
                                         <button class="active" value="1" data-bs-toggle="pill"
                                             data-bs-target="#epix-single-1" type="button">
-                                            <img width="98" height="98" th:src="@{${'/groupProduct/get/img/' + groupActivityVO.getGroupProductId}}"
+                                            <img width="98" height="98" th:src="@{${'/groupProduct/get/img/' + groupActivityDTO.getGroupProductId}}"
                                                 alt="">
                                         </button>
                                     </li>
@@ -198,27 +198,27 @@
                     <!-- 單品圖片顯示結束 -->
                     <div class="col-xxl-6 col-lg-6">
                         <div class="epix-single-product-right" id="showthe">
-                            <h4 class="epix-single-product-title" th:text="'團購活動：' + ${groupActivityVO.getGroupName}"></h4>
+                            <h4 class="epix-single-product-title" th:text="'團購活動：' + ${groupActivityDTO.getGroupName}"></h4>
                             <h6>團購主:</h6>
                             <p class="epix-product-details-short-description" th:inline="text">
-                                開始日期:[[${groupActivityVO.getGroupOrderStar}]]<br>
-                                結束日期:[[${groupActivityVO.getGroupOrderEnd}]]<br>
-                                成團達標數:[[${groupActivityVO.getGroupOrderMin}]]<br>
+                                開始日期:[[${groupActivityDTO.getGroupOrderStar}]]<br>
+                                結束日期:[[${groupActivityDTO.getGroupOrderEnd}]]<br>
+                                成團達標數:[[${groupActivityDTO.getGroupOrderMin}]]<br>
                                 參加人數:
                             </p>
                             <!-- 下面用來設定倒數計時日期 -->
-                            <input type="text" id="setendday" hidden th:value="${groupActivityVO.getGroupOrderEnd}">
+                            <input type="text" id="setendday" hidden th:value="${groupActivityDTO.getGroupOrderEnd}">
                             <!-- 下面用來設定達標量 -->
-                            <input type="text" id="walk" hidden th:value="${groupActivityVO.getGroupOrderMin}">
-                            <p class="epix-product-details-short-description" th:text="${groupActivityVO.getGroupActivityContent}">
+                            <input type="text" id="walk" hidden th:value="${groupActivityDTO.getGroupOrderMin}">
+                            <p class="epix-product-details-short-description">
 
 
                             </p>
                             <p class="price">
                                 <span class="epix-price-amount">
-                                    <bdi>
+                                    <bdi th:inline="text">
                                         <span class="epix-price-currency-symbol">NT$</span>
-                                        100
+                                        [[${groupActivityDTO.getGroupActivityPrice}]]
                                     </bdi>
                                 </span>
                             </p>
@@ -249,11 +249,14 @@
                                     <p id="demo"></p>
                                     <p>
                                         <span>揪團進度：</span>
-                                        <progress id="theprogress" value="123" th:max="${groupActivityVO.getGroupOrderMin}"></progress>
+                                        <progress id="theprogress" value="123" th:max="${groupActivityDTO.getGroupOrderMin}"></progress>
                                         <span id="percentage"></span>
                                     </p>
-                                    <a href="checkout.html"
-                                        class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a>
+                                    <!-- <a href="" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a> -->
+                                    <form action="" method="get">
+                                        <input type="text" name="groupOrderId" hidden>
+                                        <button type="submit">參加團購</button>
+                                    </form>
                                 </div>
                             </form>
                         </div>
@@ -285,7 +288,8 @@
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="tab-1-1" role="tabpanel">
                                             <div class="epix-single-product-content">
-                                                <p>這肉桂捲整個都是特調肉桂粉 超好吃。
+                                                <p th:text="${groupActivityDTO.getGroupActivityContent}">
+                                                    <!-- 團購活動內容放這邊 -->
                                                 </p>
 
                                                 <div class="row">
@@ -302,13 +306,6 @@
                                                 <div class="epix-product-table">
                                                     <table class="table table-striped">
                                                         <tbody>
-                                                            <tr>
-                                                                <th>顏色</th>
-                                                                <td>
-                                                                    <a>肉桂色</a>
-
-                                                                </td>
-                                                            </tr>
                                                             <tr>
                                                                 <th>體積</th>
                                                                 <td>

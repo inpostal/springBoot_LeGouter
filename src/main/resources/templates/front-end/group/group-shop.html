@@ -215,7 +215,8 @@
                             <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}">${response[gvo].groupName}</a></h4>
                         </div>
                         <div class="price-box">
-                            <span class="regular-price ">NT$100</span>
+                            <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
+                            <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
                         </div>
                     </div>
                     <div class="add-action d-flex position-absolute">
@@ -240,13 +241,14 @@
                             </p>
                         </div>
                         <div class="price-box">
-                            <span class="regular-price ">NT$100</span>
+                            <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
+                            <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
                         </div>
                         <div class="add-action-listview d-flex">
-                            <a href="" title="">
-                                <button>參加團購</button>
-                            </a>
-
+                            <form action="" method="get">
+                                <input type="text" name="groupOrderId" hidden>
+                                <button type="submit">參加團購</button>
+                            </form>
                         </div>
                         <p class="desc-content">
                             ${response[gvo].groupActivityContent}

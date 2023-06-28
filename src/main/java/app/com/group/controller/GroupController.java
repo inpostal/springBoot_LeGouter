@@ -1,15 +1,20 @@
 package app.com.group.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.com.group.service.GroupActivityService;
 import app.com.group.service.GroupProductService;
+import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.GroupProductVO;
+import app.com.member.vo.Members;
 
 @Controller
 public class GroupController {
@@ -40,7 +45,23 @@ public class GroupController {
     @GetMapping("/single-product") //前台團購活動單品頁
 	public String singleProduct(@RequestParam Integer groupActivityId, Model model) {
     	GroupActivityVO groupActivityVO = groupActivityService.showTheActivity(groupActivityId);
-    	 model.addAttribute("groupActivityVO", groupActivityVO);
+    	GroupProductVO tr = groupProductService.showOneProduct(groupActivityVO.getGroupProductId());
+    	
+    	GroupActivityDTO temporarydto = new GroupActivityDTO();
+    	Integer ActivityPrice = (int)(tr.getGroupProductPrice() * groupActivityVO.getGroupOrderDiscount());
+		temporarydto.setGroupActivityPrice(ActivityPrice);
+    	temporarydto.setGroupActivityId(groupActivityVO.getGroupActivityId());
+		temporarydto.setGroupProductId(groupActivityVO.getGroupProductId());
+		temporarydto.setGroupActivityContent(groupActivityVO.getGroupActivityContent());
+		temporarydto.setGroupOrderStar(groupActivityVO.getGroupOrderStar());
+		temporarydto.setGroupOrderEnd(groupActivityVO.getGroupOrderEnd());
+		temporarydto.setGroupOrderMin(groupActivityVO.getGroupOrderMin());
+		temporarydto.setGroupName(groupActivityVO.getGroupName());
+		temporarydto.setGroupOrderDiscount(groupActivityVO.getGroupOrderDiscount());
+//		temporarydto.setGroupProductPrice(tr.getGroupProductPrice());
+		temporarydto.setGroupName(tr.getGroupProductName());
+		temporarydto.setGroupProductContent(tr.getGroupProductContent());
+    	 model.addAttribute("groupActivityDTO", temporarydto);
 		return "front-end/group/single-product2";
 	}
     @GetMapping("/group-product/updata") //後台團購商品管理-修改資料用頁面
@@ -51,6 +72,24 @@ public class GroupController {
         model.addAttribute("groupProductVO", groupProductVO);
         //導至頁面
     	return "back-end/group/group-product-updata";
+    }
+    //結帳頁面
+    @GetMapping("/group-Checkout")
+    public String groupCheckout(
+//    		@RequestParam Integer groupOrderId, Model model, HttpSession session, RedirectAttributes redirectAttributes
+    		) {
+//    	Members user = (Members) session.getAttribute("user");
+//        if (user !=null){
+//            String address = user.getMemberAddress();
+//           
+//            model.addAttribute("address", address);
+
+            return "front-end/group/group-Checkout";
+//        }else {
+//            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
+//            return "redirect:/login";
+//        }
+    	
     }
 //    @GetMapping("/plan-activity/updata") //前台團購主修改活動資料
 //	public String theActivityUp(@RequestParam Integer groupActivityId, Model model) {

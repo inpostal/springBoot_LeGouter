@@ -31,5 +31,10 @@ public class GroupActivityDTO {
 	private Integer groupOrderMin; //達標數
 	private String groupName; //活動名稱
 	private Double groupOrderDiscount; //折扣數
+	
+	private Integer groupProductPrice; //團購商品原價
+	private Integer groupActivityPrice; //活動打折價格
+	private String groupProductName; //團購商品名稱
+	private String groupProductContent; //團購商品內容
 
 }

@@ -10,23 +10,28 @@ import org.springframework.stereotype.Service;
 import app.com.group.repository.GroupActivityRepository;
 import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
+import app.com.groupordermaster.repository.GroupOrderMasterRepository;
+import app.com.groupordermaster.vo.GroupOrderMaster;
 
 @Service
 public class GroupActivityService {
 
 	@Autowired
 	private GroupActivityRepository groupActivityRepository;
-	
+
+	@Autowired
+	private GroupOrderMasterRepository groupOrderMasterRepository;
+
 	public List<GroupActivityVO> allActivity() {
 		List<GroupActivityVO> avolist = groupActivityRepository.findAll();
 		return avolist;
 	}
-	
+
 	public List<GroupActivityVO> allShopActivity(Date groupOrderEnd) {
 		List<GroupActivityVO> avoaclist = groupActivityRepository.findByGroupOrderEndAfter(groupOrderEnd);
 		return avoaclist;
 	}
-	
+
 	public GroupActivityVO showTheActivity(Integer groupActivityId) {
 //		GroupActivityVO thevo = groupActivityRepository.getReferenceById(groupActivityId);
 //		GroupActivityDTO thedto = new GroupActivityDTO();
@@ -39,10 +44,10 @@ public class GroupActivityService {
 //		thedto.setGroupName(thevo.getGroupName());
 //		thedto.setGroupOrderDiscount(thevo.getGroupOrderDiscount());
 		Optional<GroupActivityVO> thevo = groupActivityRepository.findById(groupActivityId);
-				return thevo.get();
+		return thevo.get();
 	}
-	
-	public Boolean inserActivitys (GroupActivityDTO groupActivityDTO) {
+
+	public GroupActivityVO inserActivitys(GroupActivityDTO groupActivityDTO) {
 		GroupActivityVO groupActivityVO = new GroupActivityVO();
 		groupActivityVO.setGroupProductId(groupActivityDTO.getGroupProductId());
 		groupActivityVO.setGroupActivityContent(groupActivityDTO.getGroupActivityContent());
@@ -51,14 +56,14 @@ public class GroupActivityService {
 		groupActivityVO.setGroupOrderMin(groupActivityDTO.getGroupOrderMin());
 		groupActivityVO.setGroupName(groupActivityDTO.getGroupName());
 		groupActivityVO.setGroupOrderDiscount(groupActivityDTO.getGroupOrderDiscount());
-		return groupActivityRepository.save(groupActivityVO) != null;
+		return groupActivityRepository.save(groupActivityVO);
 	}
-	
-	public Boolean deleteOneActivity (Integer groupActivityId) {
+
+	public Boolean deleteOneActivity(Integer groupActivityId) {
 		groupActivityRepository.deleteById(groupActivityId);
 		return true;
 	}
-	
+
 //	public Boolean updataActivity (GroupActivityDTO groupActivityDTO) {
 //		GroupActivityVO groupActivityVO = new GroupActivityVO();
 //		groupActivityVO.setGroupActivityId(groupActivityDTO.getGroupActivityId());
@@ -66,4 +71,8 @@ public class GroupActivityService {
 //		groupActivityVO.setGroupName(groupActivityDTO.getGroupName());
 //		return groupActivityRepository.save(groupActivityVO) != null;
 //	}
+
+	public GroupOrderMaster inserMaster(GroupOrderMaster groupOrderMaster) {
+		return groupOrderMasterRepository.save(groupOrderMaster);
+	}
 }
