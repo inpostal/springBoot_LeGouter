@@ -191,8 +191,8 @@
     <script src="Group/Shan_assets/js/main.js"></script>
 
     <script>
+        showlist()
         window.addEventListener("load", function () {
-            showlist()
         })
 
         function showlist() {
@@ -212,7 +212,7 @@
                     <div class="product-content">
 
                         <div class="product-title">
-                            <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}">${response[gvo].groupName}</a></h4>
+                            <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}" style="padding: 10px;">${response[gvo].groupName}</a></h4>
                         </div>
                         <div class="price-box">
                             <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     <div class="add-action d-flex position-absolute">
-                        <a href="" title="">
+                        <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}" title="">
                             <button>參加團購</button>
                         </a>
 
@@ -245,25 +245,28 @@
                             <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
                         </div>
                         <div class="add-action-listview d-flex">
-                            <form action="" method="get">
-                                <input type="text" name="groupOrderId" hidden>
-                                <button type="submit">參加團購</button>
-                            </form>
-                        </div>
-                        <p class="desc-content">
-                            ${response[gvo].groupActivityContent}
-                        </p>
-                    </div>
-                </div>
-            </div>`;
-                        texts += text;
-                    }
-                    $("#allactivity").html(texts);
+                            <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}">
+                                <button>參加團購</button>
+                            </a>
+                            </div>
+                            <p class="desc-content">
+                                ${response[gvo].groupActivityContent}
+                                </p>
+                                </div>
+                                </div>
+                                </div>`;
+                                texts += text;
+                            }
+                            $("#allactivity").html(texts);
+                        }
+                    })
                 }
-
-            })
-
-        }
+                //這是form版本的參加團購按鈕
+                // <form action="/group-product/Checkout" method="get">
+                //     <input type="text" name="groupActivityId" value="${response[gvo].groupActivityId}" hidden>
+                //     <input type="text" name="groupActivityPrice" value="${response[gvo].groupActivityPrice}" hidden>
+                //     <button type="submit">參加團購</button>
+                // </form>
     </script>
 </body>
 

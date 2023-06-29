@@ -252,11 +252,14 @@
                                         <progress id="theprogress" value="123" th:max="${groupActivityDTO.getGroupOrderMin}"></progress>
                                         <span id="percentage"></span>
                                     </p>
-                                    <!-- <a href="" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a> -->
-                                    <form action="" method="get">
-                                        <input type="text" name="groupOrderId" hidden>
-                                        <button type="submit">參加團購</button>
-                                    </form>
+                                    <a th:href="@{'/group-product/Checkout?groupActivityId=' + ${groupActivityDTO.groupActivityId} + '&groupActivityPrice=' + ${groupActivityDTO.groupActivityPrice}}" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a>
+                                    <!-- <form action="/group-product/Checkout" method="get" target="_blank">
+                                        <input type="text" name="groupActivityId" th:value="${groupActivityDTO.groupActivityId}" hidden>
+                                        <input type="text" name="groupActivityPrice" th:value="${groupActivityDTO.groupActivityPrice}" hidden> -->
+                                        <!-- <a th:href="@{'/group-product/Checkout?groupActivityId=' + ${groupActivityDTO.groupActivityId} + '&groupActivityPrice=' + ${groupActivityDTO.groupActivityPrice}}"> -->
+                                            <!-- <button type="submit">參加團購</button> -->
+                                        <!-- </a> -->
+                                    <!-- </form> -->
                                 </div>
                             </form>
                         </div>

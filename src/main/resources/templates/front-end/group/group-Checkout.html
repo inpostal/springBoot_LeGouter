@@ -210,7 +210,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
                                     <label>會員信箱 <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id=""
+                                    <input type="email" class="form-control" id=""
                                            >
                                 </div>
                             </div>
@@ -218,15 +218,16 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
                                     <label>團購商品價格 <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id=""
+                                    <input type="number" class="form-control" id=""
                                            >
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <label>目前團購商品下訂總數 <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id=""
+                                    <!-- 目前團購商品下訂總數 -->
+                                    <label>購買數量 <span class="required">*</span></label>
+                                    <input type="number" class="form-control" id=""
                                            >
                                 </div>
                             </div>
@@ -273,10 +274,12 @@
                         <div class="cart-totals">
                             <h3>結帳明細</h3>
                             <ul>
-                                <li>名稱:</li>
-                                <li id="courseName"></li>
+                                <li>活動名稱:</li>
+                                <li id=""></li>
+                                <li>購買數量:</li>
+                                <li id=""></li>
                                 <li>金額:</li>
-                                <li id="coursePrice"></li>
+                                <li id=""></li>
                             </ul>
                         </div>
                         <div class="faq-accordion">
@@ -310,7 +313,7 @@
                                     </div>
                                 </li>
                                 <li class="place-order">
-                                    <button class="default-btn two" id="checkout">
+                                    <button type="button" class="default-btn two" id="checkout">
                                         結帳
                                     </button>
 

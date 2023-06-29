@@ -13,6 +13,7 @@ import app.com.group.service.GroupActivityService;
 import app.com.group.service.GroupProductService;
 import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
+import app.com.group.vo.GroupCheckoutDTO;
 import app.com.group.vo.GroupProductVO;
 import app.com.member.vo.Members;
 
@@ -59,7 +60,7 @@ public class GroupController {
 		temporarydto.setGroupName(groupActivityVO.getGroupName());
 		temporarydto.setGroupOrderDiscount(groupActivityVO.getGroupOrderDiscount());
 //		temporarydto.setGroupProductPrice(tr.getGroupProductPrice());
-		temporarydto.setGroupName(tr.getGroupProductName());
+		temporarydto.setGroupProductName(tr.getGroupProductName());
 		temporarydto.setGroupProductContent(tr.getGroupProductContent());
     	 model.addAttribute("groupActivityDTO", temporarydto);
 		return "front-end/group/single-product2";
@@ -73,16 +74,26 @@ public class GroupController {
         //導至頁面
     	return "back-end/group/group-product-updata";
     }
-    //結帳頁面
-    @GetMapping("/group-Checkout")
+    @GetMapping("/group-product/Checkout") //結帳頁面
     public String groupCheckout(
-//    		@RequestParam Integer groupOrderId, Model model, HttpSession session, RedirectAttributes redirectAttributes
+    		@RequestParam Integer groupActivityId,
+    		@RequestParam Integer groupActivityPrice,
+    		Model model
     		) {
+//    		HttpSession session, RedirectAttributes redirectAttributes
 //    	Members user = (Members) session.getAttribute("user");
 //        if (user !=null){
 //            String address = user.getMemberAddress();
-//           
 //            model.addAttribute("address", address);
+    	
+    	GroupActivityVO checkoutactivityvo = groupActivityService.showTheActivity(groupActivityId);
+    	GroupCheckoutDTO groupcheckoutDTO = new GroupCheckoutDTO();
+    	groupcheckoutDTO.setGroupOrderId(groupActivityId); //一個團購訂單對一個活動。
+//    	待加入會員編號
+    	groupcheckoutDTO.setGroupActivityId(groupActivityId);
+    	groupcheckoutDTO.setGroupActivityPrice(groupActivityPrice); //帶入活動價格。
+    	groupcheckoutDTO.setGroupName(checkoutactivityvo.getGroupName()); //帶入結帳明細顯示的活動名稱。
+    	model.addAttribute("groupcheckoutDTO", groupcheckoutDTO);
 
             return "front-end/group/group-Checkout";
 //        }else {

@@ -34,6 +34,8 @@ import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.GroupProductDTO;
 import app.com.group.vo.GroupProductImgVO;
 import app.com.group.vo.GroupProductVO;
+import app.com.group.vo.InserDetailDTO;
+import app.com.grouporderdetail.vo.GroupOrderDetail;
 import app.com.groupordermaster.vo.GroupOrderMaster;
 import app.com.member.vo.Members;
 
@@ -71,7 +73,7 @@ public class GroupRestContreller {
 		return groupProductService.findPutOnList();
 	}
 
-	// 查詢單以團購商品
+	// 查詢單筆團購商品
 	@PostMapping("/groupProduct/showOne")
 	public GroupProductVO showOne(@RequestParam String groupProductId) {
 		// parseInt() 將String型別傳換成Integer包裝型別。
@@ -183,9 +185,9 @@ public class GroupRestContreller {
 //		System.out.println("測試try完Date為:" + today);
 		// 將時間放入參數。
 		List<GroupActivityDTO> temporaryalldto = new ArrayList<GroupActivityDTO>();
-		GroupActivityDTO temporarydto = new GroupActivityDTO();
 		List<GroupActivityVO> temporaryvo = groupActivityService.allShopActivity(today);
 		for (GroupActivityVO evo : temporaryvo) {
+			GroupActivityDTO temporarydto = new GroupActivityDTO();
 			GroupProductVO tr = groupProductService.showOneProduct(evo.getGroupProductId());
 			Integer ActivityPrice = (int)(tr.getGroupProductPrice() * evo.getGroupOrderDiscount());
 			temporarydto.setGroupActivityPrice(ActivityPrice);
@@ -241,6 +243,26 @@ public class GroupRestContreller {
 		return response;
 	}
 
+	// 後台 刪除活動用
+	@PostMapping("/groupActivity/deleteone")
+	public Map<String, Boolean> deleteOne(@RequestParam String groupActivityId) {
+		Integer theid = Integer.parseInt(groupActivityId);
+		Boolean success = groupActivityService.deleteOneActivity(theid);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("success", success);
+		return response;
+	}
+	
+	//前台 結帳資料
+	@PostMapping("/groupActivity/CheckoutDetail")
+	public Map<String, Boolean> InserDetail(InserDetailDTO inserDetailDTO) {
+		GroupOrderDetail retuvo = groupActivityService.inDetail(inserDetailDTO);
+		Boolean success = (retuvo != null);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("success", success);
+		return response;
+	}
+	
 	// 前台團購主修改活動資料
 //	@PostMapping("/plan-activity/updata-the")
 //	public Map<String, Boolean> updataForActivity(
@@ -259,14 +281,4 @@ public class GroupRestContreller {
 //		 response.put("success", success);
 //		return response;
 //	}
-
-	// 後台
-	@PostMapping("/groupActivity/deleteone")
-	public Map<String, Boolean> deleteOne(@RequestParam String groupActivityId) {
-		Integer theid = Integer.parseInt(groupActivityId);
-		Boolean success = groupActivityService.deleteOneActivity(theid);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("success", success);
-		return response;
-	}
 }

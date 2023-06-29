@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import app.com.group.repository.GroupActivityRepository;
 import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
+import app.com.group.vo.InserDetailDTO;
+import app.com.grouporderdetail.repository.GroupOrderDetailRepository;
+import app.com.grouporderdetail.vo.GroupOrderDetail;
 import app.com.groupordermaster.repository.GroupOrderMasterRepository;
 import app.com.groupordermaster.vo.GroupOrderMaster;
 
@@ -21,6 +24,10 @@ public class GroupActivityService {
 
 	@Autowired
 	private GroupOrderMasterRepository groupOrderMasterRepository;
+
+	// 用彥君的Repository
+	@Autowired
+	private GroupOrderDetailRepository groupOrderDetailRepository;
 
 	public List<GroupActivityVO> allActivity() {
 		List<GroupActivityVO> avolist = groupActivityRepository.findAll();
@@ -64,7 +71,31 @@ public class GroupActivityService {
 		return true;
 	}
 
-//	public Boolean updataActivity (GroupActivityDTO groupActivityDTO) {
+	// 整合後應該放在彥君的團購訂單主檔Service。
+	public GroupOrderMaster inserMaster(GroupOrderMaster groupOrderMaster) {
+		return groupOrderMasterRepository.save(groupOrderMaster);
+	}
+
+	// 整合後應該放在彥君的團購訂單明細Service。
+	public GroupOrderDetail inDetail(InserDetailDTO inserDetailDTO) {
+		GroupOrderDetail groupOrderDetail = new GroupOrderDetail();
+		groupOrderDetail.setGroupOrderId(inserDetailDTO.getGroupOrderId());
+		groupOrderDetail.setMemberId(inserDetailDTO.getMemberId());
+//		待補上信箱
+		groupOrderDetail.setGroupOrderAmount(inserDetailDTO.getGroupOrderAmount());
+		groupOrderDetail.setGroupProductPaying(inserDetailDTO.getGroupProductPaying());
+		groupOrderDetail.setGroupProductStatus(inserDetailDTO.getGroupProductStatus());
+		groupOrderDetail.setGroupProductOthers(inserDetailDTO.getGroupProductOthers());
+		groupOrderDetail.setReceiverName(inserDetailDTO.getReceiverName());
+		groupOrderDetail.setReceiverAddress(inserDetailDTO.getReceiverAddress());
+		groupOrderDetail.setReceiverEmail(inserDetailDTO.getReceiverEmail());
+		groupOrderDetail.setReceiverPhone(inserDetailDTO.getReceiverPhone());
+		groupOrderDetail.setGroupProductPrice(inserDetailDTO.getGroupActivityPrice());
+		return groupOrderDetailRepository.save(groupOrderDetail);
+	}
+
+	//
+//	public Boolean updataActivity(GroupActivityDTO groupActivityDTO) {
 //		GroupActivityVO groupActivityVO = new GroupActivityVO();
 //		groupActivityVO.setGroupActivityId(groupActivityDTO.getGroupActivityId());
 //		groupActivityVO.setGroupActivityContent(groupActivityDTO.getGroupActivityContent());
@@ -72,7 +103,4 @@ public class GroupActivityService {
 //		return groupActivityRepository.save(groupActivityVO) != null;
 //	}
 
-	public GroupOrderMaster inserMaster(GroupOrderMaster groupOrderMaster) {
-		return groupOrderMasterRepository.save(groupOrderMaster);
-	}
 }
