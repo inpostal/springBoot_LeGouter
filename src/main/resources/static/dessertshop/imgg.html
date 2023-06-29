@@ -119,23 +119,30 @@
             margin-bottom: 0px;
         }
 
+    /*    圖片上傳小動畫 */
+        .hidden1, .hidden2, .hidden3, .hidden4 {
+            display: none;
+        }
+
     </style>
 
 
 </head>
 
 <body>
-
+<div style="padding: 30px;">
             <!-- picture -->
             <div id="pictureUploadModal">
                 <form enctype="multipart/form-data" id="picform">
                     <div>
-                        <h3 style="text-align: center; padding-top: 20px; padding-bottom: 20px; background-color: #ecf0f1">商品圖片管理</h3>
+                        <h3 style="padding-left:10px; padding-top: 10px; padding-bottom: 20px;">商品圖片管理</h3>
+                        <p class="text-warning"><small style="color: red;">注意：按下儲存按鈕後，圖片才會進行更新</small></p>
                     </div>
                     <div>
 
                         <hr>
-                        <div style="position: relative;">
+                        <div class="forhidden1" style="position: relative;">
+                            <span class="hidden1" id="hidden1">商品首圖</span>
                             <span id="img0"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button class="btn btn-danger" id="delete0"  style="padding-top: 2px; padding-bottom: 2px; position: absolute; right: 20px;">刪除</button>
@@ -143,7 +150,8 @@
                         </div>
 
                         <hr>
-                        <div style="position: relative;">
+                        <div class="forhidden2" style="position: relative;">
+                            <span class="hidden2" id="hidden2">第二張圖片</span>
                             <span id="img1"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button class="btn btn-danger" id="delete1"  style="padding-top: 2px; padding-bottom: 2px; position: absolute; right: 20px;">刪除</button>
@@ -151,7 +159,8 @@
                         </div>
 
                         <hr>
-                        <div style="position: relative;">
+                        <div class="forhidden3" style="position: relative;">
+                            <span class="hidden3" id="hidden3">第三張圖片</span>
                             <span id="img2"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button class="btn btn-danger" id="delete2"  style="padding-top: 2px; padding-bottom: 2px; position: absolute; right: 20px;">刪除</button>
@@ -159,7 +168,8 @@
                         </div>
 
                         <hr>
-                        <div style="position: relative;">
+                        <div class="forhidden4" style="position: relative;">
+                            <span class="hidden4" id="hidden4">第四張圖片</span>
                             <span id="img3"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button class="btn btn-danger" id="delete3"  style="padding-top: 2px; padding-bottom: 2px; position: absolute; right: 20px;">刪除</button>
@@ -174,7 +184,7 @@
                 </form>
             </div>
 
-
+</div>
 
 
 
@@ -198,6 +208,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+
+<!--    圖片標題小動畫-->
+    // 1
+    const forhidden1 = document.querySelector('.forhidden1');
+    const hidden1 = document.querySelector('#hidden1');
+
+    forhidden1.addEventListener('mouseover', () => {
+        hidden1.classList.remove('hidden1');
+    });
+
+    forhidden1.addEventListener('mouseout', () => {
+        hidden1.classList.add('hidden1');
+    });
+
+    // 2
+    const forhidden2 = document.querySelector('.forhidden2');
+    const hidden2 = document.querySelector('#hidden2');
+
+    forhidden2.addEventListener('mouseover', () => {
+        hidden2.classList.remove('hidden2');
+    });
+
+    forhidden2.addEventListener('mouseout', () => {
+        hidden2.classList.add('hidden2');
+    });
+
+    // 3
+    const forhidden3 = document.querySelector('.forhidden3');
+    const hidden3 = document.querySelector('#hidden3');
+
+    forhidden3.addEventListener('mouseover', () => {
+        hidden3.classList.remove('hidden3');
+    });
+
+    forhidden3.addEventListener('mouseout', () => {
+        hidden3.classList.add('hidden3');
+    });
+
+    // 4
+    const forhidden4 = document.querySelector('.forhidden4');
+    const hidden4 = document.querySelector('#hidden4');
+
+    forhidden4.addEventListener('mouseover', () => {
+        hidden4.classList.remove('hidden4');
+    });
+
+    forhidden4.addEventListener('mouseout', () => {
+        hidden4.classList.add('hidden4');
+    });
+
+
 
     // 圖片管理 -------------------------------------------------------------------------------------------------------------------
     $(document).ready(function() {

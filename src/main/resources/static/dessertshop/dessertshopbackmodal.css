@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/* modal */
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.c {
+    position: relative;
+    min-width: 400px;
+    min-height: 550px;
+    padding-top: 30px;
+    display: flex;
+    z-index: 1000;
+    background: #fff;
+}
+
+.contactForm {
+    position: absolute;
+}
+
+.contactForm h4 {
+    color: #0f3959;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.contactForm .formBox {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+
+.contactForm .formBox .inputBox {
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.contactForm .formBox .inputBox.w50 {
+    width: 47%;
+}
+
+.contactForm .formBox .inputBox.w100 {
+    width: 100%;
+}
+
+.contactForm .formBox .inputBox input,
+.contactForm .formBox .inputBox textarea {
+    width: 100%;
+    resize: none;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #777;
+}
+
+.contactForm .formBox .inputBox textarea {
+    height: 120px;
+}
+
+.contactForm .formBox .inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    pointer-events: none;
+    font-size: 15px;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.contactForm .formBox .inputBox input:focus ~ span,
+.contactForm .formBox .inputBox input:valid ~ span,
+.contactForm .formBox .inputBox textarea:focus ~ span,
+.contactForm .formBox .inputBox textarea:valid ~ span {
+    transform: translateY(-20px);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #0537ec;
+    font-weight: 500;
+}
+
+.contactForm .formBox .inputBox input[type="submit"] {
+    position: relative;
+    cursor: pointer;
+    background: #095a55;
+    color: #fff;
+    border: none;
+    /*max-width: 150px;*/
+    padding: 12px;
+}
+
+.contactForm .formBox .inputBox input[type="submit"]:hover {
+    background: #0d9480;
+}
+
+/* 搜尋按鈕 */
+#search :hover {
+    background-color: #2f74ec;
+    color: white;
+}
