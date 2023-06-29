@@ -267,32 +267,8 @@
                             <th class="pro-remove">移除</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr th:each="dessertCart : ${dessertCartList}">
-                            <td>
-                                <img th:src="@{/dessert5/image0(dessertId=${dessertCart.getDessertId()})}"
-                                     class="img-fluid"/>
-                            </td>
+                        <tbody id="dessertCart">
 
-                            <td class="pro-title" th:text="${dessertCart.getDessertName()}"></td>
-                            <td class="pro-price"><span th:text="'$' + ${dessertCart.dessertPrice}"></span></td>
-                            <td class="pro-quantity">
-                                <div class="quantity">
-                                    <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box"
-                                               th:value="${dessertCart.getCartDessertQuantity()}"
-                                               type="text">
-                                        <div class="dec qtybutton">-</div>
-                                        <div class="inc qtybutton">+</div>
-                                        <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
-                                        <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="pro-subtotal"><span th:text="'$' + ${dessertCart.subtotalAmount}"></span></td>
-
-                            <td class="pro-remove"><a href="#"><i class="ion-trash-b"></i></a></td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -410,7 +386,52 @@
     </div>
 </div>
 <!-- footer end -->
-<!-- 版權所有 -->
+<!--購物車-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    //顯示訂單
+    $(document).ready(function () {
+        $.ajax({
+            url: '/dessertCart/get/1',
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                console.log(res);
+                let th_html = ``;
+                for (let e in res) {
+                    let td_html = `
+                    <tr>
+                         <td>
+                        <img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="#" style="width: 640px;">
+                            </td>
+                             <td class="pro-title"><a href="#">${res[e].dessertName}</a></td>
+                            <td class="pro-price"><span>${res[e].dessertPrice}</span></td>
+                            <td class="pro-quantity">
+                                <div class="quantity">
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" value="${res[e].cartDessertQuantity}" type="text">
+                                        <div class="dec qtybutton">-</div>
+                                        <div class="inc qtybutton">+</div>
+                                        <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
+                                        <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
+                                    </div>
+                                </div>
+                            </td>
+                          <td class="pro-subtotal"><span>${res[e].subtotalAmount}</span></td>
+
+                            <td class="pro-remove"><a href="#"><i
+                                    class="ion-trash-b"></i></a></td>
+                    </tr>`;
+                    th_html += td_html;
+                }
+                $("#dessertCart").html(th_html);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error(xhr);
+            }
+        });
+    });
+</script>
 
 
 <script data-cfasync="false" src="/Dessert/JS/SAM/email-decode.min.js"></script>
@@ -421,8 +442,7 @@
 <!-- JS
 ============================================ -->
 
-<!-- jQuery JS -->
-<script src="/Dessert/JS/jquery-3.5.1.min.js"></script>
+
 <!-- jQuery Migrate JS -->
 <script src="/Dessert/JS/jQuery-migrate-3.3.0.min.js"></script>
 <!-- Modernizer JS -->

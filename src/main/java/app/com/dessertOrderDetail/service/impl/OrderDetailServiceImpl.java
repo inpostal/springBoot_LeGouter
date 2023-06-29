@@ -3,7 +3,6 @@ package app.com.dessertOrderDetail.service.impl;
 import app.com.dessert5.dao.DessertImageRepository;
 import app.com.dessert5.dao.DessertRepository;
 import app.com.dessert5.vo.Dessert;
-import app.com.dessert5.vo.DessertImage;
 import app.com.dessertOrderDetail.entity.OrderDetail;
 import app.com.dessertOrderDetail.entity.OrderDetailDTO;
 import app.com.dessertOrderDetail.repository.OrderDetailRepository;
@@ -48,8 +47,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
             Dessert dessert = dessertRepository.getReferenceById(orderDetail.getDessertId());
             orderDetailDTO.setDessertName(dessert.getDessertName());
 
-            DessertImage dessertImg = dessertImageRepository.getReferenceById(orderDetail.getDessertId());
-//            orderDetailDTO.setDessertImg(dessertImg.getDessertImg());
 
             orderDetailDTOList.add(orderDetailDTO);
         }

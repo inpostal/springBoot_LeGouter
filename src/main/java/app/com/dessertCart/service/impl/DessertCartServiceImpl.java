@@ -34,7 +34,6 @@ public class DessertCartServiceImpl implements DessertCartService {
             DessertCartDTO dessertCartDTO = convertToDTO(dessertCart);
             dessertCartDTOList.add(dessertCartDTO);
         }
-
         return dessertCartDTOList;
     }
 
@@ -63,4 +62,10 @@ public class DessertCartServiceImpl implements DessertCartService {
         return dessertCartDTO;
     }
 
+
+//    public void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity) {
+//        DessertCart dessertCart = dessertCartRepository.findByDessertIdAndMemberId(dessertId, memberId);
+//        dessertCart.setCartDessertQuantity(cartDessertQuantity);
+//        dessertCartRepository.save(dessertCart);
+//    }
 }

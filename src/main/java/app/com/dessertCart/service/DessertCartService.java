@@ -15,4 +15,5 @@ public interface DessertCartService {
 
     List<DessertCartDTO> getDessertCartByMemberId(Integer memberId);
 
+//    void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity);
 }

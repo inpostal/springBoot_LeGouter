@@ -1,6 +1,7 @@
 package app.com.dessertCart.entity;
 
 import app.com.dessert5.vo.Dessert;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class DessertCart {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DESSERT_ID", referencedColumnName = "DESSERT_ID", insertable = false, updatable = false)
+    @JsonIgnoreProperties("dessertCart")
     private Dessert dessert;
 
 

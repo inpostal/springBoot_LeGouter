@@ -4,6 +4,7 @@ import app.com.dessertCart.entity.DessertCart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * ClassName: DessertCartReposity
@@ -15,6 +16,8 @@ import java.util.List;
 public interface DessertCartRepository extends JpaRepository<DessertCart, Integer> {
 
     List<DessertCart> findByMemberId(Integer memberId);
+
+    Optional<DessertCart> findByDessertIdAndMemberId(Integer dessertId, Integer memberId);
 
 }
 
