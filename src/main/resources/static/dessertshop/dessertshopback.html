@@ -633,7 +633,7 @@
                         for (let e in res) {
                             let dessertStatus = res[e].dessertStatus;
                             let statusClass = dessertStatus === "已下架" ? "badge rounded-pill bg-danger" : "badge rounded-pill bg-primary";    // 讓已下架呈現紅色
-                            if (dessertStatus === ("已下架" || "Available")){
+                            if (dessertStatus === "已下架" || dessertStatus ===  "Available"){
                                 continue;
                             }
                             html += `<tr>
@@ -667,7 +667,7 @@
                         for (let e in res) {
                             let dessertStatus = res[e].dessertStatus;
                             let statusClass = dessertStatus === "已下架" ? "badge rounded-pill bg-danger" : "badge rounded-pill bg-primary";    // 讓已下架呈現紅色
-                            if (dessertStatus === ("販售中" || "Available")){
+                            if (dessertStatus === "販售中" || dessertStatus ===  "Available"){
                                 continue;
                             }
                             html += `<tr>
@@ -930,10 +930,33 @@
 
 
     // 圖片管理 -------------------------------------------------------------------------------------------------------------------
+
     function redirectToEditPicture(param) {
         console.log(param);
+
+        // 創建遮罩層元素
+        let overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // 設置透明黑色作為遮罩層的顏色
+        overlay.style.zIndex = '9999';
+
+        // 將遮罩層添加到原窗口的body中
+        document.body.appendChild(overlay);
+
         let url = 'imgg.html?param=' + encodeURIComponent(param);
-        window.open(url, "商品圖片管理", "width=720,height=650");
+        let width = 720;
+        let height = 650;
+
+        // 計算彈出視窗的左上角位置使其位於畫面正中間
+        let left = (window.innerWidth - width) / 2;
+        let top = (window.innerHeight - height) / 2;
+
+        // 打開新視窗，並設置位置和大小
+        window.open(url, "商品圖片管理", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     }
 
 
