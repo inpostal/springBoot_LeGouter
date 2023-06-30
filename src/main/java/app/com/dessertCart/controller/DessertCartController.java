@@ -3,11 +3,12 @@ package app.com.dessertCart.controller;
 import app.com.dessertCart.entity.DessertCartDTO;
 import app.com.dessertCart.service.DessertCartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -25,7 +26,8 @@ public class DessertCartController {
 
 
     @GetMapping("/dessertCart/{memberId}")
-    public String getDessertCartByMemberId() {
+    public String getDessertCartByMemberId(@PathVariable Integer memberId, Model model) {
+        model.addAttribute("memberId", memberId);
         return "/front-end/Dessert/DessertCart";
     }
 
@@ -36,11 +38,19 @@ public class DessertCartController {
         return dessertCartDTOList;
     }
 
-//    @PostMapping("dessertCart/update")
-//    public ResponseEntity<?> updateDessertCartQuantity(@RequestParam Integer dessertId,
-//                                                       @RequestParam Integer memberId,
-//                                                       @RequestParam Integer cartDessertQuantity) {
-//        dessertCartService.updateDessertCartQuantity(dessertId, memberId, cartDessertQuantity);
-//        return ResponseEntity.ok().build();
-//    }
+    @PostMapping("/dessertCart/update")
+    public ResponseEntity<?> updateDessertCartQuantity(@RequestParam("dessertId") Integer dessertId,
+                                                       @RequestParam("memberId") Integer memberId,
+                                                       @RequestParam("cartDessertQuantity") Integer cartDessertQuantity) {
+        dessertCartService.updateDessertCartQuantity(dessertId, memberId, cartDessertQuantity);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/dessertCart/delete")
+    public String delete(@RequestParam("dessertId") Integer dessertId,
+                         HttpSession session) {
+//        Members member = (Members) session.getAttribute("user");
+        dessertCartService.delete(dessertId, 1);
+        return "/front-end/Dessert/DessertCart";
+    }
 }

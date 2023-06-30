@@ -11,12 +11,10 @@ import lombok.Data;
  */
 @Data
 public class DessertCartDTO {
-    private Integer dessertCartId;
     private Integer dessertId;
     private Integer memberId;
     private Integer cartDessertQuantity;
     private Integer subtotalAmount;
     private String dessertName;
     private Integer dessertPrice;
-
 }

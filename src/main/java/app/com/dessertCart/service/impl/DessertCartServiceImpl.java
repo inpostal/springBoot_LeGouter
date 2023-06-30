@@ -1,5 +1,6 @@
 package app.com.dessertCart.service.impl;
 
+import app.com.dessert5.dao.DessertRepository;
 import app.com.dessert5.vo.Dessert;
 import app.com.dessertCart.entity.DessertCart;
 import app.com.dessertCart.entity.DessertCartDTO;
@@ -7,9 +8,11 @@ import app.com.dessertCart.repository.DessertCartRepository;
 import app.com.dessertCart.service.DessertCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * ClassName: DessertCartServiceImpl
@@ -20,9 +23,11 @@ import java.util.List;
  */
 @Service
 public class DessertCartServiceImpl implements DessertCartService {
-
     @Autowired
     private DessertCartRepository dessertCartRepository;
+
+    @Autowired
+    private DessertRepository dessertRepository;
 
 
     @Override
@@ -38,7 +43,7 @@ public class DessertCartServiceImpl implements DessertCartService {
     }
 
     private DessertCartDTO convertToDTO(DessertCart dessertCart) {
-        Dessert dessert = dessertCart.getDessert();
+        Dessert dessert = dessertRepository.findById(dessertCart.getDessertId()).orElse(null);
         Integer cartDessertQuantity = dessertCart.getCartDessertQuantity();
         Integer subtotalAmount = null;
         String dessertName = null;
@@ -51,7 +56,6 @@ public class DessertCartServiceImpl implements DessertCartService {
         }
 
         DessertCartDTO dessertCartDTO = new DessertCartDTO();
-        dessertCartDTO.setDessertCartId(dessertCart.getDessertCartId());
         dessertCartDTO.setDessertId(dessertCart.getDessertId());
         dessertCartDTO.setMemberId(dessertCart.getMemberId());
         dessertCartDTO.setCartDessertQuantity(dessertCart.getCartDessertQuantity());
@@ -63,9 +67,20 @@ public class DessertCartServiceImpl implements DessertCartService {
     }
 
 
-//    public void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity) {
-//        DessertCart dessertCart = dessertCartRepository.findByDessertIdAndMemberId(dessertId, memberId);
-//        dessertCart.setCartDessertQuantity(cartDessertQuantity);
-//        dessertCartRepository.save(dessertCart);
-//    }
+    @Override
+    public void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity) {
+        Optional<DessertCart> optionalDessertCart = dessertCartRepository.findByDessertIdAndMemberId(dessertId, memberId);
+        DessertCart dessertCart = optionalDessertCart.orElse(null);
+
+        if (dessertCart != null) {
+            dessertCart.setCartDessertQuantity(cartDessertQuantity);
+            dessertCartRepository.save(dessertCart);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer dessertId, Integer memberId) {
+        dessertCartRepository.deleteByDessertIdAndMemberId(dessertId, memberId);
+    }
 }

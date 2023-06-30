@@ -12,8 +12,9 @@ import java.util.List;
  * @Create 2023/6/27 PM 05:05
  */
 public interface DessertCartService {
-
     List<DessertCartDTO> getDessertCartByMemberId(Integer memberId);
 
-//    void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity);
+    void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity);
+
+    void delete(Integer dessertId, Integer memberId);
 }
