@@ -230,7 +230,7 @@
         }
 
         function inserAct() {
-            const groupOmin = $("#minva").val();
+            const groupOmin = Number($("#minva").val());
             let groupODis = 0.95;
             console.log(groupOmin);
             switch (groupOmin) {
@@ -262,7 +262,7 @@
                     groupActivityContent: $("#tarva").val(),
                     groupOrderStar: starva,
                     groupOrderEnd: endva,
-                    groupOrderMin: $("#minva").val(),
+                    groupOrderMin: groupOmin,
                     groupName: $("#nameva").val(),
                     groupOrderDiscount: groupODis
                 }),
