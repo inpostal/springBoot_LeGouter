@@ -73,12 +73,13 @@ public class GroupRestContreller {
 		return groupProductService.findPutOnList();
 	}
 
-	// 查詢單筆團購商品
+	// 後台 查詢單筆團購商品
 	@PostMapping("/groupProduct/showOne")
-	public GroupProductVO showOne(@RequestParam String groupProductId) {
+	public GroupProductVO showOne(@RequestParam Integer groupProductId) {
 		// parseInt() 將String型別傳換成Integer包裝型別。
-		Integer gpid = Integer.parseInt(groupProductId);
-		return groupProductService.showOneProduct(gpid);
+		// 前端抓取資料後如果做好Nunber轉換就不用了。
+//		Integer gpid = Integer.parseInt(groupProductId);
+		return groupProductService.showOneProduct(groupProductId);
 	}
 
 	// 後台 新增團購商品(含上傳單一圖片功能)
@@ -208,14 +209,14 @@ public class GroupRestContreller {
 		return temporaryalldto;
 	}
 
-	// 前台單品
+	// 前台單品 *改成thymeleaf後已無用*
 	@PostMapping("/single-product/showthe")
 	public GroupActivityVO showthe(@RequestParam String groupActivityId) {
 		Integer theid = Integer.parseInt(groupActivityId);
 		return groupActivityService.showTheActivity(theid);
 	}
 
-	// 前台團購主專區
+	// 前台團購主專區 發起活動
 	@PostMapping("/groupActivity/inser")
 	public Map<String, Boolean> inserActivity(@RequestBody GroupActivityDTO groupActivityDTO, HttpSession session) {
 		System.out.println("開始日期" + groupActivityDTO.getGroupOrderStar());
@@ -227,15 +228,17 @@ public class GroupRestContreller {
 		Boolean success = (theacvo != null);
 		
 		GroupOrderMaster masterdto = new GroupOrderMaster();
-		masterdto.setGroupOrderId(theacvo.getGroupActivityId()); //設定團購訂單PK編號，一個活動對應一個團購訂單主檔。
+		System.out.println("剛剛新增的活動編號" + theacvo.getGroupActivityId());
+//		masterdto.setGroupOrderId(theacvo.getGroupActivityId()); //設定團購訂單PK編號，一個活動對應一個團購訂單主檔。 20230630下面已經有FK了 改自動生成PK。
 //		masterdto.setMemId(user.getMemberId()); //設定團購主編號
-		masterdto.setMemId(1); //測試設定團購主編號
+		masterdto.setMemId(2); //測試設定團購主編號
 		masterdto.setGroupActivityId(theacvo.getGroupActivityId()); //設定FK活動編號
 		masterdto.setNumberOfProduct(0); //設定初始購買商品數量
 		masterdto.setGroupOrderStatus(1); //設定初始團購狀態
 		masterdto.setGroupOrderBonus(null); //設定初始可獲得分潤金額
 		masterdto.setTotalGroupProductPrice(null); //設定初始團購單總金額
 		masterdto.setGroupOrderBonusStatus(0); //設定初始分潤發放狀態
+		System.out.println(masterdto);
 		GroupOrderMaster getthevo = groupActivityService.inserMaster(masterdto);
 		
 		 Map<String, Boolean> response = new HashMap<>();
@@ -255,7 +258,8 @@ public class GroupRestContreller {
 	
 	//前台 結帳資料
 	@PostMapping("/groupActivity/CheckoutDetail")
-	public Map<String, Boolean> InserDetail(InserDetailDTO inserDetailDTO) {
+	public Map<String, Boolean> InserDetail(@RequestBody InserDetailDTO inserDetailDTO) {
+//		System.out.println("第一層觀察抓到的數量:" + inserDetailDTO.getGroupOrderAmount());
 		GroupOrderDetail retuvo = groupActivityService.inDetail(inserDetailDTO);
 		Boolean success = (retuvo != null);
 		Map<String, Boolean> response = new HashMap<>();

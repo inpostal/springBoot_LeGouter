@@ -32,6 +32,8 @@ public class GroupActivityDTO {
 	private String groupName; //活動名稱
 	private Double groupOrderDiscount; //折扣數
 	
+	private Long groupDetailCount; //依照訂單明細的資料筆數 統計參加人數
+	
 	private Integer groupProductPrice; //團購商品原價
 	private Integer groupActivityPrice; //活動打折價格
 	private String groupProductName; //團購商品名稱

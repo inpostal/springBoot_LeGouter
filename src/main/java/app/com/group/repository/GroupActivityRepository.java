@@ -11,5 +11,8 @@ public interface GroupActivityRepository extends JpaRepository<GroupActivityVO, 
 	
 	//自定義 查詢結束日期大於當下日期時間的活動資料。
 	public List<GroupActivityVO> findByGroupOrderEndAfter(Date groupOrderEnd);
+	
+	//自定義 查詢開始日期小於等於當下日期時間&結束日期大於當下日期時間 的活動資料
+	public List<GroupActivityVO> findByGroupOrderStarLessThanEqualAndGroupOrderEndAfter(Date groupOrderStar, Date groupOrderEnd);
 
 }

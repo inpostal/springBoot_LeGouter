@@ -22,6 +22,7 @@ public class GroupActivityService {
 	@Autowired
 	private GroupActivityRepository groupActivityRepository;
 
+	// 用彥君的Repository
 	@Autowired
 	private GroupOrderMasterRepository groupOrderMasterRepository;
 
@@ -34,8 +35,9 @@ public class GroupActivityService {
 		return avolist;
 	}
 
-	public List<GroupActivityVO> allShopActivity(Date groupOrderEnd) {
-		List<GroupActivityVO> avoaclist = groupActivityRepository.findByGroupOrderEndAfter(groupOrderEnd);
+	public List<GroupActivityVO> allShopActivity(Date groupOrderEnd) { //參數實際為當下日期時間。
+//		List<GroupActivityVO> avoaclist = groupActivityRepository.findByGroupOrderEndAfter(groupOrderEnd);
+		List<GroupActivityVO> avoaclist = groupActivityRepository.findByGroupOrderStarLessThanEqualAndGroupOrderEndAfter(groupOrderEnd, groupOrderEnd);
 		return avoaclist;
 	}
 
@@ -81,7 +83,7 @@ public class GroupActivityService {
 		GroupOrderDetail groupOrderDetail = new GroupOrderDetail();
 		groupOrderDetail.setGroupOrderId(inserDetailDTO.getGroupOrderId());
 		groupOrderDetail.setMemberId(inserDetailDTO.getMemberId());
-//		待補上信箱
+//		System.out.println("第二層觀察抓到的數量:" + inserDetailDTO.getGroupOrderAmount());
 		groupOrderDetail.setGroupOrderAmount(inserDetailDTO.getGroupOrderAmount());
 		groupOrderDetail.setGroupProductPaying(inserDetailDTO.getGroupProductPaying());
 		groupOrderDetail.setGroupProductStatus(inserDetailDTO.getGroupProductStatus());
@@ -92,6 +94,15 @@ public class GroupActivityService {
 		groupOrderDetail.setReceiverPhone(inserDetailDTO.getReceiverPhone());
 		groupOrderDetail.setGroupProductPrice(inserDetailDTO.getGroupActivityPrice());
 		return groupOrderDetailRepository.save(groupOrderDetail);
+	}
+	
+	// 整合後應該放在彥君的團購訂單明細Service。
+	public Long getDetailCount(Integer groupActivityId) {
+		//自定義以活動編號為查詢條件。
+		List<GroupOrderMaster> groupOrderMaster = groupOrderMasterRepository.findByGroupActivityId(groupActivityId);
+		//自定義以活動編號為計數。
+		System.out.println("檢查findByGroupActivityId回傳的陣列長度:" + groupOrderMaster.size());
+		return groupOrderDetailRepository.countByGroupOrderId(groupOrderMaster.get(0).getGroupOrderId());
 	}
 
 	//

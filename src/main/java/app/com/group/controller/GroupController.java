@@ -39,7 +39,7 @@ public class GroupController {
 	public String groupShop() {
 		return "front-end/group/group-shop";
 	}
-    @GetMapping("/plan-activity") //前台團購主活動瀏覽專區
+    @GetMapping("/plan-activity") //前台團購主瀏覽商品 發起活動專區
 	public String planActivity() {
 		return "front-end/group/plan-activity2";
 	}
@@ -47,6 +47,7 @@ public class GroupController {
 	public String singleProduct(@RequestParam Integer groupActivityId, Model model) {
     	GroupActivityVO groupActivityVO = groupActivityService.showTheActivity(groupActivityId);
     	GroupProductVO tr = groupProductService.showOneProduct(groupActivityVO.getGroupProductId());
+    	Long detailcount = groupActivityService.getDetailCount(groupActivityId);
     	
     	GroupActivityDTO temporarydto = new GroupActivityDTO();
     	Integer ActivityPrice = (int)(tr.getGroupProductPrice() * groupActivityVO.getGroupOrderDiscount());
@@ -62,6 +63,7 @@ public class GroupController {
 //		temporarydto.setGroupProductPrice(tr.getGroupProductPrice());
 		temporarydto.setGroupProductName(tr.getGroupProductName());
 		temporarydto.setGroupProductContent(tr.getGroupProductContent());
+		temporarydto.setGroupDetailCount(detailcount);
     	 model.addAttribute("groupActivityDTO", temporarydto);
 		return "front-end/group/single-product2";
 	}
