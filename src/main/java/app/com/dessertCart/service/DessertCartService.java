@@ -17,4 +17,7 @@ public interface DessertCartService {
     void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity);
 
     void delete(Integer dessertId, Integer memberId);
+
+    DessertCartDTO getDessertCartByDessertIdAndMemberId(Integer dessertId, Integer memberId);
+
 }

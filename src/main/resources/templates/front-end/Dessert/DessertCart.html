@@ -401,12 +401,12 @@
             var row = event.target.closest("tr"); // 找到最接近的父元素 <tr>
 
 
-            // 获取商品 ID 和会员 ID
+            //獲取商品id
             var dessertId = row.getAttribute("data-dessert-id");
 
             console.log(dessertId);
 
-            // 发送 AJAX 请求删除商品
+            // 發送請求到後端
             deleteDessertCart(dessertId);
 
             row.remove(); // 移除該行
@@ -457,17 +457,14 @@
                             <td class="pro-quantity">
                                 <div class="quantity">
                                     <div class="cart-plus-minus">
-                                      <input class="cart-plus-minus-box" onchange="updateDessertCartQuantity(${res[e].dessertId},${res[e].memberId}, e,1)" value="${res[e].cartDessertQuantity}" type="text">
-                                       <div class="dec qtybutton" onclick="reduceProduct (${res[e].dessertId},${res[e].memberId})">-</div>
-                                        <div class="inc qtybutton" onclick="addProduct(${res[e].dessertId},${res[e].memberId})">+</div>
-
-                                         <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
-                                         <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
-
+                                      <input class="cart-plus-minus-box" onchange="updateDessertCartQuantity(${res[e].dessertId}, ${res[e].memberId}, this.value)" value="${res[e].cartDessertQuantity}" type="text">
+                                      <div class="dec qtybutton" onclick="updateDessertCartQuantity(${res[e].dessertId}, ${res[e].memberId},  parseInt($(this).siblings('.cart-plus-minus-box').val())  - 1, $(this))">-</div>
+                                      <div class="inc qtybutton" onclick="updateDessertCartQuantity(${res[e].dessertId}, ${res[e].memberId}, parseInt($(this).siblings('.cart-plus-minus-box').val()) + 1, $(this))">+</div>
                                     </div>
                                 </div>
                             </td>
                         <td class="pro-subtotal"><span>${res[e].subtotalAmount}</span></td>
+
                         <td class="pro-remove"><a href="#" onclick="removeProduct(event)"><i
                                     class="ion-trash-b"></i></a></td>
                     </tr>`;
@@ -482,67 +479,20 @@
         });
     }
 
-    function reduceProduct(dessert_Id, mem_Id) {
-        var itemIndex = -1;
-        for (var i = 0; i < cartClassItems.length; i++) {
-            if (cartClassItems[i].dessertId === dessert_Id) {
-                itemIndex = i;
-                break;
-            }
-        }
-        if (itemIndex !== -1) {
-            if (cartClassItems[itemIndex].cartDessertAmount === 1) {
-                var confirmDelete = confirm("確認刪除？");
-                if (confirmDelete) {
-                    // 刪除購物車資料
-                    cartClassItems.splice(itemIndex, 1);
-                } else {
-                    // 保持數量為1
-                    cartClassItems[itemIndex].cartDessertAmount = 1;
-                }
-            } else {
-                cartClassItems[itemIndex].cartDessertAmount--;
-            }
-            updateDessertCartQuantity(dessert_Id, mem_Id, cartClassItems[itemIndex].cartDessertAmount);
-
-        }
-    }
-
-    function addProduct(dessert_Id, mem_Id) {
-        var itemIndex = -1;
-        for (var i = 0; i < cartClassItems.length; i++) {
-            if (cartClassItems[i].dessertId === dessert_Id) {
-                itemIndex = i;
-                break;
-            }
-        }
-        if (itemIndex !== -1) {
-            if (cartClassItems[itemIndex].cartDessertAmount < 50) {
-                cartClassItems[itemIndex].cartDessertAmount++;
-                updateDessertCartQuantity(dessert_Id, mem_Id, cartClassItems[itemIndex].cartDessertAmount);
-
-            } else {
-                alert("已達到最大數量，無法再新增");
-            }
-        }
-    }
-
-    function updateDessertCartQuantity(dessertId, memberId, cartDessertQuantity, itemIndex) {
-        if (itemIndex !== undefined) {
-            cartClassItems[itemIndex].cartDessertAmount = parseInt($(".cart-plus-minus-box").eq(itemIndex).val());
-        }
-
+    function updateDessertCartQuantity(dessertId, memberId, cartDessertQuantity, increaseBtn) {
+        $(increaseBtn).siblings(".cart-plus-minus-box").val(cartDessertQuantity);
         $.ajax({
-            url: '/dessertCart/update',//登陸的網址
-            type: 'POST',//請求的方式
+            url: '/dessertCart/update',
+            type: 'POST',
             data: {
                 dessertId: dessertId,
                 memberId: memberId,
-                cartDessertQuantity: cartClassItems[itemIndex].cartDessertQuantity
+                cartDessertQuantity: cartDessertQuantity
             },
-            success: function (res) {
-                console.log(res);
-                dessertCartUpdate();
+            success: function (response) {
+                // Update the subtotal dynamically
+                let newSubtotal = response.subtotalAmount;
+                $(increaseBtn).closest("tr").find(".pro-subtotal span").text(newSubtotal);
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.error(xhr);

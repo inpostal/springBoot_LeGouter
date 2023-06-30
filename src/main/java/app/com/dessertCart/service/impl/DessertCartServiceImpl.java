@@ -66,8 +66,19 @@ public class DessertCartServiceImpl implements DessertCartService {
         return dessertCartDTO;
     }
 
+    @Override
+    public DessertCartDTO getDessertCartByDessertIdAndMemberId(Integer dessertId, Integer memberId) {
+        Optional<DessertCart> optionalDessertCart = dessertCartRepository.findByDessertIdAndMemberId(dessertId, memberId);
+        if (optionalDessertCart.isPresent()) {
+            DessertCart dessertCart = optionalDessertCart.get();
+            return convertToDTO(dessertCart);
+        }
+        return null;
+    }
+
 
     @Override
+    @Transactional
     public void updateDessertCartQuantity(Integer dessertId, Integer memberId, Integer cartDessertQuantity) {
         Optional<DessertCart> optionalDessertCart = dessertCartRepository.findByDessertIdAndMemberId(dessertId, memberId);
         DessertCart dessertCart = optionalDessertCart.orElse(null);

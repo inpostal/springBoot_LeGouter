@@ -28,5 +28,4 @@ public class DessertCart {
     @Column(name = "CART_DESSERT_QUANTITY", nullable = false)
     private Integer cartDessertQuantity;
 
-    // Getters and setters
 }
