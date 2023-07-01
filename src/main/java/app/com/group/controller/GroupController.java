@@ -29,7 +29,7 @@ public class GroupController {
 
 	@GetMapping("/group-product-manage") //後台團購商品管理
 	public String groupProductManage() {
-		return "back-end/group/group-product-manage";
+		return "back-end/group/group-product-manage2";
 	}
     @GetMapping("/plan-activity-manage") //後台團購活動管理
 	public String planActivityManage() {
@@ -74,7 +74,7 @@ public class GroupController {
         //將id裡面資料放入model
         model.addAttribute("groupProductVO", groupProductVO);
         //導至頁面
-    	return "back-end/group/group-product-updata";
+    	return "back-end/group/group-product-updata2";
     }
     @GetMapping("/group-product/Checkout") //結帳頁面
     public String groupCheckout(

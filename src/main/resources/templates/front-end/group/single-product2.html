@@ -127,8 +127,8 @@
                                             <div class="epix-single-product-thumb-4">
                                                 <div class="epix-featured">
                                                 </div>
-                                                <img th:src="@{${'/groupProduct/get/img/' + groupActivityDTO.getGroupProductId}}" 
-                                                    data-zoom-image="@{${'/groupProduct/get/img/' + groupActivityDTO.getGroupProductId}}"
+                                                <img th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img0'}}" 
+                                                    data-zoom-image="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img0'}}"
                                                     class="img-fluid" alt="">
                                             </div>
                                         </div>
@@ -136,26 +136,27 @@
                                             <div class="epix-single-product-thumb-4">
                                                 <div class="epix-featured">
                                                 </div>
-                                                <img src=""
-                                                    data-zoom-image="" class="img-fluid"
-                                                    alt="">
+                                                <img th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img1'}}"
+                                                    data-zoom-image="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img1'}}" 
+                                                    class="img-fluid" alt="">
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="epix-single-3">
                                             <div class="epix-single-product-thumb-4">
                                                 <div class="epix-featured">
                                                 </div>
-                                                <img src=""
-                                                    data-zoom-image="" class="img-fluid"
-                                                    alt="">
+                                                <img th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img2'}}"
+                                                    data-zoom-image="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img2'}}"
+                                                    class="img-fluid" alt="">
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="epix-single-4">
                                             <div class="epix-single-product-thumb-4">
                                                 <div class="epix-featured">
                                                 </div>
-                                                <img src=""
-                                                    data-zoom-image="" class="img-fluid" alt="">
+                                                <img th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img3'}}"
+                                                    data-zoom-image="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img3'}}" 
+                                                    class="img-fluid" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -166,28 +167,28 @@
                                     <li>
                                         <button class="active" value="1" data-bs-toggle="pill"
                                             data-bs-target="#epix-single-1" type="button">
-                                            <img width="98" height="98" th:src="@{${'/groupProduct/get/img/' + groupActivityDTO.getGroupProductId}}"
+                                            <img width="98" height="98" th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img0'}}"
                                                 alt="">
                                         </button>
                                     </li>
                                     <li>
                                         <button data-bs-toggle="pill" value="2" data-bs-target="#epix-single-2"
                                             type="button">
-                                            <img width="98" height="98" src=""
+                                            <img width="98" height="98" th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img1'}}"
                                                 alt="">
                                         </button>
                                     </li>
                                     <li>
                                         <button data-bs-toggle="pill" value="3" data-bs-target="#epix-single-3"
                                             type="button">
-                                            <img width="98" height="98" src=""
+                                            <img width="98" height="98" th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img2'}}"
                                                 alt="">
                                         </button>
                                     </li>
                                     <li>
                                         <button data-bs-toggle="pill" value="4" data-bs-target="#epix-single-4"
                                             type="button">
-                                            <img width="98" height="98" src="" 
+                                            <img width="98" height="98" th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img3'}}" 
                                                 alt="">
                                         </button>
                                     </li>

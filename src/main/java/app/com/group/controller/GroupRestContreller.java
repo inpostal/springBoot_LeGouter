@@ -84,9 +84,12 @@ public class GroupRestContreller {
 
 	// 後台 新增團購商品(含上傳單一圖片功能)
 	@PostMapping("/groupProduct/inserNew")
-	public Map<String, Boolean> inserProductNew(@RequestParam String groupProductName,
-			@RequestParam String groupProductContent, @RequestParam Integer groupProductPrice,
-			@RequestParam String groupProductStardate, @RequestParam Integer groupProductStatus,
+	public Map<String, Boolean> inserProductNew(
+			@RequestParam String groupProductName,
+			@RequestParam String groupProductContent, 
+			@RequestParam Integer groupProductPrice,
+			@RequestParam String groupProductStardate, 
+			@RequestParam Integer groupProductStatus,
 			@RequestParam MultipartFile groupProductImg) {
 
 		GroupProductDTO inserdto = new GroupProductDTO();
@@ -130,10 +133,14 @@ public class GroupRestContreller {
 
 	// 後台 修改團購商品
 	@PostMapping("/group-product/updata-the")
-	public Map<String, Boolean> updataForProduct(@RequestParam Integer groupProductId,
-			@RequestParam String groupProductName, @RequestParam String groupProductContent,
-			@RequestParam Integer groupProductPrice, @RequestParam String groupProductStardate,
-			@RequestParam String groupProductEnddate, @RequestParam Integer groupProductStatus,
+	public Map<String, Boolean> updataForProduct(
+			@RequestParam Integer groupProductId,
+			@RequestParam String groupProductName, 
+			@RequestParam String groupProductContent,
+			@RequestParam Integer groupProductPrice, 
+			@RequestParam String groupProductStardate,
+			@RequestParam String groupProductEnddate, 
+			@RequestParam Integer groupProductStatus,
 			@RequestParam(required = false) MultipartFile groupProductImg) {
 		GroupProductDTO updatato = new GroupProductDTO();
 		updatato.setGroupProductId(groupProductId);
@@ -267,7 +274,7 @@ public class GroupRestContreller {
 		return response;
 	}
 	
-	// 後台 新增團購商品(多張圖片上傳功能 施工中)
+	// 後台 新增團購商品(多張圖片上傳功能 完成)
 		@PostMapping("/groupProduct/inserNew2")
 		public Map<String, Boolean> inserProductNew2(
 				@RequestParam String groupProductName,
@@ -279,10 +286,10 @@ public class GroupRestContreller {
                 @RequestParam(name = "1", required = false) MultipartFile file1,
                 @RequestParam(name = "2", required = false) MultipartFile file2,
                 @RequestParam(name = "3", required = false) MultipartFile file3) {
-			    System.out.println("file0: " + file0);
-		        System.out.println("file1: " + file1);
-		        System.out.println("file2: " + file2);
-		        System.out.println("file3: " + file3);
+			    System.out.println("新增功能的圖片file0: " + file0);
+		        System.out.println("新增功能的圖片file1: " + file1);
+		        System.out.println("新增功能的圖片file2: " + file2);
+		        System.out.println("新增功能的圖片file3: " + file3);
 
 			GroupProductDTO inserdto = new GroupProductDTO();
 			inserdto.setGroupProductName(groupProductName);
@@ -294,13 +301,78 @@ public class GroupRestContreller {
 			GroupProductVO evo = groupProductService.inserProductNew(inserdto);
 			Boolean success1 = (evo != null);
 
-			evo.getGroupProductId();
+			Boolean success2 = groupProductImgService.inser4Img(evo.getGroupProductId(), file0, file1, file2, file3);
 			
 
 			Map<String, Boolean> response = new HashMap<>();
 			response.put("success1", success1);
 			return response;
 		}
+		
+		// 後台 修改團購商品(多張圖片修改功能 施工中)
+		@PostMapping("/group-product/updata-the2")
+		public Map<String, Boolean> updataForProduct2(
+				@RequestParam Integer groupProductId,
+				@RequestParam String groupProductName, 
+				@RequestParam String groupProductContent,
+				@RequestParam Integer groupProductPrice, 
+				@RequestParam String groupProductStardate,
+				@RequestParam String groupProductEnddate, 
+				@RequestParam Integer groupProductStatus,
+				@RequestParam(name = "0", required = false) MultipartFile file0,
+                @RequestParam(name = "1", required = false) MultipartFile file1,
+                @RequestParam(name = "2", required = false) MultipartFile file2,
+                @RequestParam(name = "3", required = false) MultipartFile file3) {
+			    System.out.println("修改功能的圖片file0: " + file0);
+		        System.out.println("修改功能的圖片file1: " + file1);
+		        System.out.println("修改功能的圖片file2: " + file2);
+		        System.out.println("修改功能的圖片file3: " + file3);
+			GroupProductDTO updatato = new GroupProductDTO();
+			updatato.setGroupProductId(groupProductId);
+			updatato.setGroupProductName(groupProductName);
+			updatato.setGroupProductContent(groupProductContent);
+			updatato.setGroupProductPrice(groupProductPrice);
+			updatato.setGroupProductStardate(groupProductStardate);
+			updatato.setGroupProductEnddate(groupProductEnddate);
+			updatato.setGroupProductStatus(groupProductStatus);
+			Boolean success = groupProductService.updataThe(updatato);
+
+			//待施工service
+
+			Map<String, Boolean> response = new HashMap<>();
+			response.put("success", success);
+			return response;
+		}
+		
+		// 配合動態產生圖片連結。(FK多張圖片 施工中)。
+		@GetMapping("/groupActivity/get/Product{groupProductId}/img{i}")
+		public ResponseEntity<Resource> getPicture2(@PathVariable Integer groupProductId,@PathVariable Integer i) {
+			List<GroupProductImgVO> gprimgyee = groupProductImgService.getFkImg(groupProductId);
+			if(i >= gprimgyee.size()) {
+				byte[] picture = gprimgyee.get(0).getGroupProductImg();
+				ByteArrayResource resource = new ByteArrayResource(picture);
+				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF) // or another appropriate media type
+						.body(resource);
+			} else {
+				byte[] picture = gprimgyee.get(i).getGroupProductImg();
+				ByteArrayResource resource = new ByteArrayResource(picture);
+
+				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF) // or another appropriate media type
+						.body(resource);
+			}
+			
+			//20230702 凌晨。下面這樣不行，在Response的時候, MediaType.IMAGE_GIF無法對List編碼的樣子。
+//			List<ByteArrayResource> allpicture = new ArrayList<ByteArrayResource>();
+//			for (GroupProductImgVO fuck : gprimgyee) {
+//				 System.out.println("觀察List遍瀝的順序性 PK號為: " + fuck.getGroupProductImgId());
+//				 byte[] productimg = fuck.getGroupProductImg();
+//				 System.out.println("觀察byte[]: " + productimg);
+//				 ByteArrayResource productresource = new ByteArrayResource(productimg);
+//				 System.out.println("觀察ByteArrayResource: " + productresource);
+//				 allpicture.add(productresource);
+//			} //到這。
+
+			}
 	
 	// 前台團購主修改活動資料
 //	@PostMapping("/plan-activity/updata-the")
