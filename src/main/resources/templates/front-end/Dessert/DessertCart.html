@@ -305,20 +305,20 @@
                                 </tr>
                                 <tr>
                                     <td>運費</td>
-                                    <td>$70</td>
+                                    <td id="shipping-fee">$</td>
                                 </tr>
                                 <tr>
                                     <td>折扣金額</td>
-                                    <td>-$70</td>
+                                    <td>-$</td>
                                 </tr>
                                 <tr class="total">
                                     <td>應付總額</td>
-                                    <td class="total-amount">$300</td>
+                                    <td class="total-amount">$3</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                    <a href="checkout.html" class="btn obrien-button primary-btn d-block">立即付款</a>
+                    <a href="checkout.html" class="btn obrien-button primary-btn d-block">填寫收款資訊</a>
                 </div>
             </div>
         </div>
@@ -477,14 +477,32 @@
                     }
                     // 将累加的总额更新到甜点总金额处
                     $("table tr td:contains('甜點總金額')").next('td').text("$" + totalAmount);
-
+                    updateShippingFee(totalAmount);
+                    updateFinalAmount(totalAmount, $("table tr td:contains('運費')").next('td').text());
                     $("#dessertCart").html(th_html);
+
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.error(xhr);
+
                 }
             });
         });
+    }
+
+    function updateShippingFee(totalAmount) {
+        let shippingFee = totalAmount > 500 ? 'Free' : '$100';
+        $("table tr td:contains('運費')").next('td').text(shippingFee);
+        updateFinalAmount(totalAmount, shippingFee);
+    }
+
+    function updateFinalAmount(totalAmount, shippingFee) {
+        let discountAmount = parseFloat($("table tr td:contains('折扣金額')").next('td').text().replace('-$', ''));
+        let finalAmount = totalAmount - discountAmount;
+        if (shippingFee != 'Free') {
+            finalAmount += parseFloat(shippingFee.replace('$', ''));
+        }
+        $("table tr td:contains('應付總額')").next('td').text("$" + Math.round(finalAmount));
     }
 
     $(document).on('input', '.cart-plus-minus-box', function () {
@@ -513,6 +531,7 @@
         $(this).data('oldValue', this.value);
     });
 
+
     function updateDessertCartQuantity(dessertId, memberId, cartDessertQuantity, increaseBtn) {
 
         // Parse the input value as an integer
@@ -540,28 +559,14 @@
         }
         $(increaseBtn).siblings(".cart-plus-minus-box").val(cartDessertQuantity);
 
-        function updateTotalAmount() {
-            // 初始化总金额
-            let totalAmount = 0;
 
-            // 计算每个商品的小计金额之和
+        function updateTotalAmount() {
+            let totalAmount = 0;
             $("#dessertCart .pro-subtotal span").each(function () {
                 totalAmount += parseFloat($(this).text().replace('$', ''));
             });
-
-            // 更新显示的总金额
             $("table tr td:contains('甜點總金額')").next('td').text("$" + Math.round(totalAmount));
-
-            // 更新運費
             updateShippingFee(totalAmount);
-        }
-
-        function updateShippingFee(totalAmount) {
-            // 計算運費
-            let shippingFee = totalAmount > 500 ? 'Free' : '$60';
-
-            // 更新運費
-            $("table tr td:contains('運費')").next('td').text(shippingFee);
         }
 
 
