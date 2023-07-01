@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>團購商品管理</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="back-nav-bar.css">  -->
+
+    <!-- import font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+
+
+    <style>
+        #nav-bar {
+            background-color: #1E1916;
+
+        }
+
+        .nav-pills {
+            --bs-nav-pills-link-active-bg: white;
+        }
+
+        :root {
+            --bs-link-color: white;
+            --bs-link-hover-color: orange;
+
+        }
+
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 20px;
+        }
+
+        .dropdown {
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            font-size: 20px;
+        }
+
+        .dropdown-toggle::after {
+            color: #1E1916;
+        }
+
+
+        /* 以下團購商品管理添加 */
+        #tab-demo {
+            /* width: 350px;
+            height: 200px; */
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #tab-demo>ul {
+            display: block;
+            margin: 0;
+            list-style: none;
+        }
+
+        .tab-title {
+            list-style: none;
+        }
+
+        #tab-demo>ul>li {
+            display: inline-block;
+            vertical-align: top;
+            font-family: '微軟正黑體';
+            margin: 0 -1px -1px 0;
+            border: 1px solid #BCBCBC;
+            height: 25px;
+            line-height: 25px;
+            background: #cdcdcd;
+            padding: 0 15px;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        #tab-demo>ul>li a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        #tab-demo>ul>li.active {
+            border-bottom: 1px solid #fff;
+            background: #fff;
+        }
+
+        #tab-demo>.tab-inner {
+            clear: both;
+            color: #000;
+            border: 1px #BCBCBC solid;
+        }
+
+        .tab-inner {
+            padding: 15px;
+        }
+
+
+        .table {
+            text-align: center;
+        }
+
+        .inpproduct {
+            display: block;
+            margin-top: 10px;
+        }
+
+        #textarea {
+            resize: none;
+        }
+
+        /* 以上團購商品管理添加 */
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <section id="mainheader">
+        
+    </section>
+
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
+                
+                
+            </div>
+
+            <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+            <div class="col py-3">
+
+                <!-- 由此開始 -->
+
+                <div>
+                    <H4>團購商品管理</H4>
+                </div>
+                <div id="tab-demo">
+                    <ul class="tab-title">
+                        <li><a href="#tab01">新增團購商品</a></li>
+                        <li><a href="#tab02">瀏覽團購商品</a></li>
+                        <li><a href="#tab03">查詢團購商品</a></li>
+                    </ul>
+                    <div id="tab01" class="tab-inner">
+                        <!-- tab01的內容 -->
+                        <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" required></label>
+                        <textarea class="inpproduct" id="textarea" name="groupProductContent" cols="50" rows="8" maxlength="300" placeholder="輸入團購商品內容" required></textarea>
+                        <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" required></label>
+                        <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" placeholder="yyyy-mm-dd" required></label>
+                        <input type="radio" class="inpproduct" id="productstatus" name="groupProductStatus" value="1" checked style="display: none;">
+                        <label class="inpproduct">上傳圖片</label>
+                        <form enctype="multipart/form-data" id="imageform">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg0">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg2">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg3">
+                        </form>
+                        <button type="button" id="btnSend" style="margin-top: 10px; display: block;">新增</button>
+                            <!-- <button type="reset" style="margin-top: 10px;">清除</button> -->
+                    </div>
+                    <div id="tab02" class="tab-inner">
+                        <!-- tab02的內容 -->
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:120px;"><strong>團購商品編號</strong></th>
+                                        <th style="width:180px;"><strong>名稱</strong></th>
+                                        <th style="width:220px;"><strong>內容</strong></th>
+                                        <th style="width:100px;"><strong>圖片</strong></th>
+                                        <th style="width:120px;"><strong>價格</strong></th>
+                                        <th style="width:120px;"><strong>上架時間</strong></th>
+                                        <th style="width:120px;"><strong>下架時間</strong></th>
+                                        <th style="width:80px;"><strong>狀態</strong></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="showall">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="tab03" class="tab-inner">
+                        <!-- tab03的內容 -->
+                        <div class="card-body">
+                            <form action="" method="post">
+                                <fieldset style="margin: 10px;">
+                                    <legend>查詢單筆商品</legend>
+                                    <label>團購商品編號：<input type="text" id="productid" name="groupProductId" required></label>
+                                    <button type="button" id="btnone" class="inpproduct">查詢</button>
+                                </fieldset>
+                            </form>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:120px;"><strong>團購商品編號</strong></th>
+                                        <th style="width:180px;"><strong>名稱</strong></th>
+                                        <th style="width:220px;"><strong>內容</strong></th>
+                                        <th style="width:100px;"><strong>圖片</strong></th>
+                                        <th style="width:120px;"><strong>價格</strong></th>
+                                        <th style="width:120px;"><strong>上架時間</strong></th>
+                                        <th style="width:120px;"><strong>下架時間</strong></th>
+                                        <th style="width:80px;"><strong>狀態</strong></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="showone">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 由此結束 -->
+            </div>
+
+            <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- import js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+    <!-- import font awesome -->
+    <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+
+
+    <script src="/Conponents/back_end.js"></script>
+    <!-- 團購商品管理添加 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        //切換頁籤的函式。
+        $(function () {
+            var $li = $('ul.tab-title li');
+            $($li.eq(0).addClass('active').find('a').attr('href')).siblings('.tab-inner').hide();
+
+            $li.click(function () {
+                $($(this).find('a').attr('href')).show().siblings('.tab-inner').hide();
+                $(this).addClass('active').siblings('.active').removeClass('active');
+            });
+        });
+        //-------------------------
+        //load事件後包含的，新增團購商品的事件。
+        window.addEventListener("load", function () {
+		  $("#btnSend").on("click", function () {
+			  console.log($("#productstardate").val());
+		    addproduct(); //執行新增至團購商品表格的函式
+		  })
+
+          showlist(); //執行顯示全部商品資料的函式
+          $("#btnone").on("click", function () {	 
+            showone();
+        });
+		})
+
+        //新增至團購商品表格的函式。
+        function addproduct() {
+          let formdata = new FormData;
+          let groupProductName = $("#productname").val();
+          let groupProductContent = $("#textarea").val();
+          let groupProductPrice= $("#productprice").val();
+          let groupProductStardate = $("#productstardate").val();
+          let groupProductStatus = $("#productstatus").val();
+        //   let groupProductImg = $("#uploadimg0")[0].files[0];
+          let imageform = $("#imageform");
+          let imageInputs = imageform.find("input[type='file']"); // 選取4個檔案輸入元素
+          formdata.append("groupProductName", groupProductName);
+          formdata.append("groupProductContent", groupProductContent);
+          formdata.append("groupProductPrice", groupProductPrice);
+          formdata.append("groupProductStardate", groupProductStardate);
+          formdata.append("groupProductStatus", groupProductStatus);
+          //   formdata.append("groupProductImg", groupProductImg);
+          //   將每個檔案存到 formData
+            for (let i = 0; i < imageInputs.length; i++) {
+                let files = imageInputs[i].files[0];
+                console.log(files);
+  
+              //   存入formdata
+              let setname = "file" + i;
+                console.log(setname);
+                formdata.append(i, files);
+  
+            }
+
+        //   console.log(groupProductImg);
+        //   console.log(datas.groupProductStardate); //測試有無資料，本身是物件還是字串。
+          //--送出Ajax請求
+            $.ajax({
+                url: "/groupProduct/inserNew2",
+                method: "POST",
+                contentType: false,
+                processData: false,
+                data: formdata,
+                beforeSend: function () {
+                // console.log("發送請求之前確認:" + JSON.stringify(datas));
+                },
+                success: function(response) {
+                    console.log(response);
+                    if(response.success1){
+                        alert("新增成功");
+                        location.reload();
+                    }
+                
+                },
+                error: function(xhr, status, erroe) {
+                console.log("status:" + status);
+                console.log("erroe:" + erroe);
+                }   
+            });
+        }
+        //-------------------------
+
+        //顯示全部商品資料的函式。
+        function showlist() {
+            $.ajax({
+                url: "/groupProduct/showList",
+                method: "GET",
+                success: function (response) {
+                    console.log("回來的資料:" + response);
+                    let texts = "";                   
+                    for (let gvo in response) {
+                        // console.log(gvo);
+                        let text = `<tr>
+                                        <td><strong>${response[gvo].groupProductId}</strong></td>
+                                        <td>${response[gvo].groupProductName}</td>
+                                        <td>${response[gvo].groupProductContent}</td>
+                                        <td><img src="/groupProduct/get/img/${response[gvo].groupProductId}" width="100px" height="100px"></td>
+                                        <td>${response[gvo].groupProductPrice}</td>
+                                        <td>${response[gvo].groupProductStardate}</td>
+                                        <td>${response[gvo].groupProductEnddate}</td>
+                                        <td>${response[gvo].groupProductStatus}</td>                
+                                        <td>
+                                            <div class="dropdown">
+                                                <form action="/group-product/updata" method="get">
+                                                <input type="text" name="groupProductId" value="${response[gvo].groupProductId}" hidden>
+                                                <button type="submit" class="btn btn-success">編輯</button>
+                                            </form>
+                                            </div>
+                                        </td>
+                                    </tr>`;
+                        texts += text;
+                    }
+                    $("#showall").html(texts);
+                
+                },
+                error: function (xhr, status, erroe) {
+                }
+            })
+        }
+        //-------------------------
+        //查詢單筆商品的函式。
+        function showone() {
+            // let datas = {   
+            // groupProductId: ($("#productid").val())   
+            // }
+            // console.log(datas); //測試有無資料，是物件還是字串。
+
+            $.ajax({
+                url: "/groupProduct/showOne",
+                type: "POST",
+                //contentType: "application/json",
+                //data: JSON.stringify(datas),
+                data: {groupProductId: Number($("#productid").val())},
+                // beforeSend: function () {
+                // //console.log("發送請求之前確認:" + JSON.stringify(datas));
+                // console.log("發送請求之前確認:" + datas);
+                // },
+                success: function (response) {                   
+                    console.log("回來的資料:" + response);          
+                    let text = `<tr>
+                                    <td><strong>${response.groupProductId}</strong></td>
+                                    <td>${response.groupProductName}</td>
+                                    <td>${response.groupProductContent}</td>
+                                    <td><img src="/groupProduct/get/img/${response.groupProductId}" width="100px" height="100px"></td>
+                                    <td>${response.groupProductPrice}</td>
+                                    <td>${response.groupProductStardate}</td>
+                                    <td>${response.groupProductEnddate}</td>
+                                    <td>${response.groupProductStatus}</td>                
+                                    <td>
+                                        <div class="dropdown">
+                                            <form action="/group-product/updata" method="get">
+                                            <input type="text" name="groupProductId" value="${response.groupProductId}" hidden>
+                                            <button type="submit" class="btn btn-success">編輯</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>`;
+                    $("#showone").html(text);
+                },
+                error: function (xhr, status, erroe) {
+                console.log("status:" + status);
+                console.log("erroe:" + erroe);
+                }   
+            });
+        }
+        //----------
+        // function updatathe(id) { //測試跳轉頁面的痕跡，用ajax是根本上的錯誤，最後使用form帶到別URL。
+        //     let theId = id;
+        //     console.log("ID是" + theId);
+        //     let upurl = `groupProductId=${theId}`
+        //     console.log(upurl)
+        //     $.ajax({
+        //         url: "/group-product/updata",
+        //         type: "GET",
+        //         data: upurl,
+        //         beforeSend: function() {
+        //             console.log("發送前確認");
+        //         },
+        //         success: function() {
+
+        //         }
+        //     });
+        // }
+    </script>
+
+</body>
+
+</html>

@@ -267,6 +267,41 @@ public class GroupRestContreller {
 		return response;
 	}
 	
+	// 後台 新增團購商品(多張圖片上傳功能 施工中)
+		@PostMapping("/groupProduct/inserNew2")
+		public Map<String, Boolean> inserProductNew2(
+				@RequestParam String groupProductName,
+				@RequestParam String groupProductContent, 
+				@RequestParam Integer groupProductPrice,
+				@RequestParam String groupProductStardate, 
+				@RequestParam Integer groupProductStatus,
+				@RequestParam(name = "0", required = false) MultipartFile file0,
+                @RequestParam(name = "1", required = false) MultipartFile file1,
+                @RequestParam(name = "2", required = false) MultipartFile file2,
+                @RequestParam(name = "3", required = false) MultipartFile file3) {
+			    System.out.println("file0: " + file0);
+		        System.out.println("file1: " + file1);
+		        System.out.println("file2: " + file2);
+		        System.out.println("file3: " + file3);
+
+			GroupProductDTO inserdto = new GroupProductDTO();
+			inserdto.setGroupProductName(groupProductName);
+			inserdto.setGroupProductContent(groupProductContent);
+			inserdto.setGroupProductPrice(groupProductPrice);
+			inserdto.setGroupProductStardate(groupProductStardate);
+			inserdto.setGroupProductStatus(groupProductStatus);
+			// 將商品資料存入資料庫，並取得save傳回的該商品VO物件。
+			GroupProductVO evo = groupProductService.inserProductNew(inserdto);
+			Boolean success1 = (evo != null);
+
+			evo.getGroupProductId();
+			
+
+			Map<String, Boolean> response = new HashMap<>();
+			response.put("success1", success1);
+			return response;
+		}
+	
 	// 前台團購主修改活動資料
 //	@PostMapping("/plan-activity/updata-the")
 //	public Map<String, Boolean> updataForActivity(
