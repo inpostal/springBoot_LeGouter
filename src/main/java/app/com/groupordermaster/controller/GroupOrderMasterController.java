@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class GroupOrderMasterController {
     @Autowired
     private GroupOrderMasterService service;
+    //查看訂單主檔thyleaf
     @GetMapping("/groupordermaster/list")
     public String GroupOrderMasterAll() {return "/back-end/groupOrder/groupOrderMaster";
     }

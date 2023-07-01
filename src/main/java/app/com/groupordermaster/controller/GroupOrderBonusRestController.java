@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-public class GroupOrderBonusRestController {
+public class
+GroupOrderBonusRestController {
     @Autowired
     private GroupOrderMasterService service1;
     @Autowired

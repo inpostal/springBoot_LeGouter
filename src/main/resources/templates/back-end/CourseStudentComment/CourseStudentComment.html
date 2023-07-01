@@ -75,8 +75,7 @@
     tr {
       font-size: 20px;
       padding: 5px;
-      word-spacing: 10px;
-      border-width: 1px;
+        text-align: center;
       border-color: #212529;
     }
 
@@ -424,20 +423,21 @@
                       <label class="form-check-label" for="checkAll"></label>
                     </div>
                   </th>
-                  <th>學員留言編號</th>
-                  <th>課程編號</th>
+
+
+                  <th>課程名稱</th>
                   <th>會員編號</th>
                   <th>學員留言內容</th>
                   <th>學員留言時間</th>
                   <th>員工編號(主廚)</th>
-                  <th>主廚留言內容</th>
-                  <th>主廚留言時間</th>
-                  <th>編輯</th>
-                  <th>刪除</th>
+                  <th>回覆狀態</th>
+                  <th>回覆留言</th>
+                  <th>刪除留言</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="c : ${courseComment}">
+                  <th style="display: none" id="courseStudentCommentId" th:text="${c.getCourseStudentCommentId()}">學員留言編號</th>
                   <th>
                     <div class="form-check custom-checkbox ms-2">
                       <input type="checkbox" class="form-check-input" id="row1"
@@ -446,15 +446,17 @@
                     </div>
                   </th>
                   <td style="display: none" id="courseId" th:text="${c.getCourseId()}"></td>
+
                   <td id="couraeName" th:text="${c.getCourseName()}">GJ</td>
                   <td id="memId" th:text="${c.getMemId()}"></td>
                   <td id="studentCommentContent" th:text="${c.getCourseStudentCommentContent()}"></td>
                   <td id="studentCommentDate" th:text="${c.getCourseStudentCommentDate()}"></td>
-                  <td id="empId"th:text="${c.getEmpId()}"></td>
-                  <td id="chefCommentContent"th:text="${c.getChefCommentContent()}"></td>
-                  <td id="chefCommentDate" th:text="${c.getChefCommentDate()}"></td>
+                  <td id="empId" th:if="${c.getEmpName()!=null}" th:text="${c.getEmpName()}"></td>
+                  <td id="empName2" th:if="${c.getEmpName()==null}" th:text="無人回復"></td>
+                  <td id="chefCommentContent" th:text="${c.getChefCommentContent()}"></td>
+                  <td id="chefCommentDate" style="display: none" th:text="${c.getChefCommentDate()}"></td>
                   <td>
-                    <a href="">
+                    <a th:href="@{/CourseStudentComment/reply(commentId=${c.getCourseStudentCommentId()})}">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                       <i class="fas fa-pencil-alt"></i>
@@ -519,15 +521,43 @@
 
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 <script>
-  $(document).ready(function () {
-    $('.fa-trash').click(function () {
-      $(this).closest("tr").remove();
-    });
-  });
+  $(document).on('click','.fa-trash',function (){
+    var row=$(this).closest("tr");
+    var courseStudentCommentId=row.find('#courseStudentCommentId').text();
+    Swal.fire({
+      title: '確定要刪除嗎?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: '刪除',
+      denyButtonText: `取消`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('已刪除!', '', '刪除')
+        row.remove();
+        $.ajax({
+          url: '/CourseStudentComment/deletecomment',
+          type: "GET",
+          data: {
+            studentCommentId: studentCommentId
+          },
+          success: function (resp) {
+            console.log(resp);
+          },
+          error: function (xhr, textstatus, errorThrown) {
+            console.error(xhr);
+          }
+        })
+      } else if (result.isDenied) {
+        Swal.fire('確定不刪除嗎', '', 'info')
+      }
+    })
+  })
 
   (function (document) {
     'use strict';
