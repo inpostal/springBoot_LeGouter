@@ -384,7 +384,11 @@
             $.ajax({
                 url: '/GroupOrder/GroupActivity/UpdateGroupActivity',
                 type: 'POST',
-                data: {groupActivityId: groupActivityId, ActivityInfo: ActivityInfo, GroupName: groupName},
+                data: {
+                    groupActivityId: groupActivityId,
+                    activityInfo: ActivityInfo,
+                    groupName: groupName
+                },
                 success: function (resp) {
 // Handle server response
                     alert("修改成功！");
