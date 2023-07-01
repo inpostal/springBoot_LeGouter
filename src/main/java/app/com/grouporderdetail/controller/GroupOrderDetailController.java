@@ -90,13 +90,14 @@ public class GroupOrderDetailController {
     public List<GroupOrderDetail> getGroupOrderDetailByIdFront(@RequestParam Integer memberId) {
         return  service.getAllByMemberId(memberId);
     }
-    //團購主專區
+    //團購主專區前台
     @GetMapping("/grouporderdetail/list/front")
     public String frontGroupOrderDetail(Model model, HttpSession session) {
 //        Members user = (Members) session.getAttribute("user");
 //        model.addAttribute("user", user);
         return "/front-end/grouporder/groupOrderEmp";
     }
+    //一般會員專區
 }
 
 
