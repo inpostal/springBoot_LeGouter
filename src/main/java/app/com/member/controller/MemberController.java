@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -20,6 +21,21 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
+    @GetMapping("/resetpassword")
+    public String resetPasswordPage(@RequestParam String token, Model model){
+        Members members = service.findByToken(token);
+        if (members==null){
+            return "redirect:/LeGouter";
+        }else {
+            model.addAttribute("reset", members);
+            return "/front-end/member/ResetPWD";
+        }
+    }
+
+    @GetMapping("/forgotpassword")
+    public String forGotPasswordPage(){
+        return "/front-end/member/ForgotPWD";
+    }
 
 
     @GetMapping("/header")

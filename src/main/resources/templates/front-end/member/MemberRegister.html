@@ -17,6 +17,7 @@
     <link href="/Commom/css/owl.carousel.min.css" rel="stylesheet">
     <link href="/Commom/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Commom/css/style.css" rel="stylesheet">
+    <link href="/Member/Sam_CSS/sweetalert2.css">
 </head>
 
 <body>
@@ -77,6 +78,7 @@
     <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
     <script src="/Member/Sam_Js/Jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $("#name").focus();
         $("#name").blur(function() {
@@ -86,10 +88,9 @@
                 $("label[for='name']").attr("style","color: red");
                 $("label[for='name'] b").html("姓名: *姓名只能包含英文、數字或中文");
                 $(this).val('');
-                $(this).focus();
             }else {
                 $("label[for='name']").attr("style","color: black");
-                $("label[for='name'] b").html("姓名:");
+                $("label[for='name'] b").html("姓名");
             }
         });
 
@@ -102,7 +103,6 @@
                 $("label[for='account']").attr("style","color: red");
                 $("label[for='account'] b").html("帳號: *帳號只能包含英文或數字");
                 $(this).val('');
-                $(this).focus();
             } else {
                 // 發送 AJAX 請求確認是否已經被註冊
                 $.ajax({
@@ -111,12 +111,16 @@
                     data: {account: inputAccount},
                     success: function(response) {
                         if(response.isExist){
-                            alert("該帳號已被註冊");
+                            Swal.fire({
+                                icon: 'error',
+                                title: '該帳號已被註冊',
+                                text: '請嘗試輸入另一個帳號'
+                            });
                             $("#account").val('');
                             $(this).focus();
                         } else {
                             $("label[for='account']").attr("style","color: black");
-                            $("label[for='account'] b").html("帳號:");
+                            $("label[for='account'] b").html("帳號");
                         }
                     }
                 });
@@ -132,10 +136,9 @@
                 $("label[for='password']").attr("style","color: red");
                 $("label[for='password'] b").html("密碼: *密碼只能包含英文或數字，且至少7個字元");
                 $(this).val('');
-                $(this).focus();
             } else {
                 $("label[for='password']").attr("style","color: black");
-                $("label[for='password'] b").html("密碼:");
+                $("label[for='password'] b").html("密碼");
             }
         });
 
@@ -148,10 +151,9 @@
                 $("label[for='phone']").attr("style","color: red");
                 $("label[for='phone'] b").html("電話: *電話號碼必須是09開頭且總計十位數字");
                 $(this).val('');
-                $(this).focus();
             } else {
                 $("label[for='phone']").attr("style","color: black");
-                $("label[for='phone'] b").html("電話:");
+                $("label[for='phone'] b").html("電話");
             }
         });
 
@@ -166,12 +168,15 @@
                 data: {email: inputEmail},
                 success: function(response) {
                     if(response.isExist){
-                        alert("該信箱已被註冊");
+                        Swal.fire({
+                            icon: 'error',
+                            title: '該信箱已被註冊',
+                            text: '請嘗試輸入另一個信箱'
+                        });
                         $("#email").val('');
-                        $(this).focus();
                     } else {
                         $("label[for='email']").attr("style","color: black");
-                        $("label[for='email'] b").html("信箱:");
+                        $("label[for='email'] b").html("信箱");
                     }
                 }
             });
@@ -186,10 +191,9 @@
                 $("label[for='address']").attr("style","color: red");
                 $("label[for='address']").html("詳細地址: *地址只能包含數字或中文");
                 $(this).val('');
-                $(this).focus();
             } else {
                 $("label[for='address']").attr("style","color: black");
-                $("label[for='address']").html("詳細地址:");
+                $("label[for='address']").html("詳細地址");
             }
         });
 
@@ -207,6 +211,18 @@
                 birthday: $("#birthday").val(),
             };
 
+            for (let d in data) {
+                console.log(data[d]);
+                if (data[d]===undefined || data[d]==="" || data[d]===null){
+                    Swal.fire({
+                        icon: 'error',
+                        title: '請填寫完整資料',
+                        text: '註冊資料尚未輸入完整'
+                    })
+                    return;
+                }
+            }
+
             $.ajax({
                 url: "/register",
                 type: "POST",
@@ -214,10 +230,31 @@
                 data: JSON.stringify(data),
                 success: function(response) {
                     if(response.success) {
-                        alert("註冊成功！ 請嘗試登入!");
-                        location.href = "/login";
+                        let timerInterval
+                        Swal.fire({
+                            title: '註冊成功! 請嘗試登入!',
+                            html: '',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                                location.href = "/login";
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log('I was closed by the timer')
+                            }
+                        });
                     } else {
-                        alert("註冊失敗：" + response.message);
+                        Swal.fire('註冊失敗'+ response.message);
                     }
                 }
             });

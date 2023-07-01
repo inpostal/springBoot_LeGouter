@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>忘記密碼</title>
+
+    <link rel="stylesheet" href="/Member/Sam_CSS/style_login.css">
+</head>
+
+<body>
+    <header>
+        <a href="/LeGouter" id="title">Le Goûter</a>
+    </header>
+    
+    <section id="middle-section">
+        <aside id="left-side">
+
+        </aside>
+        <section id="login-section-outer">
+            <section class="space"></section>
+
+            <section id="login-section-inner-o">
+                <section class="inner-space"></section>
+                <section id="login-section-inner">
+                    <p id="member-id" style="display: none" th:text="${reset.getMemberId()}"></p>
+                    <p id="member-login-p">重設密碼</p>
+                    <form action="/login" method="post" id="login-form">
+
+                        <div id="password-div">
+                            <label for="password">新密碼:</label>
+                            <input type="text" id="password" name="password" placeholder="輸入新密碼">
+                        </div>
+                        <div id="password2-div">
+                            <label for="password2">再次輸入新密碼:</label>
+                            <input type="text" id="password2" name="password2" placeholder="再次輸入新密碼">
+                        </div>
+                        <div id="option-div">
+                            <input type="button" id="btn" value="重設密碼">
+                        </div>
+                    </form>
+                </section>
+                <section class="inner-space"></section>
+            </section>
+            <section class="space"></section>
+        </section>
+        <aside id="right-side">
+
+        </aside>
+    </section>
+
+    <footer>
+        Le Goûter
+    </footer>
+
+    <script src="/Member/Sam_Js/Jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let isOk = false;
+        // 密碼輸入區驗證
+        $("#password").blur(function(){
+            let pattern = /^[a-zA-Z0-9]{7,}$/;
+            let inputPassword = $(this).val();
+
+            if(!pattern.test(inputPassword)){
+                $("label[for='password']").attr("style","color: red");
+                $("label[for='password']").html("密碼: *密碼只能包含英文或數字，且至少7個字元");
+                $(this).val('');
+                isOk = false;
+            } else {
+                $("label[for='password']").attr("style","color: black");
+                $("label[for='password']").html("密碼:");
+                isOk = true;
+            }
+        });
+
+
+        $("#btn").click(function (e) {
+            e.preventDefault();
+
+            // 驗證密碼
+            let password = $("#password").val();
+            let password2 = $("#password2").val();
+            console.log(password);
+            console.log(password2);
+            console.log(isOk)
+            if (!isOk || password !== password2){
+                alert("請確認密碼");
+                return;
+            }
+
+            let memberId = $("#member-id").text();
+
+            $.ajax({
+                url:"/resetpassword/handle",
+                contentType:"application/json; charset=utf-8",
+                type: "POST",
+                data: JSON.stringify({
+                    memberId: memberId,
+                    memberPassword: password
+                }),
+                success: function (res) {
+                    if (!res.success){
+                        Swal.fire({
+                            icon: 'error',
+                            title: '請填寫完整資料',
+                            text: '註冊資料尚未輸入完整'
+                        })
+                    }else {
+                        let timerInterval
+                        Swal.fire({
+                            title: '密碼修改成功! 請嘗試登入!',
+                            html: '',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                                location.href = "/login";
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log('I was closed by the timer')
+                            }
+                        });
+                    }
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

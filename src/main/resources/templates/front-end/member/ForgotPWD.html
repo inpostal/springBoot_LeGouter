@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>忘記密碼</title>
+
+    <link rel="stylesheet" href="/Member/Sam_CSS/style_login.css">
+</head>
+
+<body>
+    <header>
+        <a href="/LeGouter" id="title">Le Goûter</a>
+    </header>
+    
+    <section id="middle-section">
+        <aside id="left-side">
+
+        </aside>
+        <section id="login-section-outer">
+            <section class="space"></section>
+
+            <section id="login-section-inner-o">
+                <section class="inner-space"></section>
+                <section id="login-section-inner">
+                    <p id="member-login-p">忘記密碼</p>
+                    <form action="/login" method="post" id="login-form">
+
+                        <div id="account-div">
+                            <label for="username">信箱:</label>
+                            <input type="text" id="username" name="username" placeholder="輸入註冊信箱">
+                        </div>
+                        <div id="option-div">
+                            <input type="button" id="btn" value="重設密碼">
+                        </div>
+                    </form>
+                </section>
+                <section class="inner-space"></section>
+            </section>
+            <section class="space"></section>
+        </section>
+        <aside id="right-side">
+
+        </aside>
+    </section>
+
+    <footer>
+        Le Goûter
+    </footer>
+
+    <script src="/Member/Sam_Js/Jquery.js"></script>
+    <script>
+        $("#btn").click(function (e) {
+            e.preventDefault();
+            let userMail = $("#username").val();
+
+            $.ajax({
+                url:"/reset",
+                contentType:"application/json; charset=utf-8",
+                type: "POST",
+                data: JSON.stringify({
+                    memberEmail: userMail
+                }),
+                success: function (res) {
+                    if (!res.success){
+                        alert("此帳號尚未註冊");
+                    }else {
+                        alert("驗證信件寄送成功");
+                    }
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
