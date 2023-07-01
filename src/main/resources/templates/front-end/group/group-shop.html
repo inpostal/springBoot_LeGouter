@@ -118,62 +118,7 @@
         <!--shop toolbar end-->
         <!-- Shop Wrapper Start -->
         <div class="row shop_wrapper grid_3" id="allactivity">
-            <!-- <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
-                <div class="single-product position-relative">
-                    <div class="product-image">
-                        <a class="d-block" href="single-product">
-                            <img src="Group/Shan_assets/img/肉桂捲.jpg" alt="" class="product-image-1 w-100">
-                        </a>
-                    </div>
-                    <div class="product-content">
-
-                        <div class="product-title">
-                            <h4 class="title-2"> <a href="single-product">天天肉桂捲日</a></h4>
-                        </div>
-                        <div class="price-box">
-                            <span class="regular-price ">NT$100</span>
-                        </div>
-                    </div>
-                    <div class="add-action d-flex position-absolute">
-                        <a href="" title="">
-                            <button>參加團購</button>
-                        </a>
-
-                    </div>
-                    <div class="product-content-listview">
-
-                        <div class="product-title">
-                            <h4 class="title-2"> <a href="single-product">天天肉桂捲日</a></h4>
-                        </div>
-                        <div>
-                            <p>團購開始時間:
-                                <br>
-                                團購結束時間:
-                                <br>
-                                成團達標數:
-                                <br>
-                                團購參加人數:
-                            </p>
-                        </div>
-                        <div class="price-box">
-                            <span class="regular-price ">NT$100</span>
-                            <span class="old-price"><del>NT$300</del></span>
-                        </div>
-                        <div class="add-action-listview d-flex">
-                            <a href="" title="">
-                                <button>參加團購</button>
-                            </a>
-
-                        </div>
-                        <p class="desc-content">
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                            of
-                            classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
-                            Latin professor at Hampden-Sydney College in Virginia,
-                        </p>
-                    </div>
-                </div>
-            </div> -->
+            
         </div>
         <!-- Shop Wrapper End -->
         <!-- Bottom Toolbar Start -->
@@ -246,8 +191,8 @@
     <script src="Group/Shan_assets/js/main.js"></script>
 
     <script>
+        showlist()
         window.addEventListener("load", function () {
-            showlist()
         })
 
         function showlist() {
@@ -267,14 +212,15 @@
                     <div class="product-content">
 
                         <div class="product-title">
-                            <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}">${response[gvo].groupName}</a></h4>
+                            <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}" style="padding: 10px;">${response[gvo].groupName}</a></h4>
                         </div>
                         <div class="price-box">
-                            <span class="regular-price ">NT$100</span>
+                            <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
+                            <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
                         </div>
                     </div>
                     <div class="add-action d-flex position-absolute">
-                        <a href="" title="">
+                        <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}" title="">
                             <button>參加團購</button>
                         </a>
 
@@ -295,28 +241,32 @@
                             </p>
                         </div>
                         <div class="price-box">
-                            <span class="regular-price ">NT$100</span>
+                            <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
+                            <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
                         </div>
                         <div class="add-action-listview d-flex">
-                            <a href="" title="">
+                            <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}">
                                 <button>參加團購</button>
                             </a>
-
-                        </div>
-                        <p class="desc-content">
-                            ${response[gvo].groupActivityContent}
-                        </p>
-                    </div>
-                </div>
-            </div>`;
-                        texts += text;
-                    }
-                    $("#allactivity").html(texts);
+                            </div>
+                            <p class="desc-content">
+                                ${response[gvo].groupActivityContent}
+                                </p>
+                                </div>
+                                </div>
+                                </div>`;
+                                texts += text;
+                            }
+                            $("#allactivity").html(texts);
+                        }
+                    })
                 }
-
-            })
-
-        }
+                //這是form版本的參加團購按鈕
+                // <form action="/group-product/Checkout" method="get">
+                //     <input type="text" name="groupActivityId" value="${response[gvo].groupActivityId}" hidden>
+                //     <input type="text" name="groupActivityPrice" value="${response[gvo].groupActivityPrice}" hidden>
+                //     <button type="submit">參加團購</button>
+                // </form>
     </script>
 </body>
 

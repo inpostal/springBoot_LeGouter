@@ -169,13 +169,15 @@
           let groupProductPrice= $("#productprice").val();
           let groupProductStardate = $("#productstardate").val();
           let groupProductEnddate = $("#ProductEnddate").val();
+          console.log("下架日期的值:" + $("#ProductEnddate").val());
           if($("#productstatus").val() === 0){
             let dateobj = new Date();
-            let today = dateobj.getFullYear + "-" + (dateobj.getMonth+1) + "-" + dateobj.getDate;
+            let today = dateobj.getFullYear() + "-" + (dateobj.getMonth() + 1) + "-" + dateobj.getDate();
             groupProductEnddate = today;
           }
           let groupProductStatus = $("#productstatus").val();
           let groupProductImg = $("#uploadimg1")[0].files[0];
+          console.log("groupProductImg的值" + groupProductImg);
           formdata.append("groupProductId", groupProductId);
           formdata.append("groupProductName", groupProductName);
           formdata.append("groupProductContent", groupProductContent);
@@ -192,6 +194,7 @@
             data: formdata,
             success: function(response) {
                 alert("修改成功");
+                location.reload();
             }
 
 

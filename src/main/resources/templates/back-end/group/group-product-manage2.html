@@ -171,20 +171,20 @@
                     </ul>
                     <div id="tab01" class="tab-inner">
                         <!-- tab01的內容 -->
-                        <form action="" target="_blank">
-                            <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" required></label>
-                            <textarea class="inpproduct" id="textarea" name="groupProductContent" cols="50" rows="8" maxlength="300" placeholder="輸入團購商品內容" required></textarea>
-                            <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" required></label>
-                            <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" placeholder="yyyy-mm-dd" required></label>
-                            <input type="radio" class="inpproduct" id="productstatus" name="groupProductStatus" value="1" checked style="display: none;">
-                            <label class="inpproduct">上傳圖片</label>
-                            <input type="file" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
-                            <input type="file" accept="image/*" style="margin-top: 10px;">
-                            <input type="file" accept="image/*" style="margin-top: 10px;">
-                            <input type="file" accept="image/*" style="margin-top: 10px;">
-                            <button type="button" id="btnSend" style="margin-top: 10px; display: block;">新增</button>
-                            <!-- <button type="reset" style="margin-top: 10px;">清除</button> -->
+                        <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" required></label>
+                        <textarea class="inpproduct" id="textarea" name="groupProductContent" cols="50" rows="8" maxlength="300" placeholder="輸入團購商品內容" required></textarea>
+                        <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" required></label>
+                        <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" placeholder="yyyy-mm-dd" required></label>
+                        <input type="radio" class="inpproduct" id="productstatus" name="groupProductStatus" value="1" checked style="display: none;">
+                        <label class="inpproduct">上傳圖片</label>
+                        <form enctype="multipart/form-data" id="imageform">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg0">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg2">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg3">
                         </form>
+                        <button type="button" id="btnSend" style="margin-top: 10px; display: block;">新增</button>
+                            <!-- <button type="reset" style="margin-top: 10px;">清除</button> -->
                     </div>
                     <div id="tab02" class="tab-inner">
                         <!-- tab02的內容 -->
@@ -295,32 +295,38 @@
 
         //新增至團購商品表格的函式。
         function addproduct() {
-        //   let datas = {
-		//   groupProductName: ($("#productname").val()),
-		//   groupProductContent: ($("#textarea").val()),
-		//   groupProductPrice:parseInt($("#productprice").val()),
-		//   groupProductStardate: ($("#productstardate").val()),
-		//   groupProductStatus: parseInt($("#productstatus").val()),
-        //   }
           let formdata = new FormData;
           let groupProductName = $("#productname").val();
           let groupProductContent = $("#textarea").val();
           let groupProductPrice= $("#productprice").val();
           let groupProductStardate = $("#productstardate").val();
           let groupProductStatus = $("#productstatus").val();
-          let groupProductImg = $("#uploadimg1")[0].files[0];
+        //   let groupProductImg = $("#uploadimg0")[0].files[0];
+          let imageform = $("#imageform");
+          let imageInputs = imageform.find("input[type='file']"); // 選取4個檔案輸入元素
           formdata.append("groupProductName", groupProductName);
           formdata.append("groupProductContent", groupProductContent);
           formdata.append("groupProductPrice", groupProductPrice);
           formdata.append("groupProductStardate", groupProductStardate);
           formdata.append("groupProductStatus", groupProductStatus);
-          formdata.append("groupProductImg", groupProductImg);
+          //   formdata.append("groupProductImg", groupProductImg);
+          //   將每個檔案存到 formData
+            for (let i = 0; i < imageInputs.length; i++) {
+                let files = imageInputs[i].files[0];
+                console.log(files);
+  
+              //   存入formdata
+              let setname = "file" + i;
+                console.log(setname);
+                formdata.append(i, files);
+  
+            }
 
-          console.log(groupProductImg);
+        //   console.log(groupProductImg);
         //   console.log(datas.groupProductStardate); //測試有無資料，本身是物件還是字串。
           //--送出Ajax請求
             $.ajax({
-                url: "/groupProduct/inserNew",
+                url: "/groupProduct/inserNew2",
                 method: "POST",
                 contentType: false,
                 processData: false,
