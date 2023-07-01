@@ -41,7 +41,7 @@ public class GroupController {
 	}
     @GetMapping("/plan-activity") //前台團購主瀏覽商品 發起活動專區
 	public String planActivity() {
-		return "front-end/group/plan-activity2";
+		return "front-end/group/plan-activity3";
 	}
     @GetMapping("/single-product") //前台團購活動單品頁
 	public String singleProduct(@RequestParam Integer groupActivityId, Model model) {
