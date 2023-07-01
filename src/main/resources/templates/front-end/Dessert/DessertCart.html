@@ -301,7 +301,7 @@
                             <table class="table">
                                 <tr>
                                     <td>甜點總金額</td>
-                                    <td>$230</td>
+                                    <td>$</td>
                                 </tr>
                                 <tr>
                                     <td>運費</td>
@@ -446,6 +446,7 @@
                     cartClassItems = res;
                     let th_html = ``;
                     console.log(th_html);
+                    let totalAmount = 0;
                     for (let e = 0; e < res.length; e++) {
                         let td_html = `
                       <tr data-dessert-id="${res[e].dessertId}">
@@ -457,7 +458,8 @@
                             <td class="pro-quantity">
                                 <div class="quantity">
                                     <div class="cart-plus-minus">
-                                      <input class="cart-plus-minus-box" onchange="updateDessertCartQuantity(${res[e].dessertId}, ${res[e].memberId}, this.value)" value="${res[e].cartDessertQuantity}" type="text">
+                                     <input class="cart-plus-minus-box" oninput="updateDessertCartQuantity(${res[e].dessertId}, ${res[e].memberId}, this.value)" value="${res[e].cartDessertQuantity}" type="text" data-old-value="${res[e].cartDessertQuantity}">
+
                                       <div class="dec qtybutton" onclick="updateDessertCartQuantity(${res[e].dessertId}, ${res[e].memberId},  parseInt($(this).siblings('.cart-plus-minus-box').val())  - 1, $(this))">-</div>
                                       <div class="inc qtybutton" onclick="updateDessertCartQuantity(${res[e].dessertId}, ${res[e].memberId}, parseInt($(this).siblings('.cart-plus-minus-box').val()) + 1, $(this))">+</div>
                                     </div>
@@ -469,7 +471,13 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#e98c81}</style><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg></a></td>
                     </tr>`;
                         th_html += td_html;
+                        // 累加每个商品的小计金额
+                        totalAmount += res[e].subtotalAmount;
+
                     }
+                    // 将累加的总额更新到甜点总金额处
+                    $("table tr td:contains('甜點總金額')").next('td').text("$" + totalAmount);
+
                     $("#dessertCart").html(th_html);
                 },
                 error: function (xhr, textStatus, errorThrown) {
@@ -479,10 +487,36 @@
         });
     }
 
+    $(document).on('input', '.cart-plus-minus-box', function () {
+        // Parse the input value as an integer
+        let inputQuantity = this.value;
+
+
+        // Validate the quantity
+        if (!/^\d+$/.test(inputQuantity) || inputQuantity < 1 || inputQuantity > 50) {
+            alert("請輸入有效數字1-50");
+            $(this).val($(this).data('oldValue')); // restore old value
+            return;
+        }
+
+        $(this).data('oldValue', inputQuantity);
+
+        // Use the valid input value for the AJAX call
+        let dessertId = $(this).closest('tr').data('dessert-id');
+        let memberId = $("#member-id").text();
+
+        updateDessertCartQuantity(dessertId, memberId, inputQuantity);
+    });
+
+    $(document).on('focus', '.cart-plus-minus-box', function () {
+        // Store the current value as the old value
+        $(this).data('oldValue', this.value);
+    });
+
     function updateDessertCartQuantity(dessertId, memberId, cartDessertQuantity, increaseBtn) {
 
         // Parse the input value as an integer
-        cartDessertQuantity = parseInt(cartDessertQuantity);
+        let parsedQuantity = parseInt(cartDessertQuantity);
 
         // Validate the quantity
         if (isNaN(cartDessertQuantity) || cartDessertQuantity < 1 || cartDessertQuantity > 50) {
@@ -494,23 +528,41 @@
                     } else {
                         dessertCartUpdate();
                     }
-                } else {
-                    alert("有效的輸入數量為1-50");
-                    dessertCartUpdate();
                 }
                 return;
             } else if (increaseBtn.hasClass("inc")) {
                 if (cartDessertQuantity > 50) {
                     alert("單項甜點訂購數量上限為50");
                     dessertCartUpdate();
-                } else {
-                    alert("有效的輸入數量為1-50");
-                    dessertCartUpdate();
                 }
             }
             return;
         }
         $(increaseBtn).siblings(".cart-plus-minus-box").val(cartDessertQuantity);
+
+        function updateTotalAmount() {
+            // 初始化总金额
+            let totalAmount = 0;
+
+            // 计算每个商品的小计金额之和
+            $("#dessertCart .pro-subtotal span").each(function () {
+                totalAmount += parseFloat($(this).text().replace('$', ''));
+            });
+
+            // 更新显示的总金额
+            $("table tr td:contains('甜點總金額')").next('td').text("$" + Math.round(totalAmount));
+
+            // 更新運費
+            updateShippingFee(totalAmount);
+        }
+
+        function updateShippingFee(totalAmount) {
+            // 計算運費
+            let shippingFee = totalAmount > 500 ? 'Free' : '$60';
+
+            // 更新運費
+            $("table tr td:contains('運費')").next('td').text(shippingFee);
+        }
 
 
         $.ajax({
@@ -523,8 +575,18 @@
             },
             success: function (response) {
                 // Update the subtotal dynamically
-                let newSubtotal = response.subtotalAmount;
-                $(increaseBtn).closest("tr").find(".pro-subtotal span").text(newSubtotal);
+                let newSubtotal = Math.floor(response.subtotalAmount);
+
+                // Check if increaseBtn is provided
+                if (increaseBtn) {
+                    $(increaseBtn).closest("tr").find(".pro-subtotal span").text("$" + newSubtotal);
+                } else {
+                    // If increaseBtn is not provided, that means the input box was used. We need to find the corresponding subtotal span
+                    $('[data-dessert-id="' + dessertId + '"]').find(".pro-subtotal span").text("$" + newSubtotal);
+                }
+
+                // Update the total amount
+                updateTotalAmount();
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.error(xhr);
