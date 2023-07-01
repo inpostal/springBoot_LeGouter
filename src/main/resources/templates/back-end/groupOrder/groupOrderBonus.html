@@ -192,6 +192,12 @@
         .mb-3 {
              margin-bottom: 0 rem!important;
         }
+
+        .red-button {
+            background-color: red;
+            color: white;
+            /* 添加其他红色样式 */
+        }
     </style>
 
 
@@ -450,7 +456,7 @@
                                     <th>分潤比例</th>
                                     <th>分潤金額</th>
                                     <th>分潤狀態</th>
-                                    <th>編輯</th>
+
 
                                 </tr>
                                 </thead>
@@ -474,14 +480,14 @@
                                     <td id="totalgroupproductprice" th:text="${g.getTotalGroupProductPrice()}"></td>
                                     <td id="groupordermin" th:text="${g.getBonusRate()}"></td>
                                     <td id="grouporderbonus" th:text="${g.getGroupOrderBonus()}"></td>
-                                    <td id="grouporderbonusstatus" th:text="${g.getGroupOrderBonusStatus()}"></td>
 
-                                    <td><a href="">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
-                                    </a></td>
+                                     <td>
+<!--                                    <td id="grouporderbonusstatus" th:text="${g.getGroupOrderBonusStatus()}">-->
+                                         <button id="GroupOrderBonusStatus" type="button" class="btn btn-primary" onclick="toggleBonusStatus(this)"
+                                                 th:class="${g.getGroupOrderBonusStatus() eq '未分潤'} ? 'btn btn-success' : 'btn btn-warning'">
+                                             <span th:text="${g.getGroupOrderBonusStatus() eq '已分潤' ? '已分潤' : '未分潤'}" ></span>
+                                         </button>
+                                    </td>
                                 </tr>
 
                                 </tbody>
@@ -608,9 +614,41 @@
         var selectedCountElement = document.getElementById('selectedCount');
         selectedCountElement.innerHTML = '已選取 ' + selectedCount + ' 筆資料';
     }
+    function toggleBonusStatus(button) {
+        var statusCell = button.parentNode;
+        var currentStatus = button.textContent.trim();
 
-    // Initial count when the page loads
-    updateSelectedCount();
+        if (currentStatus === '已分潤') {
+            button.textContent = '未分潤';
+            button.classList.add('red-button'); // 添加红色按钮类
+            updateBonusStatus(1);
+        } else {
+            button.textContent = '已分潤';
+            button.classList.remove('red-button'); // 移除红色按钮类
+            updateBonusStatus(0);
+        }
+    }
+    $('#GroupOrderBonusStatus').on(click,function (){
+        console.log('123');
+        function updateBonusStatus(memberId,GroupOrderBonusStatus) {
+        $.ajax({
+            url: '/groupOrder/groupOrderBonus/update',
+            type: 'POST',
+            data: {
+                MemberID:memberId,
+                GroupOrderBonusStatus: GroupOrderBonusStatus,
+            },
+            success: function (resp) {
+                console.log(resp);
+                alert("修改成功");
+            },
+            error: function (data) {
+                console.log(data);
+                alert("修改失敗");
+            }
+    })
+    }
+    })
 
 
 </script>

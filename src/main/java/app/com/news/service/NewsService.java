@@ -33,4 +33,15 @@ public class NewsService {
     public void delete(Integer newsId) {
         repository.deleteById(newsId);
     }
+
+
+    public List<News> getAllNewsFront() {
+        List<News> all = repository.findAll();
+        return all;
+    }
+
+    public News getNewsSingleFront(Integer newsId) {
+        Optional<News>update=repository.findById(newsId);
+        return update.get();
+    }
 }
