@@ -475,41 +475,41 @@
 
         <div class="container-small-unit">
           <label class="label">團購活動名稱</label>
-          <input class="input" type="text" placeholder="輸入團購活動名稱" required id="groupname" th:value="${groupActivity.getGroupName()}"/>
+          <input class="input" type="text" placeholder="輸入團購活動名稱" required id="groupname" th:value="${groupActivity.getGroupName()}" readonly/>
         </div>
         <div class="container-small-unit">
           <label class="label" >團購商品編號</label>
-          <input class="input" type="number" placeholder="團購商品編號" id="groupProductId" required th:value="${groupActivity.groupProductId}"/>
+          <input class="input" type="number" placeholder="團購商品編號" id="groupProductId" required th:value="${groupActivity.groupProductId}" readonly/>
         </div>
 
         <div class="container-small-unit">
           <label class="label">團購活動內容 </label>
           <textarea name="text"  cols="30" rows="10" placeholder="輸入團購活動內容" id="groupActivityContent"
-                    required th:text="${groupActivity.groupActivityContent}"></textarea>
+                    required th:text="${groupActivity.groupActivityContent}" readonly></textarea>
         </div>
 
         <div class="container-small-unit">
           <label class="label">團購開始時間</label>
-          <input type="date" name="grouporderstart" id="groupOrderStart" th:value="${groupActivity.getGroupOrderStar}">
+          <input type="date" name="grouporderstart" id="groupOrderStart" th:value="${groupActivity.getGroupOrderStar}" readonly>
           <label id="displayDate" ></label>
         </div>
 
         <div class="container-small-unit">
           <label class="label">團購結束時間</label>
-          <input type="date" name="grouporderend" id="groupOrderEnd" th:value="${groupActivity.groupOrderEnd}">
+          <input type="date" name="grouporderend" id="groupOrderEnd" th:value="${groupActivity.groupOrderEnd}" readonly>
 
         </div>
 
         <div class="container-small-unit">
           <label class="label">團購活動商品低標</label>
-          <input class="input" type="number" placeholder="團購商品折扣" id="groupordermin" required  th:value="${groupActivity.groupOrderMin}"/>
+          <input class="input" type="number" placeholder="團購商品折扣" id="groupordermin" required  th:value="${groupActivity.groupOrderMin}" readonly/>
         </div>
 
         <div class="container-small-unit">
           <label class="label" >團購商品折扣</label>
-          <input class="input" type="number" placeholder="團購商品折扣" id="grouporderdiscount" th:value="${groupActivity.groupOrderDiscount}" required />
+          <input class="input" type="number" placeholder="團購商品折扣" id="grouporderdiscount" th:value="${groupActivity.groupOrderDiscount}"  readonly />
         </div>
-        <button class="btn" type="button" id="submit">返回</button>
+        <button class="btn" type="button" id="submit" onclick="window.location.href='/groupordermaster/list'">返回</button>
       </form>
 
       <!-- <div class="modal-footer"> -->

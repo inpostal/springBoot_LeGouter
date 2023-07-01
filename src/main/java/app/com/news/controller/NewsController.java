@@ -36,6 +36,8 @@ public class NewsController {
         return service.getAllNews();
     }
 
+
+
     //刪除
 
     @GetMapping("/news/delete")
@@ -109,13 +111,13 @@ public class NewsController {
             @RequestParam("empId") Integer empId,
             @RequestParam("newsContent") String newsContent,
             @RequestParam("newsPic") MultipartFile newsPic,
-            @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
+//            @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
             @RequestParam("newsTitle") String newsTitle) {
         //建立news物件放入所有傳入的值
         News news = new News();
         news.setEmpId(empId);
         news.setNewsContent(newsContent);
-        news.setNewsTime(Date.valueOf(newsTime));
+//        news.setNewsTime(Date.valueOf(newsTime));
         news.setNewsTitle(newsTitle);
         //照片用資料流傳入
         try {

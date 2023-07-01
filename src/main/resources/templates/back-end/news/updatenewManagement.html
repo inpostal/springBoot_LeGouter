@@ -491,7 +491,7 @@
 
         <div class="container-small-unit">
           <label class="label">發布日期</label>
-          <input type="date" name="newsdate" id="newsTime">
+<!--          <input type="date" name="newsdate" id="newsTime">-->
           <label id="displayDate" th:text="${news.getNewsTime()}"></label>
         </div>
 
@@ -573,7 +573,7 @@
     let newsId=$('#news-id').text();
     let empId=$('#empId').val();
     let newsContent=$('#newsContent').val();
-    let newsTime=$('#newsTime').val();
+    // let newsTime=$('#newsTime').val();
     let newsPic=$('#imageInput')[0].files[0];
     let newsTitle=$('#newsTitle').val();
     let formData=new FormData();
@@ -581,7 +581,7 @@
     formData.append('newsId',newsId);
     formData.append('empId',empId);
     formData.append('newsContent',newsContent);
-    formData.append('newsTime',newsTime);
+    // formData.append('newsTime',newsTime);
     formData.append('newsPic',newsPic);
     formData.append('newsTitle',newsTitle);
     $.ajax({

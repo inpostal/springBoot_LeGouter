@@ -95,9 +95,10 @@ model.addAttribute("courseComment",result);
 
     //後台刪除留言
     @GetMapping("/CourseStudentComment/deletecomment")
-    public  String deletecomment(@RequestParam Integer courseStudentCommentId){
+    public  ResponseEntity<?> deletecomment(@RequestParam Integer courseStudentCommentId){
         courseStudentCommentService.delete(courseStudentCommentId);
-        return "redirect:/CourseStudentComment";
+        System.out.println(courseStudentCommentId);
+        return ResponseEntity.ok().build();
     }
 
 }
