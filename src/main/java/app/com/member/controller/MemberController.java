@@ -23,66 +23,77 @@ public class MemberController {
     private MemberService service;
 
     @GetMapping("/resetpassword")
-    public String resetPasswordPage(@RequestParam String token, Model model){
+    public String resetPasswordPage(@RequestParam String token, Model model) {
         Members members = service.findByToken(token);
-        if (members==null){
+        if (members == null) {
             return "redirect:/LeGouter";
-        }else {
+        } else {
             model.addAttribute("reset", members);
             return "/front-end/member/ResetPWD";
         }
     }
 
     @GetMapping("/forgotpassword")
-    public String forGotPasswordPage(){
+    public String forGotPasswordPage() {
         return "/front-end/member/ForgotPWD";
     }
 
 
     @GetMapping("/header")
-    public String getHeader(){
+    public String getHeader() {
         return "front-end/components/Header";
     }
+
     @GetMapping("/footer")
-    public String getFooter(){
+    public String getFooter() {
         return "front-end/components/Footer";
     }
+
     @GetMapping("/navbar")
-    public String getNavBar(){
+    public String getNavBar() {
         return "front-end/components/NavBar";
     }
+
     @GetMapping("/carousel")
-    public String getCarousel(){
+    public String getCarousel() {
         return "front-end/components/Carousel";
     }
+
     @GetMapping("/copyright")
-    public String getCopyright(){
+    public String getCopyright() {
         return "front-end/components/Copyright";
     }
+
     @GetMapping("/login")
-    public String getLogin(){
+    public String getLogin() {
         return "front-end/member/MemberLogin";
     }
+
     @GetMapping("/register")
-    public String memberRegister(){ return "front-end/member/MemberRegister";}
+    public String memberRegister() {
+        return "front-end/member/MemberRegister";
+    }
+
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
     }
+
     @GetMapping("/member/data")
-    public String memberData(HttpSession session, RedirectAttributes redirectAttributes){
-        if (session.getAttribute("user")!=null){
+    public String memberData(HttpSession session, RedirectAttributes redirectAttributes) {
+        if (session.getAttribute("user") != null) {
             return "front-end/member/MemberData";
-        }else {
+        } else {
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             return "redirect:/login";
         }
     }
+
     @GetMapping("/member/data/edit")
-    public String editMemberData(HttpSession session, RedirectAttributes redirectAttributes, Model model){
+    public String editMemberData(HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         Members user = (Members) session.getAttribute("user");
-        if (user !=null){
+        if (user != null) {
             String address = user.getMemberAddress();
             String[] split = address.split(",");
 
@@ -91,7 +102,7 @@ public class MemberController {
             model.addAttribute("address", split[2]);
 
             return "front-end/member/MemberDataEdit";
-        }else {
+        } else {
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             return "redirect:/login";
         }
@@ -99,12 +110,12 @@ public class MemberController {
 
     // 後台會員資料列表
     @GetMapping("/member/data/list")
-    public String memberDataList(HttpSession session, RedirectAttributes redirectAttributes, Model model){
-        if (session.getAttribute("emp")!=null){
+    public String memberDataList(HttpSession session, RedirectAttributes redirectAttributes, Model model) {
+        if (session.getAttribute("emp") != null) {
             List<Members> list = service.getAllMember();
             model.addAttribute("memberList", list);
             return "/back-end/Member/MemberList";
-        }else {
+        } else {
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             return "/back-end/Employee/EmpLogin";
         }
@@ -112,12 +123,12 @@ public class MemberController {
 
     // 後台會員資料編輯
     @GetMapping("/member/data/edit/{memberId}")
-    public String memberDataEdit(@PathVariable("memberId") Integer memberId , HttpSession session, RedirectAttributes redirectAttributes, Model model){
+    public String memberDataEdit(@PathVariable("memberId") Integer memberId, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         System.out.println(memberId);
-        if (session.getAttribute("emp")!=null){
+        if (session.getAttribute("emp") != null) {
             model.addAttribute("member", service.getMemberById(memberId));
             return "/back-end/Member/MemberDataEdit";
-        }else {
+        } else {
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             return "/back-end/Employee/EmpLogin";
         }
@@ -126,17 +137,18 @@ public class MemberController {
     // 處理登入
     @PostMapping("/member/login")
     @ResponseBody
-    public Map<String, String> login(@RequestBody Members members, HttpSession session){
+    public Map<String, String> login(@RequestBody Members members, HttpSession session) {
         Map<String, String> result = new HashMap<>();
         Members membersInDB = service.login(members.getMemberAccount(), members.getMemberPassword());
 
         if (membersInDB != null) {
             session.setAttribute("user", membersInDB);
             String location = (String) session.getAttribute("location");
-            if (location!=null){
+            if (location != null) {
                 result.put("location", location);
-                return  result;
-            }else {
+                session.removeAttribute("location");
+                return result;
+            } else {
                 result.put("location", "/LeGouter");
                 return result;
             }
