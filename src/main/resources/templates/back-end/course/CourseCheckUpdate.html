@@ -81,6 +81,7 @@
 <section id="mainheader">
     <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
     <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
+    <script src="/Conponents/back_end.js"></script>
 
     <!-- 員工功能小圈圈 -->
 
@@ -198,16 +199,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- 6 -->
-                    <!--
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-                        </li>
-                    -->
-
-                    <!-- 7 -->
                     <li>
                         <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span> </a>
@@ -222,7 +213,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <!-- 8 -->
                     <li>
                         <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -242,7 +232,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <!-- 9 -->
                     <li>
                         <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -356,46 +345,16 @@
                                                 <table id="addvideotable" class="display dataTable"
                                                        style="width: 100%">
                                                     <tbody>
-                                                    <tr>
-                                                        <td>試看</td>
-                                                        <td>試看影片</td>
+                                                    <tr th:each="video : ${videos}">
+
+                                                        <td style="width: 400px" th:text="${video.courseImgName}"></td>
                                                         <td>
-                                                            <video width="320" height="240" controls
-                                                                   th:each="v:${list}">
-                                                                <source th:src="@{'/course/'+${v.getCourseId()}+'/'+${v.getCourseImgId()}}"
+                                                            <video style="width: 500px" width="320" height="240"
+                                                                   controls>
+                                                                <source th:src="@{'/course/' + ${course.courseId} + '/' + ${video.courseImgId}}"
                                                                         type="video/mp4">
                                                             </video>
                                                         </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo3"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo4"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo5"></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -410,7 +369,8 @@
                                                         <form>
                                                             <div class="col-sm-10 ">
                                                                 <textarea class="form-control" rows="4"
-                                                                          id="comment" style="resize: none;"></textarea>
+                                                                          id="courseComment"
+                                                                          style="resize: none;"></textarea>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -420,11 +380,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <button type="button"
-                                                                class="btn btn-success" id="pass" style="width: 600px">
+                                                                class="btn btn-success" id="pass"
+                                                                style="width: 350px; height:80px">
                                                             通過
                                                         </button>
                                                         <button type="button"
-                                                                class="btn btn-danger" id="failed" style="width: 600px">
+                                                                class="btn btn-danger" id="failed"
+                                                                style="width: 350px; height:80px">
                                                             退回
                                                         </button>
                                                     </div>
@@ -447,16 +409,16 @@
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 
 <!-- import font awesome -->
-<script src="/Conponents/back_end.js"></script>
-<!-- evelyn jquery -->
+<script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
-        integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="/Course/JS/datatables.init.js"></script>
 
 <script>
 

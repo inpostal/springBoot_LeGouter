@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Owl Theme Default CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/owl.theme.default.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/owl.carousel.min.css">
+    <!-- Owl Magnific CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/animate.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/boxicons.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/flaticon.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/meanmenu.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/nice-select.css">
+    <!-- Odometer CSS-->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/odometer.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/responsive.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/Commom/css/css2.css" rel="stylesheet">
+
+    <link href="/Commom/css/all.min.css" rel="stylesheet">
+    <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/Commom/css/animate.min.css" rel="stylesheet">
+    <link href="/Commom/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/Course/front-end/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/style.css" rel="stylesheet">
+    <!-- Title -->
+    <title>Le Goûter</title>
+</head>
+<body>
+
+<!-- 頁首 -->
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<!-- 導覽列 -->
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-4">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>甜點課程</h2>
+            <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>
+
+            <ul>
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li class="active">甜點課程</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Single Course Area -->
+<section class="single-course-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="single-course-content">
+                    <h3 th:text="${course.getCourseName()}"></h3>
+
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="course-rating">
+                                <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="#">
+
+                                <h4>主廚：</h4>
+                                <span th:text="${empName}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="course-rating pl-0 text-center">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="preview-area">
+                        <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"
+                             th:alt="${course.getCourseName()}" alt="#"
+                             style="width: 100%; height: 500px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="tab single-course-tab">
+                    <ul class="tabs">
+                        <li>
+                            <a href="#">課程總覽</a>
+                        </li>
+                        <li>
+                            <a href="#">課程影片</a>
+                        </li>
+                        <li>
+                            <a href="#">主廚介紹</a>
+                        </li>
+                        <li>
+                            <a href="#">課程評論區</a>
+                        </li>
+                    </ul>
+                    <div class="tab_content">
+                        <div class="tabs_item">
+                            <h3>課程介紹</h3>
+
+                            <p style="word-wrap: break-word;" th:text="${course.getCourseContent()}"></p>
+
+                        </div>
+
+                        <div class="tabs_item">
+                            <div class="curriculum-content">
+                                <h3>課程影片</h3>
+                                <div class="curriculum-list">
+                                    <ul>
+                                        <li th:each="video : ${videos}">
+                                            <a href="#" class="preview-link meet-title"
+                                               data-video-id="${video.videoId}">
+                                                <i th:text="${video.courseImgName}" class="bx bx-right-arrow"></i>
+                                            </a>
+                                            <button class="preview-button meet-time">課程試看</button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="tabs_item">
+                            <div class="instructor-content">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <div class="advisor-img">
+                                            <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="Image">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <div class="advisor-content">
+                                            <a href="#">
+                                                <h3 th:text="${empName}"></h3>
+                                            </a>
+                                            <p style="word-wrap: break-word;" th:text="${chef.getChefInfo()}">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs_item">
+                            <div class="review-content">
+                                <h3>課程評價</h3>
+                                <hr>
+                                <div class="course-reviews-content">
+                                    <h3>學員回饋</h3>
+                                    <div class="body_comment">
+                                        <div class="row">
+                                            <div class="avatar_comment col-md-1">
+                                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg"
+                                                     alt="avatar"/>
+                                            </div>
+                                            <div class="box_comment col-md-11">
+                                                        <textarea class="commentContent" id="commentContent"
+                                                                  placeholder="在這裡描述課程內容問題或是留下學習心得與大家分享"></textarea>
+                                                <input type="hidden" id="memId" value="memId"/>
+                                                <!--                                                        <input type="hidden" id="studentCommentId"-->
+                                                <!--                                                               value="studentCommentId" />-->
+                                                <input type="hidden" id="courseId" value="courseId"/>
+                                                <div style="display: none;">
+                                                    <input type="date" name="studentcommentdate"
+                                                           id="studentcommentdate">
+                                                </div>
+
+                                                <!-- 新增的隐藏字段 -->
+                                                <div class="box_post">
+
+                                                    <div class="pull-right">
+
+                                                        <button onclick="submit_comment()" type="button"
+                                                                value="1" id="submitcomment">發布問題
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="list_comment">
+                                            <div class="row" th:each="c:${courseComment}">
+                                                <li class="box_result row">
+                                                    <div class="avatar_comment col-md-1">
+                                                        <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg"
+                                                             alt="avatar"/>
+                                                    </div>
+                                                    <div class="result_comment col-md-11">
+                                                        <h4 th:text="${c.getMemId()}">學員留言</h4>
+                                                        <p th:text="${c.getCourseStudentCommentContent()}">
+                                                            很喜換這個課</p>
+                                                        <div class="tools_comment">
+                                                            <span th:text="${c.getCourseStudentCommentDate()}">當下時間</span>
+                                                        </div>
+
+                                                        <ul class="child_replay">
+                                                            <li class="box_reply row">
+                                                                <div class="avatar_comment col-md-1">
+                                                                    <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg"
+                                                                         alt="avatar"/>
+                                                                </div>
+                                                                <div class="result_comment col-md-11">
+                                                                    <h4 th:text="${c.getEmpId()}">主廚回覆</h4>
+                                                                    <p th:text="${c.chefCommentContent}">
+                                                                        感謝你的喜歡</p>
+                                                                    <div class="tools_comment">
+                                                                        <span th:text="${c.getChefCommentDate()}">當下時間</span>
+                                                                    </div>
+                                                                    <ul class="child_replay"></ul>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Single Course Area -->
+<!-- Start Footer Top Area -->
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+
+<!-- Jquery-3.5.1.Slim.Min.JS -->
+<script src="/Comment/assets/js/jquery-3.5.1.slim.min.js"></script>
+<!-- Popper JS -->
+<script src="/Comment/assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="/Comment/assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/Comment/assets/js/jquery.meanmenu.js"></script>
+<!-- Wow JS -->
+<script src="/Comment/assets/js/wow.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/Comment/assets/js/owl.carousel.js"></script>
+<!-- Owl Magnific JS -->
+<script src="/Comment/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Nice Select JS -->
+<script src="/Comment/assets/js/jquery.nice-select.min.js"></script>
+<!-- Parallax JS -->
+<script src="/Comment/assets/js/parallax.min.js"></script>
+<!-- Appear JS -->
+<script src="/Comment/assets/js/jquery.appear.js"></script>
+<!-- Odometer JS -->
+<script src="/Comment/assets/js/odometer.min.js"></script>
+<!-- Form Validator JS -->
+<script src="/Comment/assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script src="/Comment/assets/js/contact-form-script.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/Comment/assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/Comment/assets/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+
+<script data-cfasync="false" src="/Comment/static/js/email-decode.min.js"></script>
+<script src="/Comment/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/Comment/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Comment/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    let originalHTML = null;
+
+    //用class抓～不能用id(唯一)
+    let previewLinks = document.querySelectorAll('.preview-link');
+    let previewButtons = document.querySelectorAll('.preview-button');
+
+    previewLinks.forEach(function (previewLink) {
+        previewLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            let courseId = document.getElementById('course-id').innerText;
+            let videoId = this.getAttribute('data-video-id');
+            let previewArea = document.getElementById('preview-area');
+
+            if (originalHTML === null) {
+                originalHTML = previewArea.innerHTML;
+                previewArea.innerHTML = `<video style="width: 865px; height: 525px" width="700" height="240" controls>
+                                <source src="/course/${courseId}/${videoId}"
+                                        type="video/mp4">
+                             </video>`;
+            } else {
+                // 如果這是第二次點擊，還原原始的 HTML
+                previewArea.innerHTML = originalHTML;
+                originalHTML = null;
+            }
+        });
+    });
+
+    previewButtons.forEach(function (previewButton) {
+        previewButton.addEventListener('click', function () {
+            if (originalHTML === null) {
+                // 修改按鈕的文字
+                previewButton.innerText = '取消觀看';
+            } else {
+                // 還原按鈕的文字
+                previewButton.innerText = '課程觀看';
+            }
+            previewButton.previousElementSibling.click();
+        });
+    });
+
+
+    //發布-->新增ajax,memid.courseid.coursecomment
+
+    $('#submitcomment').click(function () {
+        let memId = 1;
+        let courseId = 1;
+        let empId = 2;
+        let chefcomment = "等待主廚回覆中.....";
+        let commentContent = $('.commentContent').val();
+        let currentTime = new Date();
+        let formattedTime = currentTime.getHours() + ':' + currentTime.getMinutes();
+        let formdata = new FormData();
+        formdata.append('memId', memId);
+        formdata.append('courseId', courseId);
+        formdata.append('commentContent', commentContent);
+
+        $.ajax({
+            url: '/CourseStudentComment/addcomment',
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function (resp) {
+                let newEl = document.createElement('li');
+                newEl.className = "box_result row";
+                newEl.innerHTML =
+                    '<div class="avatar_comment col-md-1">' +
+                    '<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>' +
+                    '</div>' +
+                    '<div class="result_comment col-md-11">' +
+                    '<h4>' + memId + '</h4>' +
+                    '<p>' + commentContent + '</p>' +
+                    '<div class="tools_comment">' +
+                    '<span>當下時間' + formattedTime + '</span>' +
+                    '</div>' +
+                    '<ul class="child_replay"></ul>' +
+                    '</div>';
+                document.getElementById('list_comment').prepend(newEl);
+                $('.commentContent').val('');
+
+                let newReplyEl = document.createElement('li');
+                newReplyEl.className = "box_reply row";
+                newReplyEl.innerHTML =
+                    '<div class="col-md-12 reply_comment">' +
+                    '<div class="row">' +
+                    '<div class="avatar_comment col-md-1">' +
+                    '<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>' +
+                    '</div>' +
+                    '<div class="result_comment col-md-11">' +
+                    '<h4>主廚</h4>' +
+                    '<p>' + chefcomment + '</p>' +
+                    '<div class="tools_comment">' +
+                    '<span>當下時間' + formattedTime + '</span>' +
+                    '</div>' +
+                    '<ul class="child_replay"></ul>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+
+                let commentReplies = newEl.querySelector('.child_replay');
+                commentReplies.appendChild(newReplyEl);
+            },
+            error: function (resp) {
+                console.log("新增失敗");
+                alert("新增失敗");
+            }
+        });
+    });
+
+
+</script>
+
+
+</body>
+
+</html>

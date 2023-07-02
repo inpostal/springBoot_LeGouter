@@ -1,10 +1,14 @@
 package app.com.course.vo;
 
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Date;
 
 @Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChefInfoDTO {
 
     private String empName;

@@ -4,14 +4,18 @@ import app.com.CourseStudentComment.repository.CourseStudentCommentRepository;
 import app.com.CourseStudentComment.vo.CourseCommentDTO;
 import app.com.CourseStudentComment.vo.CourseStudentComment;
 import app.com.course.repository.CourseRepository;
+
 import app.com.course.vo.Course;
+import app.com.news.vo.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
+
+import javax.crypto.interfaces.PBEKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class CourseStudentCommentService {
@@ -38,6 +42,13 @@ public class CourseStudentCommentService {
             dto.setChefCommentContent(c.getChefCommentContent());
             dto.setChefCommentDate(c.getChefCommentDate());
             result.add(dto);
+
+            //如果沒有廚師回覆，就顯示為未回覆,如果有值就顯示已回覆
+            if (c.getChefCommentContent() == null) {
+                dto.setChefCommentContent("未回覆");
+            } else {
+                dto.setChefCommentContent("已回覆");
+            }
         }
 
         return result;
@@ -68,4 +79,21 @@ public class CourseStudentCommentService {
     public CourseStudentComment add(CourseStudentComment courseStudentComment) {
         return repository1.save(courseStudentComment);
     }
+
+    //修改
+    public CourseStudentComment getById(Integer courseStudentCommentId) {
+        Optional<CourseStudentComment> update = repository1.findById(courseStudentCommentId);
+        return update.get();
+    }
+
+    public void update(CourseStudentComment courseStudentComment) {
+        repository1.save(courseStudentComment);
+    }
+
+
+//    public List<CourseStudentComment> getAllComment(){
+//    List<CourseStudentComment>getAllComment=repository1.findAll();
+//    return getAllComment;
+//    }
+//}
 }
