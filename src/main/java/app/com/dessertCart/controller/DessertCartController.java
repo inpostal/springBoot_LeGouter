@@ -1,9 +1,9 @@
 package app.com.dessertCart.controller;
 
 import app.com.dessertCart.entity.DessertCartDTO;
+import app.com.dessertCart.entity.OrderInfo;
 import app.com.dessertCart.service.DessertCartService;
 import app.com.member.repository.MemberRepository;
-import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,11 +103,13 @@ public class DessertCartController {
 
 
     @PostMapping("/submitOrder")
-    public String submitOrder(HttpSession session) {
-        Members member = (Members) session.getAttribute("user");
-        if (member != null) {
-            dessertCartService.submitOrder(member.getMemberId());
-        }
+    public String submitOrder(@RequestBody OrderInfo orderInfo, HttpSession session) {
+//        Members member = (Members) session.getAttribute("user");
+//        if (member != null) {
+        Integer memberId = 1;
+        dessertCartService.submitOrder(memberId, orderInfo);
+//        }
         return "/front-end/Dessert/OrderSuccessful";
     }
 }
+

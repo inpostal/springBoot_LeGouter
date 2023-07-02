@@ -198,7 +198,7 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>姓名 <span class="required">*</span></label>
-                                    <input placeholder="" type="text">
+                                    <input placeholder="" type="text" name="receiverName">
                                 </div>
                             </div>
 
@@ -206,7 +206,7 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>運送地址 <span class="required">*</span></label>
-                                    <input placeholder="請輸入地址" type="text">
+                                    <input placeholder="請輸入地址" type="text" name="receiverAddress">
                                 </div>
                             </div>
 
@@ -214,13 +214,13 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>Email <span class="required">*</span></label>
-                                    <input placeholder="" type="email">
+                                    <input placeholder="" type="email" name="receiverEmail">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>連絡電話 <span class="required">*</span></label>
-                                    <input type="text">
+                                    <input type="text" name="receiverPhone">
                                 </div>
                             </div>
 
@@ -259,9 +259,12 @@
                             <tr class="cart_item">
                                 <td class="cart-product-name"> 運費<strong class="product-quantity">
                                 </strong></td>
-                                <td class="cart-product-total text-center"><span class="amount">$<span
-                                        th:text="${shippingCost}"></span></span></td>
+                                <td class="cart-product-total text-center">
+                                    <span class="amount">$<span th:text="${shippingCost}"></span></span>
+                                    <input type="hidden" name="shippingCost" value="${shippingCost}">
+                                </td>
                             </tr>
+
                             <tr class="cart_item">
                                 <td class="cart-product-name"> 折扣金額<strong class="product-quantity">
                                 </strong></td>
@@ -321,23 +324,19 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(1)"
-                                                                   onkeypress="value=value.replace(/[^\d]/g,'')">
+                                                                   oninput="moveToNextInput(1)">
                                                         </div>
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(2) onkeypress="
-                                                                   value=value.replace(/[^\d]/g,'')"">
+                                                                   oninput="moveToNextInput(2)">
                                                         </div>
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(3) onkeypress="
-                                                                   value=value.replace(/[^\d]/g,'')"">
+                                                                   oninput="moveToNextInput(3)">
                                                         </div>
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(4) onkeypress="
-                                                                   value=value.replace(/[^\d]/g,'')"">
+                                                                   oninput="moveToNextInput(4)">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -357,22 +356,23 @@
                                                     </div>
                                                 </div>
                                             </form>
-
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="order-button-payment">
-                                <input value="提交訂單" type="submit">
-                            </div>
+
+                        </div>
+                        <div class="order-button-payment">
+                            <input value="提交訂單" type="button">
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Checkout Area End Here -->
 
@@ -565,12 +565,59 @@
 </div>
 <!-- Footer Area End Here -->
 
-<!-- 信用卡卡號填完自動跳下一格 -->
-
+<!-- jQuery JS -->
+<script src="/Dessert/JS/jquery-3.5.1.min.js"></script>
 <script>
-    // 信用卡驗證
+    $(document).ready(function () {
+        $(".order-button-payment").click(function () {
+            var shippingCost = $('input[name="shippingCost"]').val() ? parseInt($('input[name="shippingCost"]').val()) : 0;
+
+            var orderInfo = {
+                receiverName: $('input[name="receiverName"]').val(),
+                receiverAddress: $('input[name="receiverAddress"]').val(),
+                receiverEmail: $('input[name="receiverEmail"]').val(),
+                receiverPhone: $('input[name="receiverPhone"]').val(),
+                shippingCost: shippingCost
+            };
+
+            $.ajax({
+                url: '/submitOrder',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(orderInfo),
+                success: function () {
+                    alert('訂單已成功提交');
+                    window.location.href = '/OrderSuccessful';
+                },
+                error: function () {
+                    alert('訂單提交失敗，請檢查您的信息並重試');
+                }
+            });
+        });
+    });
+
+    <!-- 信用卡卡號填完自動跳下一格 -->
+
+
+    function moveToNextInput(nextInputIndex) {
+        const inputs = document.querySelectorAll('input[maxlength="4"]');
+        const currentIndex = nextInputIndex - 1;
+        const nextIndex = currentIndex + 1;
+
+        if (nextIndex < inputs.length) {
+            const currentInput = inputs[currentIndex];
+            const nextInput = inputs[nextIndex];
+            const maxLength = parseInt(currentInput.getAttribute("maxlength"));
+            const inputLength = currentInput.value.length;
+
+            if (inputLength >= maxLength) {
+                nextInput.focus();
+            }
+        }
+    }
 
 </script>
+
 
 <script data-cfasync="false" src="/Dessert/JS/SAM/email-decode.min.js"></script>
 <script src="/Dessert/JS/SAM/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
@@ -580,8 +627,7 @@
 <!-- JS
 ============================================ -->
 
-<!-- jQuery JS -->
-<script src="/Dessert/JS/jquery-3.5.1.min.js"></script>
+
 <!-- jQuery Migrate JS -->
 <script src="/Dessert/JS/jQuery-migrate-3.3.0.min.js"></script>
 <!-- Modernizer JS -->

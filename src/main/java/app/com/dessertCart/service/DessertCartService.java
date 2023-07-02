@@ -1,6 +1,7 @@
 package app.com.dessertCart.service;
 
 import app.com.dessertCart.entity.DessertCartDTO;
+import app.com.dessertCart.entity.OrderInfo;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface DessertCartService {
 
     DessertCartDTO getDessertCartByDessertIdAndMemberId(Integer dessertId, Integer memberId);
 
-    void submitOrder(Integer memberId);
+    void submitOrder(Integer memberId, OrderInfo orderInfo);
 
 
 }

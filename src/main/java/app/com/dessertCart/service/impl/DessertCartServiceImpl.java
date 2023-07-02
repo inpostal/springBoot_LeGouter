@@ -4,6 +4,7 @@ import app.com.dessert5.dao.DessertRepository;
 import app.com.dessert5.vo.Dessert;
 import app.com.dessertCart.entity.DessertCart;
 import app.com.dessertCart.entity.DessertCartDTO;
+import app.com.dessertCart.entity.OrderInfo;
 import app.com.dessertCart.repository.DessertCartRepository;
 import app.com.dessertCart.service.DessertCartService;
 import app.com.dessertOrderDetail.entity.OrderDetail;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -108,23 +110,49 @@ public class DessertCartServiceImpl implements DessertCartService {
 
     @Override
     @Transactional
-    public void submitOrder(Integer memberId) {
+    public void submitOrder(Integer memberId, OrderInfo orderInfo) {
         List<DessertCart> dessertCartList = dessertCartRepository.findByMemberId(memberId);
 
         // 創建訂單
         Orders order = new Orders();
-        // 設置訂單詳情，例如購買者、地址等等
+        order.setMemId(memberId); // 設置會員ID
+        int orderTotal = 0;
 
+        // 設置訂單詳情
+        List<OrderDetail> orderDetails = new ArrayList<>();
         for (DessertCart dessertCart : dessertCartList) {
             OrderDetail orderDetail = new OrderDetail();
-            // 將每個購物車中的商品資訊加到訂單中
-            // ...
 
-            orderDetail.setOrderId(order.getOrderId()); // 設置訂單ID
-            orderDetailRepository.save(orderDetail);
+            orderDetail.setDessertId(dessertCart.getDessertId());
+            orderDetail.setDessertAmount(dessertCart.getCartDessertQuantity());
+
+            // 根據dessertId查詢甜點價格
+            Dessert dessert = dessertRepository.findById(dessertCart.getDessertId()).orElse(null);
+            if (dessert != null) {
+                orderDetail.setDessertPrice(dessert.getDessertPrice());
+                orderTotal += dessert.getDessertPrice() * dessertCart.getCartDessertQuantity();
+            }
+
+            orderDetails.add(orderDetail);
         }
+        order.setOrderTotal(orderTotal);
+        int shippingCost = orderTotal > 500 ? 0 : 100; // Recalculate shipping cost
+        order.setCpOrderTotal(orderTotal + shippingCost - 75);
+
+     
+        // 設置收件人資訊，根據您提供的HTML代碼
+        order.setReceiverPhone(orderInfo.getReceiverPhone());
+        order.setReceiverAddress(orderInfo.getReceiverAddress());
+        order.setReceiverName(orderInfo.getReceiverName());
+        order.setReceiverEmail(orderInfo.getReceiverEmail());
+        order.setOrderTime(new Timestamp(System.currentTimeMillis()));
+
 
         ordersRepository.save(order);
+        for (OrderDetail orderDetail : orderDetails) {
+            orderDetail.setOrderId(order.getOrderId()); // 設置訂單ID
+        }
+        orderDetailRepository.saveAll(orderDetails);
 
         // 清空購物車
         dessertCartRepository.deleteAll(dessertCartList);
