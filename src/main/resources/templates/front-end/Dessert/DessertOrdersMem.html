@@ -51,10 +51,9 @@
     <div class="content">
         <div class="row">
             <div class="col-md-8">
-                <h5 class="card-header" th:text="${memAccount} + ' 的甜點訂單'"></h5>
+                <h5 class="card-header" th:text="${memName} + ' 甜點訂單'"></h5>
                 <div class="col-md-5 mt-3">
-                    <select id="statusFilter" class="form-select custom-select"
-                            onchange="filterOrdersByStatus(this.value, document.getElementById('memberIdInput').value)">
+                    <select id="statusFilter" class="form-select custom-select">
                         <option value="">所有訂單</option>
                         <option value="訂單處理中">訂單處理中</option>
                         <option value="運送中">運送中</option>
@@ -62,8 +61,10 @@
                         <option value="訂單完成">訂單完成</option>
                     </select>
                 </div>
+
                 <div th:each="order : ${orders}">
-                    <div class="card widget mb-4 bg-white">
+                    <div class="card widget mb-4 bg-white" data-status="${order.getStatusName()}">
+
                         <div class="card-body">
                             <div class="d-flex gap-4 align-items-center" data-bs-toggle="collapse" aria-expanded="false"
                                  th:data-bs-target="'#order-' + ${order.orderId}" role="button">
@@ -84,8 +85,9 @@
 
                                 </div>
                                 <td class="flex-fill">
-                                     <span th:text="${order.getOrderStatus() == 0 ? '訂單處理中' : (order.getOrderStatus() == 1 ? '運送中' : (order.getOrderStatus() == 2 ? '取消訂單' : '訂單完成'))}"
-                                           th:class="${order.getOrderStatus() == 0 ? 'badge bg-primary' : (order.getOrderStatus() == 1 ? 'badge bg-dark' : (order.getOrderStatus() == 2 ? 'badge bg-danger' : 'badge bg-success'))}"></span>
+                                     <span th:text="${order.getStatusName()}"
+                                           th:class="${order.getStatusClass()}"></span>
+
                                 </td>
 
                                 <td>
@@ -164,7 +166,31 @@
 
 <script type="text/javascript" src="/Dessert/JS/jquery.min.js"></script>
 <script src="/Course/JS/Jquery.js"></script>
+<script>
+    document.getElementById('statusFilter').addEventListener('change', function (e) {
+        var selectedStatus = e.target.value;
 
+        console.log('Selected status: ' + selectedStatus); // new line
+
+        var orders = document.getElementsByClassName('card widget mb-4 bg-white');
+
+        for (var i = 0; i < orders.length; i++) {
+            var order = orders[i];
+
+            var orderStatus = order.getAttribute('data-status');
+
+            console.log('Order status: ' + orderStatus); // new line
+
+            if (selectedStatus === '' || orderStatus === selectedStatus) {
+                order.style.display = '';
+            } else {
+                order.style.display = 'none';
+            }
+        }
+    });
+
+
+</script>
 
 <!--    //以下是評價星星的功能，暫時無法實現-->
 <!--<script>-->

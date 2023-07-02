@@ -52,5 +52,31 @@ public class OrdersMem implements Serializable {
 
     @Column(name = "RECEIVER_EMAIL")
     private String receiverEmail;
+
+    public String getStatusClass() {
+        switch (getOrderStatus()) {
+            case 0:
+                return "badge bg-primary";
+            case 1:
+                return "badge bg-dark";
+            case 2:
+                return "badge bg-danger";
+            default:
+                return "badge bg-success";
+        }
+    }
+
+    public String getStatusName() {
+        switch (getOrderStatus()) {
+            case 0:
+                return "訂單處理中";
+            case 1:
+                return "運送中";
+            case 2:
+                return "取消訂單";
+            default:
+                return "訂單完成";
+        }
+    }
 }
 

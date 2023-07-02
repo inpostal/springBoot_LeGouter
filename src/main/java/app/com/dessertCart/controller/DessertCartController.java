@@ -111,5 +111,12 @@ public class DessertCartController {
 //        }
         return "/front-end/Dessert/OrderSuccessful";
     }
+
+    @GetMapping("/OrderSuccessful")
+    public String orderSuccessfulPage() {
+        return "/front-end/Dessert/OrderSuccessful";
+    }
+
+
 }
 

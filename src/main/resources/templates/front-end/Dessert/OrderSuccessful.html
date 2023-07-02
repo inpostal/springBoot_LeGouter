@@ -38,10 +38,11 @@
                             <p class="mb-4">我們會盡快將您的甜點出貨</p>
                             <div class="row my-5">
                                 <div class="col-3 m-auto">
-                                    <img class="img-fluid" src="static/picture/congratulations.svg" alt="...">
+                                    <img class="img-fluid" src="/static/Dessert/picture/congratulations.jpg" alt="...">
                                 </div>
                             </div>
-                            <button class="btn btn-primary">繼續血拚</button>
+                            <button class="btn btn-primary" onclick="redirectToShop()">繼續血拚</button>
+
                         </div>
                     </div>
                 </div>
@@ -56,6 +57,10 @@
 
 <!-- Main Javascript file -->
 <script src="/Dessert/JS/app.min.js"></script>
+<script>function redirectToShop() {
+    window.location.href = "/dessertshop/shopAndproduct/shop.html";
+}
+</script>
 </body>
 
 </html>

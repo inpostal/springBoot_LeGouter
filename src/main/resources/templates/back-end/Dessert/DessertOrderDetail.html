@@ -108,7 +108,9 @@
 
         <!-- content -->
         <div class="content ">
-
+            <div class="mb-4">
+                <button onclick="goBack()" class="btn btn-primary">返回上一頁</button>
+            </div>
 
             <div class="row">
                 <div class="col-lg-6 col-md-12">
@@ -127,10 +129,7 @@
                                     <script th:inline="javascript">
                                         var orderTimeElement = document.getElementById('orderTime');
                                         var orderTime = orderTimeElement.textContent.trim();
-                                        var formattedTime = new Date(orderTime).toLocaleString('zh-TW', {
-                                            timeZone: 'UTC',
-                                            hour12: true
-                                        });
+                                        var formattedTime = new Date(orderTime).toLocaleString('zh-TW', {hour12: true});
                                         orderTimeElement.textContent = formattedTime;
                                     </script>
                                 </div>
@@ -194,9 +193,28 @@
                                         <td th:text="'$' + ${l.getDessertAmount() * l.getDessertPrice()}"></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" rowspan="${orderDetailList.size() + 1}"
-                                            style="text-align: right;">
-                                            訂單總金額：$<span th:text="${orders.getOrderTotal()}"></span>
+                                        <td colspan="4" style="text-align: right;">
+                                            <div class="card-header">
+                                                甜點訂單金額
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <strong>甜點總金額：$</strong>
+                                                    <span th:text="${orders.getOrderTotal()}"></span>
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>運費：$</strong>
+                                                    <span th:text="${orders.getOrderTotal() > 500 ? '0' : '100'}"></span>
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>折價券：$</strong>
+                                                    <span th:text="${discount}"></span>
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>訂單總金額：$</strong>
+                                                    <span th:text="${orders.cpOrderTotal}"></span>
+                                                </p>
+                                            </div>
                                         </td>
                                     </tr>
 
@@ -213,8 +231,13 @@
 
 
 <!-- ./ layout-wrapper -->
-
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 <!-- import js -->
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

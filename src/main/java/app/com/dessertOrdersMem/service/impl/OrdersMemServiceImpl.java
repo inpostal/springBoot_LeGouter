@@ -38,7 +38,7 @@ public class OrdersMemServiceImpl implements OrdersMemService {
     }
 
     public String getMemberAccountById(Integer memId) {
-        return memberRepository.findById(memId).get().getMemberAccount();
+        return memberRepository.findById(memId).get().getMemberName();
     }
 
     public Map<Integer, List<OrderDetailDTO>> getDessertDetails(List<OrdersMem> orders) {

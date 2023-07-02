@@ -32,8 +32,8 @@ public class OrdersMemController {
     public String getAllOrdersByMemberId(@PathVariable Integer memId, Model model) {
         List<OrdersMem> orders = ordersMemService.getAllOrdersByMemberId(memId);
         model.addAttribute("orders", orders);
-        String memAccount = ordersMemService.getMemberAccountById(memId);
-        model.addAttribute("memAccount", memAccount);
+        String memName = ordersMemService.getMemberAccountById(memId);
+        model.addAttribute("memName", memName);
 
         Map<Integer, List<OrderDetailDTO>> dessertDetailsMap = new HashMap<>();
         for (OrdersMem order : orders) {
