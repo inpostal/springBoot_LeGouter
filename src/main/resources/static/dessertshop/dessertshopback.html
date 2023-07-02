@@ -419,18 +419,18 @@
 
 
                             <!-- 1. -->
-                            <tr>
-                                <td>${res[e].dessertName}</td>
-                                <td>${res[e].dessertContent}</td>
-                                <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
-                                <td>NT$${res[e].dessertPrice}</td>
-                                <td><span class="${statusClass}">${dessertStatus}</span></td>
-                                <td>
-                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
-                                    <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
-                                </td>
-                            </tr>
+<!--                            <tr>-->
+<!--                                <td>${res[e].dessertName}</td>-->
+<!--                                <td>${res[e].dessertContent}</td>-->
+<!--                                <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>-->
+<!--                                <td>NT$${res[e].dessertPrice}</td>-->
+<!--                                <td><span class="${statusClass}">${dessertStatus}</span></td>-->
+<!--                                <td>-->
+<!--                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>-->
+<!--                                    <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>-->
+<!--                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
 
 
                             </tbody>
@@ -621,6 +621,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+    // 檢查登入
+    $(document).ready(function(){
+        $.ajax({
+            url: '/dessert5/empcheck5',
+            type: 'GET',
+            success: function(res){
+                console.log(res);
+                if (res == "/employee/login"){
+                    window.location.href = res;
+                }
+            }
+        });
+    });
+
     // 狀態篩選
     $(document).ready(function(){
         $("#status-select").change(function() {
@@ -937,18 +951,18 @@
     function redirectToEditPicture(param) {
         console.log(param);
 
-        // 創建遮罩層元素
-        let overlay = document.createElement('div');
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // 設置透明黑色作為遮罩層的顏色
-        overlay.style.zIndex = '9999';
-
-        // 將遮罩層添加到原窗口的body中
-        document.body.appendChild(overlay);
+        // // 創建遮罩層元素
+        // let overlay = document.createElement('div');
+        // overlay.style.position = 'fixed';
+        // overlay.style.top = '0';
+        // overlay.style.left = '0';
+        // overlay.style.width = '100%';
+        // overlay.style.height = '100%';
+        // overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // 設置透明黑色作為遮罩層的顏色
+        // overlay.style.zIndex = '9999';
+        //
+        // // 將遮罩層添加到原窗口的body中
+        // document.body.appendChild(overlay);
 
         let url = 'imgg.html?param=' + encodeURIComponent(param);
         let width = 720;

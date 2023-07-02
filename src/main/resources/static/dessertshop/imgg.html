@@ -128,17 +128,17 @@
             display: none;
         }
 
-        /*!* 隐藏滚动条的样式 *!*/
-        /*.hide-scrollbar {*/
-        /*    overflow-y: scroll;  !* 始终显示垂直滚动条 *!*/
-        /*    scrollbar-width: none;  !* 隐藏滚动条宽度 *!*/
-        /*    -ms-overflow-style: none;  !* 隐藏 IE 和 Edge 浏览器的滚动条 *!*/
-        /*}*/
+        /* 隐藏滚动条的样式 */
+        .hide-scrollbar {
+            overflow-y: scroll;  /* 始终显示垂直滚动条 */
+            scrollbar-width: none;  /* 隐藏滚动条宽度 */
+            -ms-overflow-style: none;  /* 隐藏 IE 和 Edge 浏览器的滚动条 */
+        }
 
-        /*!* 对于支持 WebKit 浏览器的代码 *!*/
-        /*.hide-scrollbar::-webkit-scrollbar {*/
-        /*    display: none;  !* 隐藏滚动条 *!*/
-        /*}*/
+        /* 对于支持 WebKit 浏览器的代码 */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;  /* 隐藏滚动条 */
+        }
 
 
 
@@ -232,7 +232,7 @@
 <script>
 // hide scrollbar
     // 获取页面的根元素
-    var rootElement = document.documentElement;
+    let rootElement = document.documentElement;
 
     // 添加一个类名来隐藏滚动条
     rootElement.classList.add('hide-scrollbar');

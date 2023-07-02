@@ -2,10 +2,12 @@ package app.com.dessert5.controller;
 
 import app.com.dessert5.service.DessertService;
 import app.com.dessert5.vo.Dessert;
+import app.com.emp.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequestMapping("/dessert5")
@@ -15,6 +17,16 @@ public class DessertShopController {
     @Autowired
     private DessertService dessertService;
 
+    // 檢查登入
+    @GetMapping("/empcheck5")
+    public String empcheck5(HttpSession session){
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null){
+            session.setAttribute("location", "/dessertshop/dessertshopback.html" );
+            return "/employee/login";
+        }
+        return "/dessertshop/dessertshopback.html";
+    }
 
     // 測試連線
     @GetMapping("/test")

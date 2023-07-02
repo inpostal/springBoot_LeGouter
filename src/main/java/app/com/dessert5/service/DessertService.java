@@ -1,7 +1,12 @@
 package app.com.dessert5.service;
 
+import app.com.dessert5.dao.Dessert5CartRepository;
+import app.com.dessert5.dao.Dessert5LoveListRepository;
 import app.com.dessert5.dao.DessertRepository;
 import app.com.dessert5.vo.Dessert;
+import app.com.dessert5.vo.Dessert5Cart;
+import app.com.dessert5.vo.Dessert5CartPK;
+import app.com.dessert5.vo.Dessert5LoveList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +18,12 @@ public class DessertService {
 
     @Autowired
     private DessertRepository dessertRepository;
+
+    @Autowired
+    private Dessert5CartRepository dessert5CartRepository;
+
+    @Autowired
+    private Dessert5LoveListRepository dessert5LoveListRepository;
 
 
     public List<Dessert> findAll(){
@@ -69,6 +80,43 @@ public class DessertService {
             dessertOld.setDessertStatus(dessert.getDessertStatus());
             dessertRepository.save(dessertOld);
             return "編輯成功";
+        }
+
+    }
+
+
+    // 加入購物車(+1)
+    public void addToCart(Integer dessertId, Integer memberId){
+        Dessert5CartPK dessert5CartPK = new Dessert5CartPK(dessertId, memberId);
+        Dessert5Cart dessert5Cart = dessert5CartRepository.findById(dessert5CartPK).orElse(null);
+
+
+        if (dessert5Cart == null) {
+            Dessert5Cart newDessert5Cart = new Dessert5Cart();
+            newDessert5Cart.setId(dessert5CartPK);
+            newDessert5Cart.setQuantity(1);
+            dessert5CartRepository.save(newDessert5Cart);
+        } else {
+            Integer q = dessert5Cart.getQuantity();
+            dessert5Cart.setQuantity(q + 1);
+            dessert5CartRepository.save(dessert5Cart);
+        }
+
+    }
+
+    // 加入追蹤清單
+    public void addToLoveList(Integer dessertId, Integer memberId){
+        Dessert5LoveList dessert5LoveListKey = new Dessert5LoveList(dessertId, memberId);
+        Dessert5LoveList dessert5LoveList = dessert5LoveListRepository.findById(dessert5LoveListKey).orElse(null);
+
+
+        if (dessert5LoveList == null) {
+            Dessert5LoveList newDessert5LoveList = new Dessert5LoveList();
+            newDessert5LoveList.setDessertId(dessertId);
+            newDessert5LoveList.setMemberId(memberId);
+            dessert5LoveListRepository.save(newDessert5LoveList);
+        } else {
+            return;
         }
 
     }

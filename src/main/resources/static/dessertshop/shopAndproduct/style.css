@@ -61,7 +61,7 @@ button.white {
     outline: none;
     border: 1px solid #fff;
     cursor: pointer;
-    transition: 0.2 ease;
+    transition: 0.2s;
 }
 
 .section-p1 {
@@ -76,159 +76,10 @@ body {
     width: 100%;
 }
 
-/* #header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 80px;
-    background: #ffa171f2;
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-}
-
-#navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#navbar li {
-    list-style: none;
-    padding: 0 20px;
-    position: relative;
-}
-
-#navbar li a {
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    color: #1a1a1a;
-    transition: 0.3s ease;
-} */
-
-/* 在該頁面時navbar對應會亮 */
-/* #navbar li a:hover,
-#navbar li a.active {
-    color: #782b02;
-} */
-
-/* navbar按鈕底線會亮 */
-/* #navbar li a.active::after,
-#navbar li a:hover::after {
-    content: "";
-    width: 30%;
-    height: 2px;
-    background: #ab3c00;
-    position: absolute;
-    bottom: -4px;
-    left: 20px;
-}
-
-#navbar li a i {
-    font-weight: 500;
-    font-size: 20px;
-}
-
-#mobile {
-    display: none;
-    align-items: center;
-} */
 
 #close {
     display: none;
 }
-
-/* #hero {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0 80px;
-    background-image: url("img/hero4.png");
-    width: 100%;
-    height: 90vh;
-    background-size: cover;
-    background-position: top 25% right 0;
-}
-
-#hero h4 {
-    padding-bottom: 15px;
-}
-
-#hero h1 {
-    color: #088178;
-}
-
-#hero button {
-    background-image: url("img/button.png");
-    background-color: transparent;
-    color: #088178;
-    border: 0;
-    padding: 14px 80px 14px 65px;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 15px;
-} */
-
-/* #feature {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-#feature .fe-box {
-    width: 180px;
-    text-align: center;
-    padding: 25px 15px;
-    border-radius: 4px;
-    border: 1px solid #cce7d0;
-    box-shadow: 20px 20px 34px rgba(0, 0, 0, .03);
-    transition: 0.3s ease;
-    margin: 15px 0;
-}
-
-#feature .fe-box:hover {
-    box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
-}
-
-#feature .fe-box img {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-#feature .fe-box h6 {
-    display: inline-block;
-    padding: 9px 8px 6px 8px;
-    line-height: 1;
-    border-radius: 4px;
-    color: #088178;
-    background-color: #fddde4;
-}
-
-#feature .fe-box:nth-child(2) h6 {
-    background-color: #cdebbc;
-}
-
-#feature .fe-box:nth-child(3) h6 {
-    background-color: #d1e8f2;
-}
-
-#feature .fe-box:nth-child(4) h6 {
-    background-color: #cdd4f8;
-}
-
-#feature .fe-box:nth-child(5) h6 {
-    background-color: #f6dbf6;
-}
-
-#feature .fe-box:nth-child(6) h6 {
-    background-color: #fff2e5;
-} */
 
 #product1 {
     text-align: center;
@@ -237,7 +88,7 @@ body {
 #product1 .pro-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding-top: 20px;
 }
 
