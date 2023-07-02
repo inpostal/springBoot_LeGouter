@@ -3,6 +3,7 @@ package app.com.news.controller;
 import app.com.news.service.NewsService;
 import app.com.news.vo.News;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 //導至頁面
 @Controller
@@ -28,6 +30,10 @@ public class NewsController {
     @GetMapping("/news/list")
     public String getNewsAll() {
         return "/back-end/news/newsManagement";
+    }
+
+    public List<News> getNewaAllFront(){
+        return service.getAllNews();
     }
 
     //刪除
@@ -121,8 +127,20 @@ public class NewsController {
         service.add(news);
         return ResponseEntity.ok().build();
     }
-
-
+    //前台所有最新消息
+    @GetMapping("/news/front")
+public String getNewsFront(Model model){
+        List<News> newList=service.getAllNewsFront();
+        model.addAttribute("newList",newList);
+        return "/front-end/news/news";
+}
+//前台最新消息單一內容
+@GetMapping("/news/frontSingle")
+public String getNewFrontSingle(@RequestParam Integer newsId, Model model){
+        News getNewsFrontSingle=service.getNewsSingleFront(newsId);
+        model.addAttribute("getNewsFrontSingle",getNewsFrontSingle);
+        return "/front-end/news/newsSingle";
+}
 
 
 

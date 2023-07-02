@@ -6,6 +6,10 @@ import app.com.CourseStudentComment.vo.CourseStudentComment;
 import app.com.course.repository.CourseRepository;
 
 import app.com.course.vo.Course;
+import app.com.emp.repository.EmployeeRepository;
+import app.com.emp.vo.Employee;
+import app.com.member.repository.MemberRepository;
+import app.com.member.vo.Members;
 import app.com.news.vo.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,8 @@ public class CourseStudentCommentService {
     private CourseStudentCommentRepository repository1;
     @Autowired
     CourseRepository repository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     //列表
     public List<CourseCommentDTO> courseComment() {
@@ -32,13 +38,18 @@ public class CourseStudentCommentService {
         for (CourseStudentComment c : courseStudentComment) {
             CourseCommentDTO dto = new CourseCommentDTO();
             Course course = repository.getReferenceById(c.getCourseId());
+            if (c.getEmpId()!=null){
+                Employee employee = employeeRepository.getReferenceById(c.getEmpId());
+                dto.setEmpName(employee.getEmpName());
+            }
+
+
             dto.setMemId(c.getMemId());
             dto.setCourseName(course.getCourseName());
             dto.setCourseId(c.getCourseId());
             dto.setCourseStudentCommentId(c.getStudentCommentId());
             dto.setCourseStudentCommentContent(c.getStudentCommentContent());
             dto.setCourseStudentCommentDate(c.getStudentCommentDate());
-            dto.setEmpId(c.getEmpId());
             dto.setChefCommentContent(c.getChefCommentContent());
             dto.setChefCommentDate(c.getChefCommentDate());
             result.add(dto);
@@ -58,13 +69,14 @@ public class CourseStudentCommentService {
     public CourseCommentDTO getCourseCommentById(Integer courseStudentCommentId) {
         CourseCommentDTO dto = new CourseCommentDTO();
         CourseStudentComment c = repository1.findById(courseStudentCommentId).orElse(null);
+        Employee employee= employeeRepository.getReferenceById(c.getEmpId());
         if (c != null) {
             dto.setMemId(c.getMemId());
             dto.setCourseId(c.getCourseId());
             dto.setCourseStudentCommentId(c.getStudentCommentId());
             dto.setCourseStudentCommentContent(c.getStudentCommentContent());
             dto.setCourseStudentCommentDate(c.getStudentCommentDate());
-            dto.setEmpId(c.getEmpId());
+            dto.setEmpName(employee.getEmpName());
             dto.setChefCommentContent(c.getChefCommentContent());
             dto.setChefCommentDate(c.getChefCommentDate());
         }
@@ -88,6 +100,10 @@ public class CourseStudentCommentService {
 
     public void update(CourseStudentComment courseStudentComment) {
         repository1.save(courseStudentComment);
+    }
+//刪除
+    public void delete(Integer courseStudentCommentId) {
+        repository1.deleteById(courseStudentCommentId);
     }
 
 

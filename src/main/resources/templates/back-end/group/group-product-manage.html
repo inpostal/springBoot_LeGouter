@@ -178,10 +178,10 @@
                             <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" placeholder="yyyy-mm-dd" required></label>
                             <input type="radio" class="inpproduct" id="productstatus" name="groupProductStatus" value="1" checked style="display: none;">
                             <label class="inpproduct">上傳圖片</label>
-                            <input type="file" style="margin-top: 10px;" id="uploadimg1">
-                            <input type="file" style="margin-top: 10px;">
-                            <input type="file" style="margin-top: 10px;">
-                            <input type="file" style="margin-top: 10px;">
+                            <input type="file" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
+                            <input type="file" accept="image/*" style="margin-top: 10px;">
+                            <input type="file" accept="image/*" style="margin-top: 10px;">
+                            <input type="file" accept="image/*" style="margin-top: 10px;">
                             <button type="button" id="btnSend" style="margin-top: 10px; display: block;">新增</button>
                             <!-- <button type="reset" style="margin-top: 10px;">清除</button> -->
                         </form>
@@ -394,7 +394,7 @@
                 type: "POST",
                 //contentType: "application/json",
                 //data: JSON.stringify(datas),
-                data: {groupProductId: ($("#productid").val())},
+                data: {groupProductId: Number($("#productid").val())},
                 // beforeSend: function () {
                 // //console.log("發送請求之前確認:" + JSON.stringify(datas));
                 // console.log("發送請求之前確認:" + datas);

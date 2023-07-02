@@ -5,6 +5,7 @@ import app.com.grouporderdetail.vo.GroupOrderDetail;
 import app.com.grouporderdetail.vo.GroupOrderDetailId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,5 +44,12 @@ public class GroupOrderDetailService {
         }
         return groupOrderDetail;
     }
+    //前台資料查詢個人訂單明細,用memberid去找自己的訂單明細
+    public List<GroupOrderDetail> getAllByMemberId(Integer memberId) {
+        List<GroupOrderDetail> list = repository.findAllByMemberId(memberId);
+        return list;
+
+  }
+
 }
 

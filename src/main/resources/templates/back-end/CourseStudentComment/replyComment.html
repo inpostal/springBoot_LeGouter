@@ -523,7 +523,7 @@
         <div class="container-small-unit">
           <div class="container-placehold">
             <label class="label" >主廚編號</label>
-            <input class="input" type="number" placeholder="輸入主廚編號" id="empId" required th:value="${courseComment.getEmpId()}" />
+            <input class="input" type="number" placeholder="輸入主廚編號" id="empId" readonly th:value="${session.emp.getEmpId()}" />
           </div>
         </div>
 
@@ -538,13 +538,19 @@
           <div class="container-placehold">
             <label class="label">主廚回覆日期</label>
             <input type="date"  id="chefCommentDate" th:value="${courseComment.getChefCommentDate()}">
-            <label id="displayDate"></label>
+            <label id="displayDate 1"></label>
           </div>
         </div>
 
 
-        <button class="btn" type="submit">發布回覆</button>
-        <button class="btn" type="submit">取消回覆</button>
+        <div class="row">
+          <div class="col">
+            <button class="btn" id="add" type="button" style="width:150px ">新增回覆</button>
+          </div>
+          <div class="col">
+            <button class="btn" id="cancel" type="cancel" style="width:150px ">取消回覆</button>
+          </div>
+        </div>
       </form>
 
 
@@ -587,28 +593,48 @@
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
 </body>
 <script>
-  //將資料匯入
+  //更新廚師留言
+  $('#add').click(function (){
+    let courseId = $('#courseId').val();
+    let commentId = $('#commentId').text();
+    let courseName = $('#courseName').val();
+    let memId = $('#memId').val();
+    let studentCommentContent = $('#studentCommentContent').text();
+    let studentCommentDate = $('#studentCommentDate').val();
+    let empId = $('#empId').val();
+    let chefCommentContent = $('#chefCommentContent').val();
+    let chefCommentDate = $('#chefCommentDate').val();
 
 
 
-  var imageInput = document.getElementById('imageInput');
-  var imagePreviewContainer = document.getElementById('imagePreviewContainer');
-  var imagePreview = document.getElementById('imagePreview');
+    let formData = new FormData();
+    formData.append('courseId',courseId);
+    formData.append('courseName',courseName);
+    formData.append('commentId',commentId);
+    formData.append('memId',memId);
+    formData.append('studentCommentContent',studentCommentContent);
+    formData.append('studentCommentDate',studentCommentDate);
+    formData.append('empId',empId);
+    formData.append('chefCommentContent',chefCommentContent);
+    formData.append('chefCommentDate',chefCommentDate);
+    $.ajax({
+      url: '/CourseStudentComment/updatechefreplay',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+      success:function (resp){
+        alert('修改成功');
+      },
+      error:function (resp){
+        alert('修改失敗');
+      }
 
-  imageInput.addEventListener('change', function (event) {
-    var file = event.target.files[0];
+    })
 
-    if (file && file.type.startsWith('image/')) {
-      var reader = new FileReader();
+  })
 
-      reader.onload = function (e) {
-        imagePreview.src = e.target.result;
-        imagePreviewContainer.style.display = 'block';
-      };
 
-      reader.readAsDataURL(file);
-    }
-  });
 
 
 

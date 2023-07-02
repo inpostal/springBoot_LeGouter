@@ -39,4 +39,6 @@ public class Members{
     private Integer memberStatus;
     @Column(name = "MEM_REGIS_TIME", insertable = false)
     private Date memberRegistrationTime;
+    @Column(name = "TOKEN", insertable = false)
+    private String token;
 }

@@ -353,6 +353,8 @@
 
     //發布-->新增ajax,memid.courseid.coursecomment
 
+    //發布-->新增ajax,memid.courseid.coursecomment
+
     $('#submitcomment').click(function () {
         let memId = 1;
         let courseId = 1;
@@ -367,7 +369,7 @@
         formdata.append('commentContent', commentContent);
 
         $.ajax({
-            url: '/CourseStudentComment/addcomment',
+            url: '/replyAllComment',
             type: 'POST',
             data: formdata,
             processData: false,

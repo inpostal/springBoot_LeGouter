@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"></html>
+
+<head>
+    <meta charset="utf-8">
+    <title>前台團購主 發起活動</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="Group/Shan_static/css/css2.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/all.min.css" rel="stylesheet">
+    <link href="Group/Shan_static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/animate.min.css" rel="stylesheet">
+    <link href="Group/Shan_static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="Group/Shan_static/css/style.css" rel="stylesheet">
+
+
+    <style>
+        .topline {
+            margin-top: 120px;
+            padding-bottom: 50px;
+        }
+
+        .myplan {
+            position: absolute;
+            left: 250px;
+            bottom: 0px;
+        }
+
+        .to-search {
+            display: inline-block;
+            position: absolute;
+            right: 200px;
+            bottom: 0px;
+        }
+
+        .textarea {
+            resize: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+
+
+    <!-- 頁首 -->
+    <div th:insert="front-end/components/Header :: #header-div"></div>
+
+    <!-- 導覽列 -->
+    <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
+
+    <section class="main-shop">
+        <div class="products-shop">
+
+            <div class="topline">
+                <div class="pagesviews">
+                    <h3>商品項目檢視</h3>
+
+                </div>
+
+                <a href="#exampleModalCenter" data-toggle="modal" title="Quick View">
+                    <button class="myplan">我要揪團</button>
+                </a>
+
+                <div class="to-search">
+                    <form action="">
+                        <input class="" type="search" placeholder="搜尋商品名稱" name="">
+                        <button type="submit" id="">搜尋</button>
+                    </form>
+                </div>
+                <div class="sortby">
+                    <select class="wide">
+                        <option value="0">預設排序</option>
+                        <option value="1">價格高到低</option>
+                        <option value="2">價格低到高</option>
+                    </select>
+                </div>
+            </div>
+            <div class="context" id="showallact">
+               
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modal Area Start Here -->
+    <div class="modal fade obrien-modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close">
+                    <span class="close-icon" aria-hidden="true">x</span>
+                </button>
+                <div class="modal-body">
+                    <!-- <form action=""> -->
+                        <label>選擇可團購商品：
+                            <select name="groupProductId" id="selectva" class="">
+
+                            </select>
+                        </label>
+                        <textarea class="textarea" name="groupActivityContent" id="tarva" cols="50" rows="8"
+                            maxlength="300" placeholder="輸入團購活動內容" required></textarea>
+                        <label> 團購開始日期：<input type="datetime-local" name="groupOrderStar" id="starva" required> </label>
+                        <label> 團購結束日期：<input type="datetime-local" name="groupOrderEnd" id="endva" max="" required> </label>
+                        <p>選擇方案:<select name="groupOrderMin" id="minva" class="">
+                                <option value="200" selected>方案A</option>
+                                <option value="400">方案B</option>
+                                <option value="600">方案C</option>
+                            </select></p>
+                        <input type="text" placeholder="輸入團購活動名稱" name="groupName" id="nameva" required>
+                        <p>
+                            方案A:團購商品數量低標 200人，95折，成團分潤:4%。
+                            <br>
+                            方案B:團購商品數量低標 400人，90折，成團分潤:8%。
+                            <br>
+                            方案C:團購商品數量低標 600人，85折，成團分潤:12%。
+                        </p>
+                        <button type="button" class="activity-but">發起活動</button>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Area End Here -->
+
+
+    <!-- 頁腳 -->
+    <div th:insert="front-end/components/Footer :: #footer-div"></div>
+
+    <!-- 版權所有 -->
+    <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+
+    
+    <script data-cfasync="false" src="Group/Shan_static/js/email-decode.min.js"></script>
+    <!-- <script src="Group/Shan_static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script> -->
+    <script src="Group/Shan_assets/js/vendor/bootstrap.bundle.min.js"
+        type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+    <script src="Group/Shan_static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="Group/Shan_static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49"
+        defer=""></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(".activity-but").on("click", function () {
+            
+            inserAct();
+        });
+        onselect();
+        window.addEventListener("load", function () {
+            show();
+        });
+
+        function show() {
+            $.ajax({
+                url: "/groupProduct/showPutOnList",
+                type: "GET",
+                success: function (response) {
+                    let texts = "";
+                    for (let gvo in response) {
+                        let text = `<div class="col-item">
+                    <div class="item">
+                        <div class="img-board">
+                            <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="img-width">
+
+                        </div>
+                        <div class="cont">
+                            <h6>商品名稱:${response[gvo].groupProductName}</h6>
+                            <div class="info">
+                                <p class="info-context" style="height: 200px; overflow: auto;">
+                                    ${response[gvo].groupProductContent}。
+                                </p>
+                                <p>
+                                    商品價格:${response[gvo].groupProductPrice}
+                                </p>
+                            </div>
+                            <div class="botm">
+                                <div class="tags">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                        texts += text;
+                    }
+                    $("#showallact").html(texts);
+                }
+            });
+        }
+
+        function onselect() {
+            $.ajax({
+                url: "/groupProduct/showPutOnList",
+                type: "GET",
+                success: function (response) {
+                    console.log("回來的資料:" + response);
+                    let optioncons = "";
+                    for (let opt in response) {
+                        let optioncon = `<option value="${response[opt].groupProductId}">${response[opt].groupProductName}</option>
+                        `;
+
+                        optioncons += optioncon
+                    }
+                    $("#selectva").html(optioncons);
+                }
+            });
+        }
+
+        function inserAct() {
+            const groupOmin = Number($("#minva").val());
+            let groupODis = 0.95;
+            console.log(groupOmin);
+            switch (groupOmin) {
+                case 200: {groupODis = 0.95;
+                    console.log("進入200");
+                break;}
+                case 400: {groupODis = 0.90;
+                    console.log("進入400");
+                break;}
+                case 600: {groupODis = 0.85;
+                    console.log("進入600");
+                break;}
+            }
+            console.log("switch完測試" + groupODis);
+            let starvaobj = new Date($("#starva").val());
+            let endvaobj = new Date($("#endva").val());
+            let starva = starvaobj.getFullYear() + "-" + (starvaobj.getMonth() + 1) + "-" + starvaobj.getDate() + " " + starvaobj.getHours() + ":" + starvaobj.getMinutes() + ":" + starvaobj.getSeconds();
+            let endva = endvaobj.getFullYear() + "-" + (endvaobj.getMonth() + 1) + "-" + endvaobj.getDate() + " " + endvaobj.getHours() + ":" + endvaobj.getMinutes() + ":" + endvaobj.getSeconds();
+            console.log(starvaobj.getTime);
+            console.log("測試starva的資料" + starva);
+            console.log("測試endva的資料" + endva);
+
+            $.ajax({
+                url: "/groupActivity/inser",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    groupProductId: $("#selectva").val(),
+                    groupActivityContent: $("#tarva").val(),
+                    groupOrderStar: starva,
+                    groupOrderEnd: endva,
+                    groupOrderMin: groupOmin,
+                    groupName: $("#nameva").val(),
+                    groupOrderDiscount: groupODis
+                }),
+                success: function (response) {
+                    console.log(response);
+                    if(response.success){
+                        alert("新增成功");
+                        location.reload();
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
