@@ -443,7 +443,7 @@
                 <th>訂單狀態</th>
                 <th>付款方式</th>
                 <th>訂購數量</th>
-                <th>商品總金額</th>
+                <th>商品單價</th>
                 <th>訂購者資訊</th>
               </tr>
               </thead>
@@ -676,6 +676,38 @@
 
   // Initial count when the page loads
   updateSelectedCount();
+
+
+
+  //修改(將grouporderamount加總傳給訂單主檔的numberofproduct
+
+
+  //將groupproductprice傳給訂單主檔
+
+  $(document).ready(function() {
+    var rows = document.querySelectorAll('#grouporderdetail tr');
+    var totalAmount = 0;
+
+    rows.forEach(function(row) {
+      var groupOrderAmount = parseFloat(row.querySelector('#grouporderamount').innerText);
+      var groupProductPrice = parseFloat(row.querySelector('#groupproductpaying').innerText);
+      var subtotal = groupOrderAmount * groupProductPrice;
+      totalAmount += subtotal;
+    });
+
+    console.log('Total Amount:', totalAmount);
+  });
+  $.ajax({
+    url:'/groupMaster/update/numberofproduct',
+    type:"POST",
+    data:{ totalAmount: totalAmount },
+    success:function(resp){
+      console.log(resp);
+    },
+    error: function (xhr, textstatus, errorThrown) {
+      console.error(xhr);
+    }
+  })
 
 </script>
 

@@ -6,6 +6,7 @@ import app.com.groupordermaster.vo.GroupOrderMaster;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 //底層完成曾刪改查
 public interface GroupOrderMasterRepository extends  JpaRepository<GroupOrderMaster,Integer> {
@@ -13,4 +14,5 @@ public interface GroupOrderMasterRepository extends  JpaRepository<GroupOrderMas
     List<GroupOrderMaster> findAllByMemId(Integer memberId);
 
      List<GroupOrderMaster> findByGroupActivityId(Integer groupActivityId);
+
 }

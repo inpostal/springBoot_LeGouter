@@ -400,7 +400,7 @@
 
       <div class="from-row">
         <div class="d-flex justify-content-between">
-          <a href="./新增最新消息文章 .html"><input class="add-news" type="button" value="+新增文章"></a>
+
 
           <div class="text-end mb-3">
             關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
@@ -538,25 +538,25 @@
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('已刪除!', '', '刪除')
-        row.remove();
+        Swal.fire('已刪除!', '', '刪除');
         $.ajax({
           url: '/CourseStudentComment/deletecomment',
           type: "GET",
           data: {
-            studentCommentId: studentCommentId
+            courseStudentCommentId: courseStudentCommentId
           },
           success: function (resp) {
             console.log(resp);
+            row.remove();
           },
           error: function (xhr, textstatus, errorThrown) {
             console.error(xhr);
           }
-        })
+        });
       } else if (result.isDenied) {
-        Swal.fire('確定不刪除嗎', '', 'info')
+        Swal.fire('確定不刪除嗎', '', 'info');
       }
-    })
+    });
   })
 
   (function (document) {

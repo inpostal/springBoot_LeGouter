@@ -25,6 +25,7 @@ public class CourseStudentCommentController {
     @Autowired
     CourseService courseService;
     //thyleaf評論列表
+    //後台討論區管理列表
 @GetMapping("/CourseStudentComment")
     public String getAll(Model model){
         List<CourseCommentDTO>result = courseStudentCommentService.courseComment();
@@ -95,9 +96,10 @@ model.addAttribute("courseComment",result);
 
     //後台刪除留言
     @GetMapping("/CourseStudentComment/deletecomment")
-    public  String deletecomment(@RequestParam Integer courseStudentCommentId){
+    public  ResponseEntity<?> deletecomment(@RequestParam Integer courseStudentCommentId){
         courseStudentCommentService.delete(courseStudentCommentId);
-        return "redirect:/CourseStudentComment";
+        System.out.println(courseStudentCommentId);
+        return ResponseEntity.ok().build();
     }
 
 }

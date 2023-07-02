@@ -85,8 +85,6 @@
         }
 
 
-
-
         .pagination-bar {
             justify-content: center;
         }
@@ -123,8 +121,6 @@
             background-color: #1E1916 !important;
             color: white;
         }
-
-
 
 
         .card-body {
@@ -190,7 +186,7 @@
         } */
 
         .mb-3 {
-             margin-bottom: 0 rem!important;
+            margin-bottom: 0rem !important;
         }
 
         .red-button {
@@ -286,7 +282,8 @@
                                 <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">即時客服</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">輪播圖管理</span></a>
+                                <a href="#" class="nav-link px-4"> <span
+                                        class="d-none d-sm-inline">輪播圖管理</span></a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link px-4"> <span
@@ -407,7 +404,6 @@
                 </ul>
 
 
-
             </div>
         </div>
 
@@ -415,7 +411,6 @@
         <div class="col py-3">
             <!-- 由此開始 -->
             <h1>團購主分潤管理</h1>
-
 
 
             <div class="from-row">
@@ -453,6 +448,7 @@
                                     <th>團購主編號</th>
                                     <th>訂單資訊</th>
                                     <th>訂單金額</th>
+                                    <th>團購狀態</th>
                                     <th>分潤比例</th>
                                     <th>分潤金額</th>
                                     <th>分潤狀態</th>
@@ -472,21 +468,32 @@
                                     </th>
                                     <td id="memId" th:text="${g.getMemberID()}">}</td>
                                     <td id="groupordermaster">
-                                        訂單編號:<br th:text="${g.getGroupOrderId()}">
+                                        訂單編號:<span th:text="${g.getGroupOrderId()}" class="groupOrderId"></span> <br>
                                         訂單成立時間:<br id="grouporderstar" th:text="${g.getGroupOrderStar()}">
                                         訂單結束時間:<br id="goupname" th:text="${g.getGroupOrderEnd()}">
                                         團購活動編號:<br th:text="${g.getActivityId()}">
                                     </td>
                                     <td id="totalgroupproductprice" th:text="${g.getTotalGroupProductPrice()}"></td>
+                                    <td id="grouporderstatus">
+                                        <span th:if="${g.groupOrderStatus == 0}">尚未達到開團時間</span>
+                                        <span th:if="${g.groupOrderStatus == 1}">團購進行中，目前團購商品下訂總數不足</span>
+                                        <span th:if="${g.groupOrderStatus == 2}">團購進行中，目前團購商品下訂總數已達標</span>
+                                        <span th:if="${g.groupOrderStatus == 3}">團購關閉，出貨處理中</span>
+                                        <span th:if="${g.groupOrderStatus == 4}">團購關閉，已出貨</span>
+                                        <span th:if="${g.groupOrderStatus == 5}">團購結束。團購時間逾期且團購商品下訂總數不足</span>
+                                        <span th:if="${g.groupOrderStatus == 6}">團購結束。訂單已完成</span>
+                                    </td>
                                     <td id="groupordermin" th:text="${g.getBonusRate()}"></td>
-                                    <td id="grouporderbonus" th:text="${g.getGroupOrderBonus()}"></td>
+                                    <td id="grouporderbonus"
+                                        th:text="${g.groupOrderStatus == 6 ? g.getTotalGroupProductPrice() * g.getBonusRate() : ((g.groupOrderStatus == 1 || g.groupOrderStatus == 2 || g.groupOrderStatus == 3 || g.groupOrderStatus == 4) ? '尚未結算' : (g.groupOrderStatus == 5 ? '訂單取消' : g.getGroupOrderBonus()))}"></td>
 
-                                     <td>
-<!--                                    <td id="grouporderbonusstatus" th:text="${g.getGroupOrderBonusStatus()}">-->
-                                         <button id="GroupOrderBonusStatus" type="button" class="btn btn-primary" onclick="toggleBonusStatus(this)"
-                                                 th:class="${g.getGroupOrderBonusStatus() eq '未分潤'} ? 'btn btn-success' : 'btn btn-warning'">
-                                             <span th:text="${g.getGroupOrderBonusStatus() eq '已分潤' ? '已分潤' : '未分潤'}" ></span>
-                                         </button>
+                                    <td>
+                                        <!--                                    <td id="grouporderbonusstatus" th:text="${g.getGroupOrderBonusStatus()}">-->
+                                        <button id="GroupOrderBonusStatus" type="button" class="btn"
+                                                th:class="${g.getGroupOrderBonusStatus().equals('未發放')} ? 'btn btn-danger' : 'btn btn-warning'"
+                                                onclick="toggleBonusStatus(this)">
+                                            <span th:text="${g.getGroupOrderBonusStatus()}"></span>
+                                        </button>
                                     </td>
                                 </tr>
 
@@ -517,21 +524,12 @@
         </div>
 
 
-
-
-
         <!-- 由此結束 -->
     </div>
 
     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 </div>
-
-
-
-
-
-
 
 
 <!-- import js -->
@@ -614,41 +612,50 @@
         var selectedCountElement = document.getElementById('selectedCount');
         selectedCountElement.innerHTML = '已選取 ' + selectedCount + ' 筆資料';
     }
+//去找到父元素再去找到grouporderid這個數字
     function toggleBonusStatus(button) {
-        var statusCell = button.parentNode;
         var currentStatus = button.textContent.trim();
 
-        if (currentStatus === '已分潤') {
-            button.textContent = '未分潤';
-            button.classList.add('red-button'); // 添加红色按钮类
-            updateBonusStatus(1);
-        } else {
-            button.textContent = '已分潤';
+        // 尋找這個按鈕的父元素（也就是<td>），然後再找到<td>的父元素（也就是<tr>）
+        let parentRow = button.parentNode.parentNode;
+        console.log(parentRow);
+        // 從<tr>中尋找id為"groupOrderId"的元素
+        let orderIdElement = parentRow.querySelector('.groupOrderId');
+        console.log(orderIdElement);
+        // 取得該元素的文字內容（訂單編號）
+        let orderId = orderIdElement.textContent;
+        console.log(orderId);
+
+        if (currentStatus === '未發放') {
             button.classList.remove('red-button'); // 移除红色按钮类
-            updateBonusStatus(0);
+            console.log('111'); // 输出 111 到控制台
+            updateBonusStatus(1, orderId); // 调用更新状态的函数，并传递对应的参数
+        } else {
+            button.classList.add('red-button'); // 添加红色按钮类
+            console.log('000'); // 输出 000 到控制台
+            updateBonusStatus(0, orderId); // 调用更新状态的函数，并传递对应的参数
         }
     }
-    $('#GroupOrderBonusStatus').on(click,function (){
-        console.log('123');
-        function updateBonusStatus(memberId,GroupOrderBonusStatus) {
+
+    function updateBonusStatus(GroupOrderBonusStatus, groupOrderId) {
         $.ajax({
             url: '/groupOrder/groupOrderBonus/update',
             type: 'POST',
             data: {
-                MemberID:memberId,
-                GroupOrderBonusStatus: GroupOrderBonusStatus,
+                groupOrderBonusStatus: GroupOrderBonusStatus,
+                groupOrderId: groupOrderId
             },
             success: function (resp) {
                 console.log(resp);
                 alert("修改成功");
+                location.reload();
             },
             error: function (data) {
                 console.log(data);
                 alert("修改失敗");
             }
-    })
+        })
     }
-    })
 
 
 </script>
