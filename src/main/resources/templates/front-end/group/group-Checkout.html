@@ -388,6 +388,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
 <script>
+    console.log("location.href測試 " + window.location.href);
+    console.log("測試取得路徑" + window.location.pathname);
+    console.log("測試取得參數" + window.location.search);
+    console.log(window.location.pathname + window.location.search);
+    
     $("#theAmount").on("change", function() {
         $("#outnumber").html($("#theAmount").val());
         $("#outprice").html($("#setprice").val()*$("#theAmount").val());

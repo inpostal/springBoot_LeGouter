@@ -80,15 +80,16 @@ public class GroupController {
     public String groupCheckout(
     		@RequestParam Integer groupActivityId,
     		@RequestParam Integer groupActivityPrice,
-    		Model model
+    		Model model,
+    		HttpSession session, RedirectAttributes redirectAttributes
     		) {
-//    	HttpSession session, RedirectAttributes redirectAttributes
-//    	Members user = (Members) session.getAttribute("user");
-//        if (user != null){
-//    		Integer memberId = user.getMemberId();
-//            String account = user.getMemberAccount();
-//            model.addAttribute("memberId", memberId);
-//            model.addAttribute("account", account);
+    	String checkouturl = "/group-product/Checkout?" + "groupActivityId=" + groupActivityId + "&groupActivityPrice=" + groupActivityPrice;
+    	Members user = (Members) session.getAttribute("user");
+        if (user != null){
+    		Integer memberId = user.getMemberId();
+            String account = user.getMemberAccount();
+            model.addAttribute("memberId", memberId);
+            model.addAttribute("account", account);
     	
     	GroupActivityVO checkoutactivityvo = groupActivityService.showTheActivity(groupActivityId);
     	GroupCheckoutDTO groupcheckoutDTO = new GroupCheckoutDTO();
@@ -100,10 +101,11 @@ public class GroupController {
     	model.addAttribute("groupcheckoutDTO", groupcheckoutDTO);
 
             return "front-end/group/group-Checkout";
-//        }else {
-//            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
-//            return "redirect:/login";
-//        }
+        }else {
+            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
+            session.setAttribute("location", checkouturl);
+            return "redirect:/login";
+        }
     	
     }
 //    @GetMapping("/plan-activity/updata") //前台團購主修改活動資料
