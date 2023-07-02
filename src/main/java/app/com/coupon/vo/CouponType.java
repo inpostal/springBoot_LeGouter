@@ -2,7 +2,7 @@ package app.com.coupon.vo;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -27,15 +27,15 @@ public class CouponType {
     private Integer cpDiscount;
 
     @Column(name = "CP_START")
-    private LocalDateTime cpStart;
+    private Date cpStart;
 
     @Column(name = "CP_END")
-    private LocalDateTime cpEnd;
+    private Date cpEnd;
 
-    @Column(name = "CP_STATUS")
+    @Column(name = "CP_STATUS", insertable = false)
     private Integer cpStatus;
 
     @Lob
-    @Column(name = "CP_PIC")
+    @Column(name = "CP_PIC", insertable = false)
     private byte[] cpPic;
 }

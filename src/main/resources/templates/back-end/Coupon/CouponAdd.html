@@ -3,269 +3,189 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>欢迎页面-X-admin2.2</title>
+    <title>新增優惠券</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
-        content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <link rel="stylesheet" href="./css/font.css">
-    <link rel="stylesheet" href="./css/xadmin.css">
-    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <!-- <link rel="stylesheet" href="./css/font.css"> -->
+    <link rel="stylesheet" href="/Coupon/CSS/xadmin.css">
+    <script type="text/javascript" src="/Coupon/lib/layui/layui.js" charset="utf-8"></script>
+<!--    <script type="text/javascript" src="/Coupon/JS/layui.js" charset="utf-8"></script>-->
+    <script type="text/javascript" src="/Coupon/JS/xadmin.js"></script>
+    <style>
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .date-input {
+            line-height: 1.3;
+            border-width: 1px;
+        }
+    </style>
+
+
 </head>
 
 <body>
-    <div class="layui-fluid">
-        <div class="layui-row">
-            <form class="layui-form">
-                <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
-                        <!-- 原本為姓名 -->
-                        <span class="x-red">*</span>優惠券ID
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="username" name="username" required="" lay-verify="required"
-                            autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>請輸入優惠券ID
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
-                        <!-- 原本為姓名 -->
-                        <span class="x-red">*</span>優惠券名稱
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="username" name="username" required="" lay-verify="required"
-                            autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>請輸入優惠券名稱
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
-                        <!-- 原本為姓名 -->
-                        <span class="x-red">*</span>優惠券詳情
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="username" name="username" required="" lay-verify="required"
-                            autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>請輸入優惠券內容
-                    </div>
-                </div>
-                <!-- 這裡選擇日期 -->
-                <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
-                        <!-- 原本為姓名 -->
-                        <span class="x-red">*</span>優惠券期限
-                    </label>
-                    <!-- <div class="layui-input-inline">
-                        <input type="text" id="username" name="username" required="" lay-verify="required"
-                            autocomplete="off" class="layui-input">
-                    </div> -->
+<!-- 新增優惠券功能區 -->
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
 
-                    <!-- <div class="layui-inline layui-show-xs-block"> -->
-                    <!-- <div class="layui-form-item"> -->
-                    <div class="layui-input-inline">
-                        <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>請選擇優惠券期限
-                    </div>
-                </div>
-                <!-- <div class="layui-inline layui-show-xs-block">
-                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
-                </div> -->
-                <!-- <div class="layui-inline layui-show-xs-block">
-                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                </div> -->
-
-                <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
-                        <!-- 原本為姓名 -->
-                        <span class="x-red">*</span>優惠券狀態
-                    </label>
-                    <div class="layui-input-inline">
-                        <!-- <input type="text" id="username" name="username" required="" lay-verify="required"
-                            autocomplete="off" class="layui-input"> -->
-                            <select name="cateid">
-                                <option>優惠券狀態</option>
-                                <option>啟用中</option>
-                                <option>已過期</option>
-                                <option>未啟用</option>
-                            </select>
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>請選擇優惠券狀態
-                    </div>
-                </div>
-                <!-- <div class="layui-inline layui-show-xs-block">
-                    <select name="cateid">
-                        <option>優惠券狀態</option>
-                        <option>啟用中</option>
-                        <option>已過期</option>
-                        <option>未啟用</option>
+            <div class="layui-form-item">
+                <label for="cpType" class="layui-form-label">
+                    <span class="x-red">*</span>優惠券類型
+                </label>
+                <div class="layui-input-inline">
+                    <select id="cpType">
+                        <option value=0>甜點節慶優惠券</option>
+                        <option value=1>課程節慶優惠券</option>
                     </select>
-                </div> -->
-                <!-- <div class="layui-form-item">
-                    <label for="phone" class="layui-form-label">
-                        <span class="x-red">*</span>優惠券名稱
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="phone" name="phone" required="" lay-verify="phone" autocomplete="off"
-                            class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>請輸入優惠券名稱
-                    </div>
-                </div> -->
-                <!-- <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
-                        <span class="x-red">*</span>邮箱
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_email" name="email" required="" lay-verify="email" autocomplete="off"
-                            class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>
-                    </div>
-                </div> -->
-                <!-- <div class="layui-form-item">
-                    <label class="layui-form-label"><span class="x-red">*</span>角色</label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">
-                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">
-                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">
-                    </div>
-                </div> -->
-                <!-- <div class="layui-form-item">
-                    <label for="L_pass" class="layui-form-label">
-                        <span class="x-red">*</span>密码
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="password" id="L_pass" name="pass" required="" lay-verify="pass" autocomplete="off"
-                            class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        6到16个字符
-                    </div>
-                </div> -->
-                <!-- <div class="layui-form-item"> -->
-                    <!-- <label for="L_repass" class="layui-form-label">
-                        <span class="x-red">*</span>确认密码
-                    </label> -->
-                    <!-- <div class="layui-input-inline">
-                        <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                            autocomplete="off" class="layui-input">
-                    </div> -->
-                <!-- </div> -->
-                <div class="layui-form-item">
-                    <!-- <label for="L_repass" class="layui-form-label"> -->
-                    <!-- </label> -->
-                    <button class="layui-btn" lay-filter="add" lay-submit="">
-                        增加
-                    </button>
                 </div>
-            </form>
-        </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請選擇優惠券類型
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="cpName" class="layui-form-label">
+                    <span class="x-red">*</span>優惠券名稱
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="cpName" name="username" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請輸入優惠券名稱
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="amountThreshold" class="layui-form-label">
+                    <span class="x-red">*</span>金額門檻
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="amountThreshold" name="amountThreshold" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請輸入金額門檻
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="discount" class="layui-form-label">
+                    <span class="x-red">*</span>優惠券折扣
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="discount" name="discount" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請輸入優惠券折扣
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="startDate">起始日期:</label>
+                <input type="date" id="startDate" name="start-date">
+            </div>
+
+            <div class="form-group">
+                <label for="endDate">結束日期:</label>
+                <input type="date" id="endDate" name="end-date">
+            </div>
+
+                       <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                </label>
+            </div>
+        </form>
+        <button class="layui-btn" lay-filter="add" lay-submit="" id="submit-btn" type="button">
+            增加
+        </button>
     </div>
-    <!-- <script>
-         layui.use(['laydate', 'form'], function () {
-    var laydate = layui.laydate;
-    var form = layui.form;
+</div>
+<!-- 新增優惠券功能區 -->
+<script src="/Member/Sam_Js/Jquery.js"></script>
+<script>
+    $("#submit-btn").click(function (e) {
+        e.preventDefault();
+        let endDate =  $("#endDate").val();
+        let startDate =  $("#startDate").val();
+        let cpType =  $("#cpType").val();
+        let cpName =  $("#cpName").val();
+        let amountThreshold =  $("#amountThreshold").val();
+        let discount =  $("#discount").val();
 
-    //执行一个laydate实例
-    laydate.render({
-      elem: '#start' //指定元素
-    });
-
-    //执行一个laydate实例
-    laydate.render({
-      elem: '#end' //指定元素
-    });
-  });
-  
-    </script> -->
+        $.ajax({
+            url:"/coupon/addCp",
+            contentType: "application/json; charset=utf-8",
+            type: "POST",
+            data: JSON.stringify({
+                cpThreshold: amountThreshold,
+                cpTp: cpType,
+                cpName: cpName,
+                cpDiscount: discount,
+                cpStart: startDate,
+                cpEnd: endDate
+            }),
+            success: function (res) {
+                location.href="/coupon/master";
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+    })
+</script>
 
 <script>
-      layui.use(['laydate','form'], function(){
+    layui.use(['laydate', 'form'], function () {
         var laydate = layui.laydate;
         var form = layui.form;
-        
-        //执行一个laydate实例
+
+        //執行laydate實例
         laydate.render({
-          elem: '#start' //指定元素
+            elem: '#start' //指定元素
         });
 
-        //执行一个laydate实例
+        //執行laydate實例
         laydate.render({
-          elem: '#end' //指定元素
+            elem: '#end' //指定元素
         });
-      });
-    </script>
-    <script>var _hmt = _hmt || []; (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-    <script>layui.use(['form', 'layer'],
-            function () {
-                $ = layui.jquery;
-                var form = layui.form,
-                    layer = layui.layer;
+    });
+</script>
+<script>
+    // 取得輸入框元素
+    var amountThresholdInput = document.getElementById('amountThreshold');
+    var discountInput = document.getElementById('discount');
 
-                //自定义验证规则
-                form.verify({
-                    nikename: function (value) {
-                        if (value.length < 5) {
-                            return '昵称至少得5个字符啊';
-                        }
-                    },
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
-                    repass: function (value) {
-                        if ($('#L_pass').val() != $('#L_repass').val()) {
-                            return '两次密码不一致';
-                        }
-                    }
-                });
+    // 監聽事件
+    amountThresholdInput.addEventListener('input', validateAmountThreshold);
+    discountInput.addEventListener('input', validateDiscount);
 
-                //监听提交
-                form.on('submit(add)',
-                    function (data) {
-                        console.log(data);
-                        //发异步，把数据提交给php
-                        layer.alert("增加成功", {
-                            icon: 6
-                        },
-                            function () {
-                                //关闭当前frame
-                                xadmin.close();
+    // 金額門檻輸入值得函數
+    function validateAmountThreshold() {
+        var value = amountThresholdInput.value;
 
-                                // 可以对父窗口进行刷新 
-                                xadmin.father_reload();
-                            });
-                        return false;
-                    });
+        // 判斷是否為0或非數字
+        if (value === '0' || isNaN(value)) {
+            alert('金額門檻不能為0或非數字');
+            amountThresholdInput.value = '';
+        }
+    }
 
-            });</script>
-    <script>var _hmt = _hmt || []; (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();</script>
+    // 優惠券折扣輸入值得函數
+    function validateDiscount() {
+        var value = discountInput.value;
+
+        // 判斷是否為0或非數字
+        if (value === '0' || isNaN(value)) {
+            alert('優惠券折扣不能為0或非數字');
+            discountInput.value = '';
+        }
+    }
+</script>
 </body>
 
 </html>

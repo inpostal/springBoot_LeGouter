@@ -1,22 +1,291 @@
 package app.com.coupon.controller;
 
+import app.com.coupon.service.CouponService;
+import app.com.coupon.vo.*;
+import app.com.course.vo.Course;
+import app.com.member.vo.Members;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CouponController {
+    @Autowired
+    private CouponService service;
 
-    @GetMapping("/coupon/manage")
-    public String couponManage(){
-        return "/back-end/Coupon/CouponManage";
+
+    //結帳按鈕-改變會員優惠券使用狀態
+    @PostMapping("/alter/cpStatus")
+    @ResponseBody
+    public void alterCpStatus(@RequestParam Integer cpId, HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        service.updateCpStatus(user.getMemberId(), cpId);
     }
 
+    //先連到課程網頁再準備加入追蹤
+    @GetMapping("/add/follow")
+    public String addCourseFollow(){
+//
+//        if (members == null) {
+//            //未登入先導至登入頁面
+//            return "/front-end/member/MemberLogin";
+//        } else {
+            //已登入用service去顯示所有優惠券
+            return "front-end/Coupon/CourseAddFollow";
+//        }
+    }
+
+//加入追蹤課程按鈕-提出請求,發送course_id,mem_id加入資料庫中
+    @PostMapping("/add/courseFollow")
+    @ResponseBody
+    public void btnAddCourseFollow(@RequestBody Course courseId, HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        service.addCourseFollow(user.getMemberId(), courseId.getCourseId());
+    }
+
+//    @PostMapping("/add/courseFollow")
+//    public void btnAddCourseFollow(@RequestBody Integer courseId, HttpSession session){
+//        Members user = (Members) session.getAttribute("user");
+//        service.addCourseFollow(user.getMemberId(), courseId);
+//    }
+
+//刪除按鈕-追蹤清單課程
+    @PostMapping("/delete/follow/list/{courseId}")
+    @ResponseBody
+    public Map<String, Boolean> handleDeleteFollowList(@PathVariable Integer courseId, HttpSession session) {
+        Map<String, Boolean> result = new HashMap<>();
+        Members user = (Members) session.getAttribute("user");
+        LoveCourse loveCourse = new LoveCourse();
+        loveCourse.setCourseId(courseId);
+        loveCourse.setMemId(user.getMemberId());
+        service.deleteFollowList(loveCourse);
+
+        result.put("isSuccess", true);
+        return result;
+    }
+
+    //單頁
+    //領取更新會員優惠券時,收ajax傳送資料用
+    @PostMapping("/coupon/memCp")
+    public ResponseEntity<?> addMemCoupon(@RequestBody MembersCpId memCp) {
+        MembersCp cp = service.addMemCp(memCp);
+        return ResponseEntity.ok().build();
+    }
+
+    //cp管理頁面
+    @GetMapping("/coupon/master")
+    public String couponManage(Model model) {
+        List<CouponType> list = service.getAllCouponType();
+        model.addAttribute("couponList", list);
+        return "/back-end/Coupon/CouponMaster";
+    }
+
+    //新增cp
     @GetMapping("/coupon/add")
-    public String couponAdd(){
+    public String couponAdd() {
         return "/back-end/Coupon/CouponAdd";
     }
-    @GetMapping("/coupon/edit")
-    public String couponEdit(){
+
+    //單頁
+    //新增cp時,收ajax傳送資料用
+    @PostMapping("/coupon/addCp")
+    public ResponseEntity<?> addCoupon(@RequestBody CouponType coupon) {
+        CouponType cp = service.addCpType(coupon);
+        if (cp != null) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    //編輯cp
+    @GetMapping("/coupon/edit/{cpid}")
+    public String couponEdit(@PathVariable Integer cpid, Model model) {
+        CouponType couponInDb = service.getById(cpid);
+        model.addAttribute("cp", couponInDb);
         return "/back-end/Coupon/CouponEdit";
     }
+
+    //編輯(更新)cp時,收ajax傳送資料用
+    @PostMapping("/coupon/editCp")
+    public ResponseEntity<?> editCoupon(@RequestBody CouponType coupon) {
+        CouponType cp = service.editCpType(coupon);
+        return ResponseEntity.ok().build();
+    }
+
+    //課程頁面領取cp
+    //需登入會員狀態
+    @GetMapping("/coupon/shopping")
+    public String couponShopping(HttpSession session, Model model) {
+        Members user = (Members) session.getAttribute("user");
+        List<CouponType> list = service.getCourseCp(user.getMemberId());
+        model.addAttribute("courseCp", list);
+        return "/front-end/Coupon/Shopping";
+    }
+
+    //甜點頁面領取cp
+    //需登入會員狀態
+    @GetMapping("/coupon/shopping/dessert")
+    public String couponShoppingDessert(HttpSession session, Model model) {
+        Members user = (Members) session.getAttribute("user");
+        List<CouponType> list = service.getDessertCp(user.getMemberId());
+        model.addAttribute("courseCp", list);
+        return "/front-end/Coupon/ShoppingDessert";
+    }
+
+    //甜點頁面領取cp
+    //需登入會員狀態
+    ////////////////////////////////修改中
+//    @GetMapping("/coupon/shopping/dessert")
+//    public String couponShoppingDessert(Model model, HttpSession session) {
+//        Members members = (Members) session.getAttribute("user");
+//        if (members!=null){
+//            //
+//            List<CouponType> list = service.getAllCouponTypeMem(members.getMemberId());
+//            model.addAttribute("couponList", list);
+//            //
+//            return "/front-end/Coupon/ShoppingDessert";
+//        }
+//    }
+
+    //顯示會員優惠券
+    //需登入會員狀態
+    @GetMapping("/coupon/data")
+    public String couponView(Model model, HttpSession session) {
+        Members members = (Members) session.getAttribute("user");
+        if (members == null) {
+            //未登入先導至登入頁面
+            return "/front-end/member/MemberLogin";
+        } else {
+            //已登入用service去顯示所有優惠券
+            List<CouponType> list = service.getAllCouponTypeMem(members.getMemberId());
+            model.addAttribute("couponList", list);
+            return "/front-end/Coupon/CouponData";
+        }
+    }
+
+    //會員課程結帳顯示cp(同上)
+    //需登入會員狀態
+//    @GetMapping("/coupon/check")
+//    public String couponCourseCheck(Model model, HttpSession session) {
+//        Members members = (Members) session.getAttribute("user");
+//        //
+//        List<CouponType> list = service.getAllCouponTypeMem(members.getMemberId());
+//        model.addAttribute("couponList", list);
+//        return "/front-end/Coupon/Check";
+//    }
+
+    //會員甜點結帳顯示cp
+    //需登入會員狀態
+//    @GetMapping("/coupon/check/dessert")
+//    public String couponDessertCheck(Model model, HttpSession session) {
+//        Members members = (Members) session.getAttribute("user");
+//        //
+//        List<CouponType> list = service.getAllCouponTypeMem(members.getMemberId());
+//        model.addAttribute("couponList", list);
+//        return "/front-end/Coupon/CheckDessert";
+//    }
+
+    //課程追蹤清單
+    //需登入會員狀態
+//    @GetMapping("/course/follow")
+//    public String courseFollow(Model model, HttpSession session) {
+//        Members members = (Members) session.getAttribute("user");
+//        //
+//        List<CouponType> list = service.getAllCouponTypeMem(members.getMemberId());
+//        model.addAttribute("couponList", list);
+//        return "/front-end/Coupon/FollowList";
+//    }
+
+    //追蹤清單
+    @GetMapping("/course/follow")
+    public String courseFollowView(Model model, HttpSession session) {
+        Members user = (Members) session.getAttribute("user");
+        if (user == null) {
+            //未登入先導至登入頁面
+            return "/front-end/member/MemberLogin";
+        } else {
+            List<LoveCourseMemDTO> list = service.findAllByMemberId(user.getMemberId());
+            model.addAttribute("followList", list);
+            return "/front-end/Coupon/FollowList";
+        }
+    }
+
+//    @GetMapping("/course/follow")
+//    public String courseFollowView(Model model, HttpSession session) {
+//        Members members = (Members) session.getAttribute("user");
+//        if (members==null){
+//            //未登入先導至登入頁面
+//            return "/front-end/member/MemberLogin";
+//        }else {
+//            //已登入用service去顯示所有優惠券
+//            List<CouponType> list = service.getAllCouponTypeMem(members.getMemberId());
+//            model.addAttribute("couponList", list);
+//            return "/front-end/Coupon/CouponData";
+//        }
+//    }
+//---------------------------------------------------------------------------------
+    //甜點頁面領取cp
+    //需登入會員狀態
+    //模擬課程結帳網站
+    @GetMapping("/check/course")
+    public String courseCheckCoupon(){
+//    public String courseCheckCoupon(@RequestParam Integer memberId, Model model) {
+//        List<CouponType> list = service.getDessertCp(memberId);
+//        model.addAttribute("courseCp", list);
+        return "/front-end/Coupon/Check";
+    }
+
+    //ajax傳會員結帳show優惠券請求
+    @GetMapping("/check/course/viewCp")
+    @ResponseBody
+    public List<ShoppingCpMemDTO> courseCheckCoupon(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        Integer memberId = user.getMemberId();
+        List<ShoppingCpMemDTO> result = service.getAllMemCpDto(memberId);
+        return result;
+    }
+
+    //新增cp
+//    @GetMapping("/check/course")
+//    public String courseCheckCoupon {
+//        return "/front-end/Coupon/Check";
+//    }
+
+    //甜點頁面領取cp
+    //需登入會員狀態
+    @GetMapping("/check/dessert")
+    public String dessertCheckCoupon(){
+//    public String dessertCheckCoupon(@RequestParam Integer memberId, Model model) {
+//        List<CouponType> list = service.getDessertCp(memberId);
+//        model.addAttribute("courseCp", list);
+        return "/front-end/Coupon/CheckDessert";
+    }
+
+//    甜點頁面領取cp2
+//    需登入會員狀態
+//測試用
+    @GetMapping("/check/dessert2")
+    public String dessert2CheckCoupon(){
+//    public String dessertCheckCoupon(@RequestParam Integer memberId, Model model) {
+//        List<CouponType> list = service.getDessertCp(memberId);
+//        model.addAttribute("courseCp", list);
+        return "/front-end/Coupon/CheckDessert2";
+    }
+
+    //新增cp
+//    @GetMapping("/coupon/add")
+//    public String couponAdd() {
+//        return "/back-end/Coupon/CouponAdd";
+//    }
+
+
 }
+

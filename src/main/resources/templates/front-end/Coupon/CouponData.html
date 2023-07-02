@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>優惠券專區</title>
+
+
+    <link rel="stylesheet" href="/Coupon/style_coupon_data.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/Commom/css/css2.css" rel="stylesheet">
+
+    <link href="/Commom/css/all.min.css" rel="stylesheet">
+    <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/Commom/css/animate.min.css" rel="stylesheet">
+    <link href="/Commom/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!--  頁首  -->
+    <div th:insert="front-end/components/Header :: #header-div"></div>
+
+    <!--  導覽列  -->
+    <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
+    <section id="main-container">
+        <aside id="left-side">
+            <p id="left-side-title">會員專區</p>
+            <hr id="left-side-hr">
+            <ul id="ul">
+                <li class="list">會員資料</li>
+                <li class="list" id="dessert">甜點專區</li>
+                <ul id="subUl1" class="hide">
+                    <li class="subList">甜點追蹤清單</li>
+                    <li class="subList">甜點訂單</li>
+                </ul>
+                <li class="list" id="member-class">課程專區</li>
+                <ul id="subUl2" class="hide">
+                    <li class="subList">觀看課程</li>
+                    <li class="subList">課程訂單</li>
+                    <li class="subList">收藏的課程</li>
+                </ul>
+                <li class="list" id="member-group">團購專區</li>
+                <ul id="subUl3" class="hide">
+                    <li class="subList">團購訂單</li>
+                </ul>
+                <li class="list">優惠券列表</li>
+            </ul>
+        </aside>
+
+        <!-- 以下是右邊欄位放資訊用的 -->
+        <section id="msg-container">
+            <section id="msg-container-title">
+                <p id="msg-container-title-p">優惠券資料</p>
+            </section>
+            <hr id="msg-container-hr">
+            <section id="msg-container-main">
+                <form action="">
+                    <table id="member-data-table">
+                        <tr style="background-color: #f8d3ae;color:#1E1916;">
+                            <th>優惠券編號</th>
+                            <th>優惠券類型</th>
+                            <th>優惠券名稱</th>
+                            <th>金額門檻</th>
+                            <th>優惠金額</th>
+                            <th>開始日期</th>
+                            <th>截止日期</th>
+                        </tr>
+                        <tr th:each="c : ${couponList}">
+                            <td th:text="${c.getCpId()}"></td>
+                            <td th:text="${c.getCpTp()==0 ? '甜點折價券' : '課程折價券'}"></td>
+                            <td th:text="${c.getCpName()}"></td>
+                            <td th:text="${c.getCpThreshold()}"></td>
+                            <td th:text="${c.getCpDiscount()}"></td>
+                            <td th:text="${c.getCpStart()}"></td>
+                            <td th:text="${c.getCpEnd()}"></td>
+                        </tr>
+                    </table>
+                </form>
+            </section>
+        </section>
+    </section>
+
+    <!-- 頁腳 -->
+    <div th:insert="front-end/components/Footer :: #footer-div"></div>
+
+    <!-- 版權所有 -->
+    <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+
+    <script data-cfasync="false" src="/Commom/js/email-decode.min.js"></script>
+    <script src="/Commom/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+    <script src="/Commom/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+    <script src="/Member/Sam_Js/Jquery.js"></script>
+    <script>
+        $("#update").click(function () {
+            console.log("前往修改會員資料");
+            location.href = "/member/data/edit";
+        })
+    </script>
+</body>
+
+</html>

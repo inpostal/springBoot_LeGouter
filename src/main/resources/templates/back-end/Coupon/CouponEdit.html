@@ -1,81 +1,73 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>編輯優惠券</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
-          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
-    <link rel="stylesheet" href="./css/font.css">
-    <link rel="stylesheet" href="./css/xadmin.css">
-    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <!-- <link rel="stylesheet" href="./css/font.css"> -->
+    <link rel="stylesheet" href="/Coupon/CSS/xadmin.css">
+    <script type="text/javascript" src="/Coupon/lib/layui/layui.js" charset="utf-8"></script>
+    <!--    <script type="text/javascript" src="/Coupon/JS/layui.js" charset="utf-8"></script>-->
+    <script type="text/javascript" src="/Coupon/JS/xadmin.js"></script>
+    <style>
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .date-input {
+            line-height: 1.3;
+            border-width: 1px;
+        }
+    </style>
+
+
 </head>
 
 <body>
+<!-- 新增優惠券功能區 -->
 <div class="layui-fluid">
     <div class="layui-row">
         <form class="layui-form">
+
             <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
-                    <span class="x-red">*</span>優惠券ID
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="username" name="username" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>請輸入優惠券ID
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
+                <p style="display: none" th:text="${cp.getCpId()}" id="cpId"></p>
+                <label for="cpType" class="layui-form-label">
                     <span class="x-red">*</span>優惠券類型
                 </label>
                 <div class="layui-input-inline">
-                    <select name="cateid">
-                        <option>優惠券類型</option>
-                        <option>甜點節慶優惠券</option>
-                        <option>課程節慶優惠券</option>
+                    <select id="cpType">
+                        <option value=0 th:selected="${cp.getCpTp()==0}">甜點節慶優惠券</option>
+                        <option value=1 th:selected="${cp.getCpTp()==1}">課程節慶優惠券</option>
                     </select>
                 </div>
                 <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>請選擇優惠券狀態
+                    <span class="x-red">*</span>請選擇優惠券類型
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
+                <label for="cpName" class="layui-form-label">
                     <span class="x-red">*</span>優惠券名稱
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="username" name="username" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
+                    <input type="text" id="cpName" name="username" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input" th:value="${cp.getCpName()}">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>請輸入優惠券名稱
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
-                    <span class="x-red">*</span>優惠券相片
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="username" name="username" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>請選擇優惠券相片
-                </div>
-            </div>
+
             <div class="layui-form-item">
                 <label for="amountThreshold" class="layui-form-label">
                     <span class="x-red">*</span>金額門檻
                 </label>
                 <div class="layui-input-inline">
                     <input type="text" id="amountThreshold" name="amountThreshold" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
+                           autocomplete="off" class="layui-input" th:value="${cp.getCpThreshold()}">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>請輸入金額門檻
@@ -87,62 +79,69 @@
                 </label>
                 <div class="layui-input-inline">
                     <input type="text" id="discount" name="discount" required="" lay-verify="required"
-                           autocomplete="off" class="layui-input">
+                           autocomplete="off" class="layui-input" th:value="${cp.getCpDiscount()}">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>請輸入優惠券折扣
                 </div>
             </div>
-            <!-- 這裡選擇日期 -->
-            <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
-                    <!-- 原本為姓名 -->
-                    <span class="x-red">*</span>優惠券期限
-                </label>
-                <div class="layui-input-inline">
-                    <input class="layui-input" autocomplete="off" placeholder="起始日" name="start" id="start">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>請選擇優惠券起始日
-                </div>
+
+            <div class="form-group">
+                <label for="startDate">起始日期:</label>
+                <input type="date" id="startDate" name="start-date" th:value="${cp.getCpStart()}">
             </div>
-            <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
-                    <!-- 原本為姓名 -->
-                    <span class="x-red">*</span>優惠券期限
-                </label>
-                <div class="layui-input-inline">
-                    <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>請選擇優惠券截止日
-                </div>
+
+            <div class="form-group">
+                <label for="endDate">結束日期:</label>
+                <input type="date" id="endDate" name="end-date" th:value="${cp.getCpEnd()}">
             </div>
+
             <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
-                    <span class="x-red">*</span>優惠券狀態
+                <label for="edit-btn" class="layui-form-label">
                 </label>
-                <div class="layui-input-inline">
-                    <select name="cateid">
-                        <option>優惠券狀態</option>
-                        <option>啟用中</option>
-                        <option>未啟用</option>
-                    </select>
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>請選擇優惠券狀態
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">
-                </label>
-                <button class="layui-btn" lay-filter="add" lay-submit="">
-                    增加
-                </button>
             </div>
         </form>
+        <button class="layui-btn" lay-filter="add" lay-submit="" id="edit-btn" type="button">
+            修改
+        </button>
     </div>
 </div>
+<!-- 新增優惠券功能區 -->
+<script src="/Member/Sam_Js/Jquery.js"></script>
+<script>
+    $("#edit-btn").click(function (e) {
+        e.preventDefault();
+        let endDate =  $("#endDate").val();
+        let startDate =  $("#startDate").val();
+        let cpType =  $("#cpType").val();
+        let cpName =  $("#cpName").val();
+        let amountThreshold =  $("#amountThreshold").val();
+        let discount =  $("#discount").val();
+        let cpId = $("#cpId").text();
+
+        $.ajax({
+            url:"/coupon/editCp",
+            contentType: "application/json; charset=utf-8",
+            type: "POST",
+            data: JSON.stringify({
+                cpThreshold: amountThreshold,
+                cpTp: cpType,
+                cpName: cpName,
+                cpDiscount: discount,
+                cpStart: startDate,
+                cpEnd: endDate,
+                cpId: cpId
+            }),
+            success: function (res) {
+                location.href="/coupons/master";
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+    })
+</script>
+
 <script>
     layui.use(['laydate', 'form'], function () {
         var laydate = layui.laydate;
@@ -157,47 +156,6 @@
         laydate.render({
             elem: '#end' //指定元素
         });
-    });
-</script>
-<script>layui.use(['form', 'layer'],
-    function () {
-        $ = layui.jquery;
-        var form = layui.form,
-            layer = layui.layer;
-
-        //驗證規則
-        form.verify({
-            nikename: function (value) {
-                if (value.length < 5) {
-                    return '名稱需幾個字';//''欄內輸入暱稱規則解釋如需幾字
-                }
-            },
-            pass: [/(.+){6,12}$/, '密碼必須6到12位'], //密碼規則設定
-            repass: function (value) {
-                if ($('#L_pass').val() != $('#L_repass').val()) {
-                    return '兩次密碼不一致';
-                }
-            }
-        });
-
-        //提交確認
-        form.on('submit(add)',
-            function (data) {
-                console.log(data);
-                //成功後發送數據進php
-                layer.alert("增加成功", {
-                        icon: 6
-                    },
-                    function () {
-                        //關閉當前視窗
-                        xadmin.close();
-
-                        // 刷新頁面
-                        xadmin.father_reload();
-                    });
-                return false;
-            });
-
     });
 </script>
 <script>
@@ -232,4 +190,5 @@
     }
 </script>
 </body>
+
 </html>
