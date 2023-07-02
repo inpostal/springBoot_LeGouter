@@ -20,4 +20,7 @@ public interface DessertCartService {
 
     DessertCartDTO getDessertCartByDessertIdAndMemberId(Integer dessertId, Integer memberId);
 
+    void submitOrder(Integer memberId);
+
+
 }

@@ -6,6 +6,11 @@ import app.com.dessertCart.entity.DessertCart;
 import app.com.dessertCart.entity.DessertCartDTO;
 import app.com.dessertCart.repository.DessertCartRepository;
 import app.com.dessertCart.service.DessertCartService;
+import app.com.dessertOrderDetail.entity.OrderDetail;
+import app.com.dessertOrderDetail.repository.OrderDetailRepository;
+import app.com.dessertOrders.entity.Orders;
+import app.com.dessertOrders.repository.OrdersRepository;
+import app.com.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +33,12 @@ public class DessertCartServiceImpl implements DessertCartService {
 
     @Autowired
     private DessertRepository dessertRepository;
+    @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
+    private OrdersRepository ordersRepository;
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
 
 
     @Override
@@ -94,4 +105,29 @@ public class DessertCartServiceImpl implements DessertCartService {
     public void delete(Integer dessertId, Integer memberId) {
         dessertCartRepository.deleteByDessertIdAndMemberId(dessertId, memberId);
     }
+
+    @Override
+    @Transactional
+    public void submitOrder(Integer memberId) {
+        List<DessertCart> dessertCartList = dessertCartRepository.findByMemberId(memberId);
+
+        // 創建訂單
+        Orders order = new Orders();
+        // 設置訂單詳情，例如購買者、地址等等
+
+        for (DessertCart dessertCart : dessertCartList) {
+            OrderDetail orderDetail = new OrderDetail();
+            // 將每個購物車中的商品資訊加到訂單中
+            // ...
+
+            orderDetail.setOrderId(order.getOrderId()); // 設置訂單ID
+            orderDetailRepository.save(orderDetail);
+        }
+
+        ordersRepository.save(order);
+
+        // 清空購物車
+        dessertCartRepository.deleteAll(dessertCartList);
+    }
+
 }

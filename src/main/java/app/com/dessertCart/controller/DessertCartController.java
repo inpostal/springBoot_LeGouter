@@ -2,6 +2,8 @@ package app.com.dessertCart.controller;
 
 import app.com.dessertCart.entity.DessertCartDTO;
 import app.com.dessertCart.service.DessertCartService;
+import app.com.member.repository.MemberRepository;
+import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,27 +24,59 @@ import java.util.List;
 public class DessertCartController {
     @Autowired
     private DessertCartService dessertCartService;
+    @Autowired
+    private MemberRepository memberRepository;
 
+
+//    @GetMapping("/dessertCart/{memberId}")
+//    public String getDessertCartByMemberId(@PathVariable Integer memberId, Model model) {
+//        model.addAttribute("memberId", memberId);
+//        return "/front-end/Dessert/DessertCart";
+//    }
+//
+//
+//    @GetMapping("/dessertCart/get/{memberId}")
+//    @ResponseBody
+//    public List<DessertCartDTO> getDessertCartByMemberId(@PathVariable Integer memberId) {
+//        List<DessertCartDTO> dessertCartDTOList = dessertCartService.getDessertCartByMemberId(memberId);
+//        return dessertCartDTOList;
+//    }
 
     @GetMapping("/dessertCart/{memberId}")
     public String getDessertCartByMemberId(@PathVariable Integer memberId, Model model) {
-        model.addAttribute("memberId", memberId);
-        return "/front-end/Dessert/DessertCart";
+        return getDessertCart(memberId, model, "/front-end/Dessert/DessertCart");
     }
 
     @GetMapping("/dessertCart/checkOut/{memberId}")
-    public String checkOut(@PathVariable Integer memberId, Model model) {
-        model.addAttribute("memberId", memberId);
-        return "/front-end/Dessert/DessertCheckOut";
+    public String getDessertCartCheckOut(@PathVariable Integer memberId, Model model) {
+        return getDessertCart(memberId, model, "/front-end/Dessert/DessertCheckOut");
     }
 
-
-    @GetMapping("/dessertCart/get/{memberId}")
-    @ResponseBody
-    public List<DessertCartDTO> getDessertCartByMemberId(@PathVariable Integer memberId) {
+    private String getDessertCart(Integer memberId, Model model, String viewName) {
         List<DessertCartDTO> dessertCartDTOList = dessertCartService.getDessertCartByMemberId(memberId);
-        return dessertCartDTOList;
+
+        // Calculate the total
+        int total = 0;
+        for (DessertCartDTO item : dessertCartDTOList) {
+            total += item.getSubtotalAmount();
+        }
+        int shippingCost = total > 500 ? 0 : 100;
+
+        // Add total to the model
+        model.addAttribute("total", total);
+        model.addAttribute("shippingCost", shippingCost);
+        model.addAttribute("dessertCartList", dessertCartDTOList);
+        model.addAttribute("memberId", memberId);
+        return viewName;
     }
+
+
+    @ResponseBody
+    @GetMapping("/dessertCart/data/{memberId}")
+    public List<DessertCartDTO> getDessertCartData(@PathVariable Integer memberId) {
+        return dessertCartService.getDessertCartByMemberId(memberId);
+    }
+
 
     @ResponseBody
     @PostMapping("/dessertCart/update")
@@ -65,5 +99,15 @@ public class DessertCartController {
 //        }
         dessertCartService.delete(dessertId, 1);
         return "/front-end/Dessert/DessertCart";
+    }
+
+
+    @PostMapping("/submitOrder")
+    public String submitOrder(HttpSession session) {
+        Members member = (Members) session.getAttribute("user");
+        if (member != null) {
+            dessertCartService.submitOrder(member.getMemberId());
+        }
+        return "/front-end/Dessert/OrderSuccessful";
     }
 }

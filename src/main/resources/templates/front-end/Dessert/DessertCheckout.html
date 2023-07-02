@@ -185,29 +185,6 @@
         <div class="row">
             <div class="col-12">
 
-                <div class="coupon-accordion">
-                    <h3>已經是會員? <span id="showlogin">點擊此處登入</span></h3>
-                    <div id="checkout-login" class="coupon-content">
-                        <div class="coupon-info">
-                            <form action="#">
-                                <p class="form-row-first">
-                                    <label>會員帳號 <span class="required">*</span></label>
-                                    <input type="text">
-                                </p>
-                                <p class="form-row-last">
-                                    <label>會員密碼 <span class="required">*</span></label>
-                                    <input type="password">
-                                </p>
-                                <p class="form-row">
-                                    <input type="checkbox" id="remember_me">
-                                    <label for="remember_me">記住登入資訊</label>
-                                    <span class="remember-login"><input type="submit" value="登入"></span>
-                                </p>
-                                <p class="lost-password"><a href="#">忘記密碼?</a></p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -246,17 +223,7 @@
                                     <input type="text">
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list create-acc">
-                                    <input id="cbox" type="checkbox">
-                                    <label for="cbox">加入會員?</label>
-                                </div>
-                                <div id="cbox-info" class="checkout-form-list create-account">
-                                    <p class="mb-2">建立會員帳號，若已經是會員請點擊上面登入</p>
-                                    <label>會員密碼 <span class="required">*</span></label>
-                                    <input placeholder="密碼" type="password">
-                                </div>
-                            </div>
+
                         </div>
 
                     </div>
@@ -274,27 +241,26 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="cart_item">
-                                <td class="cart-product-name"> Vestibulum suscipit<strong
+                            <tr class="cart_item" th:each="item : ${dessertCartList}">
+                                <td class="cart-product-name"><span th:text="${item.dessertName}"></span><strong
                                         class="product-quantity">
-                                    × 1</strong></td>
-                                <td class="cart-product-total text-center"><span class="amount">$165</span></td>
+                                    × <span th:text="${item.cartDessertQuantity}"></span></strong></td>
+                                <td class="cart-product-total text-center"><span class="amount">$<span
+                                        th:text="${item.subtotalAmount}"></span></span></td>
                             </tr>
+
                             <tr class="cart_item">
-                                <td class="cart-product-name"> Vestibulum suscipit<strong
-                                        class="product-quantity">
-                                    × 1</strong></td>
-                                <td class="cart-product-total text-center"><span class="amount">$165</span></td>
+                                <td class="cart-product-name">甜點總金額</td>
+                                <td class="cart-product-total text-center"><span class="amount">$<span
+                                        th:text="${total}"></span></span></td>
                             </tr>
-                            <tr class="cart_item">
-                                <td class="cart-product-name"> 甜點總金額<strong class="product-quantity">
-                                </strong></td>
-                                <td class="cart-product-total text-center"><span class="amount">$165</span></td>
-                            </tr>
+
+
                             <tr class="cart_item">
                                 <td class="cart-product-name"> 運費<strong class="product-quantity">
                                 </strong></td>
-                                <td class="cart-product-total text-center"><span class="amount">$165</span></td>
+                                <td class="cart-product-total text-center"><span class="amount">$<span
+                                        th:text="${shippingCost}"></span></span></td>
                             </tr>
                             <tr class="cart_item">
                                 <td class="cart-product-name"> 折扣金額<strong class="product-quantity">
@@ -306,8 +272,10 @@
 
                             <tr class="order-total">
                                 <th>訂單總金額</th>
-                                <td class="text-center"><strong><span class="amount">$215</span></strong></td>
+                                <td class="text-center"><strong><span class="amount">$<span
+                                        th:text="${total + shippingCost - 75}"></span></span></strong></td>
                             </tr>
+
                             </tfoot>
                         </table>
                     </div>
@@ -353,19 +321,23 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(1)">
+                                                                   oninput="moveToNextInput(1)"
+                                                                   onkeypress="value=value.replace(/[^\d]/g,'')">
                                                         </div>
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(2)">
+                                                                   oninput="moveToNextInput(2) onkeypress="
+                                                                   value=value.replace(/[^\d]/g,'')"">
                                                         </div>
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(3)">
+                                                                   oninput="moveToNextInput(3) onkeypress="
+                                                                   value=value.replace(/[^\d]/g,'')"">
                                                         </div>
                                                         <div class="col">
                                                             <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(4)">
+                                                                   oninput="moveToNextInput(4) onkeypress="
+                                                                   value=value.replace(/[^\d]/g,'')"">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -385,6 +357,7 @@
                                                     </div>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -595,22 +568,8 @@
 <!-- 信用卡卡號填完自動跳下一格 -->
 
 <script>
-    function moveToNextInput(nextInputIndex) {
-        const inputs = document.querySelectorAll('input[maxlength="4"]');
-        const currentIndex = nextInputIndex - 1;
-        const nextIndex = currentIndex + 1;
+    // 信用卡驗證
 
-        if (nextIndex < inputs.length) {
-            const currentInput = inputs[currentIndex];
-            const nextInput = inputs[nextIndex];
-            const maxLength = parseInt(currentInput.getAttribute("maxlength"));
-            const inputLength = currentInput.value.length;
-
-            if (inputLength >= maxLength) {
-                nextInput.focus();
-            }
-        }
-    }
 </script>
 
 <script data-cfasync="false" src="/Dessert/JS/SAM/email-decode.min.js"></script>

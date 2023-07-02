@@ -318,7 +318,7 @@
                             </table>
                         </div>
                     </div>
-                    <a id="checkout-button" class="btn obrien-button primary-btn d-block">填寫收款資訊</a>
+                    <a id="checkout-button" class="btn obrien-button primary-btn d-block">填寫收件資訊&結帳</a>
 
                 </div>
             </div>
@@ -443,7 +443,7 @@
                 window.location.href = `/dessertCart/checkOut/${memberId}`;
             });
             $.ajax({
-                url: `/dessertCart/get/${memberId}`,
+                url: `/dessertCart/data/${memberId}`,
                 type: 'GET',
                 dataType: 'json',
                 success: function (res) {
