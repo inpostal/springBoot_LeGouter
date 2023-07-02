@@ -25,6 +25,7 @@ public class CourseStudentCommentController {
     @Autowired
     CourseService courseService;
     //thyleaf評論列表
+    //後台討論區管理列表
 @GetMapping("/CourseStudentComment")
     public String getAll(Model model){
         List<CourseCommentDTO>result = courseStudentCommentService.courseComment();

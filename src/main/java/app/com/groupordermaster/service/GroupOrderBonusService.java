@@ -24,6 +24,7 @@ public class GroupOrderBonusService {
     private GroupOrderMasterRepository repository1;
     @Autowired
     private GroupActivityRepository2 repository2;
+
     public List<GroupOrderBonusDTO> getAllGroupOrderMasters() {
         List<GroupOrderMaster> groupOrderMaster = repository1.findAll();
 
@@ -41,6 +42,8 @@ public class GroupOrderBonusService {
             dto.setGroupOrderEnd(groupActivity.getGroupOrderEnd());
             dto.setTotalGroupProductPrice(g.getTotalGroupProductPrice());
             dto.setGroupOrderBonus(g.getGroupOrderBonus());
+            dto.setGroupOrderStatus(g.getGroupOrderStatus());
+
 
             switch (groupActivity.getGroupOrderMin()) {
                 case 200:
@@ -67,7 +70,7 @@ public class GroupOrderBonusService {
 
 
     //前台團購主查詢,用memId找到
-    public List<GroupOrderBonusDTO> frontlist(Integer memberId){
+    public List<GroupOrderBonusDTO> frontlist(Integer memberId) {
         List<GroupOrderMaster> list = repository1.findAllByMemId(memberId);
         List<GroupOrderBonusDTO> result = new ArrayList<>();
 
@@ -108,8 +111,18 @@ public class GroupOrderBonusService {
     }
 
 
+    public void updatebonus(Integer groupOrderId, Integer groupOrderBonusStatus) {
+        GroupOrderMaster groupOrderMaster = repository1.getReferenceById(groupOrderId);
+        groupOrderMaster.setGroupOrderBonusStatus(groupOrderBonusStatus);
+        repository1.save(groupOrderMaster);
+    }
 
 
 }
+
+
+
+
+
 
 

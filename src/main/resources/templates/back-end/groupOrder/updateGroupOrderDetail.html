@@ -212,8 +212,9 @@
     }
 
     .btn:hover {
-      color: #1E1916;
-      background-color: #7a7066;
+      color: #FFFFFF;
+      background-color:#2c0b0e;
+
     }
 
 
@@ -588,73 +589,13 @@
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
 </body>
 <script>
-  $(document).ready(function() {
-    $("#submit").click(function () {
-      let grouporderid = $("#grouporderid").val();
-      let groupmemberid = $("#memId").text();
-      let grouporderamount = $("#grouporderamount").val();
-      let groupproductprice = $("#groupproductprice").val();
-      let receivername = $("#receivername").val();
-      let receiveremail = $("#receiveremail").val();
-      let receiverphone = $("#receiverphone").val();
-      let receiveraddress = $("#receiveraddress").val();
-      let groupproductother = $("#groupproductother").val();
-      let groupproductstatus = $("#groupproductstatus").val();
-      let groupproductpaying = $("#groupproductpaying").val();
-      let formData = new FormData();
-      formData.append("grouporderid", grouporderid);
-      formData.append("memId", groupmemberid);
-      formData.append("grouporderamount", grouporderamount);
-      formData.append("groupproductprice", groupproductprice);
-      formData.append("receivername", receivername);
-      formData.append("receiveremail", receiveremail);
-      formData.append("receiverphone", receiverphone);
-      formData.append("receiveraddress", receiveraddress);
-      formData.append("groupproductother", groupproductother);
-      formData.append("groupproductstatus", groupproductstatus);
-      formData.append("groupproductpaying", groupproductpaying);
-      $.ajax({
-        url: "/grouporderdetail/update",
-        type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (resp) {
-          alert('修改成功');
-        },
-        error: function (resp) {
-          alert('修改失敗');
-        }
-      })
-    })
-  })
 
-
-
-  var imageInput = document.getElementById('imageInput');
-  var imagePreviewContainer = document.getElementById('imagePreviewContainer');
-  var imagePreview = document.getElementById('imagePreview');
-
-  imageInput.addEventListener('change', function (event) {
-    var file = event.target.files[0];
-
-    if (file && file.type.startsWith('image/')) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        imagePreview.src = e.target.result;
-        imagePreviewContainer.style.display = 'block';
-      };
-
-      reader.readAsDataURL(file);
-    }
-  });
-
-//驗證
-  document.getElementById("submit").addEventListener("click", function() {
+  //驗證
+  document.getElementById("submit").addEventListener("click", function(event) {
     var receivernameInput = document.getElementById("receivername");
     var receiveremailInput = document.getElementById("receiveremail");
     var receiverphoneInput = document.getElementById("receiverphone");
+    var receiveraddressInput = document.getElementById("receiveraddress");
 
     clearErrorMessage();
 
@@ -684,44 +625,181 @@
       isValid = false;
     }
 
+    if (receiveraddressInput.value === "") {
+      displayErrorMessage(receiveraddressInput, "請輸入收件者地址");
+      isValid = false;
+    } else if (!isValidAddress(receiveraddressInput.value)) {
+      displayErrorMessage(receiveraddressInput, "地址須為中文或英文");
+      isValid = false;
+    }
+
+    function isValidName(name) {
+      var regex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+      return regex.test(name);
+    }
+
+    function isValidEmail(email) {
+      var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+
+    function isValidPhone(phone) {
+      var regex = /^\d{10}$/;
+      return regex.test(phone);
+    }
+
+    function isValidAddress(address) {
+      var regex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+      return regex.test(address);
+    }
+
     if (isValid) {
-      // 驗證通過，執行其他邏輯或提交表單
-      // 可以將相應的程式碼放在這裡
+      var errorMessages = document.querySelectorAll(".error-message");
+      if (errorMessages.length === 0) {
+        let grouporderid = $("#grouporderid").val();
+        let groupmemberid = $("#memId").text();
+        let grouporderamount = $("#grouporderamount").val();
+        let groupproductprice = $("#groupproductprice").val();
+        let receivername = $("#receivername").val();
+        let receiveremail = $("#receiveremail").val();
+        let receiverphone = $("#receiverphone").val();
+        let receiveraddress = $("#receiveraddress").val();
+        let groupproductother = $("#groupproductother").val();
+        let groupproductstatus = $("#groupproductstatus").val();
+        let groupproductpaying = $("#groupproductpaying").val();
+        let formData = new FormData();
+        formData.append("grouporderid", grouporderid);
+        formData.append("memId", groupmemberid);
+        formData.append("grouporderamount", grouporderamount);
+        formData.append("groupproductprice", groupproductprice);
+        formData.append("receivername", receivername);
+        formData.append("receiveremail", receiveremail);
+        formData.append("receiverphone", receiverphone);
+        formData.append("receiveraddress", receiveraddress);
+        formData.append("groupproductother", groupproductother);
+        formData.append("groupproductstatus", groupproductstatus);
+        formData.append("groupproductpaying", groupproductpaying);
+        $.ajax({
+          url: "/grouporderdetail/update",
+          type: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (resp) {
+            alert('修改成功');
+        //導回上一頁
+            // 获取groupOrderId
+            var grouporderid = document.getElementById("grouporderid").value;
+            // 执行重定向
+            window.location.href = "/grouporderdetail/list/getbyId/all?groupOrderId=" + grouporderid;
+
+
+          },
+          error: function (resp) {
+            alert('修改失敗');
+          }
+        });
+      }  else {
+        event.preventDefault();
+        alert('請先修正錯誤訊息');
+      }
     } else {
-      // 驗證不通過，禁用"修改完成"按鈕
-      document.getElementById("submit").disabled = true;
+      event.preventDefault();
+      alert('請先修正錯誤訊息');
     }
   });
 
-  function isValidName(name) {
-    var regex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
-    return regex.test(name);
-  }
 
-  function isValidEmail(email) {
-    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
 
-  function isValidPhone(phone) {
-    var regex = /^\d{10}$/;
-    return regex.test(phone);
-  }
 
+
+
+  function displayErrorMessage(element, message) {
+    var errorMessage = document.createElement("span");
+    errorMessage.classList.add("error-message");
+    errorMessage.style.color = "red";
+    errorMessage.innerText = message;
+
+    element.parentNode.appendChild(errorMessage);
+    element.classList.add("invalid");
+  }
   function clearErrorMessage() {
-    var errorMessages = document.getElementsByClassName("error-message");
+    var errorMessages = document.querySelectorAll(".error-message");
+    var inputs = document.querySelectorAll("input, textarea");
+
     for (var i = 0; i < errorMessages.length; i++) {
-      errorMessages[i].textContent = "";
+      errorMessages[i].remove();
+    }
+
+    for (var j = 0; j < inputs.length; j++) {
+      inputs[j].classList.remove("invalid");
     }
   }
 
-  function displayErrorMessage(inputElement, message) {
-    var errorElement = document.createElement("p");
-    errorElement.className = "error-message";
-    errorElement.textContent = message;
-    errorElement.style.color = "red"; // 設定錯誤訊息顯示為紅色
-    inputElement.parentNode.appendChild(errorElement);
-  }
+
+  // $(document).ready(function() {
+  //   $("#submit").click(function () {
+  //     let grouporderid = $("#grouporderid").val();
+  //     let groupmemberid = $("#memId").text();
+  //     let grouporderamount = $("#grouporderamount").val();
+  //     let groupproductprice = $("#groupproductprice").val();
+  //     let receivername = $("#receivername").val();
+  //     let receiveremail = $("#receiveremail").val();
+  //     let receiverphone = $("#receiverphone").val();
+  //     let receiveraddress = $("#receiveraddress").val();
+  //     let groupproductother = $("#groupproductother").val();
+  //     let groupproductstatus = $("#groupproductstatus").val();
+  //     let groupproductpaying = $("#groupproductpaying").val();
+  //     let formData = new FormData();
+  //     formData.append("grouporderid", grouporderid);
+  //     formData.append("memId", groupmemberid);
+  //     formData.append("grouporderamount", grouporderamount);
+  //     formData.append("groupproductprice", groupproductprice);
+  //     formData.append("receivername", receivername);
+  //     formData.append("receiveremail", receiveremail);
+  //     formData.append("receiverphone", receiverphone);
+  //     formData.append("receiveraddress", receiveraddress);
+  //     formData.append("groupproductother", groupproductother);
+  //     formData.append("groupproductstatus", groupproductstatus);
+  //     formData.append("groupproductpaying", groupproductpaying);
+  //     $.ajax({
+  //       url: "/grouporderdetail/update",
+  //       type: "POST",
+  //       data: formData,
+  //       contentType: false,
+  //       processData: false,
+  //       success: function (resp) {
+  //         alert('修改成功');
+  //       },
+  //       error: function (resp) {
+  //         alert('修改失敗');
+  //       }
+  //     })
+  //   })
+  // })
+
+
+
+  var imageInput = document.getElementById('imageInput');
+  var imagePreviewContainer = document.getElementById('imagePreviewContainer');
+  var imagePreview = document.getElementById('imagePreview');
+
+  imageInput.addEventListener('change', function (event) {
+    var file = event.target.files[0];
+
+    if (file && file.type.startsWith('image/')) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result;
+        imagePreviewContainer.style.display = 'block';
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+
   //ajax新增表單
 
 </script>
