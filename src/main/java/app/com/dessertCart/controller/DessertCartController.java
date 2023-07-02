@@ -30,6 +30,13 @@ public class DessertCartController {
         return "/front-end/Dessert/DessertCart";
     }
 
+    @GetMapping("/dessertCart/checkOut/{memberId}")
+    public String checkOut(@PathVariable Integer memberId, Model model) {
+        model.addAttribute("memberId", memberId);
+        return "/front-end/Dessert/DessertCheckOut";
+    }
+
+
     @GetMapping("/dessertCart/get/{memberId}")
     @ResponseBody
     public List<DessertCartDTO> getDessertCartByMemberId(@PathVariable Integer memberId) {

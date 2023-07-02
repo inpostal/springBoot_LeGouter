@@ -309,7 +309,7 @@
                                 </tr>
                                 <tr>
                                     <td>折扣金額</td>
-                                    <td>-$</td>
+                                    <td>-$0</td>
                                 </tr>
                                 <tr class="total">
                                     <td>應付總額</td>
@@ -318,7 +318,8 @@
                             </table>
                         </div>
                     </div>
-                    <a href="checkout.html" class="btn obrien-button primary-btn d-block">填寫收款資訊</a>
+                    <a id="checkout-button" class="btn obrien-button primary-btn d-block">填寫收款資訊</a>
+
                 </div>
             </div>
         </div>
@@ -436,7 +437,11 @@
     function dessertCartUpdate() {
         //顯示訂單
         $(document).ready(function () {
-            let memberId = $("#member-id").text();
+            let memberId = $("#member-id").text().trim();
+
+            $("#checkout-button").on("click", function () {
+                window.location.href = `/dessertCart/checkOut/${memberId}`;
+            });
             $.ajax({
                 url: `/dessertCart/get/${memberId}`,
                 type: 'GET',
