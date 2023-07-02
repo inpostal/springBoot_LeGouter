@@ -92,15 +92,11 @@
                         memberPassword: password
                     }),
                     success: function(res){
-                        console.log(res);
-                        msg.hide();
-                        alert("登入成功");
-                        location.href = "/LeGouter";
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.error(xhr);
-                        if (xhr.status === 401) {
-                           msg.show();
+                        if (res.success != "failed"){
+                            msg.hide();
+                            location.href = res.location;
+                        }else {
+                            msg.show();
                         }
                     }
                 });

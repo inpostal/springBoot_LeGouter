@@ -82,16 +82,7 @@ public class MemberRestController {
         return  memberService.getMemberById(id);
     }
 
-    @PostMapping("/member/login")
-    public ResponseEntity<?> login(@RequestBody  Members members, HttpSession session){
-        Members membersInDB = memberService.login(members.getMemberAccount(), members.getMemberPassword());
-        if (membersInDB != null) {
-            session.setAttribute("user", membersInDB);
-            return ResponseEntity.ok("Logged in successfully");
-        } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
-        }
-    }
+
 
     @PostMapping("/checkEmail")
     public Map<String, Boolean> checkEmail(@RequestParam String email){

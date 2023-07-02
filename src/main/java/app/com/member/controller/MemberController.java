@@ -4,17 +4,18 @@ import app.com.member.service.MemberService;
 import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MemberController {
@@ -119,6 +120,29 @@ public class MemberController {
         }else {
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             return "/back-end/Employee/EmpLogin";
+        }
+    }
+
+    // 處理登入
+    @PostMapping("/member/login")
+    @ResponseBody
+    public Map<String, String> login(@RequestBody Members members, HttpSession session){
+        Map<String, String> result = new HashMap<>();
+        Members membersInDB = service.login(members.getMemberAccount(), members.getMemberPassword());
+
+        if (membersInDB != null) {
+            session.setAttribute("user", membersInDB);
+            String location = (String) session.getAttribute("location");
+            if (location!=null){
+                result.put("location", location);
+                return  result;
+            }else {
+                result.put("location", "/LeGouter");
+                return result;
+            }
+        } else {
+            result.put("success", "failed");
+            return result;
         }
     }
 }
