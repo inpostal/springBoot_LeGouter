@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">
 
 
     <style>
@@ -124,6 +128,20 @@
             display: none;
         }
 
+        /*!* 隐藏滚动条的样式 *!*/
+        /*.hide-scrollbar {*/
+        /*    overflow-y: scroll;  !* 始终显示垂直滚动条 *!*/
+        /*    scrollbar-width: none;  !* 隐藏滚动条宽度 *!*/
+        /*    -ms-overflow-style: none;  !* 隐藏 IE 和 Edge 浏览器的滚动条 *!*/
+        /*}*/
+
+        /*!* 对于支持 WebKit 浏览器的代码 *!*/
+        /*.hide-scrollbar::-webkit-scrollbar {*/
+        /*    display: none;  !* 隐藏滚动条 *!*/
+        /*}*/
+
+
+
     </style>
 
 
@@ -135,14 +153,14 @@
             <div id="pictureUploadModal">
                 <form enctype="multipart/form-data" id="picform">
                     <div>
-                        <h3 style="padding-left:10px; padding-top: 10px; padding-bottom: 20px;">商品圖片管理</h3>
+                        <h3 style="padding-left:10px; padding-top: 10px; padding-bottom: 20px; font-family: 'Noto Serif TC', serif;">商品圖片管理</h3>
                         <p class="text-warning"><small style="color: red;">注意：按下儲存按鈕後，圖片才會進行更新</small></p>
                     </div>
                     <div>
 
                         <hr>
                         <div class="forhidden1" style="position: relative;" onmouseover="changeBackgroundColor(this, 'rgb(255,204,171)');" onmouseout="changeBackgroundColor(this, 'white');">
-                            <span class="hidden1" id="hidden1">商品首圖</span>
+                            <span class="hidden1" id="hidden1" style="font-family: 'Noto Serif TC', serif; padding-left: 3px;">商品首圖</span>
                             <span id="img0"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button id="delete0" class="fa-solid fa-delete-left fa-xl" style="color: #db0000; border: none; background-color: transparent; position: absolute; right: 0px; top: 17px"></button>
@@ -152,7 +170,7 @@
 
                         <hr>
                         <div class="forhidden2" style="position: relative;" onmouseover="changeBackgroundColor(this, 'rgb(255,204,171)');" onmouseout="changeBackgroundColor(this, 'white');">
-                            <span class="hidden2" id="hidden2">第二張圖片</span>
+                            <span class="hidden2" id="hidden2" style="font-family: 'Noto Serif TC', serif; padding-left: 3px;">第二張圖片</span>
                             <span id="img1"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button id="delete1" class="fa-solid fa-delete-left fa-xl" style="color: #db0000; border: none; background-color: transparent; position: absolute; right: 0px; top: 17px"></button>
@@ -162,7 +180,7 @@
 
                         <hr>
                         <div class="forhidden3" style="position: relative;" onmouseover="changeBackgroundColor(this, 'rgb(255,204,171)');" onmouseout="changeBackgroundColor(this, 'white');">
-                            <span class="hidden3" id="hidden3">第三張圖片</span>
+                            <span class="hidden3" id="hidden3" style="font-family: 'Noto Serif TC', serif; padding-left: 3px;">第三張圖片</span>
                             <span id="img2"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button id="delete2" class="fa-solid fa-delete-left fa-xl" style="color: #db0000; border: none; background-color: transparent; position: absolute; right: 0px; top: 17px"></button>
@@ -172,7 +190,7 @@
 
                         <hr>
                         <div class="forhidden4" style="position: relative;" onmouseover="changeBackgroundColor(this, 'rgb(255,204,171)');" onmouseout="changeBackgroundColor(this, 'white');">
-                            <span class="hidden4" id="hidden4">第四張圖片</span>
+                            <span class="hidden4" id="hidden4" style="font-family: 'Noto Serif TC', serif; padding-left: 3px;">第四張圖片</span>
                             <span id="img3"></span>
                             <input type="file" accept="image/gif, image/jpeg, image/png" style="padding: 3px;">
                             <button id="delete3" class="fa-solid fa-delete-left fa-xl" style="color: #db0000; border: none; background-color: transparent; position: absolute; right: 0px; top: 17px"></button>
@@ -212,11 +230,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+// hide scrollbar
+    // 获取页面的根元素
+    var rootElement = document.documentElement;
+
+    // 添加一个类名来隐藏滚动条
+    rootElement.classList.add('hide-scrollbar');
+
+// 移動滑鼠時改變顏色
     function changeBackgroundColor(element, color) {
         element.style.backgroundColor = color;
     }
 
-<!--    圖片標題小動畫-->
+// 圖片標題小動畫
     // 1
     const forhidden1 = document.querySelector('.forhidden1');
     const hidden1 = document.querySelector('#hidden1');

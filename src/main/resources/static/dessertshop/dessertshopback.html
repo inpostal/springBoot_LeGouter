@@ -24,7 +24,10 @@
     <!-- modal css -->
     <link rel="stylesheet" href="dessertshopbackmodal.css" type="text/css">
 
-
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">
 
     <style>
         #nav-bar {
@@ -368,7 +371,7 @@
                     <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" style="font-family: 'Noto Serif TC', serif;">
                                     <h2>甜點<b>商品管理</b></h2>
                                 </div>
 
@@ -416,18 +419,18 @@
 
 
                             <!-- 1. -->
-<!--                            <tr>-->
-<!--                                <td>${res[e].dessertName}</td>-->
-<!--                                <td>${res[e].dessertContent}</td>-->
-<!--                                <td>商品圖片</td>-->
-<!--                                <td>NT$${res[e].dessertPrice}</td>-->
-<!--                                <td class="${statusClass}"><span class="badge rounded-pill bg-primary">${dessertStatus}</span></td>-->
-<!--                                <td>-->
-<!--                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>-->
-<!--                                    <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>-->
-<!--                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(100)"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>-->
-<!--                                </td>-->
-<!--                            </tr>-->
+                            <tr>
+                                <td>${res[e].dessertName}</td>
+                                <td>${res[e].dessertContent}</td>
+                                <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
+                                <td>NT$${res[e].dessertPrice}</td>
+                                <td><span class="${statusClass}">${dessertStatus}</span></td>
+                                <td>
+                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
+                                    <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
+                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                </td>
+                            </tr>
 
 
                             </tbody>
@@ -447,7 +450,7 @@
                     <div class="modal-content" style="justify-content: normal; align-items: normal; min-height: auto;">
                         <form>
                             <div class="modal-header">
-                                <h4 class="modal-title">下架商品</h4>
+                                <h4 class="modal-title" style="font-family: 'Noto Serif TC', serif;">下架商品</h4>
 <!--                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
                             </div>
                             <div class="modal-body">
@@ -480,7 +483,7 @@
         <div class="modal-content">
             <form class="c">
                 <div class="contactForm">
-                    <h4>新增商品</h4>
+                    <h4 style="font-family: 'Noto Serif TC', serif;">商品新增</h4>
 <!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
                     <div class="formBox">
                         <div class="inputBox w100">
@@ -520,7 +523,7 @@
         <div class="modal-content">
             <form class="c">
                 <div class="contactForm">
-                    <h4>編輯商品</h4>
+                    <h4 style="font-family: 'Noto Serif TC', serif;">編輯商品</h4>
                     <!--                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
                     <div class="formBox">
                         <div class="inputBox w100">
@@ -637,17 +640,17 @@
                                 continue;
                             }
                             html += `<tr>
-                                    <td>${res[e].dessertName}</td>
-                                    <td>${res[e].dessertContent}</td>
-                                    <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
-                                    <td>NT$${res[e].dessertPrice}</td>
-                                    <td><span class="${statusClass}">${dessertStatus}</span></td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
-                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                        <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
-                                    </td>
-                                 </tr>`;
+                                        <td>${res[e].dessertName}</td>
+                                        <td>${res[e].dessertContent}</td>
+                                        <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
+                                        <td>NT$${res[e].dessertPrice}</td>
+                                        <td><span class="${statusClass}">${dessertStatus}</span></td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
+                                            <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
+                                            <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                        </td>
+                                     </tr>`;
 
                         }
                         $("#back-table").html(html);
@@ -671,17 +674,17 @@
                                 continue;
                             }
                             html += `<tr>
-                                    <td>${res[e].dessertName}</td>
-                                    <td>${res[e].dessertContent}</td>
-                                    <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
-                                    <td>NT$${res[e].dessertPrice}</td>
-                                    <td><span class="${statusClass}">${dessertStatus}</span></td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
-                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                        <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
-                                    </td>
-                                 </tr>`;
+                                        <td>${res[e].dessertName}</td>
+                                        <td>${res[e].dessertContent}</td>
+                                        <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
+                                        <td>NT$${res[e].dessertPrice}</td>
+                                        <td><span class="${statusClass}">${dessertStatus}</span></td>
+                                        <td>
+                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
+                                            <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
+                                            <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                        </td>
+                                     </tr>`;
 
                         }
                         $("#back-table").html(html);
@@ -710,17 +713,17 @@
                     let dessertStatus = res[e].dessertStatus;
                     let statusClass = dessertStatus === "已下架" ? "badge rounded-pill bg-danger" : "badge rounded-pill bg-primary";    // 讓已下架呈現紅色
                     html += `<tr>
-                                    <td>${res[e].dessertName}</td>
-                                    <td>${res[e].dessertContent}</td>
-                                    <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
-                                    <td>NT$${res[e].dessertPrice}</td>
-                                    <td><span class="${statusClass}">${dessertStatus}</span></td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
-                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                        <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
-                                    </td>
-                                 </tr>`;
+                                <td>${res[e].dessertName}</td>
+                                <td>${res[e].dessertContent}</td>
+                                <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
+                                <td>NT$${res[e].dessertPrice}</td>
+                                <td><span class="${statusClass}">${dessertStatus}</span></td>
+                                <td>
+                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
+                                    <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
+                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                </td>
+                             </tr>`;
 
                 }
                 $("#back-table").html(html);
@@ -781,7 +784,7 @@
                                     <td><span class="${statusClass}">${dessertStatus}</span></td>
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
-                                        <a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
+                                        <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
                                         <a href data-id="${res.dessertId}" onclick="redirectToEditPicture(${res.dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                     </td>
                                  </tr>`;
