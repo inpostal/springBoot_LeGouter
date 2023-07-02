@@ -79,6 +79,7 @@
 
 
 <section id="mainheader">
+    <script src="/Conponents/back_end.js"></script>
     <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
     <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
 
@@ -279,7 +280,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程圖片</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" class="dropify" data-default-file=""
+                                                    <input type="file" class="dropify-img" data-default-file=""
                                                            id="courseImg">
                                                 </div>
                                             </div>
@@ -319,43 +320,12 @@
                                                 <table id="addvideotable" class="display dataTable"
                                                        style="width: 100%">
                                                     <tbody>
-                                                    <tr>
-                                                        <td>試看</td>
-                                                        <td>試看影片</td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo3"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo4"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo5"></td>
-                                                    </tr>
-
+                                                    <!--                                                    <tr>-->
+                                                    <!--                                                        <td>試看</td>-->
+                                                    <!--                                                        <td>試看影片</td>-->
+                                                    <!--                                                        <td><input type="file" class="dropify" data-default-file=""-->
+                                                    <!--                                                                   id="courseVideo"></td>-->
+                                                    <!--                                                    </tr>-->
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -391,98 +361,82 @@
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
-<!-- import font awesome -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="/Conponents/back_end.js"></script>
-
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
 <script src="/Course/JS/datatables.init.js"></script>
 
 <script>
 
-    // $(document).ready(function () {
-    //     var videoData = []; // 儲存影片資料
-    //
-    //     // 更新編號
-    //     function updateRowNumbers() {
-    //         $('#addvideotable tbody tr:not(:first-child)').each(function (index) {
-    //             $(this).find('td:first').text(index + 1); // 從1開始所以加 1
-    //         });
-    //     }
-    //
-    //     // 刪除指定行並更新資料
-    //     $(document).on('click', '.deleteRow', function () {
-    //         var index = $(this).closest('tr').index() - 1; // 減去預留的試看行
-    //         videoData.splice(index, 1); // 從陣列中刪除對應的資料
-    //         $(this).closest('tr').remove();
-    //         updateRowNumbers(); // 更新編號
-    //         saveDataToLocalStorage(); // 將資料保存至 localStorage
-    //     });
-    //
-    //     // 從 localStorage 中檢索資料並顯示在頁面上
-    //     function loadDataFromLocalStorage() {
-    //         var storedData = localStorage.getItem('videoData');
-    //         if (storedData) {
-    //             videoData = JSON.parse(storedData);
-    //
-    //             videoData.forEach(function (data) {
-    //                 var newRow = $('<tr>');
-    //                 var rowContent = `
-    //                 <td></td>
-    //                 <td><input type="text" value="${data.name}" class="nameInput"></td>
-    //                 <td><input type="file" class="dropify" data-default-file=""></td>
-    //                 <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
-    //             `;
-    //
-    //                 newRow.html(rowContent);
-    //                 newRow.insertAfter("#addvideotable tbody tr:last-child");
-    //             });
-    //
-    //             updateRowNumbers(); // 更新編號
-    //         }
-    //     }
-    //
-    //     // 將資料保存至 localStorage
-    //     function saveDataToLocalStorage() {
-    //         localStorage.setItem('videoData', JSON.stringify(videoData));
-    //     }
-    //
-    //     $('#addVideo').click(function () {
-    //         var newData = {
-    //             id: '',
-    //             name: '',
-    //             file: ''
-    //         };
-    //         videoData.push(newData);
-    //
-    //         var newRow = $('<tr>');
-    //         var rowContent = `
-    //         <td></td>
-    //         <td><input type="text" value="${newData.name}" class="nameInput" placeholder="輸入影片名稱"></td>
-    //         <td><input type="file" class="dropify" data-default-file=""></td>
-    //         <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
-    //     `;
-    //
-    //         newRow.html(rowContent);
-    //         newRow.insertAfter("#addvideotable tbody tr:last-child");
-    //
-    //         updateRowNumbers(); // 更新編號
-    //         saveDataToLocalStorage(); // 將資料保存至 localStorage
-    //     });
-    //
-    //     // 在頁面載入時檢查 localStorage 中是否有資料並載入
-    //     $(document).ready(function () {
-    //         loadDataFromLocalStorage();
-    //     });
-    // });
+    $(document).ready(function () {
+        let videoData = []; // 儲存影片資料
 
+        // 刪除指定行並更新資料
+        $(document).on('click', '.deleteRow', function () {
+            let index = $(this).closest('tr').index(); // 獲取行索引
+            videoData.splice(index, 1); // 從陣列中刪除對應的資料
+            $(this).closest('tr').remove();
+            updateRowNumbers(); // 更新編號
+            saveDataToLocalStorage(); // 將資料保存至 localStorage
+        });
+
+        // 從 localStorage 中檢索資料並顯示在頁面上
+        function loadDataFromLocalStorage() {
+            let storedData = localStorage.getItem('videoData');
+            if (storedData) {
+                videoData = JSON.parse(storedData);
+
+                videoData.forEach(function (data) {
+                    let newRow = $('<tr>');
+                    let rowContent = `
+                <td><input type="text" value="${data.name}" class="nameInput"></td>
+                <td><input type="file" class="dropify" data-default-file=""></td>
+                <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+            `;
+
+                    newRow.html(rowContent);
+                    newRow.insertBefore("#addvideotable tbody");
+                });
+            }
+        }
+
+        // 將資料保存至 localStorage
+        function saveDataToLocalStorage() {
+            localStorage.setItem('videoData', JSON.stringify(videoData));
+        }
+
+        $('#addVideo').click(function () {
+            let newData = {
+                id: '',
+                name: '',
+                file: ''
+            };
+            videoData.push(newData);
+
+            let newRow = $('<tr>');
+            let rowContent = `
+        <td><input type="text" value="${newData.name}" class="nameInput" placeholder="輸入影片名稱"></td>
+        <td><input type="file" class="dropify" data-default-file=""></td>
+        <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+    `;
+
+            newRow.html(rowContent);
+            newRow.insertBefore("#addvideotable tbody");
+
+            saveDataToLocalStorage(); // 將資料保存至 localStorage
+        });
+
+        // 在頁面載入時檢查 localStorage 中是否有資料並載入
+        $(document).ready(function () {
+            loadDataFromLocalStorage();
+        });
+    });
 
 </script>
 
@@ -494,8 +448,6 @@
         let coursePrice = $("#coursePrice").val();
         let courseContent = $("#courseContent").val();
         let courseImg = $("#courseImg")[0].files[0];
-        let courseVideo = $("#courseVideo")[0].files[0];
-        console.log(courseImg);
 
 
         let formData = new FormData();
@@ -503,7 +455,15 @@
         formData.append("coursePrice", coursePrice);
         formData.append("courseContent", courseContent);
         formData.append("courseImg", courseImg);
-        formData.append("courseVideo", courseVideo);
+        $('.dropify').each(function () {
+            formData.append("videoFiles", $(this)[0].files[0]);
+        });
+
+        $('.nameInput').each(function () {
+            console.log($(this).val());
+            formData.append("videoNames", $(this).val());
+        });
+
         // formData.append("courseId", $("#course-id").text());
 
         $.ajax({

@@ -18,7 +18,6 @@ public class CourseImageService {
         return courseImage;
     }
 
-
     public void add(CourseImage video) {
         courseImageRepository.save(video);
     }
@@ -26,5 +25,22 @@ public class CourseImageService {
     public List<CourseImage> getCourseVideoById(Integer courseId) {
         List<CourseImage> list = courseImageRepository.findAllByCourseId(courseId);
         return list;
+    }
+
+    public List<CourseImage> getCourseImagesByIds(List<Integer> courseVideoIds) {
+        List<CourseImage> list = courseImageRepository.findAllById(courseVideoIds);
+        return list;
+    }
+
+    public void deleteAll(List<CourseImage> existingImages) {
+        courseImageRepository.deleteAll(existingImages);
+    }
+
+    public CourseImage getVideoById(Integer courseImgId) {
+        return courseImageRepository.findById(courseImgId).get();
+    }
+
+    public void delete(CourseImage video) {
+        courseImageRepository.delete(video);
     }
 }

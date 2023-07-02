@@ -22,6 +22,14 @@ public class CourseImage {
     private String courseImgName;
     // Getter and Setter methods
 
+    public String getCourseImgName() {
+        return courseImgName;
+    }
+
+    public void setCourseImgName(String courseImgName) {
+        this.courseImgName = courseImgName;
+    }
+
     public int getCourseImgId() {
         return courseImgId;
     }
@@ -44,5 +52,10 @@ public class CourseImage {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+
+    public Integer getCourseVideoId() {
+        return courseImgId;
     }
 }
