@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import app.com.group.service.GroupActivityService;
 import app.com.group.service.GroupProductImgService;
 import app.com.group.service.GroupProductService;
+import app.com.group.vo.CheckoutMemberDTO;
 import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.GroupProductDTO;
@@ -269,6 +270,11 @@ public class GroupRestContreller {
 //		System.out.println("第一層觀察抓到的數量:" + inserDetailDTO.getGroupOrderAmount());
 		GroupOrderDetail retuvo = groupActivityService.inDetail(inserDetailDTO);
 		Boolean success = (retuvo != null);
+		GroupOrderMaster groupOrderMaster = groupActivityService.inMasterSum(retuvo.getGroupOrderId());
+		System.out.println("觀察回傳的訂單商品總數量" + groupOrderMaster.getNumberOfProduct());
+		System.out.println("觀察回傳的訂單分潤" + groupOrderMaster.getGroupOrderBonus());
+		System.out.println("觀察回傳的訂單總金額" + groupOrderMaster.getTotalGroupProductPrice());
+		
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("success", success);
 		return response;
@@ -348,20 +354,21 @@ public class GroupRestContreller {
 		@GetMapping("/groupActivity/get/Product{groupProductId}/img{i}")
 		public ResponseEntity<Resource> getPicture2(@PathVariable Integer groupProductId,@PathVariable Integer i) {
 			List<GroupProductImgVO> gprimgyee = groupProductImgService.getFkImg(groupProductId);
-			if(i >= gprimgyee.size()) {
-				byte[] picture = gprimgyee.get(0).getGroupProductImg();
-				ByteArrayResource resource = new ByteArrayResource(picture);
-				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF) // or another appropriate media type
-						.body(resource);
-			} else {
+			
+			try {
 				byte[] picture = gprimgyee.get(i).getGroupProductImg();
 				ByteArrayResource resource = new ByteArrayResource(picture);
-
-				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF) // or another appropriate media type
+				
+				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF)
+						.body(resource);
+			} catch (RuntimeException e) {
+				byte[] picture = gprimgyee.get(0).getGroupProductImg();
+				ByteArrayResource resource = new ByteArrayResource(picture);
+				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF)
 						.body(resource);
 			}
 			
-			//20230702 凌晨。下面這樣不行，在Response的時候, MediaType.IMAGE_GIF無法對List編碼的樣子。
+			//20230702 凌晨。下面這樣不行，在Response的時候, MediaType.IMAGE_GIF無法對List編碼的樣子。 陣列也不行。
 //			List<ByteArrayResource> allpicture = new ArrayList<ByteArrayResource>();
 //			for (GroupProductImgVO fuck : gprimgyee) {
 //				 System.out.println("觀察List遍瀝的順序性 PK號為: " + fuck.getGroupProductImgId());
@@ -370,9 +377,23 @@ public class GroupRestContreller {
 //				 ByteArrayResource productresource = new ByteArrayResource(productimg);
 //				 System.out.println("觀察ByteArrayResource: " + productresource);
 //				 allpicture.add(productresource);
-//			} //到這。
-
+//			}
+//			return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF)
+//					.body(allpicture); //到這。
+			
 			}
+		
+		//前台 結帳資料 之會員一鍵輸入資料
+		@PostMapping("/groupActivity/Checkout/OneMember")
+		public CheckoutMemberDTO ActivityCheckout(@RequestParam Integer memberId) {
+			Members onemem = groupActivityService.CheckGetMember(memberId);
+			CheckoutMemberDTO checkoutMemberDTO = new CheckoutMemberDTO();
+			checkoutMemberDTO.setMemberName(onemem.getMemberName());
+			checkoutMemberDTO.setMemberAddress(onemem.getMemberAddress());
+			checkoutMemberDTO.setMemberPhone(onemem.getMemberPhone());
+			checkoutMemberDTO.setMemberEmail(onemem.getMemberEmail());
+			return checkoutMemberDTO;
+		}
 	
 	// 前台團購主修改活動資料
 //	@PostMapping("/plan-activity/updata-the")

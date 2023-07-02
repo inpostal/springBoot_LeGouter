@@ -194,10 +194,11 @@
             $("#starva").on("change", function() {
                 $("#endva").val("");
                 // let endnow = $("#starva").val();
-                let endnow =  new Date($("#starva").val());
-                // console.log("取得結束的動態最早時間" + endnow);
+                let endnow =  (Date.parse(new Date($("#starva").val())) + 604800000);
+                let defineendnow = new Date(endnow);
+                console.log("取得結束的動態最早時間" + defineendnow);
                 
-                let setAfterendnow = endnow.getFullYear() + "-" + theformat((endnow.getMonth() + 1)) + "-" + theformat(endnow.getDate()) + "T" + theformat(endnow.getHours()) + ":" + theformat(endnow.getMinutes());
+                let setAfterendnow = defineendnow.getFullYear() + "-" + theformat((defineendnow.getMonth() + 1)) + "-" + theformat(defineendnow.getDate()) + "T" + theformat(defineendnow.getHours()) + ":" + theformat(defineendnow.getMinutes());
                 // console.log("設定結束的動態最早時間" + setAfterendnow);
                 $("#endva").attr("min", setAfterendnow);
                 let Beforeendnow = Date.parse(endnow) + 2592000000;

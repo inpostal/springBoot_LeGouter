@@ -82,11 +82,13 @@ public class GroupController {
     		@RequestParam Integer groupActivityPrice,
     		Model model
     		) {
-//    		HttpSession session, RedirectAttributes redirectAttributes
+//    	HttpSession session, RedirectAttributes redirectAttributes
 //    	Members user = (Members) session.getAttribute("user");
-//        if (user !=null){
-//            String address = user.getMemberAddress();
-//            model.addAttribute("address", address);
+//        if (user != null){
+//    		Integer memberId = user.getMemberId();
+//            String account = user.getMemberAccount();
+//            model.addAttribute("memberId", memberId);
+//            model.addAttribute("account", account);
     	
     	GroupActivityVO checkoutactivityvo = groupActivityService.showTheActivity(groupActivityId);
     	GroupCheckoutDTO groupcheckoutDTO = new GroupCheckoutDTO();
