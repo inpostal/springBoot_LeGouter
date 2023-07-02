@@ -11,13 +11,13 @@ public class MembersCp {
 
     @Id
     @Column(name = "CP_ID")
-    private int cpId;
+    private Integer cpId;
 
     @Id
     @Column(name = "MEM_ID")
-    private int memId;
+    private Integer memId;
 
     @Column(name = "CP_USED")
-    private byte cpUsed;
+    private Integer cpUsed;
 }
 

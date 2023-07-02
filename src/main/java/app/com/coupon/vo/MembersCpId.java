@@ -6,6 +6,6 @@ import java.io.Serializable;
 
 @Data
 public class MembersCpId implements Serializable {
-    private int cpId;
-    private int memId;
+    private Integer cpId;
+    private Integer memId;
 }
