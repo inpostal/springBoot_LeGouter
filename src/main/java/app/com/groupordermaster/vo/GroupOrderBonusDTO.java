@@ -18,4 +18,5 @@ public class GroupOrderBonusDTO {
     private Integer groupOrderBonus;
     private String groupOrderBonusStatus;
     private Integer groupOrderStatus;
+
 }

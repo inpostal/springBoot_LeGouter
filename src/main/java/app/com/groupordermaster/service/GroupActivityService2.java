@@ -3,7 +3,7 @@ package app.com.groupordermaster.service;
 import app.com.groupordermaster.repository.GroupActivityRepository2;
 import app.com.groupordermaster.vo.GroupActivity;
 
-import app.com.news.vo.News;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;

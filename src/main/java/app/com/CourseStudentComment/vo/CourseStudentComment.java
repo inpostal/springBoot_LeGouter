@@ -25,7 +25,7 @@ public class CourseStudentComment {
     @Column(name = "STUDENT_COMMENT_CONTENT")
     private String studentCommentContent;
 
-    @Column(name = "STUDENT_COMMENT_DATE")
+    @Column(name = "STUDENT_COMMENT_DATE",insertable = false)
     private Date studentCommentDate;
 
     @Column(name = "EMP_ID")
@@ -34,6 +34,6 @@ public class CourseStudentComment {
     @Column(name = "CHEF_COMMENT_CONTNENT")
     private String chefCommentContent;
 
-    @Column(name = "CHEF_COMMENT_DATE")
+    @Column(name = "CHEF_COMMENT_DATE",insertable = false)
     private Date chefCommentDate;
 }

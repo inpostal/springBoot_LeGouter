@@ -64,14 +64,14 @@ public class NewsController {
                                     @RequestParam("empId") Integer empId,
                                     @RequestParam("newsContent") String newsContent,
                                     @RequestParam("newsPic") MultipartFile newsPic,
-                                    @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
+//                                    @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
                                     @RequestParam("newsTitle") String newsTitle) {
         //拿到後台資料
         News news = service.getNewsById(newsId);
         //將前台資料放入後台
         news.setEmpId(empId);
         news.setNewsContent(newsContent);
-        news.setNewsTime(Date.valueOf(newsTime));
+//        news.setNewsTime(Date.valueOf(newsTime));
         news.setNewsTitle(newsTitle);
         //將圖片轉成byte
         try {

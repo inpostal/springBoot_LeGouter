@@ -39,7 +39,7 @@ public class GroupOrderBonusController {
         return service.frontlist(memberId);
     }
 
-    //修改分潤狀態
+    //後台修改分潤狀態分潤列表)
     @PostMapping("/groupOrder/groupOrderBonus/update")
     public ResponseEntity<?>updatebonus(@RequestParam Integer groupOrderBonusStatus, @RequestParam Integer groupOrderId){
         service.updatebonus(groupOrderId,groupOrderBonusStatus);

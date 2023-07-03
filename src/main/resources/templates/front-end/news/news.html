@@ -152,23 +152,26 @@
 <div class="blog-column-three-area ptb-100">
   <div class="container">
     <div class="row" >
+
       <div class="col-lg-4 col-md-6" th:each="n:${newList}">
         <div class="single-news">
-          <a href="single-blog.html">
+          <div th:text="${n.getNewsId()}" style="display: none"></div>
+          <a th:href="@{/news/frontSingle(newsId=${n.newsId})}">
             <img src="/GroupOrder/assets/img/news-img/news-img-9.jpg" alt="Image">
           </a>
 
           <div class="news-content">
             <span class="tag">最新消息</span>
 
-            <a href="single-blog.html">
-              <h3 id="newsTitle" th:text="${n.getNewsContent()}">官網下單，愛0負擔 </h3>
+
+            <a th:href="@{/news/frontSingle(newsId=${n.newsId})}">
+              <h3 id="newsTitle" th:text="${n.getNewsContent()}"> </h3>
             </a>
 
 
             <ul class="lessons">
 
-              <li class="float" id="newsTime" th:text="${n.getNewsTime()}">2022/09/02</li>
+              <li class="float" id="newsTime" th:text="${n.getNewsTime()}"></li>
             </ul>
           </div>
         </div>

@@ -76,13 +76,23 @@ public class CourseStudentCommentService {
             dto.setCourseStudentCommentId(c.getStudentCommentId());
             dto.setCourseStudentCommentContent(c.getStudentCommentContent());
             dto.setCourseStudentCommentDate(c.getStudentCommentDate());
+            dto.setEmpId(employee.getEmpId());
             dto.setEmpName(employee.getEmpName());
             dto.setChefCommentContent(c.getChefCommentContent());
             dto.setChefCommentDate(c.getChefCommentDate());
+
         }
         Course course = repository.findById(c.getCourseId()).orElse(null);
         if (course != null) {
             dto.setCourseName(course.getCourseName());
+        }else {
+            dto.setCourseName("無課程");
+        }
+
+        if (c.getChefCommentContent() == null) {
+            dto.setChefCommentContent("等待回覆中...");
+        } else {
+            dto.setChefCommentContent(c.getChefCommentContent());
         }
         return dto;
     }

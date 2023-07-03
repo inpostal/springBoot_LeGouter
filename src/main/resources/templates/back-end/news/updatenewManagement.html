@@ -498,15 +498,15 @@
         <div class="container-small-unit">
           <label class="label">上傳圖片:</label>
           <input type="file" id="imageInput" accept="image/*">
-          <img th:src="@{/news/img/{newsId}(newsId=${news.getNewsId()})}" alt="預設圖片">
+          <img id="newsImage" th:src="@{/news/img/{newsId}(newsId=${news.getNewsId()})}" alt="預設圖片">
         </div>
 
         <div id="imagePreviewContainer">
-          <img id="imagePreview" src="#" alt="Preview Image" >
+          <img id="imagePreview" src="#" alt="Preview Image">
         </div>
 
         <button class="btn" type="button" id="submit">發布</button>
-        <button class="btn" type="button" id="cancel">取消修改</button>
+        <button class="btn" type="button" id="cancel" >取消修改</button>
 
       </form>
 
@@ -550,8 +550,8 @@
 
 
   var imageInput = document.getElementById('imageInput');
-  var imagePreviewContainer = document.getElementById('imagePreviewContainer');
   var imagePreview = document.getElementById('imagePreview');
+  var newsImage = document.getElementById('newsImage');
 
   imageInput.addEventListener('change', function (event) {
     var file = event.target.files[0];
@@ -561,7 +561,7 @@
 
       reader.onload = function (e) {
         imagePreview.src = e.target.result;
-        imagePreviewContainer.style.display = 'block';
+        newsImage.src = e.target.result; // 覆盖旧图片
       };
 
       reader.readAsDataURL(file);
@@ -592,12 +592,19 @@
       type:'POST',
       success:function (resp){
         alert('修改成功');
+        window.location.href='/news/list';
       },
       error:function (resp){
         alert('修改失敗');
       }
     })
   })
+
+
+  document.getElementById('cancel').addEventListener('click', function () {
+    // 取消修改，返回列表页
+    window.location.href = '/news/list'; // 跳转到指定链接
+  });
 
 </script>
 
