@@ -193,9 +193,9 @@
 
             $("#starva").on("change", function() {
                 $("#endva").val("");
-                // let endnow = $("#starva").val();
+                // let endnow = $("#starva").val(); //可以用來測試。
                 let endnow =  (Date.parse(new Date($("#starva").val())) + 604800000);
-                let defineendnow = new Date(endnow);
+                let defineendnow = new Date(endnow); //要測試的時候用上面。
                 console.log("取得結束的動態最早時間" + defineendnow);
                 
                 let setAfterendnow = defineendnow.getFullYear() + "-" + theformat((defineendnow.getMonth() + 1)) + "-" + theformat(defineendnow.getDate()) + "T" + theformat(defineendnow.getHours()) + ":" + theformat(defineendnow.getMinutes());

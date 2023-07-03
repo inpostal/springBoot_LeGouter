@@ -114,7 +114,7 @@
                     <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" th:value="${groupProductVO.getGroupProductName()}" required></label>
                     <label class="inpproduct">團購商品內容：<input type="text" id="textarea" name="groupProductContent" th:value="${groupProductVO.getGroupProductContent()}" maxlength="300" required style="width: 300px; height: 125px;"></label>
                     <!-- <textarea class="inpproduct" id="textarea" name="groupProductContent" cols="50" rows="8" maxlength="300" placeholder="輸入團購商品內容" required></textarea> -->
-                    <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" th:value="${groupProductVO.getGroupProductPrice()}" required></label>
+                    <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" th:value="${groupProductVO.getGroupProductPrice()}" disabled></label>
                     <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" th:value="${groupProductVO.getGroupProductStardate()}" placeholder="yyyy-mm-dd" readonly></label>
                     <label class="inpproduct">團購商品下架時間：<input type="date" id="ProductEnddate" name="groupProductEnddate" th:value="${groupProductVO.getGroupProductEnddate()}" placeholder="yyyy-mm-dd" readonly></label>
                     <select class="inpproduct" id="productstatus" name="groupProductStatus">

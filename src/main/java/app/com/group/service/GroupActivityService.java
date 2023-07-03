@@ -110,7 +110,8 @@ public class GroupActivityService {
 		List<GroupOrderMaster> groupOrderMaster = groupOrderMasterRepository.findByGroupActivityId(groupActivityId);
 		//自定義以活動編號為計數。
 		System.out.println("檢查findByGroupActivityId回傳的陣列長度:" + groupOrderMaster.size());
-		return groupOrderDetailRepository.countByGroupOrderId(groupOrderMaster.get(0).getGroupOrderId());
+		byte setgroupProductStatus = 1;
+		return groupOrderDetailRepository.countByGroupOrderIdAndGroupProductStatus(groupOrderMaster.get(0).getGroupOrderId(), setgroupProductStatus);
 	}
 	
 	// 整合後應該放在彥君的團購訂單明細Service。
@@ -150,6 +151,19 @@ public class GroupActivityService {
 		public Members CheckGetMember(Integer memberId) {
 			Members mem = memberRepository.findById(memberId).get();
 			return mem;
+		}
+		
+		public List<GroupActivityVO> ActivityKeyName(String keywords, Date groupOrderStar, Date groupOrderEnd) {
+//			return groupActivityRepository.findByGroupNameContaining(keywords);
+			return groupActivityRepository.findByGroupNameContainingAndGroupOrderStarLessThanEqualAndGroupOrderEndAfter(keywords, groupOrderStar, groupOrderEnd);
+		}
+		
+		public List<GroupActivityVO> BackKeyContent(String groupActivityContent) {
+			return groupActivityRepository.findByGroupActivityContentContaining(groupActivityContent);
+		}
+		
+		public List<GroupActivityVO> BackKeyName(String groupName) {
+			return groupActivityRepository.findByGroupNameContaining(groupName);
 		}
 
 	//
