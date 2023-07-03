@@ -40,8 +40,21 @@ public class GroupController {
 		return "front-end/group/group-shop";
 	}
     @GetMapping("/plan-activity") //前台團購主瀏覽商品 發起活動專區
-	public String planActivity() {
-		return "front-end/group/plan-activity3";
+	public String planActivity(Model model,HttpSession session, RedirectAttributes redirectAttributes) {
+    	String planactivityurl = "/plan-activity";
+    	Members user = (Members) session.getAttribute("user");
+        if (user != null){
+        	if (user.getMemberClassify() == 1) {
+        		return "front-end/group/plan-activity3";
+			}else {
+				return "front-end/group/group-shop";
+			}
+    		
+        }else {
+            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
+            session.setAttribute("location", planactivityurl);
+            return "redirect:/login";
+        }
 	}
     @GetMapping("/single-product") //前台團購活動單品頁
 	public String singleProduct(@RequestParam Integer groupActivityId, Model model) {
