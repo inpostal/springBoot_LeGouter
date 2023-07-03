@@ -47,8 +47,7 @@ public class DessertShopFrontController {
 
         // 如果已登入
         Integer memberId = member.getMemberId(); // 從session中取得member再取得memberId
-        dessertService.addToCart(dessertId, memberId);
-        return "已加入購物車";
+        return dessertService.addToCart(dessertId, memberId);
     }
 
     // 加入追蹤清單
