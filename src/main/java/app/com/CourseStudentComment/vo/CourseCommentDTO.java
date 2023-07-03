@@ -12,7 +12,7 @@ public class CourseCommentDTO {
     private Integer courseStudentCommentId;
     private String courseStudentCommentContent;
     private Date courseStudentCommentDate;
-    private Integer empId;
+    private String empName;
     private String chefCommentContent;
     private Date chefCommentDate;
 

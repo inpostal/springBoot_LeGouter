@@ -8,5 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GroupOrderDetailRepository extends JpaRepository<GroupOrderDetail, GroupOrderDetailId> {
-      List<GroupOrderDetail> findByGroupOrderId(Integer groupOrderId);
+    List<GroupOrderDetail> findByGroupOrderId(Integer groupOrderId);
+    List<GroupOrderDetail> findAllByMemberId(Integer memberId);
+    Long countByGroupOrderId(Integer groupOrderId);
 }

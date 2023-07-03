@@ -42,7 +42,7 @@ public class Course {
     @Column(insertable = false, name = "RATE_STAR")
     private Integer rateStar;
 
-    @Column(insertable = false, name = "COURSE_COMMENT")
+    @Column(insertable = true, name = "COURSE_COMMENT")
     private String courseComment;
 
 }

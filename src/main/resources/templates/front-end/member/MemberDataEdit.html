@@ -71,8 +71,8 @@
     <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
     <script src="/Member/Sam_Js/Jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $("#name").focus();
         $("#name").blur(function() {
             let inputName = $(this).val();
             let pattern = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
@@ -80,7 +80,6 @@
                 $("label[for='name']").attr("style","color: red");
                 $("label[for='name'] b").html("姓名: *姓名只能包含英文、數字或中文");
                 $(this).val('');
-                $(this).focus();
             }else {
                 $("label[for='name']").attr("style","color: black");
                 $("label[for='name'] b").html("姓名:");
@@ -97,7 +96,6 @@
                 $("label[for='password']").attr("style","color: red");
                 $("label[for='password'] b").html("密碼: *密碼只能包含英文或數字，且至少7個字元");
                 $(this).val('');
-                $(this).focus();
             } else {
                 $("label[for='password']").attr("style","color: black");
                 $("label[for='password'] b").html("密碼:");
@@ -113,7 +111,6 @@
                 $("label[for='phone']").attr("style","color: red");
                 $("label[for='phone'] b").html("電話: *電話號碼必須是09開頭且總計十位數字");
                 $(this).val('');
-                $(this).focus();
             } else {
                 $("label[for='phone']").attr("style","color: black");
                 $("label[for='phone'] b").html("電話:");
@@ -129,7 +126,6 @@
                 $("label[for='address']").attr("style","color: red");
                 $("label[for='address']").html("詳細地址: *地址只能包含數字或中文");
                 $(this).val('');
-                $(this).focus();
             } else {
                 $("label[for='address']").attr("style","color: black");
                 $("label[for='address']").html("詳細地址:");
@@ -147,6 +143,19 @@
                 district: $("#district").val(),
                 address: $("#address").val(),
             };
+            for (let d in data) {
+                console.log(d);
+                if (d===undefined || d==="" || d===null){
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入資料有誤',
+                        text: '請重新確認修改的資料',
+                    })
+                    return;
+                }
+            }
+
+
             $.ajax({
                 url: "/member/update",
                 type: "POST",
@@ -154,10 +163,10 @@
                 data: JSON.stringify(data),
                 success: function(response) {
                     if(response.success) {
-                        alert("修改資料成功！");
+                        Swal.fire('註冊成功');
                         location.href = "/member/data";
                     } else {
-                        alert("修改失敗：" + response.message);
+                        Swal.fire('註冊失敗'+ response.message);
                     }
                 }
             });

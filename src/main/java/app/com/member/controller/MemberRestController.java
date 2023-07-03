@@ -1,6 +1,7 @@
 package app.com.member.controller;
 
 import app.com.member.service.MemberService;
+import app.com.member.service.SendEmailService;
 import app.com.member.vo.Members;
 import app.com.member.vo.MembersDTO;
 import app.com.member.vo.MembersRegisterDTO;
@@ -8,30 +9,80 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class MemberRestController {
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private SendEmailService emailService;
+
+    @PostMapping("/resetpassword/handle")
+    public Map<String, Boolean> handleResetPassword(@RequestBody Members members){
+        Map<String, Boolean> response = new HashMap<>();
+
+        Members resetPassword = memberService.resetPassword(members);
+
+        if (resetPassword==null){
+            response.put("success", false);
+            return response;
+        }else {
+            response.put("success", true);
+            return response;
+        }
+    }
+
+    @PostMapping("/reset")
+    public Map<String, Boolean> handlePasswordReset(@RequestBody Members members, HttpServletRequest request) {
+        Map<String, Boolean> response = new HashMap<>();
+        String email = members.getMemberEmail();
+        // 檢查此信箱是否有被註冊
+        Members byEmail = memberService.findByEmail(email);
+        if (byEmail==null){
+            response.put("success", false);
+            return response;
+        }
+
+        // 生成token並存儲在資料庫
+        String token = generateToken();
+        storeToken(byEmail, token);
+
+        // 建立連結
+        String serverName = request.getServerName();
+        String servletPath = request.getServletPath();
+        int serverPort = request.getServerPort();
+        System.out.println(servletPath);
+
+        // 建立重設連結並寄送郵件
+        String resetLink = "http://"+serverName+":"+serverPort+"/resetpassword?token=" + token;
+        emailService.sendEmail(email, "Password Reset Link", resetLink);
+
+        response.put("success", true);
+        return response;
+    }
+
+    // 生成token的方法
+    private String generateToken() {
+        return UUID.randomUUID().toString();
+    }
+
+    // 將token存儲到資料庫的方法
+    private void storeToken(Members members, String token) {
+        members.setToken(token);
+        memberService.saveToken(members);
+    }
 
     @GetMapping("/member/memberData/{id}")
     public MembersDTO getMemberById(@PathVariable Integer id){
         return  memberService.getMemberById(id);
     }
 
-    @PostMapping("/member/login")
-    public ResponseEntity<?> login(@RequestBody  Members members, HttpSession session){
-        Members membersInDB = memberService.login(members.getMemberAccount(), members.getMemberPassword());
-        if (membersInDB != null) {
-            session.setAttribute("user", membersInDB);
-            return ResponseEntity.ok("Logged in successfully");
-        } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
-        }
-    }
+
 
     @PostMapping("/checkEmail")
     public Map<String, Boolean> checkEmail(@RequestParam String email){

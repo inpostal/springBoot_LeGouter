@@ -81,27 +81,7 @@
 <section id="mainheader">
     <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
     <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
-
-    <!-- 員工功能小圈圈 -->
-
-    <div class="dropdown" style="position: absolute; right: 30px;">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/weichen9715/catpic/blob/main/smudge_lord_60314581_2452933891436033_1050250552612724249_n.jpg?raw=true"
-                 alt="noimg" width="30" height="30" class="rounded-circle">
-            <span class="d-none d-sm-inline mx-1" style="color: #1E1916;">employee</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <!-- <li><a class="dropdown-item" href="#">New project</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li> -->
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
-    </div>
-
+    <script src="/Conponents/back_end.js"></script>
 
 </section>
 
@@ -316,7 +296,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程圖片</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" class="dropify" data-default-file=""
+                                                    <input type="file" class="drop-ify" data-default-file=""
                                                            id="courseImg">
                                                     <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"
                                                          th:alt="${course.getCourseName()}" width="100" height="100"
@@ -351,56 +331,31 @@
                                         </form>
                                         <div class="card-header">
                                             <h4 class="card-title">影片區域</h4>
-
+                                            <button id="addVideo" type="button" class="btn btn-sm btn-warning"
+                                                    value="新增影片">新增影片
+                                            </button>
                                         </div>
                                         <form>
                                             <div class="card-body">
                                                 <table id="addvideotable" class="display dataTable"
                                                        style="width: 100%">
                                                     <tbody>
-                                                    <tr>
-                                                        <td>試看</td>
-                                                        <td>試看影片</td>
+                                                    <tr th:each="video : ${videos}">
+                                                        <td style="width: 400px" th:text="${video.courseImgName}"></td>
                                                         <td>
-                                                            <video width="320" height="240" controls
-                                                                   th:each="v:${list}">
-                                                                <source th:src="@{'/course/'+${v.getCourseId()}+'/'+${v.getCourseImgId()}}"
+                                                            <video style="width: 500px" width="320" height="240"
+                                                                   controls>
+                                                                <source th:src="@{'/course/' + ${course.courseId} + '/' + ${video.courseImgId}}"
                                                                         type="video/mp4">
                                                             </video>
                                                         </td>
+                                                        <td>
+                                                            <i class="fa fa-trash btn btn-sm btn-danger deleteRow"
+                                                               data-video-id="${video.courseImgId}"></i>
+                                                        </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo3"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo4"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo5"></td>
-                                                    </tr>
-
                                                     </tbody>
+
                                                 </table>
                                             </div>
                                             <div class="card-body">
@@ -434,18 +389,98 @@
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 
 <!-- import font awesome -->
-<script src="/Conponents/back_end.js"></script>
-<!-- evelyn jquery -->
+<script src="https://kit.fontawesome.com/3d215f6a1d.js"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
-        integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="/Course/JS/datatables.init.js"></script>
 
 
+<script>
+    $(document).ready(function () {
+        let videoData = []; // Store video data
+
+        // Retrieve data from localStorage and display on the page
+        function loadDataFromLocalStorage() {
+            let storedData = localStorage.getItem('videoData');
+            if (storedData) {
+                videoData = JSON.parse(storedData);
+
+                if (videoData.length > 0) {
+                    videoData.forEach(function (data) {
+                        let newRow = $('<tr>');
+                        let rowContent = `
+            <td><input type="text" value="${data.name}" class="nameInput"></td>
+            <td><input type="file" class="dropify" data-default-file=""></td>
+            <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+          `;
+
+                        newRow.html(rowContent);
+                        newRow.appendTo("#addvideotable tbody");
+
+                        // Initialize Dropify plugin for the new row
+                        newRow.find('.dropify').dropify();
+
+                        // Bind click event for delete button in the new row
+                        newRow.find('.deleteRow').click(function () {
+                            deleteVideoRow($(this));
+                        });
+                    });
+                }
+            }
+        }
+
+
+        // Function to delete video row
+        function deleteVideoRow(deleteButton) {
+            let row = deleteButton.closest('tr');
+            let index = row.index();
+            videoData.splice(index, 1);
+            row.remove();
+            saveDataToLocalStorage();
+        }
+
+        $('#addVideo').click(function () {
+            let newData = {
+                id: '',
+                name: '',
+                file: ''
+            };
+            videoData.push(newData);
+
+            let newRow = $('<tr>');
+            let rowContent = `
+      <td><input type="text" value="${newData.name}" name="videoNames[]" class="nameInput" placeholder="輸入影片名稱"></td>
+      <td><input type="file" name="videoFiles[]" class="dropify" data-default-file=""></td>
+      <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+    `;
+
+            newRow.html(rowContent);
+            newRow.appendTo("#addvideotable tbody");
+
+            // Initialize Dropify plugin for the new row
+            newRow.find('.dropify').dropify();
+
+            // Bind click event for delete button in the new row
+            newRow.find('.deleteRow').click(function () {
+                deleteVideoRow($(this));
+            });
+
+            saveDataToLocalStorage(); // Save data to localStorage
+        });
+
+        // Check localStorage for data on page load and load it
+        loadDataFromLocalStorage();
+    });
+
+
+</script>
 <script>
 
     $("#submit").click(function () {
@@ -453,6 +488,10 @@
         let coursePrice = $("#coursePrice").val();
         let courseContent = $("#courseContent").val();
         let courseImg = $("#courseImg")[0].files[0];
+        let videoFiles = $('.dropify')[0].files;  // 获取所有影片文件
+        let videoNames = $('.nameInput').map(function () {
+            return $(this).val();
+        }).get();  // 获取所有影片名称
 
         let formData = new FormData();
         formData.append("courseName", courseName);
@@ -460,7 +499,14 @@
         formData.append("courseContent", courseContent);
         formData.append("courseImg", courseImg);
         formData.append("courseId", $("#course-id").text());
+        $('.dropify').each(function () {
+            formData.append("videoFiles", $(this)[0].files[0]);
+        });
 
+        $('.nameInput').each(function () {
+            console.log($(this).val());
+            formData.append("videoNames", $(this).val());
+        });
         $.ajax({
             url: "/course/update",
             type: "POST",
@@ -470,6 +516,8 @@
             success: function (data) {
                 console.log(data);
                 alert("修改成功");
+                location.href = '/course/allcrs';
+
             },
             error: function (data) {
                 console.log(data);
@@ -482,6 +530,24 @@
         location.href = '/course/allcrs';
     });
 
+    $(document).ready(function () {
+        $(document).on('click', '.deleteRow', function () {
+            var videoId = $(this).data('video-id');
+
+            $.ajax({
+                url: '/course/deleteVideo',
+                type: 'POST',
+                data: {videoId: videoId},
+                success: function (data) {
+                    console.log('Video deleted successfully');
+                    // 在此处执行其他需要的操作，例如刷新视频列表等
+                },
+                error: function (data) {
+                    console.log('Failed to delete video');
+                }
+            });
+        });
+    });
 
 </script>
 

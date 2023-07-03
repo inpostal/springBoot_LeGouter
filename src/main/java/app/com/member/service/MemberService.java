@@ -105,4 +105,19 @@ public class MemberService {
         memberInDB.setMemberStatus(members.getMemberStatus());
         return memberRepository.save(memberInDB);
     }
+
+    public Members saveToken(Members members) {
+        return memberRepository.save(members);
+    }
+
+    public Members findByToken(String token) {
+        return memberRepository.findByToken(token);
+    }
+
+    public Members resetPassword(Members members) {
+        Members referenceById = memberRepository.getReferenceById(members.getMemberId());
+        referenceById.setToken(null);
+        referenceById.setMemberPassword(members.getMemberPassword());
+        return memberRepository.save(referenceById);
+    }
 }
