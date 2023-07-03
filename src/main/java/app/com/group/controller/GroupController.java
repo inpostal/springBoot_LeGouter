@@ -28,19 +28,27 @@ public class GroupController {
 	
 
 	@GetMapping("/group-product-manage") //後台團購商品管理
-	public String groupProductManage() {
-		return "back-end/group/group-product-manage2";
+	public String groupProductManage(HttpSession session) {
+		 if (session.getAttribute("emp") != null) {
+			 return "back-end/group/group-product-manage2";
+	        } else {
+	            return "redirect:/employee/login";
+	        }
 	}
     @GetMapping("/plan-activity-manage") //後台團購活動管理
-	public String planActivityManage() {
-		return "back-end/group/plan-activity-manage";
+	public String planActivityManage(HttpSession session) {
+    	if (session.getAttribute("emp") != null) {
+    		return "back-end/group/plan-activity-manage";
+	        } else {
+	            return "redirect:/employee/login";
+	        }
 	}
     @GetMapping("/group-shop") //前台團購活動瀏覽平台
 	public String groupShop() {
 		return "front-end/group/group-shop";
 	}
     @GetMapping("/plan-activity") //前台團購主瀏覽商品 發起活動專區
-	public String planActivity(Model model,HttpSession session, RedirectAttributes redirectAttributes) {
+	public String planActivity(HttpSession session, RedirectAttributes redirectAttributes) {
     	String planactivityurl = "/plan-activity";
     	Members user = (Members) session.getAttribute("user");
         if (user != null){
@@ -81,13 +89,17 @@ public class GroupController {
 		return "front-end/group/single-product2";
 	}
     @GetMapping("/group-product/updata") //後台團購商品管理-修改資料用頁面
-    public String groupProductUpdata(@RequestParam Integer groupProductId, Model model) {
-    	//拿到id裡面資料
-    	GroupProductVO groupProductVO = groupProductService.showOneProduct(groupProductId);
-        //將id裡面資料放入model
-        model.addAttribute("groupProductVO", groupProductVO);
-        //導至頁面
-    	return "back-end/group/group-product-updata2";
+    public String groupProductUpdata(@RequestParam Integer groupProductId, Model model, HttpSession session) {
+    	 if (session.getAttribute("emp") != null) {
+    		 //拿到id裡面資料
+    		 GroupProductVO groupProductVO = groupProductService.showOneProduct(groupProductId);
+    		 //將id裡面資料放入model
+    		 model.addAttribute("groupProductVO", groupProductVO);
+    		 //導至頁面
+    		 return "back-end/group/group-product-updata2";
+	        } else {
+	            return "redirect:/employee/login";
+	        }
     }
     @GetMapping("/group-product/Checkout") //結帳頁面
     public String groupCheckout(
