@@ -152,6 +152,11 @@ public class GroupActivityService {
 			Members mem = memberRepository.findById(memberId).get();
 			return mem;
 		}
+		
+		public List<GroupActivityVO> ActivityKeyName(String keywords, Date groupOrderStar, Date groupOrderEnd) {
+//			return groupActivityRepository.findByGroupNameContaining(keywords);
+			return groupActivityRepository.findByGroupNameContainingAndGroupOrderStarLessThanEqualAndGroupOrderEndAfter(keywords, groupOrderStar, groupOrderEnd);
+		}
 
 	//
 //	public Boolean updataActivity(GroupActivityDTO groupActivityDTO) {

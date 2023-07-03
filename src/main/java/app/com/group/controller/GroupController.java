@@ -119,7 +119,6 @@ public class GroupController {
     	GroupActivityVO checkoutactivityvo = groupActivityService.showTheActivity(groupActivityId);
     	GroupCheckoutDTO groupcheckoutDTO = new GroupCheckoutDTO();
     	groupcheckoutDTO.setGroupOrderId(groupActivityId); //一個團購訂單對一個活動。
-//    	待加入會員編號
     	groupcheckoutDTO.setGroupActivityId(groupActivityId);
     	groupcheckoutDTO.setGroupActivityPrice(groupActivityPrice); //帶入活動價格。
     	groupcheckoutDTO.setGroupName(checkoutactivityvo.getGroupName()); //帶入結帳明細顯示的活動名稱。
