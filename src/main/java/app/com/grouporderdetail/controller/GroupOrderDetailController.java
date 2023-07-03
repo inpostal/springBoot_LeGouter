@@ -84,37 +84,46 @@ public class GroupOrderDetailController {
     }
 
 
-    //前台查詢個人訂單明細(團購主專區),用memberId去抓到資料
-    @GetMapping("/grouporderdetail/list/getbyId/front")
+    //前台查詢個人訂單明細(團購主專區),用session包memberId去抓到資料
+    @GetMapping("/grouporderdetail/list/getbyId/front/emp")
     @ResponseBody
-    public List<GroupOrderDetail> getGroupOrderDetailByIdFront(@RequestParam Integer memberId) {
+    public List<GroupOrderDetail> getGroupOrderDetailByIdFront(HttpSession session) {
+        Members user = (Members) session.getAttribute("user");
+        Integer memberId = user.getMemberId();
         return  service.getAllByMemberId(memberId);
     }
     //團購主專區前台(重要)
+    //memberId放入session導至前台
     @GetMapping("/grouporderdetail/list/front")
-    public String frontGroupOrderDetail(Model model, HttpSession session) {
+    public String frontGroupOrderDetail(HttpSession session) {
         Members user = (Members) session.getAttribute("user");
         String url ="/grouporderdetail/list/front";
         if (user == null) {
             session.setAttribute("location",url);
             return "redirect:/login";
         }
-        Integer memberId = user.getMemberId();
-        model.addAttribute("user", user);
         return "/front-end/grouporder/groupOrderEmp";
     }
     //一般會員專區
     @GetMapping("/grouporderdetail/list/getbyId/front/member")
     @ResponseBody
-    public List<GroupOrderDetail> getGroupOrderDetailByIdFrontMem(@RequestParam Integer memberId) {
-        return  service.getAllByMemberId(memberId);
+    public List<GroupOrderDetail> getGroupOrderDetailByIdFrontMem(HttpSession session) {
+        Members user = (Members) session.getAttribute("user");
+        Integer memberId = user.getMemberId();
+        return  service.getAllByMemberId(user.getMemberId());
     }
+
     @GetMapping("/grouporderdetail/list/front/member")
-    public String frontGroupOrderDetailMem(Model model, HttpSession session) {
-//        Members user = (Members) session.getAttribute("user");
-//        model.addAttribute("user", user);
+    public String frontGroupOrderMem(HttpSession session) {
+        Members user = (Members) session.getAttribute("user");
+        String url ="/grouporderdetail/list/front/member";
+        if (user == null) {
+            session.setAttribute("location",url);
+            return "redirect:/login";
+        }
         return "/front-end/grouporder/groupOrderMem";
     }
+
 }
 
 

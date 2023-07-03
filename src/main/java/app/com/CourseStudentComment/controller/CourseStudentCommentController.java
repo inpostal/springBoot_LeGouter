@@ -41,7 +41,7 @@ public class CourseStudentCommentController {
 @GetMapping("/CourseStudentComment")
     public String getAll(Model model){
         List<CourseCommentDTO>result = courseStudentCommentService.courseComment();
-model.addAttribute("courseComment",result);
+        model.addAttribute("courseComment",result);
         return "/back-end/CourseStudentComment/CourseStudentComment";
     }
 
@@ -97,7 +97,7 @@ model.addAttribute("courseComment",result);
 //前台顯示留言
     @GetMapping("/replyAllComment")
     public String replyAllComment(@RequestParam Integer courseId, Model model){
-        List<CourseCommentDTO>comment = courseStudentCommentService.courseComment();
+        List<CourseCommentDTO>comment = courseStudentCommentService.findAllCommentByCourseId(courseId);
         Course course=courseService.getCourseById(courseId);
         Chef chef=chefService.getChefById(course.getEmpId());
         Integer empId=chef.getEmpId();

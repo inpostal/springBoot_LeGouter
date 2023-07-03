@@ -7,6 +7,7 @@ import app.com.groupordermaster.service.GroupOrderBonusService;
 import app.com.groupordermaster.vo.GroupActivity;
 import app.com.groupordermaster.vo.GroupOrderBonusDTO;
 import app.com.groupordermaster.vo.GroupOrderMaster;
+import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,10 +34,11 @@ public class GroupOrderBonusController {
         return "/back-end/groupOrder/groupOrderBonus";
     }
     //前台團購主查詢
-    @GetMapping("/groupbonusfront")
+    @GetMapping("/groupbonusfront/memberId")
     @ResponseBody
-    public List<GroupOrderBonusDTO> getallbonusfront(@RequestParam Integer memberId){
-        return service.frontlist(memberId);
+    public List<GroupOrderBonusDTO> getallbonusfront(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        return service.frontlist(user.getMemberId());
     }
 
     //後台修改分潤狀態分潤列表)

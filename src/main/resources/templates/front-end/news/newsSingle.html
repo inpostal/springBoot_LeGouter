@@ -89,6 +89,11 @@
 </div>
 
 <!-- 導覽列 -->
+<!-- 頁首 -->
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<!-- 導覽列 -->
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
   <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
     <h1 class="text-primary m-0">Le Goûter</h1>
@@ -130,13 +135,14 @@
 <!-- End Navbar Area -->
 
 <!-- Start Page Title Area -->
-<div class="page-title-area bg-14">
+<div class="page-title-area bg-4">
   <div class="container">
     <div class="page-title-content">
       <h2>最新消息</h2>
+
       <ul>
         <li>
-          <a href="index.html">
+          <a th:href="@{/LeGouter}">
             Home
           </a>
         </li>
@@ -208,6 +214,11 @@
 <!-- End Blog Details Area -->
 
 <!-- Start Footer Top Area -->
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+
 <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
   <div class="container py-5">
     <div class="row g-5">
@@ -285,10 +296,7 @@
 
 
 <!-- Start Go Top Area -->
-<div class="go-top">
-  <i class='bx bx-chevrons-up'></i>
-  <i class='bx bx-chevrons-up'></i>
-</div>
+
 <!-- End Go Top Area -->
 
 

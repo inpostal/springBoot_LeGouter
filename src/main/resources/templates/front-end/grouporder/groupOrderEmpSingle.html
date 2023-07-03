@@ -101,6 +101,11 @@
 </div>
 
 <!-- 導覽列 -->
+<!-- 頁首 -->
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<!-- 導覽列 -->
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
     <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
         <h1 class="text-primary m-0">Le Goûter</h1>
@@ -312,12 +317,12 @@
 
 
 <!-- Start Go Top Area -->
-<div class="go-top">
-    <i class='bx bx-chevrons-up'></i>
-    <i class='bx bx-chevrons-up'></i>
-</div>
-<!-- End Go Top Area -->
 
+<!-- End Go Top Area -->
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
 <!-- Jquery-3.5.1.Slim.Min.JS -->
 <script src="/GroupOrder/assets/js/jquery-3.5.1.slim.min.js"></script>

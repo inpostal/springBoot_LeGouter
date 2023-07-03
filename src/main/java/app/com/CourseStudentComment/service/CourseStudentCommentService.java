@@ -69,15 +69,19 @@ public class CourseStudentCommentService {
     public CourseCommentDTO getCourseCommentById(Integer courseStudentCommentId) {
         CourseCommentDTO dto = new CourseCommentDTO();
         CourseStudentComment c = repository1.findById(courseStudentCommentId).orElse(null);
-        Employee employee= employeeRepository.getReferenceById(c.getEmpId());
+        if (c.getEmpId()!=null){
+            Employee employee= employeeRepository.getReferenceById(c.getEmpId());
+            dto.setEmpId(employee.getEmpId());
+            dto.setEmpName(employee.getEmpName());
+        }
+
         if (c != null) {
             dto.setMemId(c.getMemId());
             dto.setCourseId(c.getCourseId());
             dto.setCourseStudentCommentId(c.getStudentCommentId());
             dto.setCourseStudentCommentContent(c.getStudentCommentContent());
             dto.setCourseStudentCommentDate(c.getStudentCommentDate());
-            dto.setEmpId(employee.getEmpId());
-            dto.setEmpName(employee.getEmpName());
+
             dto.setChefCommentContent(c.getChefCommentContent());
             dto.setChefCommentDate(c.getChefCommentDate());
 
@@ -89,11 +93,11 @@ public class CourseStudentCommentService {
             dto.setCourseName("無課程");
         }
 
-        if (c.getChefCommentContent() == null) {
-            dto.setChefCommentContent("等待回覆中...");
-        } else {
-            dto.setChefCommentContent(c.getChefCommentContent());
-        }
+//        if (c.getChefCommentContent() == null) {
+//            dto.setChefCommentContent("等待回覆中...");
+//        } else {
+//            dto.setChefCommentContent(c.getChefCommentContent());
+//        }
         return dto;
     }
 
@@ -114,6 +118,31 @@ public class CourseStudentCommentService {
 //刪除
     public void delete(Integer courseStudentCommentId) {
         repository1.deleteById(courseStudentCommentId);
+    }
+
+    public List<CourseCommentDTO> findAllCommentByCourseId(Integer courseId) {
+        List<CourseStudentComment> courseStudentComment = repository1.findAllByCourseId(courseId);
+        List<CourseCommentDTO> result = new ArrayList<>();
+
+
+        for (CourseStudentComment c : courseStudentComment) {
+            CourseCommentDTO dto = new CourseCommentDTO();
+            Course course = repository.getReferenceById(c.getCourseId());
+            if (c.getEmpId() != null) {
+                Employee employee = employeeRepository.getReferenceById(c.getEmpId());
+                dto.setEmpName(employee.getEmpName());
+            }
+            dto.setMemId(c.getMemId());
+            dto.setCourseName(course.getCourseName());
+            dto.setCourseId(c.getCourseId());
+            dto.setCourseStudentCommentId(c.getStudentCommentId());
+            dto.setCourseStudentCommentContent(c.getStudentCommentContent());
+            dto.setCourseStudentCommentDate(c.getStudentCommentDate());
+            dto.setChefCommentContent(c.getChefCommentContent());
+            dto.setChefCommentDate(c.getChefCommentDate());
+            result.add(dto);
+        }
+        return result;
     }
 
 

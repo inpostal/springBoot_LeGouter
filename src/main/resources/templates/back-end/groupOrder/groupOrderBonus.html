@@ -484,9 +484,12 @@
                                         <span th:if="${g.groupOrderStatus == 6}">團購結束。訂單已完成</span>
                                     </td>
                                     <td id="groupordermin" th:text="${g.getBonusRate()}"></td>
-                                    <td id="grouporderbonus"
-                                        th:text="${g.groupOrderStatus == 6 ? g.getTotalGroupProductPrice() * g.getBonusRate() : ((g.groupOrderStatus == 1 || g.groupOrderStatus == 2 || g.groupOrderStatus == 3 || g.groupOrderStatus == 4) ? '尚未結算' : (g.groupOrderStatus == 5 ? '訂單取消' : g.getGroupOrderBonus()))}"></td>
-
+                                    <td id="grouporderbonus">
+                                        <span th:if="${g.groupOrderStatus == 6}" th:text="${g.totalGroupProductPrice * g.bonusRate}"></span>
+                                        <span th:if="${g.groupOrderStatus == 1 || g.groupOrderStatus == 2 || g.groupOrderStatus == 3 || g.groupOrderStatus == 4}" th:text="尚未結算"></span>
+                                        <span th:if="${g.groupOrderStatus == 5}" th:text="訂單取消"></span>
+                                        <span th:if="${g.groupOrderStatus != 1 && g.groupOrderStatus != 2 && g.groupOrderStatus != 3 && g.groupOrderStatus != 4 && g.groupOrderStatus != 5 && g.groupOrderStatus != 6}" th:text="${g.groupOrderBonus}"></span>
+                                    </td>
                                     <td>
                                         <!--                                    <td id="grouporderbonusstatus" th:text="${g.getGroupOrderBonusStatus()}">-->
                                         <button id="GroupOrderBonusStatus" type="button" class="btn"

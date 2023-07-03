@@ -60,6 +60,9 @@ public class GroupOrderBonusService {
             } else {
                 dto.setGroupOrderBonusStatus("已發放");
             }
+
+
+
             result.add(dto);
         }
         return result;

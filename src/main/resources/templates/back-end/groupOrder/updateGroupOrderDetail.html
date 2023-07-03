@@ -516,14 +516,14 @@
         <div class="container-small-unit">
           <label class="label">訂單狀態</label>
           <select name="pay-method" id="groupproductstatus" >
-            <option value="0" th:selected="${groupOrderDetail.groupProductStatus==0}">等待付款中</option>
-            <option value="1" th:selected="${groupOrderDetail.groupProductStatus==1}">已取消</option>
-            <option value="2" th:selected="${groupOrderDetail.groupProductStatus==2}">訂單付款完成</option>
-            <option value="3" th:selected="${groupOrderDetail.groupProductStatus==3}">準備出貨中</option>
-            <option value="4" th:selected="${groupOrderDetail.groupProductStatus==4}">已出貨</option>
-            <option value="5" th:selected="${groupOrderDetail.groupProductStatus==5}">未取貨,退回平台</option>
-            <option value="6" th:selected="${groupOrderDetail.groupProductStatus==6}">已取款</option>
-            <option value="7" th:selected="${groupOrderDetail.groupProductStatus==7}">退款中</option>
+            <option value="0" th:selected="${groupOrderDetail.groupProductStatus==0}">訂單已取消</option>
+            <option value="1" th:selected="${groupOrderDetail.groupProductStatus==1}">付款完成，參團中</option>
+            <option value="2" th:selected="${groupOrderDetail.groupProductStatus==2}">已成團，準備出貨中</option>
+            <option value="3" th:selected="${groupOrderDetail.groupProductStatus==3}">已出貨</option>
+            <option value="4" th:selected="${groupOrderDetail.groupProductStatus==4}">未取貨，退回平台</option>
+            <option value="5" th:selected="${groupOrderDetail.groupProductStatus==5}">已取貨</option>
+            <option value="6" th:selected="${groupOrderDetail.groupProductStatus==6}">流團，退款中</option>
+
           </select>
         </div>
 

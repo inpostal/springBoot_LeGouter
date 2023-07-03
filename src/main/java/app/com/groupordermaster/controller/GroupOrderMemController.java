@@ -6,6 +6,7 @@ import app.com.groupordermaster.service.GroupOrderMemService;
 import app.com.groupordermaster.service.GroupOrderMemSingleService;
 import app.com.groupordermaster.vo.GroupActivity;
 import app.com.groupordermaster.vo.GroupOrderMemDTO;
+import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -28,8 +30,9 @@ public class GroupOrderMemController {
 
     @GetMapping("/groupOrder/groupOrderMem/single")
     @ResponseBody
-    public List<GroupOrderMemDTO> singleMemGroupOrder(@RequestParam Integer memberID) {
-        return service.getAllGroupMem(memberID);
+    public List<GroupOrderMemDTO> singleMemGroupOrder(HttpSession session) {
+        Members user =(Members) session.getAttribute("user");
+        return service.getAllGroupMem(user.getMemberId());
     }
 
 
