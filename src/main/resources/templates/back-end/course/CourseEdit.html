@@ -287,7 +287,6 @@
                                     <a style="display: none" id="course-status"
                                        th:text="${course.getCourseStatus()}"></a>
                                     <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>
-
                                 </div>
 
                                 <div class="card-body">
@@ -297,7 +296,7 @@
                                                 <label class="col-sm-2 col-form-label">課程圖片</label>
                                                 <div class="col-sm-10">
                                                     <input type="file" class="drop-ify" data-default-file=""
-                                                           id="courseImg">
+                                                           id="courseImg" accept="image/*">
                                                     <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"
                                                          th:alt="${course.getCourseName()}" width="100" height="100"
                                                          alt="">
@@ -339,7 +338,7 @@
                                             <div class="card-body">
                                                 <table id="addvideotable" class="display dataTable"
                                                        style="width: 100%">
-                                                    <tbody>
+                                                    <tbody id="videoTableBody">
                                                     <tr th:each="video : ${videos}">
                                                         <td style="width: 400px" th:text="${video.courseImgName}"></td>
                                                         <td>
@@ -351,7 +350,8 @@
                                                         </td>
                                                         <td>
                                                             <i class="fa fa-trash btn btn-sm btn-danger deleteRow"
-                                                               data-video-id="${video.courseImgId}"></i>
+                                                               th:data-video-id="${video.courseImgId}"></i>
+
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -403,49 +403,16 @@
 
 
 <script>
-    $(document).ready(function () {
-        let videoData = []; // Store video data
 
-        // Retrieve data from localStorage and display on the page
-        function loadDataFromLocalStorage() {
-            let storedData = localStorage.getItem('videoData');
-            if (storedData) {
-                videoData = JSON.parse(storedData);
+    let videoData = [];
 
-                if (videoData.length > 0) {
-                    videoData.forEach(function (data) {
-                        let newRow = $('<tr>');
-                        let rowContent = `
-            <td><input type="text" value="${data.name}" class="nameInput"></td>
-            <td><input type="file" class="dropify" data-default-file=""></td>
-            <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
-          `;
+    function saveDataToLocalStorage() {
+        localStorage.setItem('videoData', JSON.stringify(videoData));
+    }
 
-                        newRow.html(rowContent);
-                        newRow.appendTo("#addvideotable tbody");
-
-                        // Initialize Dropify plugin for the new row
-                        newRow.find('.dropify').dropify();
-
-                        // Bind click event for delete button in the new row
-                        newRow.find('.deleteRow').click(function () {
-                            deleteVideoRow($(this));
-                        });
-                    });
-                }
-            }
-        }
-
-
-        // Function to delete video row
-        function deleteVideoRow(deleteButton) {
-            let row = deleteButton.closest('tr');
-            let index = row.index();
-            videoData.splice(index, 1);
-            row.remove();
-            saveDataToLocalStorage();
-        }
-
+    // 绑定事件函数
+    function bindEvents() {
+        // 新增影片按钮点击事件
         $('#addVideo').click(function () {
             let newData = {
                 id: '',
@@ -456,10 +423,10 @@
 
             let newRow = $('<tr>');
             let rowContent = `
-      <td><input type="text" value="${newData.name}" name="videoNames[]" class="nameInput" placeholder="輸入影片名稱"></td>
-      <td><input type="file" name="videoFiles[]" class="dropify" data-default-file=""></td>
-      <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
-    `;
+  <td><input type="text" value="${newData.name}" name="videoNames[]" class="nameInput" placeholder="輸入影片名稱"></td>
+  <td><input type="file" name="videoFiles[]" class="dropify" data-default-file="" accept="video/*"></td>
+  <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+`;
 
             newRow.html(rowContent);
             newRow.appendTo("#addvideotable tbody");
@@ -467,16 +434,39 @@
             // Initialize Dropify plugin for the new row
             newRow.find('.dropify').dropify();
 
-            // Bind click event for delete button in the new row
-            newRow.find('.deleteRow').click(function () {
-                deleteVideoRow($(this));
-            });
+            // 重新绑定删除按钮点击事件
+            bindDeleteRowEvent(newRow.find('.deleteRow'));
 
-            saveDataToLocalStorage(); // Save data to localStorage
+            saveDataToLocalStorage(); // 保存数据到本地存储
         });
 
-        // Check localStorage for data on page load and load it
-        loadDataFromLocalStorage();
+        // 删除按钮点击事件
+        $('#videoTableBody').on('click', '.deleteRow', function () {
+            let videoId = $(this).data('video-id');
+            console.log('Video ID:', videoId);
+            let self = $(this);  // 将当前元素赋值给 self
+
+            $.ajax({
+                url: '/course/deleteVideo',
+                type: 'POST',
+                data: {videoId: videoId},
+                success: function (data) {
+                    console.log('Video deleted successfully');
+                    // 在此处执行其他需要的操作，例如刷新视频列表等
+                    self.closest('tr').remove();  // 使用 self 代替 this
+                    saveDataToLocalStorage(); // 保存数据到本地存储
+
+                },
+                error: function (data) {
+                    console.log('Failed to delete video');
+                }
+            });
+        });
+    }
+
+    // 页面加载完成后绑定事件
+    $(document).ready(function () {
+        bindEvents();
     });
 
 
@@ -530,28 +520,78 @@
         location.href = '/course/allcrs';
     });
 
-    $(document).ready(function () {
-        $(document).on('click', '.deleteRow', function () {
-            var videoId = $(this).data('video-id');
+    // $(document).ready(function () {
+    //     $('#videoTableBody').on('click', '.deleteRow', function () {
+    //         let videoId = $(this).data('video-id');
+    //         console.log('Video ID:', videoId);
+    //
+    //         $.ajax({
+    //             url: '/course/deleteVideo',
+    //             type: 'POST',
+    //             data: {videoId: videoId},
+    //             success: function (data) {
+    //                 console.log('Video deleted successfully');
+    //                 // 在此处执行其他需要的操作，例如刷新视频列表等
+    //                 $(this).closest('tr').remove();
+    //
+    //             },
+    //             error: function (data) {
+    //                 console.log('Failed to delete video');
+    //             }
+    //         });
+    //     });
+    // });
 
-            $.ajax({
-                url: '/course/deleteVideo',
-                type: 'POST',
-                data: {videoId: videoId},
-                success: function (data) {
-                    console.log('Video deleted successfully');
-                    // 在此处执行其他需要的操作，例如刷新视频列表等
-                },
-                error: function (data) {
-                    console.log('Failed to delete video');
-                }
-            });
-        });
-    });
-
+    //     $(document).ready(function () {
+    //         let videoData = []; // Store video data
+    //
+    //         // Function to delete video row
+    //         function deleteVideoRow(deleteButton) {
+    //             let row = deleteButton.closest('tr');
+    //             let index = row.index();
+    //             videoData.splice(index, 1);
+    //             row.remove();
+    //             saveDataToLocalStorage();
+    //         }
+    //
+    //         $('#addVideo').click(function () {
+    //             let newData = {
+    //                 id: '',
+    //                 name: '',
+    //                 file: ''
+    //             };
+    //             videoData.push(newData);
+    //
+    //             let newRow = $('<tr>');
+    //             let rowContent = `
+    //     <td><input type="text" value="${newData.name}" name="videoNames[]" class="nameInput" placeholder="輸入影片名稱"></td>
+    //     <td><input type="file" name="videoFiles[]" class="dropify" data-default-file=""></td>
+    //         <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow" video-id="${video.courseImgId}"></i></td>
+    // `;
+    //
+    //             newRow.html(rowContent);
+    //             newRow.appendTo("#addvideotable tbody");
+    //
+    //             // Initialize Dropify plugin for the new row
+    //             newRow.find('.dropify').dropify();
+    //
+    //             // Bind click event for delete button in the new row
+    //             newRow.find('.deleteRow').click(function () {
+    //                 deleteVideoRow($(this));
+    //             });
+    //
+    //             saveDataToLocalStorage(); // Save data to localStorage
+    //         });
+    //
+    //         // Save data to localStorage
+    //         function saveDataToLocalStorage() {
+    //             localStorage.setItem('videoData', JSON.stringify(videoData));
+    //         }
+    //     });
+    //
 </script>
-
 
 </body>
 
 </html>
+

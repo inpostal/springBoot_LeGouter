@@ -296,7 +296,7 @@
                                                 <label class="col-sm-2 col-form-label">課程圖片</label>
                                                 <div class="col-sm-10">
                                                     <input type="file" class="dropify" data-default-file=""
-                                                           id="courseImg">
+                                                           id="courseImg" accept="image/*">
                                                     <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"
                                                          th:alt="${course.getCourseName()}" width="100" height="100"
                                                          alt="">
@@ -330,31 +330,32 @@
                                         </form>
                                         <div class="card-header">
                                             <h4 class="card-title">影片區域</h4>
-
+                                            <button id="addVideo" type="button" class="btn btn-sm btn-warning"
+                                                    value="新增影片">新增影片
+                                            </button>
                                         </div>
                                         <form>
                                             <div class="card-body">
                                                 <table id="addvideotable" class="display dataTable"
                                                        style="width: 100%">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>試看</td>
-                                                        <td>試看影片</td>
+                                                    <tbody id="videoTableBody">
+                                                    <tr th:each="video : ${videos}">
+                                                        <td style="width: 400px" th:text="${video.courseImgName}"></td>
                                                         <td>
-                                                            <video width="320" height="240" controls
-                                                                   th:each="v:${list}">
-                                                                <source th:src="@{'/course/'+${v.getCourseId()}+'/'+${v.getCourseImgId()}}"
+                                                            <video style="width: 500px" width="320" height="240"
+                                                                   controls>
+                                                                <source th:src="@{'/course/' + ${course.courseId} + '/' + ${video.courseImgId}}"
                                                                         type="video/mp4">
                                                             </video>
                                                         </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td><input></td>
-                                                        <td><input type="file" class="dropify" data-default-file=""
-                                                                   id="courseVideo1"></td>
+                                                        <td>
+                                                            <i class="fa fa-trash btn btn-sm btn-danger deleteRow"
+                                                               th:data-video-id="${video.courseImgId}"></i>
+
+                                                        </td>
                                                     </tr>
                                                     </tbody>
+
                                                 </table>
                                             </div>
                                             <div class="card-header">
@@ -420,11 +421,80 @@
 
 <script>
 
+    let videoData = [];
+
+    function saveDataToLocalStorage() {
+        localStorage.setItem('videoData', JSON.stringify(videoData));
+    }
+
+    // 绑定事件函数
+    function bindEvents() {
+        // 新增影片按钮点击事件
+        $('#addVideo').click(function () {
+            let newData = {
+                id: '',
+                name: '',
+                file: ''
+            };
+            videoData.push(newData);
+
+            let newRow = $('<tr>');
+            let rowContent = `
+  <td><input type="text" value="${newData.name}" name="videoNames[]" class="nameInput" placeholder="輸入影片名稱"></td>
+  <td><input type="file" name="videoFiles[]" class="dropify" data-default-file="" accept="video/*"></td>
+  <td><i class="fa fa-trash btn btn-sm btn-danger deleteRow"></i></td>
+`;
+
+            newRow.html(rowContent);
+            newRow.appendTo("#addvideotable tbody");
+
+            // Initialize Dropify plugin for the new row
+            newRow.find('.dropify').dropify();
+
+            // 重新绑定删除按钮点击事件
+            bindDeleteRowEvent(newRow.find('.deleteRow'));
+
+            saveDataToLocalStorage(); // 保存数据到本地存储
+        });
+
+        // 删除按钮点击事件
+        $('#videoTableBody').on('click', '.deleteRow', function () {
+            let videoId = $(this).data('video-id');
+            console.log('Video ID:', videoId);
+            let self = $(this);  // 将当前元素赋值给 self
+
+            $.ajax({
+                url: '/course/deleteVideo',
+                type: 'POST',
+                data: {videoId: videoId},
+                success: function (data) {
+                    console.log('Video deleted successfully');
+                    // 在此处执行其他需要的操作，例如刷新视频列表等
+                    self.closest('tr').remove();  // 使用 self 代替 this
+                    saveDataToLocalStorage(); // 保存数据到本地存储
+
+                },
+                error: function (data) {
+                    console.log('Failed to delete video');
+                }
+            });
+        });
+    }
+
+    // 页面加载完成后绑定事件
+    $(document).ready(function () {
+        bindEvents();
+    });
+
     $("#submit").click(function () {
         let courseName = $("#courseName").val();
         let coursePrice = $("#coursePrice").val();
         let courseContent = $("#courseContent").val();
         let courseImg = $("#courseImg")[0].files[0];
+        let videoFiles = $('.dropify')[0].files;  // 获取所有影片文件
+        let videoNames = $('.nameInput').map(function () {
+            return $(this).val();
+        }).get();  // 获取所有影片名称
 
         let formData = new FormData();
         formData.append("courseName", courseName);
@@ -432,7 +502,14 @@
         formData.append("courseContent", courseContent);
         formData.append("courseImg", courseImg);
         formData.append("courseId", $("#course-id").text());
+        $('.dropify').each(function () {
+            formData.append("videoFiles", $(this)[0].files[0]);
+        });
 
+        $('.nameInput').each(function () {
+            console.log($(this).val());
+            formData.append("videoNames", $(this).val());
+        });
         $.ajax({
             url: "/course/update",
             type: "POST",
@@ -441,17 +518,9 @@
             processData: false,
             success: function (data) {
                 console.log(data);
-                Swal.fire({
-                    title: '修改完成',
-                    showClass: {
-                        popup: 'animate__zoomIn'
-                    },
-                    hideClass: {
-                        popup: 'animate__fadeOutDown'
-                    }
-                }).then(function () {
-                    location.href = '/course/allcrs';
-                });
+                alert("修改成功");
+                location.href = '/course/allcrs';
+
             },
             error: function (data) {
                 console.log(data);

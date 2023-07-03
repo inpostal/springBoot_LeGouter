@@ -66,7 +66,7 @@
 
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a th:href="@{/LeGouter}">
                         Home
                     </a>
                 </li>
@@ -192,6 +192,7 @@
                             價錢 <span class="bold" th:text="${course.getCoursePrice()}"></span>
                         </li>
                     </ul>
+                    <a href="#" id="wishlist-link" class="default-btn checkout">加入追蹤清單</a>
                     <a href="#" id="checkout-link" class="default-btn checkout">購買課程</a>
                     <div class="social-content">
                         <p>
