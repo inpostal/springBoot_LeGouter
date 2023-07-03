@@ -100,7 +100,7 @@ public class DessertService {
         } else {
             Integer q = dessert5Cart.getQuantity();
             if (q >= 50) {
-                return "購物車數量已達上限";
+                return "購物車數量已達上限，無法再新增";
             } else {
                 dessert5Cart.setQuantity(q + 1);
                 dessert5CartRepository.save(dessert5Cart);
