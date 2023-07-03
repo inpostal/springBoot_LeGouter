@@ -122,8 +122,21 @@
                         <option value="0">下架</option>
                     </select>
                     <label class="inpproduct">圖片</label>
-                    <input type="file" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
-                    <img th:src="@{/groupProduct/get/img/{groupProductId}(groupProductId=${groupProductVO.getGroupProductId()})}" alt="預設圖片" width="360px" height="270px">
+                    <form enctype="multipart/form-data" id="imageform">
+                        <div>
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg0">
+                            <img th:src="@{/groupProduct/get/img/{groupProductId}(groupProductId=${groupProductVO.getGroupProductId()})}" alt="預設圖片" width="360px" height="270px">
+                        </div>
+                        <div>
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
+                        </div>
+                        <div>
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg2">
+                        </div>
+                        <div>
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg3">
+                        </div>
+                    </form>
                     <!-- <input type="file" style="margin-top: 10px;">
                     <input type="file" style="margin-top: 10px;">
                     <input type="file" style="margin-top: 10px;"> -->
@@ -176,8 +189,9 @@
             groupProductEnddate = today;
           }
           let groupProductStatus = $("#productstatus").val();
-          let groupProductImg = $("#uploadimg1")[0].files[0];
-          console.log("groupProductImg的值" + groupProductImg);
+          let imageform = $("#imageform");
+          console.log("觀察取得的FORM資料:" + imageform);
+          let imageInputs = imageform.find("input[type='file']"); // 選取4個檔案輸入元素
           formdata.append("groupProductId", groupProductId);
           formdata.append("groupProductName", groupProductName);
           formdata.append("groupProductContent", groupProductContent);
@@ -185,9 +199,19 @@
           formdata.append("groupProductStardate", groupProductStardate);
           formdata.append("groupProductEnddate", groupProductEnddate);
           formdata.append("groupProductStatus", groupProductStatus);
-          formdata.append("groupProductImg", groupProductImg);
+          //   將每個檔案存到 formData
+          for (let i = 0; i < imageInputs.length; i++) {
+                let files = imageInputs[i].files[0];
+                console.log("for迴圈當下的files:" + files);
+  
+              //   存入formdata
+            //   let setname = "file" + i;
+                // console.log("每個名稱:" + setname);
+                formdata.append(i, files);
+            }
+            // **************施工中-看來還需要圖片的PK阿**************
         $.ajax({
-            url: "/group-product/updata-the",
+            url: "/group-product/updata-the2",
             type: "POST",
             contentType: false,
             processData: false,

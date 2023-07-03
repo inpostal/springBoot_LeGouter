@@ -29,7 +29,7 @@ public class GroupController {
 
 	@GetMapping("/group-product-manage") //後台團購商品管理
 	public String groupProductManage() {
-		return "back-end/group/group-product-manage";
+		return "back-end/group/group-product-manage2";
 	}
     @GetMapping("/plan-activity-manage") //後台團購活動管理
 	public String planActivityManage() {
@@ -74,19 +74,22 @@ public class GroupController {
         //將id裡面資料放入model
         model.addAttribute("groupProductVO", groupProductVO);
         //導至頁面
-    	return "back-end/group/group-product-updata";
+    	return "back-end/group/group-product-updata2";
     }
     @GetMapping("/group-product/Checkout") //結帳頁面
     public String groupCheckout(
     		@RequestParam Integer groupActivityId,
     		@RequestParam Integer groupActivityPrice,
-    		Model model
+    		Model model,
+    		HttpSession session, RedirectAttributes redirectAttributes
     		) {
-//    		HttpSession session, RedirectAttributes redirectAttributes
-//    	Members user = (Members) session.getAttribute("user");
-//        if (user !=null){
-//            String address = user.getMemberAddress();
-//            model.addAttribute("address", address);
+    	String checkouturl = "/group-product/Checkout?" + "groupActivityId=" + groupActivityId + "&groupActivityPrice=" + groupActivityPrice;
+    	Members user = (Members) session.getAttribute("user");
+        if (user != null){
+    		Integer memberId = user.getMemberId();
+            String account = user.getMemberAccount();
+            model.addAttribute("memberId", memberId);
+            model.addAttribute("account", account);
     	
     	GroupActivityVO checkoutactivityvo = groupActivityService.showTheActivity(groupActivityId);
     	GroupCheckoutDTO groupcheckoutDTO = new GroupCheckoutDTO();
@@ -98,10 +101,11 @@ public class GroupController {
     	model.addAttribute("groupcheckoutDTO", groupcheckoutDTO);
 
             return "front-end/group/group-Checkout";
-//        }else {
-//            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
-//            return "redirect:/login";
-//        }
+        }else {
+            redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
+            session.setAttribute("location", checkouturl);
+            return "redirect:/login";
+        }
     	
     }
 //    @GetMapping("/plan-activity/updata") //前台團購主修改活動資料

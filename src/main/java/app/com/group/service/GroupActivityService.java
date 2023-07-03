@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.criteria.CriteriaBuilder.Case;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import app.com.grouporderdetail.repository.GroupOrderDetailRepository;
 import app.com.grouporderdetail.vo.GroupOrderDetail;
 import app.com.groupordermaster.repository.GroupOrderMasterRepository;
 import app.com.groupordermaster.vo.GroupOrderMaster;
+import app.com.member.repository.MemberRepository;
+import app.com.member.vo.Members;
 
 @Service
 public class GroupActivityService {
@@ -29,6 +33,10 @@ public class GroupActivityService {
 	// 用彥君的Repository
 	@Autowired
 	private GroupOrderDetailRepository groupOrderDetailRepository;
+	
+	// 用奕翔的Repository
+	@Autowired
+	private MemberRepository memberRepository;
 
 	public List<GroupActivityVO> allActivity() {
 		List<GroupActivityVO> avolist = groupActivityRepository.findAll();
@@ -104,6 +112,45 @@ public class GroupActivityService {
 		System.out.println("檢查findByGroupActivityId回傳的陣列長度:" + groupOrderMaster.size());
 		return groupOrderDetailRepository.countByGroupOrderId(groupOrderMaster.get(0).getGroupOrderId());
 	}
+	
+	// 整合後應該放在彥君的團購訂單明細Service。
+		public GroupOrderMaster inMasterSum(Integer groupOrderId) {
+			List<GroupOrderDetail> total = groupOrderDetailRepository.findByGroupOrderId(groupOrderId);
+			int numberproduct = 0;
+			int totalproductprice = 0;
+			for (GroupOrderDetail onebyone : total) {
+				if (onebyone.getGroupProductStatus() == 1) {
+					numberproduct += onebyone.getGroupOrderAmount();
+					totalproductprice += (onebyone.getGroupOrderAmount() * onebyone.getGroupProductPrice());
+				}
+			}
+			GroupOrderMaster groupOrderMaster = groupOrderMasterRepository.findById(groupOrderId).get();
+			Integer thegroupOrderMin = groupActivityRepository.findById(groupOrderMaster.getGroupActivityId()).get().getGroupOrderMin();
+			double percentage = 0.04;
+			groupOrderMaster.setGroupOrderId(groupOrderId);
+			groupOrderMaster.setNumberOfProduct(numberproduct);
+//			groupOrderMaster.setGroupOrderBonus((int) Math.round(totalproductprice * thegroupOrderDiscount.doubleValue()));
+			switch (thegroupOrderMin) {
+			case 200:
+				percentage = 0.04;
+				break;
+			case 400:
+				percentage = 0.08;
+				break;
+			case 600:
+				percentage = 0.12;
+				break;
+			}
+			groupOrderMaster.setGroupOrderBonus((int) Math.round(totalproductprice * percentage));
+			groupOrderMaster.setTotalGroupProductPrice(totalproductprice);
+			
+			return groupOrderMasterRepository.save(groupOrderMaster);
+		}
+		
+		public Members CheckGetMember(Integer memberId) {
+			Members mem = memberRepository.findById(memberId).get();
+			return mem;
+		}
 
 	//
 //	public Boolean updataActivity(GroupActivityDTO groupActivityDTO) {
