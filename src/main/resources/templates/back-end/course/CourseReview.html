@@ -403,6 +403,7 @@
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
 <script src="/Course/JS/datatables.init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $('#return').on('click', function () {
@@ -410,29 +411,42 @@
     });
 
     $('#gooff').on('click', function () {
-        console.log("kkkkk")
 
-        if (confirm('確定要下架這個課程嗎？')) {
+        Swal.fire({
+            title: '確定要下架這個課程嗎？',
+            showCancelButton: true,
+            confirmButtonText: '沒錯喔',
+            cancelButtonText: '考慮一下',
+            icon: 'warning',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let courseId = $("#course-id").text();
 
-            let courseId = $("#course-id").text();
-
-            $.ajax({
-                url: '/course/cancelcourse',
-                type: 'POST',
-                data: {
-                    courseId: courseId
-                },
-                success: function (data) {
-                    console.log(data);
-                    alert("下架成功，返回清單");
-                    location.href = '/course/allcrs';
-                },
-                error: function (data) {
-                    console.log(data);
-                    alert("下架失敗");
-                }
-            });
-        }
+                $.ajax({
+                    url: '/course/cancelcourse',
+                    type: 'POST',
+                    data: {
+                        courseId: courseId
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        Swal.fire({
+                            title: '下架成功',
+                            text: '返回清單',
+                            icon: 'success'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = '/course/allcrs';
+                            }
+                        });
+                    },
+                    error: function (data) {
+                        console.log(data);
+                        Swal.fire('下架失敗', '', 'error');
+                    }
+                });
+            }
+        });
     });
 
 

@@ -545,7 +545,7 @@ Course Area Style
 }
 
 .single-course .course-content a h3 {
-    font-size: 2rem;
+    font-size: 2.4rem;
     margin-bottom: 16px;
     -webkit-transition: var(--transition);
     transition: var(--transition);
@@ -2474,6 +2474,7 @@ a.default-btn.two {
     display: block;
     color: var(--body-color);
     margin-bottom: 10px;
+    font-size: 15px;
 }
 
 .checkout-area .billing-details .form-group label .required {
@@ -2629,6 +2630,7 @@ a.default-btn.two {
     background-color: transparent;
     border: 0;
     margin-bottom: 0px;
+    font-size: 18px;
     color: var(--heading-color);
 }
 
@@ -3202,6 +3204,7 @@ Event Area Style
 
 .account-wrap ul li:last-child {
     padding-bottom: 0;
+    font-size: 18px;
 }
 
 .account-wrap ul li:last-child::before {
@@ -3347,7 +3350,7 @@ Single Event Area Style
 Single Course Area Style
 =====================================================*/
 .single-course-area .single-course-content h3 {
-    font-size: 2.7rem;
+    font-size: 3rem;
     margin-bottom: 25px;
 }
 
@@ -3374,7 +3377,7 @@ Single Course Area Style
 }
 
 .single-course-area .course-rating span {
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .single-course-area .course-rating img {
@@ -3401,6 +3404,7 @@ Single Course Area Style
     background-color: #f5f6fa;
     text-align: center;
     padding: 20px 30px;
+    font-size: 17px;
     margin-bottom: 30px;
 }
 
@@ -3669,6 +3673,7 @@ Single Course Area Style
     margin-bottom: 15px;
     border: none;
     padding-bottom: 0;
+    text-align: center;
 }
 
 .single-course-area .review-content .course-reviews-content .course-reviews li span {
@@ -4554,8 +4559,21 @@ li.float {
 }
 
 .checkout-area .cart-totals ul li {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     padding: 8px;
+}
+
+.form-control:disabled,
+.form-control:read-only {
+    font-size: 18px;
+}
+
+ul.lessons {
+    text-align: end;
+}
+
+button.eve.btn.btn-danger {
+    font-size: 18px;
 }
 
 /*# sourceMappingURL=style.css.map */

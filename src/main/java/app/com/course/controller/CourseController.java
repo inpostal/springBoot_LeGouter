@@ -39,13 +39,22 @@ public class CourseController {
 
     // 列出所有課程頁面
     @GetMapping("/course/allcrs")
-    public String allCrs() {
+    public String allCrs(HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
         return "/back-end/course/CourseMgmt";
     }
 
     // 單個課程編輯頁面
     @GetMapping("/course/edit/{courseId}")
-    public String editCoursePage(@PathVariable Integer courseId, Model model) {
+    public String editCoursePage(@PathVariable Integer courseId, Model model,
+                                 HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
         Course course = courseService.getCourseById(courseId);
         List<CourseImage> list = courseVideoService.getCourseVideoById(courseId);
 
@@ -91,7 +100,7 @@ public class CourseController {
                 courseImage.setCourseId(courseId);
 
                 try {
-                    courseImage.setCourseImage(videoFiles[i].getBytes());
+                    courseImage.setCourseImg(videoFiles[i].getBytes());
                     courseImage.setCourseImgName(videoNames[i]);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -107,7 +116,11 @@ public class CourseController {
 
     //單個課程查看頁面(可下架)
     @GetMapping("/course/coursereview/{courseId}")
-    public String courseReview(@PathVariable Integer courseId, Model model) {
+    public String courseReview(@PathVariable Integer courseId, Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
         Course course = courseService.getCourseById(courseId);
         List<CourseImage> list = courseVideoService.getCourseVideoById(courseId);
         model.addAttribute("course", course);
@@ -116,9 +129,28 @@ public class CourseController {
         return "/back-end/course/CourseReview";
     }
 
+    //課程修改重新上架
+    @GetMapping("/course/courserestart/{courseId}")
+    public String courseRestart(@PathVariable Integer courseId, Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
+        Course course = courseService.getCourseById(courseId);
+        List<CourseImage> list = courseVideoService.getCourseVideoById(courseId);
+        model.addAttribute("course", course);
+        model.addAttribute("videos", list);
+
+        return "/back-end/course/CourseRestart";
+    }
+
     //課程新增頁面
     @GetMapping("/course/addcourse")
-    public String addCoursePage() {
+    public String addCoursePage(HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
         return "/back-end/course/AddCourse";  // 返回 addCourse.html 页面
     }
 
@@ -153,7 +185,7 @@ public class CourseController {
             CourseImage courseImage = new CourseImage();
             courseImage.setCourseId(addCourse.getCourseId());
             try {
-                courseImage.setCourseImage(videoFiles[i].getBytes());
+                courseImage.setCourseImg(videoFiles[i].getBytes());
                 courseImage.setCourseImgName(videoNames[i]);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -178,16 +210,6 @@ public class CourseController {
                 .body(resource);
     }
 
-    //課程修改重新上架
-    @GetMapping("/course/courserestart/{courseId}")
-    public String courseRestart(@PathVariable Integer courseId, Model model) {
-        Course course = courseService.getCourseById(courseId);
-        List<CourseImage> list = courseVideoService.getCourseVideoById(courseId);
-        model.addAttribute("course", course);
-        model.addAttribute("videos", list);
-        return "/back-end/course/CourseRestart";
-    }
-
 
     // 刪除課程 (用不到XD)
     @DeleteMapping("/course/delete/{courseId}")
@@ -198,7 +220,11 @@ public class CourseController {
 
     //課程審核清單頁面
     @GetMapping("/course/coursechecklist")
-    public String courseCheckList() {
+    public String courseCheckList(HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
         return "/back-end/course/CourseCheckList";
     }
 
@@ -256,7 +282,11 @@ public class CourseController {
 
     // 單個審核頁面
     @GetMapping("/course/checkupdate/{courseId}")
-    public String checkUpdate(@PathVariable Integer courseId, Model model) {
+    public String checkUpdate(@PathVariable Integer courseId, Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
         Course course = courseService.getCourseById(courseId);
         List<CourseImage> videos = courseVideoService.getCourseVideoById(courseId);
         model.addAttribute("course", course);
@@ -267,7 +297,11 @@ public class CourseController {
 
     //單個課程審核確認頁面(不能編輯)
     @GetMapping("/course/coursecheck/{courseId}")
-    public String courseCheck(@PathVariable Integer courseId, Model model) {
+    public String courseCheck(@PathVariable Integer courseId, Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            return "redirect:/employee/login";
+        }
         Course course = courseService.getCourseById(courseId);
         List<CourseImage> list = courseVideoService.getCourseVideoById(courseId);
         model.addAttribute("course", course);
@@ -307,7 +341,7 @@ public class CourseController {
         if (courseVideos != null && !courseVideos.isEmpty()) {
             for (CourseImage courseVideo : courseVideos) {
                 if (courseVideo.getCourseImgId() == videoId) {
-                    byte[] video = courseVideo.getCourseImage();
+                    byte[] video = courseVideo.getCourseImg();
                     ByteArrayResource resource = new ByteArrayResource(video);
                     return ResponseEntity.ok()
                             .contentType(MediaType.parseMediaType("video/mp4"))

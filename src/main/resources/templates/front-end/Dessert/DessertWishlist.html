@@ -238,8 +238,8 @@
 <script>
     $(document).on('click', '.btn-danger', function (e) {
         e.preventDefault();
-        var dessertId = $(this).data('dessert-id');
-        var memberId = parseInt('${session.emp.empId}');
+        let dessertId = $(this).data('dessert-id');
+        let memberId = parseInt('${session.emp.empId}');
 
         $.ajax({
             url: '/removeWishlist',
