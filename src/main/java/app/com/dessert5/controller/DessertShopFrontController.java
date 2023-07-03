@@ -37,7 +37,7 @@ public class DessertShopFrontController {
     @GetMapping("/addtocart")
     public String addToCart(@RequestParam Integer dessertId, HttpSession session) {
         Members member = (Members) session.getAttribute("user");
-        String url = "sproduct.html?param=" + dessertId;                                    // 這裡還沒測
+        String url = "dessertshop/shopAndproduct/sproduct.html?param=" + dessertId;                                    // 這裡還沒測
 
         // 如果沒登入過
         if (member == null){
@@ -48,14 +48,14 @@ public class DessertShopFrontController {
         // 如果已登入
         Integer memberId = member.getMemberId(); // 從session中取得member再取得memberId
         dessertService.addToCart(dessertId, memberId);
-        return "購物車網址";
+        return "已加入購物車";
     }
 
     // 加入追蹤清單
     @GetMapping("/addtolovelist")
     public String addToLoveList(@RequestParam Integer dessertId, HttpSession session) {
         Members member = (Members) session.getAttribute("user");
-        String url = "sproduct.html?param=" + dessertId;                                    // 這裡還沒測
+        String url = "dessertshop/shopAndproduct/sproduct.html?param=" + dessertId;                                    // 這裡還沒測
 
         // 如果沒登入過
         if (member == null){
@@ -66,6 +66,6 @@ public class DessertShopFrontController {
         // 如果已登入
         Integer memberId = member.getMemberId(); // 從session中取得member再取得memberId
         dessertService.addToLoveList(dessertId, memberId);
-        return "追蹤清單網址";
+        return "已加入追蹤清單";
     }
 }

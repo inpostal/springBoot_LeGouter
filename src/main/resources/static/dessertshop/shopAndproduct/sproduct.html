@@ -186,10 +186,12 @@
                         $.ajax({
                             url: '/dessert5front/addtocart?dessertId='+ dessertId,
                             type: 'GET',
-                            success: function(res){
+                            success: function(res) {
                                 console.log(res);
-                                if (res == "/login"){
+                                if (res == "/login") {
                                     window.location.href = res;
+                                } else {
+                                window.alert(res);
                                 }
                             }
                         });
@@ -204,6 +206,8 @@
                                 console.log(res);
                                 if (res == "/login"){
                                     window.location.href = res;
+                                } else{
+                                    window.alert(res);
                                 }
                             }
                         });
