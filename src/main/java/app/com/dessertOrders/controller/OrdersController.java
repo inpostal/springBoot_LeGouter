@@ -4,6 +4,7 @@ package app.com.dessertOrders.controller;
 import app.com.dessertOrders.entity.Orders;
 import app.com.dessertOrders.entity.OrdersDTO;
 import app.com.dessertOrders.service.OrdersService;
+import app.com.emp.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -30,7 +32,12 @@ public class OrdersController {
 
 
     @GetMapping("/orders/list")
-    public String getAllOrders() {
+    public String getAllOrders(HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null) {
+            session.setAttribute("location", "/orders/list");
+            return "redirect:/employee/login";
+        }
         return "/back-end/Dessert/DessertOrderManagement";
     }
 

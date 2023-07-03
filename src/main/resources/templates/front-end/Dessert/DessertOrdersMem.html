@@ -20,6 +20,19 @@
 
     <!-- Main style file -->
     <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/Commom/css/css2.css" rel="stylesheet">
+
+    <link href="/Commom/css/all.min.css" rel="stylesheet">
+    <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/Commom/css/animate.min.css" rel="stylesheet">
+    <link href="/Commom/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/style.css" rel="stylesheet">
 
     <style>
         ul {
@@ -32,6 +45,10 @@
 </head>
 
 <body>
+<div id="header-div"></div>
+
+
+<div id="nav-div"></div>
 
 <!-- preloader -->
 <div class="preloader">
@@ -48,7 +65,8 @@
     <!-- ./ header -->
 
     <!-- content -->
-    <div class="content">
+    <div class="content" style="margin-top: 100px;">
+
         <div class="row">
             <div class="col-md-8">
                 <h5 class="card-header" th:text="${memName} + ' 甜點訂單'"></h5>
@@ -111,7 +129,7 @@
                                             <th>數量</th>
                                             <th>價格</th>
                                             <th>小計</th>
-                                            <th>評價</th>
+                                            <!--                                            <th>評價</th>-->
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -128,28 +146,28 @@
                                             <td th:text="${M.getDessertAmount()}"></td>
                                             <td th:text="${M.getDessertPrice()}"></td>
                                             <td th:text="'$' + ${M.getDessertAmount() * M.getDessertPrice()}"></td>
-                                            <td>
-                                                <a onclick="toggleRating(this)" title="甜點評價"
-                                                   style="cursor: pointer; text-decoration: none;">
-                                                    <i class="fa-solid fa-cake-candles fa-lg"
-                                                       style="color: #f8d3ae;"></i>
-                                                </a>
+                                            <!--                                            <td>-->
+                                            <!--                                                <a onclick="toggleRating(this)" title="甜點評價"-->
+                                            <!--                                                   style="cursor: pointer; text-decoration: none;">-->
+                                            <!--                                                    <i class="fa-solid fa-cake-candles fa-lg"-->
+                                            <!--                                                       style="color: #f8d3ae;"></i>-->
+                                            <!--                                                </a>-->
 
-                                                <div class="block" style="display: none;">
-                                                    <ul>
-                                                        <li data-default-index="0">
-                                                                <span>
-                                                                    <img src="/Dessert/picture/x1.png">
-                                                                   <img src="/Dessert/picture/x1.png">
-                                                                  <img src="/Dessert/picture/x1.png">
-                                                                   <img src="/Dessert/picture/x1.png">
-                                                                   <img src="/Dessert/picture/x1.png">
-                                                                </span>
-                                                            <em class="level"></em>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                            <!--                                                <div class="block" style="display: none;">-->
+                                            <!--                                                    <ul>-->
+                                            <!--                                                        <li data-default-index="0">-->
+                                            <!--                                                                <span>-->
+                                            <!--                                                                    <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                  <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                </span>-->
+                                            <!--                                                            <em class="level"></em>-->
+                                            <!--                                                        </li>-->
+                                            <!--                                                    </ul>-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </td>-->
                                         </tr>
                                         </tbody>
                                     </table>
@@ -163,6 +181,9 @@
         </div>
     </div>
 </div>
+<div id="footer-div"></div>
+
+<div id="copyright-div"></div>
 
 <script type="text/javascript" src="/Dessert/JS/jquery.min.js"></script>
 <script src="/Course/JS/Jquery.js"></script>
@@ -256,6 +277,18 @@
 <!--    });-->
 
 <!--</script>-->
+<script src="/Conponents/front_end.js"></script>
+<script data-cfasync="false" src="/Commom/js/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="/Commom/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<!--<script src="/Commom/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>-->
 <!-- ./ layout-wrapper -->
 
 <!-- Bundle scripts -->

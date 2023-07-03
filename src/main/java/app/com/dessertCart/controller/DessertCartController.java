@@ -4,6 +4,7 @@ import app.com.dessertCart.entity.DessertCartDTO;
 import app.com.dessertCart.entity.OrderInfo;
 import app.com.dessertCart.service.DessertCartService;
 import app.com.member.repository.MemberRepository;
+import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,27 +29,27 @@ public class DessertCartController {
     private MemberRepository memberRepository;
 
 
-//    @GetMapping("/dessertCart/{memberId}")
-//    public String getDessertCartByMemberId(@PathVariable Integer memberId, Model model) {
-//        model.addAttribute("memberId", memberId);
-//        return "/front-end/Dessert/DessertCart";
-//    }
-//
-//
-//    @GetMapping("/dessertCart/get/{memberId}")
-//    @ResponseBody
-//    public List<DessertCartDTO> getDessertCartByMemberId(@PathVariable Integer memberId) {
-//        List<DessertCartDTO> dessertCartDTOList = dessertCartService.getDessertCartByMemberId(memberId);
-//        return dessertCartDTOList;
-//    }
+    @GetMapping("/dessertCart")
+    public String getDessertCartByMemberId(HttpSession session, Model model) {
+        Members member = (Members) session.getAttribute("user");
+        if (member == null) {
+            session.setAttribute("location", "/dessertCart");
+            return "redirect:/login";
+        }
+        Integer memberId = member.getMemberId();
 
-    @GetMapping("/dessertCart/{memberId}")
-    public String getDessertCartByMemberId(@PathVariable Integer memberId, Model model) {
         return getDessertCart(memberId, model, "/front-end/Dessert/DessertCart");
     }
 
-    @GetMapping("/dessertCart/checkOut/{memberId}")
-    public String getDessertCartCheckOut(@PathVariable Integer memberId, Model model) {
+    @GetMapping("/dessertCart/checkOut")
+    public String getDessertCartCheckOut(HttpSession session, Model model) {
+        Members member = (Members) session.getAttribute("user");
+        if (member == null) {
+            session.setAttribute("location", "/dessertCart/checkOut");
+            return "redirect:/login";
+        }
+        Integer memberId = member.getMemberId();
+
         return getDessertCart(memberId, model, "/front-end/Dessert/DessertCheckOut");
     }
 
@@ -89,28 +90,52 @@ public class DessertCartController {
     }
 
 
+    //    @PostMapping("/dessertCart/delete")
+//    public String delete(@RequestParam("dessertId") Integer dessertId,
+//                         HttpSession session) {
+////        Members member = (Members) session.getAttribute("user");
+////        if (member != null) {
+////            Integer memberId = member.getId();
+////            dessertCartService.delete(dessertId, memberId);
+////        }
+//        dessertCartService.delete(dessertId, 1);
+//        return "/front-end/Dessert/DessertCart";
+//    }
+//
+//
+//    @PostMapping("/submitOrder")
+//    public String submitOrder(@RequestBody OrderInfo orderInfo, HttpSession session) {
+////        Members member = (Members) session.getAttribute("user");
+////        if (member != null) {
+//        Integer memberId = 1;
+//        dessertCartService.submitOrder(memberId, orderInfo);
+////        }
+//        return "/front-end/Dessert/OrderSuccessful";
+//    }
     @PostMapping("/dessertCart/delete")
-    public String delete(@RequestParam("dessertId") Integer dessertId,
-                         HttpSession session) {
-//        Members member = (Members) session.getAttribute("user");
-//        if (member != null) {
-//            Integer memberId = member.getId();
-//            dessertCartService.delete(dessertId, memberId);
-//        }
-        dessertCartService.delete(dessertId, 1);
+    public String delete(@RequestParam("dessertId") Integer dessertId, HttpSession session) {
+        Members member = (Members) session.getAttribute("user");
+        if (member == null) {
+            session.setAttribute("location", "/dessertCart/delete");
+            return "redirect:/login";
+        }
+        Integer memberId = member.getMemberId();
+        dessertCartService.delete(dessertId, memberId);
         return "/front-end/Dessert/DessertCart";
     }
 
-
     @PostMapping("/submitOrder")
     public String submitOrder(@RequestBody OrderInfo orderInfo, HttpSession session) {
-//        Members member = (Members) session.getAttribute("user");
-//        if (member != null) {
-        Integer memberId = 1;
+        Members member = (Members) session.getAttribute("user");
+        if (member == null) {
+            session.setAttribute("location", "/submitOrder");
+            return "redirect:/login";
+        }
+        Integer memberId = member.getMemberId();
         dessertCartService.submitOrder(memberId, orderInfo);
-//        }
         return "/front-end/Dessert/OrderSuccessful";
     }
+
 
     @GetMapping("/OrderSuccessful")
     public String orderSuccessfulPage() {
