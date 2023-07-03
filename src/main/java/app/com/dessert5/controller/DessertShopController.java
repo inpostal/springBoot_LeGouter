@@ -22,7 +22,6 @@ public class DessertShopController {
     public String empcheck5(HttpSession session){
         Employee emp = (Employee) session.getAttribute("emp");
         if (emp == null){
-            session.setAttribute("location", "/dessertshop/dessertshopback.html" );
             return "/employee/login";
         }
         return "/dessertshop/dessertshopback.html";

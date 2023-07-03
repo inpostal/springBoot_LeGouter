@@ -408,6 +408,7 @@
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
 <script src="/Course/JS/datatables.init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     let editing = false;
@@ -428,7 +429,6 @@
     });
 
     $('#confirmButton').click(function () {
-        console.log("SSSSSS")
         if (editing) {
             let chefInfo = $('#chefInfoText').val();
             let chefId = $("#chef-Id").text();
@@ -438,7 +438,13 @@
                 data: {chefId: chefId, chefInfo: chefInfo},
                 success: function (response) {
                     // 处理服务器响应
-                    alert("修改成功！");
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: '修改成功',
+                        showConfirmButton: false,
+                        timer: 1200
+                    });
                     $('#chefInfoText').replaceWith('<p id="chefInfoText">' + chefInfo + '</p>');
                     $('#editButton').text('修改'); // 改变按钮文字为"修改"
                     editing = false; // 切换到非编辑状态

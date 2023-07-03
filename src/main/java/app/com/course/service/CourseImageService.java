@@ -40,7 +40,8 @@ public class CourseImageService {
         return courseImageRepository.findById(courseImgId).get();
     }
 
-    public void delete(CourseImage video) {
-        courseImageRepository.delete(video);
+    public void delete(CourseImage courseImage) {
+        courseImageRepository.delete(courseImage);
     }
+
 }

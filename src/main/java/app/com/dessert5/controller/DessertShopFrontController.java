@@ -37,11 +37,11 @@ public class DessertShopFrontController {
     @GetMapping("/addtocart")
     public String addToCart(@RequestParam Integer dessertId, HttpSession session) {
         Members member = (Members) session.getAttribute("user");
-        String url = "dessertshop/shopAndproduct/sproduct.html?param=" + dessertId;                                    // 這裡還沒測
+        String url = "dessertshop/shopAndproduct/sproduct.html?param=" + dessertId;
 
         // 如果沒登入過
         if (member == null){
-            session.setAttribute("location", url );                                  // 這裡還沒測
+            session.setAttribute("location", url );
             return "/login";
         }
 
@@ -55,11 +55,11 @@ public class DessertShopFrontController {
     @GetMapping("/addtolovelist")
     public String addToLoveList(@RequestParam Integer dessertId, HttpSession session) {
         Members member = (Members) session.getAttribute("user");
-        String url = "dessertshop/shopAndproduct/sproduct.html?param=" + dessertId;                                    // 這裡還沒測
+        String url = "dessertshop/shopAndproduct/sproduct.html?param=" + dessertId;
 
         // 如果沒登入過
         if (member == null){
-            session.setAttribute("location", url );                                  // 這裡還沒測
+            session.setAttribute("location", url );
             return "/login";
         }
 
