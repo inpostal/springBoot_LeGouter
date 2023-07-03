@@ -34,15 +34,15 @@ public class CourseImage {
         return courseImgId;
     }
 
-    public void setCourseImageId(int courseImgId) {
+    public void setCourseImgId(int courseImgId) {
         this.courseImgId = courseImgId;
     }
 
-    public byte[] getCourseImage() {
+    public byte[] getCourseImg() {
         return courseImg;
     }
 
-    public void setCourseImage(byte[] courseImg) {
+    public void setCourseImg(byte[] courseImg) {
         this.courseImg = courseImg;
     }
 

@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -62,16 +63,16 @@
 <div class="page-title-area bg-4">
     <div class="container">
         <div class="page-title-content">
-            <h2>甜點課程</h2>
+            <h2>甜點課程結帳</h2>
             <!--            <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>-->
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a th:href="@{/LeGouter}">
                         Home
                     </a>
                 </li>
 
-                <li class="active">甜點課程</li>
+                <li class="active">甜點課程結帳</li>
             </ul>
         </div>
     </div>
@@ -92,12 +93,9 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <a style="display: none" id="memberId" th:text="${checkout.getMemberId()}"></a>
-
                                 <!--                                <div class="form-group">-->
                                 <!--                                    <label>會員編號 <span class="required"></span></label>-->
                                 <!--                                    </label>-->
-
-
                                 <!--                                </div>-->
                             </div>
                             <div class="col-lg-12 col-md-12">
@@ -105,7 +103,7 @@
                                     <label>姓名 <span class="required">*</span></label>
                                     </label>
                                     <input type="text" class="form-control" id="memberName"
-                                           th:value="${checkout.getMemberName()}">
+                                           th:value="${checkout.getMemberName()}" readonly>
                                 </div>
                             </div>
 
@@ -113,7 +111,7 @@
                                 <div class="form-group">
                                     <label>Email <span class="required">*</span></label>
                                     <input type="email" class="form-control" id="memberEmail"
-                                           th:value="${checkout.getMemberEmail()}">
+                                           th:value="${checkout.getMemberEmail()}" readonly>
                                 </div>
                             </div>
 
@@ -121,11 +119,24 @@
                                 <div class="form-group">
                                     <label>電話 <span class="required">*</span></label>
                                     <input type="text" class="form-control" id="memberPhone"
-                                           th:value="${checkout.getMemberPhone()}">
+                                           th:value="${checkout.getMemberPhone()}" readonly>
                                 </div>
                             </div>
-
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <select required class="form-control">
+                                        <option value="" disabled selected>選擇折價券</option>
+                                        <option value="coupon1">Coupon 1</option>
+                                        <option value="coupon2">Coupon 2</option>
+                                        <option value="coupon3">Coupon 3</option>
+                                    </select>
+                                    <button class="btn btn-warning"
+                                            style="margin-left: auto;display: block;margin-top: 15px;">提交折價券
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -134,33 +145,32 @@
                         <div class="cart-totals">
                             <h3>結帳明細</h3>
                             <ul>
-                                <li>名稱:</li>
+                                <li>課程名稱:</li>
                                 <li id="courseName" th:text="${checkout.getCourseName()}"></li>
-                                <li>金額:</li>
+                                <li>折扣:</li>
+                                <li id="courseDiscountPrice"></li>
+                                <li>總金額:</li>
                                 <li id="coursePrice" th:text="${checkout.getCoursePrice()}"></li>
                             </ul>
                         </div>
                         <div class="faq-accordion">
                             <h3>付款方式</h3>
                             <ul class="accordion">
-                                <li class="accordion-item active">
-                                    <a class="accordion-title" href="javascript:void(0)">
+                                <li class="accordion-item">
+                                    <a class="accordion-title">
                                         信用卡
                                     </a>
-                                    <p class="accordion-content show">
-                                        Make your payment directly into our bank account. Please use your Order ID as
-                                        the payment reference. Your order won’t be shipped until the funds have our
-                                        account.
+                                    <p class="accordion-content">
+                                        若使用拍付信用卡付款，系統會引導信用卡網頁填寫信用卡資料。經確認付款成功，系統將主動發出已付款成功通知信。
                                     </p>
                                 </li>
                                 <li class="accordion-item">
-                                    <a class="accordion-title" href="javascript:void(0)">
+                                    <a class="accordion-title">
                                         匯款
                                     </a>
 
                                     <p class="accordion-content">
-                                        Please send your cheque to Store Name, Store Street, Store Town, Store State /
-                                        County, Store Postcode.
+                                        若使用匯款，系統會給予一組16碼的ATM轉帳帳號，買家可以列印或抄下帳號到外面的ATM提款機轉帳。經確認付款成功，系統會發出已付款成功通知信。
                                     </p>
                                 </li>
                                 <li class="accordion-item">
@@ -240,6 +250,7 @@
 <!-- Custom JS -->
 <script src="/Course/front-end/assets/js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 
@@ -247,10 +258,27 @@
         $('.default-btn.two').click(function (e) {
             if (!$('#agreed').prop('checked')) {
                 e.preventDefault();
-                alert('請先勾選同意條款');
+                Swal.fire(
+                    '注意',
+                    '請先勾選同意條款',
+                    'warning');
+                return;
+
+            }
+
+            let creditCardSelected = $('.accordion-title:contains("信用卡")').next('.accordion-content').is(':visible');
+            let remittanceSelected = $('.accordion-title:contains("匯款")').next('.accordion-content').is(':visible');
+
+            if (!creditCardSelected && !remittanceSelected) {
+                e.preventDefault();
+                Swal.fire(
+                    '注意',
+                    '請先選擇付款方式',
+                    'warning');
             }
         });
     });
+
 </script>
 
 <script>
@@ -278,7 +306,13 @@
                 contentType: 'application/json',
                 success: function (response) {
 
-                    alert('結帳成功!');
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: '結帳成功',
+                        showConfirmButton: false,
+                        timer: 1900
+                    })
                 },
                 error: function (error) {
 

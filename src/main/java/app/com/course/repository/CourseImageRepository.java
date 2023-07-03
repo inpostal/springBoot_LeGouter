@@ -8,4 +8,5 @@ import java.util.List;
 public interface CourseImageRepository extends JpaRepository<CourseImage, Integer> {
     List<CourseImage> findAllByCourseId(Integer courseId);
 
+    void delete(CourseImage courseImage);
 }

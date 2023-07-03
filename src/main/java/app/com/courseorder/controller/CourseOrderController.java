@@ -34,6 +34,9 @@ public class CourseOrderController {
     @GetMapping("/course/order/member")
     public String memberCourseOrderPage(HttpSession session, Model model){
         Members user = (Members) session.getAttribute("user");
+        if (user==null){
+            return "redirect:/login";
+        }
         List<CourseOrderDTO> list = service.getMemberCourseOrderList(user.getMemberId());
         model.addAttribute("courseOrderList", list);
         return "/front-end/CourseOrder/CourseOrder";
