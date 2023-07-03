@@ -11,14 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <!-- 客服 -->
-    <link rel="stylesheet" type="text/css" href="/CustomerChat/CSS/iconfont.css">
-
-    <link rel="stylesheet" type="text/css" href="/CustomerChat/CSS/chat.css">
-    <!-- 客服 -->
-    <!-- CSS
-	============================================ -->
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/Dessert/CSS/bootstrap.min.css">
     <!-- FontAwesome -->
     <!-- <link rel="stylesheet" href="assets/css/vendor/font.awesome.min.css"> -->
@@ -43,41 +35,20 @@
 
     <link href="/Commom/css/style.css" rel="stylesheet">
     <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="/Dessert/CSS/stylev.css">
+    <link rel="stylesheet" href="/Course/CSS/stylev.css">
 </head>
 
 <body>
 
 
-<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
-    <div class="row gx-0 align-items-center d-none d-lg-flex">
-        <div class="col-lg-6 px-5 text-start">
-            <ol class="breadcrumb mb-0">
-            </ol>
-        </div>
-        <div class="col-lg-6 px-5 text-end">
-            <small>Follow us:</small>
-            <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                        class="fab fa-facebook-f"></i></a>
-                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                        class="fab fa-twitter"></i></a>
-                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                        class="fab fa-linkedin-in"></i></a>
-                <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s"></div>
+
 <!-- 頁首 -->
 <div th:insert="front-end/components/Header :: #header-div"></div>
 <!-- 導覽列 -->
 <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
 
-<!-- Breadcrumb Area Start Here -->
-
-<div class="breadcrumbs-area position-relative" style="margin-top: 95px;">
+<div class="eve breadcrumbs-area position-relative" style="margin-top: 95px;">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
@@ -123,10 +94,19 @@
                                     th:href="@{/dessertshop/shopAndproduct/sproduct.html(param=${d.getDessertId()})}"
                                     th:text="${d.getDessertName()}"></a></td>
                             <td class="pro-price"><span th:text="${d.getDessertPrice()}"></span></td>
-                            <td class="pro-cart"><a href="checkout.html"
-                                                    class="btn obrien-button primary-btn text-uppercase">Add to Cart</a>
+                            <td class="pro-cart">
+                                <button class="btn obrien-button primary-btn text-uppercase">加入購物車</button>
                             </td>
+                            <td class="pro-remove">
+                                <button class="badge rounded-pill bg-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg>
 
+                                </button>
+
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -140,64 +120,7 @@
 
 <!-- Footer Area Start Here -->
 <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">粉絲專頁</h4>
 
-                <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
-                            class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">關於我們</h4>
-                <a class="btn btn-link" href="">認識Le Goûter</a>
-                <a class="btn btn-link" href="">最新消息</a>
-                <a class="btn btn-link" href="">甜點商城</a>
-                <a class="btn btn-link" href="">課程專區</a>
-                <a class="btn btn-link" href="">團購專區</a>
-                <a class="btn btn-link" href="">服務條款</a>
-                <a class="btn btn-link" href="">隱私政策</a>
-                <a class="btn btn-link" href="">聯絡我們</a>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">常見問題</h4>
-                <a class="btn btn-link" href="">註冊登入</a>
-                <a class="btn btn-link" href="">FAQ</a>
-                <a class="btn btn-link" href="">回報客服</a>
-                <a class="btn btn-link" href="">購物須知</a>
-                <a class="btn btn-link" href="">退款政策</a>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4"></h4>
-                <div class="row g-2">
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-2.jpg" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-3.jpg" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light rounded p-1" src="static/picture/product-1.jpg" alt="Image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- Footer Area End Here -->
 
@@ -233,7 +156,10 @@
 
 <!-- Main JS -->
 <script src="/Dessert/JS/main.js"></script>
-
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
 <script>
     $(document).on('click', '.btn-danger', function (e) {
