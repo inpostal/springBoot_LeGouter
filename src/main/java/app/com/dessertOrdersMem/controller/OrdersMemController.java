@@ -4,12 +4,13 @@ package app.com.dessertOrdersMem.controller;
 import app.com.dessertOrderDetail.entity.OrderDetailDTO;
 import app.com.dessertOrdersMem.entity.OrdersMem;
 import app.com.dessertOrdersMem.service.OrdersMemService;
+import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,16 @@ public class OrdersMemController {
     private OrdersMemService ordersMemService;
 
 
-    @GetMapping("/ordersMem/list/{memId}")
-    public String getAllOrdersByMemberId(@PathVariable Integer memId, Model model) {
+    @GetMapping("/ordersMem/list")
+    public String getAllOrdersByMemberId(HttpSession session, Model model) {
+        Members user = (Members) session.getAttribute("user");
+        String url = "/ordersMem/list";
+        if (user == null) {
+            session.setAttribute("location", url);
+            return "redirect:/login";
+        }
+        Integer memId = user.getMemberId();
+
         List<OrdersMem> orders = ordersMemService.getAllOrdersByMemberId(memId);
         model.addAttribute("orders", orders);
         String memName = ordersMemService.getMemberAccountById(memId);
@@ -44,7 +53,6 @@ public class OrdersMemController {
 
         return "/front-end/Dessert/DessertOrdersMem";
     }
-
 
 }
 

@@ -111,7 +111,7 @@
                                             <th>數量</th>
                                             <th>價格</th>
                                             <th>小計</th>
-                                            <th>評價</th>
+                                            <!--                                            <th>評價</th>-->
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -128,28 +128,28 @@
                                             <td th:text="${M.getDessertAmount()}"></td>
                                             <td th:text="${M.getDessertPrice()}"></td>
                                             <td th:text="'$' + ${M.getDessertAmount() * M.getDessertPrice()}"></td>
-                                            <td>
-                                                <a onclick="toggleRating(this)" title="甜點評價"
-                                                   style="cursor: pointer; text-decoration: none;">
-                                                    <i class="fa-solid fa-cake-candles fa-lg"
-                                                       style="color: #f8d3ae;"></i>
-                                                </a>
+                                            <!--                                            <td>-->
+                                            <!--                                                <a onclick="toggleRating(this)" title="甜點評價"-->
+                                            <!--                                                   style="cursor: pointer; text-decoration: none;">-->
+                                            <!--                                                    <i class="fa-solid fa-cake-candles fa-lg"-->
+                                            <!--                                                       style="color: #f8d3ae;"></i>-->
+                                            <!--                                                </a>-->
 
-                                                <div class="block" style="display: none;">
-                                                    <ul>
-                                                        <li data-default-index="0">
-                                                                <span>
-                                                                    <img src="/Dessert/picture/x1.png">
-                                                                   <img src="/Dessert/picture/x1.png">
-                                                                  <img src="/Dessert/picture/x1.png">
-                                                                   <img src="/Dessert/picture/x1.png">
-                                                                   <img src="/Dessert/picture/x1.png">
-                                                                </span>
-                                                            <em class="level"></em>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                            <!--                                                <div class="block" style="display: none;">-->
+                                            <!--                                                    <ul>-->
+                                            <!--                                                        <li data-default-index="0">-->
+                                            <!--                                                                <span>-->
+                                            <!--                                                                    <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                  <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                            <!--                                                                </span>-->
+                                            <!--                                                            <em class="level"></em>-->
+                                            <!--                                                        </li>-->
+                                            <!--                                                    </ul>-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </td>-->
                                         </tr>
                                         </tbody>
                                     </table>
