@@ -437,8 +437,10 @@
                     console.log("送出前確認:" + checkoutData);
                 },
                 success: function (response) {
-
-                    alert('結帳成功!');
+                    if (response.success == true) {
+                        alert('結帳成功! 返回團購平台');
+                        window.location.href="/group-shop";
+                    }
                 },
                 error: function (error) {
 
@@ -451,10 +453,10 @@
                 url: '/groupActivity/Checkout/OneMember',
                 method: 'POST',
                 // contentType: 'application/json',
-                data: { memberId: 1 },
+                data: { memberId: Number($("#memberId").text()) },
                 beforeSend: function() {
                     // console.log("送出前確認:" + Number($("#memberId").text()));
-                    console.log("送出前確認:" + JSON.stringify({ memberId: 1 }));
+                    console.log("送出前確認:" + JSON.stringify({ memberId: Number($("#memberId").text()) }));
                 },
                 success: function (response) {
                     $("#receiverName").val(response.memberName);
