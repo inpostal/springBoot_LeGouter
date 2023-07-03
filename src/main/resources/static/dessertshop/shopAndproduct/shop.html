@@ -54,42 +54,42 @@
         <div class="pro-container" id="mainfrontshop">
 
 
-            <!-- 第一件 -->
-            <div class="pro" onclick="window.location.href='sproduct.html';">
-                <img src="img/products/1-1.jpg" alt="">
-                <div class="des">
-                    <span>甜點商城</span>
-                    <h5>法式巧克力千層蛋糕</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>NT$380</h4>
-                </div>
-                <!-- <a href="#"><i class="fal fa-shopping-cart cart"></i></a> -->
-            </div>
+<!--            &lt;!&ndash; 第一件 &ndash;&gt;-->
+<!--            <div class="pro" onclick="window.location.href='sproduct.html';">-->
+<!--                <img src="img/products/1-1.jpg" alt="">-->
+<!--                <div class="des">-->
+<!--                    <span>甜點商城</span>-->
+<!--                    <h5>法式巧克力千層蛋糕</h5>-->
+<!--                    <div class="star">-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                    </div>-->
+<!--                    <h4>NT$380</h4>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; <a href="#"><i class="fal fa-shopping-cart cart"></i></a> &ndash;&gt;-->
+<!--            </div>-->
 
 
-            <!-- 第二件 -->
-            <div class="pro" onclick="window.location.href='sproduct2.html';">
-                <img src="img/products/2-1.jpg" alt="">
-                <div class="des">
-                    <span>甜點商城</span>
-                    <h5>蒙布朗</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>NT$290</h4>
-                </div>
-                <!-- <a href="#"><i class="fal fa-shopping-cart cart"></i></a> -->
-            </div>
+<!--            &lt;!&ndash; 第二件 &ndash;&gt;-->
+<!--            <div class="pro" onclick="window.location.href='sproduct2.html';">-->
+<!--                <img src="img/products/2-1.jpg" alt="">-->
+<!--                <div class="des">-->
+<!--                    <span>甜點商城</span>-->
+<!--                    <h5>蒙布朗</h5>-->
+<!--                    <div class="star">-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                        <i class="fas fa-star"></i>-->
+<!--                    </div>-->
+<!--                    <h4>NT$290</h4>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; <a href="#"><i class="fal fa-shopping-cart cart"></i></a> &ndash;&gt;-->
+<!--            </div>-->
 
         
 
@@ -168,7 +168,7 @@
                         if (res[e].dessertStatus === "已下架") {
                             continue;
                         }
-                        html += `<div class="pro" onclick="redirectToSProduct(${res[e].dessertId})" style="margin-left: 17px; margin-right: 17px;">
+                        html += `<div class="pro" onclick="redirectToSProduct(${res[e].dessertId})" style="margin-left: 13px; margin-right: 13px;">
                                     <img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="">
                                     <div class="des">
                                         <span>甜點商城</span>
