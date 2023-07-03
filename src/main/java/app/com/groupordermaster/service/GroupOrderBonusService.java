@@ -5,17 +5,14 @@ import app.com.groupordermaster.repository.GroupOrderMasterRepository;
 import app.com.groupordermaster.vo.GroupActivity;
 import app.com.groupordermaster.vo.GroupOrderBonusDTO;
 import app.com.groupordermaster.vo.GroupOrderMaster;
-import app.com.news.vo.News;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 
@@ -86,6 +83,9 @@ public class GroupOrderBonusService {
             dto.setGroupOrderEnd(groupActivity.getGroupOrderEnd());
             dto.setTotalGroupProductPrice(g.getTotalGroupProductPrice());
             dto.setGroupOrderBonus(g.getGroupOrderBonus());
+            dto.setGroupOrderStatus(g.getGroupOrderStatus());
+
+
 
             switch (groupActivity.getGroupOrderMin()) {
                 case 200:
@@ -100,11 +100,9 @@ public class GroupOrderBonusService {
             }
 
 
-            if (g.getGroupOrderBonusStatus() == 0) {
-                dto.setGroupOrderBonusStatus("未發放");
-            } else {
-                dto.setGroupOrderBonusStatus("已發放");
-            }
+
+
+
             result.add(dto);
         }
         return result;

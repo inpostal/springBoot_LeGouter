@@ -13,6 +13,7 @@ public class CourseCommentDTO {
     private String courseStudentCommentContent;
     private Date courseStudentCommentDate;
     private String empName;
+    private Integer empId;
     private String chefCommentContent;
     private Date chefCommentDate;
 

@@ -11,4 +11,5 @@ public interface GroupOrderDetailRepository extends JpaRepository<GroupOrderDeta
     List<GroupOrderDetail> findByGroupOrderId(Integer groupOrderId);
     List<GroupOrderDetail> findAllByMemberId(Integer memberId);
     Long countByGroupOrderId(Integer groupOrderId);
+    Long countByGroupOrderIdAndGroupProductStatus(Integer groupOrderId, byte groupProductStatus);
 }

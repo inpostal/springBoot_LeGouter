@@ -13,7 +13,7 @@ public class GroupActivityController {
     @Autowired
     private GroupActivityService2 service;
 
-
+//團購活動明細
 
     @GetMapping("/group/activity/list")
     public String GroupActivityAll(){

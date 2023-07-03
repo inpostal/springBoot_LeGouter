@@ -169,30 +169,14 @@
 <div class="page-title-area bg-17">
     <div class="container">
         <div class="page-title-content">
-            <h2>團購主專區</h2>
+            <h2>一般會員專區</h2>
         </div>
     </div>
 </div>
 <!-- End Page Title Area -->
 
 
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                role="tab" aria-controls="home" aria-selected="true">個人訂單
-        </button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                role="tab" aria-controls="profile" aria-selected="false">團購主團購活動
-        </button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
-                role="tab" aria-controls="contact" aria-selected="false">團購主分潤
-        </button>
-    </li>
-</ul>
+
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="col py-3">
@@ -246,48 +230,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
-        <div class="col py-3">
-            <!-- 由此開始 -->
-
-            <div class="from-row">
-                <div class="d-flex justify-content-between">
-
-                </div>
-                <hr>
-                <div class="from-row">
-                    <div class="card-body">
-                        <div class="table-responsive">
-
-                            <div class="text-end mb-3">
-                                關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
-                                                  placeholder="請輸入關鍵字">
-                            </div>
-                            <table class="order-table table">
-                                <thead>
-                                <tr style="background-color: #f8d3ae;color:#1E1916;">
-                                    <th>訂單資訊</th>
-                                    <th>團購狀態</th>
-                                    <th>訂單金額</th>
-                                    <th>分潤比例</th>
-                                    <th>分潤金額</th>
-                                    <th>分潤狀態</th>
-                                </tr>
-                                </thead>
-                                <tbody id="grouporderfrontbonus">
-
-                                </tbody>
-                            </table>
-                            <hr>
-                            <div id="selectedCount"></div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="col-lg-12 col-md-12">
@@ -433,7 +376,9 @@
     $(document).ready(function () {
         'use strict';
         var LightTableFilter = (function (Arr) {
+
             var _input;
+
             function _onInputEvent(e) {
                 _input = e.target;
                 var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
@@ -471,11 +416,11 @@
     //findbymemid找到他的訂單
 
     //綁 nav-link active 這個button會觸發
-    $("#home-tab").click(function () {
+    $(document).ready(function () {
         //取得會員id
         let memberId = $("#memberId").text();
         $.ajax({
-            url: `/grouporderdetail/list/getbyId/front/${memberId}`,
+            url: `/grouporderdetail/list/getbyId/front/member?memberId=1`,
             type: "GET",
             dataType: "json",
             success: function (resp) {
@@ -554,159 +499,8 @@
         });
     });
 
-    $("#home-tab").click();
-
-    $("#profile-tab").click(function () {
-        $.ajax({
-            url: `/groupOrder/groupOrderMem/single/${memberID}`,
-            type: "GET",
-            dataType: "json",
-            success: function (resp) {
-                console.log(resp);
-                let html = '';
-                for (let e in resp) {
-
-                    let groupProductStatustext = '';
-                    switch (resp[e].groupOrderStatus) {
-                        case 0:
-                            groupOrderStatustext = '尚未達到開團時間';
-                            break;
-                        case 1:
-                            groupOrderStatustext = '團購進行中，目前團購商品下訂總數不足';
-                            break;
-                        case 2:
-                            groupOrderStatustext = '團購進行中，目前團購商品下訂總數已達標';
-                            break;
-                        case 3:
-                            groupOrderStatustext = '團購關閉，出貨處理中';
-                            break;
-                        case 4:
-                            groupOrderStatustext = '團購關閉，已出貨';
-                            break;
-                        case 5:
-                            groupOrderStatustext = '團購結束。團購時間逾期且團購商品下訂總數不足';
-                            break;
-                        case 6:
-                            groupOrderStatustext = '團購結束。訂單已完成';
-                            break;
-                    }
 
 
-                    html += `<div class="col-lg-4 col-md-6">
-                   <div class="single-news">
-                    <a href='/groupOrder/groupOrderMem/single/detail?groupActivityId=${resp[e].activityId}&groupStatus=${resp[e].groupOrderStatus}'>
-                    <img  src="/groupProduct/get/img/${resp[e].groupProductId}" alt="Image" >
-                    </a>
-                    <div class="news-content">
-                    <span class="tag" id="groupOrderStatus"> ${groupOrderStatustext}  </span>
-                    <a href="grouporder.html">
-                    <h3 id="groupName">${resp[e].groupName} </h3>
-                    </a>
-                    <ul class="lessons">
-                    團購開始時間:<li class="float" id="groupOrderStar"> ${resp[e].groupOrderStar}</li>
-                    </ul>
-                    <ul class="lessons">
-                    團購結束時間:<li class="float" id="groupOrderEnd"> ${resp[e].groupOrderEnd}</li>
-                    </ul>
-                    </div>
-                    </div>
-                    </div>`;
-                }
-                $('#groupOrderContainer').html(html);
-            },
-            error: function (xhr, textstatus, errorThrown) {
-                console.error(xhr);
-            }
-        })
-    })
-
-    //查詢團購主分潤
-    $("#contact-tab").click(function () {
-        // let memberId = $("#memberId").text();
-        $.ajax({
-            url: '/groupbonusfront?memberId=1',
-            type: "GET",
-            dataType: "json",
-            success: function (resp) {
-                console.log(resp);
-                let td_html = '';
-                for (let e in resp) {
-                    let groupProductStatustext = '';
-                    switch (resp[e].groupOrderStatus) {
-                        case 0:
-                            groupOrderStatustext = '尚未達到開團時間';
-                            break;
-                        case 1:
-                            groupOrderStatustext = '團購進行中，目前團購商品下訂總數不足';
-                            break;
-                        case 2:
-                            groupOrderStatustext = '團購進行中，目前團購商品下訂總數已達標';
-                            break;
-                        case 3:
-                            groupOrderStatustext = '團購關閉，出貨處理中';
-                            break;
-                        case 4:
-                            groupOrderStatustext = '團購關閉，已出貨';
-                            break;
-                        case 5:
-                            groupOrderStatustext = '團購結束。團購時間逾期且團購商品下訂總數不足';
-                            break;
-                        case 6:
-                            groupOrderStatustext = '團購結束。訂單已完成';
-                            break;
-                    }
-
-                    let groupOrderBonusText = '';
-                    switch (resp[e].groupOrderStatus) {
-                        case 0:
-                            groupOrderBonusText = '尚未達結算標準';
-                            break;
-                        case 1:
-                            groupOrderBonusText = '尚未達結算標準';
-                            break;
-                        case 2:
-                        case 3:
-                        case 4:
-                            groupOrderBonusText = '等待結算中';
-                            break;
-                        case 5:
-                            groupOrderBonusText = '已流團';
-                            break;
-                        case 6:
-                            groupOrderBonusText = resp[e].totalGroupProductPrice * resp[e].bonusRate;
-                            break;
-                    }
-                    let groupOrderBonusStatusText = '';
-                    if (resp[e].groupOrderBonusStatus == 0) {
-                        groupOrderBonusStatusText = '未發放';
-                    } else {
-                        groupOrderBonusStatusText = '已發放';
-                    }
-
-
-                    td_html += `<tr>
-                                    <td id="memId" style="display: none">${resp[e].memberID}</td>
-
-                                    <td id="groupordermaster">
-                                        訂單編號:${resp[e].groupOrderId}<br>
-                                        訂單成立時間:${resp[e].groupOrderStar}<br>
-                                        訂單結束時間:${resp[e].groupOrderEnd}<br >
-                                        團購活動編號:${resp[e].activityId}<br>
-                                    </td>
-                                    <td id="grouporderstatus">${groupOrderStatustext}</td>
-                                    <td id="totalgroupproductprice">${resp[e].totalGroupProductPrice}</td>
-                                    <td id="groupordermin" >${resp[e].bonusRate}</td>
-                                    <td id="grouporderbonus">${groupOrderBonusText}</td>
-                                    <td id="grouporderbonusstatus">${groupOrderBonusStatusText} </td>
-                                </tr>`;
-                }
-                $("#grouporderfrontbonus").html(td_html);
-            },
-            error: function (xhr, textstatus, errorThrown) {
-                console.error(xhr);
-            }
-        });
-    });
 
 
 </script>
