@@ -13,18 +13,33 @@
         <a href="/logout" class="nav-item nav-link" th:if="${session.user != null}"  th:text="登出"></a>
         <a href="/login" class="nav-item nav-link" th:if="${session.user == null}"  th:text="會員登入"></a>
 <!--        <a href="" class="nav-item nav-link">會員登入</a>-->
-        <a href="" class="nav-item nav-link">最新消息</a>
+        <a href="/news/front" class="nav-item nav-link">最新消息</a>
         <a href="" class="nav-item nav-link">關於我們</a>
         <a href="/dessertshop/shopAndproduct/shop.html" class="nav-item nav-link">甜點商城</a>
-        <a href="" class="nav-item nav-link">課程專區</a>
-        <a href="/group-shop" class="nav-item nav-link">團購專區</a>
-        <a href="/member/data" class="nav-item nav-link">會員專區</a>
-        <a href="" class="nav-item nav-link">優惠券專區</a>
+        <a href="/course/courses" class="nav-item nav-link">課程專區</a>
+<!--        <a href="/group-shop" class="nav-item nav-link">團購專區</a>-->
+        <div class="nav-item dropdown">
+            <a href="/course/courses" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">團購專區</a>
+            <div class="dropdown-menu m-0">
+                <a href="/plan-activity" class="dropdown-item">發起活動專區</a>
+                <a href="/grouporderdetail/list/front" class="dropdown-item">團購主訂單查詢</a>
+            </div>
+        </div>
+<!--        <a href="/member/data" class="nav-item nav-link">會員專區</a>-->
+        <div class="nav-item dropdown">
+            <a href="/member/data" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">會員專區</a>
+            <div class="dropdown-menu m-0">
+                <a href="/grouporderdetail/list/front/member" class="dropdown-item">團購訂單查詢</a>
+                <a href="/ordersMem/list/1" class="dropdown-item">甜點訂單查詢</a>
+                <a href="/course/order/member" class="dropdown-item">課程訂單查詢</a>
+                <a href="" class="dropdown-item">優惠券查詢</a>
+            </div>
+        </div>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
             <div class="dropdown-menu m-0">
-                <a href="" class="dropdown-item">FAQ</a>
-                <a href="" class="dropdown-item">聯絡客服</a>
+                <a href="/front/FAQ" class="dropdown-item">FAQ</a>
+<!--                <a href="" class="dropdown-item">聯絡客服</a>-->
             </div>
         </div>
     </div>
