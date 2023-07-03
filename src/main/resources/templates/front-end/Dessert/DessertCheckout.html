@@ -86,9 +86,10 @@
                 <div class="breadcrumb-content position-relative section-content">
                     <h3 class="title-3">甜點訂單結帳</h3>
                     <ul>
-                        <li><a href="index.html">瀏覽甜點</a></li>
+                        <li><a href="http://localhost:8080/dessertshop/shopAndproduct/shop.html">瀏覽甜點</a></li>
                         <li>結帳頁面</li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -116,7 +117,7 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>姓名 <span class="required">*</span></label>
-                                    <input placeholder="" type="text" name="receiverName">
+                                    <input id="name" placeholder="" type="text" name="receiverName">
                                 </div>
                             </div>
 
@@ -124,7 +125,8 @@
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>運送地址 <span class="required">*</span></label>
-                                    <input placeholder="請輸入地址" type="text" name="receiverAddress">
+                                    <input id="receiverAddress" placeholder="請輸入地址" type="text"
+                                           name="receiverAddress">
                                 </div>
                             </div>
 
@@ -132,13 +134,13 @@
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>Email <span class="required">*</span></label>
-                                    <input placeholder="" type="email" name="receiverEmail">
+                                    <input id="receiverEmail" placeholder="" type="email" name="receiverEmail">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>連絡電話 <span class="required">*</span></label>
-                                    <input type="text" name="receiverPhone">
+                                    <input id="phone" type="text" name="receiverPhone">
                                 </div>
                             </div>
 
@@ -304,30 +306,116 @@
 <script>
     $(document).ready(function () {
         $(".order-button-payment").click(function () {
-            var shippingCost = $('input[name="shippingCost"]').val() ? parseInt($('input[name="shippingCost"]').val()) : 0;
+            // 檢查所有輸入欄位是否皆符合格式
+            let isValid = checkInputs();
+            if (isValid) {
+                var shippingCost = $('input[name="shippingCost"]').val() ? parseInt($('input[name="shippingCost"]').val()) : 0;
 
-            var orderInfo = {
-                receiverName: $('input[name="receiverName"]').val(),
-                receiverAddress: $('input[name="receiverAddress"]').val(),
-                receiverEmail: $('input[name="receiverEmail"]').val(),
-                receiverPhone: $('input[name="receiverPhone"]').val(),
-                shippingCost: shippingCost
-            };
+                var orderInfo = {
+                    receiverName: $('input[name="receiverName"]').val(),
+                    receiverAddress: $('input[name="receiverAddress"]').val(),
+                    receiverEmail: $('input[name="receiverEmail"]').val(),
+                    receiverPhone: $('input[name="receiverPhone"]').val(),
+                    shippingCost: shippingCost
+                };
 
-            $.ajax({
-                url: '/submitOrder',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(orderInfo),
-                success: function () {
-                    alert('訂單已成功提交');
-                    window.location.href = '/OrderSuccessful';
-                },
-                error: function () {
-                    alert('訂單提交失敗，請檢查您的信息並重試');
-                }
-            });
+                $.ajax({
+                    url: '/submitOrder',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(orderInfo),
+                    success: function () {
+                        alert('訂單已成功提交');
+                        window.location.href = '/OrderSuccessful';
+                    },
+                    error: function () {
+                        alert('訂單提交失敗，請檢查您的信息並重試');
+                    }
+                });
+            }
         });
+    });
+
+    function checkInputs() {
+        // 檢查姓名
+        let name = $('#name').val();
+        if (name === '' || !/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name)) {
+            alert('姓名只能包含英文、數字或中文，且不能為空');
+            return false;
+        }
+
+        // 檢查運送地址
+        let address = $('#receiverAddress').val();
+        if (address === '' || !/^[\u4e00-\u9fa5\d]+$/.test(address)) {
+            alert('地址只能包含數字或中文，且不能為空');
+            return false;
+        }
+
+        // 檢查Email
+        let email = $('#receiverEmail').val();
+        if (email === '' || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+            alert('Email格式必須符合Email格式，且不能為空');
+            return false;
+        }
+
+        // 檢查電話
+        let phone = $('#phone').val();
+        if (phone === '' || !/^09\d{8}$/.test(phone)) {
+            alert('電話號碼必須是09開頭且總計十位數字，且不能為空');
+            return false;
+        }
+
+        return true;
+    }
+
+    $("#name").blur(function () {
+        let inputName = $(this).val();
+        let pattern = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+        if (!pattern.test(inputName)) {
+            alert("姓名只能包含英文、數字或中文");
+            $(this).val('');
+        } else {
+            $("#name-error").text("");
+        }
+    });
+
+    // 電話輸入區驗證
+    $("#phone").blur(function () {
+        let pattern = /^09\d{8}$/;
+        let inputPhone = $(this).val();
+
+        if (!pattern.test(inputPhone)) {
+            alert("電話號碼必須是09開頭且總計十位數字");
+            $(this).val('');
+        } else {
+            $("#phone-error").text("");
+        }
+    });
+
+    // 運送地址輸入區驗證
+    $("#receiverAddress").blur(function () {
+        let pattern = /^[\u4e00-\u9fa5\d]+$/;
+        let inputAddress = $(this).val();
+
+        if (!pattern.test(inputAddress)) {
+            alert("地址只能包含數字或中文");
+            $(this).val('');
+        } else {
+            $("#address-error").text("");
+        }
+    });
+
+    // Email 輸入區驗證
+    $("#receiverEmail").blur(function () {
+        let pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        let inputEmail = $(this).val();
+        console.log('test');
+        if (!pattern.test(inputEmail)) {
+            alert("Email格式必須符合Email格式");
+            $(this).val('');
+        } else {
+            $("#email-error").text("");
+        }
     });
 
     <!-- 信用卡卡號填完自動跳下一格 -->

@@ -152,6 +152,16 @@
                 console.log("Product removed successfully.");
                 // 移除行
                 $('[data-dessert-id="' + dessertId + '"]').remove();
+                if ($('tr[data-dessert-id]').length === 0) {
+                    // Disable the checkout button
+                    $("#checkout-button").off("click");
+                    $("#checkout-button").on("click", function (event) {
+                        event.preventDefault();
+                        alert("購物車內沒有商品");
+                    });
+                }
+                //呼叫更新函數
+                dessertCartUpdate();
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.error(xhr);
@@ -196,6 +206,13 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function (res) {
+                    if (res.length === 0) {
+                        $("#checkout-button").off("click");
+                        $("#checkout-button").on("click", function (event) {
+                            event.preventDefault();
+                            alert("購物車內沒有商品");
+                        });
+                    }
                     console.log(res);
                     cartClassItems = res;
                     let th_html = ``;

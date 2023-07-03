@@ -29,34 +29,6 @@ public class DessertCartController {
     private MemberRepository memberRepository;
 
 
-//    @GetMapping("/dessertCart/{memberId}")
-//    public String getDessertCartByMemberId(@PathVariable Integer memberId, Model model) {
-//        return getDessertCart(memberId, model, "/front-end/Dessert/DessertCart");
-//    }
-//
-//    @GetMapping("/dessertCart/checkOut/{memberId}")
-//    public String getDessertCartCheckOut(@PathVariable Integer memberId, Model model) {
-//        return getDessertCart(memberId, model, "/front-end/Dessert/DessertCheckOut");
-//    }
-//
-//    private String getDessertCart(Integer memberId, Model model, String viewName) {
-//        List<DessertCartDTO> dessertCartDTOList = dessertCartService.getDessertCartByMemberId(memberId);
-//
-//        // Calculate the total
-//        int total = 0;
-//        for (DessertCartDTO item : dessertCartDTOList) {
-//            total += item.getSubtotalAmount();
-//        }
-//        int shippingCost = total > 500 ? 0 : 100;
-//
-//        // Add total to the model
-//        model.addAttribute("total", total);
-//        model.addAttribute("shippingCost", shippingCost);
-//        model.addAttribute("dessertCartList", dessertCartDTOList);
-//        model.addAttribute("memberId", memberId);
-//        return viewName;
-//    }
-
     @GetMapping("/dessertCart")
     public String getDessertCartByMemberId(HttpSession session, Model model) {
         Members member = (Members) session.getAttribute("user");
