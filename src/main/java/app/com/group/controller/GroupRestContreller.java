@@ -199,6 +199,7 @@ public class GroupRestContreller {
 			GroupActivityDTO temporarydto = new GroupActivityDTO();
 			GroupProductVO tr = groupProductService.showOneProduct(evo.getGroupProductId());
 			Integer ActivityPrice = (int)(tr.getGroupProductPrice() * evo.getGroupOrderDiscount());
+			Long detailcount = groupActivityService.getDetailCount(evo.getGroupActivityId());
 			temporarydto.setGroupActivityPrice(ActivityPrice);
 			temporarydto.setGroupActivityId(evo.getGroupActivityId());
 			temporarydto.setGroupProductId(evo.getGroupProductId());
@@ -211,6 +212,7 @@ public class GroupRestContreller {
 			temporarydto.setGroupProductPrice(tr.getGroupProductPrice());
 //			temporarydto.setGroupName(tr.getGroupProductName());
 //			temporarydto.setGroupProductContent(tr.getGroupProductContent());
+			temporarydto.setGroupDetailCount(detailcount);
 			temporaryalldto.add(temporarydto);
 		}
 //		return groupActivityService.allShopActivity(today);
@@ -218,11 +220,11 @@ public class GroupRestContreller {
 	}
 
 	// 前台單品 *改成thymeleaf後已無用*
-	@PostMapping("/single-product/showthe")
-	public GroupActivityVO showthe(@RequestParam String groupActivityId) {
-		Integer theid = Integer.parseInt(groupActivityId);
-		return groupActivityService.showTheActivity(theid);
-	}
+//	@PostMapping("/single-product/showthe")
+//	public GroupActivityVO showthe(@RequestParam String groupActivityId) {
+//		Integer theid = Integer.parseInt(groupActivityId);
+//		return groupActivityService.showTheActivity(theid);
+//	}
 
 	// 前台團購主專區 發起活動
 	@PostMapping("/groupActivity/inser")
