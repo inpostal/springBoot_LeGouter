@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * (OrderDetail)
@@ -34,7 +34,7 @@ public class OrderDetail implements Serializable {
     private Integer dessertPrice;
 
     @Column(name = "DESSERT_REVIEW_DATE")
-    private Date dessertReviewDate;
+    private Timestamp dessertReviewDate;
 
     @Column(name = "DESSERT_RATE_STAR")
     private Integer dessertRateStar;

@@ -1,6 +1,5 @@
 package app.com.dessertOrders.service.impl;
 
-
 import app.com.dessertOrders.entity.Orders;
 import app.com.dessertOrders.entity.OrdersDTO;
 import app.com.dessertOrders.repository.OrdersRepository;
@@ -42,7 +41,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         for (Orders o : list) {
             OrdersDTO dto = new OrdersDTO();
-            dto.setOrderID(o.getOrderId());
+            dto.setOrderId(o.getOrderId());
             dto.setMemberAC(memberService.getMemberById(o.getMemId()).getMemberAccount());
             dto.setOrdersDate(o.getOrderTime());
             dto.setCpOrderTotal(o.getCpOrderTotal());

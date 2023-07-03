@@ -98,10 +98,10 @@
         <!-- 由此開始 -->
 
         <!-- preloader -->
-        <!--        <div class="preloader">-->
-        <!--            <img src="/Dessert/picture/logo.svg" alt="logo">-->
-        <!--            <div class="preloader-icon"></div>-->
-        <!--        </div>-->
+        <div class="preloader">
+            <img src="/Dessert/picture/logo.svg" alt="logo">
+            <div class="preloader-icon"></div>
+        </div>
         <!-- ./ preloader -->
 
 
@@ -137,12 +137,11 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">訂單總金額</label>
-                                                    <input type="text" class="form-control" id="orderTotal"
-                                                           th:value="${orders.getCpOrderTotal()}" readonly
-                                                           style="background-color: #dddddd;">
-
-
+                                                    <div class="form-control" style="background-color: #dddddd;">
+                                                        <span th:text="${orders.getCpOrderTotal()}"></span>
+                                                    </div>
                                                 </div>
+
                                                 <div class="mb-3">
                                                     <label class="form-label">收件人</label>
                                                     <input type="text" class="form-control" id="receiverName"
@@ -152,9 +151,12 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label">電話</label>
+                                                    <label class="form-label" for="receiverPhone">電話</label>
                                                     <input type="text" class="form-control" id="receiverPhone"
-                                                           th:value="${orders.getReceiverPhone()}">
+                                                           name="receiverPhone"
+                                                           th:value="${orders.getReceiverPhone()}" required>
+                                                    <div class="invalid-feedback">請輸入以09開頭的十位數字電話號碼。
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <div class="mb-3">
@@ -169,10 +171,9 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">訂購日期</label>
-                                                    <input type="text" class="form-control" readonly id="orderTime"
-                                                           style="background-color: #dddddd;"
-                                                           th:value="${orders.getOrderTime()}">
-
+                                                    <div class="form-control" style="background-color: #dddddd;">
+                                                        <span id="orderTime" th:text="${orders.getOrderTime()}"></span>
+                                                    </div>
                                                 </div>
 
 
@@ -186,12 +187,19 @@
 
                                                 <div class="mb-3">
                                                     <label class="form-label">訂單狀態</label>
-                                                    <select id="orderStatus" class="form-select"
-                                                            th:value="${orders.orderStatus}">
-                                                        <option value="0">訂單處理中</option>
-                                                        <option value="1">運送中</option>
-                                                        <option value="2">取消訂單</option>
-                                                        <option value="3">訂單完成</option>
+                                                    <select id="orderStatus" class="form-select">
+                                                        <option value="0" th:selected="${orders.orderStatus == 0}">
+                                                            訂單處理中
+                                                        </option>
+                                                        <option value="1" th:selected="${orders.orderStatus == 1}">
+                                                            運送中
+                                                        </option>
+                                                        <option value="2" th:selected="${orders.orderStatus == 2}">
+                                                            取消訂單
+                                                        </option>
+                                                        <option value="3" th:selected="${orders.orderStatus == 3}">
+                                                            訂單完成
+                                                        </option>
                                                     </select>
 
 
@@ -221,43 +229,79 @@
 
 <script src="/Course/JS/Jquery.js"></script>
 
+<!--改時間顯示格式-->
 <script>
-    // 確保網頁載入完成後執行程式碼
     document.addEventListener("DOMContentLoaded", function () {
-        // 取得訂購日期元素
-        let orderTimeElement = document.getElementById("orderTime");
-        // 取得訂購日期值
-        let orderTimeValue = orderTimeElement.value;
-        // 將訂購日期值轉換為日期物件
-        let ordersDate = new Date(orderTimeValue);
-        // 格式化日期並設定時區與12小時制
-        let formattedDate = ordersDate.toLocaleString('zh-TW', {timeZone: 'UTC', hour12: true});
-        // 將格式化後的日期設定回訂購日期元素
-        orderTimeElement.value = formattedDate;
+        var orderTimeElement = document.getElementById('orderTime');
+        var orderTime = orderTimeElement.textContent.trim();
+        var formattedTime = new Date(orderTime).toLocaleString('zh-TW', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        });
+        orderTimeElement.textContent = formattedTime;
     });
+
+
 </script>
 
+
 <script>
+    $("#receiverPhone").blur(function () {
+        let pattern = /^09\d{8}$/;
+        let inputPhone = $(this).val();
+
+        if (!pattern.test(inputPhone)) {
+            $(this).addClass("is-invalid");
+            $(this).next(".invalid-feedback").show();
+        } else {
+            $(this).removeClass("is-invalid");
+            $(this).next(".invalid-feedback").hide();
+        }
+    });
     $("#submit").click(function () {
         // 取得需要修改的值
         let ordersId = $("#ordersId").text();
         let receiverName = $("#receiverName").val();
-        // let receiverEmail = $("#receiverEmail").val();
+        let receiverEmail = $("#receiverEmail").val();
         let receiverPhone = $("#receiverPhone").val();
         let orderStatus = $("#orderStatus").val();
         let receiverAddress = $("#receiverAddress").val();
-        let receiverEmail = $("#receiverEmail").val();
+
+
+        // Validate the input fields
+        if (receiverName.trim() === '') {
+            alert('收件人不能為空');
+            return;
+        }
+        if (receiverAddress.trim() === '') {
+            alert('收件地址不能為空');
+            return;
+        }
+        if (receiverPhone.trim() === '') {
+            alert('電話不能為空');
+            return;
+        }
+        if (receiverEmail.trim() === '') {
+            alert('E-mail不能為空');
+            return;
+        }
+
 
         // 建立 FormData 物件並加入需要修改的值
         let formData = new FormData();
 
         formData.append("ordersId", ordersId);
         formData.append("receiverName", receiverName);
-        // formData.append("receiverEmail", receiverEmail);
+        formData.append("receiverEmail", receiverEmail);
         formData.append("receiverPhone", receiverPhone);
         formData.append("orderStatus", orderStatus);
         formData.append("receiverAddress", receiverAddress);
-        formData.append("receiverEmail", receiverEmail);
+
 
         // 發送 AJAX 請求
         $.ajax({

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> My Orders - Vetra | E-Commerce HTML Admin Dashboard Template </title>
+    <title> 我的甜點訂單 </title>
 
 
     <!-- Google fonts -->
@@ -51,10 +51,9 @@
     <div class="content">
         <div class="row">
             <div class="col-md-8">
-                <h5 class="card-header" th:text="${memAccount} + ' 的甜點訂單'"></h5>
+                <h5 class="card-header" th:text="${memName} + ' 甜點訂單'"></h5>
                 <div class="col-md-5 mt-3">
-                    <select id="statusFilter" class="form-select custom-select"
-                            onchange="filterOrdersByStatus(this.value, document.getElementById('memberIdInput').value)">
+                    <select id="statusFilter" class="form-select custom-select">
                         <option value="">所有訂單</option>
                         <option value="訂單處理中">訂單處理中</option>
                         <option value="運送中">運送中</option>
@@ -62,11 +61,11 @@
                         <option value="訂單完成">訂單完成</option>
                     </select>
                 </div>
+
                 <div th:each="order : ${orders}">
-                    <div class="card widget mb-4 bg-white">
+                    <div class="card widget mb-4 bg-white" data-status="${order.getStatusName()}">
+
                         <div class="card-body">
-
-
                             <div class="d-flex gap-4 align-items-center" data-bs-toggle="collapse" aria-expanded="false"
                                  th:data-bs-target="'#order-' + ${order.orderId}" role="button">
 
@@ -76,18 +75,9 @@
                                 </td>
 
                                 <div class="flex-fill">
-                                    <strong id="orderTime" th:text="'訂單時間' + ${order.orderTime}"></strong>
+                                    <strong th:id="'orderTime-' + ${order.orderId}"
+                                            th:text="'訂單時間：' + ${order.orderTime}"></strong>
                                 </div>
-                                <script th:inline="javascript">
-                                    var orderTimeElement = document.getElementById('orderTime');
-                                    var orderTime = orderTimeElement.textContent.trim();
-                                    var ordersDate = new Date(orderTime);
-                                    var formattedTime = ordersDate.toLocaleString('zh-TW', {
-                                        timeZone: 'UTC',
-                                        hour12: true
-                                    });
-                                    orderTimeElement.textContent = formattedTime;
-                                </script>
 
 
                                 <div class="flex-fill">
@@ -95,14 +85,15 @@
 
                                 </div>
                                 <td class="flex-fill">
-                                     <span th:text="${order.getOrderStatus() == 0 ? '訂單處理中' : (order.getOrderStatus() == 1 ? '運送中' : (order.getOrderStatus() == 2 ? '取消訂單' : '訂單完成'))}"
-                                           th:class="${order.getOrderStatus() == 0 ? 'badge bg-primary' : (order.getOrderStatus() == 1 ? 'badge bg-dark' : (order.getOrderStatus() == 2 ? 'badge bg-danger' : 'badge bg-success'))}"></span>
+                                     <span th:text="${order.getStatusName()}"
+                                           th:class="${order.getStatusClass()}"></span>
+
                                 </td>
 
                                 <td>
                                     <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae; cursor: pointer;"
                                        th:title="詳細訂單資訊"
-                                       th:onclick="|location.href='/orderDetail/get?orderId=' + ${order.orderId}|"></i>
+                                       th:onclick="|location.href='/memOrderDetail/get?orderId=' + ${order.orderId}|"></i>
                                 </td>
 
 
@@ -125,14 +116,15 @@
                                         </thead>
                                         <tbody>
 
-                                        <tr th:each="M : ${dessertDetailsList}">
+                                        <tr th:each="M : ${dessertDetailsMap[__${order.orderId}__]}">
                                             <td>
-                                                <a href="#">
-                                                    <img src="static/picture/2.jpg" class="rounded" width="40"
-                                                         alt="...">
-                                                </a>
+                                                <img th:src="@{/dessert5/image0(dessertId=${M.getDessertId()})}"
+                                                     class="rounded" width="70">
                                             </td>
-                                            <td th:text="${M.getDessertName()}"></td>
+
+                                            <td th:text=" ${M.getDessertName()}">
+                                            </td>
+
                                             <td th:text="${M.getDessertAmount()}"></td>
                                             <td th:text="${M.getDessertPrice()}"></td>
                                             <td th:text="'$' + ${M.getDessertAmount() * M.getDessertPrice()}"></td>
@@ -159,7 +151,6 @@
                                                 </div>
                                             </td>
                                         </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -167,99 +158,121 @@
                         </div>
                     </div>
 
-
                 </div>
-
             </div>
-
         </div>
-        <!-- ./ content -->
-
-
     </div>
-    <script type="text/javascript" src="/Dessert/JS/jquery.min.js"></script>
+</div>
 
+<script type="text/javascript" src="/Dessert/JS/jquery.min.js"></script>
+<script src="/Course/JS/Jquery.js"></script>
+<script>
+    document.getElementById('statusFilter').addEventListener('change', function (e) {
+        var selectedStatus = e.target.value;
 
-    //以下是評價星星的功能，暫時無法實現
-    <script>
-        function toggleRating(button) {
-            var ratingSection = button.nextElementSibling;
-            ratingSection.style.display = (ratingSection.style.display === "none") ? "block" : "none";
+        console.log('Selected status: ' + selectedStatus); // new line
+
+        var orders = document.getElementsByClassName('card widget mb-4 bg-white');
+
+        for (var i = 0; i < orders.length; i++) {
+            var order = orders[i];
+
+            var orderStatus = order.getAttribute('data-status');
+
+            console.log('Order status: ' + orderStatus); // new line
+
+            if (selectedStatus === '' || orderStatus === selectedStatus) {
+                order.style.display = '';
+            } else {
+                order.style.display = 'none';
+            }
         }
-    </script>
-    <script type="text/javascript">
+    });
 
-        //  星星数量
-        var stars = [
-            ['x2.png', 'x1.png', 'x1.png', 'x1.png', 'x1.png'],
-            ['x2.png', 'x2.png', 'x1.png', 'x1.png', 'x1.png'],
-            ['x2.png', 'x2.png', 'x2.png', 'x1.png', 'x1.png'],
-            ['x2.png', 'x2.png', 'x2.png', 'x2.png', 'x1.png'],
-            ['x2.png', 'x2.png', 'x2.png', 'x2.png', 'x2.png'],
-        ];
-        $(".block li").find("img").hover(function (e) {
-            var obj = $(this);
-            var index = obj.index();
-            if (index < (parseInt($(".block li").attr("data-default-index")) - 1)) {
-                return;
-            }
-            var li = obj.closest("li");
-            var star_area_index = li.index();
-            for (var i = 0; i < 5; i++) {
-                li.find("img").eq(i).attr("src", "img/" + stars[index][i]);//切换每个星星
-            }
-            $(".level").html(byIndexLeve(index));
-        }, function () {
-        })
 
-        $(".block li").hover(function (e) {
-        }, function () {
-            var index = $(this).attr("data-default-index");//点击后的索引
-            index = parseInt(index);
-            console.log("index", index);
-            $(".level").html(byIndexLeve(index - 1));
-            console.log(byIndexLeve(index - 1));
-            $(".order-evaluation ul li:eq(0)").find("img").attr("src", "/Dessert/picture/x1.png");
-            for (var i = 0; i < index; i++) {
+</script>
 
-                $(".order-evaluation ul li:eq(0)").find("img").eq(i).attr("src", "/Dessert/picture/x2.png");
-            }
-        })
-        $(".block li").find("img").click(function () {
-            var obj = $(this);
-            var li = obj.closest("li");
-            var star_area_index = li.index();
-            var index1 = obj.index();
-            li.attr("data-default-index", (parseInt(index1) + 1));
-            var index = $(".block li").attr("data-default-index");//点击后的索引
-            index = parseInt(index);
-            console.log("index", index);
-            $(".level").html(byIndexLeve(index - 1));
-            console.log(byIndexLeve(index - 1));
-            $(".order-evaluation ul li:eq(0)").find("img").attr("src", "/Dessert/picture/x1.png");
-            for (var i = 0; i < index; i++) {
-                $(".order-evaluation ul li:eq(0)").find("img").eq(i).attr("src", "/Dessert/picture/x2.png");
-            }
+<!--    //以下是評價星星的功能，暫時無法實現-->
+<!--<script>-->
+<!--    function toggleRating(button) {-->
+<!--        var ratingSection = button.nextElementSibling;-->
+<!--        ratingSection.style.display = (ratingSection.style.display === "none") ? "block" : "none";-->
+<!--    }-->
+<!--</script>-->
+<!--<script type="text/javascript">-->
 
-        });
+<!--    //  星星数量-->
+<!--    var stars = [-->
+<!--        ['x2.png', 'x1.png', 'x1.png', 'x1.png', 'x1.png'],-->
+<!--        ['x2.png', 'x2.png', 'x1.png', 'x1.png', 'x1.png'],-->
+<!--        ['x2.png', 'x2.png', 'x2.png', 'x1.png', 'x1.png'],-->
+<!--        ['x2.png', 'x2.png', 'x2.png', 'x2.png', 'x1.png'],-->
+<!--        ['x2.png', 'x2.png', 'x2.png', 'x2.png', 'x2.png'],-->
+<!--    ];-->
+<!--    $(".block li").find("img").hover(function (e) {-->
+<!--        var obj = $(this);-->
+<!--        var index = obj.index();-->
+<!--        if (index < (parseInt($(".block li").attr("data-default-index")) - 1)) {-->
+<!--            return;-->
+<!--        }-->
+<!--        var li = obj.closest("li");-->
+<!--        var star_area_index = li.index();-->
+<!--        for (var i = 0; i < 5; i++) {-->
+<!--            li.find("img").eq(i).attr("src", "img/" + stars[index][i]);//切换每个星星-->
+<!--        }-->
+<!--        $(".level").html(byIndexLeve(index));-->
+<!--    }, function () {-->
+<!--    })-->
 
-    </script>
-    <!-- ./ layout-wrapper -->
+<!--    $(".block li").hover(function (e) {-->
+<!--    }, function () {-->
+<!--        var index = $(this).attr("data-default-index");//点击后的索引-->
+<!--        index = parseInt(index);-->
+<!--        console.log("index", index);-->
+<!--        $(".level").html(byIndexLeve(index - 1));-->
+<!--        console.log(byIndexLeve(index - 1));-->
+<!--        $(".order-evaluation ul li:eq(0)").find("img").attr("src", "/Dessert/picture/x1.png");-->
+<!--        for (var i = 0; i < index; i++) {-->
 
-    <!-- Bundle scripts -->
-    <script src="/Dessert/JS/bundle.js"></script>
+<!--            $(".order-evaluation ul li:eq(0)").find("img").eq(i).attr("src", "/Dessert/picture/x2.png");-->
+<!--        }-->
+<!--    })-->
+<!--    $(".block li").find("img").click(function () {-->
+<!--        var obj = $(this);-->
+<!--        var li = obj.closest("li");-->
+<!--        var star_area_index = li.index();-->
+<!--        var index1 = obj.index();-->
+<!--        li.attr("data-default-index", (parseInt(index1) + 1));-->
+<!--        var index = $(".block li").attr("data-default-index");//点击后的索引-->
+<!--        index = parseInt(index);-->
+<!--        console.log("index", index);-->
+<!--        $(".level").html(byIndexLeve(index - 1));-->
+<!--        console.log(byIndexLeve(index - 1));-->
+<!--        $(".order-evaluation ul li:eq(0)").find("img").attr("src", "/Dessert/picture/x1.png");-->
+<!--        for (var i = 0; i < index; i++) {-->
+<!--            $(".order-evaluation ul li:eq(0)").find("img").eq(i).attr("src", "/Dessert/picture/x2.png");-->
+<!--        }-->
 
-    <!-- Apex chart -->
-    <script src="/Dessert/JS/apexcharts.min.js"></script>
+<!--    });-->
 
-    <!-- Examples -->
-    <script src="/Dessert/JS/buyer-dashboard.js"></script>
+<!--</script>-->
+<!-- ./ layout-wrapper -->
 
-    <!-- Main Javascript file -->
-    <script src="/Dessert/JS/app.min.js"></script>
+<!-- Bundle scripts -->
+<script src="/Dessert/JS/bundle.js"></script>
 
-    <!-- import font awesome -->
-    <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+<!-- Apex chart -->
+<script src="/Dessert/JS/apexcharts.min.js"></script>
+
+<!-- Examples -->
+<script src="/Dessert/JS/buyer-dashboard.js"></script>
+
+<!-- Main Javascript file -->
+<script src="/Dessert/JS/app.min.js"></script>
+
+<!-- import font awesome -->
+<script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
+

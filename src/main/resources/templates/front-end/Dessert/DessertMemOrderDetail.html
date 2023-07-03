@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> 訂單詳細資料 </title>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-icons.min.css" type="text/css">
+
+    <!-- Main style file -->
+    <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
+
+</head>
+
+<body>
+
+<!-- preloader -->
+<div class="preloader">
+    <img src="/Dessert/picture/logo.svg" alt="logo">
+    <div class="preloader-icon"></div>
+</div>
+<!-- ./ preloader -->
+
+<!-- sidebars -->
+
+
+<!-- layout-wrapper -->
+
+<!-- ./ header -->
+
+<!-- content -->
+<div class="col py-3">
+    <div class="content ">
+        <div class="mb-4">
+            <button onclick="goBack()" class="btn btn-primary">返回上一頁</button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-5 d-flex align-items-center justify-content-between">
+                            <span>訂單編號 : <a th:text="'#' + ${orders.getOrderId()}"></a></span>
+                            <span th:text="${orders.getOrderStatus() == 0 ? '訂單處理中' : (orders.getOrderStatus() == 1 ? '運送中' : (orders.getOrderStatus() == 2 ? '取消訂單' : '訂單完成'))}"
+                                  th:class="${orders.getOrderStatus() == 0 ? 'badge bg-primary' : (orders.getOrderStatus() == 1 ? 'badge bg-dark' : (orders.getOrderStatus() == 2 ? 'badge bg-danger' : 'badge bg-success'))}"></span>
+                        </div>
+
+                        <div class="row mb-5 g-4">
+                            <div class="col-md-3 col-sm-6">
+                                <p class="fw-bold">訂單日期</p>
+                                <p id="orderTime" th:text="${orders.getOrderTime()}"></p>
+                                <script th:inline="javascript">
+                                    var orderTimeElement = document.getElementById('orderTime');
+                                    var orderTime = orderTimeElement.textContent.trim();
+                                    var formattedTime = new Date(orderTime).toLocaleString('zh-TW', {hour12: true});
+                                    orderTimeElement.textContent = formattedTime;
+                                </script>
+
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-6">
+                                <p class="fw-bold">收件人</p>
+                                <p id="receiverName" th:text="${orders.getReceiverName()}"></p>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <p class="fw-bold">Email</p>
+                                <p id="receiverEmail" th:text="${orders.getReceiverEmail()}"></p>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <p class="fw-bold">聯絡電話</p>
+                                <p id="receiverPhone" th:text="${orders.getReceiverPhone()}"></p>
+                            </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body d-flex flex-column gap-3">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="mb-0">收件人地址</h5>
+                                        </div>
+                                        <div id="receiverAddress" th:text="${orders.getReceiverAddress()}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card widget">
+                    <h5 class="card-header">訂購甜點品項</h5>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-custom mb-0">
+                                <thead>
+                                <tr>
+                                    <th>甜點圖示</th>
+                                    <th>甜點名稱</th>
+                                    <th>數量</th>
+                                    <th>單價</th>
+                                    <th>小計</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="l : ${orderDetailList}">
+                                    <td>
+                                        <img th:src="@{/dessert5/image0(dessertId=${l.getDessertId()})}"
+                                             class="img-fluid" style="max-width: 15%; height: auto;" alt="Product"/>
+                                    </td>
+                                    <td th:text="${l.getDessertName()}" id="dessertName"></td>
+                                    <td th:text="${l.getDessertAmount()}" id="dessertAmount"></td>
+                                    <td th:text="'$' + ${l.getDessertPrice()}" id="dessertPrice"></td>
+                                    <td th:text="'$' + ${l.getDessertAmount() * l.getDessertPrice()}"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align: right;">
+                                        <div class="card-header">
+                                            甜點訂單金額
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                <strong>甜點總金額：$</strong>
+                                                <span th:text="${orders.getOrderTotal()}"></span>
+                                            </p>
+                                            <p class="card-text">
+                                                <strong>運費：$</strong>
+                                                <span th:text="${orders.getOrderTotal() > 500 ? '0' : '100'}"></span>
+                                            </p>
+                                            <p class="card-text">
+                                                <strong>折價券：$</strong>
+                                                <span th:text="${discount}"></span>
+                                            </p>
+                                            <p class="card-text">
+                                                <strong>訂單總金額：$</strong>
+                                                <span th:text="${orders.cpOrderTotal}"></span>
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                </tr>
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+
+        <!-- Bundle scripts -->
+        <script src="/Dessert/JS/bundle.js"></script>
+
+        <!-- Examples -->
+        <script src="/Dessert/JS/orders.js"></script>
+
+        <!-- Main Javascript file -->
+        <script src="/Dessert/JS/app.min.js"></script>
+</body>
+
+</html>
