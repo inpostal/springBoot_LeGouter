@@ -16,9 +16,26 @@
     <!-- Main style file -->
     <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
 
+    <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/Commom/css/css2.css" rel="stylesheet">
+
+    <link href="/Commom/css/all.min.css" rel="stylesheet">
+    <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/Commom/css/animate.min.css" rel="stylesheet">
+    <link href="/Commom/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/style.css" rel="stylesheet">
 </head>
 
 <body>
+<div id="header-div"></div>
+
+<div id="nav-div"></div>
 
 <!-- preloader -->
 <div class="preloader">
@@ -35,7 +52,7 @@
 <!-- ./ header -->
 
 <!-- content -->
-<div class="col py-3">
+<div class="col py-3" style="margin-top: 100px;">
     <div class="content ">
         <div class="mb-4">
             <button onclick="goBack()" class="btn btn-primary">返回上一頁</button>
@@ -156,21 +173,38 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <script>
-            function goBack() {
-                window.history.back();
-            }
-        </script>
 
-        <!-- Bundle scripts -->
-        <script src="/Dessert/JS/bundle.js"></script>
+<div id="footer-div"></div>
 
-        <!-- Examples -->
-        <script src="/Dessert/JS/orders.js"></script>
+<div id="copyright-div"></div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<script src="/Conponents/front_end.js"></script>
+<script data-cfasync="false" src="/Commom/js/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="/Commom/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Commom/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
 
-        <!-- Main Javascript file -->
-        <script src="/Dessert/JS/app.min.js"></script>
+<!-- Bundle scripts -->
+<script src="/Dessert/JS/bundle.js"></script>
+
+<!-- Examples -->
+<script src="/Dessert/JS/orders.js"></script>
+
+<!-- Main Javascript file -->
+<script src="/Dessert/JS/app.min.js"></script>
 </body>
 
 </html>
