@@ -112,26 +112,25 @@
                     </div>
                     <div class="filter">
                         <div class="filter-item">
-                            <form action="" method="post">
+                            <!-- <form action="" method="post"> -->
                                 <legend>過濾條件</legend>
-                                <label>活動內容：</label><input type="search" placeholder="輸入關鍵字"
-                                    name="groupactivitycontent">
-                                <button type="submit">搜尋</button>
-                            </form>
+                                <label>活動內容：</label><input type="search" placeholder="輸入關鍵字" id="getgroupactivitycontent">
+                                <button type="button" id="gotocontent">搜尋</button>
+                            <!-- </form> -->
                         </div>
                         <div class="filter-item">
-                            <form action="" method="post">
-                                <label>活動名稱：</label><input type="search" placeholder="輸入關鍵字" name="groupname">
-                                <button type="submit">搜尋</button>
-                            </form>
+                            <!-- <form action="" method="post"> -->
+                                <label>活動名稱：</label><input type="search" placeholder="輸入關鍵字" id="getgroupname">
+                                <button type="button" id="gotoname">搜尋</button>
+                            <!-- </form> -->
                         </div>
-                        <div class="filter-item">
+                        <!-- <div class="filter-item">
                             <form action="" method="post">
                                 <label>選擇開始日期</label> <input type="date" name="grouporderstar">
                                 <label>選擇結束日期</label> <input type="date" name="grouporderend">
                                 <button type="submit">搜尋</button>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-body">
                         <div class="">
@@ -146,7 +145,7 @@
                                         <th style="width:120px;"><strong>團購數量低標</strong></th>
                                         <th style="width:180px;"><strong>活動名稱</strong></th>
                                         <th style="width:120px;"><strong>團購商品折扣</strong></th>
-                                        <th style="width:120px;"><strong>團購狀態</strong></th>
+                                        <!-- <th style="width:120px;"><strong>團購狀態</strong></th> -->
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -222,14 +221,14 @@
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="#">編輯</a>
-                                                    <a class="dropdown-item delectone" data-id="${response[avo].groupActivityId}" href="#">刪除</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>`;
-                        texts += text;
-                    }
-                    $("#actall").html(texts);
+                                                    </div>
+                                                    </div>
+                                                    </td>
+                                                    </tr>`;
+                                                    texts += text;
+                                                }
+                                                $("#actall").html(texts);
+                                                // <a class="dropdown-item delectone" data-id="${response[avo].groupActivityId}" href="#">刪除</a>
                 }
             });
         }
@@ -256,6 +255,103 @@
                 };
             });
         }
+
+        $("#gotocontent").click(function() {
+             $.ajax({
+                url: "/group-activity/back-contentSearch",
+                method: "POST",
+                data: { groupActivityContent: $("#getgroupactivitycontent").val() },
+                success: function (response) {
+                    if (response == "") {
+                        alert("查無資料");
+                    }else {
+                        let texts = "";
+                    for (let avo in response) {
+                        let text = `<tr>
+                                        <td><strong>${response[avo].groupActivityId}</strong></td>
+                                        <td>${response[avo].groupProductId}</td>
+                                        <td>${response[avo].groupActivityContent}</td>
+                                        <td>${response[avo].groupOrderStar}</td>
+                                        <td>${response[avo].groupOrderEnd}</td>
+                                        <td>${response[avo].groupOrderMin}</td>
+                                        <td>${response[avo].groupName}</td>
+                                        <td>${response[avo].groupOrderDiscount}</td>
+                                        <td></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-success" data-bs-toggle="dropdown">
+                                                    <svg width="20px" height="20px" viewbox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none"
+                                                            fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"></rect>
+                                                            <circle fill="#000000" cx="5" cy="12" r="2"></circle>
+                                                            <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+                                                            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">編輯</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>`;
+                        texts += text;
+                    }
+                    $("#actall").html(texts);
+                        }
+                    }
+            });
+
+        });
+
+        $("#gotoname").click(function() {
+            $.ajax({
+                url: "/group-activity/back-nameSearch",
+                method: "POST",
+                data: { groupName: $("#getgroupname").val() },
+                success: function (response) {
+                    if (response == "") {
+                        alert("查無資料");
+                    }else {
+                        let texts = "";
+                    for (let avo in response) {
+                        let text = `<tr>
+                                        <td><strong>${response[avo].groupActivityId}</strong></td>
+                                        <td>${response[avo].groupProductId}</td>
+                                        <td>${response[avo].groupActivityContent}</td>
+                                        <td>${response[avo].groupOrderStar}</td>
+                                        <td>${response[avo].groupOrderEnd}</td>
+                                        <td>${response[avo].groupOrderMin}</td>
+                                        <td>${response[avo].groupName}</td>
+                                        <td>${response[avo].groupOrderDiscount}</td>
+                                        <td></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-success" data-bs-toggle="dropdown">
+                                                    <svg width="20px" height="20px" viewbox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none"
+                                                            fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"></rect>
+                                                            <circle fill="#000000" cx="5" cy="12" r="2"></circle>
+                                                            <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+                                                            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">編輯</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>`;
+                        texts += text;
+                    }
+                    $("#actall").html(texts);
+                        }
+                    }
+            });
+        })
     </script>
 
 </body>

@@ -199,6 +199,7 @@ public class GroupRestContreller {
 			GroupActivityDTO temporarydto = new GroupActivityDTO();
 			GroupProductVO tr = groupProductService.showOneProduct(evo.getGroupProductId());
 			Integer ActivityPrice = (int)(tr.getGroupProductPrice() * evo.getGroupOrderDiscount());
+			Long detailcount = groupActivityService.getDetailCount(evo.getGroupActivityId());
 			temporarydto.setGroupActivityPrice(ActivityPrice);
 			temporarydto.setGroupActivityId(evo.getGroupActivityId());
 			temporarydto.setGroupProductId(evo.getGroupProductId());
@@ -211,6 +212,7 @@ public class GroupRestContreller {
 			temporarydto.setGroupProductPrice(tr.getGroupProductPrice());
 //			temporarydto.setGroupName(tr.getGroupProductName());
 //			temporarydto.setGroupProductContent(tr.getGroupProductContent());
+			temporarydto.setGroupDetailCount(detailcount);
 			temporaryalldto.add(temporarydto);
 		}
 //		return groupActivityService.allShopActivity(today);
@@ -218,11 +220,11 @@ public class GroupRestContreller {
 	}
 
 	// 前台單品 *改成thymeleaf後已無用*
-	@PostMapping("/single-product/showthe")
-	public GroupActivityVO showthe(@RequestParam String groupActivityId) {
-		Integer theid = Integer.parseInt(groupActivityId);
-		return groupActivityService.showTheActivity(theid);
-	}
+//	@PostMapping("/single-product/showthe")
+//	public GroupActivityVO showthe(@RequestParam String groupActivityId) {
+//		Integer theid = Integer.parseInt(groupActivityId);
+//		return groupActivityService.showTheActivity(theid);
+//	}
 
 	// 前台團購主專區 發起活動
 	@PostMapping("/groupActivity/inser")
@@ -297,6 +299,10 @@ public class GroupRestContreller {
 		        System.out.println("新增功能的圖片file2: " + file2);
 		        System.out.println("新增功能的圖片file3: " + file3);
 
+		        Map<String, Boolean> response = new HashMap<>();
+		        Boolean success1;
+	        if (file0 != null || file1 != null || file2 != null || file3 != null) {
+			
 			GroupProductDTO inserdto = new GroupProductDTO();
 			inserdto.setGroupProductName(groupProductName);
 			inserdto.setGroupProductContent(groupProductContent);
@@ -305,14 +311,18 @@ public class GroupRestContreller {
 			inserdto.setGroupProductStatus(groupProductStatus);
 			// 將商品資料存入資料庫，並取得save傳回的該商品VO物件。
 			GroupProductVO evo = groupProductService.inserProductNew(inserdto);
-			Boolean success1 = (evo != null);
+			success1 = (evo != null);
 
 			Boolean success2 = groupProductImgService.inser4Img(evo.getGroupProductId(), file0, file1, file2, file3);
 			
 
-			Map<String, Boolean> response = new HashMap<>();
 			response.put("success1", success1);
 			return response;
+	        }else {
+	        	success1 = false;
+	        	response.put("success1", success1);
+	        	return response;
+	        }
 		}
 		
 		// 後台 修改團購商品(多張圖片修改功能 施工中)
@@ -393,6 +403,52 @@ public class GroupRestContreller {
 			checkoutMemberDTO.setMemberPhone(onemem.getMemberPhone());
 			checkoutMemberDTO.setMemberEmail(onemem.getMemberEmail());
 			return checkoutMemberDTO;
+		}
+		
+		//前台 團購平台 活動名稱關鍵字查詢
+		@PostMapping("/group-activity/Search")
+		public List<GroupActivityDTO> SearchActivity(String groupName) {
+			String formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
+			Date today = null;
+			try {
+				today = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(formatter);
+			} catch (ParseException e) {
+				System.out.println("SimpleDateFormat錯誤");
+			}
+			
+			List<GroupActivityDTO> temporaryalldto = new ArrayList<GroupActivityDTO>();
+			List<GroupActivityVO> getKeywordsActivity = groupActivityService.ActivityKeyName(groupName, today, today);
+			for (GroupActivityVO evo : getKeywordsActivity) {
+				GroupActivityDTO temporarydto = new GroupActivityDTO();
+				GroupProductVO tr = groupProductService.showOneProduct(evo.getGroupProductId());
+				Integer ActivityPrice = (int)(tr.getGroupProductPrice() * evo.getGroupOrderDiscount());
+				Long detailcount = groupActivityService.getDetailCount(evo.getGroupActivityId());
+				temporarydto.setGroupActivityPrice(ActivityPrice);
+				temporarydto.setGroupActivityId(evo.getGroupActivityId());
+				temporarydto.setGroupProductId(evo.getGroupProductId());
+				temporarydto.setGroupActivityContent(evo.getGroupActivityContent());
+				temporarydto.setGroupOrderStar(evo.getGroupOrderStar());
+				temporarydto.setGroupOrderEnd(evo.getGroupOrderEnd());
+				temporarydto.setGroupOrderMin(evo.getGroupOrderMin());
+				temporarydto.setGroupName(evo.getGroupName());
+				temporarydto.setGroupOrderDiscount(evo.getGroupOrderDiscount());
+				temporarydto.setGroupProductPrice(tr.getGroupProductPrice());
+				temporarydto.setGroupDetailCount(detailcount);
+				temporaryalldto.add(temporarydto);
+			}
+			return temporaryalldto;
+		}
+		
+		//後台 查詢活動內容關鍵字
+		@PostMapping("/group-activity/back-contentSearch")
+		public List<GroupActivityVO> BackSearchActivityContent(String groupActivityContent) {
+			return groupActivityService.BackKeyContent(groupActivityContent);
+		}
+		
+		//後台 查詢活動名稱關鍵字
+		@PostMapping("/group-activity/back-nameSearch")
+		public List<GroupActivityVO> BackSearchActivityName(String groupName) {
+			return groupActivityService.BackKeyName(groupName);
 		}
 	
 	// 前台團購主修改活動資料
