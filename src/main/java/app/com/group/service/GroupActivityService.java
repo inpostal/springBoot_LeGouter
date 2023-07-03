@@ -157,6 +157,14 @@ public class GroupActivityService {
 //			return groupActivityRepository.findByGroupNameContaining(keywords);
 			return groupActivityRepository.findByGroupNameContainingAndGroupOrderStarLessThanEqualAndGroupOrderEndAfter(keywords, groupOrderStar, groupOrderEnd);
 		}
+		
+		public List<GroupActivityVO> BackKeyContent(String groupActivityContent) {
+			return groupActivityRepository.findByGroupActivityContentContaining(groupActivityContent);
+		}
+		
+		public List<GroupActivityVO> BackKeyName(String groupName) {
+			return groupActivityRepository.findByGroupNameContaining(groupName);
+		}
 
 	//
 //	public Boolean updataActivity(GroupActivityDTO groupActivityDTO) {

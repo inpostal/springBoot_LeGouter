@@ -405,7 +405,7 @@ public class GroupRestContreller {
 			return checkoutMemberDTO;
 		}
 		
-		//前台 活動名稱關鍵字查詢
+		//前台 團購平台 活動名稱關鍵字查詢
 		@PostMapping("/group-activity/Search")
 		public List<GroupActivityDTO> SearchActivity(String groupName) {
 			String formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
@@ -437,6 +437,18 @@ public class GroupRestContreller {
 				temporaryalldto.add(temporarydto);
 			}
 			return temporaryalldto;
+		}
+		
+		//後台 查詢活動內容關鍵字
+		@PostMapping("/group-activity/back-contentSearch")
+		public List<GroupActivityVO> BackSearchActivityContent(String groupActivityContent) {
+			return groupActivityService.BackKeyContent(groupActivityContent);
+		}
+		
+		//後台 查詢活動名稱關鍵字
+		@PostMapping("/group-activity/back-nameSearch")
+		public List<GroupActivityVO> BackSearchActivityName(String groupName) {
+			return groupActivityService.BackKeyName(groupName);
 		}
 	
 	// 前台團購主修改活動資料
