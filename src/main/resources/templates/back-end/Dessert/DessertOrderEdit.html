@@ -146,8 +146,7 @@
                                                     <label class="form-label">收件人</label>
                                                     <input type="text" class="form-control" id="receiverName"
                                                            th:value="${orders.getReceiverName()}">
-
-
+                                                    <div class="invalid-feedback" style="display: none;"></div>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -159,11 +158,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">E-mail</label>
-                                                        <input type="text" class="form-control" id="receiverEmail"
-                                                               th:value="${orders.getReceiverEmail()}">
-                                                    </div>
+                                                    <label class="form-label">E-mail</label>
+                                                    <input type="text" class="form-control" id="receiverEmail"
+                                                           th:value="${orders.getReceiverEmail()}">
+                                                    <div class="invalid-feedback" style="display: none;"></div>
                                                 </div>
 
                                             </div>
@@ -181,7 +179,7 @@
                                                     <label class="form-label">收件地址</label>
                                                     <input type="text" class="form-control" id="receiverAddress"
                                                            th:value="${orders.receiverAddress}">
-
+                                                    <div class="invalid-feedback" style="display: none;"></div>
                                                 </div>
 
 
@@ -251,19 +249,60 @@
 
 
 <script>
-    $("#receiverPhone").blur(function () {
-        let pattern = /^09\d{8}$/;
-        let inputPhone = $(this).val();
+    // $("#receiverPhone").blur(function () {
+    //     let pattern = /^09\d{8}$/;
+    //     let inputPhone = $(this).val();
+    //
+    //     if (!pattern.test(inputPhone)) {
+    //         $(this).addClass("is-invalid");
+    //         $(this).next(".invalid-feedback").show();
+    //     } else {
+    //         $(this).removeClass("is-invalid");
+    //         $(this).next(".invalid-feedback").hide();
+    //     }
+    // });
+    // $("#receiverName").blur(function () {
+    //     let pattern = /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/;
+    //     let inputName = $(this).val();
+    //
+    //     if (!pattern.test(inputName)) {
+    //         $(this).addClass("is-invalid");
+    //         $(this).next(".invalid-feedback").text('收件人只能包含英文、數字或中文').show();
+    //     } else {
+    //         $(this).removeClass("is-invalid");
+    //         $(this).next(".invalid-feedback").hide();
+    //     }
+    // });
+    //
+    // $("#receiverEmail").blur(function () {
+    //     let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //     let inputEmail = $(this).val();
+    //
+    //     if (!pattern.test(inputEmail)) {
+    //         $(this).addClass("is-invalid");
+    //         $(this).next(".invalid-feedback").text('E-mail格式不正確').show();
+    //     } else {
+    //         $(this).removeClass("is-invalid");
+    //         $(this).next(".invalid-feedback").hide();
+    //     }
+    // });
+    //
+    // $("#receiverAddress").blur(function () {
+    //     let pattern = /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/;
+    //     let inputAddress = $(this).val();
+    //
+    //     if (!pattern.test(inputAddress)) {
+    //         $(this).addClass("is-invalid");
+    //         $(this).next(".invalid-feedback").text('收件地址只能包含數字或中文').show();
+    //     } else {
+    //         $(this).removeClass("is-invalid");
+    //         $(this).next(".invalid-feedback").hide();
+    //     }
+    // });
 
-        if (!pattern.test(inputPhone)) {
-            $(this).addClass("is-invalid");
-            $(this).next(".invalid-feedback").show();
-        } else {
-            $(this).removeClass("is-invalid");
-            $(this).next(".invalid-feedback").hide();
-        }
-    });
     $("#submit").click(function () {
+        event.preventDefault();// prevent the form from submitting
+        let errorMsg = "";
         // 取得需要修改的值
         let ordersId = $("#ordersId").text();
         let receiverName = $("#receiverName").val();
@@ -271,23 +310,33 @@
         let receiverPhone = $("#receiverPhone").val();
         let orderStatus = $("#orderStatus").val();
         let receiverAddress = $("#receiverAddress").val();
-
-
-        // Validate the input fields
+        // Check each field for validation
         if (receiverName.trim() === '') {
-            alert('收件人不能為空');
-            return;
+            errorMsg += '收件人不能為空\n';
+        } else if (!/^[\u4e00-\u9fa50-9]+$/.test(receiverName)) {
+            errorMsg += '收件人只能包含中文或數字\n';
         }
-        if (receiverAddress.trim() === '') {
-            alert('收件地址不能為空');
-            return;
-        }
+
         if (receiverPhone.trim() === '') {
-            alert('電話不能為空');
-            return;
+            errorMsg += '電話不能為空\n';
+        } else if (!/^09\d{8}$/.test(receiverPhone)) {
+            errorMsg += '電話格式不正確，必須為09開頭的十位數字\n';
         }
         if (receiverEmail.trim() === '') {
-            alert('E-mail不能為空');
+            errorMsg += 'E-mail不能為空\n';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(receiverEmail)) {
+            errorMsg += 'E-mail格式不正確\n';
+        }
+        if (receiverAddress.trim() === '') {
+            errorMsg += '收件地址不能為空\n';
+        } else if (!/^[\u4e00-\u9fa50-9]+$/.test(receiverAddress)) {
+            errorMsg += '收件地址只能包含中文或數字\n';
+        }
+
+
+        // If any error, show the alert and stop form submission
+        if (errorMsg !== "") {
+            alert(errorMsg);
             return;
         }
 

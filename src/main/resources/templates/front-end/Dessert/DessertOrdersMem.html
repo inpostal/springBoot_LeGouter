@@ -10,12 +10,11 @@
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
-    <link href="/Dessert/CSS/css2.css" rel="stylesheet">
 
     <!-- Bootstrap icons -->
-    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-icons.min.css" type="text/css">
+    <!--    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-icons.min.css" type="text/css">-->
     <!-- Bootstrap Docs -->
-    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-docs.css" type="text/css">
+    <!--    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-docs.css" type="text/css">-->
 
 
     <!-- Main style file -->
@@ -45,10 +44,9 @@
 </head>
 
 <body>
-<div id="header-div"></div>
 
-
-<div id="nav-div"></div>
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
 
 <!-- preloader -->
 <div class="preloader">
@@ -88,13 +86,17 @@
                                  th:data-bs-target="'#order-' + ${order.orderId}" role="button">
 
 
-                                <td class="flex-fill">
-                                    <a href="#" th:text="'#'+${order.orderId}"></a>
-                                </td>
+                                <!--                                <td class="flex-fill">-->
+                                <!--                                    <a href="#" th:text="'#'+${order.orderId}"></a>-->
+                                <!--                                </td>-->
 
                                 <div class="flex-fill">
-                                    <strong th:id="'orderTime-' + ${order.orderId}"
-                                            th:text="'訂單時間：' + ${order.orderTime}"></strong>
+                                    <strong th:id="'orderTime-' + ${order.orderId}">
+                                        訂單時間：
+                                        <span th:text="${#dates.format(order.orderTime, 'yyyy/MM/dd')}"></span>
+                                        <span th:text="${order.orderTime.hours >= 12 ? '下午' : '上午'}"></span>
+                                        <span th:text="${#dates.format(order.orderTime, 'hh:mm:ss')}"></span>
+                                    </strong>
                                 </div>
 
 
@@ -181,9 +183,11 @@
         </div>
     </div>
 </div>
-<div id="footer-div"></div>
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
 
-<div id="copyright-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
 <script type="text/javascript" src="/Dessert/JS/jquery.min.js"></script>
 <script src="/Course/JS/Jquery.js"></script>
@@ -278,7 +282,7 @@
 
 <!--</script>-->
 <script src="/Conponents/front_end.js"></script>
-<script data-cfasync="false" src="/Commom/js/email-decode.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="/Commom/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
