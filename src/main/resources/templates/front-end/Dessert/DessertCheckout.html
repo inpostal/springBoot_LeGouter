@@ -36,6 +36,12 @@
             margin-left: -15px;
             margin-top: 7px;
         }
+
+        .error-message {
+            color: red;
+            display: none;
+        }
+
     </style>
     <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
     <!-- Bootstrap CSS -->
@@ -124,6 +130,7 @@
                                 <div class="checkout-form-list">
                                     <label>姓名 <span class="required">*</span></label>
                                     <input id="name" placeholder="" type="text" name="receiverName">
+                                    <span id="name-error" class="error-message"></span>
                                 </div>
                             </div>
 
@@ -133,6 +140,7 @@
                                     <label>運送地址 <span class="required">*</span></label>
                                     <input id="receiverAddress" placeholder="請輸入地址" type="text"
                                            name="receiverAddress">
+                                    <span id="address-error" class="error-message"></span>
                                 </div>
                             </div>
 
@@ -141,12 +149,14 @@
                                 <div class="checkout-form-list">
                                     <label>Email <span class="required">*</span></label>
                                     <input id="receiverEmail" placeholder="" type="email" name="receiverEmail">
+                                    <span id="email-error" class="error-message"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>連絡電話 <span class="required">*</span></label>
                                     <input id="phone" type="text" name="receiverPhone">
+                                    <span id="phone-error" class="error-message"></span>
                                 </div>
                             </div>
 
@@ -211,26 +221,26 @@
                     <div class="payment-method">
                         <div class="payment-accordion">
                             <div id="accordion">
-                                <div class="card">
-                                    <div class="card-header" id="payment-1">
-                                        <h5 class="panel-title mb-2">
-                                            <a href="#" class="payment-option" data-toggle="collapse"
-                                               data-target="#collapseOne" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                銀行轉帳
-                                            </a>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseOne" class="collapse" aria-labelledby="payment-1"
-                                         data-parent="#accordion">
-                                        <div class="card-body mb-2 mt-2">
-                                            <p>匯款資訊</p>
-                                            <p>戶名：LE</p>
-                                            <p>第一銀行，華山分行（007）</p>
-                                            <p>帳號：123456789</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!--                                <div class="card">-->
+                                <!--                                    <div class="card-header" id="payment-1">-->
+                                <!--                                        <h5 class="panel-title mb-2">-->
+                                <!--                                            <a href="#" class="payment-option" data-toggle="collapse"-->
+                                <!--                                               data-target="#collapseOne" aria-expanded="true"-->
+                                <!--                                               aria-controls="collapseOne">-->
+                                <!--                                                銀行轉帳-->
+                                <!--                                            </a>-->
+                                <!--                                        </h5>-->
+                                <!--                                    </div>-->
+                                <!--                                    <div id="collapseOne" class="collapse" aria-labelledby="payment-1"-->
+                                <!--                                         data-parent="#accordion">-->
+                                <!--                                        <div class="card-body mb-2 mt-2">-->
+                                <!--                                            <p>匯款資訊</p>-->
+                                <!--                                            <p>戶名：LE</p>-->
+                                <!--                                            <p>第一銀行，華山分行（007）</p>-->
+                                <!--                                            <p>帳號：123456789</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                                 <div class="card">
                                     <div class="card-header" id="payment-2">
                                         <h5 class="panel-title mb-2">
@@ -241,49 +251,49 @@
                                             </a>
                                         </h5>
                                     </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="payment-2"
-                                         data-parent="#accordion">
-                                        <div class="accordion-body">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <label class="form-label">信用卡卡號</label>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(1)">
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(2)">
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(3)">
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="text" class="form-control" maxlength="4"
-                                                                   oninput="moveToNextInput(4)">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <!--                                    <div id="collapseTwo" class="collapse" aria-labelledby="payment-2"-->
+                                    <!--                                         data-parent="#accordion">-->
+                                    <!--                                        <div class="accordion-body">-->
+                                    <!--                                            <form>-->
+                                    <!--                                                <div class="mb-3">-->
+                                    <!--                                                    <label class="form-label">信用卡卡號</label>-->
+                                    <!--                                                    <div class="row">-->
+                                    <!--                                                        <div class="col">-->
+                                    <!--                                                            <input type="text" class="form-control" maxlength="4"-->
+                                    <!--                                                                   oninput="moveToNextInput(1)">-->
+                                    <!--                                                        </div>-->
+                                    <!--                                                        <div class="col">-->
+                                    <!--                                                            <input type="text" class="form-control" maxlength="4"-->
+                                    <!--                                                                   oninput="moveToNextInput(2)">-->
+                                    <!--                                                        </div>-->
+                                    <!--                                                        <div class="col">-->
+                                    <!--                                                            <input type="text" class="form-control" maxlength="4"-->
+                                    <!--                                                                   oninput="moveToNextInput(3)">-->
+                                    <!--                                                        </div>-->
+                                    <!--                                                        <div class="col">-->
+                                    <!--                                                            <input type="text" class="form-control" maxlength="4"-->
+                                    <!--                                                                   oninput="moveToNextInput(4)">-->
+                                    <!--                                                        </div>-->
+                                    <!--                                                    </div>-->
+                                    <!--                                                </div>-->
 
-                                                <div class="mb-3">
-                                                    <label class="form-label">持卡人姓名</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-md-6">
-                                                        <label class="form-label">卡片到期日</label>
-                                                        <input type="text" class="form-control" placeholder="MM/YY">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="form-label">信用卡認證碼</label>
-                                                        <input type="text" class="form-control" placeholder="XXX">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    <!--                                                <div class="mb-3">-->
+                                    <!--                                                    <label class="form-label">持卡人姓名</label>-->
+                                    <!--                                                    <input type="text" class="form-control">-->
+                                    <!--                                                </div>-->
+                                    <!--                                                <div class="row mb-3">-->
+                                    <!--                                                    <div class="col-md-6">-->
+                                    <!--                                                        <label class="form-label">卡片到期日</label>-->
+                                    <!--                                                        <input type="text" class="form-control" placeholder="MM/YY">-->
+                                    <!--                                                    </div>-->
+                                    <!--                                                    <div class="col-md-6">-->
+                                    <!--                                                        <label class="form-label">信用卡認證碼</label>-->
+                                    <!--                                                        <input type="text" class="form-control" placeholder="XXX">-->
+                                    <!--                                                    </div>-->
+                                    <!--                                                </div>-->
+                                    <!--                                            </form>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
 
                             </div>
@@ -346,48 +356,17 @@
         });
     });
 
-    function checkInputs() {
-        // 檢查姓名
-        let name = $('#name').val();
-        if (name === '' || !/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name)) {
-            alert('姓名只能包含英文、數字或中文，且不能為空');
-            return false;
-        }
-
-        // 檢查運送地址
-        let address = $('#receiverAddress').val();
-        if (address === '' || !/^[\u4e00-\u9fa5\d]+$/.test(address)) {
-            alert('地址只能包含數字或中文，且不能為空');
-            return false;
-        }
-
-        // 檢查Email
-        let email = $('#receiverEmail').val();
-        if (email === '' || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
-            alert('Email格式必須符合Email格式，且不能為空');
-            return false;
-        }
-
-        // 檢查電話
-        let phone = $('#phone').val();
-        if (phone === '' || !/^09\d{8}$/.test(phone)) {
-            alert('電話號碼必須是09開頭且總計十位數字，且不能為空');
-            return false;
-        }
-
-        return true;
-    }
 
     $("#name").blur(function () {
         let inputName = $(this).val();
-        let pattern = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+        let pattern = /^[a-zA-Z\u4e00-\u9fa5]+$/;
         if (!pattern.test(inputName)) {
-            alert("姓名只能包含英文、數字或中文");
-            $(this).val('');
+            $("#name-error").text("！ 姓名只能包含英文或中文").show();
         } else {
-            $("#name-error").text("");
+            $("#name-error").text("").hide();
         }
     });
+
 
     // 電話輸入區驗證
     $("#phone").blur(function () {
@@ -395,62 +374,94 @@
         let inputPhone = $(this).val();
 
         if (!pattern.test(inputPhone)) {
-            alert("電話號碼必須是09開頭且總計十位數字");
-            $(this).val('');
+            $("#phone-error").text("！ 電話號碼必須是09開頭且為10個數字").show();
         } else {
-            $("#phone-error").text("");
+            $("#phone-error").text("").hide();
         }
     });
 
-    // 運送地址輸入區驗證
+
     $("#receiverAddress").blur(function () {
-        let pattern = /^[\u4e00-\u9fa5\d]+$/;
         let inputAddress = $(this).val();
 
-        if (!pattern.test(inputAddress)) {
-            alert("地址只能包含數字或中文");
-            $(this).val('');
-        } else {
-            $("#address-error").text("");
+        let cityRegex = /(縣|市)/;
+        if (!cityRegex.test(inputAddress)) {
+            $("#address-error").text("！ 地址必須包含縣或市").show();
+            return;
         }
+
+        let numberRegex = /號/;
+        if (!numberRegex.test(inputAddress)) {
+            $("#address-error").text("！ 地址必須包含號").show();
+            return;
+        }
+
+
+        $("#address-error").text("").hide();
     });
+
 
     // Email 輸入區驗證
     $("#receiverEmail").blur(function () {
         let pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
         let inputEmail = $(this).val();
-        console.log('test');
+
         if (!pattern.test(inputEmail)) {
-            alert("Email格式必須符合Email格式");
-            $(this).val('');
+            $("#email-error").text("！ Email格式必須符合Email格式").show();
         } else {
-            $("#email-error").text("");
+            $("#email-error").text("").hide();
         }
     });
 
-    <!-- 信用卡卡號填完自動跳下一格 -->
+    function checkInputs() {
+        let isValid = true;
 
-
-    function moveToNextInput(nextInputIndex) {
-        const inputs = document.querySelectorAll('input[maxlength="4"]');
-        const currentIndex = nextInputIndex - 1;
-        const nextIndex = currentIndex + 1;
-
-        if (nextIndex < inputs.length) {
-            const currentInput = inputs[currentIndex];
-            const nextInput = inputs[nextIndex];
-            const maxLength = parseInt(currentInput.getAttribute("maxlength"));
-            const inputLength = currentInput.value.length;
-
-            if (inputLength >= maxLength) {
-                nextInput.focus();
-            }
+        let inputName = $("#name").val();
+        let patternName = /^[a-zA-Z\u4e00-\u9fa5]+$/;
+        if (!patternName.test(inputName) || inputName === '') {
+            $("#name-error").text("! 姓名只能包含英文或中文").show();
+            isValid = false;
+        } else {
+            $("#name-error").text("").hide();
         }
+
+        let inputPhone = $("#phone").val();
+        let patternPhone = /^09\d{8}$/;
+        if (!patternPhone.test(inputPhone) || inputPhone === '') {
+            $("#phone-error").text("電話號碼必須是09開頭且總計十位數字").show();
+            isValid = false;
+        } else {
+            $("#phone-error").text("").hide();
+        }
+
+        let inputAddress = $("#receiverAddress").val();
+        let cityRegex = /(縣|市)/;
+        let numberRegex = /號/;
+        if (!cityRegex.test(inputAddress) || !numberRegex.test(inputAddress) || inputAddress === '') {
+            $("#address-error").text("地址必須包含縣或市及號").show();
+            isValid = false;
+        } else {
+            $("#address-error").text("").hide();
+        }
+
+        let inputEmail = $("#receiverEmail").val();
+        let patternEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        if (!patternEmail.test(inputEmail) || inputEmail === '') {
+            $("#email-error").text("Email格式必須符合Email格式").show();
+            isValid = false;
+        } else {
+            $("#email-error").text("").hide();
+        }
+
+        return isValid;
     }
 
+
+    <!--讓我的preloader不要無限轉圈圈-->
     $(window).on('load', function () {
         $('.preloader').hide();
     });
+
 
 </script>
 

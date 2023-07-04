@@ -27,20 +27,8 @@ public class AllInOneBase {
     protected static String[] ignorePayment;
 
     public AllInOneBase() {
-//		try{
+
         Document doc;
-        /* when using web project*/
-//			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
-//			doc = EcpayFunction.xmlParser(configPath);
-        /* when using testing code*/
-
-//        Resource resource = new ClassPathResource("payment_conf.xml");
-//        InputStream input = resource.getInputStream();
-//        String paymentConfPath = "classpath:payment_conf.xml";
-
-        //String paymentConfPath = "/payment_conf.xml";
-//        String paymentConfPath = "C:\\CHA101G6\\springBoot_LeGouter\\src\\main\\resources\\payment_conf.xml";
         String paymentConfPath = "./src/main/resources/payment_conf.xml";
 
         doc = EcpayFunction.xmlParser(paymentConfPath);
@@ -76,8 +64,6 @@ public class AllInOneBase {
         if (HashKey == null) {
             throw new EcpayException(ErrorMessage.MInfo_NOT_SETTING);
         }
-//		} catch(UnsupportedEncodingException e){
-//			e.printStackTrace();
-//		}
+//
     }
 }

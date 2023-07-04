@@ -213,12 +213,21 @@
                 dataType: 'json',
                 success: function (res) {
                     if (res.length === 0) {
+                        $(".container.container-default-2.custom-area").hide();
+                        let emptyCartMsg = `
+        <div class="empty-cart-message" style="text-align: center; margin-top: 100px;">
+            <h2>親，您的購物車沒有好吃的甜點唷！</h2>
+            <a href="/dessertshop/shopAndproduct/shop.html" class="btn obrien-button primary-btn" style="margin-top: 20px;">前往甜點商城</a>
+        </div>`;
+                        $("#footer-div").before(emptyCartMsg);
                         $("#checkout-button").off("click");
                         $("#checkout-button").on("click", function (event) {
                             event.preventDefault();
                             alert("購物車內沒有商品");
                         });
                     }
+
+
                     console.log(res);
                     cartClassItems = res;
                     let th_html = ``;
@@ -273,14 +282,35 @@
         updateFinalAmount(totalAmount, shippingFee);
     }
 
+    // function updateFinalAmount(totalAmount, shippingFee) {
+    //     let discountAmount = parseFloat($("table tr td:contains('折扣金額')").next('td').text().replace('$', ''));
+    //     let finalAmount = totalAmount - discountAmount;
+    //     if (shippingFee != 'Free') {
+    //         finalAmount += parseFloat(shippingFee.replace('$', ''));
+    //     }
+    //     $("table tr td:contains('應付總額')").next('td').text("$" + Math.round(finalAmount));
+    // }
+
     function updateFinalAmount(totalAmount, shippingFee) {
-        let discountAmount = parseFloat($("table tr td:contains('折扣金額')").next('td').text().replace('-$', ''));
+        let discountElement = $("table tr td:contains('折扣金額')").next('td');
+        let discountAmount = parseFloat(discountElement.text().replace('$', ''));
+        if (isNaN(discountAmount)) {
+            // 折扣金額無法解析為數字，將其設為 0
+            discountAmount = 0;
+        }
+        let formattedDiscount = `($ ${Math.abs(discountAmount)})`;
+        if (discountAmount < 0) {
+            formattedDiscount = `(${formattedDiscount})`;
+        }
+        discountElement.html("<span style='color: red;'>" + formattedDiscount + "</span>");
+
         let finalAmount = totalAmount - discountAmount;
-        if (shippingFee != 'Free') {
+        if (shippingFee !== 'Free') {
             finalAmount += parseFloat(shippingFee.replace('$', ''));
         }
-        $("table tr td:contains('應付總額')").next('td').text("$" + Math.round(finalAmount));
+        $("table tr td:contains('應付總額')").next('td').text("$ " + Math.round(finalAmount));
     }
+
 
     $(document).on('input', '.cart-plus-minus-box', function () {
         // Parse the input value as an integer
