@@ -51,9 +51,8 @@
         <!--shop toolbar start-->
         <div class="shop_toolbar_wrapper">
             <div class="shop_toolbar_btn">
-                <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip"
+                <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" id="beredoshow"
                     title="">縮圖</button>
-                <!-- <button data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip" title="4"></button> -->
                 <button data-role="grid_list" type="button" class="btn-list" data-toggle="tooltip" title="">清單</button>
             </div>
             <div>
@@ -232,42 +231,49 @@
                                             return a.groupActivityId > b.groupActivityId ? 1 : -1;
                                         });
                                         DynamiGener(response);
+                                        document.getElementById("beredoshow").click();
                                         break;}
                                     case 1: {
                                         response.sort(function(a,b) {
                                             return a.groupActivityPrice < b.groupActivityPrice ? 1 : -1;
                                         });
                                         DynamiGener(response);
+                                        document.getElementById("beredoshow").click();
                                         break;}
                                         case 2: {
                                             response.sort(function(a,b) {
                                             return a.groupActivityPrice > b.groupActivityPrice ? 1 : -1;
                                         });
                                         DynamiGener(response);
+                                        document.getElementById("beredoshow").click();
                                         break;}
                                     case 3: {
                                         response.sort(function(a,b) {
                                             return a.groupOrderEnd < b.groupOrderEnd ? 1 : -1;
                                         });
                                         DynamiGener(response);
+                                        document.getElementById("beredoshow").click();
                                         break;}
                                     case 4: {
                                         response.sort(function(a,b) {
                                             return a.groupOrderEnd > b.groupOrderEnd ? 1 : -1;
                                         });
                                         DynamiGener(response);
+                                        document.getElementById("beredoshow").click();
                                         break;}
                                     case 5: {
                                         response.sort(function(a,b) {
                                             return a.groupDetailCount < b.groupDetailCount ? 1 : -1;
                                         });
                                         DynamiGener(response);
+                                        document.getElementById("beredoshow").click();
                                         break;}
                                     case 6: {
                                         response.sort(function(a,b) {
                                             return a.groupDetailCount > b.groupDetailCount ? 1 : -1;
                                         });
                                         DynamiGener(response);
+                                        document.getElementById("beredoshow").click();
                                         break;}
                                 }
                             });

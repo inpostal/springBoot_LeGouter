@@ -33,6 +33,7 @@ import app.com.group.vo.CheckoutMemberDTO;
 import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.GroupProductDTO;
+import app.com.group.vo.GroupProductImgDTO;
 import app.com.group.vo.GroupProductImgVO;
 import app.com.group.vo.GroupProductVO;
 import app.com.group.vo.InserDetailDTO;
@@ -231,8 +232,7 @@ public class GroupRestContreller {
 	public Map<String, Boolean> inserActivity(@RequestBody GroupActivityDTO groupActivityDTO, HttpSession session) {
 		System.out.println("開始日期" + groupActivityDTO.getGroupOrderStar());
 		System.out.println("結束日期" + groupActivityDTO.getGroupOrderEnd());
-//		Members user = (Members) session.getAttribute("user");
-//		String address = user.getMemberAddress();
+		Members user = (Members) session.getAttribute("user");
 		
 		GroupActivityVO theacvo = groupActivityService.inserActivitys(groupActivityDTO);
 		Boolean success = (theacvo != null);
@@ -240,8 +240,8 @@ public class GroupRestContreller {
 		GroupOrderMaster masterdto = new GroupOrderMaster();
 		System.out.println("剛剛新增的活動編號" + theacvo.getGroupActivityId());
 //		masterdto.setGroupOrderId(theacvo.getGroupActivityId()); //設定團購訂單PK編號，一個活動對應一個團購訂單主檔。 20230630下面已經有FK了 改自動生成PK。
-//		masterdto.setMemId(user.getMemberId()); //設定團購主編號
-		masterdto.setMemId(2); //測試設定團購主編號
+		masterdto.setMemId(user.getMemberId()); //設定團購主編號
+//		masterdto.setMemId(2); //測試設定團購主編號
 		masterdto.setGroupActivityId(theacvo.getGroupActivityId()); //設定FK活動編號
 		masterdto.setNumberOfProduct(0); //設定初始購買商品數量
 		masterdto.setGroupOrderStatus(1); //設定初始團購狀態
@@ -361,22 +361,29 @@ public class GroupRestContreller {
 		}
 		
 		// 配合動態產生圖片連結。(FK多張圖片 施工中)。
-		@GetMapping("/groupActivity/get/Product{groupProductId}/img{i}")
-		public ResponseEntity<Resource> getPicture2(@PathVariable Integer groupProductId,@PathVariable Integer i) {
-			List<GroupProductImgVO> gprimgyee = groupProductImgService.getFkImg(groupProductId);
+		@GetMapping("/groupActivity/get/Product{groupProductImgId}")
+		public ResponseEntity<Resource> getPicture2(@PathVariable Integer groupProductImgId) {
+			GroupProductImgVO gprimgyee = groupProductImgService.getPkImg(groupProductImgId);
+			byte[] picture = gprimgyee.getGroupProductImg();
+
+			ByteArrayResource resource = new ByteArrayResource(picture);
+
+			return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF) // or another appropriate media type
+					.body(resource);
 			
-			try {
-				byte[] picture = gprimgyee.get(i).getGroupProductImg();
-				ByteArrayResource resource = new ByteArrayResource(picture);
-				
-				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF)
-						.body(resource);
-			} catch (RuntimeException e) {
-				byte[] picture = gprimgyee.get(0).getGroupProductImg();
-				ByteArrayResource resource = new ByteArrayResource(picture);
-				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF)
-						.body(resource);
-			}
+			//白癡妥協處理		
+//			try {
+//				byte[] picture = gprimgyee.get(i).getGroupProductImg();
+//				ByteArrayResource resource = new ByteArrayResource(picture);
+//				
+//				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF)
+//						.body(resource);
+//			} catch (RuntimeException e) {
+//				byte[] picture = gprimgyee.get(0).getGroupProductImg();
+//				ByteArrayResource resource = new ByteArrayResource(picture);
+//				return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF)
+//						.body(resource);
+//			}
 			
 			//20230702 凌晨。下面這樣不行，在Response的時候, MediaType.IMAGE_GIF無法對List編碼的樣子。 陣列也不行。
 //			List<ByteArrayResource> allpicture = new ArrayList<ByteArrayResource>();
@@ -392,6 +399,22 @@ public class GroupRestContreller {
 //					.body(allpicture); //到這。
 			
 			}
+		
+		//傳入groupProductId用來取得groupProductImgId給動態生成。
+		@PostMapping("/groupActivity/getImgPkId")
+		public List<GroupProductImgDTO> getImgPK(@RequestParam Integer groupProductId) {
+			System.out.println("觀察groupProductId取得:" + groupProductId);
+			List<GroupProductImgVO> gprimgyee = groupProductImgService.getFkImg(groupProductId);
+			List<GroupProductImgDTO> groupProductImgDTO = new ArrayList<GroupProductImgDTO>();
+			
+			for (GroupProductImgVO imgvo : gprimgyee) {
+				GroupProductImgDTO imgdto = new GroupProductImgDTO();
+				imgdto.setGroupProductImgId(imgvo.getGroupProductImgId());
+				imgdto.setGroupProductId(imgvo.getGroupProductId());
+				groupProductImgDTO.add(imgdto);
+			}
+			return groupProductImgDTO;
+		}
 		
 		//前台 結帳資料 之會員一鍵輸入資料
 		@PostMapping("/groupActivity/Checkout/OneMember")

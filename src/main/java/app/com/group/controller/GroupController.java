@@ -49,16 +49,23 @@ public class GroupController {
 	}
     @GetMapping("/plan-activity") //前台團購主瀏覽商品 發起活動專區
 	public String planActivity(HttpSession session, RedirectAttributes redirectAttributes) {
+    	//預設要返回的當前路徑
     	String planactivityurl = "/plan-activity";
+    	//取得session當中的會員value
     	Members user = (Members) session.getAttribute("user");
+    	//判斷value是否為空值
         if (user != null){
+        	//如果不為空值，就再判斷是否為團購主
         	if (user.getMemberClassify() == 1) {
+        		//如果是團購主就進入活動專區
         		return "front-end/group/plan-activity3";
 			}else {
+				//如果不是就進入團購平台
 				return "front-end/group/group-shop";
 			}
     		
         }else {
+        	//value為空值 就導向登入頁面
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             session.setAttribute("location", planactivityurl);
             return "redirect:/login";

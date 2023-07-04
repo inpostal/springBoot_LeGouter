@@ -174,20 +174,28 @@
     <!-- 團購商品管理添加 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
+        function theformat(wtfbo){
+            return (wtfbo<10) ? ("0"+wtfbo) : wtfbo;
+        };
+
+        $("#productstatus").on("change", function() {
+            if(Number($("#productstatus").val()) === 0){
+                let dateobj = new Date();
+                let today = dateobj.getFullYear() + "-" + theformat(dateobj.getMonth() + 1) + "-" + theformat(dateobj.getDate());
+                $("#ProductEnddate").val(today);
+            }else {
+                $("#ProductEnddate").val("");
+            }
+        })
+        
        $("#btnupdata").on("click", function() {
-        let formdata = new FormData;
-        let groupProductId = $("#productid").val();
+          let formdata = new FormData;
+          let groupProductId = $("#productid").val();
           let groupProductName = $("#productname").val();
           let groupProductContent = $("#textarea").val();
           let groupProductPrice= $("#productprice").val();
           let groupProductStardate = $("#productstardate").val();
           let groupProductEnddate = $("#ProductEnddate").val();
-          console.log("下架日期的值:" + $("#ProductEnddate").val());
-          if($("#productstatus").val() === 0){
-            let dateobj = new Date();
-            let today = dateobj.getFullYear() + "-" + (dateobj.getMonth() + 1) + "-" + dateobj.getDate();
-            groupProductEnddate = today;
-          }
           let groupProductStatus = $("#productstatus").val();
           let imageform = $("#imageform");
           console.log("觀察取得的FORM資料:" + imageform);

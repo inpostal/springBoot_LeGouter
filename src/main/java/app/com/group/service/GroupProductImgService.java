@@ -21,16 +21,16 @@ public class GroupProductImgService {
 		return groupProductImgRepository.save(groupProductImgVO) != null;
 	}
 
-	public GroupProductImgVO getImg(Integer groupProductImgId) {
-		GroupProductImgVO imgvo = groupProductImgRepository.getReferenceById(groupProductImgId);
-		return imgvo;
+	public GroupProductImgVO getImg(Integer groupProductId) {
+		List<GroupProductImgVO> imgvo = groupProductImgRepository.findByGroupProductId(groupProductId);
+		return imgvo.get(0);
 	}
 
 	public Boolean updataImg(GroupProductImgVO groupProductImgVO) {
 		return groupProductImgRepository.save(groupProductImgVO) != null;
 	}
 
-	public GroupProductImgVO getOneImg(Integer groupProductImgId) {
+	public GroupProductImgVO getPkImg(Integer groupProductImgId) {
 		Optional<GroupProductImgVO> imgonevo = groupProductImgRepository.findById(groupProductImgId);
 		return imgonevo.get();
 	}

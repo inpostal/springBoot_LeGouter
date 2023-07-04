@@ -400,11 +400,11 @@
             let pattern = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
             if(!pattern.test(inputName)){
                 $("label[for='receiverName']").attr("style","color: red");
-                $("label[for='receiverName'] b").html("姓名: *姓名只能包含英文、數字或中文");
+                $("label[for='receiverName']").html("姓名: *姓名只能包含英文、數字或中文");
                 $(this).val('');
             }else {
                 $("label[for='receiverName']").attr("style","color: black");
-                $("label[for='receiverName'] b").html("姓名");
+                $("label[for='receiverName']").html("姓名");
             }
         });
         
@@ -415,11 +415,11 @@
 
             if(!pattern.test(inputPhone)){
                 $("label[for='receiverPhone']").attr("style","color: red");
-                $("label[for='receiverPhone'] b").html("電話: *電話號碼必須是09開頭且總計十位數字");
+                $("label[for='receiverPhone']").html("電話: *電話號碼必須是09開頭且總計十位數字");
                 $(this).val('');
             } else {
                 $("label[for='receiverPhone']").attr("style","color: black");
-                $("label[for='receiverPhone'] b").html("電話");
+                $("label[for='receiverPhone']").html("電話");
             }
         });
     
