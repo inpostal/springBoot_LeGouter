@@ -2,470 +2,338 @@
 <html lang="zxx">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/bootstrap.min.css">
-  <!-- Owl Theme Default CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/owl.theme.default.min.css">
-  <!-- Owl Carousel CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/owl.carousel.min.css">
-  <!-- Owl Magnific CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/magnific-popup.css">
-  <!-- Animate CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/animate.css">
-  <!-- Boxicons CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/boxicons.min.css">
-  <!-- Flaticon CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/flaticon.css">
-  <!-- Meanmenu CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/meanmenu.css">
-  <!-- Nice Select CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/nice-select.css">
-  <!-- Odometer CSS-->
-  <link rel="stylesheet" href="/Comment/assets/css/odometer.css">
-  <!-- Style CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/style.css">
-  <!-- Responsive CSS -->
-  <link rel="stylesheet" href="/Comment/assets/css/responsive.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/bootstrap.min.css">
+    <!-- Owl Theme Default CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/owl.theme.default.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/owl.carousel.min.css">
+    <!-- Owl Magnific CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/animate.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/boxicons.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/flaticon.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/meanmenu.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/nice-select.css">
+    <!-- Odometer CSS-->
+    <link rel="stylesheet" href="/FAQ/assets/css/odometer.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/FAQ/assets/css/responsive.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="/Comment/static/css/css2.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/FAQ/static/css/css2.css" rel="stylesheet">
 
-  <link href="/Comment/static/css/all.min.css" rel="stylesheet">
-  <link href="/Comment/static/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="/FAQ/static/css/all.min.css" rel="stylesheet">
+    <link href="/FAQ/static/css/bootstrap-icons.css" rel="stylesheet">
 
-  <link href="/Comment/static/css/animate.min.css" rel="stylesheet">
-  <link href="/Comment/static/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="/FAQ/static/css/animate.min.css" rel="stylesheet">
+    <link href="/FAQ/static/css/owl.carousel.min.css" rel="stylesheet">
 
-  <link href="/Comment/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/FAQ/static/css/bootstrap.min.css" rel="stylesheet">
 
-  <link href="/Comment/static/css/style.css" rel="stylesheet">
+    <link href="/FAQ/static/css/style.css" rel="stylesheet">
 
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/Comment/assets/img/favicon.png">
-  <!-- Title -->
-  <title>Eduon</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/FAQ/assets/img/favicon.png">
+    <!-- Title -->
+    <title>Eduon</title>
 </head>
 
 <body>
 <!-- Start Preloader Area -->
-<!-- 頁首 -->
 <div th:insert="front-end/components/Header :: #header-div"></div>
 <!-- 導覽列 -->
 <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
-
-<div id="spinner"
-     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-  <div class="spinner-grow text-primary" role="status"></div>
-</div>
-
-
-<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
-  <div class="row gx-0 align-items-center d-none d-lg-flex">
-    <div class="col-lg-6 px-5 text-start">
-      <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
-        <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
-        <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
-        <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li>
-      </ol>
-    </div>
-    <div class="col-lg-6 px-5 text-end">
-      <small>Follow us:</small>
-      <div class="h-100 d-inline-flex align-items-center">
-        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                class="fab fa-facebook-f"></i></a>
-        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                class="fab fa-twitter"></i></a>
-        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
-                class="fab fa-linkedin-in"></i></a>
-        <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-  <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
-    <h1 class="text-primary m-0">Le Goûter</h1>
-  </a>
-  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <div class="navbar-nav mx-auto p-4 p-lg-0">
-      <a href="" class="nav-item nav-link active">首頁</a>
-      <a href="" class="nav-item nav-link">品牌故事</a>
-      <a href="" class="nav-item nav-link">甜點訂購</a>
-      <a href="" class="nav-item nav-link">課程系統</a>
-      <a href="" class="nav-item nav-link">團購平台</a>
-      <a href="" class="nav-item nav-link">會員專區</a>
-      <a href="" class="nav-item nav-link">優惠券專區</a>
-      <div class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
-        <div class="dropdown-menu m-0">
-          <a href="" class="dropdown-item">FAQ</a>
-          <a href="" class="dropdown-item">聯絡客服</a>
-        </div>
-      </div>
-    </div>
-    <div class=" d-none d-lg-flex">
-      <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-        <i class="fa fa-phone text-primary"></i>
-      </div>
-      <div class="ps-3">
-        <small class="text-primary mb-0">聯絡我們</small>
-        <p class="text-light fs-5 mb-0">0912345678</p>
-      </div>
-    </div>
-  </div>
-</nav>
-<!-- End Others Option For Responsive -->
-</div>
 <!-- End Navbar Area -->
 
 <!-- Start Page Title Area -->
 <div class="page-title-area bg-3">
-  <div class="container">
-    <div class="page-title-content">
-      <h2>FAQ</h2>
-      <ul>
-        <li class="active">常見問題</li>
-      </ul>
+    <div class="container">
+        <div class="page-title-content">
+            <h2>FAQ</h2>
+            <ul>
+                <li>
+                    <a href="/LeGouter">
+                        Home
+                    </a>
+                </li>
+
+                <li class="active">常見問題</li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
 <!-- End Page Title Area -->
 
 <!-- Start FAQ Area -->
 <section class="faq-area ptb-100">
-  <div class="container">
-    <div class="section-title">
-      <span class="top-title">常見問題</span>
-      <h2 style="font-size: 40px;">甜點商品問題</h2>
-    </div>
-
-    <div class="faq-accordion">
-      <ul class="accordion">
-        <li class="accordion-item">
-          <a class="accordion-title active" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            退款服務流程
-          </a>
-
-          <div class="accordion-content show">
-            <p style="font-size: 15px;">(1) 使用宅配服務, 商品嚐鮮期將縮短一天 (實際保存期限以包裝盒上標示為主).</p>
-            <p style="font-size: 15px;">(2) 商品運送過程中所造成之產品毀損, 瑕疵; 請您於收到產品第一時間內將商品瑕疵處及簽收單據拍照存證
-              (以快遞簽單或相關簽收憑據), 並來電或以郵件
-              (於信件主旨註明退款) 通知客服人員.</p>
-            <p style="font-size: 15px;"> (3) 內容物組成以實物及商品說明為主.</p>
-
-
-
-          </div>
-        </li>
-
-        <li class="accordion-item">
-          <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            出貨多久可以收到貨呢?
-          </a>
-
-          <div class="accordion-content">
-            <p style="font-size: 15px;">目前確認訂單+完成款項約4-7天安排出貨(不包含假日)，快則出貨後隔日到貨，慢則2-3天到貨。
-              黑貓宅配可以指定13:00前到貨，或14:00至18:00到貨，但送貨時段還是都需依配送公司的送貨量而定。</p>
-            <p style="font-size: 15px;">
-              可於訂單中備註2-3天的到貨日期!但必須是下單7天後的日期喔！例如:1/10下單+已付款，
-              可指定1/17-1/19到貨。(星期日黑貓休息無配送喔！)ps.若指定的到貨日第2天仍未到貨，
-              可與客服聯繫查詢貨況，以避免延誤您的日期
-            </p>
-          </div>
-        </li>
-
-
-        <li class="accordion-item">
-          <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            保存方式/品嚐方式
-          </a>
-
-          <div class="accordion-content" style="font-size: 15px;">
-            <p style="font-size: 20px;">🔸塔類冷凍保存30天
-              烤布蕾&奶酪冷藏保存8天
-              ※塔類商品請勿冷藏保存，冷藏容易受潮會影響塔皮口感</p>
-
-            <p style="font-size: 15px;">🔸塔類冷凍拿出來常溫退5-15分鐘即可享用 </p>
-          </div>
-        </li>
-
+    <div class="container">
         <div class="section-title">
-          <h2 style="font-size: 40px;">甜點課程問題</h2>
+            <span class="top-title">常見問題</span>
+            <h2 style="font-size: 40px;">甜點商品問題</h2>
         </div>
 
-        <li class="accordion-item">
-          <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            線上課程退費政策
-          </a>
+        <div class="faq-accordion">
+            <ul class="accordion">
+                <li class="accordion-item">
+                    <a class="accordion-title active" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        退款服務流程
+                    </a>
 
-          <div class="accordion-content">
-            <p style="font-size: 15px;">購買課程者：</p>
-
-            <p style="font-size: 15px;">購買 7 日內且未觀看正式付費單元（除試看單元）→ 可退還 100% 全額課程費用</p>
-
-            <p style="font-size: 15px;">購買 8-14 日內且未觀看正式付費單元（除試看單元）→ 可退還 30% 課程費用</p>
-
-            <p style="font-size: 15px;">購買超過 15 日（含）申請 → 恕不退費</p>
-            <p style="font-size: 15px;">如符合退客條件,請依照課程購買時的狀態有以下條件，請依照 <a href=#>如何申請退費 </a>來信申請退款</p>
-          </div>
-        </li>
-
-        <li class="accordion-item">
-          <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            如何申請退費
-          </a>
-
-          <div class="accordion-content">
-            <p style="font-size: 15px;">請正式來信，提出有效的退費申請</p>
-            <p style="font-size: 15px;">1. 務必於退費申請信件中詳細說明認為課程不符合需求之原因</p>
-            <p style="font-size: 15px;">2. 如果我們需要你提供更多資訊，請積極配合回覆為嚴謹確認身份，請使用 Le Goutar
-              帳號之驗證信箱（可於「帳號設定」頁面確認），寄一封電子信件至
-              contact@LaGoutar.in，說明退款原因，格式如下：</p>
-            <p style="font-size: 15px;">3. 信件格式如下:</p>
-            <p style="font-size: 15px;">
-            <pre>信件內容：「我是 ＿＿＿＿（姓名），用此帳號購買了 ＿＿＿＿ 課程（課程名稱），因為 ＿＿＿＿＿＿＿＿＿＿＿（請詳述認為課程不符合需求之原因），且我已了解退費僅退回實際花費金額，將不退回原訂單使用的優惠券代碼 (Coupon) ，故提出退費申請，請協助退費程序。」</pre>
-            </p>
-            <div>
-              <p style="font-size: 15px;">🔸退費是否成立皆依照「退費申請信件寄送之時間點」為時間判斷依據</p>
-
-              <p style="font-size: 15px;">🔸退費作業僅退回實際花費金額，若原訂單有使用折價券 (Coupon) ，皆不予退回</p>
-
-              <p style="font-size: 15px;">🔸使用分期付款結帳的訂單，須整筆訂單所有課程皆退費，無法部分或擇一課程退費</p>
-
-              <p style="font-size: 15px;">🔸若你曾使用 LINE Points 折抵購買欲退費的課程，退費後將會退回所使用的 LINE Points</p>
-
-              <p style="font-size: 15px;">
-                🔸退費程序皆以信件往來通知，請務必確認收取信件（若在收件匣未看到信件，可以至垃圾信件匣或其他分類中找尋看看，並請參考「確保能正常收到 Hahow 重要通知信件」，將
-                Hahow 的重要通知寄件人設為優先讀取，確保自己不漏收信件）</p>
-              <p style="font-size: 15px;">🔸您的訂購信箱將會收到主旨為：【Le Goutar】ATM轉帳繳費提醒通知，請於期限內完成繳費。</p>
-
-              </p>
-              </p>
-            </div>
+                    <div class="accordion-content show">
+                        <p style="font-size: 15px;">(1) 使用宅配服務, 商品嚐鮮期將縮短一天 (實際保存期限以包裝盒上標示為主).</p>
+                        <p style="font-size: 15px;">(2) 商品運送過程中所造成之產品毀損, 瑕疵; 請您於收到產品第一時間內將商品瑕疵處及簽收單據拍照存證
+                            (以快遞簽單或相關簽收憑據), 並來電或以郵件
+                            (於信件主旨註明退款) 通知客服人員.</p>
+                        <p style="font-size: 15px;"> (3) 內容物組成以實物及商品說明為主.</p>
 
 
-        <div class="section-title">
-          <h2 style="font-size: 40px;">團購常見問題</h2>
+                        </p>
+                    </div>
+                </li>
+
+                <li class="accordion-item">
+                    <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        出貨多久可以收到貨呢?
+                    </a>
+
+                    <div class="accordion-content">
+                        <p style="font-size: 15px;">目前確認訂單+完成款項約4-7天安排出貨(不包含假日)，快則出貨後隔日到貨，慢則2-3天到貨。
+                            黑貓宅配可以指定13:00前到貨，或14:00至18:00到貨，但送貨時段還是都需依配送公司的送貨量而定。</p>
+                        <p style="font-size: 15px;">
+                            可於訂單中備註2-3天的到貨日期!但必須是下單7天後的日期喔！例如:1/10下單+已付款，
+                            可指定1/17-1/19到貨。(星期日黑貓休息無配送喔！)ps.若指定的到貨日第2天仍未到貨，
+                            可與客服聯繫查詢貨況，以避免延誤您的日期
+                        </p>
+                    </div>
+                </li>
+
+
+                <li class="accordion-item">
+                    <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        保存方式/品嚐方式
+                    </a>
+
+                    <div class="accordion-content" style="font-size: 15px;">
+                        <p style="font-size: 20px;">🔸塔類冷凍保存30天
+                            烤布蕾&奶酪冷藏保存8天
+                            ※塔類商品請勿冷藏保存，冷藏容易受潮會影響塔皮口感</p>
+
+                        <p style="font-size: 15px;">🔸塔類冷凍拿出來常溫退5-15分鐘即可享用 </p>
+                    </div>
+                </li>
+
+                <div class="section-title">
+                    <h2 style="font-size: 40px;">甜點課程問題</h2>
+                </div>
+
+                <li class="accordion-item">
+                    <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        線上課程退費政策
+                    </a>
+
+                    <div class="accordion-content">
+                        <p style="font-size: 15px;">購買課程者：</p>
+
+                        <p style="font-size: 15px;">購買 7 日內且未觀看正式付費單元（除試看單元）→ 可退還 100% 全額課程費用</p>
+
+                        <p style="font-size: 15px;">購買 8-14 日內且未觀看正式付費單元（除試看單元）→ 可退還 30% 課程費用</p>
+
+                        <p style="font-size: 15px;">購買超過 15 日（含）申請 → 恕不退費</p>
+                        <p style="font-size: 15px;">如符合退客條件,請依照課程購買時的狀態有以下條件，請依照 <a href=#>如何申請退費 </a>來信申請退款</p>
+                    </div>
+                </li>
+
+                <li class="accordion-item">
+                    <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        如何申請退費
+                    </a>
+
+                    <div class="accordion-content">
+                        <p style="font-size: 15px;">請正式來信，提出有效的退費申請</p>
+                        <p style="font-size: 15px;">1. 務必於退費申請信件中詳細說明認為課程不符合需求之原因</p>
+                        <p style="font-size: 15px;">2. 如果我們需要你提供更多資訊，請積極配合回覆為嚴謹確認身份，請使用 Le Goutar
+                            帳號之驗證信箱（可於「帳號設定」頁面確認），寄一封電子信件至
+                            contact@LaGoutar.in，說明退款原因，格式如下：</p>
+                        <p style="font-size: 15px;">3. 信件格式如下:</p>
+                        <p style="font-size: 15px;">
+                        <pre>信件內容：「我是 ＿＿＿＿（姓名），用此帳號購買了 ＿＿＿＿ 課程（課程名稱），因為 ＿＿＿＿＿＿＿＿＿＿＿（請詳述認為課程不符合需求之原因），且我已了解退費僅退回實際花費金額，將不退回原訂單使用的優惠券代碼 (Coupon) ，故提出退費申請，請協助退費程序。」</pre>
+                        </p>
+                        <div>
+                            <p style="font-size: 15px;">🔸退費是否成立皆依照「退費申請信件寄送之時間點」為時間判斷依據</p>
+
+                            <p style="font-size: 15px;">🔸退費作業僅退回實際花費金額，若原訂單有使用折價券 (Coupon) ，皆不予退回</p>
+
+                            <p style="font-size: 15px;">🔸使用分期付款結帳的訂單，須整筆訂單所有課程皆退費，無法部分或擇一課程退費</p>
+
+                            <p style="font-size: 15px;">🔸若你曾使用 LINE Points 折抵購買欲退費的課程，退費後將會退回所使用的 LINE Points</p>
+
+                            <p style="font-size: 15px;">
+                                🔸退費程序皆以信件往來通知，請務必確認收取信件（若在收件匣未看到信件，可以至垃圾信件匣或其他分類中找尋看看，並請參考「確保能正常收到 Hahow 重要通知信件」，將
+                                Hahow 的重要通知寄件人設為優先讀取，確保自己不漏收信件）</p>
+                            <p style="font-size: 15px;">🔸您的訂購信箱將會收到主旨為：【Le Goutar】ATM轉帳繳費提醒通知，請於期限內完成繳費。</p>
+
+                            </p>
+                            </p>
+                        </div>
+                </li>
+
+                <div class="section-title">
+                    <h2 style="font-size: 40px;">團購常見問題</h2>
+                </div>
+
+                <li class="accordion-item">
+                    <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        團購如何結帳
+                    </a>
+
+                    <div class="accordion-content">
+
+                        <p style="font-size: 15px;">1.每次結單僅限單門課程：
+                            團購為獨立結帳系統，僅限【單門課程】進行團購，無法與其他課程合併結帳，請於結帳刷卡前，確認您的團購方案後再結帳。</p>
+
+                        <p style="font-size: 15px;">2.團購與單購訂單需分開結帳：
+                            團購訂單無法與單購訂單同步結帳，如同時購買團購與單購訂單需分開操作結帳流程。</p>
+
+                        <p style="font-size: 15px;">3.一組序號僅限定一個帳號開通，無法重複開通多個序號。</p>
+
+                        <p style="font-size: 15px;">4.優惠券【不適用】團購訂單，如有活動「優惠代碼」請於購物車清單中「優惠代碼」欄位進行輸入。</p>
+
+                        <p style="font-size: 15px;">
+                            5.若選擇團購方案，其訂單發票將以【單筆團購訂單總金額】開立，一筆團購訂單為開立一張發票，同一筆訂單【無法分成多張發票開立】，主訂購者為發票持有人。</p>
+
+                        <p style="font-size: 15px;">6.如有報帳需求，因發票無法分別開立，團購前請確認是否符合公司報帳規格。</p>
+
+                        <p style="font-size: 15px;">7.發票屬於電子式發票，一經付費完成發票即刻開立將無法修改，購買前請確認發票格式。</p>
+
+                        <p style="font-size: 15px;">8.如有報帳需求者，請選擇「三聯式」發票，詳細說明請前往「三聯式發票領取說明」。</p>
+                    </div>
+                </li>
+
+                <li class="accordion-item">
+                    <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        購買流程說明
+                    </a>
+
+                    <div class="accordion-content">
+                        <p style="font-size: 15px;">【步驟一】於大大讀書活動頁面點選「三人團購」方案，方案自動放入購物車。</p>
+
+                        <p style="font-size: 15px;">
+                            【步驟二】進入購物車於「團購模式」頁面選擇您的購買數量，如活動有提供優惠代碼，輸入完成後才可進行折抵。請確認「總金額正確無誤」，再進入下一步付費流程。</p>
+
+                        <p style="font-size: 15px;">
+                            【步驟三】填寫訂購人姓名、電話、地址，並選擇發票格式。（請注意！如有報帳需求，請務必選擇三聯式發票，訂單一購買完成將自動開立無法再修改）</p>
+
+                        <p style="font-size: 15px;">【步驟四】付費方式共分三種：</p>
+
+
+                        <p style="font-size: 15px;">🔸 信用卡付款：</p>
+
+                        <p style="font-size: 15px;">信用卡分為「一次付清」、「分期付款」，可分 3
+                            期銀行為：玉山銀行、台新商銀，請依照需求點選支付方式，並確認付款金額與填寫信用卡資料，點選「確認送出」，就可以完成訂購了！</p>
+
+                        <p style="font-size: 15px;">🔸 選擇「ATM」： </p>
+
+                        <p style="font-size: 20px;">
+                            於藍新金流頁面中，點選銀行（如您也有相同的銀行帳戶轉帳免手續費）並確認繳費期限與訂單付款金額，確認無誤後，請勾選後送出，繳費訂單建立完成，請於 7 天內完成繳費。</p>
+
+                        <p style="font-size: 15px;">ATM轉帳每筆訂單都有專屬 16 碼虛擬帳號，因此不適用臨櫃填寫匯款單，僅適合ATM機器操作或使用網路銀行轉帳。</p>
+                    </div>
+                </li>
+
+                <li class="accordion-item">
+                    <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
+                        <i class="bx bx-plus"></i>
+                        團購流團會退費嗎?
+                    </a>
+
+                    <div class="accordion-content">
+                        <p style="font-size: 15px;">1.每個參加團購的人，都會暫收 $5 團購手續費。若團購成功，手續費會全額退款，其餘情況將不退款。</p>
+                        <p style="font-size: 15px;">2.同一個商品 + 同帳號一次僅能參加一組團購。</p>
+                        <p style="font-size: 15px;">3.目前僅能使用信用卡付款，參加團購即表示同意於成團時自動扣款。</p>
+                        <p style="font-size: 15px;">4.倒數時間一到，若人數未滿則視為流團。</p>
+                    </div>
+                </li>
+            </ul>
         </div>
-
-        <li class="accordion-item">
-          <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            團購如何結帳
-          </a>
-
-          <div class="accordion-content">
-
-            <p style="font-size: 15px;">1.每次結單僅限單門課程：
-              團購為獨立結帳系統，僅限【單門課程】進行團購，無法與其他課程合併結帳，請於結帳刷卡前，確認您的團購方案後再結帳。</p>
-
-            <p style="font-size: 15px;">2.團購與單購訂單需分開結帳：
-              團購訂單無法與單購訂單同步結帳，如同時購買團購與單購訂單需分開操作結帳流程。</p>
-
-            <p style="font-size: 15px;">3.一組序號僅限定一個帳號開通，無法重複開通多個序號。</p>
-
-            <p style="font-size: 15px;">4.優惠券【不適用】團購訂單，如有活動「優惠代碼」請於購物車清單中「優惠代碼」欄位進行輸入。</p>
-
-            <p style="font-size: 15px;">
-              5.若選擇團購方案，其訂單發票將以【單筆團購訂單總金額】開立，一筆團購訂單為開立一張發票，同一筆訂單【無法分成多張發票開立】，主訂購者為發票持有人。</p>
-
-            <p style="font-size: 15px;">6.如有報帳需求，因發票無法分別開立，團購前請確認是否符合公司報帳規格。</p>
-
-            <p style="font-size: 15px;">7.發票屬於電子式發票，一經付費完成發票即刻開立將無法修改，購買前請確認發票格式。</p>
-
-            <p style="font-size: 15px;">8.如有報帳需求者，請選擇「三聯式」發票，詳細說明請前往「三聯式發票領取說明」。</p>
-          </div>
-        </li>
-
-        <li class="accordion-item">
-          <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            購買流程說明
-          </a>
-
-          <div class="accordion-content">
-            <p style="font-size: 15px;">【步驟一】於大大讀書活動頁面點選「三人團購」方案，方案自動放入購物車。</p>
-
-            <p style="font-size: 15px;">
-              【步驟二】進入購物車於「團購模式」頁面選擇您的購買數量，如活動有提供優惠代碼，輸入完成後才可進行折抵。請確認「總金額正確無誤」，再進入下一步付費流程。</p>
-
-            <p style="font-size: 15px;">
-              【步驟三】填寫訂購人姓名、電話、地址，並選擇發票格式。（請注意！如有報帳需求，請務必選擇三聯式發票，訂單一購買完成將自動開立無法再修改）</p>
-
-            <p style="font-size: 15px;">【步驟四】付費方式共分三種：</p>
-
-
-            <p style="font-size: 15px;">🔸 信用卡付款：</p>
-
-            <p style="font-size: 15px;">信用卡分為「一次付清」、「分期付款」，可分 3
-              期銀行為：玉山銀行、台新商銀，請依照需求點選支付方式，並確認付款金額與填寫信用卡資料，點選「確認送出」，就可以完成訂購了！</p>
-
-            <p style="font-size: 15px;">🔸 選擇「ATM」： </p>
-
-            <p style="font-size: 20px;">
-              於藍新金流頁面中，點選銀行（如您也有相同的銀行帳戶轉帳免手續費）並確認繳費期限與訂單付款金額，確認無誤後，請勾選後送出，繳費訂單建立完成，請於 7 天內完成繳費。</p>
-
-            <p style="font-size: 15px;">ATM轉帳每筆訂單都有專屬 16 碼虛擬帳號，因此不適用臨櫃填寫匯款單，僅適合ATM機器操作或使用網路銀行轉帳。</p>
-          </div>
-        </li>
-
-        <li class="accordion-item">
-          <a class="accordion-title" href="javascript:void(0)" style="font-size: 20px;">
-            <i class="bx bx-plus"></i>
-            團購流團會退費嗎?
-          </a>
-
-          <div class="accordion-content">
-            <p style="font-size: 15px;">1.每個參加團購的人，都會暫收 $5 團購手續費。若團購成功，手續費會全額退款，其餘情況將不退款。</p>
-            <p style="font-size: 15px;">2.同一個商品 + 同帳號一次僅能參加一組團購。</p>
-            <p style="font-size: 15px;">3.目前僅能使用信用卡付款，參加團購即表示同意於成團時自動扣款。</p>
-            <p style="font-size: 15px;">4.倒數時間一到，若人數未滿則視為流團。</p>
-          </div>
-        </li>
-
     </div>
-  </div>
 </section>
 <!-- End FAQ Area -->
-<!-- 頁腳 -->
+
+<!-- Start Footer Top Area -->
 <div th:insert="front-end/components/Footer :: #footer-div"></div>
 <!-- 版權所有 -->
 <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
-<!-- Start Footer Top Area -->
-<div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
-  <div class="container py-5">
-    <div class="row g-5">
-      <div class="col-lg-3 col-md-6">
-        <h4 class="text-light mb-4">粉絲專頁</h4>
 
-        <div class="d-flex pt-2">
-          <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
-                  class="fab fa-facebook-f"></i></a>
-          <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
-                  class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <h4 class="text-light mb-4">快速連結</h4>
-        <a class="btn btn-link" href="">品牌故事</a>
-        <a class="btn btn-link" href="">聯絡我們</a>
-        <a class="btn btn-link" href="">服務與條款</a>
-      </div>
+<script data-cfasync="false" src="/FAQ/static/js/email-decode.min.js"></script>
+<script src="/FAQ/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/FAQ/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/FAQ/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/FAQ/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/FAQ/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/FAQ/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/FAQ/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
 
-      <div class="col-lg-3 col-md-6">
-        <h4 class="text-light mb-4">常見問題</h4>
-        <a class="btn btn-link" href="">FAQ</a>
-        <a class="btn btn-link" href="">回報客服</a>
-      </div>
-
-      <div class="col-lg-3 col-md-6">
-        <h4 class="text-light mb-4">甜點畫廊</h4>
-        <div class="row g-2">
-          <div class="col-4">
-            <img class="img-fluid bg-light rounded p-1" src="/Comment/static/picture/product-1.jpg" alt="Image">
-          </div>
-          <div class="col-4">
-            <img class="img-fluid bg-light rounded p-1" src="/Comment/static/picture/product-2.jpg" alt="Image">
-          </div>
-          <div class="col-4">
-            <img class="img-fluid bg-light rounded p-1" src="/Comment/static/picture/product-3.jpg" alt="Image">
-          </div>
-          <div class="col-4">
-            <img class="img-fluid bg-light rounded p-1" src="/Comment/static/picture/product-2.jpg" alt="Image">
-          </div>
-          <div class="col-4">
-            <img class="img-fluid bg-light rounded p-1" src="/Comment/static/picture/product-3.jpg" alt="Image">
-          </div>
-          <div class="col-4">
-            <img class="img-fluid bg-light rounded p-1" src="/Comment/static/picture/product-1.jpg" alt="Image">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script data-cfasync="false" src="/Comment/static/js/email-decode.min.js"></script>
-<script src="/Comment/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-<script src="/Comment/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-<script src="/Comment/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-<script src="/Comment/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-<script src="/Comment/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-<script src="/Comment/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-<script src="/Comment/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-
-<script src="/Comment/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-<script src="/Comment/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+<script src="/FAQ/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/FAQ/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
 <!-- End Footer Top Area -->
 
 
 
 <!-- Start Go Top Area -->
-<div class="go-top">
-  <i class='bx bx-chevrons-up'></i>
-  <i class='bx bx-chevrons-up'></i>
-</div>
-<!-- End Go Top Area -->
+
 
 
 <!-- Jquery-3.5.1.Slim.Min.JS -->
-<script src="/Comment/assets/js/jquery-3.5.1.slim.min.js"></script>
+<script src="/FAQ/assets/js/jquery-3.5.1.slim.min.js"></script>
 <!-- Popper JS -->
-<script src="/Comment/assets/js/popper.min.js"></script>
+<script src="/FAQ/assets/js/popper.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="/Comment/assets/js/bootstrap.min.js"></script>
+<script src="/FAQ/assets/js/bootstrap.min.js"></script>
 <!-- Meanmenu JS -->
-<script src="/Comment/assets/js/jquery.meanmenu.js"></script>
+<script src="/FAQ/assets/js/jquery.meanmenu.js"></script>
 <!-- Wow JS -->
-<script src="/Comment/assets/js/wow.min.js"></script>
+<script src="/FAQ/assets/js/wow.min.js"></script>
 <!-- Owl Carousel JS -->
-<script src="/Comment/assets/js/owl.carousel.js"></script>
+<script src="/FAQ/assets/js/owl.carousel.js"></script>
 <!-- Owl Magnific JS -->
-<script src="/Comment/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/FAQ/assets/js/jquery.magnific-popup.min.js"></script>
 <!-- Nice Select JS -->
-<script src="/Comment/assets/js/jquery.nice-select.min.js"></script>
+<script src="/FAQ/assets/js/jquery.nice-select.min.js"></script>
 <!-- Parallax JS -->
-<script src="/Comment/assets/js/parallax.min.js"></script>
+<script src="/FAQ/assets/js/parallax.min.js"></script>
 <!-- Appear JS -->
-<script src="/Comment/assets/js/jquery.appear.js"></script>
+<script src="/FAQ/assets/js/jquery.appear.js"></script>
 <!-- Odometer JS -->
-<script src="/Comment/assets/js/odometer.min.js"></script>
+<script src="/FAQ/assets/js/odometer.min.js"></script>
 <!-- Form Validator JS -->
-<script src="/Comment/assets/js/form-validator.min.js"></script>
+<script src="/FAQ/assets/js/form-validator.min.js"></script>
 <!-- Contact JS -->
-<script src="/Comment/assets/js/contact-form-script.js"></script>
+<script src="/FAQ/assets/js/contact-form-script.js"></script>
 <!-- Ajaxchimp JS -->
-<script src="/Comment/assets/js/jquery.ajaxchimp.min.js"></script>
+<script src="/FAQ/assets/js/jquery.ajaxchimp.min.js"></script>
 <!-- Custom JS -->
-<script src="/Comment/assets/js/custom.js"></script>
+<script src="/FAQ/assets/js/custom.js"></script>
 </body>
-<script>
-  $.ajax({
-    url:'/front/FAQ',
-    type:"GET",
-    success:function (resp){
 
-    },
-    error: function (resp) {
-
-  }
-  })
-</script>
 </html>

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FaqController {
 @GetMapping("/front/FAQ")
     public String faq(){
-    return ("/front-end/FAQ/FAQ");
+    return ("front-end/FAQ/FAQ");
 }
 }
