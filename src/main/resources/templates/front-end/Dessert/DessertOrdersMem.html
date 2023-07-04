@@ -30,10 +30,35 @@
 
     <link href="/Commom/css/style.css" rel="stylesheet">
 
+    <!--    yen-->
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/Dessert/CSS/styleYen.css">
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/GroupOrder/assets/img/favicon.png">
+
+
     <style>
         ul {
             list-style-type: none;
             /* 刪除點點 */
+        }
+
+
+        .col-md-5.mt-3 {
+            margin-top: 0px !important;
+        }
+
+
+        .form-select {
+
+            width: 79%;
         }
     </style>
 
@@ -52,143 +77,161 @@
 </div>
 <!-- ./ preloader -->
 
+<!--Yen-->
+<div class="page-title-area bg-5">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>甜點專區</h2>
+            <ul>
+                <li>
+                    <a th:href="@{/LeGouter}">
+                        Home
+                    </a>
+                </li>
+                <li class="active">甜點訂單查詢</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 <!-- layout-wrapper -->
 <div class="layout-wrapper">
-
-
     <!-- ./ header -->
 
     <!-- content -->
     <div class="content" style="margin-top: 100px;">
 
-        <div class="row">
+        <div class="row" style="flex-wrap: nowrap">
             <div class="col-md-8">
                 <h5 class="card-header" th:text="${memName} + ' 甜點訂單'"></h5>
-                <div class="col-md-5 mt-3">
-                    <select id="statusFilter" class="form-select custom-select">
-                        <option value="">所有訂單</option>
-                        <option value="訂單處理中">訂單處理中</option>
-                        <option value="運送中">運送中</option>
-                        <option value="取消訂單">取消訂單</option>
-                        <option value="訂單完成">訂單完成</option>
-                    </select>
-                </div>
+            </div>
+            <div class="col-md-5 mt-3">
+                <select id="statusFilter" class="form-select custom-select">
+                    <option value="">所有訂單</option>
+                    <option value="訂單處理中">訂單處理中</option>
+                    <option value="運送中">運送中</option>
+                    <option value="取消訂單">取消訂單</option>
+                    <option value="訂單完成">訂單完成</option>
+                </select>
+            </div>
+        </div>
 
-                <div th:each="order : ${orders}">
-                    <div class="card widget mb-4 bg-white" data-status="${order.getStatusName()}">
+        <div th:each="order : ${orders}">
+            <div class="card widget mb-4 bg-white" data-status="${order.getStatusName()}">
 
-                        <div class="card-body">
-                            <div class="d-flex gap-4 align-items-center" data-bs-toggle="collapse" aria-expanded="false"
-                                 th:data-bs-target="'#order-' + ${order.orderId}" role="button">
-
-
-                                <!--                                <td class="flex-fill">-->
-                                <!--                                    <a href="#" th:text="'#'+${order.orderId}"></a>-->
-                                <!--                                </td>-->
-
-                                <div class="flex-fill">
-                                    <strong th:id="'orderTime-' + ${order.orderId}">
-                                        訂單時間：
-                                        <span th:text="${#dates.format(order.orderTime, 'yyyy/MM/dd')}"></span>
-                                        <span th:text="${order.orderTime.hours >= 12 ? '下午' : '上午'}"></span>
-                                        <span th:text="${#dates.format(order.orderTime, 'hh:mm:ss')}"></span>
-                                    </strong>
-                                </div>
+                <div class="card-body">
+                    <div class="d-flex gap-4 align-items-center" data-bs-toggle="collapse" aria-expanded="false"
+                         th:data-bs-target="'#order-' + ${order.orderId}" role="button">
 
 
-                                <div class="flex-fill">
-                                    <strong th:text=" '訂單總金額$：'+${order.orderTotal}"></strong>
+                        <!--                                <td class="flex-fill">-->
+                        <!--                                    <a href="#" th:text="'#'+${order.orderId}"></a>-->
+                        <!--                                </td>-->
 
-                                </div>
-                                <td class="flex-fill">
+                        <div class="flex-fill">
+                            <strong th:id="'orderTime-' + ${order.orderId}">
+                                訂單時間：
+                                <span th:text="${#dates.format(order.orderTime, 'yyyy/MM/dd')}"></span>
+                                <span th:text="${order.orderTime.hours >= 12 ? '下午' : '上午'}"></span>
+                                <span th:text="${#dates.format(order.orderTime, 'hh:mm:ss')}"></span>
+                            </strong>
+                        </div>
+
+
+                        <div class="flex-fill">
+                            <strong th:text=" '訂單總金額$：'+${order.orderTotal}"></strong>
+
+                        </div>
+                        <td class="flex-fill">
                                      <span status="status" th:text="${order.getStatusName()}"
                                            th:class="${order.getStatusClass()}"></span>
 
-                                </td>
+                        </td>
 
-                                <td>
-                                    <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae; cursor: pointer;"
-                                       th:title="詳細訂單資訊"
-                                       th:onclick="|location.href='/memOrderDetail/get?orderId=' + ${order.orderId}|"></i>
-                                </td>
-
-
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-
-                            <div class="collapse mt-4" th:id="'order-' + ${order.orderId}">
-                                <hr class="mb-0">
-                                <div class="table-responsive">
-                                    <table class="table table-custom mb-0">
-                                        <thead>
-                                        <tr>
-                                            <th>甜點圖片</th>
-                                            <th>甜點名稱</th>
-                                            <th>數量</th>
-                                            <th>價格</th>
-                                            <th>小計</th>
-                                            <!--                                            <th>評價</th>-->
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        <tr th:each="M : ${dessertDetailsMap[__${order.orderId}__]}">
-                                            <td>
-                                                <img th:src="@{/dessert5/image0(dessertId=${M.getDessertId()})}"
-                                                     class="rounded" width="70">
-                                            </td>
-
-                                            <td>
-                                                <a th:href="@{'/dessertshop/shopAndproduct/sproduct.html?param=' + ${M.getDessertId()}}">
-                                                    <span th:text="${M.getDessertName()}"></span>
-                                                </a>
-                                            </td>
+                        <td>
+                            <i class="fa-solid fa-circle-info fa-xl" style="color: #f8d3ae; cursor: pointer;"
+                               th:title="詳細訂單資訊"
+                               th:onclick="|location.href='/memOrderDetail/get?orderId=' + ${order.orderId}|"></i>
+                        </td>
 
 
-                                            <td th:text="${M.getDessertAmount()}"></td>
-                                            <td th:text="${M.getDessertPrice()}"></td>
-                                            <td th:text="'$' + ${M.getDessertAmount() * M.getDessertPrice()}"></td>
-                                            <!--                                            <td>-->
-                                            <!--                                                <a onclick="toggleRating(this)" title="甜點評價"-->
-                                            <!--                                                   style="cursor: pointer; text-decoration: none;">-->
-                                            <!--                                                    <i class="fa-solid fa-cake-candles fa-lg"-->
-                                            <!--                                                       style="color: #f8d3ae;"></i>-->
-                                            <!--                                                </a>-->
-
-                                            <!--                                                <div class="block" style="display: none;">-->
-                                            <!--                                                    <ul>-->
-                                            <!--                                                        <li data-default-index="0">-->
-                                            <!--                                                                <span>-->
-                                            <!--                                                                    <img src="/Dessert/picture/x1.png">-->
-                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
-                                            <!--                                                                  <img src="/Dessert/picture/x1.png">-->
-                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
-                                            <!--                                                                   <img src="/Dessert/picture/x1.png">-->
-                                            <!--                                                                </span>-->
-                                            <!--                                                            <em class="level"></em>-->
-                                            <!--                                                        </li>-->
-                                            <!--                                                    </ul>-->
-                                            <!--                                                </div>-->
-                                            <!--                                            </td>-->
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
 
+                    <div class="collapse mt-4" th:id="'order-' + ${order.orderId}">
+                        <hr class="mb-0">
+                        <div class="table-responsive">
+                            <table class="table table-custom mb-0">
+                                <thead>
+                                <tr>
+                                    <th>甜點圖片</th>
+                                    <th>甜點名稱</th>
+                                    <th>數量</th>
+                                    <th>價格</th>
+                                    <th>小計</th>
+                                    <!--                                            <th>評價</th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each="M : ${dessertDetailsMap[__${order.orderId}__]}">
+                                    <td>
+                                        <img th:src="@{/dessert5/image0(dessertId=${M.getDessertId()})}"
+                                             class="rounded" width="70">
+                                    </td>
+
+                                    <td>
+                                        <a th:href="@{'/dessertshop/shopAndproduct/sproduct.html?param=' + ${M.getDessertId()}}">
+                                            <span th:text="${M.getDessertName()}"></span>
+                                        </a>
+                                    </td>
+
+
+                                    <td th:text="${M.getDessertAmount()}"></td>
+                                    <td th:text="${M.getDessertPrice()}"></td>
+                                    <td th:text="'$' + ${M.getDessertAmount() * M.getDessertPrice()}"></td>
+                                    <!--                                            <td>-->
+                                    <!--                                                <a onclick="toggleRating(this)" title="甜點評價"-->
+                                    <!--                                                   style="cursor: pointer; text-decoration: none;">-->
+                                    <!--                                                    <i class="fa-solid fa-cake-candles fa-lg"-->
+                                    <!--                                                       style="color: #f8d3ae;"></i>-->
+                                    <!--                                                </a>-->
+
+                                    <!--                                                <div class="block" style="display: none;">-->
+                                    <!--                                                    <ul>-->
+                                    <!--                                                        <li data-default-index="0">-->
+                                    <!--                                                                <span>-->
+                                    <!--                                                                    <img src="/Dessert/picture/x1.png">-->
+                                    <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                    <!--                                                                  <img src="/Dessert/picture/x1.png">-->
+                                    <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                    <!--                                                                   <img src="/Dessert/picture/x1.png">-->
+                                    <!--                                                                </span>-->
+                                    <!--                                                            <em class="level"></em>-->
+                                    <!--                                                        </li>-->
+                                    <!--                                                    </ul>-->
+                                    <!--                                                </div>-->
+                                    <!--                                            </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+</div>
+
+
 <!-- 頁腳 -->
 <div th:insert="front-end/components/Footer :: #footer-div"></div>
 
 <!-- 版權所有 -->
 <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+
 
 <script type="text/javascript" src="/Dessert/JS/jquery.min.js"></script>
 <script src="/Course/JS/Jquery.js"></script>

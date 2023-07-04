@@ -30,6 +30,69 @@
     <link href="/Commom/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="/Commom/css/style.css" rel="stylesheet">
+
+
+    <!--    Yen-->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/bootstrap.min.css">
+    <!-- Owl Theme Default CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/owl.theme.default.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/owl.carousel.min.css">
+    <!-- Owl Magnific CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/animate.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/boxicons.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/flaticon.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/meanmenu.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/nice-select.css">
+    <!-- Odometer CSS-->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/odometer.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/responsive.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/GroupOrder/static/css/css2.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/all.min.css" rel="stylesheet">
+    <link href="/GroupOrder/static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/animate.min.css" rel="stylesheet">
+    <link href="/GroupOrder/static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/style.css" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/GroupOrder/assets/img/favicon.png">
+    <style>
+        .btn-primary {
+            margin-left: 120px;
+        }
+
+        .row {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mb-4 {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,8 +121,8 @@
             <button onclick="goBack()" class="btn btn-primary">返回上一頁</button>
         </div>
 
-        <div class="row">
-            <div class="col-lg-6 col-md-12">
+        <div class="row" style="flex-wrap: wrap">
+            <div class="col-lg-10 col-md-10">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -95,7 +158,7 @@
                                 <p id="receiverPhone" th:text="${orders.getReceiverPhone()}"></p>
                             </div>
                         </div>
-                        <div class="row g-4">
+                        <div class="row g-4" style="justify-content: flex-start;">
                             <div class="col-md-6 col-sm-12">
                                 <div class="card">
                                     <div class="card-body d-flex flex-column gap-3">
@@ -110,7 +173,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <div class="card widget">
                     <h5 class="card-header">訂購甜點品項</h5>
                     <div class="card-body">
@@ -137,7 +200,7 @@
                                     <td th:text="'$' + ${l.getDessertAmount() * l.getDessertPrice()}"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td colspan="5" style="text-align:left;">
                                         <div class="card-header">
                                             甜點訂單金額
                                         </div>
