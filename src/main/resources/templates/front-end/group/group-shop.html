@@ -65,12 +65,12 @@
                     <div class="form-group">
                         <select class="form-control nice-select w-100" name="sortId" id="gotosort">
                             <option selected value="0">預設排序</option>
-                            <!-- <option value="1">價格高到低</option> -->
-                            <!-- <option value="2">價格低到高</option> -->
-                            <!-- <option value="3">結束日期晚到早</option> -->
-                            <!-- <option value="4">結束日期早到晚</option> -->
-                            <!-- <option value="5">參加人數高到低</option> -->
-                            <!-- <option value="6">參加人數低到高</option> -->
+                            <option value="1">價格高到低</option>
+                            <option value="2">價格低到高</option>
+                            <option value="3">結束日期晚到早</option>
+                            <option value="4">結束日期早到晚</option>
+                            <option value="5">參加人數高到低</option>
+                            <option value="6">參加人數低到高</option>
                         </select>
                     </div>
                 </form>
@@ -161,84 +161,116 @@
                 url: "/group-shop/showActivityList",
                 type: "GET",
                 success: function (response) {
-                    let texts = "";                   
-                    for (let gvo in response) {
-                        let text = `<div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
-                    <div class="single-product position-relative">
-                    <div class="product-image">
-                        <a class="d-block" href="/single-product?groupActivityId=${response[gvo].groupActivityId}">
-                            <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="product-image-1 w-100">
-                        </a>
-                    </div>
-                    <div class="product-content">
-
-                        <div class="product-title">
-                            <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}" style="padding: 10px;">${response[gvo].groupName}</a></h4>
+                    function DynamiGener(array){
+                        let texts = "";                   
+                        for (let gvo in response) {
+                            let text = `<div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
+                        <div class="single-product position-relative">
+                        <div class="product-image">
+                            <a class="d-block" href="/single-product?groupActivityId=${response[gvo].groupActivityId}">
+                                <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="product-image-1 w-100">
+                            </a>
                         </div>
-                        <div class="price-box">
-                            <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
-                            <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
+                        <div class="product-content">
+    
+                            <div class="product-title">
+                                <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}" style="padding: 10px;">${response[gvo].groupName}</a></h4>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
+                                <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="add-action d-flex position-absolute">
-                        <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}" title="">
-                            <button>參加團購</button>
-                        </a>
-
-                    </div>
-                    <div class="product-content-listview">
-
-                        <div class="product-title">
-                            <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}">${response[gvo].groupName}</a></h4>
-                        </div>
-                        <div>
-                            <p>團購開始時間:${response[gvo].groupOrderStar}
-                                <br>
-                                團購結束時間:${response[gvo].groupOrderEnd}
-                                <br>
-                                成團達標數:${response[gvo].groupOrderMin}
-                                <br>
-                                已參加人數:${response[gvo].groupDetailCount}
-                            </p>
-                        </div>
-                        <div class="price-box">
-                            <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
-                            <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
-                        </div>
-                        <div class="add-action-listview d-flex">
-                            <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}">
+                        <div class="add-action d-flex position-absolute">
+                            <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}" title="">
                                 <button>參加團購</button>
                             </a>
+    
+                        </div>
+                        <div class="product-content-listview">
+    
+                            <div class="product-title">
+                                <h4 class="title-2"> <a href="/single-product?groupActivityId=${response[gvo].groupActivityId}">${response[gvo].groupName}</a></h4>
                             </div>
-                            <p class="desc-content">
-                                ${response[gvo].groupActivityContent}
+                            <div>
+                                <p>團購開始時間:${response[gvo].groupOrderStar}
+                                    <br>
+                                    團購結束時間:${response[gvo].groupOrderEnd}
+                                    <br>
+                                    成團達標數:${response[gvo].groupOrderMin}
+                                    <br>
+                                    已參加人數:${response[gvo].groupDetailCount}
                                 </p>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price ">NT$${response[gvo].groupActivityPrice}</span>
+                                <span class="old-price"><del>NT$${response[gvo].groupProductPrice}</del></span>
+                            </div>
+                            <div class="add-action-listview d-flex">
+                                <a href="/group-product/Checkout?groupActivityId=${response[gvo].groupActivityId}&groupActivityPrice=${response[gvo].groupActivityPrice}">
+                                    <button>參加團購</button>
+                                </a>
                                 </div>
-                                </div>
-                                </div>`;
-                                texts += text;
-                            }
-                            $("#allactivity").html(texts);
+                                <p class="desc-content">
+                                    ${response[gvo].groupActivityContent}
+                                    </p>
+                                    </div>
+                                    </div>
+                                    </div>`;
+                                    texts += text;
+                                }
+                                $("#allactivity").html(texts);
+                    }
+                    DynamiGener(response);
 
-                            //施工中 排序
-                            // $("#gotosort").change(function() {
-                            //     let sortid = Number(("#gotosort").val());
-                            //     switch (sortid) {
-                            //         case 0: {
-                            //             response.sort;
-                            //             console.log("進入0");
-                            //         break;}
-                            //         case 1: {
-                            //             groupODis = 0.90;
-                            //             console.log("進入1");
-                            //         break;}
-                            //         case 2: {
-                            //             groupODis = 0.85;
-                            //             console.log("進入2");
-                            //         break;}
-                            //     }
-                                
-                            // });
+                            //排序 施工完成
+                            $("#gotosort").change(function() {
+                                let sortid = Number($("#gotosort").val());
+                                switch (sortid) {
+                                    case 0: {
+                                        response.sort(function(a,b) {
+                                            return a.groupActivityId > b.groupActivityId ? 1 : -1;
+                                        });
+                                        DynamiGener(response);
+                                        break;}
+                                    case 1: {
+                                        response.sort(function(a,b) {
+                                            return a.groupActivityPrice < b.groupActivityPrice ? 1 : -1;
+                                        });
+                                        DynamiGener(response);
+                                        break;}
+                                        case 2: {
+                                            response.sort(function(a,b) {
+                                            return a.groupActivityPrice > b.groupActivityPrice ? 1 : -1;
+                                        });
+                                        DynamiGener(response);
+                                        break;}
+                                    case 3: {
+                                        response.sort(function(a,b) {
+                                            return a.groupOrderEnd < b.groupOrderEnd ? 1 : -1;
+                                        });
+                                        DynamiGener(response);
+                                        break;}
+                                    case 4: {
+                                        response.sort(function(a,b) {
+                                            return a.groupOrderEnd > b.groupOrderEnd ? 1 : -1;
+                                        });
+                                        DynamiGener(response);
+                                        break;}
+                                    case 5: {
+                                        response.sort(function(a,b) {
+                                            return a.groupDetailCount < b.groupDetailCount ? 1 : -1;
+                                        });
+                                        DynamiGener(response);
+                                        break;}
+                                    case 6: {
+                                        response.sort(function(a,b) {
+                                            return a.groupDetailCount > b.groupDetailCount ? 1 : -1;
+                                        });
+                                        DynamiGener(response);
+                                        break;}
+                                }
+                            });
                         }
                     })
                 }
