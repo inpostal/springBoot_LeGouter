@@ -3,6 +3,7 @@ package app.com.coupon.controller;
 import app.com.coupon.service.CouponService;
 import app.com.coupon.vo.*;
 import app.com.course.vo.Course;
+import app.com.emp.vo.Employee;
 import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,11 @@ public class CouponController {
     @Autowired
     private CouponService service;
 
+    //領優惠券
+    @GetMapping("/get/coupon")
+    public String GetCoupon(){
+        return "front-end/Coupon/GetCoupon";
+    }
 
     //結帳按鈕-改變會員優惠券使用狀態
     @PostMapping("/alter/cpStatus")
@@ -41,6 +47,17 @@ public class CouponController {
     public void btnAddCourseFollow(@RequestBody Course courseId, HttpSession session){
         Members user = (Members) session.getAttribute("user");
         service.addCourseFollow(user.getMemberId(), courseId.getCourseId());
+    }
+
+    @GetMapping("/check/loginStatus")
+    @ResponseBody
+    public ResponseEntity<?> checkLoginStatus(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        if (user==null){
+            return ResponseEntity.badRequest().build();
+        }else {
+            return ResponseEntity.ok().build();
+        }
     }
 
 //刪除按鈕-追蹤清單課程
@@ -70,17 +87,30 @@ public class CouponController {
 
     //cp管理頁面
     @GetMapping("/coupon/master")
-    public String couponManage(Model model) {
-        List<CouponType> list = service.getAllCouponType();
-        model.addAttribute("couponList", list);
-        return "/back-end/Coupon/CouponMaster";
+    public String couponManage(Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null){
+            return "/back-end/Employee/EmpLogin";
+//            session.setAttribute("location","/coupon/master");
+        } else {
+            List<CouponType> list = service.getAllCouponType();
+            model.addAttribute("couponList", list);
+            return "/back-end/Coupon/CouponMaster";
+        }
     }
 
     //新增cp
     @GetMapping("/coupon/add")
-    public String couponAdd() {
-        return "/back-end/Coupon/CouponAdd";
-    }
+    public String couponAdd(Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null){
+            return "/back-end/Employee/EmpLogin";
+        } else {
+            List<CouponType> list = service.getAllCouponType();
+            model.addAttribute("couponList", list);
+            return "/back-end/Coupon/CouponAdd";
+            }
+        }
 
     //單頁
     //新增cp時,收ajax傳送資料用
@@ -96,10 +126,16 @@ public class CouponController {
 
     //編輯cp
     @GetMapping("/coupon/edit/{cpid}")
-    public String couponEdit(@PathVariable Integer cpid, Model model) {
-        CouponType couponInDb = service.getById(cpid);
-        model.addAttribute("cp", couponInDb);
-        return "/back-end/Coupon/CouponEdit";
+    public String couponEdit(@PathVariable Integer cpid, Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+
+        if (emp == null){
+            return "/back-end/Employee/EmpLogin";
+        } else {
+            CouponType couponInDb = service.getById(cpid);
+            model.addAttribute("cp", couponInDb);
+            return "/back-end/Coupon/CouponEdit";
+        }
     }
 
     //編輯(更新)cp時,收ajax傳送資料用
@@ -117,13 +153,26 @@ public class CouponController {
         Members user = (Members) session.getAttribute("user");
         if (user == null) {
             //未登入先導至登入頁面
-            session.setAttribute("location", "/coupon/shopping");
-            return "/front-end/member/MemberLogin";
+//            session.setAttribute("location", "/coupon/shopping");
+//            return "/front-end/member/MemberLogin";
+            return "/front-end/Coupon/Shopping";
         } else {
+
             List<CouponType> list = service.getCourseCp(user.getMemberId());
             model.addAttribute("courseCp", list);
             return "/front-end/Coupon/Shopping";
         }
+    }
+
+    @GetMapping("/coupon/getDessert")
+    @ResponseBody
+    public List<CouponType> getDessertCp(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        if (user!=null){
+            List<CouponType> list = service.getDessertCp(user.getMemberId());
+            return list;
+        }
+        return null;
     }
 
     //甜點頁面領取cp

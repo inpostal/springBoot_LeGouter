@@ -112,6 +112,7 @@ public class CouponService {
         if (membersCpList != null) {
             for (MembersCp m :
                     membersCpList) {
+                System.out.println(m.getCpId());
                 result.removeIf(c -> c.getCpId().equals(m.getCpId()));
             }
         }
