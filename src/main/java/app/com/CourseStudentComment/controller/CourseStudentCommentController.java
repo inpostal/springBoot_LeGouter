@@ -12,6 +12,7 @@ import app.com.course.vo.Course;
 import app.com.course.vo.CourseImage;
 import app.com.emp.repository.EmployeeRepository;
 import app.com.emp.service.EmployeeService;
+import app.com.emp.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.List;
 
@@ -39,10 +41,17 @@ public class CourseStudentCommentController {
     //thyleaf評論列表
     //後台討論區管理列表
 @GetMapping("/CourseStudentComment")
-    public String getAll(Model model){
-        List<CourseCommentDTO>result = courseStudentCommentService.courseComment();
+    public String getAll(Model model, HttpSession session){
+    Employee employee= (Employee) session.getAttribute("emp");
+    if (employee==null){
+        return "redirect:/employee/login";
+    }else {
+        if(employee.getEmpClassify()!=2){
+            return"redirect:/employee/data";
+        } List<CourseCommentDTO>result = courseStudentCommentService.courseComment();
         model.addAttribute("courseComment",result);
         return "/back-end/CourseStudentComment/CourseStudentComment";
+    }
     }
 
     //個別回復表單thyleaf

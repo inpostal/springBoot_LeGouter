@@ -301,6 +301,9 @@
                     $('#groupNameText').replaceWith('<h3 style="font-size: 50px;" id="groupNameText">' + groupName + '</h3>'); // Update the group name
                     $('#editButton').text('修改'); // Change the button text to "修改"
                     editing = false; // Switch to non-editing state
+
+                    // 执行重定向
+                    window.location.href = "/grouporderdetail/list/front";
                 },
                 error: function (error) {
 // Handle error cases

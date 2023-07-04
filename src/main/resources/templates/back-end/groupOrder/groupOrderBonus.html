@@ -473,7 +473,10 @@
                                         訂單結束時間:<br id="goupname" th:text="${g.getGroupOrderEnd()}">
                                         團購活動編號:<br th:text="${g.getActivityId()}">
                                     </td>
-                                    <td id="totalgroupproductprice" th:text="${g.getTotalGroupProductPrice()}"></td>
+                                    <td id="totalgroupproductprice" th:text="${g.getTotalGroupProductPrice()}">
+                                        <span th:if="${g.getTotalGroupProductPrice==null}">尚無訂單成立</span>
+                                        <span th:if="${g.getTotalGroupProductPrice!=null}" th:text="${g.getTotalGroupProductPrice()}"></span>
+                                    </td>
                                     <td id="grouporderstatus">
                                         <span th:if="${g.groupOrderStatus == 0}">尚未達到開團時間</span>
                                         <span th:if="${g.groupOrderStatus == 1}">團購進行中，目前團購商品下訂總數不足</span>

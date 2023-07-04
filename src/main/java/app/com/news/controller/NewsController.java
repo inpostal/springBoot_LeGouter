@@ -1,5 +1,6 @@
 package app.com.news.controller;
 
+import app.com.emp.vo.Employee;
 import app.com.news.service.NewsService;
 import app.com.news.vo.News;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -28,8 +30,13 @@ public class NewsController {
     private NewsService service;
 
     @GetMapping("/news/list")
-    public String getNewsAll() {
-        return "/back-end/news/newsManagement";
+    public String getNewsAll(HttpSession session) {
+        Employee employee= (Employee) session.getAttribute("emp");
+        if (employee==null){
+            return "redirect:/employee/login";
+        }else {
+            return "/back-end/news/newsManagement";
+        }
     }
 
     public List<News> getNewaAllFront(){
