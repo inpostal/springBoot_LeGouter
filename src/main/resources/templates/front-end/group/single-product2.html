@@ -67,49 +67,10 @@
     <!-- 頁首 -->
     <div th:insert="front-end/components/Header :: #header-div"></div>
 
-    <!-- =====================導覽列開始========================= -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-        <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="text-primary m-0">Le Goûter</h1>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav mx-auto p-4 p-lg-0">
-                <a href="" class="nav-item nav-link active">首頁</a>
-                <a href="" class="nav-item nav-link">品牌故事</a>
-                <a href="" class="nav-item nav-link">甜點訂購</a>
-                <a href="" class="nav-item nav-link">課程系統</a>
-                <a href="/group-shop" class="nav-item nav-link">團購平台</a>
-                <a href="" class="nav-item nav-link">會員專區</a>
-                <a href="" class="nav-item nav-link">優惠券專區</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="" class="dropdown-item">FAQ</a>
-                        <a href="" class="dropdown-item">聯絡客服</a>
-                    </div>
-                </div>
-                <div class="nav-link">
-                    <form action="/group-shop">
-                        <input class="" type="search" placeholder="搜尋團購活動" name="" value="">
-                        <button class="" type="submit">搜尋</button>
-                    </form>
-                </div>
-            </div>
-            <div class=" d-none d-lg-flex">
-                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-                    <i class="fa fa-phone text-primary"></i>
-                </div>
-                <div class="ps-3">
-                    <small class="text-primary mb-0">聯絡我們</small>
-                    <p class="text-light fs-5 mb-0">0912345678</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- =====================導覽列結束========================= -->
+    <!-- 導覽列 -->
+    <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
+    
     <div class="tototo"></div>
     <main>
 
@@ -375,10 +336,10 @@
         var countDownDate = new Date($("#setendday").val()).getTime();
 
         // Update the count down every 1 second
+        var now = new Date().getTime(); //原本Get today's date and time下面。
         var x = setInterval(function () {
-
+            
             // Get today's date and time
-            var now = new Date().getTime();
 
             // Find the distance between now and the count down date
             var distance = countDownDate - now;
@@ -401,146 +362,18 @@
         }, 1000);
 
 
+        //計算參加%值。
         $(window).on("load", function() {
-            let walk = ($("#theprogress").val() / $("#walk").val());
+            let walk = ($("#theprogress").val() / $("#walk").val()).toFixed(5);
             $("#percentage").html((walk*100) + "%");
         })
 
-        // window.addEventListener("load", function () {
-        //     show();
-        // })
-
-        // function show() {
-        //     $.ajax({
-        //         url: "/single-product/showthe",
-        //         type: "POST",
-        //         data: { groupActivityId: 1 },
-        //         success: function (response) {
-        //             let text = `<h4 class="epix-single-product-title">團購活動：${response.groupName}</h4>
-        //                     <h6>團購主:</h6>
-        //                     <p class="epix-product-details-short-description">
-        //                         開始日期:${response.groupOrderStar}<br>
-        //                         結束日期:${response.groupOrderEnd}<br>
-        //                         成團達標數:${response.groupOrderMin}<br>
-        //                         參加人數:
-        //                     </p>
-        //                     <p class="epix-product-details-short-description">
-        //                         ${response.groupActivityContent}
-        //                     </p>
-        //                     <p class="price">
-        //                         <span class="epix-price-amount">
-        //                             <bdi>
-        //                                 <span class="epix-price-currency-symbol">NT$</span>
-        //                                 100
-        //                             </bdi>
-        //                         </span>
-        //                     </p>
-        //                     <form action="#" class="epix-cart-variation">
-        //                         <!-- 選擇規格開始，先不要 -->
-        //                         <!-- <div class="epix-product-label mb-35">
-        //                             <a href="#" class="title">SERIES CPU</a>
-        //                             <div class="taglist">
-        //                                 <a href="shop.html">Core i5</a>
-        //                                 <a href="shop.html">Core i7</a>
-        //                                 <a href="shop.html">Core i9</a>
-        //                             </div>
-        //                         </div> -->
-        //                         <!-- 選擇規格結束 -->
-        //                         <div class="epix-quantity-validation">
-        //                             <!-- <span>數量</span>
-        //                             <div class="wrap-2 d-block d-sm-inline-block mb-15 mb-sm-0">
-        //                                 <div class="d-inline-block border-gray mr-20">
-        //                                     <div class="epix-quantity-form">
-        //                                         <div class="cart-plus-minus"></div>
-        //                                         <input type="text" value="2">
-        //                                     </div>
-        //                                 </div>
-        //                                 <a href="cart.html" class="cart-btn mr-15">加入購物車</a>
-        //                             </div> -->
-        //                             <!-- 在結帳的頁面選擇數量 -->
-        //                             <span>倒數計時:</span>
-        //                             <p id="demo"></p>
-        //                             <p>
-        //                                 <span>揪團進度：</span>
-        //                                 <progress value="123" max="${response.groupOrderMin}"></progress>
-        //                             </p>
-        //                             <a href="checkout.html"
-        //                                 class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a>
-        //                         </div>
-        //                     </form>`;
-        //             $("#showthe").html(text);
-
-        //             let imgmonth = `<div class="tab-pane fade show active" id="epix-single-1">
-        //                                     <div class="epix-single-product-thumb-4">
-        //                                         <div class="epix-featured">
-        //                                         </div>
-        //                                         <img src="/groupProduct/get/img/${response.groupProductId}" 
-        //                                             data-zoom-image="/groupProduct/get/img/${response.groupProductId}"
-        //                                             class="img-fluid" alt="">
-        //                                     </div>
-        //                                 </div>
-        //                                 <div class="tab-pane fade" id="epix-single-2">
-        //                                     <div class="epix-single-product-thumb-4">
-        //                                         <div class="epix-featured">
-        //                                         </div>
-        //                                         <img src=""
-        //                                             data-zoom-image="" class="img-fluid"
-        //                                             alt="">
-        //                                     </div>
-        //                                 </div>
-        //                                 <div class="tab-pane fade" id="epix-single-3">
-        //                                     <div class="epix-single-product-thumb-4">
-        //                                         <div class="epix-featured">
-        //                                         </div>
-        //                                         <img src=""
-        //                                             data-zoom-image="" class="img-fluid"
-        //                                             alt="">
-        //                                     </div>
-        //                                 </div>
-        //                                 <div class="tab-pane fade" id="epix-single-4">
-        //                                     <div class="epix-single-product-thumb-4">
-        //                                         <div class="epix-featured">
-        //                                         </div>
-        //                                         <img src=""
-        //                                             data-zoom-image="" class="img-fluid" alt="">
-        //                                     </div>
-        //                                 </div>`;
-        //             $(".imgmonth").html(imgmonth);
-
-        //             let imgsun = `<li>
-        //                                 <button class="active" value="1" data-bs-toggle="pill"
-        //                                     data-bs-target="#epix-single-1" type="button">
-        //                                     <img width="98" height="98" src="/groupProduct/get/img/${response.groupProductId}"
-        //                                         alt="">
-        //                                 </button>
-        //                             </li>
-        //                             <li>
-        //                                 <button data-bs-toggle="pill" value="2" data-bs-target="#epix-single-2"
-        //                                     type="button">
-        //                                     <img width="98" height="98" src=""
-        //                                         alt="">
-        //                                 </button>
-        //                             </li>
-        //                             <li>
-        //                                 <button data-bs-toggle="pill" value="3" data-bs-target="#epix-single-3"
-        //                                     type="button">
-        //                                     <img width="98" height="98" src=""
-        //                                         alt="">
-        //                                 </button>
-        //                             </li>
-        //                             <li>
-        //                                 <button data-bs-toggle="pill" value="4" data-bs-target="#epix-single-4"
-        //                                     type="button">
-        //                                     <img width="98" height="98" src="" 
-        //                                         alt="">
-        //                                 </button>
-        //                             </li>`;
-        //             $(".imgsun").html(imgsun);
-        //         }
-        //     });
-        // }
-
-        
+        $(document).ready(function () {
+            if(now > countDownDate){
+                alert("該團購活動已結束! 返回團購平台");
+                window.location.href="/group-shop";
+            }
+    });
     </script>
 </body>
 

@@ -229,7 +229,7 @@
 
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <label>收件人名稱 <span class="required">*</span></label>
+                                    <label for="receiverName">收件人名稱 <span class="required">*</span></label>
                                     </label>
                                     <input type="text" class="form-control" id="receiverName" maxlength="50"
                                            >
@@ -238,7 +238,7 @@
 
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <label>收件人地址 <span class="required">*</span></label>
+                                    <label for="receiverAddress">收件人地址 <span class="required">*</span></label>
                                     <input type="email" class="form-control" id="receiverAddress" maxlength="100"
                                            >
                                 </div>
@@ -246,7 +246,7 @@
 
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <label>收件人電話 <span class="required">*</span></label>
+                                    <label for="receiverPhone">收件人電話 <span class="required">*</span></label>
                                     <input type="text" class="form-control" id="receiverPhone" maxlength="10" onkeypress="value=value.replace(/[^\d]/g,'')"
                                            >
                                 </div>
@@ -254,7 +254,7 @@
 
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <label>收件人信箱 <span class="required">*</span></label>
+                                    <label for="receiverEmail">收件人信箱 <span class="required">*</span></label>
                                     <input type="email" class="form-control" id="receiverEmail" maxlength="100"
                                            >
                                 </div>
@@ -392,60 +392,104 @@
     console.log("測試取得路徑" + window.location.pathname);
     console.log("測試取得參數" + window.location.search);
     console.log(window.location.pathname + window.location.search);
+
+    // 姓名輸入區驗證
+    $("#receiverName").focus();
+        $("#receiverName").blur(function() {
+            let inputName = $(this).val();
+            let pattern = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+            if(!pattern.test(inputName)){
+                $("label[for='receiverName']").attr("style","color: red");
+                $("label[for='receiverName'] b").html("姓名: *姓名只能包含英文、數字或中文");
+                $(this).val('');
+            }else {
+                $("label[for='receiverName']").attr("style","color: black");
+                $("label[for='receiverName'] b").html("姓名");
+            }
+        });
+        
+     // 電話輸入區驗證
+     $("#receiverPhone").blur(function(){
+            let pattern = /^09\d{8}$/;
+            let inputPhone = $(this).val();
+
+            if(!pattern.test(inputPhone)){
+                $("label[for='receiverPhone']").attr("style","color: red");
+                $("label[for='receiverPhone'] b").html("電話: *電話號碼必須是09開頭且總計十位數字");
+                $(this).val('');
+            } else {
+                $("label[for='receiverPhone']").attr("style","color: black");
+                $("label[for='receiverPhone'] b").html("電話");
+            }
+        });
     
+    // 詳細地址輸入區驗證
+    $("#receiverAddress").blur(function(){
+        let pattern = /^[\u4e00-\u9fa5\d]+$/;
+        let inputAddress = $(this).val();
+
+        if(!pattern.test(inputAddress)){
+            $("label[for='receiverAddress']").attr("style","color: red");
+            $("label[for='receiverAddress']").html("詳細地址: *地址只能包含數字或中文");
+            $(this).val('');
+        } else {
+            $("label[for='receiverAddress']").attr("style","color: black");
+            $("label[for='receiverAddress']").html("詳細地址");
+        }
+    });
+
+
+    //即時反應計算
     $("#theAmount").on("change", function() {
         $("#outnumber").html($("#theAmount").val());
         $("#outprice").html($("#setprice").val()*$("#theAmount").val());
     });
 
-    $(document).ready(function () {
-        $('.default-btn.two').click(function (e) {
-            if (!$('#agreed').prop('checked')) {
-                e.preventDefault();
-                alert('請先勾選同意條款');
-            }
-        });
-
-        $("#outprice").html($("#setprice").val())
-    });
 </script>
 
 <script>
     $(document).ready(function () {
+        $("#outprice").html($("#setprice").val());
+
         $("#checkout").click(function (e) {
-
-            var checkoutData = {
-                groupOrderId: Number($("#groupOrderId").val()),
-                memberId: Number($("#memberId").text()),
-                groupOrderAmount: Number($("#theAmount").val()),
-                groupProductPaying: 0,
-                groupProductStatus: 1,
-                groupProductOthers: $("#groupProductOthers").val(),
-                receiverName: $("#receiverName").val(),
-                receiverAddress: $("#receiverAddress").val(),
-                receiverPhone: $("#receiverPhone").val(),
-                receiverEmail: $("#receiverEmail").val(),
-                groupActivityPrice: Number($("#setprice").val())
-            };
-
-            $.ajax({
-                url: '/groupActivity/CheckoutDetail',
-                method: 'POST',
-                data: JSON.stringify(checkoutData),
-                contentType: 'application/json',
-                beforeSend: function() {
-                    console.log("送出前確認:" + checkoutData);
-                },
-                success: function (response) {
-                    if (response.success == true) {
-                        alert('結帳成功! 返回團購平台');
-                        window.location.href="/group-shop";
+            if (!$('#agreed').prop('checked')) {
+                e.preventDefault();
+                alert('請先勾選同意條款');
+            }else {
+                var checkoutData = {
+                    groupOrderId: Number($("#groupOrderId").val()),
+                    memberId: Number($("#memberId").text()),
+                    groupOrderAmount: Number($("#theAmount").val()),
+                    groupProductPaying: 0,
+                    groupProductStatus: 1,
+                    groupProductOthers: $("#groupProductOthers").val(),
+                    receiverName: $("#receiverName").val(),
+                    receiverAddress: $("#receiverAddress").val(),
+                    receiverPhone: $("#receiverPhone").val(),
+                    receiverEmail: $("#receiverEmail").val(),
+                    groupActivityPrice: Number($("#setprice").val())
+                };
+    
+                $.ajax({
+                    url: '/groupActivity/CheckoutDetail',
+                    method: 'POST',
+                    data: JSON.stringify(checkoutData),
+                    contentType: 'application/json',
+                    beforeSend: function() {
+                        console.log("送出前確認:" + checkoutData);
+                    },
+                    success: function (response) {
+                        if (response.success == true) {
+                            alert('結帳成功! 返回團購平台');
+                            window.location.href="/group-shop";
+                        }
+                    },
+                    error: function (error) {
+    
                     }
-                },
-                error: function (error) {
+                });
 
-                }
-            });
+            }
         });
 
         $("#memcheck").change(function () {

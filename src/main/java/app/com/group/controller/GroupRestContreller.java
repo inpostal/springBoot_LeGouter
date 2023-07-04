@@ -257,14 +257,14 @@ public class GroupRestContreller {
 	}
 
 	// 後台 刪除活動用
-	@PostMapping("/groupActivity/deleteone")
-	public Map<String, Boolean> deleteOne(@RequestParam String groupActivityId) {
-		Integer theid = Integer.parseInt(groupActivityId);
-		Boolean success = groupActivityService.deleteOneActivity(theid);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("success", success);
-		return response;
-	}
+//	@PostMapping("/groupActivity/deleteone")
+//	public Map<String, Boolean> deleteOne(@RequestParam String groupActivityId) {
+//		Integer theid = Integer.parseInt(groupActivityId);
+//		Boolean success = groupActivityService.deleteOneActivity(theid);
+//		Map<String, Boolean> response = new HashMap<>();
+//		response.put("success", success);
+//		return response;
+//	}
 	
 	//前台 結帳資料
 	@PostMapping("/groupActivity/CheckoutDetail")
@@ -450,7 +450,8 @@ public class GroupRestContreller {
 		public List<GroupActivityVO> BackSearchActivityName(String groupName) {
 			return groupActivityService.BackKeyName(groupName);
 		}
-	
+		
+		
 	// 前台團購主修改活動資料
 //	@PostMapping("/plan-activity/updata-the")
 //	public Map<String, Boolean> updataForActivity(

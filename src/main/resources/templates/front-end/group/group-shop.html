@@ -43,51 +43,8 @@
     <!-- 頁首 -->
     <div th:insert="front-end/components/Header :: #header-div"></div>
 
-    <!-- =====================導覽列開始========================= -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-        <a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="text-primary m-0">Le Goûter</h1>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav mx-auto p-4 p-lg-0">
-                <a href="" class="nav-item nav-link active">首頁</a>
-                <a href="" class="nav-item nav-link">品牌故事</a>
-                <a href="" class="nav-item nav-link">甜點訂購</a>
-                <a href="" class="nav-item nav-link">課程系統</a>
-                <a href="/group-shop" class="nav-item nav-link">團購平台</a>
-                <a href="" class="nav-item nav-link">會員專區</a>
-                <a href="" class="nav-item nav-link">優惠券專區</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="" class="dropdown-item">FAQ</a>
-                        <a href="" class="dropdown-item">聯絡客服</a>
-                    </div>
-                </div>
-                <div class="nav-link">
-                    <!-- <form action=""> -->
-                        <input type="search" placeholder="搜尋團購活動" id="searchgroupName">
-                        <button type="button" id="gotosearch">搜尋</button>
-                    <!-- </form> -->
-                </div>
-            </div>
-            <div class=" d-none d-lg-flex">
-                <div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
-                    <i class="fa fa-phone text-primary"></i>
-                </div>
-                <div class="ps-3">
-                    <small class="text-primary mb-0">聯絡我們</small>
-                    <p class="text-light fs-5 mb-0">0912345678</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- =====================導覽列結束========================= -->
-
-
+    <!-- 導覽列 -->
+    <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
 
 
     <div class="col-lg-9 col-12 col-custom widget-mt">
@@ -99,17 +56,21 @@
                 <!-- <button data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip" title="4"></button> -->
                 <button data-role="grid_list" type="button" class="btn-list" data-toggle="tooltip" title="">清單</button>
             </div>
+            <div>
+                <input type="search" placeholder="搜尋團購活動" id="searchgroupName">
+                <button type="button" id="gotosearch">搜尋</button>
+            </div>
             <div class="shop-select">
                 <form class="d-flex flex-column w-100" action="#">
                     <div class="form-group">
-                        <select class="form-control nice-select w-100">
+                        <select class="form-control nice-select w-100" name="sortId" id="gotosort">
                             <option selected value="0">預設排序</option>
-                            <option value="1">價格高到低</option>
-                            <option value="2">價格低到高</option>
-                            <option value="3">截止日期高到低</option>
-                            <option value="4">截止日期低到高</option>
-                            <option value="5">參加人數高到低</option>
-                            <option value="6">參加人數低到高</option>
+                            <!-- <option value="1">價格高到低</option> -->
+                            <!-- <option value="2">價格低到高</option> -->
+                            <!-- <option value="3">結束日期晚到早</option> -->
+                            <!-- <option value="4">結束日期早到晚</option> -->
+                            <!-- <option value="5">參加人數高到低</option> -->
+                            <!-- <option value="6">參加人數低到高</option> -->
                         </select>
                     </div>
                 </form>
@@ -125,7 +86,7 @@
         <div class="row">
             <div class="col-sm-12 col-custom">
                 <div class="toolbar-bottom mt-30">
-                    <nav class="pagination pagination-wrap mb-10 mb-sm-0">
+                    <!-- <nav class="pagination pagination-wrap mb-10 mb-sm-0">
                         <ul class="pagination">
                             <li class="disabled prev">
                                 Left
@@ -139,7 +100,7 @@
                             </li>
                         </ul>
                     </nav>
-                    <p class="desc-content text-center text-sm-right">Showing 1 - 12 of 34 result</p>
+                    <p class="desc-content text-center text-sm-right">Showing 1 - 12 of 34 result</p> -->
                 </div>
             </div>
         </div>
@@ -203,7 +164,7 @@
                     let texts = "";                   
                     for (let gvo in response) {
                         let text = `<div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
-                <div class="single-product position-relative">
+                    <div class="single-product position-relative">
                     <div class="product-image">
                         <a class="d-block" href="/single-product?groupActivityId=${response[gvo].groupActivityId}">
                             <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="product-image-1 w-100">
@@ -258,6 +219,26 @@
                                 texts += text;
                             }
                             $("#allactivity").html(texts);
+
+                            //施工中 排序
+                            // $("#gotosort").change(function() {
+                            //     let sortid = Number(("#gotosort").val());
+                            //     switch (sortid) {
+                            //         case 0: {
+                            //             response.sort;
+                            //             console.log("進入0");
+                            //         break;}
+                            //         case 1: {
+                            //             groupODis = 0.90;
+                            //             console.log("進入1");
+                            //         break;}
+                            //         case 2: {
+                            //             groupODis = 0.85;
+                            //             console.log("進入2");
+                            //         break;}
+                            //     }
+                                
+                            // });
                         }
                     })
                 }
@@ -280,7 +261,7 @@
                                 let texts = "";                   
                                 for (let gvo in response) {
                                     let text = `<div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
-                            <div class="single-product position-relative">
+                                <div class="single-product position-relative">
                                 <div class="product-image">
                                     <a class="d-block" href="/single-product?groupActivityId=${response[gvo].groupActivityId}">
                                         <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="product-image-1 w-100">
