@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>新增優惠券</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <!-- <link rel="stylesheet" href="./css/font.css"> -->
+    <link rel="stylesheet" href="/Coupon/CSS/xadmin.css">
+    <script type="text/javascript" src="/Coupon/lib/layui/layui.js" charset="utf-8"></script>
+<!--    <script type="text/javascript" src="/Coupon/JS/layui.js" charset="utf-8"></script>-->
+    <script type="text/javascript" src="/Coupon/JS/xadmin.js"></script>
+    <style>
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .date-input {
+            line-height: 1.3;
+            border-width: 1px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<!-- 新增優惠券功能區 -->
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <label for="cpType" class="layui-form-label">
+                    <span class="x-red">*</span>優惠券類型
+                </label>
+                <div class="layui-input-inline">
+                    <select id="cpType">
+                        <option value=0>甜點節慶優惠券</option>
+                        <option value=1>課程節慶優惠券</option>
+                    </select>
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請選擇優惠券類型
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="cpName" class="layui-form-label">
+                    <span class="x-red">*</span>優惠券名稱
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="cpName" name="username" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請輸入優惠券名稱
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="amountThreshold" class="layui-form-label">
+                    <span class="x-red">*</span>金額門檻
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="amountThreshold" name="amountThreshold" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請輸入金額門檻
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="discount" class="layui-form-label">
+                    <span class="x-red">*</span>優惠券折扣
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="discount" name="discount" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>請輸入優惠券折扣
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="startDate">起始日期:</label>
+                <input type="date" id="startDate" name="start-date">
+            </div>
+
+            <div class="form-group">
+                <label for="endDate">結束日期:</label>
+                <input type="date" id="endDate" name="end-date">
+            </div>
+
+                       <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                </label>
+            </div>
+        </form>
+        <button class="layui-btn" lay-filter="add" lay-submit="" id="submit-btn" type="button">
+            增加
+        </button>
+    </div>
+</div>
+<!-- 新增優惠券功能區 -->
+<script src="/Member/Sam_Js/Jquery.js"></script>
+<script>
+    $("#submit-btn").click(function (e) {
+        e.preventDefault();
+        let endDate =  $("#endDate").val();
+        let startDate =  $("#startDate").val();
+        let cpType =  $("#cpType").val();
+        let cpName =  $("#cpName").val();
+        let amountThreshold =  $("#amountThreshold").val();
+        let discount =  $("#discount").val();
+
+        $.ajax({
+            url:"/coupon/addCp",
+            contentType: "application/json; charset=utf-8",
+            type: "POST",
+            data: JSON.stringify({
+                cpThreshold: amountThreshold,
+                cpTp: cpType,
+                cpName: cpName,
+                cpDiscount: discount,
+                cpStart: startDate,
+                cpEnd: endDate
+            }),
+            success: function (res) {
+                location.href="/coupon/master";
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+    })
+</script>
+
+<script>
+    layui.use(['laydate', 'form'], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+
+        //執行laydate實例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //執行laydate實例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+</script>
+<script>
+    // 取得輸入框元素
+    var amountThresholdInput = document.getElementById('amountThreshold');
+    var discountInput = document.getElementById('discount');
+
+    // 監聽事件
+    amountThresholdInput.addEventListener('input', validateAmountThreshold);
+    discountInput.addEventListener('input', validateDiscount);
+
+    // 金額門檻輸入值得函數
+    function validateAmountThreshold() {
+        var value = amountThresholdInput.value;
+
+        // 判斷是否為0或非數字
+        if (value === '0' || isNaN(value)) {
+            alert('金額門檻不能為0或非數字');
+            amountThresholdInput.value = '';
+        }
+    }
+
+    // 優惠券折扣輸入值得函數
+    function validateDiscount() {
+        var value = discountInput.value;
+
+        // 判斷是否為0或非數字
+        if (value === '0' || isNaN(value)) {
+            alert('優惠券折扣不能為0或非數字');
+            discountInput.value = '';
+        }
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+:root {
+    --primary: #EAA636;
+    --secondary: #545454;
+    --light: #FDF5EB;
+    --dark: #1E1916;
+}
+
+body {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+    background-color: var(--light);
+    background-image: url(/Commom/image/member.jpg);
+    font-family: Arial, sans-serif;
+}
+
+input {
+    padding: 5px;
+    border: 1px var(--dark) solid;
+    border-radius: 5px;
+    background-color: white;
+    color: var(--dark);
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid var(--primary);
+}
+
+input::placeholder {
+    color: var(--dark);
+}
+
+select {
+    padding: 5px;
+    border: 1px var(--dark) solid;
+    border-radius: 5px;
+    background-color: white;
+    color: var(--dark);
+}
+
+select:focus {
+    outline: none;
+    border: 2px solid var(--primary);
+}
+
+option {
+    color: var(--secondary);
+    background: var(--light);
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--dark);
+    width: 100%;
+    text-align: center;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 40px;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background-color: var(--dark);
+    color: var(--primary);
+    font-size: 40px;
+}
+
+#main-container {
+    border: 2.5px var(--dark) solid;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    background-color: var(--light);
+    opacity: 0.9;
+    display: flex;
+    margin-top: 100px;
+}
+
+#left-side {
+    border: 2.5px var(--dark) solid;
+    width: 20%;
+    background-color: var(--dark);
+}
+
+#msg-container {
+    border: 2.5px var(--dark) solid;
+    width: 80%;
+}
+
+#ul {
+    padding-left: 10px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list {
+    font-size: 35px;
+    list-style-type: none;
+    color: var(--primary);
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.list:hover {
+    background-color: var(--secondary);
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+#subUl {
+    padding-left: 10px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subList {
+    font-size: 20px;
+    list-style-type: none;
+    color: var(--primary);
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.subList:hover {
+    background-color: var(--secondary);
+    cursor: pointer;
+}
+
+#left-side-title{
+    color: var(--primary);
+    text-align: center;
+    font-size: 50px;
+    margin: 0;
+}
+
+
+/* #msg-container-title{
+    border: 1px var(--secondary) solid;
+} */
+
+#msg-container-title-p {
+    font-size: 50px;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+#msg-container-hr {
+    border-top: var(--dark) 3px solid;
+    border-width: var(--secondary) 3px;
+}
+
+#msg-container-main {
+    /* border: 1px red solid; */
+    height: calc(100% - 66.4px - 21px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#update {
+    background-color: var(--secondary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#update:hover {
+    background-color: var(--primary);
+}
+
+#member-data-table {
+    width: 80%;
+    border-collapse: collapse;
+    border: var(--secondary) 1px solid;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+  }
+  
+  tr, th, td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid var(--secondary);
+  }
+  
+  th {
+    background-color: var(--dark);
+    color: var(--primary);
+  }
+  
+  tr:nth-child(even) {
+    background-color: #efdcc7;
+  }
+

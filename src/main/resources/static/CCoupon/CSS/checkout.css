@@ -1,0 +1,95 @@
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 5% auto;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.total-row {
+    font-weight: bold;
+}.payment-form {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 200px; 
+}
+
+.button-space {
+    width: 20px; 
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+.coupon-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.coupon-modal-content {
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 9999;
+}
+
+.coupon-modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.coupon-checkbox {
+    margin-bottom: 10px;
+}
+
+.apply-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.apply-button:hover {
+    background-color: #45a049;
+}

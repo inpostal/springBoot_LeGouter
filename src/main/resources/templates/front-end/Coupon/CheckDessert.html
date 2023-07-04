@@ -1,0 +1,384 @@
+
+<!doctype html>
+<html lang="zxx">
+
+<head>
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/bootstrap.min.css">
+		<!-- Owl Theme Default CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/owl.theme.default.min.css">
+		<!-- Owl Carousel CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/owl.carousel.min.css">
+		<!-- Owl Magnific CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/magnific-popup.css">
+		<!-- Animate CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/animate.css">
+		<!-- Boxicons CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/boxicons.min.css">
+		<!-- Flaticon CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/flaticon.css">
+		<!-- Meanmenu CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/meanmenu.css">
+		<!-- Nice Select CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/nice-select.css">
+		<!-- Odometer CSS-->
+		<link rel="stylesheet" href="/Coupon/CSS/odometer.css">
+		<!-- Style CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/style.css">
+		<!-- Responsive CSS -->
+		<link rel="stylesheet" href="/Coupon/CSS/responsive.css">
+
+		<link rel="preconnect" href="https://fonts.googleapis.com/">
+		<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+		<link href="/Coupon/CSS/css2.css" rel="stylesheet">
+
+		<link href="/Coupon/CSS/all.min.css" rel="stylesheet">
+		<link href="/Coupon/CSS/bootstrap-icons.css" rel="stylesheet">
+
+		<link href="/Coupon/CSS/animate.min.css" rel="stylesheet">
+		<link href="/Coupon/CSS/owl.carousel.min.css" rel="stylesheet">
+
+		<link href="/Coupon/CSS/bootstrap.min.css" rel="stylesheet">
+
+		<link href="/Coupon/CSS/style.css" rel="stylesheet">
+		<link href="/Coupon/CSS/checkout.css" rel="stylesheet">
+
+
+
+		<!-- Favicon -->
+		<!-- <link rel="icon" type="image/png" href="assets/img/favicon.png"> -->
+		<!-- Title -->
+		<title>3-2.結帳頁-套用優惠券功能</title>
+	</head>
+
+<body>
+<!-- Start Preloader Area -->
+<div id="spinner"
+	 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+	<div class="spinner-grow text-primary" role="status"></div>
+</div>
+
+
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+	<div class="row gx-0 align-items-center d-none d-lg-flex">
+		<div class="col-lg-6 px-5 text-start">
+			<ol class="breadcrumb mb-0">
+			</ol>
+		</div>
+		<div class="col-lg-6 px-5 text-end">
+			<small>Follow us:</small>
+			<div class="h-100 d-inline-flex align-items-center">
+				<a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+						class="fab fa-facebook-f"></i></a>
+				<a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+						class="fab fa-twitter"></i></a>
+				<a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+						class="fab fa-linkedin-in"></i></a>
+				<a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 導覽列 -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+	<a href="index1.html" class="navbar-brand ms-4 ms-lg-0">
+		<h1 class="text-primary m-0">Le Goûter</h1>
+	</a>
+	<button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+		<div class="navbar-nav mx-auto p-4 p-lg-0">
+			<a href="" class="nav-item nav-link active">首頁</a>
+			<a href="" class="nav-item nav-link">最新消息</a>
+			<a href="" class="nav-item nav-link">關於我們</a>
+			<a href="" class="nav-item nav-link">甜點商城</a>
+			<a href="" class="nav-item nav-link">課程專區</a>
+			<a href="" class="nav-item nav-link">團購專區</a>
+			<a href="" class="nav-item nav-link">會員專區</a>
+			<a href="" class="nav-item nav-link">優惠券專區</a>
+			<div class="nav-item dropdown">
+				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">其他</a>
+				<div class="dropdown-menu m-0">
+					<a href="" class="dropdown-item">FAQ</a>
+					<a href="" class="dropdown-item">聯絡客服</a>
+				</div>
+			</div>
+		</div>
+		<div class=" d-none d-lg-flex">
+			<div class="flex-shrink-0 btn-lg-square border border-light rounded-circle">
+				<i class="fa fa-phone text-primary"></i>
+			</div>
+			<div class="ps-3">
+				<small class="text-primary mb-0">聯絡我們</small>
+				<p class="text-light fs-5 mb-0">0912345678</p>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-17">
+	<div class="container">
+		<div class="page-title-content">
+			<h2>結帳清單</h2>
+			<ul>
+				<li>
+					<a href="index.html">
+						Home
+					</a>
+				</li>
+
+				<li class="active">會員專區</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- 結帳區域 -->
+<table>
+	<tr>
+		<th>商品名稱</th>
+		<th>價格</th>
+		<th>小計</th>
+	</tr>
+	<tr>
+		<td>課程C</td>
+		<td>$100.00</td>
+		<td id="subtotalC">$100.00</td>
+	</tr>
+	<tr class="total-row">
+		<td colspan="2">折扣金額:</td>
+		<td id="discountAmount"></td>
+	</tr>
+	<tr class="total-row">
+		<td colspan="2">總計</td>
+		<td id="total">$</td>
+	</tr>
+</table>
+
+<div class="payment-form">
+	<div class="button-container">
+		<button class="button" onclick="showCouponModal()" id="chooseCp">選擇優惠券</button>
+		<div class="button-space">  </div>
+		<button class="button" onclick="checkOut()">確認結帳</button>
+	</div>
+</div>
+
+
+<h3 id="changeAmount"></h3>
+
+<div id="couponModal" class="coupon-modal">
+	<div class="coupon-modal-content" id="contain">
+		<h3 class="coupon-modal-title">選擇優惠券</h3>
+		<button class="apply-button" onclick="applyCoupon()">確認優惠券</button>
+	</div>
+</div>
+<!-- 結帳區域 -->
+
+<!-- Start Footer Top Area -->
+<div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
+	<div class="container py-5">
+		<div class="row g-5">
+			<div class="col-lg-3 col-md-6">
+				<h4 class="text-light mb-4">粉絲專頁</h4>
+
+				<div class="d-flex pt-2">
+					<a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+							class="fab fa-facebook-f"></i></a>
+					<a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+							class="fab fa-linkedin-in"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<h4 class="text-light mb-4">快速連結</h4>
+				<a class="btn btn-link" href="">品牌故事</a>
+				<a class="btn btn-link" href="">聯絡我們</a>
+				<a class="btn btn-link" href="">服務與條款</a>
+			</div>
+
+			<div class="col-lg-3 col-md-6">
+				<h4 class="text-light mb-4">常見問題</h4>
+				<a class="btn btn-link" href="">FAQ</a>
+				<a class="btn btn-link" href="">回報客服</a>
+			</div>
+
+			<div class="col-lg-3 col-md-6">
+				<h4 class="text-light mb-4">甜點畫廊</h4>
+				<div class="row g-2">
+					<div class="col-4">
+						<img class="img-fluid bg-light rounded p-1" src="/Coupon/PICTURE/product-1.jpg" alt="Image">
+					</div>
+					<div class="col-4">
+						<img class="img-fluid bg-light rounded p-1" src="/Coupon/PICTURE/product-2.jpg" alt="Image">
+					</div>
+					<div class="col-4">
+						<img class="img-fluid bg-light rounded p-1" src="/Coupon/PICTURE/product-3.jpg" alt="Image">
+					</div>
+					<div class="col-4">
+						<img class="img-fluid bg-light rounded p-1" src="/Coupon/PICTURE/product-2.jpg" alt="Image">
+					</div>
+					<div class="col-4">
+						<img class="img-fluid bg-light rounded p-1" src="/Coupon/PICTURE/product-3.jpg" alt="Image">
+					</div>
+					<div class="col-4">
+						<img class="img-fluid bg-light rounded p-1" src="/Coupon/PICTURE/product-1.jpg" alt="Image">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script data-cfasync="false" src="/Coupon/JS/email-decode.min.js"></script>
+<script src="/Coupon/JS/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Coupon/JS/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Coupon/JS/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Coupon/JS/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Coupon/JS/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Coupon/JS/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+<script src="/Coupon/JS/checkout.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<!-- End Footer Top Area -->
+
+
+
+<!-- Start Go Top Area -->
+<div class="go-top">
+	<i class='bx bx-chevrons-up'></i>
+	<i class='bx bx-chevrons-up'></i>
+</div>
+<!-- End Go Top Area -->
+
+
+<!-- Jquery-3.5.1.Slim.Min.JS -->
+<script src="/Coupon/JS/jquery-3.5.1.slim.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/Coupon/JS/jquery.meanmenu.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/Coupon/JS/owl.carousel.js"></script>
+<!-- Nice Select JS -->
+<script src="/Coupon/JS/jquery.nice-select.min.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/Coupon/JS/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/Coupon/JS/custom.js"></script>
+
+<script>
+	let cpId;
+	let cpThreshold;
+	let cpDiscount;
+
+	function checkOut(){
+		$.ajax({
+			url: `/alter/cpStatus`,
+			type: "POST",
+			contentType: "application/x-www-form-urlencoded",
+			data: {
+				cpId: cpId
+			},
+			success: function (res) {
+				console.log(res);
+			}
+		})
+	}
+
+	function showCouponModal() {
+		$("#contain").html(`<h3 class="coupon-modal-title">選擇優惠券</h3>
+\t\t<button class="apply-button" onclick="applyCoupon()">確認優惠券</button>`);
+
+		let couponModal = $("#couponModal");
+		let title = $('#couponModal .coupon-modal-title');
+		let html = `<div class="coupon-checkbox">
+						<label>
+							<input type="checkbox" id="coupon1" value="10" onchange="handleCouponSelection(this)" /> 折50元優惠券
+						</label>
+						<span id="coupon1Text"></span>
+					</div>`;
+		$.ajax({
+			url: "/check/course/viewCp",
+			type: "GET",
+			success: function (data) {
+				console.log(data);
+				for(let e in data){
+					let newElement = $('<div class="coupon-checkbox">').html(`
+						<label>
+							<input type="checkbox" id="${data[e].cpId}" value="${data[e].cpDiscount}" data-threshold="${data[e].cpThreshold}" onchange="handleCouponSelection(this)" />優惠券名稱:${data[e].cpName}  折${data[e].cpDiscount}元  低標:${data[e].cpThreshold}元
+						</label>
+						<span id="${data[e].cpId}Text"></span>`);
+					title.after(newElement);
+				}
+				couponModal.css("display", "block");
+			}
+		});
+	}
+
+	// 選擇優惠券處理函式
+	function handleCouponSelection(checkbox) {
+		cpId = parseInt(checkbox.id);
+		cpDiscount = parseInt(checkbox.value);
+		cpThreshold = parseInt(checkbox.dataset.threshold);
+		console.log("checkbox:" + checkbox);
+		console.log("checkbox.id:" + cpId);
+		console.log("checkbox.value:" + cpDiscount);
+		console.log("checkbox.value:" + cpThreshold);
+
+		//----------------------------------------------------------
+
+		let checkboxes = document.querySelectorAll(".coupon-checkbox input[type='checkbox']");
+		checkboxes.forEach(function (otherCheckbox) {
+			if (otherCheckbox !== checkbox) {
+				otherCheckbox.checked = false;
+				document.getElementById(otherCheckbox.id + "Text").textContent = "";
+			}
+		});
+
+		if (checkbox.checked) {
+			document.getElementById(checkbox.id + "Text").textContent = "(已選擇)";
+			let discount = parseFloat(checkbox.value);
+			applyCouponDiscount(discount);
+		} else {
+			document.getElementById(checkbox.id + "Text").textContent = "";
+			applyCouponDiscount(0);
+
+			document.getElementById("discountAmount").textContent = "$0.00";
+			calculateTotal();
+
+
+		}
+//--------------------------------------------------------------
+		let totalElement = document.getElementById("total");
+		let total = parseFloat(totalElement.textContent.slice(1));
+
+		if (total >= cpThreshold) {
+			// 是則total -= cpDiscount
+			total -= cpDiscount;
+			// 更新畫面上的總額
+			// totalElement.textContent = "$" + total.toFixed(2);
+			document.getElementById("total").textContent = "$" + total.toFixed(2);
+			let discountAmountElement = document.getElementById("discountAmount");
+			discountAmountElement.textContent = "$" + cpDiscount.toFixed(2);
+
+			let totalRowElements = document.querySelectorAll(".total-row");
+			totalRowElements.forEach(function (row) {
+				if (row.children[0].textContent === "折扣金額:") {
+					row.children[2].textContent = discountAmountElement.textContent;
+				}
+			});
+
+
+		}
+
+	}
+
+</script>
+</body>
+
+</html>

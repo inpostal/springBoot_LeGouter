@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>4.優惠管理</title>
+    <!-- <title>優惠券管理</title> -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <!-- <link rel="stylesheet" href="./css/font.css"> -->
+    <link rel="stylesheet" href="/Coupon/CSS/xadmin.css">
+<!--    <script src="/Coupon/JS/layui.js" charset="utf-8"></script>-->
+    <script type="text/javascript" src="/Coupon/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/Coupon/JS/xadmin.js"></script>
+
+    <link href="/Coupon/CSS/css2.css" rel="stylesheet">
+    <!-- Bootstrap icons -->
+    <!--    <link rel="stylesheet" href="/Coupon/CSS/bootstrap-icons.min.css" type="text/css">-->
+    <!-- Bootstrap Docs -->
+    <!--    <link rel="stylesheet" href="/Coupon/CSS/bootstrap-docs.css" type="text/css">-->
+
+
+    <!-- Main style file -->
+    <!--    <link rel="stylesheet" href="/Coupon/CSS/app.min.css" type="text/css">-->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <!--    <link href="/Coupon/CSS/1css2.css" rel="stylesheet">-->
+
+    <link href="/Coupon/CSS/all.min.css" rel="stylesheet">
+    <link href="/Coupon/CSS/bootstrap-icons.css" rel="stylesheet">
+
+    <!--    <link href="/Coupon/CSS/1animate.min.css" rel="stylesheet">-->
+<!--    <link href="/Coupon/CSS/owl.carousel.min.css" rel="stylesheet">-->
+
+    <link href="/Coupon/CSS/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/Coupon/CSS/style.css" rel="stylesheet">
+    <link href="/Coupon/CSS/orders.css" rel="stylesheet">
+    <style>
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #nav-bar {
+            background-color: #1E1916;
+        }
+
+        .nav-pills {
+            --bs-nav-pills-link-active-bg: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        :root {
+            --bs-link-color: white;
+            --bs-link-hover-color: orange;
+
+        }
+
+        /* 標題列 */
+        #mainheader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 80px;
+            background: #f8d3ae;
+            position: static;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 20px;
+        }
+
+        .dropdown {
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<section id="mainheader">
+    <span style="font-size: 40px; font-family: serif;">Le Goûter </span>
+    <span style="font-size: 40px; font-family: 'Jost', sans-serif;">&nbsp後台管理系統</span>
+</section>
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" role="status"></div>
+</div>
+
+
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+</div>
+
+<!-- layout-wrapper -->
+<div class="layout-wrapper">
+    <div class="row">
+        <!-- 左側導航欄 -->
+        <div class="col-lg-3">
+            <div class="container-fluid">
+                <div class="row flex-nowrap">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="nav-bar">
+                        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                                id="menu">
+
+                                <!-- 1 -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link px-5 align-middle d-flex" style="margin-top: 50px;">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                                    </a>
+                                </li>
+
+                                <!-- 2 -->
+                                <li>
+                                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span
+                                            class="ms-1 d-none d-sm-inline">會員管理系統</span></a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">會員權限管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">會員資料管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">優惠管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span
+                                            class="ms-1 d-none d-sm-inline">網站管理系統</span></a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">即時客服</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">輪播圖管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">最新消息管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 5 -->
+                                <li>
+                                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">團購管理系統</span>
+                                    </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">團購商品管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span class="d-none d-sm-inline">團購參與者訂單管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">團購方案管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">團購活動管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">團購分潤管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- 7 -->
+                                <li>
+                                    <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">課程管理系統</span>
+                                    </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">課程訂單管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">課程資訊審核管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 8 -->
+                                <li>
+                                    <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">主廚管理</span> </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">主廚資料管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">課程討論區管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">課程資訊管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 9 -->
+                                <li>
+                                    <a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">甜點管理系統</span>
+                                    </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">甜點訂單管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">甜點商品管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">甜點追蹤清單管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- 10 -->
+                                <li>
+                                    <a href="#submenu7" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">員工管理系統</span>
+                                    </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu7" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-4"><span
+                                                    class="d-none d-sm-inline">員工資料管理</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-4"> <span
+                                                    class="d-none d-sm-inline">員工權限管理</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <body>
+        <!--   優惠券搜尋功能程式區開始   -->
+        <div class="col-lg-8">
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-body" style="margin-left: 30%; padding-top: 30px;">
+                                <div class="layui-inline layui-show-xs-block">
+                                    <input type="text" id="searchInput" placeholder="請輸入優惠券名稱"
+                                           class="layui-input">
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <button class="layui-btn" onclick="searchCoupon()"><i
+                                            class="layui-icon">&#xe615;</i></button>
+                                </div>
+                            </div>
+                            <div class="layui-card-header" style="margin-left: 30%;">
+                                <button class="layui-btn layui-btn-danger" onclick="all_del()"><i
+                                        class="layui-icon"></i>整批删除
+                                </button>
+                                <button class="layui-btn"
+                                        onclick="xadmin.open('新增優惠券','./CouponAdd.html',600,400)"><i
+                                        class="layui-icon"></i>新增優惠
+                                </button>
+                            </div>
+                            <!--   優惠券搜尋功能程式區結束  -->
+
+                            <!--   優惠券詳細內容與附加功能區開始   -->
+                            <div class="layui-card-body " style="width: 1000px; margin: 30px auto;">
+                                <table class="layui-table layui-form" id="couponTable">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" name="" lay-skin="primary">
+                                        </th>
+                                        <th>編號</th>
+                                        <th>類型</th>
+                                        <th>名稱</th>
+                                        <th>相片</th>
+                                        <th>金額門檻</th>
+                                        <th>折扣</th>
+                                        <th>開始日期</th>
+                                        <th>截止日期</th>
+                                        <th>狀態</th>
+                                        <th>操作</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="" lay-skin="primary">
+                                        </td>
+                                        <td>D0253202</td>
+                                        <td>甜點節慶優惠券</td>
+                                        <td>在特別的日子裡，獻上一份法式香甜。</td>
+                                        <td></td>
+                                        <td>500</td>
+                                        <td>50</td>
+                                        <td>2017-01-01 11:11:42</td>
+                                        <td>2017-01-01 11:11:42</td>
+                                        <td class="td-status">
+                                            <span class="layui-btn layui-btn-normal layui-btn-mini">啟用中</span>
+                                        </td>
+                                        <td class="td-manage">
+                                            <a onclick="member_stop(this,'10001')" href="javascript:;" title="啟用">
+                                                <i class="layui-icon">&#xe601;</i>
+                                            </a>
+                                            <a title="編輯" onclick="xadmin.open('編輯','CouponEdit.html')"
+                                               href="javascript:;">
+                                                <i class="layui-icon">&#xe642;</i>
+                                            </a>
+                                            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                                <i class="layui-icon">&#xe640;</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="" lay-skin="primary">
+                                        </td>
+                                        <td>C0253202</td>
+                                        <td>課程節慶折價券</td>
+                                        <td>獻出心意吧！☆法式手作甜點課程☆ 現正優惠中~</td>
+                                        <td></td>
+                                        <td>1000</td>
+                                        <td>150</td>
+                                        <td>2017-01-01 11:11:42</td>
+                                        <td>2017-01-01 11:11:42</td>
+                                        <td class="td-status">
+                                            <span class="layui-btn layui-btn-normal layui-btn-mini">啟用中</span>
+                                        </td>
+                                        <td class="td-manage">
+                                            <a onclick="member_stop(this,'10001')" href="javascript:;" title="啟用">
+                                                <i class="layui-icon">&#xe601;</i>
+                                            </a>
+                                            <a title="编辑" onclick="xadmin.open('编辑','CouponEdit.html')"
+                                               href="javascript:;">
+                                                <i class="layui-icon">&#xe642;</i>
+                                            </a>
+                                            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                                <i class="layui-icon">&#xe640;</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="layui-card-body ">
+                                <div class="page" style="margin-left: 20%;">
+                                    <div>
+                                        <a class="prev" href="">&lt;&lt;</a>
+                                        <span class="current">1</span>
+                                        <a class="num" href="">2</a>
+                                        <!-- <a class="num" href="">489</a> -->
+                                        <a class="next" href="">&gt;&gt;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--   優惠券詳細內容與附加功能區結束   -->
+        </body>
+        <script>
+            //優惠券搜尋腳本開始
+            function searchCoupon() {
+                var input = document.getElementById("searchInput").value;
+                var table = document.getElementById("couponTable");
+                var rows = table.getElementsByTagName("tr");
+
+                for (var i = 0; i < rows.length; i++) {
+                    var nameCell = rows[i].getElementsByTagName("td")[2];
+                    var idCell = rows[i].getElementsByTagName("td")[1];
+                    if (nameCell || idCell) {
+                        var name = nameCell.textContent || nameCell.innerText;
+                        var id = idCell.textContent || idCell.innerText;
+
+                        if (name.indexOf(input) > -1 || id.indexOf(input) > -1) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+            //優惠券搜尋腳本結束
+
+            /*用户-停用*/
+            function member_stop(obj, id) {
+                layer.confirm('確定要改變狀態嗎？', function (index) {
+
+                    if ($(obj).attr('title') == '啟用中') {
+
+                        //異常數據用戶變更
+                        $(obj).attr('title', '未啟用')
+                        $(obj).find('i').html('&#xe62f;');
+
+                        $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('未啟用');
+                        layer.msg('未啟用!', {icon: 5, time: 1000});
+
+                    } else {
+                        $(obj).attr('title', '啟用中')
+                        $(obj).find('i').html('&#xe601;');
+
+                        $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('啟用中');
+                        layer.msg('啟用中!', {icon: 1, time: 1000});
+
+                    }
+
+                });
+            }
+
+            /*用户-删除*/
+            function member_del(obj, id) {
+                layer.confirm('確定要刪除嗎？', function (index) {
+                    //異常數據刪除
+                    $(obj).parents("tr").remove();
+                    layer.msg('已刪除!', {icon: 1, time: 1000});
+                });
+            }
+
+            /*整批-删除*/
+            function all_del() {
+                layer.confirm('確定要刪除嗎？', function (index) {
+                    let arr1 = document.querySelectorAll("tr");
+                    let rows = arr1.length;
+                    for (let i = 1; i < rows; i++)
+                        arr1[i].remove();
+                    layer.msg('已刪除!', {icon: 1, time: 1000});
+                });
+            }
+        </script>
+
+        <script data-cfasync="false" src="/Coupon/JS/email-decode.min.js"></script>
+        <script src="/Coupon/JS/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="/Coupon/JS/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="/Coupon/JS/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="/Coupon/JS/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="/Coupon/JS/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="/Coupon/JS/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="/Coupon/JS/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+        <script src="/Coupon/JS/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+        <script src="/Coupon/JS/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
+        <script src="/Coupon/JS/orders.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+        <!-- ./ layout-wrapper -->
+
+        <!-- Bundle scripts -->
+<!--        <script src="/Coupon/JS/bundle.js"></script>-->
+
+        <!-- Main Javascript file -->
+<!--        <script src="/Coupon/JS/app.min.js"></script>-->
+
+    </div>
+</div>
+</div>
+</html>
