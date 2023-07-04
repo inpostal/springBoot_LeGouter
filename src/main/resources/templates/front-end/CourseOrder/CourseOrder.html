@@ -80,7 +80,7 @@
                             <td th:text="${c.getCourseName()}"></td>
                             <td th:text="${c.getCourseOrderPrice()}"></td>
                             <td th:text="${c.getCourseDate()}"></td>
-                            <td><button type="button" id="view-course">觀看課程</button></td>
+                            <td><button type="button" id="view-course" th:onclick="'window.location.href=\'/replyAllComment?courseId=' + ${c.getCourseId} + '\''">觀看課程</button></td>
                         </tr>
                     </table>
                 </form>

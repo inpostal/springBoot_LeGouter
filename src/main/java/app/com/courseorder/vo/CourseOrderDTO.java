@@ -7,6 +7,7 @@ import java.sql.Date;
 @Data
 public class CourseOrderDTO {
     private Integer courseOrderId;
+    private Integer courseId;
     private String memberName;
     private Integer courseOrderPrice;
     private Date courseDate;
