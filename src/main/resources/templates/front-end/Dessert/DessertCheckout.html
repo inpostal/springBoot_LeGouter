@@ -111,7 +111,7 @@
 <!-- Checkout Area Start Here -->
 
 
-<div class="checkout-area">
+<div class="checkout-area" th:unless="${isCartEmpty}">
     <div class="container container-default-2 custom-container">
         <div class="row">
             <div class="col-12">
@@ -311,7 +311,11 @@
         </div>
     </div>
 </div>
+<div th:if="${isCartEmpty}" class="empty-cart-message text-center">
+    <h2>親，您的購物車沒有好吃的甜點</h2>
+    <a href="/dessertshop/shopAndproduct/shop.html" class="btn obrien-button primary-btn">到甜點商城逛逛吧！</a>
 </div>
+
 <!-- Checkout Area End Here -->
 <div id="footer-div"></div>
 
