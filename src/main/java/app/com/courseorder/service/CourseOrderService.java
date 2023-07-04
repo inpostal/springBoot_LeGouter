@@ -55,7 +55,7 @@ public class CourseOrderService {
              list) {
             CourseOrderDTO dto = new CourseOrderDTO();
             Course course = courseRepository.getReferenceById(c.getCourseId());
-
+            dto.setCourseId(c.getCourseId());
             dto.setCourseOrderId(c.getCourseOrderId());
             dto.setCourseOrderPrice(course.getCoursePrice());
             dto.setCourseName(course.getCourseName());
