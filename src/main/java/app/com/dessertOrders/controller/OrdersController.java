@@ -44,7 +44,7 @@ public class OrdersController {
     @GetMapping("/orders")
     @ResponseBody
     public List<OrdersDTO> getAll() {
-        List<OrdersDTO> dtoList = ordersService.getAllOrdersDTO();
+        List<OrdersDTO> dtoList = ordersService.getAllOrdersDTOSortedById();
         return dtoList;
     }
 

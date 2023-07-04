@@ -8,13 +8,10 @@
     <title> 我的甜點訂單 </title>
 
 
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com/">
-
     <!-- Bootstrap icons -->
-    <!--    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-icons.min.css" type="text/css">-->
+    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-icons.min.css" type="text/css">
     <!-- Bootstrap Docs -->
-    <!--    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-docs.css" type="text/css">-->
+    <link rel="stylesheet" href="/Dessert/CSS/bootstrap-docs.css" type="text/css">
 
 
     <!-- Main style file -->
@@ -105,7 +102,7 @@
 
                                 </div>
                                 <td class="flex-fill">
-                                     <span th:text="${order.getStatusName()}"
+                                     <span status="status" th:text="${order.getStatusName()}"
                                            th:class="${order.getStatusClass()}"></span>
 
                                 </td>
@@ -142,8 +139,12 @@
                                                      class="rounded" width="70">
                                             </td>
 
-                                            <td th:text=" ${M.getDessertName()}">
+                                            <td>
+                                                <a th:href="@{'/dessertshop/shopAndproduct/sproduct.html?param=' + ${M.getDessertId()}}">
+                                                    <span th:text="${M.getDessertName()}"></span>
+                                                </a>
                                             </td>
+
 
                                             <td th:text="${M.getDessertAmount()}"></td>
                                             <td th:text="${M.getDessertPrice()}"></td>
@@ -195,21 +196,26 @@
     document.getElementById('statusFilter').addEventListener('change', function (e) {
         var selectedStatus = e.target.value;
 
-        console.log('Selected status: ' + selectedStatus); // new line
+        console.log('選擇的狀態: ' + selectedStatus);
 
-        var orders = document.getElementsByClassName('card widget mb-4 bg-white');
+        var orders = document.querySelectorAll('span[status="status"]');
+        var div = document.getElementsByClassName('card widget mb-4 bg-white');
+        console.log(orders);
 
         for (var i = 0; i < orders.length; i++) {
             var order = orders[i];
+            var divorder = div[i];
+            // console.log(order);
+            var orderStatus = order.innerHTML;
 
-            var orderStatus = order.getAttribute('data-status');
-
-            console.log('Order status: ' + orderStatus); // new line
+            console.log('訂單狀態: ' + orderStatus);
 
             if (selectedStatus === '' || orderStatus === selectedStatus) {
-                order.style.display = '';
+                console.log('訂單 ID: ' + order.id + ' 是符合的狀態，將會顯示。');
+                divorder.style.display = '';
             } else {
-                order.style.display = 'none';
+                console.log('訂單 ID: ' + order.id + ' 不符合選擇的狀態，將會隱藏。');
+                divorder.style.display = 'none';
             }
         }
     });

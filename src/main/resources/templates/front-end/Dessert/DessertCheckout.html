@@ -37,7 +37,7 @@
             margin-top: 7px;
         }
     </style>
-
+    <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/Dessert/CSS/bootstrap.min.css">
     <!-- FontAwesome -->
@@ -72,6 +72,12 @@
 </head>
 
 <body>
+<!-- preloader -->
+<div class="preloader">
+    <img src="/Dessert/picture/logo.svg" alt="logo">
+    <div class="preloader-icon"></div>
+</div>
+<!-- ./ preloader -->
 <div id="header-div"></div>
 
 
@@ -437,6 +443,10 @@
             }
         }
     }
+
+    $(window).on('load', function () {
+        $('.preloader').hide();
+    });
 
 </script>
 
