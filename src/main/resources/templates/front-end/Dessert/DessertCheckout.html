@@ -292,6 +292,8 @@
                         <div class="order-button-payment">
                             <input value="提交訂單" type="button">
                         </div>
+                        <div id="ecpay"></div>
+
                     </div>
                 </div>
 
@@ -330,9 +332,11 @@
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(orderInfo),
-                    success: function () {
-                        alert('訂單已成功提交');
-                        window.location.href = '/OrderSuccessful';
+                    success: function (result) {
+                        //alert('訂單已成功提交');
+                        //window.location.href = '/OrderSuccessful';
+                        let ecpay = document.getElementById("ecpay");
+                        ecpay.innerHTML(result.value);
                     },
                     error: function () {
                         alert('訂單提交失敗，請檢查您的信息並重試');

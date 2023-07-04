@@ -3,6 +3,8 @@ package app.com.dessertCart.controller;
 import app.com.dessertCart.entity.DessertCartDTO;
 import app.com.dessertCart.entity.OrderInfo;
 import app.com.dessertCart.service.DessertCartService;
+import app.com.dessertCart.service.PaymentService;
+import app.com.dessertOrders.repository.OrdersRepository;
 import app.com.member.repository.MemberRepository;
 import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,11 @@ public class DessertCartController {
     @Autowired
     private DessertCartService dessertCartService;
     @Autowired
+    private PaymentService paymentService;
+    @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private OrdersRepository ordersRepository;
 
 
     @GetMapping("/dessertCart")
@@ -124,6 +130,7 @@ public class DessertCartController {
         return "/front-end/Dessert/DessertCart";
     }
 
+    @ResponseBody
     @PostMapping("/submitOrder")
     public String submitOrder(@RequestBody OrderInfo orderInfo, HttpSession session) {
         Members member = (Members) session.getAttribute("user");
@@ -132,13 +139,29 @@ public class DessertCartController {
             return "redirect:/login";
         }
         Integer memberId = member.getMemberId();
-        dessertCartService.submitOrder(memberId, orderInfo);
-        return "/front-end/Dessert/OrderSuccessful";
+        String result = dessertCartService.submitOrder(memberId, orderInfo);
+
+
+        // return "/front-end/Dessert/OrderSuccessful";
+        return result;
+
+    }
+
+    @ResponseBody
+    @PostMapping("/ecpay")
+    public String ecpay(@RequestParam Integer orderId) {
+
+        String result = paymentService.genAioCheckOutALL(orderId);
+        return result;
+//        /return "redirect:" + result;
+
     }
 
 
-    @GetMapping("/OrderSuccessful")
+    @PostMapping("/OrderSuccessful")
     public String orderSuccessfulPage() {
+
+
         return "/front-end/Dessert/OrderSuccessful";
     }
 
