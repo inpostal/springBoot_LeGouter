@@ -233,18 +233,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="course-body">
-                                <td>a</td>
-                                <td>b</td>
-                                <td>c</td>
-                                <td>d</td>
-                                <td>e</td>
-                                <td>f</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="selectCheckbox">
-                                        <label class="form-check-label" for="selectCheckbox"></label>
-                                    </div>
-                                </td>
+
 
                                 </tbody>
                             </table>
@@ -356,18 +345,38 @@
         $("#dessert-tab").click();
     });
 
-    // $("#course-tab").click(function(){
-    //     $.ajax({
-    //         url:"",
-    //         type:"",
-    //         success: function (res){
-    //
-    //         },
-    //         error: function (xhr){
-    //
-    //         }
-    //     })
-    // })
+    $("#course-tab").click(function(){
+        $.ajax({
+            url:"/coupon/getCourse",
+            type:"GET",
+            success: function (res){
+                console.log(res);
+                let td ="";
+                for (let e in res){
+                    let html=`
+                    <tr>
+                      <td>a</td>
+                      <td>b</td>
+                      <td>c</td>
+                      <td>d</td>
+                      <td>e</td>
+                      <td>f</td>
+                      <td>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="selectCheckbox">
+                            <label class="form-check-label" for="selectCheckbox"></label>
+                        </div>
+                      </td>
+                    </tr>`;
+                td += html;
+            }
+            $("#course-body").html(td);
+            },
+            error: function (xhr){
+            }
+        });
+        // $("#course-tab").click();
+     });
 
 
     // 獲取所有的checkbox元素

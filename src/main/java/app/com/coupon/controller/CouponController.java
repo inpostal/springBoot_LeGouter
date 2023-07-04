@@ -164,6 +164,7 @@ public class CouponController {
         }
     }
 
+    //優惠券領取專區-ajax渲染甜點頁面優惠券
     @GetMapping("/coupon/getDessert")
     @ResponseBody
     public List<CouponType> getDessertCp(HttpSession session){
@@ -175,7 +176,21 @@ public class CouponController {
         return null;
     }
 
-    //甜點頁面領取cp
+    //優惠券領取專區-ajax渲染甜點頁面優惠券
+    @GetMapping("/coupon/getCourse")
+    @ResponseBody
+    public List<CouponType> getCourseCp(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        if (user!=null){
+            List<CouponType> list = service.getCourseCp(user.getMemberId());
+            return list;
+        }
+        return null;
+    }
+
+
+
+    //模擬甜點頁面領取cp
     //需登入會員狀態
     @GetMapping("/coupon/shopping/dessert")
     public String couponShoppingDessert(HttpSession session, Model model) {
