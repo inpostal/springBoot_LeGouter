@@ -1,0 +1,81 @@
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+.order-history {
+    height: 1000px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination .prev-btn,
+.pagination .next-btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #f2f2f2;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination .page-indicator {
+    margin: 0 10px;
+}
+
+.pagination .current-page {
+    font-weight: bold;
+}
+#noResultsMessage {
+   background-color: #f2f2f2;
+  }
+
+  .input-group {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .input-group-append {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+  /*優惠券*/
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+  }
+
+  

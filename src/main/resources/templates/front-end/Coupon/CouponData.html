@@ -71,13 +71,13 @@
                 <form action="">
                     <table id="member-data-table">
                         <tr style="background-color: #f8d3ae;color:#1E1916;">
-                            <th>優惠券編號</th>
-                            <th>優惠券類型</th>
-                            <th>優惠券名稱</th>
-                            <th>金額門檻</th>
-                            <th>優惠金額</th>
-                            <th>開始日期</th>
-                            <th>截止日期</th>
+                            <th style="width: 5%">編號</th>
+                            <th style="width: 10%">類型</th>
+                            <th style="width: 15%">名稱</th>
+                            <th style="width: 5%">金額門檻</th>
+                            <th style="width: 5%">優惠金額</th>
+                            <th style="width: 20%">開始日</th>
+                            <th style="width: 20%">截止日</th>
                         </tr>
                         <tr th:each="c : ${couponList}">
                             <td th:text="${c.getCpId()}"></td>

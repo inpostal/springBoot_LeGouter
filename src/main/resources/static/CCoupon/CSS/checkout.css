@@ -69,7 +69,6 @@ th {
     flex-direction: column;
     justify-content: space-between;
     z-index: 9999;
-    overflow: auto;
 }
 
 .coupon-modal-title {

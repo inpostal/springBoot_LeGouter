@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="zxx">
 
@@ -122,8 +123,6 @@
 		</div>
 	</div>
 </nav>
-</div>
-</div>
 
 <!-- Start Page Title Area -->
 <div class="page-title-area bg-17">
@@ -152,19 +151,9 @@
 		<th>小計</th>
 	</tr>
 	<tr>
-		<td>課程A</td>
-		<td>$10.00</td>
-		<td id="subtotalA">$10.00</td>
-	</tr>
-	<tr>
-		<td>課程B</td>
-		<td>$50.00</td>
-		<td id="subtotalB">$50.00</td>
-	</tr>
-	<tr>
 		<td>課程C</td>
-		<td>$20.00</td>
-		<td id="subtotalC">$20.00</td>
+		<td>$100.00</td>
+		<td id="subtotalC">$100.00</td>
 	</tr>
 	<tr class="total-row">
 		<td colspan="2">折扣金額:</td>
@@ -172,15 +161,15 @@
 	</tr>
 	<tr class="total-row">
 		<td colspan="2">總計</td>
-		<td id="total">$80.00</td>
+		<td id="total">$</td>
 	</tr>
 </table>
 
 <div class="payment-form">
 	<div class="button-container">
-		<button class="button" onclick="showCouponModal()">選擇優惠券</button>
+		<button class="button" onclick="showCouponModal()" id="chooseCp">選擇優惠券</button>
 		<div class="button-space">  </div>
-		<button class="button" onclick="confirmCheckout()">確認結帳</button>
+		<button class="button" onclick="checkOut()">確認結帳</button>
 	</div>
 </div>
 
@@ -188,26 +177,8 @@
 <h3 id="changeAmount"></h3>
 
 <div id="couponModal" class="coupon-modal">
-	<div class="coupon-modal-content">
+	<div class="coupon-modal-content" id="contain">
 		<h3 class="coupon-modal-title">選擇優惠券</h3>
-		<div class="coupon-checkbox">
-			<label>
-				<input type="checkbox" id="coupon1" value="10" onchange="handleCouponSelection(this)" /> 折50元優惠券
-			</label>
-			<span id="coupon1Text"></span>
-		</div>
-		<div class="coupon-checkbox">
-			<label>
-				<input type="checkbox" id="coupon2" value="20" onchange="handleCouponSelection(this)" /> 折100元優惠券
-			</label>
-			<span id="coupon2Text"></span>
-		</div>
-		<div class="coupon-checkbox">
-			<label>
-				<input type="checkbox" id="coupon3" value="30" onchange="handleCouponSelection(this)" /> 折150元優惠券
-			</label>
-			<span id="coupon3Text"></span>
-		</div>
 		<button class="apply-button" onclick="applyCoupon()">確認優惠券</button>
 	</div>
 </div>
@@ -299,6 +270,115 @@
 <script src="/Coupon/JS/jquery.ajaxchimp.min.js"></script>
 <!-- Custom JS -->
 <script src="/Coupon/JS/custom.js"></script>
+
+<script>
+	let cpId;
+	let cpThreshold;
+	let cpDiscount;
+
+	function checkOut(){
+		$.ajax({
+			url: `/alter/cpStatus`,
+			type: "POST",
+			contentType: "application/x-www-form-urlencoded",
+			data: {
+				cpId: cpId
+			},
+			success: function (res) {
+				console.log(res);
+			}
+		})
+	}
+
+	function showCouponModal() {
+		$("#contain").html(`<h3 class="coupon-modal-title">選擇優惠券</h3>
+\t\t<button class="apply-button" onclick="applyCoupon()">確認優惠券</button>`);
+
+		let couponModal = $("#couponModal");
+		let title = $('#couponModal .coupon-modal-title');
+		let html = `<div class="coupon-checkbox">
+						<label>
+							<input type="checkbox" id="coupon1" value="10" onchange="handleCouponSelection(this)" /> 折50元優惠券
+						</label>
+						<span id="coupon1Text"></span>
+					</div>`;
+		$.ajax({
+			url: "/check/course/viewCp",
+			type: "GET",
+			success: function (data) {
+				console.log(data);
+				for(let e in data){
+					let newElement = $('<div class="coupon-checkbox">').html(`
+						<label>
+							<input type="checkbox" id="${data[e].cpId}" value="${data[e].cpDiscount}" data-threshold="${data[e].cpThreshold}" onchange="handleCouponSelection(this)" />優惠券名稱:${data[e].cpName}  折${data[e].cpDiscount}元  低標:${data[e].cpThreshold}元
+						</label>
+						<span id="${data[e].cpId}Text"></span>`);
+					title.after(newElement);
+				}
+				couponModal.css("display", "block");
+			}
+		});
+	}
+
+	// 選擇優惠券處理函式
+	function handleCouponSelection(checkbox) {
+		cpId = parseInt(checkbox.id);
+		cpDiscount = parseInt(checkbox.value);
+		cpThreshold = parseInt(checkbox.dataset.threshold);
+		console.log("checkbox:" + checkbox);
+		console.log("checkbox.id:" + cpId);
+		console.log("checkbox.value:" + cpDiscount);
+		console.log("checkbox.value:" + cpThreshold);
+
+		//----------------------------------------------------------
+
+		let checkboxes = document.querySelectorAll(".coupon-checkbox input[type='checkbox']");
+		checkboxes.forEach(function (otherCheckbox) {
+			if (otherCheckbox !== checkbox) {
+				otherCheckbox.checked = false;
+				document.getElementById(otherCheckbox.id + "Text").textContent = "";
+			}
+		});
+
+		if (checkbox.checked) {
+			document.getElementById(checkbox.id + "Text").textContent = "(已選擇)";
+			let discount = parseFloat(checkbox.value);
+			applyCouponDiscount(discount);
+		} else {
+			document.getElementById(checkbox.id + "Text").textContent = "";
+			applyCouponDiscount(0);
+
+			document.getElementById("discountAmount").textContent = "$0.00";
+			calculateTotal();
+
+
+		}
+//--------------------------------------------------------------
+		let totalElement = document.getElementById("total");
+		let total = parseFloat(totalElement.textContent.slice(1));
+
+		if (total >= cpThreshold) {
+			// 是則total -= cpDiscount
+			total -= cpDiscount;
+			// 更新畫面上的總額
+			// totalElement.textContent = "$" + total.toFixed(2);
+			document.getElementById("total").textContent = "$" + total.toFixed(2);
+			let discountAmountElement = document.getElementById("discountAmount");
+			discountAmountElement.textContent = "$" + cpDiscount.toFixed(2);
+
+			let totalRowElements = document.querySelectorAll(".total-row");
+			totalRowElements.forEach(function (row) {
+				if (row.children[0].textContent === "折扣金額:") {
+					row.children[2].textContent = discountAmountElement.textContent;
+				}
+			});
+
+
+		}
+
+	}
+
+</script>
 </body>
 
 </html>

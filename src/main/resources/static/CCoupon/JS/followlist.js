@@ -1,19 +1,19 @@
 // 搜尋產品
 function searchOrders() {
-  let input = document.getElementById("searchInput");
-  let filter = input.value.toUpperCase();
-  let table = document.getElementById("orderTable");
-  let tr = table.getElementsByTagName("tr");
-  let noResultsMessage = document.getElementById("noResultsMessage");
-  let hasResults = false;
+  var input = document.getElementById("searchInput");
+  var filter = input.value.toUpperCase();
+  var table = document.getElementById("orderTable");
+  var tr = table.getElementsByTagName("tr");
+  var noResultsMessage = document.getElementById("noResultsMessage");
+  var hasResults = false;
 
-  for (let i = 0; i < tr.length; i++) {
-    let tdOrderNumber = tr[i].getElementsByTagName("td")[0]; // 訂單編號欄位
-    let tdProductName = tr[i].getElementsByTagName("td")[2]; // 產品名稱欄位
+  for (var i = 0; i < tr.length; i++) {
+    var tdOrderNumber = tr[i].getElementsByTagName("td")[1]; // 訂單編號欄位
+    var tdProductName = tr[i].getElementsByTagName("td")[3]; // 產品名稱欄位
 
     if (tdOrderNumber && tdProductName) {
-      let orderNumber = tdOrderNumber.textContent || tdOrderNumber.innerText;
-      let productName = tdProductName.textContent || tdProductName.innerText;
+      var orderNumber = tdOrderNumber.textContent || tdOrderNumber.innerText;
+      var productName = tdProductName.textContent || tdProductName.innerText;
 
       if (orderNumber.toUpperCase().indexOf(filter) > -1 || productName.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = ""; // 顯示符合條件的行
@@ -36,7 +36,7 @@ function searchOrders() {
 function sortTableByColumn(columnIndex, event) {
   event.preventDefault();
 
-  let table, rows, switching, i, x, y, shouldSwitch;
+  var table, rows, switching, i, x, y, shouldSwitch;
   table = document.getElementById("orderTable");
   switching = true;
 
@@ -50,8 +50,8 @@ function sortTableByColumn(columnIndex, event) {
       y = rows[i + 1].getElementsByTagName("td")[columnIndex];
 
       if (columnIndex === 2) {
-        let dateX = new Date(x.innerHTML);
-        let dateY = new Date(y.innerHTML);
+        var dateX = new Date(x.innerHTML);
+        var dateY = new Date(y.innerHTML);
 
         if (dateX < dateY) {
           shouldSwitch = true;
@@ -78,6 +78,6 @@ function trackCourse(button) {
 }
 //取消追蹤
 function removeCourseRow(button) {
-  let row = button.closest("tr");
+  var row = button.closest("tr");
   row.remove();
 }
