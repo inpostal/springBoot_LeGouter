@@ -130,14 +130,13 @@
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
+                                    <label>優惠券 <span class="required"></span></label>
                                     <select required class="form-control" id="cp-select">
                                         <option value="0" name="0" selected>未使用優惠券</option>
                                         <option th:each="cp : ${cplist}" th:value="${cp.getCpId()}"
                                                 th:name="${cp.getDiscount()}" th:text="${cp.getCpName()}"></option>
                                     </select>
-                                    <button class="btn btn-warning"
-                                            style="margin-left: auto;display: block;margin-top: 15px;">提交折價券
-                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -277,6 +276,15 @@
 
         let courseId = (new URL(document.location)).searchParams.get("courseId");
         $("#checkout").click(function (e) {
+            let paymentMethodSelected = document.querySelector('input[name="paymentMethod"]:checked');
+            let termsAgreed = document.getElementById('agreed').checked;
+
+            if (!paymentMethodSelected || !termsAgreed) {
+                e.preventDefault(); // 阻止按钮的默认行为
+                alert('請選擇付款方式並接受購物條款。');
+                return;  // 不繼續執行以下的程式碼
+            }
+
             e.preventDefault(); // 阻止按钮的默认行为
 
             // val, text要跟著標籤變動
@@ -310,9 +318,12 @@
                                     top
                                     repeat
                                 `
-                    })
-
-
+                    }).then((result) => {
+                        // Check if the user clicked "OK"
+                        if (result.isConfirmed) {
+                            location.href = '/course/order/member'; // 指定跳转的页面URL
+                        }
+                    });
                 },
                 error: function (error) {
 
@@ -321,21 +332,6 @@
             });
         });
     });
-</script>
-
-<script>
-
-    // document.getElementById('checkout').addEventListener('click', function (event) {
-    //     console.log('Checkout button clicked');  // Add this line
-    //     let paymentMethodSelected = document.querySelector('input[name="paymentMethod"]:checked');
-    //     let termsAgreed = document.getElementById('agreed').checked;
-    //
-    //     if (!paymentMethodSelected || !termsAgreed) {
-    //         event.preventDefault();  // Prevent the default action of the button
-    //         alert('請選擇付款方式並接受購物條款。');
-    //     }
-    // });
-
 
 </script>
 

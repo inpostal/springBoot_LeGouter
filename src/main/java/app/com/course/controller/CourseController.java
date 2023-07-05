@@ -326,7 +326,7 @@ public class CourseController {
     //前台課程
     @GetMapping("/course/courses")
     public String coursesPage(HttpSession session, Model model) {
-        return "/front-end/course/Course";
+        return "/front-end/course/Course1";
     }
 
     //前台單個課程
@@ -387,7 +387,9 @@ public class CourseController {
         System.out.println(dto);
         courseService.checkout(dto);
         Members user = (Members) session.getAttribute("user");
-        service.updateCpStatus(user.getMemberId(), dto.getCpId());
+        if (dto.getCpId() != 0) {
+            service.updateCpStatus(user.getMemberId(), dto.getCpId());
+        }
         return ResponseEntity.ok().build();
     }
 
@@ -398,6 +400,8 @@ public class CourseController {
                                  Model model) {
         Members user = (Members) session.getAttribute("user");
         if (user == null) {
+            session.setAttribute("location", "/course/coursecheckout?courseId=" + courseId);
+
             return "redirect:/login";
         }
         CheckoutDTO dto = courseService.getCheckoutData(user.getMemberId(), courseId);
