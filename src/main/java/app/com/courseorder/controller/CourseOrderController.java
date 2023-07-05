@@ -39,6 +39,6 @@ public class CourseOrderController {
         }
         List<CourseOrderDTO> list = service.getMemberCourseOrderList(user.getMemberId());
         model.addAttribute("courseOrderList", list);
-        return "/front-end/CourseOrder/CourseOrder";
+        return "/front-end/CourseOrder/CourseOrder1";
     }
 }

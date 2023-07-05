@@ -1,5 +1,6 @@
 package app.com.emp.controller;
 
+import app.com.course.vo.Chef;
 import app.com.emp.service.EmployeeService;
 import app.com.emp.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,8 +108,10 @@ public class EmployeeController {
             // Handle the exception, return an error response, etc.
         }
 
-        service.addEmp(employee);
-
+        Employee addEmp = service.addEmp(employee);
+        if (empClassify==2){
+            Chef chef = service.addChef(addEmp);
+        }
         return ResponseEntity.ok().build(); // or return an appropriate response
     }
 

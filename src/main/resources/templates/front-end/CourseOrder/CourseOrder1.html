@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zxx">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/bootstrap.min.css">
+  <!-- Owl Theme Default CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/owl.theme.default.min.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/owl.carousel.min.css">
+  <!-- Owl Magnific CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/magnific-popup.css">
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/animate.css">
+  <!-- Boxicons CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/boxicons.min.css">
+  <!-- Flaticon CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/flaticon.css">
+  <!-- Meanmenu CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/meanmenu.css">
+  <!-- Nice Select CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/nice-select.css">
+  <!-- Odometer CSS-->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/odometer.css">
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/style.css">
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/responsive.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="/GroupOrder/static/css/css2.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/all.min.css" rel="stylesheet">
+  <link href="/GroupOrder/static/css/bootstrap-icons.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/animate.min.css" rel="stylesheet">
+  <link href="/GroupOrder/static/css/owl.carousel.min.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/style.css" rel="stylesheet">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/GroupOrder/assets/img/favicon.png">
+  <!-- Title -->
+  <title>課程訂單</title>
+  <style>
+    .nav-tabs .nav-link {
+      margin-bottom: -1px;
+      background: none;
+      border: 1px solid transparent;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      width: 600px;
+      height: 90px;
+      font-size: 20px;
+    }
+
+    .table > :not(:last-child) > :last-child > * {
+      border-bottom-color: white;
+    }
+
+    .table td, .table th {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+      text-align: center;
+    }
+
+    .single-news .news-content .lessons {
+      border-top: 0px solid #ebebeb;
+      font-size: 18px;
+    }
+
+    .card {
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    .my-span {
+      margin-right: 5px; /* 设置右侧间距为 5px */
+    }
+
+
+  </style>
+</head>
+
+<body>
+<!-- Start Preloader Area -->
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+  <div class="spinner-grow text-primary" role="status"></div>
+</div>
+
+
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+  <div class="row gx-0 align-items-center d-none d-lg-flex">
+    <div class="col-lg-6 px-5 text-start">
+      <ol class="breadcrumb mb-0">
+        <!-- <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li> -->
+      </ol>
+    </div>
+    <div class="col-lg-6 px-5 text-end">
+      <small>Follow us:</small>
+      <div class="h-100 d-inline-flex align-items-center">
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-facebook-f"></i></a>
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-twitter"></i></a>
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-linkedin-in"></i></a>
+        <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 導覽列 -->
+<!-- 頁首 -->
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<!-- 導覽列 -->
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
+
+</div>
+</div>
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-5">
+  <div class="container">
+    <div class="page-title-content">
+      <h2>課程訂單</h2>
+
+      <ul>
+        <li>
+          <a th:href="@{/LeGouter}">
+            Home
+          </a>
+        </li>
+
+        <li class="active">課程訂單</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- End Page Title Area -->
+
+
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="col py-3">
+      <!-- 由此開始 -->
+
+
+      <hr>
+      <div class="from-row">
+        <div class="card-body">
+          <div class="table-responsive">
+            <div class="text-end mb-3">
+              關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
+                                placeholder="請輸入關鍵字">
+            </div>
+            <!--                        <p style="display: none" th:text="${user.getMemberId()}" id="memberId"></p>-->
+            <table class="order-table table">
+              <thead>
+              <tr style="background-color: #f8d3ae;color:#1E1916;">
+                <th>訂單編號</th>
+                <th>課程名稱</th>
+                <th>購買價格</th>
+                <th>購買日期</th>
+                <th>前往觀看</th>
+              </tr>
+              </thead>
+              <tbody th:each="c : ${courseOrderList}">
+                <td th:text="${c.getCourseOrderId()}"></td>
+                <td th:text="${c.getCourseName()}"></td>
+                <td th:text="${c.getCourseOrderPrice()}"></td>
+                <td th:text="${c.getCourseDate()}"></td>
+                <td><button type="button" id="view-course" th:onclick="'window.location.href=\'/replyAllComment?courseId=' + ${c.getCourseId} + '\''">觀看課程</button></td>
+              </tbody>
+            </table>
+            <hr>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 d-flex pagination-bar"></div>
+
+    </div>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="blog-column-three-area ptb-100">
+      <div class="container">
+        <div class="row" id="groupOrderContainer">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-lg-12 col-md-12">
+    <div class="pagination-area">
+      <!--
+                  <a href="#" class="prev page-numbers">
+                      <i class="bx bx-chevron-left"></i>
+                  </a>
+                  -->
+      <span class="page-numbers current" aria-current="page">1</span>
+      <a href="#" class="page-numbers">2</a>
+      <a href="#" class="page-numbers">3</a>
+      <a href="#" class="page-numbers">4</a>
+
+      <a href="#" class="next page-numbers">
+        <i class="bx bx-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- End Blog Column Three Area -->
+
+<!-- Start Footer Top Area -->
+
+
+<script data-cfasync="false" src="/GroupOrder/static/js/email-decode.min.js"></script>
+<script src="/GroupOrder/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/GroupOrder/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49"
+        defer=""></script>
+<!-- End Footer Top Area -->
+
+
+<!-- Start Go Top Area -->
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+<!-- End Go Top Area -->
+
+
+<!-- Jquery-3.5.1.Slim.Min.JS -->
+<script src="/GroupOrder/assets/js/jquery-3.5.1.slim.min.js"></script>
+<!-- Popper JS -->
+<script src="/GroupOrder/assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="/GroupOrder/assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/GroupOrder/assets/js/jquery.meanmenu.js"></script>
+<!-- Wow JS -->
+<script src="/GroupOrder/assets/js/wow.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/GroupOrder/assets/js/owl.carousel.js"></script>
+<!-- Owl Magnific JS -->
+<script src="/GroupOrder/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Nice Select JS -->
+<script src="/GroupOrder/assets/js/jquery.nice-select.min.js"></script>
+<!-- Parallax JS -->
+<script src="/GroupOrder/assets/js/parallax.min.js"></script>
+<!-- Appear JS -->
+<script src="/GroupOrder/assets/js/jquery.appear.js"></script>
+<!-- Odometer JS -->
+<script src="/GroupOrder/assets/js/odometer.min.js"></script>
+<!-- Form Validator JS -->
+<script src="/GroupOrder/assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script src="/GroupOrder/assets/js/contact-form-script.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/GroupOrder/assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/GroupOrder/assets/js/custom.js"></script>
+
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+</body>
+<script>
+  //關鍵字搜尋
+  $(document).ready(function () {
+    'use strict';
+    var LightTableFilter = (function (Arr) {
+
+      var _input;
+
+      function _onInputEvent(e) {
+        _input = e.target;
+        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+        Arr.forEach.call(tables, function (table) {
+          Arr.forEach.call(table.tBodies, function (tbody) {
+            Arr.forEach.call(tbody.rows, _filter);
+          });
+        });
+      }
+
+      function _filter(row) {
+        var text = row.textContent.toLowerCase(),
+                val = _input.value.toLowerCase();
+        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+      }
+
+      return {
+        init: function () {
+          var inputs = document.getElementsByClassName('light-table-filter');
+          Arr.forEach.call(inputs, function (input) {
+            input.oninput = _onInputEvent;
+          });
+        }
+      };
+    })(Array.prototype);
+
+    document.addEventListener('readystatechange', function () {
+      if (document.readyState === 'complete') {
+        LightTableFilter.init();
+      }
+    });
+
+  });
+
+
+
+
+
+</script>
+</html>
