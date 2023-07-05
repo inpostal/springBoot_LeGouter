@@ -39,7 +39,7 @@ public class OrdersMemController {
         }
         Integer memId = user.getMemberId();
 
-        List<OrdersMem> orders = ordersMemService.getAllOrdersByMemberId(memId);
+        List<OrdersMem> orders = ordersMemService.getAllOrdersByMemberIdOrderByOrderTimeDesc(memId);
         model.addAttribute("orders", orders);
         String memName = ordersMemService.getMemberAccountById(memId);
         model.addAttribute("memName", memName);
