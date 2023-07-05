@@ -39,14 +39,16 @@ public class CouponController {
     public List<CheckOutDto> checkCourseCoupon(@PathVariable Integer price,HttpSession session){
         Members user = (Members) session.getAttribute("user");
         Integer memberId = user.getMemberId();
-        return service.findAllMemCp(price, memberId);
+        return service.findAllMemCourseCp(price, memberId);
     }
 
 
-    @PostMapping("check/dessert/viewCp")
+    @PostMapping("check/dessert/viewCp/{price}")
     @ResponseBody
-    public void checkDessertCoupon(HttpSession session){
-
+    public List<CheckOutDto> checkDessertCoupon(@PathVariable Integer price,HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        Integer memberId = user.getMemberId();
+        return service.findAllMemDessertCp(price, memberId);
     }
 
 
