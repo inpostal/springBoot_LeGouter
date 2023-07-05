@@ -195,19 +195,21 @@
                 $("#endva").val("");
                 // let endnow = $("#starva").val(); //可以用來測試。
                 let endnow =  (Date.parse(new Date($("#starva").val())) + 604800000);
+                // console.log("檢查endnow:" + endnow);
                 let defineendnow = new Date(endnow); //要測試的時候用上面。
-                console.log("取得結束的動態最早時間" + defineendnow);
+                // console.log("取得結束的動態最早時間" + defineendnow);
                 
                 let setAfterendnow = defineendnow.getFullYear() + "-" + theformat((defineendnow.getMonth() + 1)) + "-" + theformat(defineendnow.getDate()) + "T" + theformat(defineendnow.getHours()) + ":" + theformat(defineendnow.getMinutes());
-                // console.log("設定結束的動態最早時間" + setAfterendnow);
+                console.log("設定結束的動態最早時間" + setAfterendnow);
                 $("#endva").attr("min", setAfterendnow);
-                let Beforeendnow = Date.parse(endnow) + 2592000000;
+                // let Beforeendnow = (Date.parse(endnow) + 2592000000); //endnow改成毫秒數值後改用下行。
+                let Beforeendnow = (endnow + 2592000000);
 
                 let Beforeendnowsrting = new Date(Beforeendnow);
                 // console.log("取得結束的動態最晚時間" + Beforeendnowsrting);
                 
                 let setBeforeendnow = Beforeendnowsrting.getFullYear() + "-" + theformat((Beforeendnowsrting.getMonth() + 1)) + "-" + theformat(Beforeendnowsrting.getDate()) + "T" + theformat(Beforeendnowsrting.getHours()) + ":" + theformat(Beforeendnowsrting.getMinutes());
-                // console.log("設定結束的動態最晚時間" + setBeforeendnow);
+                console.log("設定結束的動態最晚時間" + setBeforeendnow);
                 $("#endva").attr("max", setBeforeendnow);
                 });
         });

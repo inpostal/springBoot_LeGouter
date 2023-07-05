@@ -50,6 +50,11 @@
     <div class="col-lg-9 col-12 col-custom widget-mt">
         <!--shop toolbar start-->
         <div class="shop_toolbar_wrapper">
+            <!-- 20230706 01:00，酷酷的東西 -->
+            <p th:text="${STOP}" id="STOP" hidden></p>
+            <p th:text="${NotAgain}" id="NotAgain" hidden></p>
+            <!-- 20230706 01:00，酷酷的東西 -->
+
             <div class="shop_toolbar_btn">
                 <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" id="beredoshow"
                     title="">縮圖</button>
@@ -154,6 +159,15 @@
         showlist()
         window.addEventListener("load", function () {
         })
+        
+        $(document).ready(function () {
+            if($("#STOP").text() != ""){
+                alert($("#STOP").text());
+            }
+            if($("#NotAgain").text() != ""){
+            alert($("#NotAgain").text());
+        }
+        });
 
         function showlist() {
             $.ajax({

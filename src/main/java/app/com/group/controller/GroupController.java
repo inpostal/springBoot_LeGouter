@@ -62,7 +62,7 @@ public class GroupController {
         		return "front-end/group/plan-activity3";
 			}else {
 				//如果不是就進入團購平台
-				redirectAttributes.addFlashAttribute("pleaseLogin", "不是團購主 無法進入專區!");
+				redirectAttributes.addFlashAttribute("STOP", "不是團購主 無法進入專區!");
         		return "redirect:/group-shop";
 			}
     		
@@ -125,7 +125,7 @@ public class GroupController {
         if (user != null){
         	Boolean examineDetail = groupActivityService.ConfirmDetail(groupActivityId, user.getMemberId());
         	if (examineDetail) {
-        		redirectAttributes.addFlashAttribute("pleaseLogin", "已參加團購!");
+        		redirectAttributes.addFlashAttribute("NotAgain", "已參加過該團購!");
         		return "redirect:/group-shop";
 			}else {
 				
