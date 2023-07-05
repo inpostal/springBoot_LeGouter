@@ -46,7 +46,7 @@ public class DessertService {
             dessertRepository.save(dessert);
             result = "新增成功";
         } else {
-            result = "商品已存在，無法新增";
+            result = "商品名稱已存在，新增失敗";
         }
 
         return result;
@@ -76,7 +76,7 @@ public class DessertService {
         Dessert sameNameDessert = dessertRepository.findByDessertName(dessert.getDessertName());
 
         if ( (sameNameDessert != null) && (sameNameDessert.getDessertId() != dessertId) ) {
-            return "商品已存在，無法修改";
+            return "商品名稱已存在，無法修改";
         } else {
             dessertOld.setDessertName(dessert.getDessertName());
             dessertOld.setDessertContent(dessert.getDessertContent());
