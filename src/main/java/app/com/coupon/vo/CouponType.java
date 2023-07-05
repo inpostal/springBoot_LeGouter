@@ -1,6 +1,8 @@
 package app.com.coupon.vo;
 
 import lombok.Data;
+import org.springframework.context.annotation.Lazy;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -31,11 +33,4 @@ public class CouponType {
 
     @Column(name = "CP_END")
     private Date cpEnd;
-
-    @Column(name = "CP_STATUS", insertable = false)
-    private Integer cpStatus;
-
-    @Lob
-    @Column(name = "CP_PIC", insertable = false)
-    private byte[] cpPic;
 }

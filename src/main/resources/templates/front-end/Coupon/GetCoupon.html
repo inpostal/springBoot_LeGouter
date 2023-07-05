@@ -179,7 +179,7 @@
                     <div class="table-responsive">
 
                         <!--                        <p style="display: none" th:text="${user.getMemberId()}" id="memberId"></p>-->
-                        <table class="order-table table">
+                        <table class="order-table table" id="dessert-cp">
                             <thead>
                             <tr style="background-color: #f8d3ae;color:#1E1916;">
                                 <th>優惠券名稱</th>
@@ -221,7 +221,7 @@
                                 關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
                                                   placeholder="請輸入關鍵字">
                             </div>
-                            <table class="order-table table">
+                            <table class="order-table table" id="course-cp">
                                 <thead>
                                 <tr style="background-color: #f8d3ae;color:#1E1916;">
                                     <th>優惠券名稱</th>
@@ -311,6 +311,27 @@
 </body>
 <script>
     $(document).ready(function () {
+        $("#dessert-body").on("change", ".form-check-input", function(e) {
+            let $currentRow = $(this).closest("tr");
+            let id = $currentRow.find(".cp-id").text();
+            $.ajax({
+                url:"/coupon/memCp",
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    cpId: id
+                }),
+                success: function (res) {
+                    console.log(res);
+                    $currentRow.remove();
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            });
+        });
+
+
         $("#dessert-tab").click(function () {
             $.ajax({
                 url: "/coupon/getDessert",
@@ -337,6 +358,8 @@
                         td += html;
                     }
                     $("#dessert-body").html(td);
+                    // $("#dessert-cp").show();
+                    // $("#course-cp").hide();
                 },
                 error: function (xhr) {
                 }
@@ -345,38 +368,44 @@
         $("#dessert-tab").click();
     });
 
-    $("#course-tab").click(function(){
+    $("#course-tab").click(function () {
         $.ajax({
-            url:"/coupon/getCourse",
-            type:"GET",
-            success: function (res){
+            url: "/coupon/getCourse",
+            type: "GET",
+            success: function (res) {
                 console.log(res);
-                let td ="";
-                for (let e in res){
-                    let html=`
+                let td = "";
+                for (let e in res) {
+                    let html = `
                     <tr>
-                      <td>a</td>
-                      <td>b</td>
-                      <td>c</td>
-                      <td>d</td>
-                      <td>e</td>
-                      <td>f</td>
+                      <td style="display: none" class="cp-id">${res[e].cpId}</td>
+                                <td>${res[e].cpName}</td>
+                                <td>${res[e].cpThreshold}</td>
+                                <td>${res[e].cpDiscount}</td>
+                                <td>${res[e].cpStart}</td>
+                                <td>${res[e].cpEnd}</td>
                       <td>
                         <div class="form-check">
+<!--                            <input type="checkbox" class="form-check-input" id="selectCheckbox">-->
                             <input type="checkbox" class="form-check-input" id="selectCheckbox">
                             <label class="form-check-label" for="selectCheckbox"></label>
                         </div>
                       </td>
                     </tr>`;
-                td += html;
-            }
-            $("#course-body").html(td);
+                    td += html;
+                }
+                $("#dessert-body").html(td);
+                // $("#course-cp").show();
+                // $("#dessert-cp").hide();
             },
-            error: function (xhr){
+            error: function (xhr) {
             }
         });
         // $("#course-tab").click();
-     });
+
+
+
+    });
 
 
     // 獲取所有的checkbox元素

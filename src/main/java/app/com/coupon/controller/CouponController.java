@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +24,31 @@ public class CouponController {
 
     //領優惠券
     @GetMapping("/get/coupon")
-    public String GetCoupon(){
-        return "front-end/Coupon/GetCoupon";
+    public String GetCoupon(HttpSession session) {
+        Members user = (Members) session.getAttribute("user");
+        if (user != null){
+            return "front-end/Coupon/GetCoupon";
+        }else{
+            session.setAttribute("location", "/get/coupon");
+            return "/front-end/member/MemberLogin";
+        }
     }
+
+    @GetMapping("/check/course/viewCp/{price}")
+    @ResponseBody
+    public List<CheckOutDto> checkCourseCoupon(@PathVariable Integer price,HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        Integer memberId = user.getMemberId();
+        return service.findAllMemCp(price, memberId);
+    }
+
+
+    @PostMapping("check/dessert/viewCp")
+    @ResponseBody
+    public void checkDessertCoupon(HttpSession session){
+
+    }
+
 
     //結帳按鈕-改變會員優惠券使用狀態
     @PostMapping("/alter/cpStatus")
@@ -247,14 +270,14 @@ public class CouponController {
     }
 
     //ajax傳會員結帳show優惠券請求
-    @GetMapping("/check/course/viewCp")
-    @ResponseBody
-    public List<ShoppingCpMemDTO> courseCheckCoupon(HttpSession session){
-        Members user = (Members) session.getAttribute("user");
-        Integer memberId = user.getMemberId();
-        List<ShoppingCpMemDTO> result = service.getAllMemCpDto(memberId);
-        return result;
-    }
+//    @GetMapping("/check/course/viewCp")
+//    @ResponseBody
+//    public List<ShoppingCpMemDTO> courseCheckCoupon(HttpSession session){
+//        Members user = (Members) session.getAttribute("user");
+//        Integer memberId = user.getMemberId();
+//        List<ShoppingCpMemDTO> result = service.getAllMemCpDto(memberId);
+//        return result;
+//    }
 
     @GetMapping("/check/dessert")
     public String dessertCheckCoupon(){
