@@ -506,7 +506,7 @@
 
 
                 <button class="btn" type="button" id="submit">新增文章</button>
-                <button class="btn" type="button" id="cancek">取消新增文章</button>
+                <button class="btn" type="button" id="cancel" >取消新增文章</button>
             </form>
 
 
@@ -536,6 +536,7 @@
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
 <!--ckeditor-->
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 <script>
@@ -593,19 +594,30 @@
             processData: false,
             contentType: false,
             success: function (resp) {
-                console.log("新增成功");
-                alert("新增成功");
-                window.location.href = "/news/list";
-
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '新增成功',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                setTimeout(function () {
+                    window.location.href = "/news/list";
+                }, 2000);
             },
             error: function (resp) {
-                console.log("新增失敗");
-                alert("新增失敗");
+                Swal.fire({
+                    icon: 'error',
+                    title: '新增失敗',
+                })
             }
         })
 
 
     })
+    document.getElementById("cancel").addEventListener("click", function() {
+        window.location.href = "/news/list";
+    });
 
 
     var imageInput = document.getElementById('imageInput');

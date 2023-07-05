@@ -295,16 +295,23 @@
                     groupName: groupName
                 },
                 success: function (resp) {
-// Handle server response
-                    alert("修改成功！");
                     $('#groupActivityContentText').replaceWith('<p id="groupActivityContentText">' + ActivityInfo + '</p>');
                     $('#groupNameText').replaceWith('<h3 style="font-size: 50px;" id="groupNameText">' + groupName + '</h3>'); // Update the group name
                     $('#editButton').text('修改'); // Change the button text to "修改"
                     editing = false; // Switch to non-editing state
 
-                    // 执行重定向
-                    window.location.href = "/grouporderdetail/list/front";
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '修改成功',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(function () {
+                        window.location.href = "/grouporderdetail/list/front";
+                    }, 2000);
                 },
+                    // 执行重定向
                 error: function (error) {
 // Handle error cases
                     console.log('Error:', error);

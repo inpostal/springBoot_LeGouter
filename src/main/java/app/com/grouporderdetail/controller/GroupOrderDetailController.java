@@ -106,7 +106,7 @@ public class GroupOrderDetailController {
             if (user.getMemberClassify() == 0) {
                 return "redirect:/grouporderdetail/list/front/member";
             } else {
-                return "groupOrderEmp";
+                return "/front-end/grouporder/groupOrderEmp";
             }
         }
     }
