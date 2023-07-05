@@ -380,13 +380,11 @@
 
     <script>
         function WTF(){
+            let eu = { groupProductId: Number($("#catchgroupProductId").text()) };
         $.ajax({
             url: "/groupActivity/getImgPkId",
             method: "POST",
-            Date: { groupProductId: Number($("#catchgroupProductId").text()) },
-            beforeSend: function() {
-                // console.log("ajax送出前觀察catchgroupProductId取得:" + Number($("#catchgroupProductId").text()));
-                },
+            data: eu,
             success: function (response) {
                 // console.log("觀察回應的陣列長度:" + response.length);
                 let i = 1;

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -360,7 +361,7 @@ public class GroupRestContreller {
 			return response;
 		}
 		
-		// 配合動態產生圖片連結。(FK多張圖片 施工中)。
+		// 配合動態產生圖片連結。(FK多張圖片 施工停止，最終決定用兩段方式)。
 		@GetMapping("/groupActivity/get/Product{groupProductImgId}")
 		public ResponseEntity<Resource> getPicture2(@PathVariable Integer groupProductImgId) {
 			GroupProductImgVO gprimgyee = groupProductImgService.getPkImg(groupProductImgId);

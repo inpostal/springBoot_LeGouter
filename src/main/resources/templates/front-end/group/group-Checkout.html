@@ -500,10 +500,10 @@
                 method: 'POST',
                 // contentType: 'application/json',
                 data: { memberId: Number($("#memberId").text()) },
-                beforeSend: function() {
-                    // console.log("送出前確認:" + Number($("#memberId").text()));
-                    console.log("送出前確認:" + JSON.stringify({ memberId: Number($("#memberId").text()) }));
-                },
+                // beforeSend: function() {
+                //     // console.log("送出前確認:" + Number($("#memberId").text()));
+                //     console.log("送出前確認:" + JSON.stringify({ memberId: Number($("#memberId").text()) }));
+                // },
                 success: function (response) {
                         $("#receiverName").val(response.memberName);
                         $("#receiverAddress").val(response.memberAddress);
