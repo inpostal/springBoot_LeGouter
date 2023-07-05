@@ -344,8 +344,23 @@
 
 <script>
 	let couponIdArr = [];
-	let memberId = (new URL(document.location)).searchParams.get("memberId");
 	$(document).ready(function() {
+		// 驗證有無登入
+		// 無燈入要改modal的css
+		$.ajax({
+			url:"/check/loginStatus",
+			type:"GET",
+			success: (res) => {
+				console.log(res);
+				console.log("有登入");
+			},
+			error:(xhr) => {
+				console.log(xhr);
+				console.log("無登入");
+				$("#myModal").remove();
+			}
+		})
+
 		// 為每個 checkbox 添加事件監聽器
 		$(".coupon-checkbox").change(function() {
 			if (this.checked) {
@@ -358,6 +373,8 @@
 		});
 	});
 
+
+
 	$("#get").click(function(){
 		couponIdArr.forEach(function (id) {
 			$.ajax({
@@ -366,7 +383,6 @@
 				type: "POST",
 				data: JSON.stringify({
 					cpId: id,
-					memId: memberId
 				}),
 				success: function (res) {
 					showSuccessMessage();

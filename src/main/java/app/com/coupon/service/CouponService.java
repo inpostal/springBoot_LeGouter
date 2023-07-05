@@ -10,6 +10,7 @@ import app.com.emp.repository.EmployeeRepository;
 import app.com.emp.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -112,6 +113,7 @@ public class CouponService {
         if (membersCpList != null) {
             for (MembersCp m :
                     membersCpList) {
+                System.out.println(m.getCpId());
                 result.removeIf(c -> c.getCpId().equals(m.getCpId()));
             }
         }
@@ -198,6 +200,26 @@ public class CouponService {
         data.setCpUsed(1);
 
         memberCpRepository.save(data);
+    }
+
+    @Transactional
+    public List<CheckOutDto> findAllMemCp(Integer price, Integer memberId) {
+        List<MembersCp> allMemIdCp = memberCpRepository.findAllByMemId(memberId);
+        List<CheckOutDto> result = new ArrayList<>();
+
+        for (MembersCp m:
+             allMemIdCp) {
+            CouponType reference = repository.getReferenceById(m.getCpId());
+            if (reference.getCpTp()==1 && reference.getCpThreshold()<price){
+                CheckOutDto dto = new CheckOutDto();
+                dto.setCpId(reference.getCpId());
+                dto.setCpName(reference.getCpName());
+                dto.setDiscount(reference.getCpDiscount());
+                result.add(dto);
+            }
+        }
+        result.forEach(System.out::println);
+        return result;
     }
 
 

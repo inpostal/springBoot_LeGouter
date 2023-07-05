@@ -133,7 +133,7 @@
                 cpId: cpId
             }),
             success: function (res) {
-                location.href="/coupons/master";
+                location.href="/coupon/master";
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -144,8 +144,8 @@
 
 <script>
     layui.use(['laydate', 'form'], function () {
-        var laydate = layui.laydate;
-        var form = layui.form;
+        let laydate = layui.laydate;
+        let form = layui.form;
 
         //執行laydate實例
         laydate.render({
@@ -160,8 +160,8 @@
 </script>
 <script>
     // 取得輸入框元素
-    var amountThresholdInput = document.getElementById('amountThreshold');
-    var discountInput = document.getElementById('discount');
+    let amountThresholdInput = document.getElementById('amountThreshold');
+    let discountInput = document.getElementById('discount');
 
     // 監聽事件
     amountThresholdInput.addEventListener('input', validateAmountThreshold);
@@ -169,7 +169,7 @@
 
     // 金額門檻輸入值得函數
     function validateAmountThreshold() {
-        var value = amountThresholdInput.value;
+        let value = amountThresholdInput.value;
 
         // 判斷是否為0或非數字
         if (value === '0' || isNaN(value)) {
@@ -180,7 +180,7 @@
 
     // 優惠券折扣輸入值得函數
     function validateDiscount() {
-        var value = discountInput.value;
+        let value = discountInput.value;
 
         // 判斷是否為0或非數字
         if (value === '0' || isNaN(value)) {

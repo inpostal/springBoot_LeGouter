@@ -3,6 +3,7 @@ package app.com.coupon.controller;
 import app.com.coupon.service.CouponService;
 import app.com.coupon.vo.*;
 import app.com.course.vo.Course;
+import app.com.emp.vo.Employee;
 import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,33 @@ import java.util.Map;
 public class CouponController {
     @Autowired
     private CouponService service;
+
+    //領優惠券
+    @GetMapping("/get/coupon")
+    public String GetCoupon(HttpSession session) {
+        Members user = (Members) session.getAttribute("user");
+        if (user != null){
+            return "front-end/Coupon/GetCoupon";
+        }else{
+            session.setAttribute("location", "/get/coupon");
+            return "/front-end/member/MemberLogin";
+        }
+    }
+
+    @GetMapping("/check/course/viewCp/{price}")
+    @ResponseBody
+    public List<CheckOutDto> checkCourseCoupon(@PathVariable Integer price,HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        Integer memberId = user.getMemberId();
+        return service.findAllMemCp(price, memberId);
+    }
+
+
+    @PostMapping("check/dessert/viewCp")
+    @ResponseBody
+    public void checkDessertCoupon(HttpSession session){
+
+    }
 
 
     //結帳按鈕-改變會員優惠券使用狀態
@@ -41,6 +70,17 @@ public class CouponController {
     public void btnAddCourseFollow(@RequestBody Course courseId, HttpSession session){
         Members user = (Members) session.getAttribute("user");
         service.addCourseFollow(user.getMemberId(), courseId.getCourseId());
+    }
+
+    @GetMapping("/check/loginStatus")
+    @ResponseBody
+    public ResponseEntity<?> checkLoginStatus(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        if (user==null){
+            return ResponseEntity.badRequest().build();
+        }else {
+            return ResponseEntity.ok().build();
+        }
     }
 
 //刪除按鈕-追蹤清單課程
@@ -70,17 +110,30 @@ public class CouponController {
 
     //cp管理頁面
     @GetMapping("/coupon/master")
-    public String couponManage(Model model) {
-        List<CouponType> list = service.getAllCouponType();
-        model.addAttribute("couponList", list);
-        return "/back-end/Coupon/CouponMaster";
+    public String couponManage(Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null){
+            return "/back-end/Employee/EmpLogin";
+//            session.setAttribute("location","/coupon/master");
+        } else {
+            List<CouponType> list = service.getAllCouponType();
+            model.addAttribute("couponList", list);
+            return "/back-end/Coupon/CouponMaster";
+        }
     }
 
     //新增cp
     @GetMapping("/coupon/add")
-    public String couponAdd() {
-        return "/back-end/Coupon/CouponAdd";
-    }
+    public String couponAdd(Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp == null){
+            return "/back-end/Employee/EmpLogin";
+        } else {
+            List<CouponType> list = service.getAllCouponType();
+            model.addAttribute("couponList", list);
+            return "/back-end/Coupon/CouponAdd";
+            }
+        }
 
     //單頁
     //新增cp時,收ajax傳送資料用
@@ -96,10 +149,16 @@ public class CouponController {
 
     //編輯cp
     @GetMapping("/coupon/edit/{cpid}")
-    public String couponEdit(@PathVariable Integer cpid, Model model) {
-        CouponType couponInDb = service.getById(cpid);
-        model.addAttribute("cp", couponInDb);
-        return "/back-end/Coupon/CouponEdit";
+    public String couponEdit(@PathVariable Integer cpid, Model model, HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+
+        if (emp == null){
+            return "/back-end/Employee/EmpLogin";
+        } else {
+            CouponType couponInDb = service.getById(cpid);
+            model.addAttribute("cp", couponInDb);
+            return "/back-end/Coupon/CouponEdit";
+        }
     }
 
     //編輯(更新)cp時,收ajax傳送資料用
@@ -117,16 +176,44 @@ public class CouponController {
         Members user = (Members) session.getAttribute("user");
         if (user == null) {
             //未登入先導至登入頁面
-            session.setAttribute("location", "/coupon/shopping");
-            return "/front-end/member/MemberLogin";
+//            session.setAttribute("location", "/coupon/shopping");
+//            return "/front-end/member/MemberLogin";
+            return "/front-end/Coupon/Shopping";
         } else {
+
             List<CouponType> list = service.getCourseCp(user.getMemberId());
             model.addAttribute("courseCp", list);
             return "/front-end/Coupon/Shopping";
         }
     }
 
-    //甜點頁面領取cp
+    //優惠券領取專區-ajax渲染甜點頁面優惠券
+    @GetMapping("/coupon/getDessert")
+    @ResponseBody
+    public List<CouponType> getDessertCp(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        if (user!=null){
+            List<CouponType> list = service.getDessertCp(user.getMemberId());
+            return list;
+        }
+        return null;
+    }
+
+    //優惠券領取專區-ajax渲染甜點頁面優惠券
+    @GetMapping("/coupon/getCourse")
+    @ResponseBody
+    public List<CouponType> getCourseCp(HttpSession session){
+        Members user = (Members) session.getAttribute("user");
+        if (user!=null){
+            List<CouponType> list = service.getCourseCp(user.getMemberId());
+            return list;
+        }
+        return null;
+    }
+
+
+
+    //模擬甜點頁面領取cp
     //需登入會員狀態
     @GetMapping("/coupon/shopping/dessert")
     public String couponShoppingDessert(HttpSession session, Model model) {
@@ -183,14 +270,14 @@ public class CouponController {
     }
 
     //ajax傳會員結帳show優惠券請求
-    @GetMapping("/check/course/viewCp")
-    @ResponseBody
-    public List<ShoppingCpMemDTO> courseCheckCoupon(HttpSession session){
-        Members user = (Members) session.getAttribute("user");
-        Integer memberId = user.getMemberId();
-        List<ShoppingCpMemDTO> result = service.getAllMemCpDto(memberId);
-        return result;
-    }
+//    @GetMapping("/check/course/viewCp")
+//    @ResponseBody
+//    public List<ShoppingCpMemDTO> courseCheckCoupon(HttpSession session){
+//        Members user = (Members) session.getAttribute("user");
+//        Integer memberId = user.getMemberId();
+//        List<ShoppingCpMemDTO> result = service.getAllMemCpDto(memberId);
+//        return result;
+//    }
 
     @GetMapping("/check/dessert")
     public String dessertCheckCoupon(){

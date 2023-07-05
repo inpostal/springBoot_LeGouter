@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="zxx">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/bootstrap.min.css">
+    <!-- Owl Theme Default CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/owl.theme.default.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/owl.carousel.min.css">
+    <!-- Owl Magnific CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/animate.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/boxicons.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/flaticon.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/meanmenu.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/nice-select.css">
+    <!-- Odometer CSS-->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/odometer.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/GroupOrder/assets/css/responsive.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/GroupOrder/static/css/css2.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/all.min.css" rel="stylesheet">
+    <link href="/GroupOrder/static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/animate.min.css" rel="stylesheet">
+    <link href="/GroupOrder/static/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/GroupOrder/static/css/style.css" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/GroupOrder/assets/img/favicon.png">
+    <!-- Title -->
+    <title>優惠卷專區</title>
+    <style>
+        .nav-tabs .nav-link {
+            margin-bottom: -1px;
+            background: none;
+            border: 1px solid transparent;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            width: 562px;
+            height: 90px;
+            font-size: 20px;
+        }
+
+        .table > :not(:last-child) > :last-child > * {
+            border-bottom-color: white;
+        }
+
+        .table td, .table th {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .single-news .news-content .lessons {
+            border-top: 0px solid #ebebeb;
+            font-size: 18px;
+        }
+
+        .card {
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .my-span {
+            margin-right: 5px; /* 设置右侧间距为 5px */
+        }
+
+
+    </style>
+</head>
+
+<body>
+<!-- Start Preloader Area -->
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" role="status"></div>
+</div>
+
+
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+    <div class="row gx-0 align-items-center d-none d-lg-flex">
+        <div class="col-lg-6 px-5 text-start">
+            <ol class="breadcrumb mb-0">
+                <!-- <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
+                <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li> -->
+            </ol>
+        </div>
+        <div class="col-lg-6 px-5 text-end">
+            <small>Follow us:</small>
+            <div class="h-100 d-inline-flex align-items-center">
+                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                        class="fab fa-facebook-f"></i></a>
+                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                        class="fab fa-twitter"></i></a>
+                <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 導覽列 -->
+
+<!-- 頁首 -->
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<!-- 導覽列 -->
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-4">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>優惠券專區</h2>
+
+            <ul>
+                <li>
+                    <a th:href="@{/LeGouter}">
+                        Home
+                    </a>
+                </li>
+
+                <li class="active">優惠券專區</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- End Page Title Area -->
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="dessert-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">甜點優惠券
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="course-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">課程優惠券
+        </button>
+    </li>
+
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="col py-3">
+            <!-- 由此開始 -->
+
+
+            <hr>
+            <div class="from-row">
+                <div class="card-body">
+                    <div class="table-responsive">
+
+                        <!--                        <p style="display: none" th:text="${user.getMemberId()}" id="memberId"></p>-->
+                        <table class="order-table table" id="dessert-cp">
+                            <thead>
+                            <tr style="background-color: #f8d3ae;color:#1E1916;">
+                                <th>優惠券名稱</th>
+                                <th>金額門檻</th>
+                                <th>優惠金額</th>
+                                <th>開始日期</th>
+                                <th>截止日期</th>
+                                <th>選取</th>
+                            </tr>
+                            </thead>
+                            <tbody id="dessert-body">
+
+
+                            </tbody>
+                        </table>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 d-flex pagination-bar"></div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+        <div class="col py-3">
+            <!-- 由此開始 -->
+
+            <div class="from-row">
+                <div class="d-flex justify-content-between">
+
+                </div>
+                <hr>
+                <div class="from-row">
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <div class="text-end mb-3">
+                                關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
+                                                  placeholder="請輸入關鍵字">
+                            </div>
+                            <table class="order-table table" id="course-cp">
+                                <thead>
+                                <tr style="background-color: #f8d3ae;color:#1E1916;">
+                                    <th>優惠券名稱</th>
+                                    <th>金額門檻</th>
+                                    <th>優惠金額</th>
+                                    <th>開始日期</th>
+                                    <th>截止日期</th>
+                                    <th>選取</th>
+                                </tr>
+                                </thead>
+                                <tbody id="course-body">
+
+
+                                </tbody>
+                            </table>
+                            <hr>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Blog Column Three Area -->
+
+<!-- Start Footer Top Area -->
+
+
+<script data-cfasync="false" src="/GroupOrder/static/js/email-decode.min.js"></script>
+<script src="/GroupOrder/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/GroupOrder/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49"
+        defer=""></script>
+<!-- End Footer Top Area -->
+
+
+<!-- Start Go Top Area -->
+
+<!-- End Go Top Area -->
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+
+<!-- Jquery-3.5.1.Slim.Min.JS -->
+<script src="/GroupOrder/assets/js/jquery-3.5.1.slim.min.js"></script>
+<!-- Popper JS -->
+<script src="/GroupOrder/assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="/GroupOrder/assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/GroupOrder/assets/js/jquery.meanmenu.js"></script>
+<!-- Wow JS -->
+<script src="/GroupOrder/assets/js/wow.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/GroupOrder/assets/js/owl.carousel.js"></script>
+<!-- Owl Magnific JS -->
+<script src="/GroupOrder/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Nice Select JS -->
+<script src="/GroupOrder/assets/js/jquery.nice-select.min.js"></script>
+<!-- Parallax JS -->
+<script src="/GroupOrder/assets/js/parallax.min.js"></script>
+<!-- Appear JS -->
+<script src="/GroupOrder/assets/js/jquery.appear.js"></script>
+<!-- Odometer JS -->
+<script src="/GroupOrder/assets/js/odometer.min.js"></script>
+<!-- Form Validator JS -->
+<script src="/GroupOrder/assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script src="/GroupOrder/assets/js/contact-form-script.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/GroupOrder/assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/GroupOrder/assets/js/custom.js"></script>
+
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#dessert-body").on("change", ".form-check-input", function(e) {
+            let $currentRow = $(this).closest("tr");
+            let id = $currentRow.find(".cp-id").text();
+            $.ajax({
+                url:"/coupon/memCp",
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    cpId: id
+                }),
+                success: function (res) {
+                    console.log(res);
+                    $currentRow.remove();
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            });
+        });
+
+
+        $("#dessert-tab").click(function () {
+            $.ajax({
+                url: "/coupon/getDessert",
+                type: "GET",
+                success: function (res) {
+                    console.log(res);
+                    let td = "";
+                    for (let e in res) {
+                        let html = `
+                            <tr>
+                                <td style="display: none" class="cp-id">${res[e].cpId}</td>
+                                <td>${res[e].cpName}</td>
+                                <td>${res[e].cpThreshold}</td>
+                                <td>${res[e].cpDiscount}</td>
+                                <td>${res[e].cpStart}</td>
+                                <td>${res[e].cpEnd}</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="selectCheckbox">
+                                        <label class="form-check-label" for="selectCheckbox"></label>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        td += html;
+                    }
+                    $("#dessert-body").html(td);
+                    // $("#dessert-cp").show();
+                    // $("#course-cp").hide();
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+        $("#dessert-tab").click();
+    });
+
+    $("#course-tab").click(function () {
+        $.ajax({
+            url: "/coupon/getCourse",
+            type: "GET",
+            success: function (res) {
+                console.log(res);
+                let td = "";
+                for (let e in res) {
+                    let html = `
+                    <tr>
+                      <td style="display: none" class="cp-id">${res[e].cpId}</td>
+                                <td>${res[e].cpName}</td>
+                                <td>${res[e].cpThreshold}</td>
+                                <td>${res[e].cpDiscount}</td>
+                                <td>${res[e].cpStart}</td>
+                                <td>${res[e].cpEnd}</td>
+                      <td>
+                        <div class="form-check">
+<!--                            <input type="checkbox" class="form-check-input" id="selectCheckbox">-->
+                            <input type="checkbox" class="form-check-input" id="selectCheckbox">
+                            <label class="form-check-label" for="selectCheckbox"></label>
+                        </div>
+                      </td>
+                    </tr>`;
+                    td += html;
+                }
+                $("#dessert-body").html(td);
+                // $("#course-cp").show();
+                // $("#dessert-cp").hide();
+            },
+            error: function (xhr) {
+            }
+        });
+        // $("#course-tab").click();
+
+
+
+    });
+
+
+    // 獲取所有的checkbox元素
+    let checkboxes = document.querySelectorAll('input[type="checkbox"][name="selectedCoupon"]');
+
+    // 監聽checkbox的變化事件
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            // 取得目前被勾選的checkbox
+            let selectedCheckboxes = document.querySelectorAll('input[type="checkbox"][name="selectedCoupon"]:checked');
+
+            // 將被勾選的checkbox的值存放在一個陣列中
+            let selectedValues = Array.from(selectedCheckboxes).map(function (checkbox) {
+                return checkbox.value;
+            });
+
+            // 印出被勾選的checkbox的值
+            console.log(selectedValues);
+        });
+    });
+
+    //甜點優惠券
+    //  $("#home-tab").click(function () {}
+
+
+    //課程優惠券
+    //  $("#profile-tab").click(function () {
+    //  }
+
+
+</script>
+</html>
