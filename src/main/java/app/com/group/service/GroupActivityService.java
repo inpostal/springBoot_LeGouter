@@ -130,6 +130,10 @@ public class GroupActivityService {
 			double percentage = 0.04;
 			groupOrderMaster.setGroupOrderId(groupOrderId);
 			groupOrderMaster.setNumberOfProduct(numberproduct);
+			//當購買數量大於最低標就要將狀態改成 2:團購進行中，目前團購商品下訂總數已達標。
+			if (numberproduct >= thegroupOrderMin) {
+				groupOrderMaster.setGroupOrderStatus(2);
+			}
 //			groupOrderMaster.setGroupOrderBonus((int) Math.round(totalproductprice * thegroupOrderDiscount.doubleValue()));
 			switch (thegroupOrderMin) {
 			case 200:
