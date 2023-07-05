@@ -76,7 +76,7 @@ public class DessertService {
         Dessert sameNameDessert = dessertRepository.findByDessertName(dessert.getDessertName());
 
         if ( (sameNameDessert != null) && (sameNameDessert.getDessertId() != dessertId) ) {
-            return "商品名稱已存在，無法修改";
+            return "商品名稱已存在，編輯失敗";
         } else {
             dessertOld.setDessertName(dessert.getDessertName());
             dessertOld.setDessertContent(dessert.getDessertContent());

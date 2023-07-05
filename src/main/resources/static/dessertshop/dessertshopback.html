@@ -336,6 +336,21 @@
             cursor: pointer;
         }
 
+    /*    sweet alert font*/
+        div:where(.swal2-container) h2:where(.swal2-title) {
+            position: relative;
+            max-width: 100%;
+            margin: 0;
+            padding: 0.8em 1em 0;
+            color: inherit;
+            font-size: 1.875em;
+            font-weight: 330 !important;
+            text-align: center;
+            text-transform: none;
+            word-wrap: break-word;
+        }
+
+
 
     </style>
 
@@ -648,7 +663,7 @@
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                             <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                            <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                            <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                         </td>
                                      </tr>`;
 
@@ -682,7 +697,7 @@
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                             <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                            <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                            <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                         </td>
                                      </tr>`;
 
@@ -721,7 +736,7 @@
                                 <td>
                                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                     <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                    <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                    <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                 </td>
                              </tr>`;
 
@@ -747,8 +762,22 @@
                 url: '/dessert5/soldout?dessertName=' + encodeURIComponent(dessertName),
                 type: 'GET',
                 success: function(){
-                    window.alert("商品已下架");
-                    location.reload();
+                    // window.alert("商品已下架");
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品已下架',
+                        confirmButtonText: '確定'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    })
+                    // toastr.success("商品已下架");
+                    // setTimeout(function() {
+                    //     location.reload();
+                    // }, 2000);
+
+
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.error(xhr);
@@ -781,7 +810,7 @@
                                 <td>
                                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                     <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                    <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                    <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                 </td>
                              </tr>`;
 
@@ -842,12 +871,21 @@
                     dessertStatus: "販售中"
                 }),
                 success: function(res){
-                    // 跳出訊息視窗
-                    window.alert(res);
-                    if (res != "商品名稱已存在，無法修改") {
-                        location.reload();
+                    if (res === "商品名稱已存在，新增失敗") {
+                        toastr.error(res);
+                        return;
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '新增成功',
+                            confirmButtonText: '確定',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                                return;
+                            }
+                        })
                     }
-                    return;
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.error(xhr);
@@ -922,12 +960,21 @@
                         dessertStatus: $("#editStatus").val()
                     }),
                     success: function(res) {
-                        // 跳出訊息視窗
-                        window.alert(res);
-                        if (res != "商品名稱已存在，無法修改") {
-                            location.reload();
+                        if (res === "商品名稱已存在，編輯失敗") {
+                            toastr.error(res);
+                            return;
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '編輯完成',
+                                confirmButtonText: '確定',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                    return;
+                                }
+                            })
                         }
-                        return;
                         // 在成功后解绑当前按钮元素的点击事件
                         // $currentButton.off('click');
                     },
