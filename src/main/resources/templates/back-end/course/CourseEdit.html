@@ -472,7 +472,9 @@
 </script>
 <script>
 
+
     $("#submit").click(function () {
+
         let courseName = $("#courseName").val();
         let coursePrice = $("#coursePrice").val();
         let courseContent = $("#courseContent").val();
@@ -486,7 +488,9 @@
         formData.append("courseName", courseName);
         formData.append("coursePrice", coursePrice);
         formData.append("courseContent", courseContent);
-        formData.append("courseImg", courseImg);
+        if (courseImg) {
+            formData.append("courseImg", courseImg);
+        }
         formData.append("courseId", $("#course-id").text());
         $('.dropify').each(function () {
             formData.append("videoFiles", $(this)[0].files[0]);

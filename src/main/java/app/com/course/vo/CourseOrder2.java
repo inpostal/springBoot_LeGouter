@@ -15,7 +15,7 @@ public class CourseOrder2 {
     @Column(name = "COURSE_ORDER_ID")
     private Integer courseOrderId;
 
-    @Column(name = "CP_ID", insertable = false)
+    @Column(name = "CP_ID")
     private Integer cpId;
 
     @Column(name = "MEM_ID")
@@ -24,7 +24,7 @@ public class CourseOrder2 {
     @Column(name = "ORDER_TOTAL")
     private Integer orderTotal;
 
-    @Column(name = "CP_ORDER_TOTAL", insertable = false)
+    @Column(name = "CP_ORDER_TOTAL")
     private Integer cpOrderTotal;
 
     @Column(name = "ORDER_TIME", insertable = false)

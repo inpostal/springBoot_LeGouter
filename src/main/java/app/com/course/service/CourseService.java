@@ -1,5 +1,7 @@
 package app.com.course.service;
 
+import app.com.coupon.repository.CouponTypeRepository;
+import app.com.coupon.vo.CouponType;
 import app.com.course.repository.ChefRepository;
 import app.com.course.repository.CourseOrderRepository2;
 import app.com.course.repository.CourseRepository;
@@ -33,6 +35,9 @@ public class CourseService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    CouponTypeRepository cpRepository;
+
     public List<Course> getCourse() {
         return repository.findAll();
     }
@@ -63,7 +68,12 @@ public class CourseService {
         courseOrder.setMemId(dto.getMemberId());
         courseOrder.setOrderTotal(dto.getCoursePrice());
         courseOrder.setCourseId(dto.getCourseId());
-
+        if (dto.getCpId() != 0) {
+            courseOrder.setCpId(dto.getCpId());
+            CouponType couponType = cpRepository.getReferenceById(dto.getCpId());
+            courseOrder.setCpOrderTotal(dto.getCoursePrice() - couponType.getCpDiscount());
+        }
+        System.out.println(courseOrder);
         return courseOrderRepository2.save(courseOrder);
     }
 

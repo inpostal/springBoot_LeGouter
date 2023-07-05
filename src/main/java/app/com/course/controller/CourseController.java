@@ -1,6 +1,7 @@
 package app.com.course.controller;
 
 import app.com.coupon.service.CouponService;
+import app.com.coupon.vo.CheckOutDto;
 import app.com.course.service.ChefService;
 import app.com.course.service.CourseImageService;
 import app.com.course.service.CourseService;
@@ -82,21 +83,25 @@ public class CourseController {
                                           @RequestParam String courseName,
                                           @RequestParam String courseContent,
                                           @RequestParam Integer coursePrice,
-                                          @RequestParam MultipartFile courseImg,
+                                          @RequestParam(value = "courseImg", required = false) MultipartFile courseImg,
                                           @RequestParam(value = "videoFiles", required = false) MultipartFile[] videoFiles,
                                           @RequestParam(value = "videoNames", required = false) String[] videoNames) {
 
         Course course = courseService.getCourseById(courseId);
-
+        if (course == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         course.setCourseName(courseName);
         course.setCourseContent(courseContent);
         course.setCoursePrice(coursePrice);
         course.setCourseStatus(0);
 
-        try {
-            course.setCourseVideo(courseImg.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (courseImg != null && !courseImg.isEmpty()) {
+            try {
+                course.setCourseVideo(courseImg.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         courseService.update(course);
@@ -378,8 +383,11 @@ public class CourseController {
 
     //結帳資料進資料庫
     @PostMapping("/course/checkoutdata")
-    public ResponseEntity<?> checkoutData(@RequestBody CheckoutDTO dto) {
+    public ResponseEntity<?> checkoutData(@RequestBody CheckoutDTO dto, HttpSession session) {
+        System.out.println(dto);
         courseService.checkout(dto);
+        Members user = (Members) session.getAttribute("user");
+        service.updateCpStatus(user.getMemberId(), dto.getCpId());
         return ResponseEntity.ok().build();
     }
 
@@ -393,7 +401,9 @@ public class CourseController {
             return "redirect:/login";
         }
         CheckoutDTO dto = courseService.getCheckoutData(user.getMemberId(), courseId);
+        List<CheckOutDto> cp = service.findAllMemCp(courseId, user.getMemberId());
         model.addAttribute("checkout", dto);
+        model.addAttribute("cplist", cp);
         return "/front-end/course/CourseCheckout";
     }
 

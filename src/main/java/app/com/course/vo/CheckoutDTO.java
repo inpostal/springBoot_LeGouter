@@ -18,4 +18,6 @@ public class CheckoutDTO {
     private String courseName;
 
     private Integer coursePrice;
+
+    private Integer cpId;
 }

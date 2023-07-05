@@ -130,11 +130,10 @@
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <select required class="form-control">
-                                        <option value="" disabled selected>選擇折價券</option>
-                                        <option value="coupon1">Coupon 1</option>
-                                        <option value="coupon2">Coupon 2</option>
-                                        <option value="coupon3">Coupon 3</option>
+                                    <select required class="form-control" id="cp-select">
+                                        <option value="0" name="0" selected>未使用優惠券</option>
+                                        <option th:each="cp : ${cplist}" th:value="${cp.getCpId()}"
+                                                th:name="${cp.getDiscount()}" th:text="${cp.getCpName()}"></option>
                                     </select>
                                     <button class="btn btn-warning"
                                             style="margin-left: auto;display: block;margin-top: 15px;">提交折價券
@@ -205,7 +204,6 @@
 <!-- 版權所有 -->
 <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
-
 <script data-cfasync="false" src="/Course/front-end/static/js/email-decode.min.js"></script>
 <script src="/Course/front-end/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
 <script src="/Course/front-end/static/js/bootstrap.bundle.min.js"
@@ -256,36 +254,40 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-
-    document.getElementById('checkout').addEventListener('click', function (event) {
-        console.log('Checkout button clicked');  // Add this line
-        let paymentMethodSelected = document.querySelector('input[name="paymentMethod"]:checked');
-        let termsAgreed = document.getElementById('agreed').checked;
-
-        if (!paymentMethodSelected || !termsAgreed) {
-            event.preventDefault();  // Prevent the default action of the button
-            alert('請選擇付款方式並接受購物條款。');
-        }
-    });
-
-
-</script>
-
-<script>
     $(document).ready(function () {
+        let niceSelectDiv = $("div.nice-select");
+        niceSelectDiv.hide();
+        $("#cp-select").show();
+
+        let price = $("#coursePrice").text();
+
+        $("#cp-select").change(function () {
+            let cpid = $(this).val();
+            console.log(cpid);
+            // 印出選項的name屬性的值
+            let cpname = $(this).find("option:selected").attr("name");
+            $("#courseDiscountPrice").text(cpname);
+            console.log(cpname);
+
+            // 將總金額跟折扣金額相減
+            let total = price - cpname;
+            $("#coursePrice").text(total);
+        });
+
+
         let courseId = (new URL(document.location)).searchParams.get("courseId");
         $("#checkout").click(function (e) {
             e.preventDefault(); // 阻止按钮的默认行为
 
             // val, text要跟著標籤變動
             var checkoutData = {
-
+                cpId: $('#cp-select').val(),
                 memberId: $('#memberId').text(),
                 memberName: $('#memberName').val(),
                 memberEmail: $('#memberEmail').val(),
                 memberPhone: $('#memberPhone').val(),
                 courseId: courseId,
-                coursePrice: $('#coursePrice').text()
+                coursePrice: price
             };
             console.log(checkoutData)
 
@@ -309,7 +311,7 @@
                                     repeat
                                 `
                     })
-                    location.href = '/course/coursechecklist';
+
 
                 },
                 error: function (error) {
@@ -320,6 +322,23 @@
         });
     });
 </script>
+
+<script>
+
+    // document.getElementById('checkout').addEventListener('click', function (event) {
+    //     console.log('Checkout button clicked');  // Add this line
+    //     let paymentMethodSelected = document.querySelector('input[name="paymentMethod"]:checked');
+    //     let termsAgreed = document.getElementById('agreed').checked;
+    //
+    //     if (!paymentMethodSelected || !termsAgreed) {
+    //         event.preventDefault();  // Prevent the default action of the button
+    //         alert('請選擇付款方式並接受購物條款。');
+    //     }
+    // });
+
+
+</script>
+
 
 </body>
 
