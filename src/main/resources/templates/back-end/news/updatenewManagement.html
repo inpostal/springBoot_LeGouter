@@ -543,9 +543,26 @@
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 <script>
+
+  //ckeditor
+  let editorInstance;
+
+  ClassicEditor
+          .create(document.querySelector('#newsContent'))
+          .then(editor => {
+            console.log(editor);
+            // 將CKEditor實例存儲到全局變量中
+            editorInstance = editor;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+
 
 
 
@@ -572,7 +589,7 @@
     console.log('123');
     let newsId=$('#news-id').text();
     let empId=$('#empId').val();
-    let newsContent=$('#newsContent').val();
+    let newsContent = editorInstance.getData();
     // let newsTime=$('#newsTime').val();
     let newsPic=$('#imageInput')[0].files[0];
     let newsTitle=$('#newsTitle').val();
@@ -582,7 +599,9 @@
     formData.append('empId',empId);
     formData.append('newsContent',newsContent);
     // formData.append('newsTime',newsTime);
-    formData.append('newsPic',newsPic);
+    if (newsPic) {
+      formData.append('newsPic',newsPic);
+    }
     formData.append('newsTitle',newsTitle);
     $.ajax({
       url:'/news/update',
@@ -590,10 +609,18 @@
       processData:false,
       data:formData,
       type:'POST',
-      success:function (resp){
-        alert('修改成功');
-        window.location.href='/news/list';
-      },
+              success: function (resp) {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: '修改成功',
+                  showConfirmButton: false,
+                  timer: 3000
+                })
+                setTimeout(function () {
+                  window.location.href = "/news/list";
+                }, 2000);
+              },
       error:function (resp){
         alert('修改失敗');
       }

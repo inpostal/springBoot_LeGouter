@@ -127,7 +127,7 @@
         <div class="single-news">
           <div th:text="${n.getNewsId()}" style="display: none"></div>
           <a th:href="@{/news/frontSingle(newsId=${n.newsId})}">
-            <img src="/GroupOrder/assets/img/news-img/news-img-9.jpg" alt="Image">
+            <img th:src="@{/news/img/{newsId}(newsId=${n.newsId})}" alt="Image">
           </a>
 
           <div class="news-content">
@@ -135,7 +135,7 @@
 
 
             <a th:href="@{/news/frontSingle(newsId=${n.newsId})}">
-              <h3 id="newsTitle" th:text="${n.getNewsContent()}"> </h3>
+              <h3 id="newsTitle" th:text="${n.getNewsTitle()}"> </h3>
             </a>
 
 

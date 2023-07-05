@@ -587,6 +587,7 @@
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 <script>
 
@@ -686,15 +687,19 @@
           contentType: false,
           processData: false,
           success: function (resp) {
-            alert('修改成功');
-        //導回上一頁
-            // 获取groupOrderId
-            var grouporderid = document.getElementById("grouporderid").value;
-            // 执行重定向
-            window.location.href = "/grouporderdetail/list/getbyId/all?groupOrderId=" + grouporderid;
-
-
-          },
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '修改成功',
+                showConfirmButton: false,
+                timer: 3000
+              })
+              setTimeout(function () {
+                var grouporderid = document.getElementById("grouporderid").value;
+                // 执行重定向
+                window.location.href = "/grouporderdetail/list/getbyId/all?groupOrderId=" + grouporderid;
+              }, 2000);
+            },
           error: function (resp) {
             alert('修改失敗');
           }

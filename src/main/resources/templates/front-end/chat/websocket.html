@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    div{
+      width: 200px;
+      height: 200px;
+      border:1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<!--輸入內容-->
+<input type="text" placeholder="請輸入你的內容">
+<button>發送請求</button>
+<!--顯示結果-->
+<div></div>
+
+</body>
+<script>
+  var input=document.querySelector('input');
+    var btn=document.querySelector('button');
+    var div=document.querySelector('div');
+  // 演示websocket在瀏覽器端如何使用
+  //html5已經有websocket API,所以可以直接使用
+
+  //1.創建websocket
+  //參數1:websocket服務
+  var socket=new WebSocket('ws://echo.websocket.org');
+
+  //監聽事件
+  //2.open:2; 當和websocket服務器連接成功後觸發
+  socket.addEventListener('open',function () {
+    div.innerHTML='連接成功';
+  });
+
+</script>
+</html>

@@ -44,10 +44,10 @@ public class GroupOrderBonusService {
 
             switch (groupActivity.getGroupOrderMin()) {
                 case 200:
-                    dto.setBonusRate("8%");
+                    dto.setBonusRate("4%");
                     break;
                 case 400:
-                    dto.setBonusRate("10%");
+                    dto.setBonusRate("8%");
                     break;
                 case 600:
                     dto.setBonusRate("12%");
@@ -92,19 +92,20 @@ public class GroupOrderBonusService {
 
             switch (groupActivity.getGroupOrderMin()) {
                 case 200:
-                    dto.setBonusRate("8%");
+                    dto.setBonusRate("4%");
                     break;
                 case 400:
-                    dto.setBonusRate("10%");
+                    dto.setBonusRate("8%");
                     break;
                 case 600:
                     dto.setBonusRate("12%");
                     break;
             }
-
-
-
-
+            if (g.getGroupOrderBonusStatus() == 0) {
+                dto.setGroupOrderBonusStatus("未發放");
+            } else {
+                dto.setGroupOrderBonusStatus("已發放");
+            }
 
             result.add(dto);
         }
