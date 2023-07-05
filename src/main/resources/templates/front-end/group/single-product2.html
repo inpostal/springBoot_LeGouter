@@ -164,7 +164,8 @@
                                 開始日期:[[${groupActivityDTO.getGroupOrderStar}]]<br>
                                 結束日期:[[${groupActivityDTO.getGroupOrderEnd}]]<br>
                                 成團達標數:[[${groupActivityDTO.getGroupOrderMin}]]<br>
-                                已參加人數:[[${groupActivityDTO.getGroupDetailCount}]]
+                                已參加人數:[[${groupActivityDTO.getGroupDetailCount}]]<br>
+                                已購買數量:[[${groupActivityDTO.getNumberOfProduct}]]
                             </p>
                             <!-- 下面用來設定倒數計時日期 -->
                             <input type="text" id="setendday" hidden th:value="${groupActivityDTO.getGroupOrderEnd}">
@@ -202,7 +203,7 @@
                                     <p id="demo"></p>
                                     <p>
                                         <span>揪團進度：</span>
-                                        <progress id="theprogress" th:value="${groupActivityDTO.getGroupDetailCount}" th:max="${groupActivityDTO.getGroupOrderMin}"></progress>
+                                        <progress id="theprogress" th:value="${groupActivityDTO.getNumberOfProduct}" th:max="${groupActivityDTO.getGroupOrderMin}"></progress>
                                         <span id="percentage"></span>
                                     </p>
                                     <a th:href="@{'/group-product/Checkout?groupActivityId=' + ${groupActivityDTO.groupActivityId} + '&groupActivityPrice=' + ${groupActivityDTO.groupActivityPrice}}" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a>

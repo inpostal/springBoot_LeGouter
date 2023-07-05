@@ -15,6 +15,7 @@ import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.GroupCheckoutDTO;
 import app.com.group.vo.GroupProductVO;
+import app.com.groupordermaster.vo.GroupOrderMaster;
 import app.com.member.vo.Members;
 
 @Controller
@@ -93,6 +94,9 @@ public class GroupController {
 		temporarydto.setGroupProductName(tr.getGroupProductName());
 		temporarydto.setGroupProductContent(tr.getGroupProductContent());
 		temporarydto.setGroupDetailCount(detailcount);
+		GroupOrderMaster groupOrderMaster = groupActivityService.GiveMeNumberOfProduct(groupActivityId);
+		temporarydto.setNumberOfProduct(groupOrderMaster.getNumberOfProduct());
+		
     	 model.addAttribute("groupActivityDTO", temporarydto);
 		return "front-end/group/single-product2";
 	}
