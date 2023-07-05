@@ -27,6 +27,8 @@ public class DessertShopController {
         return "/dessertshop/dessertshopback.html";
     }
 
+
+
     // 測試連線
     @GetMapping("/test")
     public String test(){
@@ -58,9 +60,8 @@ public class DessertShopController {
 
     // 查詢一筆
     @GetMapping("/search")
-    public Dessert search(@RequestParam String dessertName){
-        Dessert dessert = dessertService.findByName(dessertName);
-        return dessert;
+    public List<Dessert> search(@RequestParam String dessertName){
+        return dessertService.findByDessertNameContaining(dessertName);
     }
 
     // 編輯一筆

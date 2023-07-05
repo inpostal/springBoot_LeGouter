@@ -57,6 +57,10 @@ public class DessertService {
         return dessert;
     }
 
+    public List<Dessert> findByDessertNameContaining(String dessertName){
+        return dessertRepository.findByDessertNameContaining(dessertName);
+    }
+
     public Dessert findById(Integer dessertId){
         Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
         return dessert;
