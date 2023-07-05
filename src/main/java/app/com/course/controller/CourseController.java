@@ -401,7 +401,7 @@ public class CourseController {
             return "redirect:/login";
         }
         CheckoutDTO dto = courseService.getCheckoutData(user.getMemberId(), courseId);
-        List<CheckOutDto> cp = service.findAllMemCp(courseId, user.getMemberId());
+        List<CheckOutDto> cp = service.findAllMemCourseCp(courseId, user.getMemberId());
         model.addAttribute("checkout", dto);
         model.addAttribute("cplist", cp);
         return "/front-end/course/CourseCheckout";
