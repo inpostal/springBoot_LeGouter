@@ -50,7 +50,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/GroupOrder/assets/img/favicon.png">
     <!-- Title -->
-    <title>Eduon</title>
+    <title>團購主訂單</title>
     <style>
         .nav-tabs .nav-link {
             margin-bottom: -1px;
@@ -577,13 +577,14 @@
 
 
                     html += `<div class="col-lg-4 col-md-6">
-                   <div class="single-news">
+
+                   <div class="single-news" d-flex flex-column>
                     <a href='/groupOrder/groupOrderMem/single/detail?groupActivityId=${resp[e].activityId}&groupStatus=${resp[e].groupOrderStatus}'>
-                    <img  src="/groupProduct/get/img/${resp[e].groupProductId}" alt="Image" >
+                    <img  src="/groupProduct/get/img/${resp[e].groupProductId}" alt="Image" style="width: 100%; height: 100%; object-fit: cover;">
                     </a>
                     <div class="news-content">
                     <span class="tag" id="groupOrderStatus"> ${groupOrderStatustext}  </span>
-                    <a href="grouporder.html">
+                    <a href=""/groupProduct/get/img/${resp[e].groupProductId}"">
                     <h3 id="groupName">${resp[e].groupName} </h3>
                     </a>
                     <ul class="lessons">
@@ -659,12 +660,20 @@
                             groupOrderBonusText = resp[e].totalGroupProductPrice * resp[e].bonusRate;
                             break;
                     }
-                    let groupOrderBonusStatusText = '';
-                    if (resp[e].groupOrderBonusStatus == 0) {
-                        groupOrderBonusStatusText = '未發放';
-                    } else {
-                        groupOrderBonusStatusText = '已發放';
+                    // let groupOrderBonusStatusText = '';
+                    // if (resp[e].groupOrderBonusStatus == 0) {
+                    //     groupOrderBonusStatusText = '未發放';
+                    // } else {
+                    //     groupOrderBonusStatusText = '已發放';
+                    // }
+
+
+                    let totalGroupProductPriceText='';
+                    if(resp[e].totalGroupProductPrice==null){
+                        totalGroupProductPriceText='目前無人訂購';
                     }
+                    else{
+                        totalGroupProductPriceText=resp[e].totalGroupProductPrice;}
 
 
                     td_html += `<tr>

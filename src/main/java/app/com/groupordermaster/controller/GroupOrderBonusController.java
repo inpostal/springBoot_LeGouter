@@ -2,6 +2,7 @@ package app.com.groupordermaster.controller;
 
 
 
+import app.com.emp.vo.Employee;
 import app.com.groupordermaster.service.GroupOrderBonusService;
 
 import app.com.groupordermaster.vo.GroupActivity;
@@ -28,10 +29,15 @@ public class GroupOrderBonusController {
 //後臺分潤列表
 //thyleaf
     @GetMapping("/groupOrder/groupOrderBonus/getAll")
-    public String getAllGroupOrderMasters( Model model) {
-        List<GroupOrderBonusDTO> result = service.getAllGroupOrderMasters();
-        model.addAttribute("groupOrderBonus", result);
-        return "/back-end/groupOrder/groupOrderBonus";
+    public String getAllGroupOrderMasters( Model model,HttpSession session) {
+        Employee employee = (Employee) session.getAttribute("emp");
+        if (employee == null) {
+            return "redirect:/employee/login";
+        } else {
+            List<GroupOrderBonusDTO> result = service.getAllGroupOrderMasters();
+            model.addAttribute("groupOrderBonus", result);
+            return "/back-end/groupOrder/groupOrderBonus";
+        }
     }
     //前台團購主查詢
     @GetMapping("/groupbonusfront/memberId")

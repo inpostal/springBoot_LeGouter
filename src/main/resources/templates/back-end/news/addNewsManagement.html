@@ -127,7 +127,7 @@
         }
 
         p {
-            text-align: center;
+            /*text-align: center;*/
             margin-bottom: 5px;
             letter-spacing: 2px;
             font-style: oblique;
@@ -506,7 +506,7 @@
 
 
                 <button class="btn" type="button" id="submit">新增文章</button>
-                <button class="btn" type="button" id="cancek">取消新增文章</button>
+                <button class="btn" type="button" id="cancel" >取消新增文章</button>
             </form>
 
 
@@ -534,8 +534,25 @@
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+<!--ckeditor-->
+<script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 <script>
+    //ckeditor
+    ClassicEditor
+        .create(document.querySelector('#newsContent'))
+        .then(editor => {
+            console.log(editor);
+            // 将CKEditor实例存储到全局变量中，以便在提交时获取内容
+            window.editor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+
     //拿到empId直接匯入
     $(document).ready(function () {
         $.ajax({
@@ -556,14 +573,19 @@
     $('#submit').click(function () {
         let empId = $('#empId').val();
         let newsTitle = $('#newsTitle').val();
-        let newsContent = $('#newsContent').val();
+        // let newsContent = $('#newsContent').val();
         // let newsTime = $('#newsTime').val();
         let newsPic = $('#imageInput')[0].files[0];
         let formData = new FormData();
         formData.append('empId', empId);
         formData.append('newsTitle', newsTitle);
-        formData.append('newsContent', newsContent);
+        // formData.append('newsContent', newsContent);
         // formData.append('newsTime', newsTime);
+        // 获取CKEditor的内容
+        let editorData = window.editor.getData();
+        formData.append('newsContent', editorData);
+
+
         formData.append('newsPic', newsPic);
         $.ajax({
             url: '/news/add',
@@ -572,19 +594,30 @@
             processData: false,
             contentType: false,
             success: function (resp) {
-                console.log("新增成功");
-                alert("新增成功");
-                window.location.href = "/news/list";
-
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '新增成功',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                setTimeout(function () {
+                    window.location.href = "/news/list";
+                }, 2000);
             },
             error: function (resp) {
-                console.log("新增失敗");
-                alert("新增失敗");
+                Swal.fire({
+                    icon: 'error',
+                    title: '新增失敗',
+                })
             }
         })
 
 
     })
+    document.getElementById("cancel").addEventListener("click", function() {
+        window.location.href = "/news/list";
+    });
 
 
     var imageInput = document.getElementById('imageInput');
@@ -636,9 +669,13 @@
                 isValid = false;
             }
         }
+        // 取得CKEditor的編輯器實例
+        var editor = ClassicEditor.instances.newsContent;
+        // 取得編輯器中的內容
+        var content = editor.getData();
 
-        if (newsContentInput.value === "") {
-            displayErrorMessage(newsContentInput, "請輸入文章內容");
+        if (content === "") {
+            displayErrorMessage(document.getElementById("newsContent"), "請輸入文章內容");
             isValid = false;
         }
 

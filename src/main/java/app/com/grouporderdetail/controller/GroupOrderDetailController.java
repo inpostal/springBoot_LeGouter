@@ -90,41 +90,53 @@ public class GroupOrderDetailController {
     public List<GroupOrderDetail> getGroupOrderDetailByIdFront(HttpSession session) {
         Members user = (Members) session.getAttribute("user");
         Integer memberId = user.getMemberId();
-        return  service.getAllByMemberId(memberId);
+        return service.getAllByMemberId(memberId);
     }
+
     //團購主專區前台(重要)
     //memberId放入session導至前台
     @GetMapping("/grouporderdetail/list/front")
     public String frontGroupOrderDetail(HttpSession session) {
         Members user = (Members) session.getAttribute("user");
-        String url ="/grouporderdetail/list/front";
+        String url = "/grouporderdetail/list/front";
         if (user == null) {
-            session.setAttribute("location",url);
+            session.setAttribute("location", url);
             return "redirect:/login";
+        } else {
+            if (user.getMemberClassify() == 0) {
+                return "redirect:/grouporderdetail/list/front/member";
+            } else {
+                return "/front-end/grouporder/groupOrderEmp";
+            }
         }
-        return "/front-end/grouporder/groupOrderEmp";
     }
+
     //一般會員專區
     @GetMapping("/grouporderdetail/list/getbyId/front/member")
     @ResponseBody
     public List<GroupOrderDetail> getGroupOrderDetailByIdFrontMem(HttpSession session) {
         Members user = (Members) session.getAttribute("user");
         Integer memberId = user.getMemberId();
-        return  service.getAllByMemberId(user.getMemberId());
+        return service.getAllByMemberId(user.getMemberId());
     }
 
     @GetMapping("/grouporderdetail/list/front/member")
     public String frontGroupOrderMem(HttpSession session) {
         Members user = (Members) session.getAttribute("user");
-        String url ="/grouporderdetail/list/front/member";
+        String url = "/grouporderdetail/list/front/member";
         if (user == null) {
-            session.setAttribute("location",url);
+            session.setAttribute("location", url);
             return "redirect:/login";
+        } else {
+            if (user.getMemberClassify() == 1) {
+                return "redirect:/grouporderdetail/list/front";
+            } else {
+                return "/front-end/grouporder/groupOrderMem";
+            }
         }
-        return "/front-end/grouporder/groupOrderMem";
     }
-
 }
+
 
 
 

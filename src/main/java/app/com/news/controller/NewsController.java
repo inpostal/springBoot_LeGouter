@@ -1,11 +1,13 @@
 package app.com.news.controller;
 
+import app.com.emp.vo.Employee;
 import app.com.news.service.NewsService;
 import app.com.news.vo.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -28,8 +31,13 @@ public class NewsController {
     private NewsService service;
 
     @GetMapping("/news/list")
-    public String getNewsAll() {
-        return "/back-end/news/newsManagement";
+    public String getNewsAll(HttpSession session) {
+        Employee employee= (Employee) session.getAttribute("emp");
+        if (employee==null){
+            return "redirect:/employee/login";
+        }else {
+            return "/back-end/news/newsManagement";
+        }
     }
 
     public List<News> getNewaAllFront(){
@@ -63,21 +71,28 @@ public class NewsController {
     public ResponseEntity<?> update(@RequestParam("newsId") Integer newsId,
                                     @RequestParam("empId") Integer empId,
                                     @RequestParam("newsContent") String newsContent,
-                                    @RequestParam("newsPic") MultipartFile newsPic,
+                                    @RequestParam(value = "newsPic", required = false) MultipartFile newsPic,
 //                                    @RequestParam("newsTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newsTime,
                                     @RequestParam("newsTitle") String newsTitle) {
         //拿到後台資料
         News news = service.getNewsById(newsId);
+        if (news == null) {
+            // 新聞不存在，返回錯誤響應
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         //將前台資料放入後台
         news.setEmpId(empId);
         news.setNewsContent(newsContent);
 //        news.setNewsTime(Date.valueOf(newsTime));
         news.setNewsTitle(newsTitle);
         //將圖片轉成byte
-        try {
-            news.setNewsPic(newsPic.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (newsPic != null && !newsPic.isEmpty()) {
+            // 更新圖片
+            try {
+                news.setNewsPic(newsPic.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         //將資料放入資料庫(save)==>有pk就update沒有就insert
         service.update(news);

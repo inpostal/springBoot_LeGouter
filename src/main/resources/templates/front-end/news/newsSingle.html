@@ -137,7 +137,7 @@
               </li>
             </ul>
 
-            <p style="font-size: 20px;" id="newsContent" th:text="${getNewsFrontSingle.getNewsContent()}">
+            <p style="font-size: 20px;" id="newsContent" th:utext="${getNewsFrontSingle.newsContent}"></p>
 
             </p>　
 
@@ -150,11 +150,7 @@
             <li>
               <span>分享文章:</span>
             </li>
-            <li>
-              <a href="#" target="_blank" style="font-size: 20px;">
-                <i class="bx bxl-twitter"></i>
-              </a>
-            </li>
+
             <li>
               <a href="#" target="_blank" style="font-size: 20px;">
                 <i class="bx bxl-instagram"></i>
@@ -165,11 +161,7 @@
                 <i class="bx bxl-facebook"></i>
               </a>
             </li>
-            <li>
-              <a href="#" target="_blank" style="font-size: 20px;">
-                <i class="bx bxl-youtube"></i>
-              </a>
-            </li>
+
           </ul>
         </div>
       </div>

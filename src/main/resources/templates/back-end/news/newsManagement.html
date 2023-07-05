@@ -168,6 +168,13 @@
             color: #1e1916;
         }
 
+        .truncate-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3; /* 設置顯示行數 */
+
+        }
+
 
         /* .ms-2 {
             padding: 1.5rem !important;
@@ -500,7 +507,11 @@
                                             <td id="newsid">${resp[e].newsId}</td>
                                             <td id="empid">${resp[e].empId}</td>
                                             <td id="newstitle">${resp[e].newsTitle}</td>
-                                            <td id="newscontent">${resp[e].newsContent}</td>
+                                          <td>
+  <div class="truncate-text" style="max-height: 3.6em; line-height: 1.2em; overflow:hidden;width: 800px;  text-overflow: ellipsis;">
+    ${resp[e].newsContent}
+  </div>
+</td>
                                             <td><img src="/news/img/${resp[e].newsId}" width="100" height="100"></td>
                                             <td id="news-released-date">${resp[e].newsTime}</td>
 
