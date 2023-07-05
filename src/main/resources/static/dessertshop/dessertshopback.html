@@ -364,7 +364,6 @@
 
             <!-- 由此開始 -->
 
-            <!-- <h3>甜點商品清單</h3> -->
 
             <div class="container-xl">
                 <div class="table-responsive">
@@ -418,19 +417,7 @@
                             <tbody id="back-table">
 
 
-                            <!-- 1. -->
-<!--                            <tr>-->
-<!--                                <td>${res[e].dessertName}</td>-->
-<!--                                <td>${res[e].dessertContent}</td>-->
-<!--                                <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>-->
-<!--                                <td>NT$${res[e].dessertPrice}</td>-->
-<!--                                <td><span class="${statusClass}">${dessertStatus}</span></td>-->
-<!--                                <td>-->
-<!--                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>-->
-<!--                                    <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>-->
-<!--                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>-->
-<!--                                </td>-->
-<!--                            </tr>-->
+
 
 
                             </tbody>
@@ -567,9 +554,13 @@
 <script src="/Conponents/back_end.js"></script>
 
 
-
-
-
+<!-- sweet alert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<!--    toast -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 <!-- import js -->
 
@@ -591,24 +582,6 @@
         // Activate tooltip
         $('[data-toggle="tooltip"]').tooltip();
 
-        // Select/Deselect checkboxes
-        // var checkbox = $('table tbody input[type="checkbox"]');
-        // $("#selectAll").click(function(){
-        //     if(this.checked){
-        //         checkbox.each(function(){
-        //             this.checked = true;
-        //         });
-        //     } else{
-        //         checkbox.each(function(){
-        //             this.checked = false;
-        //         });
-        //     }
-        // });
-        // checkbox.click(function(){
-        //     if(!this.checked){
-        //         $("#selectAll").prop("checked", false);
-        //     }
-        // });
     });
 </script>
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -627,7 +600,6 @@
             url: '/dessert5/empcheck5',
             type: 'GET',
             success: function(res){
-                console.log(res);
                 if (res == "/employee/login"){
                     window.location.href = res;
                 }
@@ -639,13 +611,11 @@
     $(document).ready(function(){
         $("#status-select").change(function() {
             let status = $(this).val();
-            console.log(status);
             if (status === "販售中") {
                 $.ajax({
                     url: '/dessert5/findAll',
                     type: 'GET',
                     success: function(res){
-                        console.log(res);
                         let html = "";
                         for (let e in res) {
                             let dessertStatus = res[e].dessertStatus;

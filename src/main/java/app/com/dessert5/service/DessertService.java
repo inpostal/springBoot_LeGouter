@@ -117,10 +117,10 @@ public class DessertService {
     // 加入追蹤清單
     public void addToLoveList(Integer dessertId, Integer memberId){
         Dessert5LoveList dessert5LoveListKey = new Dessert5LoveList(dessertId, memberId);
-        Dessert5LoveList dessert5LoveList = dessert5LoveListRepository.findById(dessert5LoveListKey).orElse(null);
+        Dessert5LoveList olddessert5LoveList = dessert5LoveListRepository.findById(dessert5LoveListKey).orElse(null);
 
 
-        if (dessert5LoveList == null) {
+        if (olddessert5LoveList == null) {
             Dessert5LoveList newDessert5LoveList = new Dessert5LoveList();
             newDessert5LoveList.setDessertId(dessertId);
             newDessert5LoveList.setMemberId(memberId);

@@ -48,43 +48,7 @@
 <!-- 主要內容 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
     <section id="prodetails" class="section-p1">
-        <div class="single-pro-image">
-            <img src="img/products/1-1.jpg" width="100%" id="MainImg" alt="">
 
-            <div class="small-img-group">
-                <div class="small-img-col">
-                    <img src="img/products/1-1.jpg" width="100%" class="small-img" alt="">
-                </div>
-                <div class="small-img-col">
-                    <img src="img/products/1-2.jpg" width="100%" class="small-img" alt="">
-                </div>
-                <div class="small-img-col">
-                    <img src="img/products/1-3.jpg" width="100%" class="small-img" alt="">
-                </div>
-                <div class="small-img-col">
-                    <img src="img/products/1-4.jpg" width="100%" class="small-img" alt="">
-                </div>
-            </div>
-        </div>
-
-        <div class="single-pro-details">
-            <h6>甜點商城</h6>
-            <h4>法式巧克力千層蛋糕</h4>
-            <h2>NT$380</h2>
-            <!-- <select>
-                <option>選擇口味</option>
-                <option>焦糖</option>
-                <option>巧克力</option>
-                <option>草莓</option>
-                <option>覆盆子</option>
-            </select> -->
-            <div><button id="addtolovelist" class="normal" style="border: 2px; padding: 10px 10px 10px 0; background-color: white; color:#1E1916">加入追蹤清單</button></div>
-            <button class="normal" onmouseover="this.style.background='#c90c0c';" onmouseout="this.style.background='#1E1916'">加入購物車</button>
-            <h4>Product Details</h4>
-            <span>
-                超過20層的手工法式薄餅，層層散發香濃的可可氣息，滑順柔和的巧克力鮮奶油如同絲絨般高貴典雅，頂端以口感溫和的苦甜巧克力點綴，堆疊出精巧細膩的美妙滋味。
-            </span>
-        </div>
     </section>
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
@@ -117,7 +81,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+
+    <!-- sweet alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <!--    toast -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
     <script>
+        toastr.options = {
+            // toastr配置
+            "closeButton": true, //是否显示关闭按钮
+            "debug": false, //是否使用debug模式
+            "progressBar": true, //是否显示进度条，当为false时候不显示；当为true时候，显示进度条，当进度条缩短到0时候，消息通知弹窗消失
+            "positionClass": "toast-top-center",//显示的动画位置
+            "showDuration": "400", //显示的动画时间
+            "hideDuration": "1000", //消失的动画时间
+            "timeOut": "7000", //展现时间
+            "extendedTimeOut": "1000", //加长展示时间
+            "showEasing": "swing", //显示时的动画缓冲方式
+            "hideEasing": "linear", //消失时的动画缓冲方式
+            "showMethod": "fadeIn", //显示时的动画方式
+            "hideMethod": "fadeOut" //消失时的动画方式
+        }
+
 
         $(document).ready(getAllContent());
         function getAllContent(){
@@ -189,9 +178,28 @@
                             success: function(res) {
                                 console.log(res);
                                 if (res == "/login") {
-                                    window.location.href = res;
+                                    // window.alert("請先登入會員，將跳轉至會員登入頁面");
+                                    Swal.fire({
+                                        title: '請登入會員',
+                                        text: "須先登入會員才能使用購物車功能",
+
+                                        // icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: '確定，將跳轉至登入頁面',
+                                        cancelButtonText: '暫不登入'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = res;
+                                        }
+                                    })
+                                }  else if (res == "已加入購物車") {
+                                    // window.alert(res);
+                                    toastr.success(res);
                                 } else {
-                                window.alert(res);
+                                    // window.alert(res);
+                                    toastr.error(res);
                                 }
                             }
                         });
@@ -205,9 +213,25 @@
                             success: function(res){
                                 console.log(res);
                                 if (res == "/login"){
-                                    window.location.href = res;
-                                } else{
-                                    window.alert(res);
+                                    // window.alert("請先登入會員，將跳轉至會員登入頁面");
+                                    Swal.fire({
+                                        title: '請登入會員',
+                                        text: "須先登入會員才能使用購物車功能",
+
+                                        // icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: '確定，將跳轉至登入頁面',
+                                        cancelButtonText: '暫不登入'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = res;
+                                        }
+                                    })
+                                } else {
+                                    // window.alert(res);
+                                    toastr.success(res);
                                 }
                             }
                         });
