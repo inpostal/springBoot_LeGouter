@@ -1,5 +1,6 @@
 package app.com.course.controller;
 
+import app.com.coupon.service.CouponService;
 import app.com.course.service.ChefService;
 import app.com.course.service.CourseImageService;
 import app.com.course.service.CourseService;
@@ -37,14 +38,21 @@ public class CourseController {
     @Autowired
     MemberService memberService;
 
+    @Autowired
+    CouponService service;
+
     // 列出所有課程頁面
     @GetMapping("/course/allcrs")
     public String allCrs(HttpSession session) {
         Employee emp = (Employee) session.getAttribute("emp");
         if (emp == null) {
             return "redirect:/employee/login";
+        } else {
+            if (emp.getEmpClassify() != 2) {
+                return "redirect:/employee/data";
+            }
+            return "/back-end/course/CourseMgmt";
         }
-        return "/back-end/course/CourseMgmt";
     }
 
     // 單個課程編輯頁面
@@ -312,7 +320,7 @@ public class CourseController {
 
     //前台課程
     @GetMapping("/course/courses")
-    public String coursesPage() {
+    public String coursesPage(HttpSession session, Model model) {
         return "/front-end/course/Course";
     }
 
@@ -396,11 +404,15 @@ public class CourseController {
         Employee emp = (Employee) session.getAttribute("emp");
         if (emp == null) {
             return "redirect:/employee/login";
+        } else {
+            if (emp.getEmpClassify() != 2) {
+                return "redirect:/employee/data";
+            }
+            Chef chef = chefService.findByEmpId(emp.getEmpId());
+            ChefInfoDTO dto = courseService.getChefData(emp.getEmpId(), chef.getChefId());
+            model.addAttribute("chef", dto);
+            return "/back-end/course/Chef";
         }
-        Chef chef = chefService.findByEmpId(emp.getEmpId());
-        ChefInfoDTO dto = courseService.getChefData(emp.getEmpId(), chef.getChefId());
-        model.addAttribute("chef", dto);
-        return "/back-end/course/Chef";
     }
 
     //主廚資料更新

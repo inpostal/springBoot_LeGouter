@@ -31,6 +31,8 @@
     <link href="/Commom/css/style.css" rel="stylesheet">
     <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/Course/CSS/stylev.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -63,6 +65,9 @@
     <div class="container container-default-2 custom-area">
         <div class="row">
             <div class="col-lg-12">
+                <p style="display: none" th:text="${memberId}" id="member-id"></p>
+                <p style="display: none" th:text="${dessertId}" id="dessert-id"></p>
+
                 <!-- Wishlist Table Area -->
                 <div class="wishlist-table table-responsive">
                     <table class="table table-bordered">
@@ -72,10 +77,11 @@
                             <th class="pro-title">甜點名稱</th>
                             <th class="pro-price">價格</th>
                             <th class="pro-cart">加入購物車</th>
-                            <th class="pro-remove">移除追蹤</th>
+                            <th class="pro-remove">移除</th>
                         </tr>
                         </thead>
                         <tbody id="wishlist">
+
                         <tr th:each="d : ${wishlist}">
                             <!--                            @{/employee/get/img/{id}(id=${chef.getEmpId()})}-->
                             <td class="pro-thumbnail"><a
@@ -89,15 +95,22 @@
                                     th:text="${d.getDessertName()}"></a></td>
                             <td class="pro-price"><span th:text="${d.getDessertPrice()}"></span></td>
                             <td class="pro-cart">
-                                <button class="btn obrien-button primary-btn text-uppercase">加入購物車</button>
+                                <form>
+                                    <input type="hidden" th:name="dessertId" th:value="${d.getDessertId()}">
+                                    <button class="btn obrien-button primary-btn text-uppercase addtocart">加入購物車
+                                    </button>
+                                </form>
                             </td>
                             <td class="pro-remove">
-                                <button class="btn-delete badge rounded-pill bg-danger">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                                    </svg>
-                                </button>
+                                <form th:action="@{/removewishlist}" method="post">
+                                    <input type="hidden" th:name="dessertId" th:value="${d.getDessertId()}">
+                                    <button class="badge rounded-pill bg-danger remove" type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                        </svg>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         </tbody>
@@ -139,23 +152,63 @@
 <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
 
 <script>
-    $(document).on('click', '.btn-delete', function (e) {
-        console.log("DDDDD");
-        e.preventDefault();
-        let dessertId = $(this).data('dessert-id');
-        let memberId = parseInt('${session.emp.empId}');
+    let removeButtons = document.querySelectorAll('.remove');
+    removeButtons.forEach(removeButton => {
+        removeButton.addEventListener('click', function (event) {
+            event.preventDefault();  // 阻止表單的預設提交行為
+            let dessertId = $(this).siblings('input[name="dessertId"]').val();
+            let currentRow = $(this).parents('tr'); // 選擇到當前行
+            console.log("dessertId:", dessertId);  // 打印出dessertId來檢查
+            // 使用 AJAX 發送刪除請求
+            $.ajax({
+                url: '/deletewishlist',
+                type: 'POST',
+                data: {dessertId: dessertId},
+                success: function (response) {
+                    // 刪除成功後的處理邏輯
+                    console.log('刪除成功！');
+                    currentRow.remove(); // 移除當前行
+                },
+                error: function (xhr, status, error) {
+                    // 刪除失敗後的處理邏輯
+                    console.error('刪除失敗：', error, xhr.responseText);
+                }
+            });
+        });
+    });
 
+
+    $(".addtocart").on("click", function (event) {
+        event.preventDefault();  // 阻止按鈕的預設提交行為
+        let dessertId = $(this).siblings('input[name="dessertId"]').val();
+        let currentRow = $(this).parents('tr'); // 選擇到當前行
         $.ajax({
-            url: '/removeWishlist',
-            type: 'DELETE',
-            data: {memberId: memberId, dessertId: dessertId},
+            url: '/addtocart',
+            type: 'POST',
+            data: {dessertId: dessertId},
             success: function (response) {
-                console.log(response);
-                // 在此處執行刪除成功後的操作，例如更新頁面或顯示成功訊息
+                // 加入購物車成功後的處理邏輯
+                console.log('加入購物車成功！');
+
+                // 在這裡調用刪除追蹤清單的 AJAX 請求
+                $.ajax({
+                    url: '/deletewishlist',
+                    type: 'POST',
+                    data: {dessertId: dessertId},
+                    success: function (response) {
+                        // 刪除成功後的處理邏輯
+                        console.log('從追蹤清單中刪除成功！');
+                        currentRow.remove(); // 移除當前行
+                    },
+                    error: function (xhr, status, error) {
+                        // 刪除失敗後的處理邏輯
+                        console.error('從追蹤清單中刪除失敗：', error, xhr.responseText);
+                    }
+                });
             },
-            error: function (xhr, textStatus, errorThrown) {
-                console.error(xhr.responseText);
-                // 在此處處理錯誤，例如顯示錯誤訊息或回滾操作
+            error: function (xhr, status, error) {
+                // 加入購物車失敗後的處理邏輯
+                console.error('加入購物車失敗：', error, xhr.responseText);
             }
         });
     });

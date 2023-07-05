@@ -1,8 +1,12 @@
 package app.com.dessertWishlist.service;
 
+import app.com.dessert5.dao.Dessert5CartRepository;
+import app.com.dessert5.dao.Dessert5LoveListRepository;
 import app.com.dessert5.dao.DessertImageRepository;
 import app.com.dessert5.dao.DessertRepository;
 import app.com.dessert5.vo.Dessert;
+import app.com.dessert5.vo.Dessert5Cart;
+import app.com.dessert5.vo.Dessert5CartPK;
 import app.com.dessertWishlist.repository.DessertWishlistRepository;
 import app.com.dessertWishlist.vo.DessertWishlist;
 import app.com.dessertWishlist.vo.DessertWishlistDTO;
@@ -29,6 +33,12 @@ public class DessertWishlistService {
     @Autowired
     DessertRepository dessertRepository;
 
+    @Autowired
+    Dessert5CartRepository dessert5CartRepository;
+
+    @Autowired
+    Dessert5LoveListRepository dessert5LoveListRepository;
+
     public void addWishlist(Integer memberId, Integer dessertId) {
         DessertWishlistId id = new DessertWishlistId();
         id.setMemId(memberId);
@@ -45,16 +55,10 @@ public class DessertWishlistService {
         }
     }
 
-    public void removeWishlist(Integer memberId, Integer dessertId) {
-        DessertWishlistId id = new DessertWishlistId();
-        id.setMemId(memberId);
-        id.setDessertId(dessertId);
-
-        if (dessertWishlistRepository.existsById(id)) {
-            dessertWishlistRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("The wishlist item does not exist.");
-        }
+    public void delete(Integer dessertId, Integer memId) {
+        System.out.println("memId = " + memId);
+        System.out.println("dessertId = " + dessertId);
+        dessertWishlistRepository.deleteByDessertIdAndMemId(dessertId, memId);
     }
 
 
@@ -80,5 +84,32 @@ public class DessertWishlistService {
         }
 
         return dtoList;
+    }
+
+    public List<Dessert> getAllByMemberId(Integer memberId) {
+        List<DessertWishlist> dessertWishlists = dessertWishlistRepository.findAllByMemId(memberId);
+
+        List<Dessert> desserts = new ArrayList<>();
+        for (DessertWishlist dessertWishlist : dessertWishlists) {
+            Dessert dessert = dessertRepository.getReferenceById(dessertWishlist.getDessertId());
+            desserts.add(dessert);
+        }
+        return desserts;
+    }
+
+    public void addToCart(Integer dessertId, Integer memberId) {
+        Dessert5CartPK dessert5CartPK = new Dessert5CartPK(dessertId, memberId);
+        Dessert5Cart dessert5Cart = dessert5CartRepository.findById(dessert5CartPK).orElse(null);
+
+        if (dessert5Cart == null) {
+            Dessert5Cart newCart = new Dessert5Cart();
+            newCart.setId(dessert5CartPK);
+            newCart.setQuantity(1);
+            dessert5CartRepository.save(newCart);
+        } else {
+            Integer p = dessert5Cart.getQuantity();
+            dessert5Cart.setQuantity(p + 1);
+            dessert5CartRepository.save(dessert5Cart);
+        }
     }
 }

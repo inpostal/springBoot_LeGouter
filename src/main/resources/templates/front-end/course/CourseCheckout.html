@@ -49,6 +49,12 @@
     <link href="/Commom/css/style.css" rel="stylesheet">
     <!-- Title -->
     <title>Le Goûter</title>
+    <style>
+        h2#swal2-title {
+            font-size: 33px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -157,18 +163,15 @@
                             <h3>付款方式</h3>
                             <ul class="accordion">
                                 <li class="accordion-item">
-                                    <a class="accordion-title">
-                                        信用卡
-                                    </a>
+                                    <input type="radio" id="creditCard" name="paymentMethod">
+                                    <label for="creditCard">信用卡</label>
                                     <p class="accordion-content">
                                         若使用拍付信用卡付款，系統會引導信用卡網頁填寫信用卡資料。經確認付款成功，系統將主動發出已付款成功通知信。
                                     </p>
                                 </li>
                                 <li class="accordion-item">
-                                    <a class="accordion-title">
-                                        匯款
-                                    </a>
-
+                                    <input type="radio" id="bankTransfer" name="paymentMethod">
+                                    <label for="bankTransfer">匯款</label>
                                     <p class="accordion-content">
                                         若使用匯款，系統會給予一組16碼的ATM轉帳帳號，買家可以列印或抄下帳號到外面的ATM提款機轉帳。經確認付款成功，系統會發出已付款成功通知信。
                                     </p>
@@ -254,30 +257,17 @@
 
 <script>
 
-    $(document).ready(function () {
-        $('.default-btn.two').click(function (e) {
-            if (!$('#agreed').prop('checked')) {
-                e.preventDefault();
-                Swal.fire(
-                    '注意',
-                    '請先勾選同意條款',
-                    'warning');
-                return;
+    document.getElementById('checkout').addEventListener('click', function (event) {
+        console.log('Checkout button clicked');  // Add this line
+        let paymentMethodSelected = document.querySelector('input[name="paymentMethod"]:checked');
+        let termsAgreed = document.getElementById('agreed').checked;
 
-            }
-
-            let creditCardSelected = $('.accordion-title:contains("信用卡")').next('.accordion-content').is(':visible');
-            let remittanceSelected = $('.accordion-title:contains("匯款")').next('.accordion-content').is(':visible');
-
-            if (!creditCardSelected && !remittanceSelected) {
-                e.preventDefault();
-                Swal.fire(
-                    '注意',
-                    '請先選擇付款方式',
-                    'warning');
-            }
-        });
+        if (!paymentMethodSelected || !termsAgreed) {
+            event.preventDefault();  // Prevent the default action of the button
+            alert('請選擇付款方式並接受購物條款。');
+        }
     });
+
 
 </script>
 
@@ -307,12 +297,20 @@
                 success: function (response) {
 
                     Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: '結帳成功',
-                        showConfirmButton: false,
-                        timer: 1900
+                        title: '結帳成功！要認真上課哦:)',
+                        width: 800,
+                        padding: '3em',
+                        color: '#rgb(20, 20, 90)',
+                        background: 'rgb(255 255 255 / 86%)',
+                        backdrop: `
+                                    rgba(255, 193, 77,0.4)
+                                    url("/Course/images/coin.gif")
+                                    top
+                                    repeat
+                                `
                     })
+                    location.href = '/course/coursechecklist';
+
                 },
                 error: function (error) {
 

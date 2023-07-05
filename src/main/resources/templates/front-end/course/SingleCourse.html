@@ -137,8 +137,9 @@
                                             <a href="#" id="preview-link" class="meet-title">
                                                 <i th:text="${video.courseImgName}" class="bx bx-right-arrow"></i>
                                             </a>
-                                            <button id="preview-button" class="meet-time">課程試看</button>
-
+                                            <p style="display: none" th:text="${video.getCourseImgId()}"
+                                               class="video-id"></p>
+                                            <button id="#" class="meet-time preview-button">課程試看</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -295,7 +296,7 @@
     document.getElementById('preview-link').addEventListener('click', function (event) {
         event.preventDefault();  // Prevent the default action of the link
         let courseId = document.getElementById('course-id').innerText;
-        let videoId = 29;
+        let videoId = $(this).siblings(".video-id").text();
         let previewArea = document.getElementById('preview-area');
 
         if (originalHTML === null) {
@@ -312,17 +313,25 @@
         }
     });
 
-    document.getElementById('preview-button').addEventListener('click', function () {
-        let previewButton = document.getElementById('preview-button');
-        if (originalHTML === null) {
-            // Change the button text
-            previewButton.innerText = '取消觀看';
-        } else {
-            // Change the button text back
-            previewButton.innerText = '課程試看';
+    document.querySelectorAll('.preview-button').forEach((previewButton, buttonIndex) => {
+        previewButton.addEventListener('click', function () {
+            if (originalHTML === null) {
+                // Change the button text
+                previewButton.innerText = '取消觀看';
+            } else {
+                // Change the button text back
+                previewButton.innerText = '課程試看';
+            }
+            // Trigger click event on the link
+            document.getElementById('preview-link').click();
+        });
+
+        if (buttonIndex !== 0) {
+            previewButton.disabled = true;
+            previewButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+  <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+</svg>禁止觀看`;  // Change the button text
         }
-        // Trigger click event on the link
-        document.getElementById('preview-link').click();
     });
 
     document.getElementById('checkout-link').addEventListener('click', function (event) {
@@ -335,15 +344,17 @@
 
 
 <script>
-    var currentCourseId = $("#course-id").text(); // 使用 jQuery 取得 course-id 的值
+
+    let currentCourseId = $("#course-id").text(); // 使用 jQuery 取得 course-id 的值
 
     $.ajax({
         url: "/course/getall", // 這裡改成你的 getAll API
         type: 'GET',
         dataType: 'json',
         success: function (courses) {
-            var filteredCourses = courses.filter(function (course) {
-                return course.courseId != currentCourseId;
+            let filteredCourses = courses.filter(function (course) {
+                // 檢查 courseId 是否等於當前的 courseId，以及 courseStatus 是否為 1
+                return course.courseId !== currentCourseId && course.courseStatus === 1;
             });
 
             // 隨機排序
@@ -352,26 +363,26 @@
             });
 
             // 取前三個課程
-            var selectedCourses = filteredCourses.slice(0, 3);
+            let selectedCourses = filteredCourses.slice(0, 3);
 
-            var coursesHtml = '';
-            for (var i = 0; i < selectedCourses.length; i++) {
-                var course = selectedCourses[i];
+            let coursesHtml = '';
+            for (let i = 0; i < selectedCourses.length; i++) {
+                let course = selectedCourses[i];
 
                 coursesHtml += `
-            <div class="col-lg-4 col-md-6">
-                <div class="single-course" >
-                    <a href="/course/singlecourse?courseId=${course.courseId}">
-                        <img src="/course/img/${course.courseId}" alt="image" style="width: 100%; height: 350px; object-fit: cover;">
-                    </a>
+        <div class="col-lg-4 col-md-6">
+            <div class="single-course" >
+                <a href="/course/singlecourse?courseId=${course.courseId}">
+                    <img src="/course/img/${course.courseId}" alt="image" style="width: 100%; height: 350px; object-fit: cover;">
+                </a>
 
-                    <div class="course-content">
-                       <a href="/course/singlecourse?courseId=${course.courseId}">
-                        <h3>${course.courseName}</h3>
-                        </a>
-                    </div>
+                <div class="course-content">
+                   <a href="/course/singlecourse?courseId=${course.courseId}">
+                    <h3>${course.courseName}</h3>
+                    </a>
                 </div>
-            </div>`;
+            </div>
+        </div>`;
             }
             $('#recommends').html(coursesHtml); // 將取得的課程資訊插入到 '#recommends' 的元素中
         },

@@ -21,8 +21,8 @@ public class ChefService {
         return chefRepository.findAll();
     }
 
-    public Chef getChefById(Integer chefId) {
-        Optional<Chef> chef = chefRepository.findById(chefId);
+    public Chef getChefById(Integer empId) {
+        Optional<Chef> chef = chefRepository.findByEmpId(empId);
         return chef.get();
     }
 
