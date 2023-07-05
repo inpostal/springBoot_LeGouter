@@ -289,23 +289,20 @@
                             <h3>付款方式</h3>
                             <ul class="accordion">
                                 <li class="accordion-item active">
-                                    <a class="accordion-title" href="javascript:void(0)">
+                                    <a class="accordion-title">
                                         信用卡
                                     </a>
-                                    <p class="accordion-content show">
-                                        Make your payment directly into our bank account. Please use your Order ID as
-                                        the payment reference. Your order won’t be shipped until the funds have our
-                                        account.
+                                    <p class="accordion-content">
+                                        若使用拍付信用卡付款，系統會引導信用卡網頁填寫信用卡資料。經確認付款成功，系統將主動發出已付款成功通知信。
                                     </p>
                                 </li>
                                 <li class="accordion-item">
-                                    <a class="accordion-title" href="javascript:void(0)">
+                                    <a class="accordion-title">
                                         匯款
                                     </a>
 
                                     <p class="accordion-content">
-                                        Please send your cheque to Store Name, Store Street, Store Town, Store State /
-                                        County, Store Postcode.
+                                        若使用匯款，系統會給予一組16碼的ATM轉帳帳號，買家可以列印或抄下帳號到外面的ATM提款機轉帳。經確認付款成功，系統會發出已付款成功通知信。
                                     </p>
                                 </li>
                                 <li class="accordion-item">
@@ -388,10 +385,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
 <script>
-    console.log("location.href測試 " + window.location.href);
-    console.log("測試取得路徑" + window.location.pathname);
-    console.log("測試取得參數" + window.location.search);
-    console.log(window.location.pathname + window.location.search);
+    // console.log("location.href測試 " + window.location.href);
+    // console.log("測試取得路徑" + window.location.pathname);
+    // console.log("測試取得參數" + window.location.search);
+    // console.log(window.location.pathname + window.location.search);
 
     // 姓名輸入區驗證
     $("#receiverName").focus();
@@ -400,11 +397,11 @@
             let pattern = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
             if(!pattern.test(inputName)){
                 $("label[for='receiverName']").attr("style","color: red");
-                $("label[for='receiverName']").html("姓名: *姓名只能包含英文、數字或中文");
+                $("label[for='receiverName']").html("收件人姓名: *姓名只能包含英文、數字或中文");
                 $(this).val('');
             }else {
                 $("label[for='receiverName']").attr("style","color: black");
-                $("label[for='receiverName']").html("姓名");
+                $("label[for='receiverName']").html("收件人姓名 *");
             }
         });
         
@@ -415,26 +412,26 @@
 
             if(!pattern.test(inputPhone)){
                 $("label[for='receiverPhone']").attr("style","color: red");
-                $("label[for='receiverPhone']").html("電話: *電話號碼必須是09開頭且總計十位數字");
+                $("label[for='receiverPhone']").html("收件人電話 *電話號碼必須是09開頭且總計十位數字");
                 $(this).val('');
             } else {
                 $("label[for='receiverPhone']").attr("style","color: black");
-                $("label[for='receiverPhone']").html("電話");
+                $("label[for='receiverPhone']").html("收件人電話 *");
             }
         });
     
-    // 詳細地址輸入區驗證
+    // 地址輸入區驗證
     $("#receiverAddress").blur(function(){
         let pattern = /^[\u4e00-\u9fa5\d]+$/;
         let inputAddress = $(this).val();
 
         if(!pattern.test(inputAddress)){
             $("label[for='receiverAddress']").attr("style","color: red");
-            $("label[for='receiverAddress']").html("詳細地址: *地址只能包含數字或中文");
+            $("label[for='receiverAddress']").html("收件人地址 *地址只能包含數字或中文");
             $(this).val('');
         } else {
             $("label[for='receiverAddress']").attr("style","color: black");
-            $("label[for='receiverAddress']").html("詳細地址");
+            $("label[for='receiverAddress']").html("收件人地址 *");
         }
     });
 
@@ -452,46 +449,51 @@
         $("#outprice").html($("#setprice").val());
 
         $("#checkout").click(function (e) {
-            if (!$('#agreed').prop('checked')) {
-                e.preventDefault();
-                alert('請先勾選同意條款');
+            if ($("#receiverName").val() == "" || $("#receiverAddress").val() == "" || $("#receiverPhone").val() == "" || $("#receiverEmail").val() == "") {
+                alert('請填寫完整資料');
             }else {
-                var checkoutData = {
-                    groupOrderId: Number($("#groupOrderId").val()),
-                    memberId: Number($("#memberId").text()),
-                    groupOrderAmount: Number($("#theAmount").val()),
-                    groupProductPaying: 0,
-                    groupProductStatus: 1,
-                    groupProductOthers: $("#groupProductOthers").val(),
-                    receiverName: $("#receiverName").val(),
-                    receiverAddress: $("#receiverAddress").val(),
-                    receiverPhone: $("#receiverPhone").val(),
-                    receiverEmail: $("#receiverEmail").val(),
-                    groupActivityPrice: Number($("#setprice").val())
-                };
-    
-                $.ajax({
-                    url: '/groupActivity/CheckoutDetail',
-                    method: 'POST',
-                    data: JSON.stringify(checkoutData),
-                    contentType: 'application/json',
-                    beforeSend: function() {
-                        console.log("送出前確認:" + checkoutData);
-                    },
-                    success: function (response) {
-                        if (response.success == true) {
-                            alert('結帳成功! 返回團購平台');
-                            window.location.href="/group-shop";
+                if (!$('#agreed').prop('checked')) {
+                    e.preventDefault();
+                    alert('請先勾選同意條款');
+                }else {
+                    var checkoutData = {
+                        groupOrderId: Number($("#groupOrderId").val()),
+                        memberId: Number($("#memberId").text()),
+                        groupOrderAmount: Number($("#theAmount").val()),
+                        groupProductPaying: 0,
+                        groupProductStatus: 1,
+                        groupProductOthers: $("#groupProductOthers").val(),
+                        receiverName: $("#receiverName").val(),
+                        receiverAddress: $("#receiverAddress").val(),
+                        receiverPhone: $("#receiverPhone").val(),
+                        receiverEmail: $("#receiverEmail").val(),
+                        groupActivityPrice: Number($("#setprice").val())
+                    };
+        
+                    $.ajax({
+                        url: '/groupActivity/CheckoutDetail',
+                        method: 'POST',
+                        data: JSON.stringify(checkoutData),
+                        contentType: 'application/json',
+                        beforeSend: function() {
+                            console.log("送出前確認:" + checkoutData);
+                        },
+                        success: function (response) {
+                            if (response.success == true) {
+                                alert('結帳成功! 返回團購平台');
+                                window.location.href="/group-shop";
+                            }
+                        },
+                        error: function (error) {
+        
                         }
-                    },
-                    error: function (error) {
+                    });
     
-                    }
-                });
-
+                }
             }
         });
 
+        //一鍵輸入資料
         $("#memcheck").change(function () {
             $.ajax({
                 url: '/groupActivity/Checkout/OneMember',
@@ -503,11 +505,14 @@
                     console.log("送出前確認:" + JSON.stringify({ memberId: Number($("#memberId").text()) }));
                 },
                 success: function (response) {
-                    $("#receiverName").val(response.memberName);
-                    $("#receiverAddress").val(response.memberAddress);
-                    $("#receiverPhone").val(response.memberPhone);
-                    $("#receiverEmail").val(response.memberEmail);
-
+                        $("#receiverName").val(response.memberName);
+                        $("#receiverAddress").val(response.memberAddress);
+                        $("#receiverPhone").val(response.memberPhone);
+                        $("#receiverEmail").val(response.memberEmail);
+                        document.getElementById("receiverName").focus();
+                        document.getElementById("receiverAddress").focus();
+                        document.getElementById("receiverPhone").focus();
+                        document.getElementById("receiverEmail").focus();
                 },
                 error: function (error) {
 
