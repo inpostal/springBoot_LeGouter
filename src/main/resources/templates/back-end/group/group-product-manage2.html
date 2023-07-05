@@ -224,13 +224,13 @@
                     <div id="tab03" class="tab-inner">
                         <!-- tab03的內容 -->
                         <div class="card-body">
-                            <form action="" method="post">
+                            <!-- <form action="" method="post"> --> <!-- 這樣包 在欄位輸入後按下ENTER的時候會踩到請求方法錯誤陷阱 -->
                                 <fieldset style="margin: 10px;">
                                     <legend>查詢單筆商品</legend>
-                                    <label>團購商品編號：<input type="text" id="productid" name="groupProductId" required></label>
+                                    <label>團購商品編號：<input type="text" id="segetproductid" name="groupProductId" required></label>
                                     <button type="button" id="btnone" class="inpproduct">查詢</button>
                                 </fieldset>
-                            </form>
+                            <!-- </form> -->
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -421,7 +421,7 @@
                 type: "POST",
                 //contentType: "application/json",
                 //data: JSON.stringify(datas),
-                data: {groupProductId: Number($("#productid").val())},
+                data: {groupProductId: Number($("#segetproductid").val())},
                 // beforeSend: function () {
                 // //console.log("發送請求之前確認:" + JSON.stringify(datas));
                 // console.log("發送請求之前確認:" + datas);
@@ -472,6 +472,10 @@
         //         }
         //     });
         // }
+
+        $("#segetproductid").change(function() {
+            document.getElementById("btnone").click();
+        })
     </script>
 
 </body>

@@ -171,7 +171,11 @@ public class GroupActivityService {
 			idpks.setGroupOrderId(groupActivityId);
 			idpks.setMemberId(memberId);
 			Optional<GroupOrderDetail> outConfirm = groupOrderDetailRepository.findById(idpks);
-			return outConfirm.get() != null;
+			if (! outConfirm.isPresent()) { //採到資料不存在的雷。
+				return false;
+			}else {
+				return outConfirm.get() != null;
+			}
 		}
 
 	//
