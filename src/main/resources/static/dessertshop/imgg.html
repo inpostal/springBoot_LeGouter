@@ -140,6 +140,20 @@
             display: none;  /* 隐藏滚动条 */
         }
 
+    /*    sweet alert font*/
+        div:where(.swal2-container) h2:where(.swal2-title) {
+            position: relative;
+            max-width: 100%;
+            margin: 0;
+            padding: 0.8em 1em 0;
+            color: inherit;
+            font-size: 1.875em;
+            font-weight: 330 !important;
+            text-align: center;
+            text-transform: none;
+            word-wrap: break-word;
+        }
+
 
 
     </style>
@@ -355,8 +369,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -379,8 +405,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -403,8 +441,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -427,8 +477,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -472,8 +534,19 @@
                 processData: false,
                 data: formData,
                 success: function(res) {
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已更新',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.error(xhr);
