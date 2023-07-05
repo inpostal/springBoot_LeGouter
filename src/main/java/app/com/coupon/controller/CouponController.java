@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,12 +66,21 @@ public class CouponController {
     }
 
 //加入追蹤課程按鈕-提出請求,發送course_id,mem_id加入資料庫中
-    @PostMapping("/add/courseFollow")
+    @PostMapping("/add/courseFollow/{courseId}")
     @ResponseBody
-    public void btnAddCourseFollow(@RequestBody Course courseId, HttpSession session){
+    public void btnAddCourseFollow(@PathVariable Integer courseId, HttpSession session){
         Members user = (Members) session.getAttribute("user");
-        service.addCourseFollow(user.getMemberId(), courseId.getCourseId());
+        if (user != null) {
+            service.addCourseFollow(user.getMemberId(), courseId);
+        }
     }
+
+//    @PostMapping("/add/courseFollow")
+//    @ResponseBody
+//    public void btnAddCourseFollow(@RequestBody Course courseId, HttpSession session){
+//        Members user = (Members) session.getAttribute("user");
+//        service.addCourseFollow(user.getMemberId(), courseId.getCourseId());
+//    }
 
     @GetMapping("/check/loginStatus")
     @ResponseBody
