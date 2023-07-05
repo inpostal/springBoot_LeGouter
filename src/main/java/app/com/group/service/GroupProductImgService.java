@@ -46,11 +46,11 @@ public class GroupProductImgService {
 					// 取得該商品VO物件的AutoID，帶入成為FK之值。
 					inserivo.setGroupProductId(groupProductId);
 					inserivo.setGroupProductImg(files[i].getBytes());
+					groupProductImgRepository.save(inserivo);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			groupProductImgRepository.save(inserivo);
 		}
 		return true;
 	}
