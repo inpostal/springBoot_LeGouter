@@ -34,22 +34,22 @@ public class CouponController {
         }
     }
 
-    @GetMapping("/check/course/viewCp/{price}")
-    @ResponseBody
-    public List<CheckOutDto> checkCourseCoupon(@PathVariable Integer price,HttpSession session){
-        Members user = (Members) session.getAttribute("user");
-        Integer memberId = user.getMemberId();
-        return service.findAllMemCourseCp(price, memberId);
-    }
+//    @GetMapping("/check/course/viewCp/{price}")
+//    @ResponseBody
+//    public List<CheckOutDto> checkCourseCoupon(@PathVariable Integer price,HttpSession session){
+//        Members user = (Members) session.getAttribute("user");
+//        Integer memberId = user.getMemberId();
+//        return service.findAllMemCourseCp(price, memberId);
+//    }
 
 
-    @PostMapping("check/dessert/viewCp/{price}")
-    @ResponseBody
-    public List<CheckOutDto> checkDessertCoupon(@PathVariable Integer price,HttpSession session){
-        Members user = (Members) session.getAttribute("user");
-        Integer memberId = user.getMemberId();
-        return service.findAllMemDessertCp(price, memberId);
-    }
+//    @PostMapping("check/dessert/viewCp/{price}")
+//    @ResponseBody
+//    public List<CheckOutDto> checkDessertCoupon(@PathVariable Integer price,HttpSession session){
+//        Members user = (Members) session.getAttribute("user");
+//        Integer memberId = user.getMemberId();
+//        return service.findAllMemDessertCp(price, memberId);
+//    }
 
 
     //結帳按鈕-改變會員優惠券使用狀態

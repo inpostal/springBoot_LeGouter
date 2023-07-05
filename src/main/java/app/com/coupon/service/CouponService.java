@@ -203,19 +203,21 @@ public class CouponService {
     }
 
     @Transactional
-    public List<CheckOutDto> findAllMemCourseCp(Integer price, Integer memberId) {
+    public List<CheckOutDto> findAllMemCourseCp(Integer courseId, Integer memberId) {
         List<MembersCp> allMemIdCp = memberCpRepository.findAllByMemId(memberId);
         List<CheckOutDto> result = new ArrayList<>();
-
+        Integer price = courseRepository.getReferenceById(courseId).getCoursePrice();
         for (MembersCp m:
              allMemIdCp) {
-            CouponType reference = repository.getReferenceById(m.getCpId());
-            if (reference.getCpTp()==1 && reference.getCpThreshold()<price){
-                CheckOutDto dto = new CheckOutDto();
-                dto.setCpId(reference.getCpId());
-                dto.setCpName(reference.getCpName());
-                dto.setDiscount(reference.getCpDiscount());
-                result.add(dto);
+            if (m.getCpUsed() == 0){
+                CouponType reference = repository.getReferenceById(m.getCpId());
+                if (reference.getCpTp()==1 && reference.getCpThreshold()<price){
+                    CheckOutDto dto = new CheckOutDto();
+                    dto.setCpId(reference.getCpId());
+                    dto.setCpName(reference.getCpName());
+                    dto.setDiscount(reference.getCpDiscount());
+                    result.add(dto);
+                }
             }
         }
         result.forEach(System.out::println);
