@@ -11,7 +11,6 @@ import app.com.dessertOrderDetail.entity.OrderDetail;
 import app.com.dessertOrderDetail.repository.OrderDetailRepository;
 import app.com.dessertOrders.entity.Orders;
 import app.com.dessertOrders.repository.OrdersRepository;
-import app.com.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,8 +34,7 @@ public class DessertCartServiceImpl implements DessertCartService {
 
     @Autowired
     private DessertRepository dessertRepository;
-    @Autowired
-    private MemberRepository memberRepository;
+
     @Autowired
     private OrdersRepository ordersRepository;
     @Autowired
@@ -110,7 +108,7 @@ public class DessertCartServiceImpl implements DessertCartService {
 
     @Override
     @Transactional
-    public void submitOrder(Integer memberId, OrderInfo orderInfo) {
+    public String submitOrder(Integer memberId, OrderInfo orderInfo) {
         List<DessertCart> dessertCartList = dessertCartRepository.findByMemberId(memberId);
 
         // 創建訂單
@@ -139,7 +137,7 @@ public class DessertCartServiceImpl implements DessertCartService {
         int shippingCost = orderTotal > 500 ? 0 : 100; // Recalculate shipping cost
         order.setCpOrderTotal(orderTotal + shippingCost - 75);
 
-     
+
         // 設置收件人資訊，根據您提供的HTML代碼
         order.setReceiverPhone(orderInfo.getReceiverPhone());
         order.setReceiverAddress(orderInfo.getReceiverAddress());
@@ -156,6 +154,12 @@ public class DessertCartServiceImpl implements DessertCartService {
 
         // 清空購物車
         dessertCartRepository.deleteAll(dessertCartList);
+
+
+        return order.getOrderId().toString();
+
+
     }
+
 
 }

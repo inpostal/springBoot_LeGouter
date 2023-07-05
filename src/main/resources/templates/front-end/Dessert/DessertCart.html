@@ -32,7 +32,7 @@
 
 
     <!--    頁面css-->
-
+    <link rel="stylesheet" href="/Dessert/CSS/app.min.css" type="text/css">
 
     <link href="/Commom/css/all.min.css" rel="stylesheet">
 
@@ -45,6 +45,12 @@
 </head>
 
 <body>
+<!-- preloader -->
+<div class="preloader">
+    <img src="/Dessert/picture/logo.svg" alt="logo">
+    <div class="preloader-icon"></div>
+</div>
+<!-- ./ preloader -->
 
 <div id="header-div"></div>
 
@@ -173,21 +179,32 @@
     function removeProduct(event) {
         event.preventDefault(); // 阻止預設的連結點擊行為
 
-        var confirmation = confirm("確認移除商品?"); // 確認移除商品
+        Swal.fire({
+            title: '確定移除商品?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var row = event.target.closest("tr"); // 找到最接近的父元素 <tr>
 
-        if (confirmation) {
-            var row = event.target.closest("tr"); // 找到最接近的父元素 <tr>
+                //獲取商品id
+                var dessertId = row.getAttribute("data-dessert-id");
 
+                // 發送請求到後端
+                deleteDessertCart(dessertId);
 
-            //獲取商品id
-            var dessertId = row.getAttribute("data-dessert-id");
+                row.remove(); // 移除該行
 
-
-            // 發送請求到後端
-            deleteDessertCart(dessertId);
-
-            row.remove(); // 移除該行
-        }
+                Swal.fire(
+                    '刪除!',
+                    '您的商品已移除',
+                    '成功'
+                )
+            }
+        });
     }
 
     dessertCartUpdate();
@@ -207,12 +224,21 @@
                 dataType: 'json',
                 success: function (res) {
                     if (res.length === 0) {
+                        $(".container.container-default-2.custom-area").hide();
+                        let emptyCartMsg = `
+        <div class="empty-cart-message" style="text-align: center; margin-top: 100px;">
+            <h2>親，您的購物車沒有好吃的甜點唷！</h2>
+            <a href="/dessertshop/shopAndproduct/shop.html" class="btn obrien-button primary-btn" style="margin-top: 20px;">前往甜點商城</a>
+        </div>`;
+                        $("#footer-div").before(emptyCartMsg);
                         $("#checkout-button").off("click");
                         $("#checkout-button").on("click", function (event) {
                             event.preventDefault();
                             alert("購物車內沒有商品");
                         });
                     }
+
+
                     console.log(res);
                     cartClassItems = res;
                     let th_html = ``;
@@ -267,14 +293,35 @@
         updateFinalAmount(totalAmount, shippingFee);
     }
 
+    // function updateFinalAmount(totalAmount, shippingFee) {
+    //     let discountAmount = parseFloat($("table tr td:contains('折扣金額')").next('td').text().replace('$', ''));
+    //     let finalAmount = totalAmount - discountAmount;
+    //     if (shippingFee != 'Free') {
+    //         finalAmount += parseFloat(shippingFee.replace('$', ''));
+    //     }
+    //     $("table tr td:contains('應付總額')").next('td').text("$" + Math.round(finalAmount));
+    // }
+
     function updateFinalAmount(totalAmount, shippingFee) {
-        let discountAmount = parseFloat($("table tr td:contains('折扣金額')").next('td').text().replace('-$', ''));
+        let discountElement = $("table tr td:contains('折扣金額')").next('td');
+        let discountAmount = parseFloat(discountElement.text().replace('$', ''));
+        if (isNaN(discountAmount)) {
+            // 折扣金額無法解析為數字，將其設為 0
+            discountAmount = 0;
+        }
+        let formattedDiscount = `($ ${Math.abs(discountAmount)})`;
+        if (discountAmount < 0) {
+            formattedDiscount = `(${formattedDiscount})`;
+        }
+        discountElement.html("<span style='color: red;'>" + formattedDiscount + "</span>");
+
         let finalAmount = totalAmount - discountAmount;
-        if (shippingFee != 'Free') {
+        if (shippingFee !== 'Free') {
             finalAmount += parseFloat(shippingFee.replace('$', ''));
         }
-        $("table tr td:contains('應付總額')").next('td').text("$" + Math.round(finalAmount));
+        $("table tr td:contains('應付總額')").next('td').text("$ " + Math.round(finalAmount));
     }
+
 
     $(document).on('input', '.cart-plus-minus-box', function () {
         // Parse the input value as an integer
@@ -312,17 +359,42 @@
         if (isNaN(cartDessertQuantity) || cartDessertQuantity < 1 || cartDessertQuantity > 50) {
             if (increaseBtn.hasClass("dec")) {
                 if (cartDessertQuantity === 0) {
-                    var confirmation = confirm("確認移除商品?"); // 確認移除商品
-                    if (confirmation) {
-                        deleteDessertCart(dessertId, memberId);
-                    } else {
-                        dessertCartUpdate();
-                    }
+                    Swal.fire({
+                        title: '確定移除商品?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '確定!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            deleteDessertCart(dessertId, memberId);
+                            Swal.fire(
+                                '刪除!',
+                                '你的商品已移除',
+                                '成功'
+                            )
+                        } else {
+                            dessertCartUpdate();
+                        }
+                    })
                 }
                 return;
             } else if (increaseBtn.hasClass("inc")) {
                 if (cartDessertQuantity > 50) {
-                    alert("單項甜點訂購數量上限為50");
+                    Swal.fire({
+                        title: '單項甜點訂購數量上限為50',
+                        width: 600,
+                        padding: '3em',
+                        color: '#716add',
+                        background: '#fff url(/Dessert/picture/back.jpg)',
+                        backdrop: `
+                rgba(0,0,123,0.4)
+                url("/Dessert/picture/chen.gif")
+                top
+                no-repeat
+            `
+                    });
                     dessertCartUpdate();
                 }
             }
@@ -370,10 +442,13 @@
         });
     }
 
+    $(window).on('load', function () {
+        $('.preloader').hide();
+    });
 
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script data-cfasync="false" src="/Dessert/JS/SAM/email-decode.min.js"></script>
 <script src="/Dessert/JS/SAM/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
 <script src="/Dessert/JS/SAM/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
