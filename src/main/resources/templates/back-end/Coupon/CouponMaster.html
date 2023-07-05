@@ -418,7 +418,6 @@
                   <th>優惠金額</th>
                   <th>開始日期</th>
                   <th>截止日期</th>
-                  <th>優惠券狀態</th>
                   <th>修改</th>
                 </tr>
                 </thead>
@@ -431,7 +430,6 @@
                   <td th:text="${c.getCpDiscount()}"></td>
                   <td th:text="${c.getCpStart()}"></td>
                   <td th:text="${c.getCpEnd()}"></td>
-                  <td th:text="${c.getCpStatus()==0? '不可用': '可用'}"></td>
                   <td><button th:onclick="'window.location.href=\'/coupon/edit/' + ${c.getCpId()} + '\''">編輯</button></td>
                 </tr>
 <!--                </tbody>-->

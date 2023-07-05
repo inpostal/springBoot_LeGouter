@@ -203,14 +203,38 @@ public class CouponService {
     }
 
     @Transactional
-    public List<CheckOutDto> findAllMemCp(Integer price, Integer memberId) {
+    public List<CheckOutDto> findAllMemCourseCp(Integer courseId, Integer memberId) {
+        List<MembersCp> allMemIdCp = memberCpRepository.findAllByMemId(memberId);
+        List<CheckOutDto> result = new ArrayList<>();
+        Integer price = courseRepository.getReferenceById(courseId).getCoursePrice();
+        for (MembersCp m:
+             allMemIdCp) {
+            if (m.getCpUsed() == 0){
+                CouponType reference = repository.getReferenceById(m.getCpId());
+                if (reference.getCpTp()==1 && reference.getCpThreshold()<price){
+                    CheckOutDto dto = new CheckOutDto();
+                    dto.setCpId(reference.getCpId());
+                    dto.setCpName(reference.getCpName());
+                    dto.setDiscount(reference.getCpDiscount());
+                    result.add(dto);
+                }
+            }
+        }
+        result.forEach(System.out::println);
+        return result;
+    }
+
+
+
+    @Transactional
+    public List<CheckOutDto> findAllMemDessertCp(Integer price, Integer memberId) {
         List<MembersCp> allMemIdCp = memberCpRepository.findAllByMemId(memberId);
         List<CheckOutDto> result = new ArrayList<>();
 
         for (MembersCp m:
-             allMemIdCp) {
+                allMemIdCp) {
             CouponType reference = repository.getReferenceById(m.getCpId());
-            if (reference.getCpTp()==1 && reference.getCpThreshold()<price){
+            if (reference.getCpTp()==0 && reference.getCpThreshold()<price){
                 CheckOutDto dto = new CheckOutDto();
                 dto.setCpId(reference.getCpId());
                 dto.setCpName(reference.getCpName());
@@ -221,8 +245,6 @@ public class CouponService {
         result.forEach(System.out::println);
         return result;
     }
-
-
     //追蹤清單
 //    public List<CouponType> getAllCouponTypeMem(Integer memberId) {
 //        List<MembersCp> list = memberCpRepository.findAllByMemId(memberId);
