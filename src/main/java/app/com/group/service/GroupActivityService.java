@@ -14,6 +14,7 @@ import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.InserDetailDTO;
 import app.com.grouporderdetail.repository.GroupOrderDetailRepository;
 import app.com.grouporderdetail.vo.GroupOrderDetail;
+import app.com.grouporderdetail.vo.GroupOrderDetailId;
 import app.com.groupordermaster.repository.GroupOrderMasterRepository;
 import app.com.groupordermaster.vo.GroupOrderMaster;
 import app.com.member.repository.MemberRepository;
@@ -163,6 +164,14 @@ public class GroupActivityService {
 		
 		public List<GroupActivityVO> BackKeyName(String groupName) {
 			return groupActivityRepository.findByGroupNameContaining(groupName);
+		}
+		
+		public Boolean ConfirmDetail(Integer groupActivityId, Integer memberId) {
+			GroupOrderDetailId idpks = new GroupOrderDetailId();
+			idpks.setGroupOrderId(groupActivityId);
+			idpks.setMemberId(memberId);
+			Optional<GroupOrderDetail> outConfirm = groupOrderDetailRepository.findById(idpks);
+			return outConfirm.get() != null;
 		}
 
 	//

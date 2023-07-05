@@ -171,17 +171,29 @@
                     </ul>
                     <div id="tab01" class="tab-inner">
                         <!-- tab01的內容 -->
-                        <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" required></label>
+                        <label class="inpproduct">團購商品名稱：<input type="text" id="productname" name="groupProductName" maxlength="40" required></label>
                         <textarea class="inpproduct" id="textarea" name="groupProductContent" cols="50" rows="8" maxlength="300" placeholder="輸入團購商品內容" required></textarea>
                         <label class="inpproduct">團購商品價格：<input type="number" id="productprice" name="groupProductPrice" min="0" required></label>
                         <label class="inpproduct">團購商品上架時間：<input type="date" id="productstardate" name="groupProductStardate" placeholder="yyyy-mm-dd" required></label>
                         <input type="radio" class="inpproduct" id="productstatus" name="groupProductStatus" value="1" checked style="display: none;">
                         <label class="inpproduct">上傳圖片</label>
                         <form enctype="multipart/form-data" id="imageform">
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: block;" id="uploadimg0">
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: block;" id="uploadimg1">
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: block;" id="uploadimg2">
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: block;" id="uploadimg3">
+                            <div>
+                                <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg0">
+                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                            </div>
+                            <div>
+                                <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg1">
+                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                            </div>
+                            <div>
+                                <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg2">
+                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                            </div>
+                            <div>
+                                <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg3">
+                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                            </div>
                         </form>
                         <button type="button" id="btnSend" style="margin-top: 10px; display: block;">新增</button>
                             <!-- <button type="reset" style="margin-top: 10px;">清除</button> -->
@@ -295,62 +307,67 @@
 
         //新增至團購商品表格的函式。
         function addproduct() {
-          let formdata = new FormData;
-          let groupProductName = $("#productname").val();
-          let groupProductContent = $("#textarea").val();
-          let groupProductPrice= $("#productprice").val();
-          let groupProductStardate = $("#productstardate").val();
-          let groupProductStatus = $("#productstatus").val();
-        //   let groupProductImg = $("#uploadimg0")[0].files[0];
-          let imageform = $("#imageform");
-          console.log("觀察取得的FORM資料:" + imageform);
-          let imageInputs = imageform.find("input[type='file']"); // 選取4個檔案輸入元素
-          formdata.append("groupProductName", groupProductName);
-          formdata.append("groupProductContent", groupProductContent);
-          formdata.append("groupProductPrice", groupProductPrice);
-          formdata.append("groupProductStardate", groupProductStardate);
-          formdata.append("groupProductStatus", groupProductStatus);
-          console.log("觀察有無取得所有圖片輸入:" + imageInputs);
-          //   formdata.append("groupProductImg", groupProductImg);
-          //   將每個檔案存到 formData
-            for (let i = 0; i < imageInputs.length; i++) {
-                let files = imageInputs[i].files[0];
-                console.log("for迴圈當下的files:" + files);
-  
-              //   存入formdata
-              let setname = "file" + i;
-                console.log("每個名稱:" + setname);
-                formdata.append(i, files);
-  
-            }
+            if($("#productname").val() == "" || $("#textarea").val() == "" || $("#productprice").val() == "" || $("#productstardate").val() == "") {
+                alert("需填寫完整資料 請檢查尚未輸入的欄位!")
+            }else {
+                let formdata = new FormData;
+                let groupProductName = $("#productname").val();
+                let groupProductContent = $("#textarea").val();
+                let groupProductPrice= $("#productprice").val();
+                let groupProductStardate = $("#productstardate").val();
+                let groupProductStatus = $("#productstatus").val();
+              //   let groupProductImg = $("#uploadimg0")[0].files[0];
+                let imageform = $("#imageform");
+                console.log("觀察取得的FORM資料:" + imageform);
+                let imageInputs = imageform.find("input[type='file']"); // 選取4個檔案輸入元素
+                formdata.append("groupProductName", groupProductName);
+                formdata.append("groupProductContent", groupProductContent);
+                formdata.append("groupProductPrice", groupProductPrice);
+                formdata.append("groupProductStardate", groupProductStardate);
+                formdata.append("groupProductStatus", groupProductStatus);
+                console.log("觀察有無取得所有圖片輸入:" + imageInputs);
+                //   formdata.append("groupProductImg", groupProductImg);
+                //   將每個檔案存到 formData
+                  for (let i = 0; i < imageInputs.length; i++) {
+                      let files = imageInputs[i].files[0];
+                      console.log("for迴圈當下的files:" + files);
+        
+                    //   存入formdata
+                    let setname = "file" + i;
+                      console.log("每個名稱:" + setname);
+                      formdata.append(i, files);
+        
+                  }
+      
+              //   console.log(groupProductImg);
+              //   console.log(datas.groupProductStardate); //測試有無資料，本身是物件還是字串。
+                //--送出Ajax請求
+                  $.ajax({
+                      url: "/groupProduct/inserNew2",
+                      method: "POST",
+                      contentType: false,
+                      processData: false,
+                      data: formdata,
+                      beforeSend: function () {
+                      // console.log("發送請求之前確認:" + JSON.stringify(datas));
+                      },
+                      success: function(response) {
+                          console.log(response);
+                          if(response.success1){
+                              alert("新增成功");
+                              location.reload();
+                          }else {
+                              alert("請選擇圖片");
+                          }
+                      
+                      },
+                      error: function(xhr, status, erroe) {
+                      console.log("status:" + status);
+                      console.log("erroe:" + erroe);
+                      }   
+                  });
 
-        //   console.log(groupProductImg);
-        //   console.log(datas.groupProductStardate); //測試有無資料，本身是物件還是字串。
-          //--送出Ajax請求
-            $.ajax({
-                url: "/groupProduct/inserNew2",
-                method: "POST",
-                contentType: false,
-                processData: false,
-                data: formdata,
-                beforeSend: function () {
-                // console.log("發送請求之前確認:" + JSON.stringify(datas));
-                },
-                success: function(response) {
-                    console.log(response);
-                    if(response.success1){
-                        alert("新增成功");
-                        location.reload();
-                    }else {
-                        alert("請選擇圖片");
-                    }
-                
-                },
-                error: function(xhr, status, erroe) {
-                console.log("status:" + status);
-                console.log("erroe:" + erroe);
-                }   
-            });
+            }
         }
         //-------------------------
 

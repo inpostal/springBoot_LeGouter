@@ -49,16 +49,24 @@ public class GroupController {
 	}
     @GetMapping("/plan-activity") //前台團購主瀏覽商品 發起活動專區
 	public String planActivity(HttpSession session, RedirectAttributes redirectAttributes) {
+    	//預設要返回的當前路徑
     	String planactivityurl = "/plan-activity";
+    	//取得session當中的會員value
     	Members user = (Members) session.getAttribute("user");
+    	//判斷value是否為空值
         if (user != null){
+        	//如果不為空值，就再判斷是否為團購主
         	if (user.getMemberClassify() == 1) {
+        		//如果是團購主就進入活動專區
         		return "front-end/group/plan-activity3";
 			}else {
-				return "front-end/group/group-shop";
+				//如果不是就進入團購平台
+				redirectAttributes.addFlashAttribute("pleaseLogin", "不是團購主 無法進入專區!");
+        		return "redirect:/group-shop";
 			}
     		
         }else {
+        	//value為空值 就導向登入頁面
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             session.setAttribute("location", planactivityurl);
             return "redirect:/login";
@@ -111,20 +119,27 @@ public class GroupController {
     	String checkouturl = "/group-product/Checkout?" + "groupActivityId=" + groupActivityId + "&groupActivityPrice=" + groupActivityPrice;
     	Members user = (Members) session.getAttribute("user");
         if (user != null){
-    		Integer memberId = user.getMemberId();
-            String account = user.getMemberAccount();
-            model.addAttribute("memberId", memberId);
-            model.addAttribute("account", account);
-    	
-    	GroupActivityVO checkoutactivityvo = groupActivityService.showTheActivity(groupActivityId);
-    	GroupCheckoutDTO groupcheckoutDTO = new GroupCheckoutDTO();
-    	groupcheckoutDTO.setGroupOrderId(groupActivityId); //一個團購訂單對一個活動。
-    	groupcheckoutDTO.setGroupActivityId(groupActivityId);
-    	groupcheckoutDTO.setGroupActivityPrice(groupActivityPrice); //帶入活動價格。
-    	groupcheckoutDTO.setGroupName(checkoutactivityvo.getGroupName()); //帶入結帳明細顯示的活動名稱。
-    	model.addAttribute("groupcheckoutDTO", groupcheckoutDTO);
-
-            return "front-end/group/group-Checkout";
+        	Boolean examineDetail = groupActivityService.ConfirmDetail(groupActivityId, user.getMemberId());
+        	if (examineDetail) {
+        		redirectAttributes.addFlashAttribute("pleaseLogin", "已參加團購!");
+        		return "redirect:/group-shop";
+			}else {
+				
+				Integer memberId = user.getMemberId();
+				String account = user.getMemberAccount();
+				model.addAttribute("memberId", memberId);
+				model.addAttribute("account", account);
+				
+				GroupActivityVO checkoutactivityvo = groupActivityService.showTheActivity(groupActivityId);
+				GroupCheckoutDTO groupcheckoutDTO = new GroupCheckoutDTO();
+				groupcheckoutDTO.setGroupOrderId(groupActivityId); //一個團購訂單對一個活動。
+				groupcheckoutDTO.setGroupActivityId(groupActivityId);
+				groupcheckoutDTO.setGroupActivityPrice(groupActivityPrice); //帶入活動價格。
+				groupcheckoutDTO.setGroupName(checkoutactivityvo.getGroupName()); //帶入結帳明細顯示的活動名稱。
+				model.addAttribute("groupcheckoutDTO", groupcheckoutDTO);
+				
+				return "front-end/group/group-Checkout";
+			}
         }else {
             redirectAttributes.addFlashAttribute("pleaseLogin", "請先登入!");
             session.setAttribute("location", checkouturl);

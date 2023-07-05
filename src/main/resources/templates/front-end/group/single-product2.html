@@ -84,16 +84,16 @@
                             <div class="epix-tab-product mb-15">
                                 <div class="epix-product-tab-content">
                                     <div class="tab-content imgmonth" id="pills-tabContent">
-                                        <div class="tab-pane fade show active" id="epix-single-1">
+                                        <!-- <div class="tab-pane fade show active" id="epix-single-1">
                                             <div class="epix-single-product-thumb-4">
                                                 <div class="epix-featured">
                                                 </div>
-                                                <img th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img0'}}" 
-                                                    data-zoom-image="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img0'}}"
+                                                <img src="" 
+                                                    data-zoom-image=""
                                                     class="img-fluid" alt="">
                                             </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="epix-single-2">
+                                        </div> -->
+                                        <!-- <div class="tab-pane fade" id="epix-single-2">
                                             <div class="epix-single-product-thumb-4">
                                                 <div class="epix-featured">
                                                 </div>
@@ -119,22 +119,20 @@
                                                     data-zoom-image="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img3'}}" 
                                                     class="img-fluid" alt="">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                             <div class="epix-tab-content">
                                 <ul class="nav nav-pills mb-3 imgsun" id="epix-single-product-tab" role="tablist">
-                                    <li>
-                                        <button class="active" value="1" data-bs-toggle="pill"
-                                            data-bs-target="#epix-single-1" type="button">
-                                            <img width="98" height="98" th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img0'}}"
+                                    <!-- <li>
+                                        <button class="active" value="1" data-bs-toggle="pill" data-bs-target="#epix-single-1" type="button">
+                                            <img width="98" height="98" src=""
                                                 alt="">
                                         </button>
-                                    </li>
-                                    <li>
-                                        <button data-bs-toggle="pill" value="2" data-bs-target="#epix-single-2"
-                                            type="button">
+                                    </li> -->
+                                    <!-- <li>
+                                        <button data-bs-toggle="pill" value="2" data-bs-target="#epix-single-2" type="button">
                                             <img width="98" height="98" th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img1'}}"
                                                 alt="">
                                         </button>
@@ -152,7 +150,7 @@
                                             <img width="98" height="98" th:src="@{${'/groupActivity/get/Product' + groupActivityDTO.getGroupProductId + '/img3'}}" 
                                                 alt="">
                                         </button>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -267,6 +265,7 @@
                                                             <tr>
                                                                 <th>商品名稱</th>
                                                                 <td>
+                                                                    <a id="catchgroupProductId" th:text="${groupActivityDTO.getGroupProductId}" hidden></a>
                                                                     <a th:text="${groupActivityDTO.getGroupProductName}"></a>
                                                                 </td>
                                                             </tr>
@@ -336,10 +335,10 @@
         var countDownDate = new Date($("#setendday").val()).getTime();
 
         // Update the count down every 1 second
-        var now = new Date().getTime(); //原本Get today's date and time下面。
         var x = setInterval(function () {
             
             // Get today's date and time
+            var now = new Date().getTime();
 
             // Find the distance between now and the count down date
             var distance = countDownDate - now;
@@ -366,14 +365,89 @@
         $(window).on("load", function() {
             let walk = ($("#theprogress").val() / $("#walk").val()).toFixed(5);
             $("#percentage").html((walk*100) + "%");
+            WTF();
         })
 
+        let limitnow = new Date().getTime();
         $(document).ready(function () {
-            if(now > countDownDate){
+            if(limitnow > countDownDate){
                 alert("該團購活動已結束! 返回團購平台");
                 window.location.href="/group-shop";
             }
-    });
+            
+        });
+    </script>
+
+    <script>
+        function WTF(){
+            let eu = { groupProductId: Number($("#catchgroupProductId").text()) };
+        $.ajax({
+            url: "/groupActivity/getImgPkId",
+            method: "POST",
+            data: eu,
+            success: function (response) {
+                // console.log("觀察回應的陣列長度:" + response.length);
+                let i = 1;
+                let texts = "";
+                for (let index = 0; index < response.length; index++) {
+                    if(index <= 0){
+                        let text = `
+                        <div class="tab-pane fade show active" id="epix-single-${i}">
+                            <div class="epix-single-product-thumb-4">
+                                <div class="epix-featured">
+                                </div>
+                                <img src="/groupActivity/get/Product${response[index].groupProductImgId}" 
+                                    data-zoom-image=""
+                                    class="img-fluid" alt="">
+                            </div>
+                        </div>`
+                        texts += text;
+                    }else {
+                        let text = `
+                        <div class="tab-pane fade" id="epix-single-${i}">
+                            <div class="epix-single-product-thumb-4">
+                                <div class="epix-featured">
+                                </div>
+                                <img src="/groupActivity/get/Product${response[index].groupProductImgId}"
+                                    data-zoom-image="/groupActivity/get/Product${response[index].groupProductImgId}" 
+                                    class="img-fluid" alt="">
+                            </div>
+                        </div>`;
+                        texts += text;
+                    }
+                    ++i;
+                }
+                $("#pills-tabContent").html(texts);
+                
+                i = 1;
+                texts = "";
+                for (let index = 0; index < response.length; index++) {
+                    if(index <= 0){
+                        let text = `
+                        <li>
+                            <button class="active" value="${i}" data-bs-toggle="pill" data-bs-target="#epix-single-${i}" type="button">
+                                <img width="98" height="98" src="/groupActivity/get/Product${response[index].groupProductImgId}"
+                                    alt="">
+                            </button>
+                        </li>`;
+                        texts += text;
+    
+                    }else {
+                        let text = `
+                        <li>
+                            <button data-bs-toggle="pill" value="${i}" data-bs-target="#epix-single-${i}" type="button">
+                                <img width="98" height="98" src="/groupActivity/get/Product${response[index].groupProductImgId}"
+                                    alt="">
+                            </button>
+                        </li>`;
+                        texts += text;
+                    }
+                    ++i;
+                }
+                $("#epix-single-product-tab").html(texts);
+            }
+        });
+    };
     </script>
 </body>
 

@@ -227,7 +227,7 @@
                         let text = `<div class="col-item">
                     <div class="item">
                         <div class="img-board">
-                            <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="" class="img-width">
+                            <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="商品圖片" class="img-width">
 
                         </div>
                         <div class="cont">
@@ -274,50 +274,50 @@
         }
 
         function inserAct() {
-            const groupOmin = Number($("#minva").val());
-            let groupODis = 0.95;
-            console.log(groupOmin);
-            switch (groupOmin) {
-                case 200: {groupODis = 0.95;
-                    console.log("進入200");
-                break;}
-                case 400: {groupODis = 0.90;
-                    console.log("進入400");
-                break;}
-                case 600: {groupODis = 0.85;
-                    console.log("進入600");
-                break;}
-            }
-            console.log("switch完測試" + groupODis);
-            let starvaobj = new Date($("#starva").val());
-            let endvaobj = new Date($("#endva").val());
-            let starva = starvaobj.getFullYear() + "-" + (starvaobj.getMonth() + 1) + "-" + starvaobj.getDate() + " " + starvaobj.getHours() + ":" + starvaobj.getMinutes() + ":" + starvaobj.getSeconds();
-            let endva = endvaobj.getFullYear() + "-" + (endvaobj.getMonth() + 1) + "-" + endvaobj.getDate() + " " + endvaobj.getHours() + ":" + endvaobj.getMinutes() + ":" + endvaobj.getSeconds();
-            console.log(starvaobj.getTime);
-            console.log("測試starva的資料" + starva);
-            console.log("測試endva的資料" + endva);
-
-            $.ajax({
-                url: "/groupActivity/inser",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    groupProductId: $("#selectva").val(),
-                    groupActivityContent: $("#tarva").val(),
-                    groupOrderStar: starva,
-                    groupOrderEnd: endva,
-                    groupOrderMin: groupOmin,
-                    groupName: $("#nameva").val(),
-                    groupOrderDiscount: groupODis
-                }),
-                success: function (response) {
-                    console.log(response);
-                    if(response.success){
-                        alert("新增成功");
-                        location.reload();
-                    }
+            if($("#selectva").val() == null){
+                alert("尚無可團購商品");
+            }else {
+                const groupOmin = Number($("#minva").val());
+                let groupODis = 0.95;
+                console.log(groupOmin);
+                switch (groupOmin) {
+                    case 200: {groupODis = 0.95;
+                    break;}
+                    case 400: {groupODis = 0.90;
+                    break;}
+                    case 600: {groupODis = 0.85;
+                    break;}
                 }
-            });
+                console.log("switch完測試" + groupODis);
+                let starvaobj = new Date($("#starva").val());
+                let endvaobj = new Date($("#endva").val());
+                let starva = starvaobj.getFullYear() + "-" + (starvaobj.getMonth() + 1) + "-" + starvaobj.getDate() + " " + starvaobj.getHours() + ":" + starvaobj.getMinutes() + ":" + starvaobj.getSeconds();
+                let endva = endvaobj.getFullYear() + "-" + (endvaobj.getMonth() + 1) + "-" + endvaobj.getDate() + " " + endvaobj.getHours() + ":" + endvaobj.getMinutes() + ":" + endvaobj.getSeconds();
+                console.log("測試starva的資料" + starva);
+                console.log("測試endva的資料" + endva);
+
+                $.ajax({
+                    url: "/groupActivity/inser",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        groupProductId: $("#selectva").val(),
+                        groupActivityContent: $("#tarva").val(),
+                        groupOrderStar: starva,
+                        groupOrderEnd: endva,
+                        groupOrderMin: groupOmin,
+                        groupName: $("#nameva").val(),
+                        groupOrderDiscount: groupODis
+                    }),
+                    success: function (response) {
+                        console.log(response);
+                        if(response.success){
+                            alert("新增成功");
+                            location.reload();
+                        }
+                    }
+                });
+            }
         }
     </script>
 
