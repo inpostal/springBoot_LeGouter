@@ -47,8 +47,24 @@ public class DessertShopFrontController {
 
         // 如果已登入
         Integer memberId = member.getMemberId(); // 從session中取得member再取得memberId
-        dessertService.addToCart(dessertId, memberId);
-        return "已加入購物車";
+        return dessertService.addToCart(dessertId, memberId);
+    }
+
+    // 加入購物車
+    @GetMapping("/addtocartshop")
+    public String addToCartshop(@RequestParam Integer dessertId, HttpSession session) {
+        Members member = (Members) session.getAttribute("user");
+        String url = "dessertshop/shopAndproduct/shop.html";
+
+        // 如果沒登入過
+        if (member == null){
+            session.setAttribute("location", url );
+            return "/login";
+        }
+
+        // 如果已登入
+        Integer memberId = member.getMemberId(); // 從session中取得member再取得memberId
+        return dessertService.addToCart(dessertId, memberId);
     }
 
     // 加入追蹤清單

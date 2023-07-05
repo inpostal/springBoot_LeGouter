@@ -11,5 +11,7 @@ public interface DessertRepository extends JpaRepository<Dessert, Integer> {
 
     Dessert findByDessertName(String dessertName);
 
+    List<Dessert> findByDessertNameContaining(String dessertName);
+
 
 }

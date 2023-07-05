@@ -662,7 +662,7 @@
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                             <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                            <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                            <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                         </td>
                                      </tr>`;
 
@@ -696,7 +696,7 @@
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                             <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                            <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                            <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                         </td>
                                      </tr>`;
 
@@ -735,7 +735,7 @@
                                 <td>
                                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                     <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                    <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                 </td>
                              </tr>`;
 
@@ -772,7 +772,7 @@
     });
 
 
-    // 查詢一筆 -----------------------------------------------------------------------------------------------------------------------------------
+    // 查詢 -----------------------------------------------------------------------------------------------------------------------------------
     $("#search").on("click", function(){
         let dessertName = $("#searchVal").val();
         console.log(dessertName);
@@ -781,28 +781,25 @@
             type: 'GET',
             success: function(res){
                 console.log(res);
-                if (res.dessertName !== undefined) {
-                    let dessertStatus = res.dessertStatus;
-                    let statusClass = dessertStatus === "已下架" ? "badge rounded-pill bg-danger" : "badge rounded-pill bg-primary";
-                    let html =`<tr>
-<!--                                    <td>-->
-<!--                                        <span class="custom-checkbox">-->
-<!--                                            <input type="checkbox" id="checkbox1" name="options[]" value="1">-->
-<!--                                            <label for="checkbox1"></label>-->
-<!--                                        </span>-->
-<!--                                    </td>-->
-                                    <td>${res.dessertName}</td>
-                                    <td>${res.dessertContent}</td>
-                                    <td><img src="/dessert5/image0?dessertId=${res.dessertId}" alt="" style="height: 60px;"></td>
-                                    <td>NT$${res.dessertPrice}</td>
-                                    <td><span class="${statusClass}">${dessertStatus}</span></td>
-                                    <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res.dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
-                                        <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res.dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                        <a href data-id="${res.dessertId}" onclick="redirectToEditPicture(${res.dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
-                                    </td>
-                                 </tr>`;
+                if (res.length !== 0) {
+                    let html = "";
+                    for (let e in res) {
+                        let dessertStatus = res[e].dessertStatus;
+                        let statusClass = dessertStatus === "已下架" ? "badge rounded-pill bg-danger" : "badge rounded-pill bg-primary";    // 讓已下架呈現紅色
+                        html += `<tr>
+                                <td>${res[e].dessertName}</td>
+                                <td>${res[e].dessertContent}</td>
+                                <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>
+                                <td>NT$${res[e].dessertPrice}</td>
+                                <td><span class="${statusClass}">${dessertStatus}</span></td>
+                                <td>
+                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
+                                    <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
+                                    <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                </td>
+                             </tr>`;
 
+                    }
                     $("#back-table").html(html);
                 } else {
                     window.alert("查無此商品");
@@ -835,7 +832,7 @@
             window.alert("商品描述不得超過300字");
             return;
         } else if ($("#dessertPrice").val() === "") {
-            window.alert("請填寫商品價格");
+            window.alert("請填寫商品價格，僅限填入數字0-9");
             return;
         } else if ($("#dessertPrice").val() === "" || $("#dessertPrice").val().length > 5 || $("#dessertPrice").val() === "0" ) {
             window.alert("商品價格應介於1~9999之間");
@@ -909,7 +906,7 @@
                 window.alert("商品描述不得超過300字");
                 return;
             } else if ($("#editPrice").val() === "") {
-                window.alert("請填寫商品價格");
+                window.alert("請填寫商品價格，僅限填入數字0-9");
                 return;
             } else if ($("#editPrice").val() === "" || $("#editPrice").val().length > 5 || $("#editPrice").val() === "0" ) {
                 window.alert("商品價格應介於1~9999之間");

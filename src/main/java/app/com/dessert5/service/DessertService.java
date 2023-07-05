@@ -57,6 +57,10 @@ public class DessertService {
         return dessert;
     }
 
+    public List<Dessert> findByDessertNameContaining(String dessertName){
+        return dessertRepository.findByDessertNameContaining(dessertName);
+    }
+
     public Dessert findById(Integer dessertId){
         Dessert dessert = dessertRepository.findById(dessertId).orElse(null);
         return dessert;
@@ -86,7 +90,7 @@ public class DessertService {
 
 
     // 加入購物車(+1)
-    public void addToCart(Integer dessertId, Integer memberId){
+    public String addToCart(Integer dessertId, Integer memberId){
         Dessert5CartPK dessert5CartPK = new Dessert5CartPK(dessertId, memberId);
         Dessert5Cart dessert5Cart = dessert5CartRepository.findById(dessert5CartPK).orElse(null);
 
@@ -96,10 +100,16 @@ public class DessertService {
             newDessert5Cart.setId(dessert5CartPK);
             newDessert5Cart.setQuantity(1);
             dessert5CartRepository.save(newDessert5Cart);
+            return "已加入購物車";
         } else {
             Integer q = dessert5Cart.getQuantity();
-            dessert5Cart.setQuantity(q + 1);
-            dessert5CartRepository.save(dessert5Cart);
+            if (q >= 50) {
+                return "購物車數量已達上限，無法再新增";
+            } else {
+                dessert5Cart.setQuantity(q + 1);
+                dessert5CartRepository.save(dessert5Cart);
+                return "已加入購物車";
+            }
         }
 
     }
