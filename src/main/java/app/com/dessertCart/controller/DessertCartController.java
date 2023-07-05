@@ -62,7 +62,7 @@ public class DessertCartController {
     private String getDessertCart(Integer memberId, Model model, String viewName) {
         List<DessertCartDTO> dessertCartDTOList = dessertCartService.getDessertCartByMemberId(memberId);
 
-        // 檢查購物車是否為空
+//         檢查購物車是否為空
         if (dessertCartDTOList.isEmpty()) {
             model.addAttribute("isCartEmpty", true);
         }

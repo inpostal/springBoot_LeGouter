@@ -179,21 +179,32 @@
     function removeProduct(event) {
         event.preventDefault(); // 阻止預設的連結點擊行為
 
-        var confirmation = confirm("確認移除商品?"); // 確認移除商品
+        Swal.fire({
+            title: '確定移除商品?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var row = event.target.closest("tr"); // 找到最接近的父元素 <tr>
 
-        if (confirmation) {
-            var row = event.target.closest("tr"); // 找到最接近的父元素 <tr>
+                //獲取商品id
+                var dessertId = row.getAttribute("data-dessert-id");
 
+                // 發送請求到後端
+                deleteDessertCart(dessertId);
 
-            //獲取商品id
-            var dessertId = row.getAttribute("data-dessert-id");
+                row.remove(); // 移除該行
 
-
-            // 發送請求到後端
-            deleteDessertCart(dessertId);
-
-            row.remove(); // 移除該行
-        }
+                Swal.fire(
+                    '刪除!',
+                    '您的商品已移除',
+                    '成功'
+                )
+            }
+        });
     }
 
     dessertCartUpdate();
@@ -348,17 +359,42 @@
         if (isNaN(cartDessertQuantity) || cartDessertQuantity < 1 || cartDessertQuantity > 50) {
             if (increaseBtn.hasClass("dec")) {
                 if (cartDessertQuantity === 0) {
-                    var confirmation = confirm("確認移除商品?"); // 確認移除商品
-                    if (confirmation) {
-                        deleteDessertCart(dessertId, memberId);
-                    } else {
-                        dessertCartUpdate();
-                    }
+                    Swal.fire({
+                        title: '確定移除商品?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '確定!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            deleteDessertCart(dessertId, memberId);
+                            Swal.fire(
+                                '刪除!',
+                                '你的商品已移除',
+                                '成功'
+                            )
+                        } else {
+                            dessertCartUpdate();
+                        }
+                    })
                 }
                 return;
             } else if (increaseBtn.hasClass("inc")) {
                 if (cartDessertQuantity > 50) {
-                    alert("單項甜點訂購數量上限為50");
+                    Swal.fire({
+                        title: '單項甜點訂購數量上限為50',
+                        width: 600,
+                        padding: '3em',
+                        color: '#716add',
+                        background: '#fff url(/Dessert/picture/back.jpg)',
+                        backdrop: `
+                rgba(0,0,123,0.4)
+                url("/Dessert/picture/chen.gif")
+                top
+                no-repeat
+            `
+                    });
                     dessertCartUpdate();
                 }
             }
@@ -412,7 +448,7 @@
 
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script data-cfasync="false" src="/Dessert/JS/SAM/email-decode.min.js"></script>
 <script src="/Dessert/JS/SAM/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
 <script src="/Dessert/JS/SAM/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
