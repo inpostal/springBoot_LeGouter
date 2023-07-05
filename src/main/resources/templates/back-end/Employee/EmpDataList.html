@@ -134,7 +134,9 @@
                             <td th:text="${e.getEmpMail()}"></td>
                             <td th:text="${e.getEmpAccount()}"></td>
                             <td th:text="${e.getEmpPassword()}"></td>
-                            <td th:text="${e.getEmpClassify()==0?'一般員工':'管理員'}"></td>
+                            <td th:if="${e.getEmpClassify()==0}" th:text="一般員工"></td>
+                            <td th:if="${e.getEmpClassify()==1}" th:text="管理員"></td>
+                            <td th:if="${e.getEmpClassify()==2}" th:text="主廚"></td>
                             <td th:text="${e.getEmpStatus()==0?'離職':'在職'}"></td>
                             <td th:text="${e.getEmpHireDate()}"></td>
                             <td>

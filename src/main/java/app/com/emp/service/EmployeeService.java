@@ -1,5 +1,7 @@
 package app.com.emp.service;
 
+import app.com.course.repository.ChefRepository;
+import app.com.course.vo.Chef;
 import app.com.emp.repository.EmployeeRepository;
 import app.com.emp.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import java.util.List;
 public class EmployeeService {
     @Autowired
     private EmployeeRepository repository;
+    @Autowired
+    private ChefRepository chefRepository;
 
     public Employee checkLogin(String empAccount, String empPassword) {
         return repository.findByEmpAccountAndEmpPassword(empAccount, empPassword);
@@ -49,5 +53,11 @@ public class EmployeeService {
 
     public void updateEmp(Employee employee) {
         repository.save(employee);
+    }
+
+    public Chef addChef(Employee addEmp) {
+        Chef chef = new Chef();
+        chef.setEmpId(addEmp.getEmpId());
+        return chefRepository.save(chef);
     }
 }
