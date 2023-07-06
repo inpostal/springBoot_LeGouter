@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CouponService {
@@ -167,8 +168,21 @@ public class CouponService {
         LoveCourse loveCourse = new LoveCourse();
         loveCourse.setCourseId(courseId);
         loveCourse.setMemId(memId);
-        memberFollowRepository.deleteById(loveCourse);
+        Optional<LoveCourse> byId = memberFollowRepository.findById(loveCourse);
+        if (byId.isPresent()){
+            memberFollowRepository.deleteById(loveCourse);
+        }
     }
+
+//    public void deleteFollowList(LoveCourse){
+//        LoveCourse loveCourse = new LoveCourse();
+//        LoveCourse followResult = memberFollowRepository.getReferenceById(loveCourse);
+//        if (followResult != null){
+//            loveCourse.setCourseId(courseId);
+//            loveCourse.setMemId(memId);
+//            memberFollowRepository.deleteById(loveCourse);
+//        }
+//    }
     //service.deleteFollowList(user.getMemberId, dto.getCourseId);
 
     public List<ShoppingCpMemDTO> getAllMemCpDto(Integer memId) {

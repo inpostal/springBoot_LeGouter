@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Owl Theme Default CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/owl.theme.default.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/owl.carousel.min.css">
+    <!-- Owl Magnific CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/animate.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/boxicons.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/flaticon.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/meanmenu.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/nice-select.css">
+    <!-- Odometer CSS-->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/odometer.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/Course/front-end/assets/css/responsive.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/Commom/css/css2.css" rel="stylesheet">
+
+    <link href="/Commom/css/all.min.css" rel="stylesheet">
+    <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/Commom/css/animate.min.css" rel="stylesheet">
+    <link href="/Commom/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/Course/front-end/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/Commom/css/style.css" rel="stylesheet">
+    <!-- Title -->
+    <title>Le Goûter</title>
+</head>
+<body>
+
+<!-- 頁首 -->
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<!-- 導覽列 -->
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-4">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>甜點課程</h2>
+<!--            <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>-->
+<!--            <p id="userLoggedIn" th:data-logged-in="${user != null}"></p>-->
+            <ul>
+                <li>
+<!--                    <a th:href="@{/LeGouter}">-->
+                        Home
+                    </a>
+                </li>
+
+                <li class="active">甜點課程</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Single Course Area -->
+<section class="single-course-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="single-course-content">
+<!--                    <h3 th:text="${course.getCourseName()}"></h3>-->
+
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="course-rating">
+<!--                                <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="#">-->
+
+                                <h4>主廚：</h4>
+<!--                                <span th:text="${empName}"></span>-->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="course-rating pl-0 text-center">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="preview-area">
+<!--                        <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"-->
+<!--                             th:alt="${course.getCourseName()}" alt="#"-->
+<!--                             style="width: 100%; height: 500px; object-fit: cover;">-->
+                    </div>
+                </div>
+
+                <div class="tab single-course-tab">
+                    <ul class="tabs">
+                        <li>
+                            <a href="#">課程總覽</a>
+                        </li>
+                        <li>
+                            <a href="#">課程影片</a>
+                        </li>
+                        <li>
+                            <a href="#">主廚介紹</a>
+                        </li>
+                        <li>
+                            <a href="#">課程評論區</a>
+                        </li>
+                    </ul>
+                    <div class="tab_content">
+                        <div class="tabs_item">
+                            <h3>課程介紹</h3>
+<!--                            <p style="word-wrap: break-word;" th:text="${course.getCourseContent()}"></p>-->
+                        </div>
+                        <div class=" tabs_item">
+                            <div class="curriculum-content">
+                                <div class="curriculum-list">
+                                    <h4>影片</h4>
+                                    <ul>
+<!--                                        <li th:each="video : ${videos}">-->
+                                            <a href="#" id="preview-link" class="meet-title">
+<!--                                                <i th:text="${video.courseImgName}" class="bx bx-right-arrow"></i>-->
+                                            </a>
+<!--                                            <p style="display: none" th:text="${video.getCourseImgId()}"-->
+                                               class="video-id"></p>
+                                            <button id="#" class="meet-time preview-button">課程試看</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tabs_item">
+                            <div class="instructor-content">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <div class="advisor-img">
+<!--                                            <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="Image">-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <div class="advisor-content">
+                                            <a href="#">
+<!--                                                <h3 th:text="${empName}"></h3>-->
+                                            </a>
+
+<!--                                            <p style="word-wrap: break-word;" th:text="${chef.getChefInfo()}">-->
+
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tabs_item">
+                            <div class="review-content">
+                                <div class="course-reviews-content">
+                                    <ul class="course-reviews">
+                                        <li>
+                                            <h3>請先<a herf="#">購買課程</a>後觀看</h3>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="account-wrap">
+                    <ul>
+                        <li>
+<!--                            價錢 <span class="bold" th:text="${course.getCoursePrice()}"></span>-->
+                        </li>
+                    </ul>
+                    <a href="#" id="wishlist-link" class="default-btn checkout">加入追蹤清單</a>
+                    <a href="#" id="checkout-link" class="default-btn checkout">購買課程</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Single Course Area -->
+
+<!-- Start Popular Courses Area -->
+<section class="courses-area-style pb-70">
+    <div class="container">
+        <div class="section-title">
+            <h2>課程推薦</h2>
+        </div>
+        <!--ajax-->
+        <div class="row" id="recommends">
+        </div>
+    </div>
+</section>
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+
+
+<script data-cfasync="false" src="/Course/front-end/static/js/email-decode.min.js"></script>
+<script src="/Course/front-end/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/bootstrap.bundle.min.js"
+        type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/Course/front-end/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/Course/front-end/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49"
+        defer=""></script>
+
+<script src="/Course/front-end/assets/js/jquery-3.5.1.slim.min.js"></script>
+<!-- Popper JS -->
+<script src="/Course/front-end/assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="/Course/front-end/assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/Course/front-end/assets/js/jquery.meanmenu.js"></script>
+<!-- Wow JS -->
+<script src="/Course/front-end/assets/js/wow.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/Course/front-end/assets/js/owl.carousel.js"></script>
+<!-- Owl Magnific JS -->
+<script src="/Course/front-end/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Nice Select JS -->
+<script src="/Course/front-end/assets/js/jquery.nice-select.min.js"></script>
+<!-- Parallax JS -->
+<script src="/Course/front-end/assets/js/parallax.min.js"></script>
+<!-- Appear JS -->
+<script src="/Course/front-end/assets/js/jquery.appear.js"></script>
+<!-- Odometer JS -->
+<script src="/Course/front-end/assets/js/odometer.min.js"></script>
+<!-- Form Validator JS -->
+<script src="/Course/front-end/assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script src="/Course/front-end/assets/js/contact-form-script.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/Course/front-end/assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/Course/front-end/assets/js/custom.js"></script>
+
+<script>
+    document.getElementById('wishlist-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        // 獲取當前網址的 URLSearchParams
+        const urlParams = new URLSearchParams(window.location.search);
+        // console.log("urlParams:"+urlParams);
+        // 獲取特定請求參數的值
+        const courseId = urlParams.get('courseId');
+        console.log("courseId:"+courseId);
+        $.ajax({
+                // url: `/add/courseFollow/${courseId}`,
+                url: "/add/courseFollow/"+courseId,
+                type: 'POST',
+                success: function (data) {
+                    if (data.isSuccess){
+                        console.log("成功送出");
+                    }
+                }
+        });
+    })
+</script>
+
+
+<script>
+
+    let originalHTML = null;
+
+    // document.getElementById('preview-link').addEventListener('click', function (event) {
+    //     event.preventDefault();  // Prevent the default action of the link
+    //     let courseId = document.getElementById('course-id').innerText;
+    //     let videoId = $(this).siblings(".video-id").text();
+    //     let previewArea = document.getElementById('preview-area');
+    //
+    //     if (originalHTML === null) {
+    //         // If this is the first click, save the original HTML and replace it with the video
+    //         originalHTML = previewArea.innerHTML;
+    //         previewArea.innerHTML = `<video style="width: 865px; height: 525px" width="700" height="240" controls>
+    //                             <source src="/course/${courseId}/${videoId}"
+    //                                     type="video/mp4">
+    //                          </video>`;
+    //     } else {
+    //         // If this is the second click, restore the original HTML
+    //         previewArea.innerHTML = originalHTML;
+    //         originalHTML = null;
+    //     }
+    // });
+
+//     document.querySelectorAll('.preview-button').forEach((previewButton, buttonIndex) => {
+//         previewButton.addEventListener('click', function () {
+//             if (originalHTML === null) {
+//                 // Change the button text
+//                 previewButton.innerText = '取消觀看';
+//             } else {
+//                 // Change the button text back
+//                 previewButton.innerText = '課程試看';
+//             }
+//             // Trigger click event on the link
+//             document.getElementById('preview-link').click();
+//         });
+//
+//         if (buttonIndex !== 0) {
+//             previewButton.disabled = true;
+//             previewButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+//   <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+// </svg>禁止觀看`;  // Change the button text
+//         }
+//     });
+
+    // document.getElementById('checkout-link').addEventListener('click', function (event) {
+    //     event.preventDefault();  // 阻止默認的頁面跳轉行為
+    //
+    //     let userLoggedIn = document.getElementById('userLoggedIn').dataset.loggedIn === 'true';
+    //
+    //     if (!userLoggedIn) {
+    //         alert('請先登入才能購買課程');
+    //         window.location.href = '/login';  // 將用戶重定向到登入頁面
+    //     } else {
+    //         let courseId = document.getElementById('course-id').innerText;
+    //         window.location.href = '/course/coursecheckout?courseId=' + courseId;  // 跳轉到結帳頁面並附帶 courseId 參數
+    //     }
+    // });
+
+
+</script>
+
+
+<script>
+
+    let currentCourseId = $("#course-id").text(); // 使用 jQuery 取得 course-id 的值
+
+    $.ajax({
+        url: "/course/getall", // 這裡改成你的 getAll API
+        type: 'GET',
+        dataType: 'json',
+        success: function (courses) {
+            let filteredCourses = courses.filter(function (course) {
+                // 檢查 courseId 是否等於當前的 courseId，以及 courseStatus 是否為 1
+                return course.courseId !== currentCourseId && course.courseStatus === 1;
+            });
+
+            // 隨機排序
+            filteredCourses.sort(function (a, b) {
+                return 0.5 - Math.random();
+            });
+
+            // 取前三個課程
+            let selectedCourses = filteredCourses.slice(0, 3);
+
+            let coursesHtml = '';
+            for (let i = 0; i < selectedCourses.length; i++) {
+                let course = selectedCourses[i];
+
+                coursesHtml += `
+        <div class="col-lg-4 col-md-6">
+            <div class="single-course" >
+                <a href="/course/singlecourse?courseId=${course.courseId}">
+                    <img src="/course/img/${course.courseId}" alt="image" style="width: 100%; height: 350px; object-fit: cover;">
+                </a>
+
+                <div class="course-content">
+                   <a href="/course/singlecourse?courseId=${course.courseId}">
+                    <h3>${course.courseName}</h3>
+                    </a>
+                </div>
+            </div>
+        </div>`;
+            }
+            $('#recommends').html(coursesHtml); // 將取得的課程資訊插入到 '#recommends' 的元素中
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+
+
+</script>
+
+</body>
+
+</html>
