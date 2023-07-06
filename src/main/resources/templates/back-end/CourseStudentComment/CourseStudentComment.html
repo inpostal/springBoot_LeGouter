@@ -434,7 +434,7 @@
                   <th>會員編號</th>
                   <th>學員留言內容</th>
                   <th>學員留言時間</th>
-                  <th>員工編號(主廚)</th>
+                  <th>主廚名稱</th>
                   <th>回覆狀態</th>
                   <th>回覆留言</th>
                   <th>刪除留言</th>
@@ -491,29 +491,25 @@
               <a class="page-link" th:unless="${page.number > 0}" th:href="@{${#request.requestURI}(page=0, size=${page.size})}">上一頁</a>
             </li>
 
-            <li class="page-item" th:class="${page.number == 0 ? 'active' : ''}">
-              <a class="page-link" th:href="@{${#request.requestURI}(page=0, size=${page.size})}">1</a>
-            </li>
-
-            <li class="page-item" th:class="${page.number == 1 ? 'active' : ''}">
-              <a class="page-link" th:href="@{${#request.requestURI}(page=1, size=${page.size})}">2</a>
-            </li>
-
-            <li class="page-item" th:class="${page.number == 2 ? 'active' : ''}">
-              <a class="page-link" th:href="@{${#request.requestURI}(page=2, size=${page.size})}">3</a>
-            </li>
-
-            <li th:if="${page.totalPages > 3}">
-              <span class="page-link">...</span>
-            </li>
-
             <li th:if="${page.number >= 3}">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number - 2}, size=${page.size})}" th:text="${page.number - 1}"></a>
+            </li>
+            <li th:if="${page.number >= 2}">
               <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number - 1}, size=${page.size})}" th:text="${page.number}"></a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number}, size=${page.size})}" th:text="${page.number + 1}"></a>
+            </li>
+            <li th:if="${page.number < page.totalPages - 1}">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number + 1}, size=${page.size})}" th:text="${page.number + 2}"></a>
+            </li>
+            <li th:if="${page.number < page.totalPages - 2}">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number + 2}, size=${page.size})}" th:text="${page.number + 3}"></a>
             </li>
 
             <li class="page-item" th:class="${page.last ? 'disabled' : ''}">
-              <a class="page-link" th:if="${page.number < page.totalPages - 1}" th:href="@{${#request.requestURI}(page=${page.number + 1}, size=${page.size})}">下一頁</a>
-              <a class="page-link" th:unless="${page.number < page.totalPages - 1}" th:href="@{${#request.requestURI}(page=${page.totalPages - 1}, size=${page.size})}">下一頁</a>
+              <a class="page-link" th:if="${page.number < page.totalPages - 3}" th:href="@{${#request.requestURI}(page=${page.number + 1}, size=${page.size})}">下一頁</a>
+              <a class="page-link" th:unless="${page.number < page.totalPages - 3}" th:href="@{${#request.requestURI}(page=${page.totalPages - 1}, size=${page.size})}">下一頁</a>
             </li>
           </ul>
         </nav>
