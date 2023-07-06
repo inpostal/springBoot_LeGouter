@@ -254,6 +254,11 @@
       align-items: center;
       gap: 10px;
     }
+
+
+    element.style {
+      width: 150px;
+      margin-top: 20px;}
   </style>
 
 
@@ -503,19 +508,23 @@
         </div>
 
         <div class="container-small-unit">
-
           <label class="label">學員留言內容 </label>
-          <textarea name="text"  cols="30" rows="10" placeholder="輸入文章內容" id="studentCommentContent" required th:text="${courseComment.getCourseStudentCommentContent()}" readonly></textarea>
-
+          <textarea name="text"  cols="30" rows="0" placeholder="輸入文章內容" id="studentCommentContent" required th:text="${courseComment.getCourseStudentCommentContent()}" readonly></textarea>
         </div>
 
 
+<!--        <div class="container-small-unit">-->
+<!--          <div class="container-placehold">-->
+<!--            <label class="label">學員留言日期</label>-->
+<!--            <input type="date"  readonly name="newsdate" id="studentCommentDate" th:value="${courseComment.getCourseStudentCommentDate()}">-->
+<!--            <label id="displayDate"></label>-->
+<!--          </div>-->
+<!--        </div>-->
+
         <div class="container-small-unit">
-          <div class="container-placehold">
-            <label class="label">學員留言日期</label>
-            <input type="date"  readonly name="newsdate" id="studentCommentDate" th:value="${courseComment.getCourseStudentCommentDate()} ">
-            <label id="displayDate"></label>
-          </div>
+          <label class="label">學員留言日期</label>
+          <!--          <input type="date" name="newsdate" id="newsTime">-->
+          <label id="displayDate" th:text="${courseComment.getCourseStudentCommentDate()} "></label>
         </div>
 
         <div class="divider"></div>
@@ -536,19 +545,20 @@
 
         <div class="container-small-unit">
           <div class="container-placehold">
-            <label class="label">主廚回覆日期</label>
-            <input type="date"  id="chefCommentDate" th:value="${courseComment.getChefCommentDate()}" >
-            <label id="displayDate 1"></label>
+            <label class="label" style="display: none">主廚回覆日期</label>
+            <input type="date"  id="chefCommentDate"style="display: none" >
+            <label id="displayDate 1" style="display: none"></label>
           </div>
         </div>
 
 
-        <div class="row">
+        <div class="row" style="margin-top: 10px;">
           <div class="col">
             <button class="btn" id="add" type="button" style="width:150px">新增回覆</button>
           </div>
           <div class="col">
-            <button class="btn" id="cancel" type="button" style="width:150px " href="/CourseStudentComment">取消回覆</button>
+            <a class="btn" id="cancel" href="/CourseStudentComment" style="width: 150px;">取消回覆</a>
+<!--            <button class="btn" id="cancel" type="button" style="width:150px " href="/CourseStudentComment">取消回覆</button>-->
           </div>
         </div>
       </form>
@@ -620,7 +630,7 @@
         let courseName = $('#courseName').val();
         let memId = $('#memId').val();
         let studentCommentContent = $('#studentCommentContent').val();
-        let studentCommentDate = $('#studentCommentDate').val();
+        // let studentCommentDate = $('#studentCommentDate').val();
         let empId = $('#empId').val();
         let chefCommentContent = $('#chefCommentContent').val();
         let chefCommentDate = $('#chefCommentDate').val();
@@ -631,11 +641,11 @@
         formData.append('commentId',commentId);
         formData.append('memId',memId);
         formData.append('studentCommentContent',studentCommentContent);
-        formData.append('studentCommentDate',studentCommentDate);
+        // formData.append('studentCommentDate',studentCommentDate);
         formData.append('chefCommentContent', chefCommentContent);
-        formData.append('chefCommentDate', chefCommentDate);
+        // formData.append('chefCommentDate', chefCommentDate);
         formData.append('empId',empId);
-        // formData.append('chefCommentContent',chefCommentContent);
+        formData.append('chefCommentContent',chefCommentContent);
         // formData.append('chefCommentDate',chefCommentDate);
         $.ajax({
           url: '/CourseStudentComment/updatechefreplay',

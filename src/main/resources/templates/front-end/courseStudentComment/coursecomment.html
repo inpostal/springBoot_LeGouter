@@ -339,11 +339,12 @@
                                     <div class="curriculum-list">
                                         <ul>
                                             <li th:each="video : ${videos}">
-                                                <a href="#" class="preview-link meet-title"
-                                                   data-video-id="${video.videoId}">
+                                                <a href="#" id="preview-link" class="meet-title">
                                                     <i th:text="${video.courseImgName}" class="bx bx-right-arrow"></i>
                                                 </a>
-                                                <button class="preview-button meet-time">課程試看</button>
+                                                <p style="display: none" th:text="${video.getCourseImgId()}"
+                                                   class="video-id"></p>
+                                                <button id="#" class="meet-time preview-button">課程觀看</button>
                                             </li>
                                         </ul>
                                     </div>
