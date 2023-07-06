@@ -505,7 +505,7 @@
 
                         <div class="inputBox w100">
         <!--                    <input type="button" class="btn btn-default" data-dismiss="modal" value="取消">-->
-                            <input type="submit" value="確定上架" id="insert"  style="position: absolute; top: 50px; right: 0;">
+                            <input type="submit" value="確定新增" id="insert"  style="position: absolute; top: 50px; right: 0;">
                         </div>
 
                     </div>
@@ -868,7 +868,7 @@
                     dessertName: $("#dessertName").val(),
                     dessertContent: $("#dessertContent").val(),
                     dessertPrice: $("#dessertPrice").val(),
-                    dessertStatus: "販售中"
+                    dessertStatus: "已下架"
                 }),
                 success: function(res){
                     if (res === "商品名稱已存在，新增失敗") {
