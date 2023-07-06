@@ -50,6 +50,11 @@
     <div class="col-lg-9 col-12 col-custom widget-mt">
         <!--shop toolbar start-->
         <div class="shop_toolbar_wrapper">
+            <!-- 20230706 01:00，酷酷的東西 -->
+            <p th:text="${STOP}" id="STOP" hidden></p>
+            <p th:text="${NotAgain}" id="NotAgain" hidden></p>
+            <!-- 20230706 01:00，酷酷的東西 -->
+
             <div class="shop_toolbar_btn">
                 <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" id="beredoshow"
                     title="">縮圖</button>
@@ -150,10 +155,37 @@
     <!-- Main JS -->
     <script src="Group/Shan_assets/js/main.js"></script>
 
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         showlist()
         window.addEventListener("load", function () {
         })
+        
+        $(document).ready(function () {
+            // if($("#STOP").text() != ""){
+            //     alert($("#STOP").text());
+            // }
+            // if($("#NotAgain").text() != ""){
+            //     alert($("#NotAgain").text());
+            // }
+            if ($("#STOP").text() !== "") {
+                Swal.fire({
+                    title: "提示",
+                    text: $("#STOP").text(),
+                    icon: "info",
+                    confirmButtonText: "確定"
+                });
+            }
+            if ($("#NotAgain").text() !== "") {
+                Swal.fire({
+                    title: "提示",
+                    text: $("#NotAgain").text(),
+                    icon: "info",
+                    confirmButtonText: "確定"
+                });
+            }
+        });
 
         function showlist() {
             $.ajax({
@@ -240,7 +272,7 @@
                                         DynamiGener(response);
                                         document.getElementById("beredoshow").click();
                                         break;}
-                                        case 2: {
+                                    case 2: {
                                             response.sort(function(a,b) {
                                             return a.groupActivityPrice > b.groupActivityPrice ? 1 : -1;
                                         });

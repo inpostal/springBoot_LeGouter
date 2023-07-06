@@ -159,7 +159,11 @@ public class EmployeeController {
 
     // 員工登入網址
     @GetMapping("/employee/login")
-    public String login() {
+    public String login(HttpSession session) {
+        Employee emp = (Employee) session.getAttribute("emp");
+        if (emp!=null){
+            return "redirect:/employee/data";
+        }
         return "/back-end/Employee/EmpLogin";
     }
 

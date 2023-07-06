@@ -67,11 +67,11 @@ public class GroupActivityService {
 	public GroupActivityVO inserActivitys(GroupActivityDTO groupActivityDTO) {
 		GroupActivityVO groupActivityVO = new GroupActivityVO();
 		groupActivityVO.setGroupProductId(groupActivityDTO.getGroupProductId());
-		groupActivityVO.setGroupActivityContent(groupActivityDTO.getGroupActivityContent());
+		groupActivityVO.setGroupActivityContent(groupActivityDTO.getGroupActivityContent().trim());
 		groupActivityVO.setGroupOrderStar(groupActivityDTO.getGroupOrderStar());
 		groupActivityVO.setGroupOrderEnd(groupActivityDTO.getGroupOrderEnd());
 		groupActivityVO.setGroupOrderMin(groupActivityDTO.getGroupOrderMin());
-		groupActivityVO.setGroupName(groupActivityDTO.getGroupName());
+		groupActivityVO.setGroupName(groupActivityDTO.getGroupName().trim());
 		groupActivityVO.setGroupOrderDiscount(groupActivityDTO.getGroupOrderDiscount());
 		return groupActivityRepository.save(groupActivityVO);
 	}
@@ -95,10 +95,10 @@ public class GroupActivityService {
 		groupOrderDetail.setGroupOrderAmount(inserDetailDTO.getGroupOrderAmount());
 		groupOrderDetail.setGroupProductPaying(inserDetailDTO.getGroupProductPaying());
 		groupOrderDetail.setGroupProductStatus(inserDetailDTO.getGroupProductStatus());
-		groupOrderDetail.setGroupProductOthers(inserDetailDTO.getGroupProductOthers());
-		groupOrderDetail.setReceiverName(inserDetailDTO.getReceiverName());
-		groupOrderDetail.setReceiverAddress(inserDetailDTO.getReceiverAddress());
-		groupOrderDetail.setReceiverEmail(inserDetailDTO.getReceiverEmail());
+		groupOrderDetail.setGroupProductOthers(inserDetailDTO.getGroupProductOthers().trim());
+		groupOrderDetail.setReceiverName(inserDetailDTO.getReceiverName().trim());
+		groupOrderDetail.setReceiverAddress(inserDetailDTO.getReceiverAddress().trim());
+		groupOrderDetail.setReceiverEmail(inserDetailDTO.getReceiverEmail().trim());
 		groupOrderDetail.setReceiverPhone(inserDetailDTO.getReceiverPhone());
 		groupOrderDetail.setGroupProductPrice(inserDetailDTO.getGroupActivityPrice());
 		return groupOrderDetailRepository.save(groupOrderDetail);
@@ -130,6 +130,10 @@ public class GroupActivityService {
 			double percentage = 0.04;
 			groupOrderMaster.setGroupOrderId(groupOrderId);
 			groupOrderMaster.setNumberOfProduct(numberproduct);
+			//當購買數量大於最低標就要將狀態改成 2:團購進行中，目前團購商品下訂總數已達標。
+			if (numberproduct >= thegroupOrderMin) {
+				groupOrderMaster.setGroupOrderStatus(2);
+			}
 //			groupOrderMaster.setGroupOrderBonus((int) Math.round(totalproductprice * thegroupOrderDiscount.doubleValue()));
 			switch (thegroupOrderMin) {
 			case 200:
@@ -171,7 +175,16 @@ public class GroupActivityService {
 			idpks.setGroupOrderId(groupActivityId);
 			idpks.setMemberId(memberId);
 			Optional<GroupOrderDetail> outConfirm = groupOrderDetailRepository.findById(idpks);
-			return outConfirm.get() != null;
+			if (! outConfirm.isPresent()) { //採到資料不存在的雷。
+				return false;
+			}else {
+				return outConfirm.get() != null;
+			}
+		}
+		
+		public GroupOrderMaster GiveMeNumberOfProduct(Integer groupActivityId) {
+			List<GroupOrderMaster> groupOrderMaster = groupOrderMasterRepository.findByGroupActivityId(groupActivityId);
+			return groupOrderMaster.get(0);
 		}
 
 	//

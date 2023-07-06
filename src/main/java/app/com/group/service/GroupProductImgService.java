@@ -40,7 +40,7 @@ public class GroupProductImgService {
 		MultipartFile[] files = { file0, file1, file2, file3 };
 		for (int i = 0; i < files.length; i++) {
 			GroupProductImgVO inserivo = new GroupProductImgVO();
-			System.out.println("每次回圈觀察MultipartFile陣列長度:" + files.length);
+//			System.out.println("每次回圈觀察MultipartFile陣列長度:" + files.length);
 			if (files[i] != null) {
 				try {
 					// 取得該商品VO物件的AutoID，帶入成為FK之值。

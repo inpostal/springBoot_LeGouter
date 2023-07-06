@@ -97,7 +97,7 @@ public class CarouselController {
                                                @RequestParam("content") String content,
                                                @RequestParam("linkTitle") String linkTitle,
                                                @RequestParam("link") String link,
-                                               @RequestParam("image") MultipartFile image) {
+                                               @RequestParam(value = "image", required = false) MultipartFile image) {
 
         Carousel carousel = service.getCarousel(carId);
         carousel.setCarTag(tag);
@@ -107,7 +107,8 @@ public class CarouselController {
         carousel.setCarPicLink(link);
 
         try {
-            carousel.setCarPicPic(image.getBytes());
+            if (image!=null && !image.isEmpty())
+                carousel.setCarPicPic(image.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -15,6 +15,7 @@ import app.com.group.vo.GroupActivityDTO;
 import app.com.group.vo.GroupActivityVO;
 import app.com.group.vo.GroupCheckoutDTO;
 import app.com.group.vo.GroupProductVO;
+import app.com.groupordermaster.vo.GroupOrderMaster;
 import app.com.member.vo.Members;
 
 @Controller
@@ -61,7 +62,7 @@ public class GroupController {
         		return "front-end/group/plan-activity3";
 			}else {
 				//如果不是就進入團購平台
-				redirectAttributes.addFlashAttribute("pleaseLogin", "不是團購主 無法進入專區!");
+				redirectAttributes.addFlashAttribute("STOP", "不是團購主 無法進入專區!");
         		return "redirect:/group-shop";
 			}
     		
@@ -93,6 +94,9 @@ public class GroupController {
 		temporarydto.setGroupProductName(tr.getGroupProductName());
 		temporarydto.setGroupProductContent(tr.getGroupProductContent());
 		temporarydto.setGroupDetailCount(detailcount);
+		GroupOrderMaster groupOrderMaster = groupActivityService.GiveMeNumberOfProduct(groupActivityId);
+		temporarydto.setNumberOfProduct(groupOrderMaster.getNumberOfProduct());
+		
     	 model.addAttribute("groupActivityDTO", temporarydto);
 		return "front-end/group/single-product2";
 	}
@@ -121,7 +125,7 @@ public class GroupController {
         if (user != null){
         	Boolean examineDetail = groupActivityService.ConfirmDetail(groupActivityId, user.getMemberId());
         	if (examineDetail) {
-        		redirectAttributes.addFlashAttribute("pleaseLogin", "已參加團購!");
+        		redirectAttributes.addFlashAttribute("NotAgain", "已參加過該團購!");
         		return "redirect:/group-shop";
 			}else {
 				

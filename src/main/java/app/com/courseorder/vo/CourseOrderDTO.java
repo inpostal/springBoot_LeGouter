@@ -12,4 +12,5 @@ public class CourseOrderDTO {
     private Integer courseOrderPrice;
     private Date courseDate;
     private String courseName;
+    private String cpName;
 }

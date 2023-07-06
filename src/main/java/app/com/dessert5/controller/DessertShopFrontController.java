@@ -50,7 +50,7 @@ public class DessertShopFrontController {
         return dessertService.addToCart(dessertId, memberId);
     }
 
-    // 加入購物車
+    // 加入購物車主頁小圖
     @GetMapping("/addtocartshop")
     public String addToCartshop(@RequestParam Integer dessertId, HttpSession session) {
         Members member = (Members) session.getAttribute("user");

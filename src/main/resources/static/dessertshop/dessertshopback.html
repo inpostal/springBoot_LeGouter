@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>dessert shop back</title>
+    <title>LeGouter 商品後台管理</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -336,6 +336,21 @@
             cursor: pointer;
         }
 
+    /*    sweet alert font*/
+        div:where(.swal2-container) h2:where(.swal2-title) {
+            position: relative;
+            max-width: 100%;
+            margin: 0;
+            padding: 0.8em 1em 0;
+            color: inherit;
+            font-size: 1.875em;
+            font-weight: 330 !important;
+            text-align: center;
+            text-transform: none;
+            word-wrap: break-word;
+        }
+
+
 
     </style>
 
@@ -364,7 +379,6 @@
 
             <!-- 由此開始 -->
 
-            <!-- <h3>甜點商品清單</h3> -->
 
             <div class="container-xl">
                 <div class="table-responsive">
@@ -418,19 +432,7 @@
                             <tbody id="back-table">
 
 
-                            <!-- 1. -->
-<!--                            <tr>-->
-<!--                                <td>${res[e].dessertName}</td>-->
-<!--                                <td>${res[e].dessertContent}</td>-->
-<!--                                <td><img src="/dessert5/image0?dessertId=${res[e].dessertId}" alt="" style="height: 60px;"></td>-->
-<!--                                <td>NT$${res[e].dessertPrice}</td>-->
-<!--                                <td><span class="${statusClass}">${dessertStatus}</span></td>-->
-<!--                                <td>-->
-<!--                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>-->
-<!--                                    <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>-->
-<!--                                    <a href data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>-->
-<!--                                </td>-->
-<!--                            </tr>-->
+
 
 
                             </tbody>
@@ -503,7 +505,7 @@
 
                         <div class="inputBox w100">
         <!--                    <input type="button" class="btn btn-default" data-dismiss="modal" value="取消">-->
-                            <input type="submit" value="確定上架" id="insert"  style="position: absolute; top: 50px; right: 0;">
+                            <input type="submit" value="確定新增" id="insert"  style="position: absolute; top: 50px; right: 0;">
                         </div>
 
                     </div>
@@ -567,9 +569,13 @@
 <script src="/Conponents/back_end.js"></script>
 
 
-
-
-
+<!-- sweet alert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<!--    toast -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 <!-- import js -->
 
@@ -591,24 +597,6 @@
         // Activate tooltip
         $('[data-toggle="tooltip"]').tooltip();
 
-        // Select/Deselect checkboxes
-        // var checkbox = $('table tbody input[type="checkbox"]');
-        // $("#selectAll").click(function(){
-        //     if(this.checked){
-        //         checkbox.each(function(){
-        //             this.checked = true;
-        //         });
-        //     } else{
-        //         checkbox.each(function(){
-        //             this.checked = false;
-        //         });
-        //     }
-        // });
-        // checkbox.click(function(){
-        //     if(!this.checked){
-        //         $("#selectAll").prop("checked", false);
-        //     }
-        // });
     });
 </script>
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -621,13 +609,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+
+    toastr.options = {
+        // toastr配置
+        "closeButton": true, //是否显示关闭按钮
+        "debug": false, //是否使用debug模式
+        "progressBar": true, //是否显示进度条，当为false时候不显示；当为true时候，显示进度条，当进度条缩短到0时候，消息通知弹窗消失
+        "positionClass": "toast-top-center",//显示的动画位置
+        "showDuration": "400", //显示的动画时间
+        "hideDuration": "1000", //消失的动画时间
+        "timeOut": "7000", //展现时间
+        "extendedTimeOut": "1000", //加长展示时间
+        "showEasing": "swing", //显示时的动画缓冲方式
+        "hideEasing": "linear", //消失时的动画缓冲方式
+        "showMethod": "fadeIn", //显示时的动画方式
+        "hideMethod": "fadeOut" //消失时的动画方式
+    }
     // 檢查登入
     $(document).ready(function(){
         $.ajax({
             url: '/dessert5/empcheck5',
             type: 'GET',
             success: function(res){
-                console.log(res);
                 if (res == "/employee/login"){
                     window.location.href = res;
                 }
@@ -639,13 +642,11 @@
     $(document).ready(function(){
         $("#status-select").change(function() {
             let status = $(this).val();
-            console.log(status);
             if (status === "販售中") {
                 $.ajax({
                     url: '/dessert5/findAll',
                     type: 'GET',
                     success: function(res){
-                        console.log(res);
                         let html = "";
                         for (let e in res) {
                             let dessertStatus = res[e].dessertStatus;
@@ -662,7 +663,7 @@
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                             <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                            <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                            <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                         </td>
                                      </tr>`;
 
@@ -696,7 +697,7 @@
                                         <td>
                                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                             <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                            <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                            <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                         </td>
                                      </tr>`;
 
@@ -735,7 +736,7 @@
                                 <td>
                                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                     <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                    <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                    <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                 </td>
                              </tr>`;
 
@@ -761,8 +762,22 @@
                 url: '/dessert5/soldout?dessertName=' + encodeURIComponent(dessertName),
                 type: 'GET',
                 success: function(){
-                    window.alert("商品已下架");
-                    location.reload();
+                    // window.alert("商品已下架");
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品已下架',
+                        confirmButtonText: '確定'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    })
+                    // toastr.success("商品已下架");
+                    // setTimeout(function() {
+                    //     location.reload();
+                    // }, 2000);
+
+
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.error(xhr);
@@ -795,14 +810,15 @@
                                 <td>
                                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="${res[e].dessertId}"><span data-toggle="tooltip" title="編輯商品資訊" >編輯</span></a>
                                     <br><a href="#RemoveEmployeeModal" class="Remove" data-toggle="modal" data-info="${res[e].dessertName}"><span data-toggle="tooltip" title="下架商品">下架</span></a>
-                                    <a href="#" data-id="${res[e].dessertId}" onclick="redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
+                                    <a href="#" data-id="${res[e].dessertId}" onclick="event.preventDefault(); redirectToEditPicture(${res[e].dessertId})"><span data-toggle="tooltip" title="編輯商品圖片">商品圖片</span></a>
                                 </td>
                              </tr>`;
 
                     }
                     $("#back-table").html(html);
                 } else {
-                    window.alert("查無此商品");
+                    // window.alert("查無此商品");
+                    toastr.warning("查無此商品");
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -820,22 +836,28 @@
 
         // 驗證
         if ($("#dessertName").val() === "") {
-            window.alert("請填寫商品名稱");
+            // window.alert("請填寫商品名稱");
+            toastr.error("請填寫商品名稱");
             return;
         } else if ($("#dessertName").val().length > 30) {
-            window.alert("商品名稱不得超過30字");
+            // window.alert("商品名稱不得超過30字");
+            toastr.error("商品名稱不得超過30字");
             return;
         } else if ($("#dessertContent").val() === "") {
-            window.alert("請填寫商品描述");
+            // window.alert("請填寫商品描述");
+            toastr.error("請填寫商品描述");
             return;
         } else if ($("#dessertContent").val().length > 300) {
-            window.alert("商品描述不得超過300字");
+            // window.alert("商品描述不得超過300字");
+            toastr.error("商品描述不得超過300字");
             return;
         } else if ($("#dessertPrice").val() === "") {
-            window.alert("請填寫商品價格，僅限填入數字0-9");
+            // window.alert("請填寫商品價格，僅限填入數字0-9");
+            toastr.error("請填寫商品價格，僅限填入數字0-9");
             return;
         } else if ($("#dessertPrice").val() === "" || $("#dessertPrice").val().length > 5 || $("#dessertPrice").val() === "0" ) {
-            window.alert("商品價格應介於1~9999之間");
+            // window.alert("商品價格應介於1~9999之間");
+            toastr.error("商品價格應介於1~9999之間");
             return;
         } else {
             $.ajax({
@@ -846,15 +868,24 @@
                     dessertName: $("#dessertName").val(),
                     dessertContent: $("#dessertContent").val(),
                     dessertPrice: $("#dessertPrice").val(),
-                    dessertStatus: "販售中"
+                    dessertStatus: "已下架"
                 }),
                 success: function(res){
-                    // 跳出訊息視窗
-                    window.alert(res);
-                    if (res != "商品已存在，無法修改") {
-                        location.reload();
+                    if (res === "商品名稱已存在，新增失敗") {
+                        toastr.error(res);
+                        return;
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '新增成功',
+                            confirmButtonText: '確定',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                                return;
+                            }
+                        })
                     }
-                    return;
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.error(xhr);
@@ -894,22 +925,28 @@
             const $currentButton = $(this);
 
             if ($("#editName").val() === "") {
-                window.alert("請填寫商品名稱");
+                // window.alert("請填寫商品名稱");
+                toastr.error("請填寫商品名稱");
                 return;
             } else if ($("#editName").val().length > 30) {
-                window.alert("商品名稱不得超過30字");
+                // window.alert("商品名稱不得超過30字");
+                toastr.error("商品名稱不得超過30字");
                 return;
             } else if ($("#editContent").val() === "") {
-                window.alert("請填寫商品描述");
+                // window.alert("請填寫商品描述");
+                toastr.error("請填寫商品描述");
                 return;
             } else if ($("#editContent").val().length > 300) {
-                window.alert("商品描述不得超過300字");
+                // window.alert("商品描述不得超過300字");
+                toastr.error("商品描述不得超過300字");
                 return;
             } else if ($("#editPrice").val() === "") {
-                window.alert("請填寫商品價格，僅限填入數字0-9");
+                // window.alert("請填寫商品價格，僅限填入數字0-9");
+                toastr.error("請填寫商品價格，僅限填入數字0-9");
                 return;
             } else if ($("#editPrice").val() === "" || $("#editPrice").val().length > 5 || $("#editPrice").val() === "0" ) {
-                window.alert("商品價格應介於1~9999之間");
+                // window.alert("商品價格應介於1~9999之間");
+                toastr.error("商品價格應介於1~9999之間");
                 return;
             } else {
                 $.ajax({
@@ -923,12 +960,21 @@
                         dessertStatus: $("#editStatus").val()
                     }),
                     success: function(res) {
-                        // 跳出訊息視窗
-                        window.alert(res);
-                        if (res != "商品已存在，無法修改") {
-                            location.reload();
+                        if (res === "商品名稱已存在，編輯失敗") {
+                            toastr.error(res);
+                            return;
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '編輯完成',
+                                confirmButtonText: '確定',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                    return;
+                                }
+                            })
                         }
-                        return;
                         // 在成功后解绑当前按钮元素的点击事件
                         // $currentButton.off('click');
                     },

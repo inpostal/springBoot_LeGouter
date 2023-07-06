@@ -65,7 +65,11 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String getLogin() {
+    public String getLogin(HttpSession session) {
+        Members user = (Members) session.getAttribute("user");
+        if (user!=null){
+            return "redirect:/LeGouter";
+        }
         return "front-end/member/MemberLogin";
     }
 

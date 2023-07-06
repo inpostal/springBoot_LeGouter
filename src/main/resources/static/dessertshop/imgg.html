@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>dessert shop back</title>
+    <title>LeGouter 商品後台管理</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -140,6 +140,20 @@
             display: none;  /* 隐藏滚动条 */
         }
 
+    /*    sweet alert font*/
+        div:where(.swal2-container) h2:where(.swal2-title) {
+            position: relative;
+            max-width: 100%;
+            margin: 0;
+            padding: 0.8em 1em 0;
+            color: inherit;
+            font-size: 1.875em;
+            font-weight: 330 !important;
+            text-align: center;
+            text-transform: none;
+            word-wrap: break-word;
+        }
+
 
 
     </style>
@@ -229,7 +243,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<!-- sweet alert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<!--    toast -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
 <script>
+    toastr.options = {
+        // toastr配置
+        "closeButton": true, //是否显示关闭按钮
+        "debug": false, //是否使用debug模式
+        "progressBar": true, //是否显示进度条，当为false时候不显示；当为true时候，显示进度条，当进度条缩短到0时候，消息通知弹窗消失
+        "positionClass": "toast-top-center",//显示的动画位置
+        "showDuration": "400", //显示的动画时间
+        "hideDuration": "1000", //消失的动画时间
+        "timeOut": "7000", //展现时间
+        "extendedTimeOut": "1000", //加长展示时间
+        "showEasing": "swing", //显示时的动画缓冲方式
+        "hideEasing": "linear", //消失时的动画缓冲方式
+        "showMethod": "fadeIn", //显示时的动画方式
+        "hideMethod": "fadeOut" //消失时的动画方式
+    }
 // hide scrollbar
     // 获取页面的根元素
     let rootElement = document.documentElement;
@@ -332,8 +369,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -356,8 +405,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -380,8 +441,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -404,8 +477,20 @@
                 type: 'DELETE',
                 success: function(res) {
                     // 跳出訊息視窗
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    // 刪除成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已刪除',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
 
                     // 在成功后解绑当前按钮元素的点击事件
                     $currentButton.off('click');
@@ -449,8 +534,19 @@
                 processData: false,
                 data: formData,
                 success: function(res) {
-                    window.alert(res);
-                    location.reload();
+                    // window.alert(res);
+                    // location.reload();
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: '商品圖片已更新',
+                        confirmButtonText: '確定',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                            return;
+                        }
+                    })
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.error(xhr);
