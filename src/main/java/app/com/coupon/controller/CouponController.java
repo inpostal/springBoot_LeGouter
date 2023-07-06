@@ -108,6 +108,11 @@ public class CouponController {
 //        return result;
 //    }
 
+//    @GetMapping("/delete/follow/list/{courseId}/{memId}")
+//    @ResponseBody
+//    public void deleteFollowList(@PathVariable Integer courseId, @PathVariable Integer memId){
+//        service.deleteFollowList(memId, courseId);
+//    }
     //單頁
     //領取更新會員優惠券時,收ajax傳送資料用
     @PostMapping("/coupon/memCp")
