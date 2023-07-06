@@ -188,6 +188,13 @@
             deletecontroll();
         });
 
+        $("#getgroupactivitycontent").change(function() {
+            document.getElementById("gotocontent").click();
+        });
+        $("#getgroupname").change(function() {
+            document.getElementById("gotoname").click();
+        });
+
         function showlist() {
             $.ajax({
                 url: "/groupActivity/showList",

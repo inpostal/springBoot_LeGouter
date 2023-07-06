@@ -290,7 +290,6 @@
                             <ul class="accordion">
                                 <li class="accordion-item active">
                                     <input type="radio" name="thePaying" value="0">
-                                    <!-- <a class="accordion-title"> -->
                                     <a class="">
                                         信用卡
                                     </a>
@@ -300,7 +299,6 @@
                                 </li>
                                 <li class="accordion-item">
                                     <input type="radio" name="thePaying" value="1">
-                                    <!-- <a class="accordion-title"> -->
                                     <a class="">
                                         匯款
                                     </a>
@@ -451,7 +449,14 @@
     $(document).ready(function () {
         $("#outprice").html($("#setprice").val());
 
+        
         $("#checkout").click(function (e) {
+            // let getradio = $(".accordion").find("input[type='radio']"); //舊
+            // let getradio = $(".accordion").find("input[type='radio']:checked").val(); //新
+            // console.log("觀察新getradio: " + getradio)
+            
+            // console.log("觀察getradio: " + getradio[0].value); //成功抓到radio元素，並且陣列[0]印出信用卡radio的值。
+            // console.log("觀察getradio: " + getradio[0].getAttribute("checked")) //改用新getradio的方式就不用了。
             if ($("#receiverName").val() == "" || $("#receiverAddress").val() == "" || $("#receiverPhone").val() == "" || $("#receiverEmail").val() == "") {
                 alert('請填寫完整資料');
             }else {
@@ -463,7 +468,7 @@
                         groupOrderId: Number($("#groupOrderId").val()),
                         memberId: Number($("#memberId").text()),
                         groupOrderAmount: Number($("#theAmount").val()),
-                        groupProductPaying: Number($("#groupProductPaying").val()),
+                        groupProductPaying: $(".accordion").find("input[type='radio']:checked").val(),
                         groupProductStatus: 1,
                         groupProductOthers: $("#groupProductOthers").val(),
                         receiverName: $("#receiverName").val(),

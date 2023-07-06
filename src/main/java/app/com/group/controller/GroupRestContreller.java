@@ -354,7 +354,7 @@ public class GroupRestContreller {
 			updatato.setGroupProductStatus(groupProductStatus);
 			Boolean success = groupProductService.updataThe(updatato);
 
-			//待施工service
+			//待施工service。 20230706 要收尾了 可是無法完成，在前端先隱藏input 
 
 			Map<String, Boolean> response = new HashMap<>();
 			response.put("success", success);

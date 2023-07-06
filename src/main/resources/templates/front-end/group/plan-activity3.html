@@ -79,14 +79,15 @@
                     <button class="myplan">我要揪團</button>
                 </a>
 
-                <div class="to-search">
+                <!-- 20230706 施工中 待補上後端 -->
+                <!-- <div class="to-search">
                     <form action="">
                         <input class="" type="search" placeholder="搜尋商品名稱" name="">
                         <button type="submit" id="">搜尋</button>
                     </form>
-                </div>
+                </div> -->
                 <div class="sortby">
-                    <select class="wide">
+                    <select class="wide" id="gotosort">
                         <option value="0">預設排序</option>
                         <option value="1">價格高到低</option>
                         <option value="2">價格低到高</option>
@@ -224,35 +225,67 @@
                 url: "/groupProduct/showPutOnList",
                 type: "GET",
                 success: function (response) {
-                    let texts = "";
-                    for (let gvo in response) {
-                        let text = `<div class="col-item">
-                    <div class="item">
-                        <div class="img-board">
-                            <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="商品圖片" class="img-width">
-
-                        </div>
-                        <div class="cont">
-                            <h6>商品名稱:${response[gvo].groupProductName}</h6>
-                            <div class="info">
-                                <p class="info-context" style="height: 200px; overflow: auto;">
-                                    ${response[gvo].groupProductContent}。
-                                </p>
-                                <p>
-                                    商品價格:${response[gvo].groupProductPrice}
-                                </p>
-                            </div>
-                            <div class="botm">
-                                <div class="tags">
-                                    
+                    function DynamiGener(array){
+                        let texts = "";
+                        for (let gvo in response) {
+                            let text = `
+                        <div class="col-item">
+                            <div class="item">
+                                <div class="img-board">
+                                    <img src="/groupProduct/get/img/${response[gvo].groupProductId}" alt="商品圖片" class="img-width">
+                                </div>
+                                <div class="cont">
+                                    <h6>商品名稱:${response[gvo].groupProductName}</h6>
+                                    <div class="info">
+                                        <p class="info-context" style="height: 200px; overflow: auto;">
+                                            ${response[gvo].groupProductContent}。
+                                        </p>
+                                        <p>
+                                            商品價格:${response[gvo].groupProductPrice}
+                                        </p>
+                                    </div>
+                                    <div class="botm">
+                                        <div class="tags">
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>`;
-                        texts += text;
+                        </div>`;
+                            texts += text;
+                        }
+                        $("#showallact").html(texts);
                     }
-                    $("#showallact").html(texts);
+                    DynamiGener(response);
+
+                    //排序
+                    $("#gotosort").change(function() {
+                        let sortid = Number($("#gotosort").val());
+                            switch (sortid) {
+                                case 0: {
+                                    response.sort(function(a,b) {
+                                        return a.groupProductId > b.groupProductId ? 1 : -1;
+                                    });
+                                    DynamiGener(response);
+                                    document.getElementById("beredoshow").click();
+                                    break;}
+                                case 1: {
+                                    response.sort(function(a,b) {
+                                        return a.groupActivityPrice < b.groupActivityPrice ? 1 : -1;
+                                    });
+                                    DynamiGener(response);
+                                    document.getElementById("beredoshow").click();
+                                    break;}
+                                case 2: {
+                                        response.sort(function(a,b) {
+                                        return a.groupActivityPrice > b.groupActivityPrice ? 1 : -1;
+                                    });
+                                    DynamiGener(response);
+                                    document.getElementById("beredoshow").click();
+                                    break;}
+                                
+                            }
+                    });
                 }
             });
         }

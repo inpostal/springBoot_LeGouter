@@ -155,18 +155,36 @@
     <!-- Main JS -->
     <script src="Group/Shan_assets/js/main.js"></script>
 
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         showlist()
         window.addEventListener("load", function () {
         })
         
         $(document).ready(function () {
-            if($("#STOP").text() != ""){
-                alert($("#STOP").text());
+            // if($("#STOP").text() != ""){
+            //     alert($("#STOP").text());
+            // }
+            // if($("#NotAgain").text() != ""){
+            //     alert($("#NotAgain").text());
+            // }
+            if ($("#STOP").text() !== "") {
+                Swal.fire({
+                    title: "提示",
+                    text: $("#STOP").text(),
+                    icon: "info",
+                    confirmButtonText: "確定"
+                });
             }
-            if($("#NotAgain").text() != ""){
-                alert($("#NotAgain").text());
-        }
+            if ($("#NotAgain").text() !== "") {
+                Swal.fire({
+                    title: "提示",
+                    text: $("#NotAgain").text(),
+                    icon: "info",
+                    confirmButtonText: "確定"
+                });
+            }
         });
 
         function showlist() {
@@ -254,7 +272,7 @@
                                         DynamiGener(response);
                                         document.getElementById("beredoshow").click();
                                         break;}
-                                        case 2: {
+                                    case 2: {
                                             response.sort(function(a,b) {
                                             return a.groupActivityPrice > b.groupActivityPrice ? 1 : -1;
                                         });
