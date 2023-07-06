@@ -72,9 +72,11 @@ function sortTableByColumn(columnIndex, event) {
   }
 }
 //追蹤按鈕更新
-function trackCourse(button) {
-  button.innerHTML = "已加入購物車";
-  button.disabled = true;
+function trackCourse(courseId) {
+  window.location.href = '/course/coursecheckout?courseId=' + courseId;
+  //
+  // button.innerHTML = "已加入購物車";
+  // button.disabled = true;
 }
 //取消追蹤
 function removeCourseRow(button) {

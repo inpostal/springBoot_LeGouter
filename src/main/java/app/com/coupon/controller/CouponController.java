@@ -94,19 +94,19 @@ public class CouponController {
     }
 
 //刪除按鈕-追蹤清單課程
-    @PostMapping("/delete/follow/list/{courseId}")
-    @ResponseBody
-    public Map<String, Boolean> handleDeleteFollowList(@PathVariable Integer courseId, HttpSession session) {
-        Map<String, Boolean> result = new HashMap<>();
-        Members user = (Members) session.getAttribute("user");
-        LoveCourse loveCourse = new LoveCourse();
-        loveCourse.setCourseId(courseId);
-        loveCourse.setMemId(user.getMemberId());
-        service.deleteFollowList(loveCourse);
-
-        result.put("isSuccess", true);
-        return result;
-    }
+//    @PostMapping("/delete/follow/list/{courseId}")
+//    @ResponseBody
+//    public Map<String, Boolean> handleDeleteFollowList(@PathVariable Integer courseId, HttpSession session) {
+//        Map<String, Boolean> result = new HashMap<>();
+//        Members user = (Members) session.getAttribute("user");
+//        LoveCourse loveCourse = new LoveCourse();
+//        loveCourse.setCourseId(courseId);
+//        loveCourse.setMemId(user.getMemberId());
+//        service.deleteFollowList(loveCourse);
+//
+//        result.put("isSuccess", true);
+//        return result;
+//    }
 
     //單頁
     //領取更新會員優惠券時,收ajax傳送資料用
@@ -270,6 +270,12 @@ public class CouponController {
             return "/front-end/Coupon/FollowList";
         }
     }
+//
+//    @GetMapping("/course/coursecheckout?courseId={courseId}")
+//    public void checkFollowCourse(@PathVariable ){
+//
+//    }
+
 
     @GetMapping("/check/course")
     public String courseCheckCoupon(){

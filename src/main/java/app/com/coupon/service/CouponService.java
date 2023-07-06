@@ -159,9 +159,17 @@ public class CouponService {
         return result;
     }
 
-    public void deleteFollowList(LoveCourse loveCourse) {
+//    public void deleteFollowList(LoveCourse loveCourse) {
+//        memberFollowRepository.deleteById(loveCourse);
+//    }
+
+    public void deleteFollowList(Integer memId, Integer courseId){
+        LoveCourse loveCourse = new LoveCourse();
+        loveCourse.setCourseId(courseId);
+        loveCourse.setMemId(memId);
         memberFollowRepository.deleteById(loveCourse);
     }
+    //service.deleteFollowList(user.getMemberId, dto.getCourseId);
 
     public List<ShoppingCpMemDTO> getAllMemCpDto(Integer memId) {
         List<MembersCp> allCpByMemId = memberCpRepository.findAllByMemId(memId);

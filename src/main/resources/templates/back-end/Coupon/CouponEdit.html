@@ -27,9 +27,9 @@
 
 </head>
 
-<body>
+<body style="background: #fff9e5">
 <!-- 新增優惠券功能區 -->
-<div class="layui-fluid">
+<div class="layui-fluid" style="display:flex; justify-content: center;  align-items: center; margin-top:150px">
     <div class="layui-row">
         <form class="layui-form">
 
@@ -87,13 +87,13 @@
             </div>
 
             <div class="form-group">
-                <label for="startDate">起始日期:</label>
-                <input type="date" id="startDate" name="start-date" th:value="${cp.getCpStart()}">
+                <label for="startDate" class="layui-form-label"><span class="x-red">*</span>起始日期:</label>
+                <input type="date" id="startDate" class="layui-input" name="start-date" th:value="${cp.getCpStart()}" style="border-radius: 10px; height: 40px; text-align: center; width: 190px;">
             </div>
 
             <div class="form-group">
-                <label for="endDate">結束日期:</label>
-                <input type="date" id="endDate" name="end-date" th:value="${cp.getCpEnd()}">
+                <label for="endDate" class="layui-form-label"><span class="x-red">*</span>結束日期:</label>
+                <input type="date" id="endDate" class="layui-input" name="end-date" th:value="${cp.getCpEnd()}" style="border-radius: 10px; height: 40px; text-align: center; width: 190px;">
             </div>
 
             <div class="layui-form-item">
@@ -101,7 +101,7 @@
                 </label>
             </div>
         </form>
-        <button class="layui-btn" lay-filter="add" lay-submit="" id="edit-btn" type="button">
+        <button class="layui-btn" lay-filter="add" lay-submit="" id="edit-btn" type="button" style="background-color:#ffb800; margin-left: 80%">
             修改
         </button>
     </div>

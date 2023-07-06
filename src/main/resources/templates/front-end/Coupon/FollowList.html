@@ -126,7 +126,9 @@
 							<td th:text="${f.getEmpName()}"></td>
 							<td th:text="${f.getCoursePrice()}"></td>
 							<td>
-								<button class="btn btn-primary" style="font-size: small" onclick="trackCourse(this)" >購買課程</button>
+<!--								<button class="btn btn-primary" style="font-size: small" th:text="'購買課程'" th:onclick="'trackCourse(' + ${f.getCourseId()} + ')'" ></button>-->
+								<button class="btn btn-primary" style="font-size: small" th:onclick="'window.location.href=\'/course/coursecheckout?courseId=' + ${f.getCourseId()} + '\''" >購買課程</button>
+								<!--								<button class="btn btn-primary" style="font-size: small" th:href="@{/course/coursecheckout?courseId=${f.getCourseId()}}">購買課程</button>-->
 								<p style="display: none" th:text="${f.getCourseId()}" class="course-id"></p>
 								<button class="btn btn-success delete-btn" style="font-size: small" >刪除課程</button>
 							</td>
