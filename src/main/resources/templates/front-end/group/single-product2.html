@@ -206,7 +206,7 @@
                                         <progress id="theprogress" th:value="${groupActivityDTO.getNumberOfProduct}" th:max="${groupActivityDTO.getGroupOrderMin}"></progress>
                                         <span id="percentage"></span>
                                     </p>
-                                    <a th:href="@{'/group-product/Checkout?groupActivityId=' + ${groupActivityDTO.groupActivityId} + '&groupActivityPrice=' + ${groupActivityDTO.groupActivityPrice}}" class="buy-btn d-block d-sm-inline-block text-center text-sm-left">參加團購</a>
+                                    <a th:href="@{'/group-product/Checkout?groupActivityId=' + ${groupActivityDTO.groupActivityId} + '&groupActivityPrice=' + ${groupActivityDTO.groupActivityPrice}}" class="buy-btn d-block d-sm-inline-block text-center text-sm-left" id="joinbutton">參加團購</a>
                                     <!-- <form action="/group-product/Checkout" method="get" target="_blank">
                                         <input type="text" name="groupActivityId" th:value="${groupActivityDTO.groupActivityId}" hidden>
                                         <input type="text" name="groupActivityPrice" th:value="${groupActivityDTO.groupActivityPrice}" hidden> -->
@@ -374,6 +374,8 @@
             if(limitnow > countDownDate){
                 alert("該團購活動已結束! 返回團購平台");
                 window.location.href="/group-shop";
+                // alert("該團購活動已結束 Chill一下") //跟下一行搭配。
+                // document.getElementById("joinbutton").style.visibility = "hidden"; //這種的也不錯，原本想用這個再配合倒數讀秒隱藏。
             }
             
         });

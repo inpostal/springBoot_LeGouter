@@ -475,7 +475,7 @@
                 type: "POST",
                 //contentType: "application/json",
                 //data: JSON.stringify(datas),
-                data: {groupProductId: Number($("#segetproductid").val())},
+                data: {groupProductId: Number($("#segetproductid").val().trim())},
                 // beforeSend: function () {
                 // //console.log("發送請求之前確認:" + JSON.stringify(datas));
                 // console.log("發送請求之前確認:" + datas);
@@ -503,8 +503,7 @@
                     $("#showone").html(text);
                 },
                 error: function (xhr, status, erroe) {
-                console.log("status:" + status);
-                console.log("erroe:" + erroe);
+                    alert("查無資料");
                 }   
             });
         }
