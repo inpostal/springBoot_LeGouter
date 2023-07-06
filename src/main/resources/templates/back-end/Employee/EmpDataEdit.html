@@ -114,8 +114,9 @@
                         <div class="form-group">
                             <label for="emp-category">員工分類:</label>
                             <select id="emp-category" name="emp-category">
-                                <option value="0" th:selected="${employee.empClassify == 0}">一般員工</option>
-                                <option value="1" th:selected="${employee.empClassify == 1}">管理員</option>
+                                <option value="0" th:if="${employee.empClassify != 2}" th:selected="${employee.empClassify == 0}">一般員工</option>
+                                <option value="1" th:if="${employee.empClassify != 2}" th:selected="${employee.empClassify == 1}">管理員</option>
+                                <option value="2" th:if="${employee.empClassify == 2}" th:selected="${employee.empClassify == 2}" >主廚</option>
                             </select>
                         </div>
                         <div class="form-group">

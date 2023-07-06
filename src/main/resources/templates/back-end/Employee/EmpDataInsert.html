@@ -147,6 +147,7 @@
     <!-- import font awesome -->
     <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
     <script src="/Member/Sam_Js/Jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $('#emp-name').blur(function() {
             let name = $(this).val();
@@ -289,11 +290,35 @@
                 data: formData,
                 type: 'POST',
                 success: function(response) {
-                    alert('新增成功');
-                    window.location.href = '/employee/manage';
+                    Swal.fire({
+                        title: '修改成功',
+                        html: '',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            window.location.href = '/employee/manage';
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            console.log('I was closed by the timer')
+                        }
+                    });
                 },
                 error: function(xhr, status, error) {
-                    alert('新增失敗');
+                    Swal.fire({
+                        icon: 'error',
+                        title: '輸入資料有誤',
+                        text: '請重新確認修改的資料',
+                    });
                     console.log(xhr);
                 }
             });

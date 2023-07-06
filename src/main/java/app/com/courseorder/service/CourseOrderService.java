@@ -1,6 +1,7 @@
 package app.com.courseorder.service;
 
 
+import app.com.coupon.repository.CouponTypeRepository;
 import app.com.course.repository.CourseRepository;
 import app.com.course.vo.Course;
 import app.com.courseorder.repository.CourseOrderRepository;
@@ -22,6 +23,8 @@ public class CourseOrderService {
     private MemberRepository memberRepository;
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private CouponTypeRepository cpRepository;
 
     public List<CourseOrderDTO> getCourseOrderList(){
         List<CourseOrderDTO> result = new ArrayList<>();
@@ -60,7 +63,10 @@ public class CourseOrderService {
             dto.setCourseOrderPrice(course.getCoursePrice());
             dto.setCourseName(course.getCourseName());
             dto.setCourseDate(c.getOrderTime());
-
+            if (c.getCpId()!=null){
+                dto.setCpName(cpRepository.getReferenceById(c.getCpId()).getCpName());
+                dto.setCourseOrderPrice(c.getCpOrderTotal());
+            }
             result.add(dto);
         }
         return  result;
