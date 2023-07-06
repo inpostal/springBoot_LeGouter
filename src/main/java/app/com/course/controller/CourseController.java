@@ -415,7 +415,7 @@ public class CourseController {
                 return "redirect:/course/singlecourse?courseId=" + courseId;
             } else {
                 CheckoutDTO dto = courseService.getCheckoutData(user.getMemberId(), courseId);
-//        service.deleteFollowList(user.getMemberId(), courseId);
+                service.deleteFollowList(user.getMemberId(), courseId);
                 List<CheckOutDto> cp = service.findAllMemCourseCp(courseId, user.getMemberId());
                 model.addAttribute("checkout", dto);
                 model.addAttribute("cplist", cp);

@@ -270,6 +270,34 @@
 
 
 <script>
+    document.getElementById('wishlist-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        // 獲取當前網址的 URLSearchParams
+        const urlParams = new URLSearchParams(window.location.search);
+        // console.log("urlParams:"+urlParams);
+        // 獲取特定請求參數的值
+        const courseId = urlParams.get('courseId');
+        console.log("courseId:" + courseId);
+        $.ajax({
+            // url: `/add/courseFollow/${courseId}`,
+            ///course/singlecourse
+            url: "/add/courseFollow/" + courseId,
+            type: 'POST',
+            success: function (data) {
+                Swal.fire({
+                    title: "成功加入收藏",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                });
+                console.log("成功送出");
+            }
+
+        });
+    })
+</script>
+
+
+<script>
 
     $(document).ready(function () {
         if ($("#NotAgain").text() !== "") {

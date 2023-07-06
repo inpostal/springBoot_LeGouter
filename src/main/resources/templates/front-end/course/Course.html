@@ -160,6 +160,8 @@
 <!-- Custom JS -->
 <script src=/Course/front-end/"assets/js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script>
     $(function () {
@@ -212,7 +214,12 @@
             url: `/add/courseFollow/${id}`,
             type: 'POST',
             success: function (res) {
-                alert('追蹤成功');
+                Swal.fire({
+                    title: "成功加入收藏",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                });
+                console.log("成功送出");
             },
             error: function (error) {
                 // 处理错误情况
