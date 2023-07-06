@@ -178,21 +178,25 @@
                         <input type="radio" class="inpproduct" id="productstatus" name="groupProductStatus" value="1" checked style="display: none;">
                         <label class="inpproduct">上傳圖片</label>
                         <form enctype="multipart/form-data" id="imageform">
-                            <div>
+                            <div style="margin-bottom: 10px;">
                                 <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg0">
-                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                                <img src="" id="imgpreview0" alt="預覽圖1" width="360px" height="270px">
+                                <button type="button" id="toclearimg0" style="display: inline-block; margin-left: 30px;">清除圖片</button>
                             </div>
-                            <div>
+                            <div style="margin-bottom: 10px;">
                                 <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg1">
-                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                                <img src="" id="imgpreview1" alt="預覽圖1" width="360px" height="270px">
+                                <button type="button" id="toclearimg1" style="display: inline-block; margin-left: 30px;">清除圖片</button>
                             </div>
-                            <div>
+                            <div style="margin-bottom: 10px;">
                                 <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg2">
-                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                                <img src="" id="imgpreview2" alt="預覽圖1" width="360px" height="270px">
+                                <button type="button" id="toclearimg2" style="display: inline-block; margin-left: 30px;">清除圖片</button>
                             </div>
-                            <div>
+                            <div style="margin-bottom: 10px;">
                                 <input type="file" class="getimg" accept="image/*" style="margin-top: 10px; display: inline-block;" id="uploadimg3">
-                                <button type="button" style="display: inline-block; margin-left: 30px;">清除圖片</button>
+                                <img src="" id="imgpreview3" alt="預覽圖1" width="360px" height="270px">
+                                <button type="button" id="toclearimg3" style="display: inline-block; margin-left: 30px;">清除圖片</button>
                             </div>
                         </form>
                         <button type="button" id="btnSend" style="margin-top: 10px; display: block;">新增</button>
@@ -295,7 +299,7 @@
         //load事件後包含的，新增團購商品的事件。
         window.addEventListener("load", function () {
 		  $("#btnSend").on("click", function () {
-			  console.log($("#productstardate").val());
+			//   console.log($("#productstardate").val()); //觀察有無取到上架日期的值。
 		    addproduct(); //執行新增至團購商品表格的函式
 		  })
 
@@ -303,7 +307,57 @@
           $("#btnone").on("click", function () {	 
             showone();
         });
+
+        // 清除圖片用的按鈕(個別清除)。
+        $("#toclearimg0").click(function() {
+            $("#uploadimg0").val("");
+            $("#imgpreview0").attr("src", "");
+        });
+        $("#toclearimg1").click(function() {
+            $("#uploadimg1").val("");
+            $("#imgpreview1").attr("src", "");
+        });
+        $("#toclearimg2").click(function() {
+            $("#uploadimg2").val("");
+            $("#imgpreview2").attr("src", "");
+        });
+        $("#toclearimg3").click(function() {
+            $("#uploadimg3").val("");
+            $("#imgpreview3").attr("src", "");
+        });
+
 		})
+
+        // 得到預覽圖片用
+        $("#uploadimg0").change(function() {
+            let reader = new FileReader(); // 用來讀取檔案
+            reader.readAsDataURL($("#uploadimg0")[0].files[0]); // 讀取檔案
+            reader.addEventListener("load", function () {
+            $("#imgpreview0").attr("src", reader.result);
+        });
+        })
+        $("#uploadimg1").change(function() {
+            let reader = new FileReader(); // 用來讀取檔案
+            reader.readAsDataURL($("#uploadimg1")[0].files[0]); // 讀取檔案
+            reader.addEventListener("load", function () {
+            $("#imgpreview1").attr("src", reader.result);
+        });
+        })
+        $("#uploadimg2").change(function() {
+            let reader = new FileReader(); // 用來讀取檔案
+            reader.readAsDataURL($("#uploadimg2")[0].files[0]); // 讀取檔案
+            reader.addEventListener("load", function () {
+            $("#imgpreview2").attr("src", reader.result);
+        });
+        })
+        $("#uploadimg3").change(function() {
+            let reader = new FileReader(); // 用來讀取檔案
+            reader.readAsDataURL($("#uploadimg3")[0].files[0]); // 讀取檔案
+            reader.addEventListener("load", function () {
+            $("#imgpreview3").attr("src", reader.result);
+        });
+        })
+
 
         //新增至團購商品表格的函式。
         function addproduct() {
@@ -377,7 +431,7 @@
                 url: "/groupProduct/showList",
                 method: "GET",
                 success: function (response) {
-                    console.log("回來的資料:" + response);
+                    // console.log("回來的資料:" + response);
                     let texts = "";                   
                     for (let gvo in response) {
                         // console.log(gvo);
