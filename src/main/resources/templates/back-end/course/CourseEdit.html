@@ -305,6 +305,9 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程名稱</label>
                                                 <div class="col-sm-10">
+                                                    <small id="courseNameError" style="display: none; color: red;">
+                                                        課程名稱必須至少包含3個中文字
+                                                    </small>
                                                     <input type="text" class="form-control input-default"
                                                            name="courseName" placeholder="課程名稱" id="courseName"
                                                            th:value="${course.getCourseName()}">
@@ -313,6 +316,9 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程售價</label>
                                                 <div class="col-sm-10">
+                                                    <small id="coursePriceError" style="display: none; color: red;">
+                                                        請輸入"數字"
+                                                    </small>
                                                     <input type="text" class="form-control input-default"
                                                            name="coursePrice" placeholder="課程售價" id="coursePrice"
                                                            th:value="${course.getCoursePrice()}">
@@ -321,6 +327,9 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程介紹</label>
                                                 <div class="col-sm-10">
+                                                    <small id="courseContentError" style="display: none; color: red;">
+                                                        課程介紹必須包含10個中文字哦
+                                                    </small>
                                                     <textarea class="form-control" rows="4" name="courseContent"
                                                               id="courseContent"
                                                               th:text="${course.getCourseContent()}"></textarea>
@@ -403,6 +412,7 @@
 
 <script>
 
+
     let videoData = [];
 
     function saveDataToLocalStorage() {
@@ -471,7 +481,38 @@
 
 </script>
 <script>
+    document.getElementById('courseName').addEventListener('blur', function () {
+        let courseName = this.value;
+        let chineseRegex = /[\u4E00-\u9FFF]/;
+        let courseNameError = document.getElementById('courseNameError');
+        if (courseName.length < 3 || !chineseRegex.test(courseName)) {
+            courseNameError.style.display = 'block';
+        } else {
+            courseNameError.style.display = 'none';
+        }
+    });
 
+    document.getElementById('coursePrice').addEventListener('blur', function () {
+        let coursePrice = this.value;
+        let numberRegex = /^[1-9][0-9]*$/;
+        let coursePriceError = document.getElementById('coursePriceError');
+        if (!numberRegex.test(coursePrice)) {
+            coursePriceError.style.display = 'block';
+        } else {
+            coursePriceError.style.display = 'none';
+        }
+    });
+
+    document.getElementById('courseContent').addEventListener('blur', function () {
+        let courseContent = this.value;
+        let chineseRegex = /[\u4E00-\u9FFF]/;
+        let courseContentError = document.getElementById('courseContentError');
+        if (courseContent.length < 10 || !chineseRegex.test(courseContent)) {
+            courseContentError.style.display = 'block';
+        } else {
+            courseContentError.style.display = 'none';
+        }
+    });
 
     $("#submit").click(function () {
 

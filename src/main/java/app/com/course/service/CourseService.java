@@ -6,6 +6,8 @@ import app.com.course.repository.ChefRepository;
 import app.com.course.repository.CourseOrderRepository2;
 import app.com.course.repository.CourseRepository;
 import app.com.course.vo.*;
+import app.com.courseorder.repository.CourseOrderRepository;
+import app.com.courseorder.vo.CourseOrder;
 import app.com.emp.repository.EmployeeRepository;
 import app.com.emp.vo.Employee;
 import app.com.member.repository.MemberRepository;
@@ -37,6 +39,9 @@ public class CourseService {
 
     @Autowired
     CouponTypeRepository cpRepository;
+
+    @Autowired
+    CourseOrderRepository courseOrderRepository;
 
     public List<Course> getCourse() {
         return repository.findAll();
@@ -100,6 +105,18 @@ public class CourseService {
         return dto;
     }
 
+    //確認重複購買
+    public boolean isCourseOrdered(Integer courseId, Integer memId) {
+        CourseOrder co = new CourseOrder();
+        co.setCourseId(courseId);
+        co.setMemId(memId);
+        Optional<CourseOrder> outConfirm = courseOrderRepository.findByMemIdAndCourseId(courseId, memId);
+        if (!outConfirm.isPresent()) { //採到資料不存在的雷。
+            return false;
+        } else {
+            return outConfirm.get() != null;
+        }
+    }
 
     public ChefInfoDTO getChefData(Integer empId,
                                    Integer chefId) {

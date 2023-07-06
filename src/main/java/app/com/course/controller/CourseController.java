@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -402,19 +403,27 @@ public class CourseController {
     @GetMapping("/course/coursecheckout")
     public String courseCheckout(HttpSession session,
                                  @RequestParam Integer courseId,
-                                 Model model) {
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
         Members user = (Members) session.getAttribute("user");
         if (user == null) {
             session.setAttribute("location", "/course/coursecheckout?courseId=" + courseId);
-
             return "redirect:/login";
+        } else {
+            if (courseService.isCourseOrdered(user.getMemberId(), courseId)) {
+                redirectAttributes.addFlashAttribute("NotAgain", "已經買過了喔!!!!");
+                return "redirect:/course/singlecourse?courseId=" + courseId;
+            } else {
+                CheckoutDTO dto = courseService.getCheckoutData(user.getMemberId(), courseId);
+//        service.deleteFollowList(user.getMemberId(), courseId);
+                List<CheckOutDto> cp = service.findAllMemCourseCp(courseId, user.getMemberId());
+                model.addAttribute("checkout", dto);
+                model.addAttribute("cplist", cp);
+                return "/front-end/course/CourseCheckout";
+            }
+
         }
-        CheckoutDTO dto = courseService.getCheckoutData(user.getMemberId(), courseId);
-        service.deleteFollowList(user.getMemberId(), courseId);
-        List<CheckOutDto> cp = service.findAllMemCourseCp(courseId, user.getMemberId());
-        model.addAttribute("checkout", dto);
-        model.addAttribute("cplist", cp);
-        return "/front-end/course/CourseCheckout";
+
     }
 
     //主廚資料頁面顯示

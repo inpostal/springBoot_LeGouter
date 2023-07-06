@@ -279,16 +279,21 @@
             let paymentMethodSelected = document.querySelector('input[name="paymentMethod"]:checked');
             let termsAgreed = document.getElementById('agreed').checked;
 
-            if (!paymentMethodSelected || !termsAgreed) {
-                e.preventDefault(); // 阻止按钮的默认行为
-                alert('請選擇付款方式並接受購物條款。');
-                return;  // 不繼續執行以下的程式碼
+            if (!paymentMethodSelected) {
+                Swal.fire('請選擇付款方式！');
+                e.preventDefault();
+                return;
             }
 
+            if (!termsAgreed) {
+                Swal.fire('請記得勾選同意購物條款');
+                e.preventDefault();
+                return;
+            }
             e.preventDefault(); // 阻止按钮的默认行为
 
             // val, text要跟著標籤變動
-            var checkoutData = {
+            let checkoutData = {
                 cpId: $('#cp-select').val(),
                 memberId: $('#memberId').text(),
                 memberName: $('#memberName').val(),

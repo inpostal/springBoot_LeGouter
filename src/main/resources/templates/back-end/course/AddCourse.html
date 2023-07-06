@@ -289,7 +289,8 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control input-default "
                                                            placeholder="課程名稱" id="courseName">
-                                                    <!--                                                    <input type="text" class="form-control input-default" name="courseName" placeholder="課程名稱" id="courseName" th:value="${course.getCourseName()}">-->
+                                                    <small id="courseNameError" class="form-text text-danger"
+                                                           style="display:none;">名稱需至少3個字，且必須包含中文字</small>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -297,15 +298,17 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control input-default "
                                                            placeholder="課程售價" id="coursePrice">
-                                                    <!--                                                    <input type="text" class="form-control input-default" name="coursePrice" placeholder="課程售價" id="coursePrice" th:value="${course.getCoursePrice()}">-->
+                                                    <small id="coursePriceError" class="form-text text-danger"
+                                                           style="display:none;">售價只能填寫數字，且首位不能為0</small>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">課程介紹</label>
                                                 <div class="col-sm-10">
-                                                     <textarea class="form-control" rows="4"
-                                                               id="courseContent"></textarea>
-                                                    <!--                                                    <textarea class="form-control" rows="4" name="courseContent" id="courseContent" th:text="${course.getCourseContent()}"></textarea>-->
+                                                    <textarea class="form-control" rows="4"
+                                                              id="courseContent"></textarea>
+                                                    <small id="courseContentError" class="form-text text-danger"
+                                                           style="display:none;">課程介紹至少要有10個字，且必須包含中文字</small>
                                                 </div>
                                             </div>
                                         </form>
@@ -441,14 +444,91 @@
 </script>
 
 <script>
+    document.getElementById('courseName').addEventListener('blur', function () {
+        let courseName = this.value;
+        let chineseRegex = /[\u4E00-\u9FFF]/;
+        let courseNameError = document.getElementById('courseNameError');
+        if (courseName.length < 3 || !chineseRegex.test(courseName)) {
+            courseNameError.style.display = 'block';
+        } else {
+            courseNameError.style.display = 'none';
+        }
+    });
+
+    document.getElementById('coursePrice').addEventListener('blur', function () {
+        let coursePrice = this.value;
+        let numberRegex = /^[1-9][0-9]*$/;
+        let coursePriceError = document.getElementById('coursePriceError');
+        if (!numberRegex.test(coursePrice)) {
+            coursePriceError.style.display = 'block';
+        } else {
+            coursePriceError.style.display = 'none';
+        }
+    });
+
+    document.getElementById('courseContent').addEventListener('blur', function () {
+        let courseContent = this.value;
+        let chineseRegex = /[\u4E00-\u9FFF]/;
+        let courseContentError = document.getElementById('courseContentError');
+        if (courseContent.length < 10 || !chineseRegex.test(courseContent)) {
+            courseContentError.style.display = 'block';
+        } else {
+            courseContentError.style.display = 'none';
+        }
+    });
 
 
-    $("#submit").click(function () {
+    $("#submit").click(function (event) {
+        event.preventDefault(); // 阻止表單的自動提交
+
         let courseName = $("#courseName").val();
         let coursePrice = $("#coursePrice").val();
         let courseContent = $("#courseContent").val();
         let courseImg = $("#courseImg")[0].files[0];
+        let nameInputs = document.getElementsByClassName("nameInput");
+        let videoFiles = document.getElementsByClassName("dropify");
 
+        // 定義驗證函數
+        let isValid = true;
+        // 課程名稱驗證
+        let chineseRegex = /[\u4E00-\u9FFF]/;
+        if (courseName.length < 3 || !chineseRegex.test(courseName)) {
+            isValid = false;
+            Swal.fire('課程名稱需至少3個字，且必須包含中文字')
+        }
+
+        // 課程售價驗證
+        let numberRegex = /^[1-9][0-9]*$/;
+        if (!numberRegex.test(coursePrice)) {
+            isValid = false;
+            Swal.fire('課程售價僅能填寫數字，且首位不能為0')
+        }
+
+        // 課程介紹驗證
+        if (courseContent.length < 10 || !chineseRegex.test(courseContent)) {
+            isValid = false;
+            alert('課程介紹至少要有10個字，且必須包含中文字。');
+        }
+
+        // 課程圖片驗證
+        if (!courseImg) {
+            isValid = false;
+            Swal.fire('要記得上傳課程圖片哦')
+        }
+
+        // 影片名稱與影片檔案驗證
+        for (let i = 0; i < nameInputs.length; i++) {
+            if (nameInputs[i].value === '' || videoFiles[i].files.length === 0) {
+                isValid = false;
+                Swal.fire('要記得填寫影片名稱跟上傳影片哦')
+                break;
+            }
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+            return;
+        }
 
         let formData = new FormData();
         formData.append("courseName", courseName);
@@ -460,7 +540,6 @@
         });
 
         $('.nameInput').each(function () {
-            console.log($(this).val());
             formData.append("videoNames", $(this).val());
         });
 
@@ -473,16 +552,32 @@
             contentType: false,
             processData: false,
             success: function (data) {
-                console.log(data);
-                alert("新增成功");
-                location.href = '/course/allcrs';
+                Swal.fire({
+                    title: "新增成功",
+                    icon: "success",
+                    text: "請等待審核員通過上架",
+                    showCancelButton: false,
+                    confirmButtonColor: "#EBA038",
+                    confirmButtonText: "收到",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "/course/allcrs";
+                    }
+                });
             },
             error: function (data) {
                 console.log(data);
-                alert("新增失敗");
+                Swal.fire({
+                    title: "新增失敗",
+                    icon: "error",
+                    text: "請確認所有欄位都已正確填寫",
+                    showCancelButton: false,
+                    confirmButtonColor: "#EBA038",
+                    confirmButtonText: "好的",
+                });
             }
         })
-    })
+    });
 
     $('#cancel').on('click', function () {
         location.href = '/course/allcrs';

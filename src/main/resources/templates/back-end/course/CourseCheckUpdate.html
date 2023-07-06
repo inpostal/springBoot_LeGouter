@@ -370,7 +370,7 @@
                                                             <div class="col-sm-10 ">
                                                                 <textarea class="form-control" rows="4"
                                                                           id="courseComment"
-                                                                          style="resize: none;"></textarea>
+                                                                          style="resize: none;" required></textarea>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -419,6 +419,7 @@
 <script src="/Course/JS/Jquery.js"></script>
 <script src="/Course/JS/jquery.dataTables.min.js"></script>
 <script src="/Course/JS/datatables.init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 
@@ -470,10 +471,31 @@
     //     });
     // });
 
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (document.querySelector('#comment').value.trim() === '') {
+            Swal.fire(
+                '偷懶！',
+                '審核紀錄要填寫ㄛ',
+                'warning'
+            );
+            event.preventDefault();
+        }
+    });
+
     //通過課程審核評論
     $("#pass").click(function () {
         let courseComment = $("#courseComment").val();
         let courseId = $("#course-id").text();
+
+        // Check if comment is empty
+        if (courseComment.trim() === '') {
+            Swal.fire(
+                '偷懶！',
+                '審核紀錄要填寫ㄛ',
+                'warning'
+            );
+            return;  // cancel the Ajax call
+        }
 
         let formData = new FormData();
         formData.append("courseComment", courseComment);
@@ -496,7 +518,7 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        alert("開課了～");
+                        Swal.fire('課程上架成功～開課了');
                         location.href = '/course/coursechecklist';
                     },
                     error: function (data) {
@@ -537,7 +559,7 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        alert("不通過退件！");
+                        Swal.fire('退件給主廚～');
                         location.href = '/course/coursechecklist';
                     },
                     error: function (data) {
