@@ -2,7 +2,6 @@ package app.com.coupon.controller;
 
 import app.com.coupon.service.CouponService;
 import app.com.coupon.vo.*;
-import app.com.course.vo.Course;
 import app.com.emp.vo.Employee;
 import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,19 +93,20 @@ public class CouponController {
     }
 
 //刪除按鈕-追蹤清單課程
-//    @PostMapping("/delete/follow/list/{courseId}")
-//    @ResponseBody
-//    public Map<String, Boolean> handleDeleteFollowList(@PathVariable Integer courseId, HttpSession session) {
-//        Map<String, Boolean> result = new HashMap<>();
-//        Members user = (Members) session.getAttribute("user");
+    @PostMapping("/delete/follow/list/{courseId}")
+    @ResponseBody
+    public Map<String, Boolean> handleDeleteFollowList(@PathVariable Integer courseId, HttpSession session) {
+        Map<String, Boolean> result = new HashMap<>();
+        Members user = (Members) session.getAttribute("user");
 //        LoveCourse loveCourse = new LoveCourse();
 //        loveCourse.setCourseId(courseId);
 //        loveCourse.setMemId(user.getMemberId());
 //        service.deleteFollowList(loveCourse);
-//
-//        result.put("isSuccess", true);
-//        return result;
-//    }
+        service.deleteFollowList(user.getMemberId(), courseId);
+
+        result.put("isSuccess", true);
+        return result;
+    }
 
 //    @GetMapping("/delete/follow/list/{courseId}/{memId}")
 //    @ResponseBody
@@ -279,6 +279,7 @@ public class CouponController {
         } else {
             List<LoveCourseMemDTO> list = service.findAllByMemberId(user.getMemberId());
             model.addAttribute("followList", list);
+//            return "FollowList";
             return "/front-end/Coupon/FollowList";
         }
     }
