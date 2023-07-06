@@ -555,7 +555,7 @@
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     Swal.fire('已刪除!', '', '刪除')
-                    row.remove();
+                    // row.remove();
                     $.ajax({
                         url: '/news/delete',
                         type: "GET",
@@ -564,6 +564,7 @@
                         },
                         success: function (resp) {
                             console.log(resp);
+                            row.remove();
                         },
                         error: function (xhr, textstatus, errorThrown) {
                             console.error(xhr);

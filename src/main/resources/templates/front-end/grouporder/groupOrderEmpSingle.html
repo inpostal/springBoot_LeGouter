@@ -151,7 +151,8 @@
                                                 <h3 style="font-size: 50px;" id="groupNameText"
                                                     th:text="${groupActivity.getGroupName()}"></h3>
                                                 <p id="groupOrderId" th:text="${groupActivity.getGroupOrderId()}"></p>
-                                                <img src="/GroupOrder/assets/img/news-img/news-img-8.jpg" alt="Image">
+                                                <img th:src="@{'/groupProduct/get/img/'+${groupActivity.getGroupProductId()}}" alt="Image">
+
 
                                                 <ul class="post-details" style="font-size: 20px;">
                                                     團購開始時間:

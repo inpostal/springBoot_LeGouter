@@ -41,6 +41,7 @@ public class NewsController {
     }
 
     public List<News> getNewaAllFront(){
+
         return service.getAllNews();
     }
 

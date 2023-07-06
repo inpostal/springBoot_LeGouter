@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="zxx" xmlns="http://www.w3.org/1999/html">
 <html xmlns:th="http://www.thymeleaf.org">
 
 
@@ -52,7 +52,17 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/GroupOrder/assets/img/favicon.png">
   <!-- Title -->
-  <title>Eduon</title>
+  <title>最新消息</title>
+  <style>
+  img {
+  vertical-align: middle;
+  border-style: none;
+  width: 200%;
+  max-height: 600px!important;
+
+  object-fit: contain;
+  }
+  </style>
 </head>
 
 <body>
@@ -126,7 +136,7 @@
       <div class="col-lg-12">
         <div class="single-blog-content">
           <div class="blog-top-content">
-            <img src="/GroupOrder/assets/img/news-img/news-img-8.jpg" alt="Image">
+            <img th:src="@{/news/img/{newsId}(newsId=${getNewsFrontSingle.newsId})}"  class="enlarge-image">
             <span id="newsId" style="display: none" th:text="${getNewsFrontSingle.getNewsId()}"></span>
             <span id="empId" style="display: none" th:text="${getNewsFrontSingle.getEmpId()}"></span>
             <h3 style="font-size: 50px;" id="newsTitle" th:text="${getNewsFrontSingle.getNewsTitle()}"></h3>
