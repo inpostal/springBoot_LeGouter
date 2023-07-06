@@ -121,20 +121,19 @@
                         <option value="1" selected="true">上架</option>
                         <option value="0">下架</option>
                     </select>
-                    <label class="inpproduct">圖片</label>
+                    <!-- <label class="inpproduct">圖片</label> -->
                     <form enctype="multipart/form-data" id="imageform">
                         <div>
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg0">
-                            <img th:src="@{/groupProduct/get/img/{groupProductId}(groupProductId=${groupProductVO.getGroupProductId()})}" alt="預設圖片" width="360px" height="270px">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg0" hidden>
                         </div>
                         <div>
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg1">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg1" hidden>
                         </div>
                         <div>
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg2">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg2" hidden>
                         </div>
                         <div>
-                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg3">
+                            <input type="file" class="getimg" accept="image/*" style="margin-top: 10px;" id="uploadimg3" hidden>
                         </div>
                     </form>
                     <!-- <input type="file" style="margin-top: 10px;">

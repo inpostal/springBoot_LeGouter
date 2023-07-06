@@ -96,8 +96,8 @@ public class GroupRestContreller {
 			@RequestParam MultipartFile groupProductImg) {
 
 		GroupProductDTO inserdto = new GroupProductDTO();
-		inserdto.setGroupProductName(groupProductName);
-		inserdto.setGroupProductContent(groupProductContent);
+		inserdto.setGroupProductName(groupProductName.trim());
+		inserdto.setGroupProductContent(groupProductContent.trim());
 		inserdto.setGroupProductPrice(groupProductPrice);
 		inserdto.setGroupProductStardate(groupProductStardate);
 		inserdto.setGroupProductStatus(groupProductStatus);
@@ -147,8 +147,8 @@ public class GroupRestContreller {
 			@RequestParam(required = false) MultipartFile groupProductImg) {
 		GroupProductDTO updatato = new GroupProductDTO();
 		updatato.setGroupProductId(groupProductId);
-		updatato.setGroupProductName(groupProductName);
-		updatato.setGroupProductContent(groupProductContent);
+		updatato.setGroupProductName(groupProductName.trim());
+		updatato.setGroupProductContent(groupProductContent.trim());
 		updatato.setGroupProductPrice(groupProductPrice);
 		updatato.setGroupProductStardate(groupProductStardate);
 		updatato.setGroupProductEnddate(groupProductEnddate);
@@ -305,8 +305,8 @@ public class GroupRestContreller {
 	        if (file0 != null || file1 != null || file2 != null || file3 != null) {
 			
 			GroupProductDTO inserdto = new GroupProductDTO();
-			inserdto.setGroupProductName(groupProductName);
-			inserdto.setGroupProductContent(groupProductContent);
+			inserdto.setGroupProductName(groupProductName.trim());
+			inserdto.setGroupProductContent(groupProductContent.trim());
 			inserdto.setGroupProductPrice(groupProductPrice);
 			inserdto.setGroupProductStardate(groupProductStardate);
 			inserdto.setGroupProductStatus(groupProductStatus);
@@ -346,15 +346,15 @@ public class GroupRestContreller {
 		        System.out.println("修改功能的圖片file3: " + file3);
 			GroupProductDTO updatato = new GroupProductDTO();
 			updatato.setGroupProductId(groupProductId);
-			updatato.setGroupProductName(groupProductName);
-			updatato.setGroupProductContent(groupProductContent);
+			updatato.setGroupProductName(groupProductName.trim());
+			updatato.setGroupProductContent(groupProductContent.trim());
 			updatato.setGroupProductPrice(groupProductPrice);
 			updatato.setGroupProductStardate(groupProductStardate);
 			updatato.setGroupProductEnddate(groupProductEnddate);
 			updatato.setGroupProductStatus(groupProductStatus);
 			Boolean success = groupProductService.updataThe(updatato);
 
-			//待施工service
+			//待施工service。 20230706 要收尾了 可是無法完成，在前端先隱藏input 
 
 			Map<String, Boolean> response = new HashMap<>();
 			response.put("success", success);
@@ -441,7 +441,7 @@ public class GroupRestContreller {
 			}
 			
 			List<GroupActivityDTO> temporaryalldto = new ArrayList<GroupActivityDTO>();
-			List<GroupActivityVO> getKeywordsActivity = groupActivityService.ActivityKeyName(groupName, today, today);
+			List<GroupActivityVO> getKeywordsActivity = groupActivityService.ActivityKeyName(groupName.trim(), today, today);
 			for (GroupActivityVO evo : getKeywordsActivity) {
 				GroupActivityDTO temporarydto = new GroupActivityDTO();
 				GroupProductVO tr = groupProductService.showOneProduct(evo.getGroupProductId());
@@ -466,13 +466,13 @@ public class GroupRestContreller {
 		//後台 查詢活動內容關鍵字
 		@PostMapping("/group-activity/back-contentSearch")
 		public List<GroupActivityVO> BackSearchActivityContent(String groupActivityContent) {
-			return groupActivityService.BackKeyContent(groupActivityContent);
+			return groupActivityService.BackKeyContent(groupActivityContent.trim());
 		}
 		
 		//後台 查詢活動名稱關鍵字
 		@PostMapping("/group-activity/back-nameSearch")
 		public List<GroupActivityVO> BackSearchActivityName(String groupName) {
-			return groupActivityService.BackKeyName(groupName);
+			return groupActivityService.BackKeyName(groupName.trim());
 		}
 		
 		
