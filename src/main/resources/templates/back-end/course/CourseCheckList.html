@@ -492,7 +492,7 @@
             <th>課程名稱</th>
             <th>更新時間</th>
             <th>審核狀態</th>
-            <th>審核人員</th>
+<!--            <th>審核人員</th>-->
             <th>內容</th>
         </tr>`;
 
@@ -521,7 +521,7 @@
     <td>${res[e].courseName}</td>
     <td>${courseTime}</td>
     <td><span class="${badgeClass}">${courseStatusText}</span></td>
-    <td>${res[e].empId}</td>
+<!--    // <td>${res[e].empId}</td>-->
     <td><button type="button" class="btn btn-warning" onclick="location.href='/course/coursecheck/${res[e].courseId}'">查看</button></td>
 </tr>`;
                             th_html += td_html;

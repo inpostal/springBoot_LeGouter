@@ -518,8 +518,11 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        Swal.fire('課程上架成功～開課了');
-                        location.href = '/course/coursechecklist';
+                        Swal.fire('課程上架成功～開課了').then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = '/course/coursechecklist';
+                            }
+                        });
                     },
                     error: function (data) {
                         console.log(data);
@@ -537,6 +540,14 @@
     $("#failed").click(function () {
         let courseComment = $("#courseComment").val();
         let courseId = $("#course-id").text();
+        if (courseComment.trim() === '') {
+            Swal.fire(
+                '偷懶！',
+                '審核紀錄要填寫ㄛ',
+                'warning'
+            );
+            return;  // cancel the Ajax call
+        }
 
         let formData = new FormData();
         formData.append("courseComment", courseComment);
@@ -559,8 +570,11 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        Swal.fire('退件給主廚～');
-                        location.href = '/course/coursechecklist';
+                        Swal.fire('退件給主廚～').then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = '/course/coursechecklist';
+                            }
+                        });
                     },
                     error: function (data) {
                         console.log(data);

@@ -253,8 +253,6 @@
 <!-- Menu For Desktop Device -->
 
 
-
-
 <!-- End Others Option For Responsive -->
 </div>
 <!-- End Navbar Area -->
@@ -385,7 +383,7 @@
                                         <div class="body_comment">
                                             <div class="row">
                                                 <div class="avatar_comment col-md-1">
-                                                    <img src="https://secure.gravatar.com/avatar/b4c1280395bf96defbf298505181c4ab?s=100&d=mm&r=g"
+                                                    <img src="https://www.pressplay.cc/public/img/icon/ic-boy@3x.png"
                                                          alt="avatar"/>
                                                 </div>
                                                 <div class="box_comment col-md-11">
@@ -394,7 +392,8 @@
                                                     <input type="hidden" id="memId" value="memId"/>
                                                     <!-- <input type="hidden" id="studentCommentId"-->
                                                     <!-- value="studentCommentId" />-->
-                                                    <input type="hidden" id="courseId" th:value="${course.getCourseId()}"/>
+                                                    <input type="hidden" id="courseId"
+                                                           th:value="${course.getCourseId()}"/>
                                                     <div style="display: none;">
                                                         <input type="date" name="studentcommentdate"
                                                                id="studentcommentdate">
@@ -417,7 +416,8 @@
                                                 <div class="row" th:each="c:${courseComment}">
                                                     <li class="box_result row">
                                                         <div class="avatar_comment col-md-1">
-                                                            <img src="https://secure.gravatar.com/avatar/b4c1280395bf96defbf298505181c4ab?s=100&d=mm&r=g" alt="avatar"/>
+                                                            <img src="https://www.pressplay.cc/public/img/icon/ic-boy@3x.png"
+                                                                 alt="avatar"/>
                                                         </div>
                                                         <div class="result_comment col-md-11">
                                                             <h4 th:text="${c.getMemId()}">學員留言</h4>
@@ -432,12 +432,13 @@
                                                             <ul class="child_replay">
                                                                 <li class="box_reply row">
                                                                     <div class="avatar_comment col-md-1">
-                                                                        <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" width="300"
+                                                                        <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}"
+                                                                             width="300"
                                                                              class="img-fluid rounded"
                                                                              alt="">
                                                                     </div>
                                                                     <div class="result_comment col-md-11">
-<!--                                                                        <h3 th:text="${c.getId()}" style="display: none"></h3>-->
+                                                                        <!--                                                                        <h3 th:text="${c.getId()}" style="display: none"></h3>-->
                                                                         <h4 th:text="${c.getEmpName()}"></h4>
                                                                         <p th:text="${c.chefCommentContent}">
                                                                         </p>
@@ -539,6 +540,43 @@
 
 </body>
 <script>
+    let originalHTML = null;
+
+    document.getElementById('preview-link').addEventListener('click', function (event) {
+        event.preventDefault();  // Prevent the default action of the link
+        let courseId = document.getElementById('course-id').innerText;
+        let videoId = $(this).siblings(".video-id").text();
+        let previewArea = document.getElementById('preview-area');
+
+        if (originalHTML === null) {
+            // If this is the first click, save the original HTML and replace it with the video
+            originalHTML = previewArea.innerHTML;
+            previewArea.innerHTML = `<video style="width: 920px; height: 525px" width="700" height="240" controls>
+                                <source src="/course/${courseId}/${videoId}"
+                                        type="video/mp4">
+                             </video>`;
+        } else {
+            // If this is the second click, restore the original HTML
+            previewArea.innerHTML = originalHTML;
+            originalHTML = null;
+        }
+    });
+
+    document.querySelectorAll('.preview-button').forEach((previewButton, buttonIndex) => {
+        previewButton.addEventListener('click', function () {
+            if (originalHTML === null) {
+                // Change the button text
+                previewButton.innerText = '取消觀看';
+            } else {
+                // Change the button text back
+                previewButton.innerText = '課程試看';
+            }
+            // Trigger click event on the link
+            document.getElementById('preview-link').click();
+        });
+
+    });
+
     $(document).ready(function () {
         $('#submitcomment').click(function () {
             let memId;

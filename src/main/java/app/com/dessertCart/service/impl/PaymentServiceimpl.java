@@ -41,8 +41,7 @@ public class PaymentServiceimpl implements app.com.dessertCart.service.PaymentSe
             Dessert dessert = dessertRepository.findById(orderDetail.getDessertId()).orElse(null);
             String dessertName = dessert.getDessertName();
             int dessertAmount = orderDetail.getDessertAmount();
-//            int dessertPrice = dessert.getDessertPrice();
-//            int dessertTotal = dessertAmount * dessertPrice;
+
 
             itemName.append(dessertName).append("*").append(dessertAmount).append("，");
         }
@@ -52,7 +51,7 @@ public class PaymentServiceimpl implements app.com.dessertCart.service.PaymentSe
 
 
         AioCheckOutALL obj = new AioCheckOutALL();
-        obj.setMerchantTradeNo("LeGouterorderid" + orderid);   //訂單編號
+        obj.setMerchantTradeNo("G6LeGouter" + orderid);   //訂單編號
         obj.setMerchantTradeDate("2017/01/01 08:05:23");  //訂單日期
         obj.setTotalAmount(String.valueOf(orderTotal));   //訂單全部總金額
         obj.setTradeDesc("test Description");
