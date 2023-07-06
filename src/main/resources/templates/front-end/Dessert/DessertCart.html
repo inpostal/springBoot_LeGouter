@@ -185,7 +185,9 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: '確定!'
+            confirmButtonText: '確定!',
+            cancelButtonText: '取消!'
+
         }).then((result) => {
             if (result.isConfirmed) {
                 var row = event.target.closest("tr"); // 找到最接近的父元素 <tr>
@@ -403,7 +405,8 @@
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: '確定!'
+                        confirmButtonText: '確定!',
+                        cancelButtonText: '取消!'
                     }).then((result) => {
                         if (result.isConfirmed) {
                             deleteDessertCart(dessertId, memberId);
