@@ -133,5 +133,9 @@ public class CourseService {
         return chef;
     }
 
+    public boolean isCoursePurchased(Integer courseId, Integer memId) {
+        return courseOrderRepository2.existsByCourseIdAndMemId(courseId, memId);
+    }
+
 }
 

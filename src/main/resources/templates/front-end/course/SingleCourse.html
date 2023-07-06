@@ -194,7 +194,7 @@
                         </li>
                     </ul>
                     <a href="#" id="wishlist-link" class="default-btn checkout">加入追蹤清單</a>
-                    <a href="#" id="checkout-link" class="default-btn checkout">購買課程</a>
+                    <button id="checkout-link" class="default-btn checkout">購買課程</button>
 
                 </div>
             </div>
@@ -312,17 +312,42 @@
 
     document.getElementById('checkout-link').addEventListener('click', function (event) {
         event.preventDefault();  // 阻止默認的頁面跳轉行為
-
-        let userLoggedIn = document.getElementById('userLoggedIn').dataset.loggedIn === 'true';
-
-        if (!userLoggedIn) {
-            alert('請先登入才能購買課程');
-            window.location.href = '/login';  // 將用戶重定向到登入頁面
-        } else {
-            let courseId = document.getElementById('course-id').innerText;
-            window.location.href = '/course/coursecheckout?courseId=' + courseId;  // 跳轉到結帳頁面並附帶 courseId 參數
-        }
+        let courseId = document.getElementById('course-id').innerText;
+        window.location.href = '/course/coursecheckout?courseId=' + courseId;  // 跳轉到結帳頁面並附帶 courseId 參數
     });
+
+
+    function checkCoursePurchase(courseId, memId) {
+        let request = {
+            courseId: courseId,
+            memId: memId
+        };
+
+        $.ajax({
+            url: '/checkcoursepurchase',
+            type: 'POST',
+            data: JSON.stringify(request),
+            contentType: 'application/json',
+            success: function (response) {
+                // 根据验证结果更新页面上的内容
+                if (response === "買過") {
+                    // 课程已购买，禁止操作
+                    let checkoutButton = document.getElementById('checkout-link');
+                    checkoutButton.disabled = true; // 禁用按钮
+                } else {
+                    // 课程未购买，允许操作
+                    document.getElementById('checkout-link').addEventListener('click', function (event) {
+                        event.preventDefault();  // 阻止默认的页面跳转行为
+                        let courseId = document.getElementById('course-id').innerText;
+                        window.location.href = '/course/coursecheckout?courseId=' + courseId;  // 跳转到结账页面并附带 courseId 参数
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('验证课程购买失败：', error, xhr.responseText);
+            }
+        });
+    }
 
 
 </script>

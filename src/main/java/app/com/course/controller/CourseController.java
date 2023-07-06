@@ -174,16 +174,19 @@ public class CourseController {
                                        @RequestParam Integer coursePrice,
                                        @RequestParam MultipartFile courseImg,
                                        @RequestParam MultipartFile[] videoFiles,
-                                       @RequestParam String[] videoNames
+                                       @RequestParam String[] videoNames,
+                                       HttpSession session
+
 
     ) {
+        Employee emp = (Employee) session.getAttribute("emp");
 
         Course course = new Course();
         course.setCourseName(courseName);
         course.setCourseContent(courseContent);
         course.setCoursePrice(coursePrice);
         course.setCourseStatus(0);
-        course.setEmpId(1);
+        course.setEmpId(emp.getEmpId());
 
 
         try {
@@ -237,8 +240,10 @@ public class CourseController {
         Employee emp = (Employee) session.getAttribute("emp");
         if (emp == null) {
             return "redirect:/employee/login";
+        } else if (emp.getEmpClassify() != 2) {
+            return "/back-end/course/CourseCheckList";
         }
-        return "/back-end/course/CourseCheckList";
+        return "/back-end/Employee/EmpData";
     }
 
     //課程審核評論新增
@@ -326,7 +331,7 @@ public class CourseController {
     //前台課程
     @GetMapping("/course/courses")
     public String coursesPage(HttpSession session, Model model) {
-        return "/front-end/course/Course1";
+        return "/front-end/course/Course";
     }
 
     //前台單個課程
@@ -405,6 +410,7 @@ public class CourseController {
             return "redirect:/login";
         }
         CheckoutDTO dto = courseService.getCheckoutData(user.getMemberId(), courseId);
+        service.deleteFollowList(user.getMemberId(), courseId);
         List<CheckOutDto> cp = service.findAllMemCourseCp(courseId, user.getMemberId());
         model.addAttribute("checkout", dto);
         model.addAttribute("cplist", cp);
@@ -439,6 +445,21 @@ public class CourseController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Chef with id " + chefId + " not found.");
         } else {
             return ResponseEntity.ok().build();
+        }
+    }
+
+    //確認重複購買
+    @PostMapping("/checkcoursepurchase")
+    public ResponseEntity<?> checkCoursePurchase(@RequestBody CheckoutDTO request) {
+        try {
+            boolean isCoursePurchased = courseService.isCoursePurchased(request.getCourseId(), request.getMemberId());
+            if (isCoursePurchased) {
+                return ResponseEntity.ok("買過");
+            } else {
+                return ResponseEntity.ok("沒買");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
