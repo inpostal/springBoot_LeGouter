@@ -20,6 +20,8 @@ public interface OrdersMemService {
 
     List<OrderDetailDTO> getDessertDetails(Integer orderId);
 
+    List<OrdersMem> getAllOrdersByMemberIdOrderByOrderTimeDesc(Integer memId);
+
 }
 
 

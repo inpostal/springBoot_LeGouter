@@ -54,5 +54,8 @@ public class OrdersMemServiceImpl implements OrdersMemService {
         return orderDetailService.getOrderDetailDTOList(orderId);
     }
 
+    public List<OrdersMem> getAllOrdersByMemberIdOrderByOrderTimeDesc(Integer memId) {
+        return ordersMemRepository.findByMemIdOrderByOrderTimeDesc(memId);
+    }
 
 }

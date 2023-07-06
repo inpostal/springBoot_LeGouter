@@ -41,19 +41,24 @@
                 <input id="password" type="password" placeholder="輸入密碼" name="password" required th:value="${session.user.getMemberPassword()}">
 
                 <label for="gender"><b>性別</b></label>
-                <select id="gender" name="gender" required th:value="${session.user.getMemberGender()}">
-                    <option value="f">女</option>
-                    <option value="m">男</option>
+                <select id="gender" name="gender">
+                    <option value="f" th:selected="${session.user.getMemberGender().toString().equals('f')}" th:text="女"></option>
+                    <option value="m" th:selected="${session.user.getMemberGender().toString().equals('m')}" th:text="男"></option>
                 </select>
+
 
                 <label for="phone"><b>電話</b></label>
                 <input id="phone" type="text" placeholder="輸入電話" name="phone" required th:value="${session.user.getMemberPhone()}">
 
 
                 <label for="city">居住縣市:</label><br>
-                <select id="city" name="city" th:value="${city}"></select><br>
+                <select id="city" name="city">
+                    <option th:value="${city}" th:selected="${city}" th:text="${city}"></option>
+                </select><br>
                 <label for="district">居住地區:</label><br>
-                <select id="district" name="district" th:value="${district}"></select><br>
+                <select id="district" name="district">
+                    <option th:value="${district}" th:selected="${district}" th:text="${district}"></option>
+                </select><br>
                 <label for="address">詳細地址:</label><br>
                 <input type="text" id="address" name="address" th:value="${address}"><br>
 
@@ -163,10 +168,31 @@
                 data: JSON.stringify(data),
                 success: function(response) {
                     if(response.success) {
-                        Swal.fire('註冊成功');
-                        location.href = "/member/data";
+                        let timerInterval
+                        Swal.fire({
+                            title: '修改成功',
+                            html: '',
+                            timer: 1000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                                location.href = "/member/data";
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log('I was closed by the timer')
+                            }
+                        });
                     } else {
-                        Swal.fire('註冊失敗'+ response.message);
+                        Swal.fire('修改失敗'+ response.message);
                     }
                 }
             });
@@ -220,9 +246,9 @@
             let districts = cityDistrict[city];
 
             // 清空地區選項
-            while (districtSelect.options.length > 0) {
-                districtSelect.remove(0);
-            }
+            // while (districtSelect.options.length > 0) {
+            //     districtSelect.remove(0);
+            // }
 
             // 更新地區選項
             for (let i = 0; i < districts.length; i++) {

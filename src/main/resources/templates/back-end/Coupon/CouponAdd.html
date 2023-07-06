@@ -22,59 +22,26 @@
             line-height: 1.3;
             border-width: 1px;
         }
-    /*    ---------------------------------------------------------------------------------*/
-    <!--    <style>-->
-    <!--         /* 输入框外层容器 */-->
-    <!--     .input-container {-->
-    <!--         margin-bottom: 10px;-->
-    <!--         display: flex;-->
-    <!--         justify-content: center;-->
-    <!--     }-->
 
-    <!--    /* 输入框样式 */-->
-    <!--    .input-field {-->
-    <!--        width: 10%;-->
-    <!--        padding: 10px;-->
-    <!--        border: 1px solid #ccc;-->
-    <!--        border-radius: 10px;-->
-    <!--    }-->
-
-    <!--    /* 聚焦时的输入框样式 */-->
-    <!--    .input-field:focus {-->
-    <!--        outline: none;-->
-    <!--        border-color: #007bff;-->
-    <!--        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);-->
-    <!--    }-->
-
-    <!--    /* 错误状态的输入框样式 */-->
-    <!--    .input-field.error {-->
-    <!--        border-color: #dc3545;-->
-    <!--    }-->
-
-    <!--    /* 错误提示文字样式 */-->
-    <!--    .error-message {-->
-    <!--        color: #dc3545;-->
-    <!--        font-size: 12px;-->
-    <!--        margin-top: 5px;-->
-    <!--    }-->
-    <!--    </style>-->
-    <!--    -->
-    <!--</style>-->
+        .layui-form-select dl dd.layui-this {
+            background-color: #ffe7e7;
+        }
+    </style>
 
 
 </head>
 
-<body>
+<body style="background: #fff9e5">
 <!-- 新增優惠券功能區 -->
-<div class="layui-fluid">
+<div class="layui-fluid" style="display:flex; justify-content: center;  align-items: center; margin-top:150px">
     <div class="layui-row">
         <form class="layui-form">
 
             <div class="layui-form-item">
-                <label for="cpType" class="layui-form-label">
+                <label for="cpType" class="layui-form-label" >
                     <span class="x-red">*</span>優惠券類型
                 </label>
-                <div class="layui-input-inline">
+                <div class="layui-input-inline" style="text-align:center">
                     <select id="cpType">
                         <option value=0>甜點節慶優惠券</option>
                         <option value=1>課程節慶優惠券</option>
@@ -123,13 +90,13 @@
             </div>
 
             <div class="form-group">
-                <label for="startDate">起始日期:</label>
-                <input type="date" id="startDate" name="start-date">
+                <label for="startDate" class="layui-form-label"><span class="x-red">*</span>起始日期</label>
+                <input type="date" id="startDate" class="layui-input" name="start-date" style="border-radius: 10px; height: 40px; text-align: center; width: 190px; ">
             </div>
 
             <div class="form-group">
-                <label for="endDate">結束日期:</label>
-                <input type="date" id="endDate" name="end-date">
+                <label for="endDate" class="layui-form-label"><span class="x-red">*</span>結束日期</label>
+                <input type="date" id="endDate" class="layui-input" name="end-date"  style="border-radius: 10px; height: 40px; text-align: center; width: 190px;">
             </div>
 
                        <div class="layui-form-item">
@@ -137,7 +104,7 @@
                 </label>
             </div>
         </form>
-        <button class="layui-btn" lay-filter="add" lay-submit="" id="submit-btn" type="button">
+        <button class="layui-btn" lay-filter="add" lay-submit="" id="submit-btn" type="button" style="background-color:#ff9a9a; margin-left: 80%">
             增加
         </button>
     </div>

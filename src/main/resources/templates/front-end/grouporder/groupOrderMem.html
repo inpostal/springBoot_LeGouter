@@ -213,23 +213,23 @@
 
 
 
-    <div class="col-lg-12 col-md-12">
-        <div class="pagination-area">
-            <!--
-                        <a href="#" class="prev page-numbers">
-                            <i class="bx bx-chevron-left"></i>
-                        </a>
-                        -->
-            <span class="page-numbers current" aria-current="page">1</span>
-            <a href="#" class="page-numbers">2</a>
-            <a href="#" class="page-numbers">3</a>
-            <a href="#" class="page-numbers">4</a>
+<!--    <div class="col-lg-12 col-md-12">-->
+<!--        <div class="pagination-area">-->
+<!--            &lt;!&ndash;-->
+<!--                        <a href="#" class="prev page-numbers">-->
+<!--                            <i class="bx bx-chevron-left"></i>-->
+<!--                        </a>-->
+<!--                        &ndash;&gt;-->
+<!--            <span class="page-numbers current" aria-current="page">1</span>-->
+<!--            <a href="#" class="page-numbers">2</a>-->
+<!--            <a href="#" class="page-numbers">3</a>-->
+<!--            <a href="#" class="page-numbers">4</a>-->
 
-            <a href="#" class="next page-numbers">
-                <i class="bx bx-chevron-right"></i>
-            </a>
-        </div>
-    </div>
+<!--            <a href="#" class="next page-numbers">-->
+<!--                <i class="bx bx-chevron-right"></i>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 </div>
 </div>
@@ -383,6 +383,13 @@
                         groupProductPayingText = '匯款';
                     }
 
+                    let groupProductOthersText = '';
+                    if (resp[e].groupProductOthers == null) {
+                        groupProductOthersText = '無備註';
+                    } else {
+                        groupProductOthersText = resp[e].groupProductOthers;
+                    }
+
                     td_html += `<tr>
   <td colspan="0">
     <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample-${resp[e].groupOrderId}" role="button" aria-expanded="false" aria-controls="collapseExample-${resp[e].groupOrderId}">
@@ -405,7 +412,7 @@
         收件者電話:<span class="my-span" id="receiverPhone">${resp[e].receiverPhone}</span>
         收件者地址:<span class="my-span" id="receiverAddress">${resp[e].receiverAddress}</span>
         收件者信箱:<span class="my-span" id="receiverEmail">${resp[e].receiverEmail}</span>
-        訂單備註::<span class="my-span" id="groupProductOthers">${resp[e].groupProductOthers}</span>
+        訂單備註::<span class="my-span" id="groupProductOthers">${groupProductOthersText}</span>
 
       </div>
     </div>

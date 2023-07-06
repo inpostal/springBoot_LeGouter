@@ -1,122 +1,303 @@
-<!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="zxx">
+
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>優惠券專區</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/bootstrap.min.css">
+  <!-- Owl Theme Default CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/owl.theme.default.min.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/owl.carousel.min.css">
+  <!-- Owl Magnific CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/magnific-popup.css">
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/animate.css">
+  <!-- Boxicons CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/boxicons.min.css">
+  <!-- Flaticon CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/flaticon.css">
+  <!-- Meanmenu CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/meanmenu.css">
+  <!-- Nice Select CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/nice-select.css">
+  <!-- Odometer CSS-->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/odometer.css">
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/style.css">
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" href="/GroupOrder/assets/css/responsive.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="/GroupOrder/static/css/css2.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/all.min.css" rel="stylesheet">
+  <link href="/GroupOrder/static/css/bootstrap-icons.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/animate.min.css" rel="stylesheet">
+  <link href="/GroupOrder/static/css/owl.carousel.min.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="/GroupOrder/static/css/style.css" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="/Coupon/style_coupon_data.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="/Commom/css/css2.css" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/GroupOrder/assets/img/favicon.png">
+  <!-- Title -->
+  <title>優惠券專區</title>
+  <style>
+    .nav-tabs .nav-link {
+      margin-bottom: -1px;
+      background: none;
+      border: 1px solid transparent;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      width: 600px;
+      height: 90px;
+      font-size: 20px;
+    }
 
-    <link href="/Commom/css/all.min.css" rel="stylesheet">
-    <link href="/Commom/css/bootstrap-icons.css" rel="stylesheet">
+    .table > :not(:last-child) > :last-child > * {
+      border-bottom-color: white;
+    }
 
-    <link href="/Commom/css/animate.min.css" rel="stylesheet">
-    <link href="/Commom/css/owl.carousel.min.css" rel="stylesheet">
+    .table td, .table th {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+      text-align: center;
+    }
 
-    <link href="/Commom/css/bootstrap.min.css" rel="stylesheet">
+    .single-news .news-content .lessons {
+      border-top: 0px solid #ebebeb;
+      font-size: 18px;
+    }
 
-    <link href="/Commom/css/style.css" rel="stylesheet">
+    .card {
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
 
+    .my-span {
+      margin-right: 5px; /* 设置右侧间距为 5px */
+    }
+
+
+  </style>
 </head>
 
 <body>
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
+<!-- Start Preloader Area -->
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+  <div class="spinner-grow text-primary" role="status"></div>
+</div>
+
+
+<div class="container-fluid top-bar bg-dark text-light px-0 wow fadeIn" data-wow-delay="0.1s">
+  <div class="row gx-0 align-items-center d-none d-lg-flex">
+    <div class="col-lg-6 px-5 text-start">
+      <ol class="breadcrumb mb-0">
+        <!-- <li class="breadcrumb-item"><a class="small text-light" href="#">Home</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Career</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Terms</a></li>
+        <li class="breadcrumb-item"><a class="small text-light" href="#">Privacy</a></li> -->
+      </ol>
     </div>
-    <!--  頁首  -->
-    <div th:insert="front-end/components/Header :: #header-div"></div>
+    <div class="col-lg-6 px-5 text-end">
+      <small>Follow us:</small>
+      <div class="h-100 d-inline-flex align-items-center">
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-facebook-f"></i></a>
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-twitter"></i></a>
+        <a class="btn-lg-square text-primary border-end rounded-0" href=""><i
+                class="fab fa-linkedin-in"></i></a>
+        <a class="btn-lg-square text-primary pe-0" href=""><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!--  導覽列  -->
-    <div th:insert="front-end/components/NavBar :: #nav-bar"></div>
+<!-- 導覽列 -->
+<!-- 頁首 -->
+<div th:insert="front-end/components/Header :: #header-div"></div>
+<!-- 導覽列 -->
+<div th:insert="front-end/components/NavBar :: #nav-bar"></div>
 
-    <section id="main-container">
-        <aside id="left-side">
-            <p id="left-side-title">會員專區</p>
-            <hr id="left-side-hr">
-            <ul id="ul">
-                <li class="list">會員資料</li>
-                <li class="list" id="dessert">甜點專區</li>
-                <ul id="subUl1" class="hide">
-                    <li class="subList">甜點追蹤清單</li>
-                    <li class="subList">甜點訂單</li>
-                </ul>
-                <li class="list" id="member-class">課程專區</li>
-                <ul id="subUl2" class="hide">
-                    <li class="subList">觀看課程</li>
-                    <li class="subList">課程訂單</li>
-                    <li class="subList">收藏的課程</li>
-                </ul>
-                <li class="list" id="member-group">團購專區</li>
-                <ul id="subUl3" class="hide">
-                    <li class="subList">團購訂單</li>
-                </ul>
-                <li class="list">優惠券列表</li>
-            </ul>
-        </aside>
 
-        <!-- 以下是右邊欄位放資訊用的 -->
-        <section id="msg-container">
-            <section id="msg-container-title">
-                <p id="msg-container-title-p">優惠券資料</p>
-            </section>
-            <hr id="msg-container-hr">
-            <section id="msg-container-main" style="overflow: auto; max-height: 300px;">
-                <form action="">
-                    <table id="member-data-table">
-                        <tr style="background-color: #f8d3ae;color:#1E1916;">
-                            <th style="width: 5%">編號</th>
-                            <th style="width: 10%">類型</th>
-                            <th style="width: 15%">名稱</th>
-                            <th style="width: 5%">金額門檻</th>
-                            <th style="width: 5%">優惠金額</th>
-                            <th style="width: 20%">開始日</th>
-                            <th style="width: 20%">截止日</th>
-                        </tr>
-                        <tr th:each="c : ${couponList}">
-                            <td th:text="${c.getCpId()}"></td>
-                            <td th:text="${c.getCpTp()==0 ? '甜點折價券' : '課程折價券'}"></td>
-                            <td th:text="${c.getCpName()}"></td>
-                            <td th:text="${c.getCpThreshold()}"></td>
-                            <td th:text="${c.getCpDiscount()}"></td>
-                            <td th:text="${c.getCpStart()}"></td>
-                            <td th:text="${c.getCpEnd()}"></td>
-                        </tr>
-                    </table>
-                </form>
-            </section>
-        </section>
-    </section>
+</div>
+</div>
 
-    <!-- 頁腳 -->
-    <div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-5">
+  <div class="container">
+    <div class="page-title-content">
+      <h2>優惠券專區</h2>
 
-    <!-- 版權所有 -->
-    <div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+      <ul>
+        <li>
+          <a th:href="@{/LeGouter}">
+            Home
+          </a>
+        </li>
 
-    <script data-cfasync="false" src="/Commom/js/email-decode.min.js"></script>
-    <script src="/Commom/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
-    <script src="/Commom/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49" defer=""></script>
-    <script src="/Member/Sam_Js/Jquery.js"></script>
-    <script>
-        $("#update").click(function () {
-            console.log("前往修改會員資料");
-            location.href = "/member/data/edit";
-        })
-    </script>
+        <li class="active">優惠券專區</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- End Page Title Area -->
+
+
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="col py-3">
+      <!-- 由此開始 -->
+
+
+      <hr>
+      <div class="from-row">
+        <div class="card-body">
+          <div class="table-responsive">
+            <!--                        <p style="display: none" th:text="${user.getMemberId()}" id="memberId"></p>-->
+            <table class="order-table table">
+              <thead>
+              <tr style="background-color: #f8d3ae;color:#1E1916;">
+                <th style="width: 5%">編號</th>
+                <th style="width: 10%">類型</th>
+                <th style="width: 15%">名稱</th>
+                <th style="width: 5%">金額門檻</th>
+                <th style="width: 5%">優惠金額</th>
+                <th style="width: 20%">開始日</th>
+                <th style="width: 20%">截止日</th>
+              </tr>
+              </thead>
+              <tbody th:each="c : ${couponList}">
+              <td th:text="${c.getCpId()}"></td>
+              <td th:text="${c.getCpTp()==0 ? '甜點折價券' : '課程折價券'}"></td>
+              <td th:text="${c.getCpName()}"></td>
+              <td th:text="${c.getCpThreshold()}"></td>
+              <td th:text="${c.getCpDiscount()}"></td>
+              <td th:text="${c.getCpStart()}"></td>
+              <td th:text="${c.getCpEnd()}"></td>
+              </tbody>
+            </table>
+            <hr>
+          </div>
+        </div>
+      </div>
+
+<!--      <div class="col-lg-12 col-md-12 d-flex pagination-bar"></div>-->
+
+    </div>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="blog-column-three-area ptb-100">
+      <div class="container">
+        <div class="row" id="groupOrderContainer">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+<!--  <div class="col-lg-12 col-md-12">-->
+<!--    <div class="pagination-area">-->
+<!--      &lt;!&ndash;-->
+<!--                  <a href="#" class="prev page-numbers">-->
+<!--                      <i class="bx bx-chevron-left"></i>-->
+<!--                  </a>-->
+<!--                  &ndash;&gt;-->
+<!--      <span class="page-numbers current" aria-current="page">1</span>-->
+<!--      <a href="#" class="page-numbers">2</a>-->
+<!--      <a href="#" class="page-numbers">3</a>-->
+<!--      <a href="#" class="page-numbers">4</a>-->
+
+<!--      <a href="#" class="next page-numbers">-->
+<!--        <i class="bx bx-chevron-right"></i>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>
+</div>
+</div>
+<!-- End Blog Column Three Area -->
+
+<!-- Start Footer Top Area -->
+
+
+<script data-cfasync="false" src="/GroupOrder/static/js/email-decode.min.js"></script>
+<script src="/GroupOrder/static/js/jquery-3.4.1.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/bootstrap.bundle.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/wow.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/easing.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/waypoints.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/counterup.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/owl.carousel.min.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+
+<script src="/GroupOrder/static/js/main.js" type="0080e6b992b21508d4c0eeae-text/javascript"></script>
+<script src="/GroupOrder/static/js/rocket-loader.min.js" data-cf-settings="0080e6b992b21508d4c0eeae-|49"
+        defer=""></script>
+<!-- End Footer Top Area -->
+
+
+<!-- Start Go Top Area -->
+<!-- 頁腳 -->
+<div th:insert="front-end/components/Footer :: #footer-div"></div>
+<!-- 版權所有 -->
+<div th:insert="front-end/components/Copyright :: #copyright-div"></div>
+<!-- End Go Top Area -->
+
+
+<!-- Jquery-3.5.1.Slim.Min.JS -->
+<script src="/GroupOrder/assets/js/jquery-3.5.1.slim.min.js"></script>
+<!-- Popper JS -->
+<script src="/GroupOrder/assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="/GroupOrder/assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script src="/GroupOrder/assets/js/jquery.meanmenu.js"></script>
+<!-- Wow JS -->
+<script src="/GroupOrder/assets/js/wow.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="/GroupOrder/assets/js/owl.carousel.js"></script>
+<!-- Owl Magnific JS -->
+<script src="/GroupOrder/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Nice Select JS -->
+<script src="/GroupOrder/assets/js/jquery.nice-select.min.js"></script>
+<!-- Parallax JS -->
+<script src="/GroupOrder/assets/js/parallax.min.js"></script>
+<!-- Appear JS -->
+<script src="/GroupOrder/assets/js/jquery.appear.js"></script>
+<!-- Odometer JS -->
+<script src="/GroupOrder/assets/js/odometer.min.js"></script>
+<!-- Form Validator JS -->
+<script src="/GroupOrder/assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script src="/GroupOrder/assets/js/contact-form-script.js"></script>
+<!-- Ajaxchimp JS -->
+<script src="/GroupOrder/assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Custom JS -->
+<script src="/GroupOrder/assets/js/custom.js"></script>
+
+<script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
 </body>
-
+<script>
+  $("#update").click(function () {
+    console.log("前往修改會員資料");
+    location.href = "/member/data/edit";
+  })
+</script>
 </html>

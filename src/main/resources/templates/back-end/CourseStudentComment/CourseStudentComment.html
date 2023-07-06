@@ -405,11 +405,8 @@
 
       <div class="from-row">
         <div class="d-flex justify-content-between">
-
-
           <div class="text-end mb-3">
-            關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
-                              placeholder="請輸入關鍵字">
+            關鍵字搜尋 <input type="search" id="searchInput" placeholder="請輸入關鍵字">
           </div>
         </div>
         <hr>
@@ -434,13 +431,13 @@
                   <th>會員編號</th>
                   <th>學員留言內容</th>
                   <th>學員留言時間</th>
-                  <th>員工編號(主廚)</th>
+                  <th>主廚名稱</th>
                   <th>回覆狀態</th>
                   <th>回覆留言</th>
                   <th>刪除留言</th>
                 </tr>
                 </thead>
-                <tbody>
+                <table class="order-table table" data-table="courseTable">
                 <tr th:each="c : ${courseComment}">
                   <th style="display: none" id="courseStudentCommentId" th:text="${c.getCourseStudentCommentId()}">學員留言編號</th>
                   <th>
@@ -478,7 +475,7 @@
                 </tbody>
               </table>
               <div id="selectedCount"></div>
-            </div>
+
 
           </div>
         </div>
@@ -486,26 +483,38 @@
         <div class="col-lg-12 col-md-12 d-flex pagination-bar"></div>
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link">上一頁</a>
+            <li class="page-item" th:class="${page.first ? 'disabled' : ''}">
+              <a class="page-link" th:if="${page.number > 0}" th:href="@{${#request.requestURI}(page=${page.number - 1}, size=${page.size})}">上一頁</a>
+              <a class="page-link" th:unless="${page.number > 0}" th:href="@{${#request.requestURI}(page=0, size=${page.size})}">上一頁</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">下一頁</a>
+
+            <li th:if="${page.number >= 3}">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number - 2}, size=${page.size})}" th:text="${page.number - 1}"></a>
+            </li>
+            <li th:if="${page.number >= 2}">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number - 1}, size=${page.size})}" th:text="${page.number}"></a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number}, size=${page.size})}" th:text="${page.number + 1}"></a>
+            </li>
+            <li th:if="${page.number < page.totalPages - 1}">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number + 1}, size=${page.size})}" th:text="${page.number + 2}"></a>
+            </li>
+            <li th:if="${page.number < page.totalPages - 2}">
+              <a class="page-link" th:href="@{${#request.requestURI}(page=${page.number + 2}, size=${page.size})}" th:text="${page.number + 3}"></a>
+            </li>
+
+            <li class="page-item" th:class="${page.last ? 'disabled' : ''}">
+              <a class="page-link" th:if="${page.number < page.totalPages - 3}" th:href="@{${#request.requestURI}(page=${page.number + 1}, size=${page.size})}">下一頁</a>
+              <a class="page-link" th:unless="${page.number < page.totalPages - 3}" th:href="@{${#request.requestURI}(page=${page.totalPages - 1}, size=${page.size})}">下一頁</a>
             </li>
           </ul>
         </nav>
       </div>
     </div>
-
-
-
-
-
-    <!-- 由此結束 -->
+    </div>
   </div>
+
 
   <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
@@ -523,14 +532,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
-<script>
+<script th:inline="javascript">
   $(document).on('click','.fa-trash',function (){
     var row=$(this).closest("tr");
     var courseStudentCommentId=row.find('#courseStudentCommentId').text();
@@ -562,48 +571,43 @@
         Swal.fire('確定不刪除嗎', '', 'info');
       }
     });
-  })
+  });
 
   (function (document) {
     'use strict';
-
     var LightTableFilter = (function (Arr) {
-
       var _input;
 
       function _onInputEvent(e) {
         _input = e.target;
-        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-        Arr.forEach.call(tables, function (table) {
-          Arr.forEach.call(table.tBodies, function (tbody) {
-            Arr.forEach.call(tbody.rows, _filter);
-          });
-        });
-      }
+        var table = document.querySelector('[data-table="courseTable"]');
+        var tbody = table.getElementsByTagName('tbody')[0];
+        var rows = tbody.getElementsByTagName('tr');
+        var searchText = _input.value.toLowerCase();
 
-      function _filter(row) {
-        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        for (var i = 0; i < rows.length; i++) {
+          var row = rows[i];
+          var rowData = row.textContent.toLowerCase();
+          if (rowData.indexOf(searchText) === -1) {
+            row.style.display = 'none';
+          } else {
+            row.style.display = 'table-row';
+          }
+        }
       }
 
       return {
         init: function () {
-          var inputs = document.getElementsByClassName('light-table-filter');
-          Arr.forEach.call(inputs, function (input) {
-            input.oninput = _onInputEvent;
-          });
+          var input = document.getElementById('searchInput');
+          input.oninput = _onInputEvent;
         }
       };
     })(Array.prototype);
 
-    document.addEventListener('readystatechange', function () {
-      if (document.readyState === 'complete') {
-        LightTableFilter.init();
-      }
+    document.addEventListener('DOMContentLoaded', function () {
+      LightTableFilter.init();
     });
-
   })(document);
-
 
   function selectAll() {
     var checkboxes = document.querySelectorAll('.table-responsive .form-check-input');

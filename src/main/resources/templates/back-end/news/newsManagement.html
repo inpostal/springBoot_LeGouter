@@ -402,15 +402,14 @@
                 <div class="d-flex justify-content-between">
                     <a href="/news/addnews"><input class="add-news" type="button" value="+新增文章"></a>
                     <div class="text-end mb-3">
-                        關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
-                                          placeholder="請輸入關鍵字">
+                        關鍵字搜尋 <input type="search" id="searchInput" placeholder="請輸入關鍵字">
                     </div>
                 </div>
                 <hr>
                 <div class="from-row">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="order-table table">
+                            <table class="order-table table" data-table="courseTable">
                                 <thead>
                                 <tr style="background-color: #f8d3ae;color:#1E1916;">
 
@@ -477,7 +476,9 @@
 
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/News/Yen_js/jquery-3.4.1.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -485,7 +486,32 @@
 <script>
     $(document).ready(function () {
         console.log("xxx");
+        // 获取输入框元素
+        var searchInput = document.getElementById('searchInput');
 
+        // 创建函数，用于根据关键字筛选表格行
+        function filterTableRows(searchText) {
+            var table = document.querySelector('table[data-table="courseTable"]');
+            var tbody = table.getElementsByTagName('tbody')[0];
+            var rows = tbody.getElementsByTagName('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var rowData = row.textContent.toLowerCase();
+
+                if (rowData.indexOf(searchText) === -1) {
+                    row.style.display = 'none';
+                } else {
+                    row.style.display = 'table-row';
+                }
+            }
+        }
+
+        // 监听输入事件
+        searchInput.addEventListener('input', function (event) {
+            var searchText = event.target.value.toLowerCase();
+            filterTableRows(searchText);
+        });
 
 
         $.ajax({
@@ -536,6 +562,7 @@
 
                 }
                 $("#row").html(td_html);
+                LightTableFilter.init();
 
             },
             error: function (xhr, textstatus, errorThrown) {
@@ -555,7 +582,7 @@
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     Swal.fire('已刪除!', '', '刪除')
-                    row.remove();
+                    // row.remove();
                     $.ajax({
                         url: '/news/delete',
                         type: "GET",
@@ -564,6 +591,7 @@
                         },
                         success: function (resp) {
                             console.log(resp);
+                            row.remove();
                         },
                         error: function (xhr, textstatus, errorThrown) {
                             console.error(xhr);
@@ -579,44 +607,43 @@
 
 
 
-    $(document).ready(function () {
+
+
+    (function (document) {
         'use strict';
         var LightTableFilter = (function (Arr) {
-
             var _input;
 
             function _onInputEvent(e) {
                 _input = e.target;
-                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                Arr.forEach.call(tables, function (table) {
-                    Arr.forEach.call(table.tBodies, function (tbody) {
-                        Arr.forEach.call(tbody.rows, _filter);
-                    });
-                });
-            }
+                var table = document.querySelector('table[data-table="courseTable"]');
+                var tbody = table.getElementsByTagName('tbody')[0];
+                var rows = tbody.getElementsByTagName('tr');
+                var searchText = _input.value.toLowerCase();
 
-            function _filter(row) {
-                var text = row.textContent.toLowerCase(),
-                    val = _input.value.toLowerCase();
-                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                for (var i = 0; i < rows.length; i++) {
+                    var row = rows[i];
+                    var rowData = row.textContent.toLowerCase();
+                    if (rowData.indexOf(searchText) === -1) {
+                        row.style.display = 'none';
+                    } else {
+                        row.style.display = 'table-row';
+                    }
+                }
             }
 
             return {
                 init: function () {
-                    var inputs = document.getElementsByClassName('light-table-filter');
-                    Arr.forEach.call(inputs, function (input) {
-                        input.oninput = _onInputEvent;
-                    });
+                    var input = document.getElementById('searchInput');
+                    input.oninput = _onInputEvent;
                 }
             };
         })(Array.prototype);
 
-        document.addEventListener('readystatechange', function () {
-            if (document.readyState === 'complete') {
-                LightTableFilter.init();
-            }
+        document.addEventListener('DOMContentLoaded', function () {
+            LightTableFilter.init();
         });
-    });
+    })(document);
 
 
     function selectAll() {
@@ -650,9 +677,6 @@
 
         // Initial count when the page loads
         updateSelectedCount();
-
-
-
 </script>
 
 </html>

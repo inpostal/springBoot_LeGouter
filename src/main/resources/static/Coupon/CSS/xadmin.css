@@ -529,10 +529,11 @@ table td {
 
 .x-admin-sm {
     font-size: 12px;
+    border-radius: 10px;
 }
 
 .x-admin-sm body {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 /*登录页面样式*/
@@ -621,7 +622,10 @@ table td {
 .x-admin-sm .layui-input,
 .x-admin-sm .layui-select,
 .x-admin-sm .layui-textarea {
-    height: 30px;
+    height: 40px;
+    border-radius: 10px;
+    color: #bb757d;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
 }
 
 .x-admin-sm .layui-form-pane .layui-form-label {

@@ -14,6 +14,9 @@ import java.util.List;
  */
 public interface OrdersMemRepository extends JpaRepository<OrdersMem, Integer> {
     List<OrdersMem> findByMemId(Integer memId);
+
+    List<OrdersMem> findByMemIdOrderByOrderTimeDesc(Integer memId);
+
 }
 
 

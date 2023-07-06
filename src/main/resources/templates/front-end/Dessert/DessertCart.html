@@ -89,9 +89,9 @@
                         <form action="#" method="post" class="d-block d-md-flex">
                             <select required>
                                 <option value="" disabled selected>選擇折價券</option>
-                                <option value="coupon1">Coupon 1</option>
-                                <option value="coupon2">Coupon 2</option>
-                                <option value="coupon3">Coupon 3</option>
+                                <option value="coupon1">不使用</option>
+                                <option value="coupon2">滿500折價20元</option>
+                                <option value="coupon3">滿1000折價50元</option>
                                 <!-- 添加更多选项 -->
                             </select>
                             <button class="btn obrien-button primary-btn">提交折價券</button>
@@ -212,6 +212,46 @@
     function dessertCartUpdate() {
         //顯示訂單
         $(document).ready(function () {
+            $("form button").click(function (e) {
+                e.preventDefault(); // 阻止默认的提交行为
+
+                let totalAmount = parseFloat($("table tr td:contains('甜點總金額')").next('td').text().replace('$', ''));
+                let selectedCoupon = $('form select').val();
+                let discountAmount;
+
+                switch (selectedCoupon) {
+                    case "coupon1":
+
+                        discountAmount = 0;
+
+                        break;
+                    case "coupon2":
+                        if (totalAmount >= 500) {
+                            discountAmount = 20;
+                        } else {
+                            alert(`還差 ${500 - totalAmount} 元可以使用此折價券`);
+                            return;
+                        }
+                        break;
+                    case "coupon3":
+                        if (totalAmount >= 1000) {
+                            discountAmount = 50;
+                        } else {
+                            alert(`還差 ${1000 - totalAmount} 元可以使用此折價券`);
+                            return;
+                        }
+                        break;
+                    default:
+                        alert('請選擇折價券');
+                        return;
+                }
+
+                // 更新折扣金額
+                $("table tr td:contains('折扣金額')").next('td').text("$" + discountAmount);
+                // 更新應付總額
+                let shippingFee = $("table tr td:contains('運費')").next('td').text();
+                updateFinalAmount(totalAmount, shippingFee);
+            });
             let memberId = $('#member-id').text().trim();
 
             $("#checkout-button").on("click", function () {
@@ -226,10 +266,10 @@
                     if (res.length === 0) {
                         $(".container.container-default-2.custom-area").hide();
                         let emptyCartMsg = `
-        <div class="empty-cart-message" style="text-align: center; margin-top: 100px;">
-            <h2>親，您的購物車沒有好吃的甜點唷！</h2>
-            <a href="/dessertshop/shopAndproduct/shop.html" class="btn obrien-button primary-btn" style="margin-top: 20px;">前往甜點商城</a>
-        </div>`;
+                         <div class="empty-cart-message" style="text-align: center; margin-top: 100px;">
+                         <h2>親，您的購物車沒有好吃的甜點唷！</h2>
+                         <a href="/dessertshop/shopAndproduct/shop.html" class="btn obrien-button primary-btn" style="margin-top: 20px;">前往甜點商城</a>
+                        </div>`;
                         $("#footer-div").before(emptyCartMsg);
                         $("#checkout-button").off("click");
                         $("#checkout-button").on("click", function (event) {
@@ -237,8 +277,6 @@
                             alert("購物車內沒有商品");
                         });
                     }
-
-
                     console.log(res);
                     cartClassItems = res;
                     let th_html = ``;

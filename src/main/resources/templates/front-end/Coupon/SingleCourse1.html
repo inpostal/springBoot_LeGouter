@@ -62,11 +62,11 @@
     <div class="container">
         <div class="page-title-content">
             <h2>甜點課程</h2>
-            <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>
-            <p id="userLoggedIn" th:data-logged-in="${user != null}"></p>
+<!--            <a style="display: none" id="course-id" th:text="${course.getCourseId()} "></a>-->
+<!--            <p id="userLoggedIn" th:data-logged-in="${user != null}"></p>-->
             <ul>
                 <li>
-                    <a th:href="@{/LeGouter}">
+<!--                    <a th:href="@{/LeGouter}">-->
                         Home
                     </a>
                 </li>
@@ -84,15 +84,15 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="single-course-content">
-                    <h3 th:text="${course.getCourseName()}"></h3>
+<!--                    <h3 th:text="${course.getCourseName()}"></h3>-->
 
                     <div class="row align-items-center">
                         <div class="col-lg-4 col-sm-4">
                             <div class="course-rating">
-                                <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="#">
+<!--                                <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="#">-->
 
                                 <h4>主廚：</h4>
-                                <span th:text="${empName}"></span>
+<!--                                <span th:text="${empName}"></span>-->
                             </div>
                         </div>
 
@@ -102,9 +102,9 @@
                         </div>
                     </div>
                     <div id="preview-area">
-                        <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"
-                             th:alt="${course.getCourseName()}" alt="#"
-                             style="width: 100%; height: 500px; object-fit: cover;">
+<!--                        <img th:src="@{/course/img/{courseId}(courseId=${course.getCourseId()})}"-->
+<!--                             th:alt="${course.getCourseName()}" alt="#"-->
+<!--                             style="width: 100%; height: 500px; object-fit: cover;">-->
                     </div>
                 </div>
 
@@ -126,18 +126,18 @@
                     <div class="tab_content">
                         <div class="tabs_item">
                             <h3>課程介紹</h3>
-                            <p style="word-wrap: break-word;" th:text="${course.getCourseContent()}"></p>
+<!--                            <p style="word-wrap: break-word;" th:text="${course.getCourseContent()}"></p>-->
                         </div>
                         <div class=" tabs_item">
                             <div class="curriculum-content">
                                 <div class="curriculum-list">
                                     <h4>影片</h4>
                                     <ul>
-                                        <li th:each="video : ${videos}">
+<!--                                        <li th:each="video : ${videos}">-->
                                             <a href="#" id="preview-link" class="meet-title">
-                                                <i th:text="${video.courseImgName}" class="bx bx-right-arrow"></i>
+<!--                                                <i th:text="${video.courseImgName}" class="bx bx-right-arrow"></i>-->
                                             </a>
-                                            <p style="display: none" th:text="${video.getCourseImgId()}"
+<!--                                            <p style="display: none" th:text="${video.getCourseImgId()}"-->
                                                class="video-id"></p>
                                             <button id="#" class="meet-time preview-button">課程試看</button>
                                         </li>
@@ -151,17 +151,17 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-4">
                                         <div class="advisor-img">
-                                            <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="Image">
+<!--                                            <img th:src="@{/employee/get/img/{id}(id=${chef.getEmpId()})}" alt="Image">-->
                                         </div>
                                     </div>
 
                                     <div class="col-lg-8">
                                         <div class="advisor-content">
                                             <a href="#">
-                                                <h3 th:text="${empName}"></h3>
+<!--                                                <h3 th:text="${empName}"></h3>-->
                                             </a>
 
-                                            <p style="word-wrap: break-word;" th:text="${chef.getChefInfo()}">
+<!--                                            <p style="word-wrap: break-word;" th:text="${chef.getChefInfo()}">-->
 
                                             </p>
 
@@ -190,11 +190,11 @@
                 <div class="account-wrap">
                     <ul>
                         <li>
-                            價錢 <span class="bold" th:text="${course.getCoursePrice()}"></span>
+<!--                            價錢 <span class="bold" th:text="${course.getCoursePrice()}"></span>-->
                         </li>
                     </ul>
                     <a href="#" id="wishlist-link" class="default-btn checkout">加入追蹤清單</a>
-                    <button id="checkout-link" class="default-btn checkout">購買課程</button>
+                    <a href="#" id="checkout-link" class="default-btn checkout">購買課程</a>
 
                 </div>
             </div>
@@ -264,90 +264,87 @@
 <!-- Custom JS -->
 <script src="/Course/front-end/assets/js/custom.js"></script>
 
+<script>
+    document.getElementById('wishlist-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        // 獲取當前網址的 URLSearchParams
+        const urlParams = new URLSearchParams(window.location.search);
+        // console.log("urlParams:"+urlParams);
+        // 獲取特定請求參數的值
+        const courseId = urlParams.get('courseId');
+        console.log("courseId:"+courseId);
+        $.ajax({
+                // url: `/add/courseFollow/${courseId}`,
+                url: "/add/courseFollow/"+courseId,
+                type: 'POST',
+                success: function (data) {
+                    if (data.isSuccess){
+                        console.log("成功送出");
+                    }
+                }
+        });
+    })
+</script>
+
 
 <script>
 
     let originalHTML = null;
 
-    document.getElementById('preview-link').addEventListener('click', function (event) {
-        event.preventDefault();  // Prevent the default action of the link
-        let courseId = document.getElementById('course-id').innerText;
-        let videoId = $(this).siblings(".video-id").text();
-        let previewArea = document.getElementById('preview-area');
+    // document.getElementById('preview-link').addEventListener('click', function (event) {
+    //     event.preventDefault();  // Prevent the default action of the link
+    //     let courseId = document.getElementById('course-id').innerText;
+    //     let videoId = $(this).siblings(".video-id").text();
+    //     let previewArea = document.getElementById('preview-area');
+    //
+    //     if (originalHTML === null) {
+    //         // If this is the first click, save the original HTML and replace it with the video
+    //         originalHTML = previewArea.innerHTML;
+    //         previewArea.innerHTML = `<video style="width: 865px; height: 525px" width="700" height="240" controls>
+    //                             <source src="/course/${courseId}/${videoId}"
+    //                                     type="video/mp4">
+    //                          </video>`;
+    //     } else {
+    //         // If this is the second click, restore the original HTML
+    //         previewArea.innerHTML = originalHTML;
+    //         originalHTML = null;
+    //     }
+    // });
 
-        if (originalHTML === null) {
-            // If this is the first click, save the original HTML and replace it with the video
-            originalHTML = previewArea.innerHTML;
-            previewArea.innerHTML = `<video style="width: 865px; height: 525px" width="700" height="240" controls>
-                                <source src="/course/${courseId}/${videoId}"
-                                        type="video/mp4">
-                             </video>`;
-        } else {
-            // If this is the second click, restore the original HTML
-            previewArea.innerHTML = originalHTML;
-            originalHTML = null;
-        }
-    });
+//     document.querySelectorAll('.preview-button').forEach((previewButton, buttonIndex) => {
+//         previewButton.addEventListener('click', function () {
+//             if (originalHTML === null) {
+//                 // Change the button text
+//                 previewButton.innerText = '取消觀看';
+//             } else {
+//                 // Change the button text back
+//                 previewButton.innerText = '課程試看';
+//             }
+//             // Trigger click event on the link
+//             document.getElementById('preview-link').click();
+//         });
+//
+//         if (buttonIndex !== 0) {
+//             previewButton.disabled = true;
+//             previewButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+//   <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+// </svg>禁止觀看`;  // Change the button text
+//         }
+//     });
 
-    document.querySelectorAll('.preview-button').forEach((previewButton, buttonIndex) => {
-        previewButton.addEventListener('click', function () {
-            if (originalHTML === null) {
-                // Change the button text
-                previewButton.innerText = '取消觀看';
-            } else {
-                // Change the button text back
-                previewButton.innerText = '課程試看';
-            }
-            // Trigger click event on the link
-            document.getElementById('preview-link').click();
-        });
-
-        if (buttonIndex !== 0) {
-            previewButton.disabled = true;
-            previewButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
-  <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-</svg>禁止觀看`;  // Change the button text
-        }
-    });
-
-    document.getElementById('checkout-link').addEventListener('click', function (event) {
-        event.preventDefault();  // 阻止默認的頁面跳轉行為
-        let courseId = document.getElementById('course-id').innerText;
-        window.location.href = '/course/coursecheckout?courseId=' + courseId;  // 跳轉到結帳頁面並附帶 courseId 參數
-    });
-
-
-    function checkCoursePurchase(courseId, memId) {
-        let request = {
-            courseId: courseId,
-            memId: memId
-        };
-
-        $.ajax({
-            url: '/checkcoursepurchase',
-            type: 'POST',
-            data: JSON.stringify(request),
-            contentType: 'application/json',
-            success: function (response) {
-                // 根据验证结果更新页面上的内容
-                if (response === "買過") {
-                    // 课程已购买，禁止操作
-                    let checkoutButton = document.getElementById('checkout-link');
-                    checkoutButton.disabled = true; // 禁用按钮
-                } else {
-                    // 课程未购买，允许操作
-                    document.getElementById('checkout-link').addEventListener('click', function (event) {
-                        event.preventDefault();  // 阻止默认的页面跳转行为
-                        let courseId = document.getElementById('course-id').innerText;
-                        window.location.href = '/course/coursecheckout?courseId=' + courseId;  // 跳转到结账页面并附带 courseId 参数
-                    });
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('验证课程购买失败：', error, xhr.responseText);
-            }
-        });
-    }
+    // document.getElementById('checkout-link').addEventListener('click', function (event) {
+    //     event.preventDefault();  // 阻止默認的頁面跳轉行為
+    //
+    //     let userLoggedIn = document.getElementById('userLoggedIn').dataset.loggedIn === 'true';
+    //
+    //     if (!userLoggedIn) {
+    //         alert('請先登入才能購買課程');
+    //         window.location.href = '/login';  // 將用戶重定向到登入頁面
+    //     } else {
+    //         let courseId = document.getElementById('course-id').innerText;
+    //         window.location.href = '/course/coursecheckout?courseId=' + courseId;  // 跳轉到結帳頁面並附帶 courseId 參數
+    //     }
+    // });
 
 
 </script>

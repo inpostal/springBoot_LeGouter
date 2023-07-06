@@ -12,13 +12,16 @@ import app.com.member.repository.MemberRepository;
 import app.com.member.vo.Members;
 import app.com.news.vo.News;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
-
-import javax.crypto.interfaces.PBEKey;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 @Service
@@ -31,18 +34,18 @@ public class CourseStudentCommentService {
     EmployeeRepository employeeRepository;
 
     //列表
-    public List<CourseCommentDTO> courseComment() {
-        List<CourseStudentComment> courseStudentComment = repository1.findAll();
+    public Page<CourseCommentDTO> courseComment(Pageable pageable) {
+        Page<CourseStudentComment> page = repository1.findAll(pageable);
+        List<CourseStudentComment> courseStudentComment = page.getContent();
         List<CourseCommentDTO> result = new ArrayList<>();
 
         for (CourseStudentComment c : courseStudentComment) {
             CourseCommentDTO dto = new CourseCommentDTO();
             Course course = repository.getReferenceById(c.getCourseId());
-            if (c.getEmpId()!=null){
+            if (c.getEmpId() != null) {
                 Employee employee = employeeRepository.getReferenceById(c.getEmpId());
                 dto.setEmpName(employee.getEmpName());
             }
-
 
             dto.setMemId(c.getMemId());
             dto.setCourseName(course.getCourseName());
@@ -54,7 +57,7 @@ public class CourseStudentCommentService {
             dto.setChefCommentDate(c.getChefCommentDate());
             result.add(dto);
 
-            //如果沒有廚師回覆，就顯示為未回覆,如果有值就顯示已回覆
+            // 如果没有厨师回复，显示为未回复；如果有值，显示为已回复
             if (c.getChefCommentContent() == null) {
                 dto.setChefCommentContent("未回覆");
             } else {
@@ -62,7 +65,7 @@ public class CourseStudentCommentService {
             }
         }
 
-        return result;
+        return new PageImpl<>(result, pageable, page.getTotalElements());
     }
 
     //回覆留言
@@ -113,6 +116,8 @@ public class CourseStudentCommentService {
     }
 
     public void update(CourseStudentComment courseStudentComment) {
+        //如果有值就顯示已回覆
+        courseStudentComment.setChefCommentDate(Date.valueOf(java.time.LocalDate.now()));
         repository1.save(courseStudentComment);
     }
 //刪除

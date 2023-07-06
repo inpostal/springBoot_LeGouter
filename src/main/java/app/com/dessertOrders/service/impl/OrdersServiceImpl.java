@@ -34,24 +34,6 @@ public class OrdersServiceImpl implements OrdersService {
         return orders.get();
     }
 
-//    @Override
-//    public List<OrdersDTO> getAllOrdersDTO() {
-//        List<Orders> list = ordersRepository.findAll();
-//        List<OrdersDTO> dtoList = new ArrayList<>();
-//
-//        for (Orders o : list) {
-//            OrdersDTO dto = new OrdersDTO();
-//            dto.setOrderId(o.getOrderId());
-//            dto.setMemberAC(memberService.getMemberById(o.getMemId()).getMemberAccount());
-//            dto.setOrdersDate(o.getOrderTime());
-//            dto.setCpOrderTotal(o.getCpOrderTotal());
-//            dto.setOrderStatus(o.getOrderStatus());
-//            dtoList.add(dto);
-//        }
-//
-//        return dtoList;
-//    }
-
 
     @Override
     public void updateOrders(Integer ordersId, String receiverName, String receiverAddress, String receiverPhone,

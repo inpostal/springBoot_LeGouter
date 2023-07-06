@@ -2,7 +2,6 @@ package app.com.coupon.controller;
 
 import app.com.coupon.service.CouponService;
 import app.com.coupon.vo.*;
-import app.com.course.vo.Course;
 import app.com.emp.vo.Employee;
 import app.com.member.vo.Members;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,12 +65,21 @@ public class CouponController {
     }
 
 //加入追蹤課程按鈕-提出請求,發送course_id,mem_id加入資料庫中
-    @PostMapping("/add/courseFollow")
+    @PostMapping("/add/courseFollow/{courseId}")
     @ResponseBody
-    public void btnAddCourseFollow(@RequestBody Course courseId, HttpSession session){
+    public void btnAddCourseFollow(@PathVariable Integer courseId, HttpSession session){
         Members user = (Members) session.getAttribute("user");
-        service.addCourseFollow(user.getMemberId(), courseId.getCourseId());
+        if (user != null) {
+            service.addCourseFollow(user.getMemberId(), courseId);
+        }
     }
+
+//    @PostMapping("/add/courseFollow")
+//    @ResponseBody
+//    public void btnAddCourseFollow(@RequestBody Course courseId, HttpSession session){
+//        Members user = (Members) session.getAttribute("user");
+//        service.addCourseFollow(user.getMemberId(), courseId.getCourseId());
+//    }
 
     @GetMapping("/check/loginStatus")
     @ResponseBody
@@ -91,15 +98,21 @@ public class CouponController {
     public Map<String, Boolean> handleDeleteFollowList(@PathVariable Integer courseId, HttpSession session) {
         Map<String, Boolean> result = new HashMap<>();
         Members user = (Members) session.getAttribute("user");
-        LoveCourse loveCourse = new LoveCourse();
-        loveCourse.setCourseId(courseId);
-        loveCourse.setMemId(user.getMemberId());
-        service.deleteFollowList(loveCourse);
+//        LoveCourse loveCourse = new LoveCourse();
+//        loveCourse.setCourseId(courseId);
+//        loveCourse.setMemId(user.getMemberId());
+//        service.deleteFollowList(loveCourse);
+        service.deleteFollowList(user.getMemberId(), courseId);
 
         result.put("isSuccess", true);
         return result;
     }
 
+//    @GetMapping("/delete/follow/list/{courseId}/{memId}")
+//    @ResponseBody
+//    public void deleteFollowList(@PathVariable Integer courseId, @PathVariable Integer memId){
+//        service.deleteFollowList(memId, courseId);
+//    }
     //單頁
     //領取更新會員優惠券時,收ajax傳送資料用
     @PostMapping("/coupon/memCp")
@@ -248,6 +261,13 @@ public class CouponController {
         }
     }
 
+
+    @GetMapping("/test/add/followList")
+    public String testAddFollow(@RequestParam("courseId") Integer courseId){
+
+        return "/front-end/Coupon/SingleCourse1.html";
+    }
+
     //追蹤清單
     @GetMapping("/course/follow")
     public String courseFollowView(Model model, HttpSession session) {
@@ -259,9 +279,16 @@ public class CouponController {
         } else {
             List<LoveCourseMemDTO> list = service.findAllByMemberId(user.getMemberId());
             model.addAttribute("followList", list);
+//            return "FollowList";
             return "/front-end/Coupon/FollowList";
         }
     }
+//
+//    @GetMapping("/course/coursecheckout?courseId={courseId}")
+//    public void checkFollowCourse(@PathVariable ){
+//
+//    }
+
 
     @GetMapping("/check/course")
     public String courseCheckCoupon(){

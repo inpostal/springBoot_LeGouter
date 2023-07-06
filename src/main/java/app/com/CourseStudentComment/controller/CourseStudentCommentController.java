@@ -14,7 +14,11 @@ import app.com.emp.repository.EmployeeRepository;
 import app.com.emp.service.EmployeeService;
 import app.com.emp.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,20 +44,22 @@ public class CourseStudentCommentController {
     CourseImageService courseImageService;
     //thyleaf評論列表
     //後台討論區管理列表
-@GetMapping("/CourseStudentComment")
-    public String getAll(Model model, HttpSession session){
-    Employee employee= (Employee) session.getAttribute("emp");
-    if (employee==null){
-        return "redirect:/employee/login";
-    }else {
-        if(employee.getEmpClassify()!=2){
-            return"redirect:/employee/data";
-        } List<CourseCommentDTO>result = courseStudentCommentService.courseComment();
-        model.addAttribute("courseComment",result);
-        return "/back-end/CourseStudentComment/CourseStudentComment";
-    }
-    }
+    @GetMapping("/CourseStudentComment")
+    public String getAll(Model model, HttpSession session, @PageableDefault(size = 10) Pageable pageable) {
+        Employee employee = (Employee) session.getAttribute("emp");
+        if (employee == null) {
+            return "redirect:/employee/login";
+        } else {
+            if (employee.getEmpClassify() != 2) {
+                return "redirect:/employee/data";
+            }
 
+            Page<CourseCommentDTO> result = courseStudentCommentService.courseComment(pageable);
+            model.addAttribute("courseComment", result.getContent());
+            model.addAttribute("page", result);
+            return "/back-end/CourseStudentComment/CourseStudentComment";
+        }
+    }
     //個別回復表單thyleaf
     @GetMapping("/CourseStudentComment/reply")
     public String reply(@RequestParam Integer commentId, Model model) {
@@ -69,22 +75,22 @@ public class CourseStudentCommentController {
             @RequestParam("commentId") Integer courseStudentCommentId,
             @RequestParam("courseId") Integer courseId,
             @RequestParam("chefCommentContent") String chefCommentContent,
-            @RequestParam("chefCommentDate") Date chefCommentDate,
+//            @RequestParam("chefCommentDate") Date chefCommentDate,
+//            @RequestParam("studentCommentDate") Date studentCommentDate,
             @RequestParam("empId") Integer empId,
             @RequestParam ("memId")Integer memId,
-            @RequestParam("studentCommentContent") String studentCommentContent,
-            @RequestParam("studentCommentDate") Date studentCommentDate) {
+            @RequestParam("studentCommentContent") String studentCommentContent){
         System.out.println("chefCommentContent: " + chefCommentContent);
 
     CourseStudentComment courseStudentComment=courseStudentCommentService.getById(courseStudentCommentId);
     courseStudentComment.setStudentCommentId(courseStudentCommentId);
     courseStudentComment.setCourseId(courseId);
     courseStudentComment.setChefCommentContent(chefCommentContent);
-    courseStudentComment.setChefCommentDate(chefCommentDate);
+//    courseStudentComment.setChefCommentDate(chefCommentDate);
     courseStudentComment.setEmpId(empId);
     courseStudentComment.setMemId(memId);
     courseStudentComment.setStudentCommentContent(studentCommentContent);
-    courseStudentComment.setStudentCommentDate(studentCommentDate);
+//    courseStudentComment.setStudentCommentDate(studentCommentDate);
     courseStudentCommentService.update(courseStudentComment);
     return ResponseEntity.ok().body("修改成功");
     }
@@ -114,7 +120,7 @@ public class CourseStudentCommentController {
         List<CourseImage> list=courseImageService.getCourseVideoById(courseId);
         model.addAttribute("course",course);
         model.addAttribute("empName",empName);
-        model.addAttribute("courseImage",list);
+        model.addAttribute("videos",list);
         model.addAttribute("chef",chef);
         model.addAttribute("courseComment",comment);
         comment.forEach(System.out::println);
