@@ -399,10 +399,8 @@
 
       <div class="from-row">
         <div class="d-flex justify-content-between">
-
           <div class="text-end mb-3">
-            關鍵字搜尋 <input type="search" class="light-table-filter" data-table="order-table"
-                              placeholder="請輸入關鍵字">
+            關鍵字搜尋 <input type="search" id="searchInput" placeholder="請輸入關鍵字">
           </div>
         </div>
         <hr>
@@ -483,7 +481,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- import font awesome -->
 <script src="https://kit.fontawesome.com/3d215f6a1d.js" crossorigin="anonymous"></script>
 
@@ -491,10 +489,31 @@
 
 </body>
 <script>
-
-  //numberofproduct*訂單明細(groupproductprice)=totalgroupproductprice
   $(document).ready(function () {
+    console.log("xxx");
+    var searchInput = document.getElementById('searchInput');
 
+    function filterTableRows(searchText) {
+      var table = document.querySelector('.order-table');
+      var tbody = table.getElementsByTagName('tbody')[0];
+      var rows = tbody.getElementsByTagName('tr');
+
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        var rowData = row.textContent.toLowerCase();
+
+        if (rowData.indexOf(searchText) === -1) {
+          row.style.display = 'none';
+        } else {
+          row.style.display = 'table-row';
+        }
+      }
+    }
+
+    searchInput.addEventListener('input', function (event) {
+      var searchText = event.target.value.toLowerCase();
+      filterTableRows(searchText);
+    });
     // 第一个 $(document).ready 函数中的代码
     $.ajax({
       url: '/group/order/master/restcontrollerlist',
@@ -527,6 +546,12 @@
                 groupOrderStatustext = ':團購結束。訂單已完成';
                 break;
             }
+            let totalGroupProductPricetext ='';
+            if(resp[e].totalGroupProductPrice==null){
+              totalGroupProductPricetext = '尚未結算';}
+            else{
+              totalGroupProductPricetext = resp[e].totalGroupProductPrice;
+            }
 
 
           td_html += `<tr>
@@ -540,7 +565,7 @@
           <td id="memId">${resp[e].memId}</td>
           <td id="numberOfProduct">${resp[e].numberOfProduct}</td>
           <td id="groupOrderStatus">${groupOrderStatustext}</td>
-          <td id="totalGroupProductPrice">${resp[e].totalGroupProductPrice}</td>
+          <td id="totalGroupProductPrice">${totalGroupProductPricetext}</td>
           <td>
 
             <a href="/group/activity/update?groupActivityId=${resp[e].groupActivityId}" class="btn btn-dark">
@@ -556,6 +581,7 @@
         </tr>`;
         }
         $("#groupordermaster").html(td_html);
+        LightTableFilter.init();
       },
       error: function (xhr, textstatus, errorThrown) {
         console.error(xhr);
@@ -563,45 +589,41 @@
     });
     });
 
-    $(document).ready(function () {
-      'use strict';
-      var LightTableFilter = (function (Arr) {
+  (function (document) {
+    'use strict';
+    var LightTableFilter = (function (Arr) {
+      var _input;
 
-        var _input;
+      function _onInputEvent(e) {
+        _input = e.target;
+        var table = document.querySelector('table[data-table="courseTable"]');
+        var tbody = table.getElementsByTagName('tbody')[0];
+        var rows = tbody.getElementsByTagName('tr');
+        var searchText = _input.value.toLowerCase();
 
-        function _onInputEvent(e) {
-          _input = e.target;
-          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-          Arr.forEach.call(tables, function (table) {
-            Arr.forEach.call(table.tBodies, function (tbody) {
-              Arr.forEach.call(tbody.rows, _filter);
-            });
-          });
-        }
-
-        function _filter(row) {
-          var text = row.textContent.toLowerCase(),
-                  val = _input.value.toLowerCase();
-          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-        }
-
-        return {
-          init: function () {
-            var inputs = document.getElementsByClassName('light-table-filter');
-            Arr.forEach.call(inputs, function (input) {
-              input.oninput = _onInputEvent;
-            });
+        for (var i = 0; i < rows.length; i++) {
+          var row = rows[i];
+          var rowData = row.textContent.toLowerCase();
+          if (rowData.indexOf(searchText) === -1) {
+            row.style.display = 'none';
+          } else {
+            row.style.display = 'table-row';
           }
-        };
-      })(Array.prototype);
-
-      document.addEventListener('readystatechange', function () {
-        if (document.readyState === 'complete') {
-          LightTableFilter.init();
         }
-      });
-    });
+      }
 
+      return {
+        init: function () {
+          var input = document.getElementById('searchInput');
+          input.oninput = _onInputEvent;
+        }
+      };
+    })(Array.prototype);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      LightTableFilter.init();
+    });
+  })(document);
 
     function selectAll() {
       var checkboxes = document.querySelectorAll('.table-responsive .form-check-input');

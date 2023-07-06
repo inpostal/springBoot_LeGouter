@@ -120,7 +120,7 @@ public class CourseStudentCommentController {
         List<CourseImage> list=courseImageService.getCourseVideoById(courseId);
         model.addAttribute("course",course);
         model.addAttribute("empName",empName);
-        model.addAttribute("courseImage",list);
+        model.addAttribute("videos",list);
         model.addAttribute("chef",chef);
         model.addAttribute("courseComment",comment);
         comment.forEach(System.out::println);

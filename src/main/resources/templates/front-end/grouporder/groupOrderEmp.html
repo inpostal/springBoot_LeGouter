@@ -651,7 +651,7 @@
                         case 2:
                         case 3:
                         case 4:
-                            groupOrderBonusText = '等待結算中';
+                           groupOrderBonusText = '等待結算中';
                             break;
                         case 5:
                             groupOrderBonusText = '已流團';
@@ -660,12 +660,17 @@
                             groupOrderBonusText = resp[e].totalGroupProductPrice * resp[e].bonusRate;
                             break;
                     }
-                    // let groupOrderBonusStatusText = '';
-                    // if (resp[e].groupOrderBonusStatus == 0) {
-                    //     groupOrderBonusStatusText = '未發放';
-                    // } else {
-                    //     groupOrderBonusStatusText = '已發放';
-                    // }
+
+
+
+
+
+                    let groupOrderBonusStatusText = '';
+                    if (resp[e].groupOrderBonusStatus == 0) {
+                        groupOrderBonusStatusText = '未發放';
+                    } else {
+                        groupOrderBonusStatusText = '已發放';
+                    }
 
 
                     let totalGroupProductPriceText='';
@@ -686,7 +691,7 @@
                                         團購活動編號:${resp[e].activityId}<br>
                                     </td>
                                     <td id="grouporderstatus">${groupOrderStatustext}</td>
-                                    <td id="totalgroupproductprice">${resp[e].totalGroupProductPrice}</td>
+                                    <td id="totalgroupproductprice">${totalGroupProductPriceText}</td>
                                     <td id="groupordermin" >${resp[e].bonusRate}</td>
                                     <td id="grouporderbonus">${groupOrderBonusText}</td>
                                     <td id="grouporderbonusstatus">${groupOrderBonusStatusText} </td>

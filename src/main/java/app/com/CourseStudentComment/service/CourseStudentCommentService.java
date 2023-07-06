@@ -59,9 +59,9 @@ public class CourseStudentCommentService {
 
             // 如果没有厨师回复，显示为未回复；如果有值，显示为已回复
             if (c.getChefCommentContent() == null) {
-                dto.setChefCommentContent("未回复");
+                dto.setChefCommentContent("未回覆");
             } else {
-                dto.setChefCommentContent("已回复");
+                dto.setChefCommentContent("已回覆");
             }
         }
 
