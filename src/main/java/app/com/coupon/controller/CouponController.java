@@ -261,6 +261,13 @@ public class CouponController {
         }
     }
 
+
+    @GetMapping("/test/add/followList")
+    public String testAddFollow(@RequestParam("courseId") Integer courseId){
+
+        return "/front-end/Coupon/SingleCourse1.html";
+    }
+
     //追蹤清單
     @GetMapping("/course/follow")
     public String courseFollowView(Model model, HttpSession session) {
