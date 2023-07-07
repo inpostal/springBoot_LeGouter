@@ -440,22 +440,22 @@
                 <table class="order-table table" data-table="courseTable">
                 <tr th:each="c : ${courseComment}">
                   <th style="display: none" id="courseStudentCommentId" th:text="${c.getCourseStudentCommentId()}">學員留言編號</th>
-                  <th>
+                  <th style="width: 166px">
                     <div class="form-check custom-checkbox ms-2">
                       <input type="checkbox" class="form-check-input" id="row1"
                              onchange="updateSelectedCount()">
-                      <label class="form-check-label" for="row1"></label>
+                      <label class="form-check-label" for="row1" style="width: 30px"></label>
                     </div>
                   </th>
                   <td style="display: none" id="courseId" th:text="${c.getCourseId()}"></td>
 
-                  <td id="couraeName" th:text="${c.getCourseName()}">GJ</td>
-                  <td id="memId" th:text="${c.getMemId()}"></td>
-                  <td id="studentCommentContent" th:text="${c.getCourseStudentCommentContent()}"></td>
-                  <td id="studentCommentDate" th:text="${c.getCourseStudentCommentDate()}"></td>
-                  <td id="empId" th:if="${c.getEmpName()!=null}" th:text="${c.getEmpName()}"></td>
-                  <td id="empName2" th:if="${c.getEmpName()==null}" th:text="無人回復"></td>
-                  <td id="chefCommentContent" th:text="${c.getChefCommentContent()}"></td>
+                  <td style="width: 110px" id="couraeName" th:text="${c.getCourseName()}">GJ</td>
+                  <td style="width: 220px" id="memId" th:text="${c.getMemId()}"></td>
+                  <td style="width: 160px" id="studentCommentContent" th:text="${c.getCourseStudentCommentContent()}"></td>
+                  <td style="width: 290px" id="studentCommentDate" th:text="${c.getCourseStudentCommentDate()}"></td>
+                  <td style="width: 110px" id="empId" th:if="${c.getEmpName()!=null}" th:text="${c.getEmpName()}"></td>
+                  <td style="width: 110px" id="empName2" th:if="${c.getEmpName()==null}" th:text="無人回復"></td>
+                  <td  style="width: 200px" id="chefCommentContent" th:text="${c.getChefCommentContent()}"></td>
                   <td id="chefCommentDate" style="display: none" th:text="${c.getChefCommentDate()}"></td>
                   <td>
                     <a th:href="@{/CourseStudentComment/reply(commentId=${c.getCourseStudentCommentId()})}">

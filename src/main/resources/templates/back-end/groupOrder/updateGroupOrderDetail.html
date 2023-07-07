@@ -630,12 +630,12 @@
       displayErrorMessage(receiveraddressInput, "請輸入收件者地址");
       isValid = false;
     } else if (!isValidAddress(receiveraddressInput.value)) {
-      displayErrorMessage(receiveraddressInput, "地址須為中文或英文");
+      displayErrorMessage(receiveraddressInput, "請輸入正確地址");
       isValid = false;
     }
 
     function isValidName(name) {
-      var regex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+      var regex = /^[\u4e00-\u9fa5a-zA-Z0-9]+$/;
       return regex.test(name);
     }
 
@@ -713,7 +713,10 @@
       alert('請先修正錯誤訊息');
     }
   });
-
+  document.getElementById("cancel").addEventListener("click", function() {
+    var grouporderid = document.getElementById("grouporderid").value;
+    window.location.href = "/grouporderdetail/list/getbyId/all?groupOrderId="+ grouporderid;
+  });
 
 
 

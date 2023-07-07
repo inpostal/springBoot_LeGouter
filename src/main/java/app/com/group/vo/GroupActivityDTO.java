@@ -38,7 +38,8 @@ public class GroupActivityDTO {
 	private Integer groupActivityPrice; //活動打折價格
 	private String groupProductName; //團購商品名稱
 	private String groupProductContent; //團購商品內容
-	
+
+	private String memberName; //團購主名稱
 	private Integer numberOfProduct; //團購訂單主檔的總數量
 
 }

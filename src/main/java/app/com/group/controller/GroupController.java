@@ -95,6 +95,7 @@ public class GroupController {
 		temporarydto.setGroupProductContent(tr.getGroupProductContent());
 		temporarydto.setGroupDetailCount(detailcount);
 		GroupOrderMaster groupOrderMaster = groupActivityService.GiveMeNumberOfProduct(groupActivityId);
+		temporarydto.setMemberName(groupActivityService.GiveMembersName(groupOrderMaster.getMemId()));
 		temporarydto.setNumberOfProduct(groupOrderMaster.getNumberOfProduct());
 		
     	 model.addAttribute("groupActivityDTO", temporarydto);

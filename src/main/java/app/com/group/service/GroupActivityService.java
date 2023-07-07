@@ -187,6 +187,11 @@ public class GroupActivityService {
 			return groupOrderMaster.get(0);
 		}
 
+		public String GiveMembersName(Integer memberId) {
+			Optional<Members> outConfirm = memberRepository.findById(memberId);
+			return outConfirm.get().getMemberName();
+		}
+
 	//
 //	public Boolean updataActivity(GroupActivityDTO groupActivityDTO) {
 //		GroupActivityVO groupActivityVO = new GroupActivityVO();

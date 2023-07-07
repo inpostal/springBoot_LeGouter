@@ -159,7 +159,7 @@
                     <div class="col-xxl-6 col-lg-6">
                         <div class="epix-single-product-right" id="showthe">
                             <h4 class="epix-single-product-title" th:text="'團購活動：' + ${groupActivityDTO.getGroupName}"></h4>
-                            <h6>團購主:</h6>
+                            <h6 th:text="'團購活動：' + ${groupActivityDTO.getMemberName}"></h6>
                             <p class="epix-product-details-short-description" th:inline="text">
                                 開始日期:[[${groupActivityDTO.getGroupOrderStar}]]<br>
                                 結束日期:[[${groupActivityDTO.getGroupOrderEnd}]]<br>

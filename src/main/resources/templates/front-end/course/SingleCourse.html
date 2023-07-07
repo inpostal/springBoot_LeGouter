@@ -137,7 +137,7 @@
                                     <h4>影片</h4>
                                     <ul>
                                         <li th:each="video : ${videos}">
-                                            <a href="#" id="preview-link" class="meet-title">
+                                            <a href="#" class="preview-link meet-title">
                                                 <i th:text="${video.courseImgName}" class="bx bx-right-arrow"></i>
                                             </a>
                                             <p style="display: none" th:text="${video.getCourseImgId()}"
@@ -313,37 +313,38 @@
 
     let originalHTML = null;
 
-    document.getElementById('preview-link').addEventListener('click', function (event) {
-        event.preventDefault();  // Prevent the default action of the link
-        let courseId = document.getElvideo-idementById('course-id').innerText;
-        let videoId = $(this).siblings(".video-id").text();
-        let previewArea = document.getElementById('preview-area');
+    document.querySelectorAll('.preview-link').forEach((previewLink, linkIndex) => {
+        previewLink.addEventListener('click', function (event) {
+            event.preventDefault();  // 防止預設點擊事件
 
-        if (originalHTML === null) {
-            // If this is the first click, save the original HTML and replace it with the video
-            originalHTML = previewArea.innerHTML;
-            previewArea.innerHTML = `<video style="width: 865px; height: 525px" width="700" height="240" controls>
-                                <source src="/course/${courseId}/${videoId}"
-                                        type="video/mp4">
-                             </video>`;
-        } else {
-            // If this is the second click, restore the original HTML
-            previewArea.innerHTML = originalHTML;
-            originalHTML = null;
-        }
+            let courseId = document.getElementById('course-id').innerText;
+            let videoId = this.parentNode.querySelector('.video-id').textContent;
+            let previewArea = document.getElementById('preview-area');
+
+            if (originalHTML === null) {
+                // 如果這是第一次點擊，保存原始 HTML 並替換為影片
+                originalHTML = previewArea.innerHTML;
+                previewArea.innerHTML = `<video style="width: 900px; height: 525px" width="700" height="240" controls>
+                                <source src="/course/${courseId}/${videoId}" type="video/mp4">
+                              </video>`;
+            } else {
+                // 如果這是第二次點擊，還原原始 HTML
+                previewArea.innerHTML = originalHTML;
+                originalHTML = null;
+            }
+        });
     });
-
     document.querySelectorAll('.preview-button').forEach((previewButton, buttonIndex) => {
         previewButton.addEventListener('click', function () {
             if (originalHTML === null) {
-                // Change the button text
+                // 更改按鈕文字
                 previewButton.innerText = '取消觀看';
             } else {
-                // Change the button text back
+                // 還原按鈕文字
                 previewButton.innerText = '課程試看';
             }
-            // Trigger click event on the link
-            document.getElementById('preview-link').click();
+            // 觸發點擊事件
+            this.parentNode.querySelector('.preview-link').click();
         });
 
         if (buttonIndex !== 0) {
